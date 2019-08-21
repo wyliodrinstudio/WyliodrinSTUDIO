@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "electron build/",
-		"postinstall": "electron-builder install-app-deps",
+		"postinstall": "mkdirp build && electron-builder install-app-deps",
 		"pack": "webpack --mode=production && electron-builder --dir",
 		"dist": "webpack --mode=production && electron-builder"
 	},

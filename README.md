@@ -1,12 +1,6 @@
-# Wyliodrin STUDIO 2
+# Wyliodrin STUDIO
 
-[![Build Status](https://travis-ci.org/Wyliodrin/WyliodrinSTUDIO.svg?branch=master)](https://travis-ci.org/Wyliodrin/WyliodrinSTUDIO)
-[![Dependency Status](https://gemnasium.com/Wyliodrin/WyliodrinSTUDIO.svg)](https://gemnasium.com/Wyliodrin/WyliodrinSTUDIO)
-[![Gitter](https://badges.gitter.im/Wyliodrin/WyliodrinSTUDIO.svg)](https://gitter.im/Wyliodrin/WyliodrinSTUDIO?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-Wyliodrin STUDIO 2 is a Chrome based IDE for software and hardware development for IoT and Embedded Linux systems.
-
-![Wyliodrin](https://raw.githubusercontent.com/Wyliodrin/WyliodrinSTUDIO/master/extra/gitslide.gif)
+Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.
 
 * Connect to devices using TCP/IP or serial port
 * Develop software and firmware for IoT in several programming languages
@@ -30,7 +24,6 @@ Wyliodrin STUDIO 2 is a Chrome based IDE for software and hardware development f
 * Visual Programming (translates to Python)
 * Javascript
 * Python
-* Streams (node-red)
 * Shell Script (bash)
 
 ## Install
@@ -90,7 +83,6 @@ Install Xcode
 
 The device needs to run
 * [wyliodrin-app-server](https://www.github.com/wyliodrin/wyliodrin-app-server)
-* [wyliodrin-server](https://www.github.com/wyliodrin/wyliodrin-server)
 * [libwyliodrin](https://www.github.com/wyliodrin/libwyliodrin)
 
 You may download device images that have them installed from Wyliodrin.
