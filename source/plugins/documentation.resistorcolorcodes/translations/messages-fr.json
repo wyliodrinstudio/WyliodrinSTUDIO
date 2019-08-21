@@ -1,0 +1,42 @@
+{
+    "TOOLBAR_RESISTOR_COLOR_CODE": {
+        "message": "Code couleur de résistance",
+        "description": "Option in the Help Menu which opens a dialog that makes a connection between the color of a resistor and it's value"
+    },
+    "RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER": {
+        "message": "DE COULEUR À VALEUR",
+        "description": "Options that transforms the color in a value"
+    },
+    "RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR": {
+        "message": "DE VALEUR À COULEUR",
+        "description": "Option that transforms the value in a color"
+    },
+    "RESISTOR_COLORCODE_STRIPES": {
+        "message": "Bandes",
+        "description": "Number of stripes in the resistor"
+    },
+    "VALUE_FOUR": {
+        "message": "Quatre",
+        "description": "Number 4"
+    },
+    "VALUE_FIVE": {
+        "message": "Cinq",
+        "description": "Number 5"
+    },
+    "RESISTOR_COLORCODE_STRIPE": {
+        "message": "Bande",
+        "description": "Stripe option"
+    },
+    "VALUE_VALUE": {
+        "message": "Valeur",
+        "description": "Value of the resistance"
+    },
+    "RESISTOR_COLORCODE_RESISTANCE": {
+        "message": "Résistance",
+        "description": "Label for the value of the resistance"
+    },
+    "VALUE_TOLERANCE": {
+        "message": "Tolérance",
+        "description": "Tolerance of the resistor"
+    }
+}

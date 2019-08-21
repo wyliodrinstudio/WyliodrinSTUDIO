@@ -1,0 +1,42 @@
+{
+    "TOOLBAR_RESISTOR_COLOR_CODE": {
+        "message": "Codul culorilor pentru rezistențe",
+        "description": "Option in the Help Menu which opens a dialog that makes a connection between the color of a resistor and it's value"
+    },
+    "RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER": {
+        "message": "DIN CULOARE ÎN VALOARE",
+        "description": "Options that transforms the color in a value"
+    },
+    "RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR": {
+        "message": "DIN NUMĂR ÎN CULOARE",
+        "description": "Option that transforms the value in a color"
+    },
+    "RESISTOR_COLORCODE_STRIPES": {
+        "message": "Linii",
+        "description": "Number of stripes in the resistor"
+    },
+    "VALUE_FOUR": {
+        "message": "Patru",
+        "description": "Number 4"
+    },
+    "VALUE_FIVE": {
+        "message": "Cinci",
+        "description": "Number 5"
+    },
+    "RESISTOR_COLORCODE_STRIPE": {
+        "message": "Linie",
+        "description": "Stripe option"
+    },
+    "VALUE_VALUE": {
+        "message": "Valoare",
+        "description": "Value of the resistance"
+    },
+    "RESISTOR_COLORCODE_RESISTANCE": {
+        "message": "Rezistență",
+        "description": "Label for the value of the resistance"
+    },
+    "VALUE_TOLERANCE": {
+        "message": "Toleranță",
+        "description": "Tolerance of the resistor"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "name": "dashboard.graph.thermometer",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace","dashboard"],
+        "provides": [],
+        "target": ["electron", "browser"]
+    }
+}

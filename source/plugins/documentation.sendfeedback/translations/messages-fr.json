@@ -1,0 +1,22 @@
+{
+    "SEND_FEEDBACK_TITLE": {
+        "message": "Envoyer des commentaires",
+        "description": "Option in the Help Menu to send a feedback"
+    },
+    "SEND_FEEDBACK_MESSAGE": {
+        "message": "Ecrivez vos commentaires",
+        "description": "Label of the input text area of the feedback"
+    },
+    "SEND_FEEDBACK_SEND": {
+        "message": "Envoyez votre commentaire",
+        "description": "Button used to send the feecback"
+    },
+    "FEEDBACK_SCREENSHOT_ERROR": {
+        "message": "Une erreur s'est produite lors de la capture de la page! Veuillez réessayer.",
+        "description": "Notification that shows up when  the system can't take a screenshot"
+    },
+    "SEND_FEEDBACK_CANCEL": {
+        "message": "Annuler",
+        "description": "Button to close the feedback dialog"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "EXTRA_GRAPH": {
+        "message": "EXTRA",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDEXTRA": {
+        "message": "Extra - Ajouter un signal",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

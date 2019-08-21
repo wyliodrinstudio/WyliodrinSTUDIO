@@ -1,0 +1,27 @@
+{
+	"DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED":
+	{
+		"message": "Authenticated to websocket device server",
+		"description": "The notification the user sees when authetnicated with the devices server"
+	},
+	"DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR":
+	{
+		"message": "Server error: {error}",
+		"description": "The error notification the user sees with the error for the websocket server"
+	},
+	"DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED":
+	{
+		"message": "Disconnected from the websocket devices server",
+		"description": "The notification the user sees when disconnected from the devices server"
+	},
+	"DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE":
+	{
+		"message": "Use Studio here?",
+		"description": "The title of the question dialog the user sees when there is another connection with his id"
+	},
+	"DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET":
+	{
+		"message": "There is another Studio instance connected to the server with your id. You are not able to use multiple connections. Would you like to use Studio here?",
+		"description": "The question dialog text the user sees when there is another instance connected with his id"
+	}
+}

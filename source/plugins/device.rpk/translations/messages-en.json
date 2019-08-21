@@ -1,0 +1,42 @@
+{
+    "DEVICE_RPK_RUN": {
+        "message": "Run",
+        "description": "The run button for an application"
+    },
+    "DEVICE_RPK_STOP": {
+        "message": "Stop",
+        "description": "The stop button for an application"
+    },
+    "DEVICE_RPK_TASK_MANAGER": {
+        "message": "Task Manager",
+        "description": "The button for the task manager "
+    },
+    "DEVICE_RPK_PACKAGE_MANAGER": {
+        "message": "Package Manager",
+        "description": "The button for the package manager "
+    },
+    "DEVICE_RPK_NETWORK_MANAGER": {
+        "message": "Network Manager",
+        "description": "The button for the network manager "
+    },
+    "DEVICE_RPK_DISCONNECT": {
+        "message": "Disconnect",
+        "description": "The disconnect option in the disconnect menu"
+    },
+    "DEVICE_RPK_RESTART": {
+        "message": "Reboot and Disconnect",
+        "description": "The reboot and disconnect option in the disconnect menu"
+    },
+    "DEVICE_RPK_TURNOFF": {
+        "message": "Power Off and Disconnect",
+        "description": "The power off and disconnect option in the disconnect menu"
+    },
+    "DEVICE_RPK_ANOTHER_USER": {
+        "message": "The device is already connected to another user.",
+        "description": "The notification message when another use is connected to the board and the board is busy"
+    },
+    "DEVICE_RPK_ERROR_BLE": {
+        "message": "List devices failed ({error}).",
+        "description": "The error shown when list devices for ble fails"
+    }
+}

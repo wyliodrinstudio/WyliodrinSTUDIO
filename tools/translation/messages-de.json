@@ -1,0 +1,597 @@
+{
+  "LANGUAGE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Deutsch",
+    "description": "Button that indicates the current language of the program, represented by a flag"
+  },
+  "WORKSPACE_TOOLBAR_EXIT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Verlassen",
+    "description": "Close the program"
+  },
+  "WORKSPACE_TOOLBAR_FULLSCREEN": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Maximieren",
+    "description": "Located in the upper right corner, enlarges the window across the entire screen"
+  },
+  "WORKSPACE_TOOLBAR_RESTORE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Wiederherstellen",
+    "description": "Same button as Fullscreen, restores the window to it's previous dimension"
+  },
+  "WORKSPACE_TOOLBAR_MINIMIZE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Minimieren",
+    "description": "Located in the upper right corner, reduces the window to a small title and hide its contents"
+  },
+  "WORKSPACE_TOOLBAR_SETUP": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Einrichtung",
+    "description": "Located in the help menu"
+  },
+  "WORKSPACE_TOOLBAR_ABOUT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Über",
+    "description": "Located in the help menu, displays informations about the application"
+  },
+  "WORKSPACE_PROJECT_NOTEBOOK": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Notebook",
+    "description": "Tool for project management and task management"
+  },
+  "WORKSPACE_DEVICE_CONNECT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Verbinden",
+    "description": "Button used for connection"
+  },
+  "WORKSPACE_BOARD_CONNECT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Wählen Sie ein Gerät aus, mit dem Sie eine Verbindung herstellen möchten",
+    "description": "Connect to a device"
+  },
+  "CLOSE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Schließen",
+    "description": "Close the current window"
+  },
+  "WORKSPACE_PROJECT_LIBRARY": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Projektbibliothek",
+    "description": "Button that opens a modal with all the projects, with a folder icon as pictogram"
+  },
+  "WORKSPACE_DEVICE_DISCONNECT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Verbindung trennen",
+    "description": "The Disconnect button"
+  },
+  "WORKSPACE_TOOLBAR_EXIT_QUESTION": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Soll die Anwendung beendet werden?",
+    "description": "Select if you are sure you want to exit"
+  },
+  "YES": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Ja",
+    "description": "The 'yes' button"
+  },
+  "NO": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Nein",
+    "description": "The 'no' button"
+  },
+  "EXIT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Beenden",
+    "description": "A button with the text exit"
+  },
+  "CHAT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "CHAT",
+    "description": "The Chat tab"
+  },
+  "CHAT_JOIN_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Kanal Verbinden",
+    "description": "Button uset to connect to a channel."
+  },
+  "CHAT_NEW_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Neuer Kanalname",
+    "description": "The name of the new channel"
+  },
+  "CHAT_PART_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "PART CHANNEL",
+    "description": "Button to leave a channel"
+  },
+  "CHAT_TYPE_MESSAGE": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Nachricht",
+    "description": "Input message area label"
+  },
+  "CHAT_WELCOME_ADD_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Add New Channel",
+    "description": "Text used when the user wants to add a new channel"
+  },
+  "CHAT_TEXT_PART_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Sind Sie sicher, dass Sie diesen Kanal verlassen möchten?",
+    "description": "Text of prompt that show up when the user wants to leave a channel."
+  },
+  "CHAT_CANCEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Abbrechen",
+    "description": "The Cancel button"
+  },
+  "CHAT_DISCONNECT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Abmelden",
+    "description": "The Disconnect button"
+  },
+  "CHAT_TAKEN_NAME": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Ihrer Spitzname ist schon benutzt. Er wurde geaendert. Er ist jetzt {nickName}",
+    "description": "Text of notification that shows up when the user tries to use a nickname already taken."
+  },
+  "CHAT_COULD_NOT_JOIN_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Nu vă puteți conecta pe acest canal. Alegeți altul!",
+    "description": "Text of notification that shows up when the user can not connect to a certain channel"
+  },
+  "CHAT_TITLE_DISCONNECT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Den Kanal abbrechen",
+    "description": "Title of the prompt that show up when the user wants to disconnect from the server"
+  },
+  "CHAT_TEXT_DISCONNECT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Sind Sie sicher, dass Sie den Kanal abbrechen möchten?",
+    "description": "Text of the prompt that show up when the user wants to disconnect from the server"
+  },
+  "CHAT_INSERT_CHANNEL_MESSAGE": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Bitte eine Nachricht schreiben!",
+    "description": "Notification text when the user didn't write a message."
+  },
+  "CHAT_TITLE_WARNING": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Kanal verlassen",
+    "description": "Title of prompt that show up when the user wants to leave a channel."
+  },
+  "CHAT_AVAILABLE_CHANNELS": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Verfügbare Kanale",
+    "description": "List of the available channels"
+  },
+  "CHAT_USERS": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Benutzer",
+    "description": "List with chat users."
+  },
+  "CHAT_INSERT_CHANNEL_NAME": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Bitte den Name des Kanales eingeben",
+    "description": "Warning when the user didn't choose a channel name."
+  },
+  "CHAT_LOGIN_TITLE": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Zum Kanal anmelden",
+    "description": "Text when the user is connecting to a server."
+  },
+  "CHAT_LOGIN_BUTTON": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Anmelden",
+    "description": "The login button"
+  },
+  "PROJECT_DASHBOARD": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Übersicht",
+    "description": "The Dashboard tab, used to send signals from a board."
+  },
+  "DASHBOARD_SIGNAL_NAME": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Signalname *",
+    "description": "Input text area for the name of the signal"
+  },
+  "DASHBOARD_SIGNAL_DESCRIPTION": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Beschreibung",
+    "description": "Input text area for additional description of the signal"
+  },
+  "DASHBOARD_SIGNAL_COLOR": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Farbe",
+    "description": "Button used to pick the color of the signal"
+  },
+  "NAME": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Name",
+    "description": "Signal's name"
+  },
+  "DASHBOARD_ADD_SIGNAL": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Hinzufügen",
+    "description": "Button used to add a signal graph"
+  },
+  "EXTRA_GRAPH": {
+    "plugins": [
+      "dashboard.graph.extra"
+    ],
+    "message": "EXTRA",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDEXTRA": {
+    "plugins": [
+      "dashboard.graph.extra"
+    ],
+    "message": "Extra -Signal hinzufügen",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "LINE_GRAPH": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "LINIE",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDLINE": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Linie - Signal hinzufügen",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "DEVICE_RPK_RUN": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Ausführen",
+    "description": "The run button for an application"
+  },
+  "DEVICE_RPK_STOP": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Stop",
+    "description": "The stop button for an application"
+  },
+  "DEVICE_RPK_TASK_MANAGER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Task Manager",
+    "description": "The button for the task manager "
+  },
+  "DEVICE_RPK_PACKAGE_MANAGER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Paketmanager",
+    "description": "The button for the package manager "
+  },
+  "DEVICE_RPK_NETWORK_MANAGER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Netzwerkmanager",
+    "description": "The button for the network manager "
+  },
+  "DEVICE_RPK_DISCONNECT": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Verbindung trennen",
+    "description": "The disconnect option in the disconnect menu"
+  },
+  "DEVICE_RPK_RESTART": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Verbindung trennen und Neustart",
+    "description": "The reboot and disconnect option in the disconnect menu"
+  },
+  "DEVICE_RPK_TURNOFF": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Verbindung trennen und herunterfahren",
+    "description": "The power off and disconnect option in the disconnect menu"
+  },
+  "DEVICE_WYAPP_RUN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Ausführen",
+    "description": "The run button for an application"
+  },
+  "DEVICE_WYAPP_STOP": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Stop",
+    "description": "The stop button for an application"
+  },
+  "DEVICE_WYAPP_TASK_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Task Manager",
+    "description": "The button for the task manager "
+  },
+  "DEVICE_WYAPP_PACKAGE_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Paketmanager",
+    "description": "The button for the package manager "
+  },
+  "DEVICE_WYAPP_NETWORK_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Netzwerkmanager",
+    "description": "The button for the network manager "
+  },
+  "DEVICE_WYAPP_DISCONNECT": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Verbindung trennen",
+    "description": "The disconnect option in the disconnect menu"
+  },
+  "DEVICE_WYAPP_RESTART": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Verbindung trennen und Neustart",
+    "description": "The reboot and disconnect option in the disconnect menu"
+  },
+  "DEVICE_WYAPP_TURNOFF": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Verbindung trennen und herunterfahren",
+    "description": "The power off and disconnect option in the disconnect menu"
+  },
+  "NETWORK_AUTHENTICATE_IP": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "IP",
+    "description": "Internet Protocol (IP)"
+  },
+  "NETWORK_PORT": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Port",
+    "description": "Number of port for the network connection"
+  },
+  "NETWORK_USERNAME": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Benutzername",
+    "description": "Input text area for the name of the user on the raspberry pi"
+  },
+  "NETWORK_PASSWORD": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Passwort",
+    "description": "Input text area for the password of the user on the raspberry pi"
+  },
+  "NETWORK_SHOWPASSWORD": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Passwort anzeigen",
+    "description": "Switch use to make the password visible"
+  },
+  "PROJECT_NOTEBOOK": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "Notebook",
+    "description": "The Notebook Tab, where the user can take it's own notes"
+  },
+  "PIN_LAYOUT": {
+    "plugins": [
+      "pinLayout"
+    ],
+    "message": "Pinbelegung",
+    "description": "The Pin Layout tab title"
+  },
+  "PROJECT_APPLICATION": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Awedung",
+    "description": "Description of tab"
+  },
+  "PROJECT_NEW_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Neuer Ordner",
+    "description": "Create a folder within a project"
+  },
+  "PROJECT_NEW_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Neue Datei",
+    "description": "Create a file within a project"
+  },
+  "PROJECT_HIDE_CONSOLE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Konsole ausblenden",
+    "description": "Button designed to hide the console"
+  },
+  "PROJECT_WELCOME_CREATE_NEW_APP": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Neue Anwendung erstellen",
+    "description": "Button to create a new project within the workspace"
+  },
+  "PROJECT_LIBRARY_IMPORT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Import",
+    "description": "Import a project from an archive"
+  },
+  "PROJECT_LIBRARY_RENAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Umbenennen",
+    "description": "Rename a project within the workspace"
+  },
+  "PROJECT_LIBRARY_DELETE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Löschen",
+    "description": "Delete a project within the workspace"
+  },
+  "PROJECT_LIBRARY_CLOSE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Schließen",
+    "description": "Close a dialog"
+  },
+  "PROJECT_LIBRARY_EXPORT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Export",
+    "description": "Export a project from the workspace"
+  },
+  "PROJECT_LIBRARY_OPTIONS": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Optionen",
+    "description": "Label for the options menu"
+  },
+  "PROJECT_LIBRARY_PROJECTS": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Projekte",
+    "description": "Label for the projects dialog"
+  },
+  "PROJECT_LIBRARY_LOAD_EXAMPLE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Beispiel laden",
+    "description": "Load a project Example"
+  },
+  "PROJECT_LIBRARY_CLONE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Klonen",
+    "description": "Clone a project within the workspace"
+  },
+  "PROJECT_SHELL": {
+    "plugins": [
+      "shell"
+    ],
+    "message": "Befehlszeile",
+    "description": "The Shell tab, opens a terminal"
+  }
+}

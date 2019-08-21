@@ -1,0 +1,11 @@
+{
+    "name": "device.wyapp",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace", "events", "console", "projects", "shell", "notebook", "dashboard"],
+        "provides": ["device_wyapp"],
+        "target": ["electron", "browser"]
+    }
+}

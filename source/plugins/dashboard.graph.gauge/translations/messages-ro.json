@@ -1,0 +1,10 @@
+{
+    "GAUGE_GRAPH": {
+        "message": "CADRAN",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDGAUGE": {
+        "message": "Cadran - Adăugare semnal",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

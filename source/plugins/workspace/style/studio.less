@@ -1,0 +1,518 @@
+@import '../../../style/var.less';
+
+html {overflow: hidden;}
+body {font-size:13px; color:@color-black;overflow: hidden;}
+
+a {color:@color-highlight; text-decoration:none;}
+a:hover {text-decoration:underline;}
+
+.v-btn {letter-spacing:0;}
+.v-btn:hover {}
+
+.v-toolbar__content, .v-toolbar__extension {padding: 0;}
+
+.titlebar {
+	-webkit-user-select: none;
+	-webkit-app-region: drag;
+	height:90px;
+	background:@color-dark-1 !important;
+	.v-toolbar__content {height: 90px !important;}
+}
+
+.v-card__text {padding: 16px !important;}
+
+.v-menu  {
+	button {text-transform:none; color: @color-white !important; min-width: 50px; margin:23px 10px 0 0 !important; height: 50px !important; box-shadow: none !important; background: transparent !important;
+		> div { padding: 13px;
+			> div {height: 24px; width: 24px;}
+		}
+	}
+	button:hover {background: @color-highlight !important;}
+}
+
+.titlebar-buttons {height: 50px;
+	-webkit-app-region: no-drag;
+	button {background: transparent !important; box-shadow: none !important; min-width: initial !important;
+		> span {}
+		.v-image__image {height: 24px; width: 24px;}
+		.v-responsive__content { width: 24px !important;}
+	}
+	> button {margin: 0px 1px !important; border-radius: 3px !important; max-width: 50px; padding: 13px !important; 
+	> span > img {height: 24px; width: 24px;}
+
+	}
+	button:hover {background: @color-highlight !important;}
+}
+
+.titlebar-buttons > div > div > div {
+	-webkit-app-region: no-drag;
+}
+
+.logo {width: 155px; height: 50px; margin: 0px 0 0 20px;}
+
+.toggle-connection {display: block; background:@color-dark-2; z-index: 80; padding: 25px 25px 0; position:relative; margin-left:30px; height: 90px; margin-top: -20px;
+	button {height: 36px !important; background: @color-dark-3 !important;
+		> div {padding: 0 12px!important; line-height: 36px;}
+	}
+	button:hover {background: @color-highlight !important; color: @color-white !important;}
+}
+
+.status {padding: 10px; float: left; text-align: center; color: @color-white; border-radius: 4px; font-size: 12px;}
+	
+.toggle-connection .triangle {
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: 100;
+    left: -20px;
+    top: 0;
+    background: none !important;
+    border-bottom: 90px solid @color-dark-2;
+    border-left: 20px solid transparent;
+}
+
+.label-disconnected {
+    background: @color-disconnected;
+}
+.label-connected {
+    background: @color-connected;
+}
+.label-synchronizing, .label-install, .label-ping {
+    background: @color-synchronizing;
+}
+.label-connecting {
+    background: @color-connecting;
+}
+.label-error {
+    background: @color-error;
+}
+
+.label {display: inline; font-size: 75%; font-weight: bold; line-height: 1; color: @color-white; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: .25em;}
+
+.c-status{position: fixed; left: 200px; top: 32px; font-size: 11px;}
+
+.window-control {
+    display: block;
+    z-index: 80;
+	padding: 10px 5px;
+	height: 90px;
+    position: relative;
+    margin-left: 0px;
+	max-width: 34px;
+	button {background: transparent !important;}
+	button:hover {background: @color-highlight !important;}
+	margin-top:-20px;
+}
+
+.window-button {
+	-webkit-app-region: no-drag;
+	height: initial !important;
+	width: 24px !important;
+	height: 24px !important;
+	min-width:initial; 
+	line-height:initial; 
+	border-radius:0;
+	min-height:initial !important;
+    margin:0px !important;
+    padding: 0px !important;
+	top:-1px;
+	> div {padding: 0 !important; width: 24px !important; height: 24px !important;}
+}
+
+.tabs-box {
+	> div{background-color:@color-light-1 !important;}
+	.v-tabs-slider-wrapper {height: 4px !important;}
+	.v-tabs-slider{ background-color: @color-highlight !important; border-color: @color-highlight !important;}
+	.v-tab--active {color: @color-black !important;}
+	.v-tabs__item {
+		.v-image {width: 24px; margin-right: 3px;}
+		.v-image__image {background-position: center 1px;}
+	}
+}
+
+.v-system-bar {margin-top: -20px; height: 20px !important; position: relative; z-index: 100; background: @color-dark-1 !important;
+	.status-btn {position: relative; cursor: pointer; text-align: center; margin-top: -20px; margin-left: 5px;}
+	button {border: @color-grey-6 0px solid ; border-radius: 30px; min-width: initial !important; background-color: @color-dark-4 !important; color: @color-white !important; font-size: 12px; text-transform: initial; font-weight: 300; height: 24px !important; padding: 0 7px !important; margin: 0px !important; box-shadow: none !important;
+		.v-image {height: 10px;	width: 10px; filter: invert(100%) !important;}
+		.v-responsive__content {width: 14px !important;}
+	}
+	button:hover {border: @color-highlight 0px solid ; background-color: @color-highlight !important; color: @color-white ;}
+}
+
+.application a:hover {text-decoration: none;}
+
+.projname {position:absolute; background:none; top:100px; left:20px; color:@color-black; z-index: 1; font-size: 20px; letter-spacing: 0.005em; font-weight: 400;}
+
+.v-card__title {background: @color-dark-4; color: @color-white;}
+
+.headline {font-size: 20px !important;}
+
+.v-avatar .v-icon, .v-avatar .v-image, .v-avatar img {border-radius: 0 !important; display: block !important; height: initial !important; width: initial !important;}
+.v-avatar {border-radius: 0;}
+
+.v-list-item__avatar:first-child {margin-right: 15px;}
+
+.connection-box {overflow: hidden;
+	.v-card__text { max-height: 50%; overflow-y: scroll;}
+	.itemlist{display: flex; padding: 0;	margin: 5px 0; min-height: 90px; overflow-x: hidden; overflow-y: auto; flex-wrap: wrap;
+		> div {max-width: 33%; flex-basis:33%;}
+		a{min-height: 90px !important; height: 90px !important;}
+		.board-connect-title {width: 100%; text-align: left; line-height: 25px; color: @color-black; text-transform: none; font-weight: bold;}
+		.board-connect-type {width: 100%; text-align: left; font-size: 12px; color: @color-black !important; text-transform: none; line-height: normal;}
+		.board-connect-address {width: 100%; text-align: left; font-size: 12px; color: @color-black !important; text-transform: none; line-height: normal;}
+		.v-avatar {width: initial !important; height: initial !important; border-radius: 0;}
+	}
+}
+
+.v-list {background-color: @color-dark-4 !important; color: @color-white !important; padding: 0px !important;
+	> div:hover {background-color: @color-highlight !important; color:@color-white !important; cursor: pointer;}
+}
+
+.v-dialog {box-shadow: none;
+	.v-list {background-color: @color-white !important; color: @color-black !important;
+		>div:hover {background-color: @color-grey-1 !important; color:@color-black !important;}
+	}
+}
+
+.small-box {width: 550px; height: 365px; overflow: hidden;
+	.itemlist {flex-flow: wrap;}
+	.v-card__text { height: 68%; overflow-y: scroll;}
+	.v-avatar {width: initial !important; height: initial !important; border-radius: 0; padding-right: 25px;}
+	a{min-height: 130px !important; height: 130px !important;}
+	.v-list__tile__title {cursor: pointer; color:@color-black; font-size: 16px; font-weight: bold;}
+	.v-list__tile__sub-title {cursor: pointer; color:@color-black !important; padding-TOP: 5px; font-size: 13px;}
+	.projlang {padding: 3px; font-size: 10px; color: @color-grey-3; background: @color-white; border-radius: 4px; border: @color-grey-2 1px solid; display: inline; margin: 0 0 0 5px; font-weight: normal;}
+}
+
+.v-card__actions {border-top-width: 1px; border-top-style: solid; border-top-color:@color-grey-2;
+	.layout {display: contents;}
+}
+
+.v-card__title {
+	button, button:hover {background: transparent !important; text-decoration: @color-highlight !important; margin: 0 !important; height: initial !important; font-weight: 300;
+		> div {padding: 0 !important;}
+	}
+	.v-btn:hover:before {
+		background-color: transparent;
+	}
+}
+
+.v-menu__content {margin-top: -42px !important;
+	.v-list-item__title {color: @color-white !important;font-size: 14px !important;}
+}
+.v-list__tile {font-size: 14px !important;}
+
+.v-list__tile__action, .v-list__tile__avatar {min-width: 30px;}
+
+.device {position: absolute; top: -5px; left: -60px; height: 48px; width: 54px;
+	.v-image__image {background-size:48px auto !important;}
+}
+
+.connected-menu {margin-left: 45px; float: left; position: relative;
+	.device-title {font-size: 18px; font-weight: 500; letter-spacing: 0.005em; display: inline; padding: 4px 20px 0 0px; min-width:100px; color:@color-white; margin-left: -5px;}
+	.device-port {font-size: 10px; position: absolute; left: -5px; top: 25px; color: @color-grey-2;}
+	.v-btn {padding: 0 13px !important; margin-left: 5px !important;; border-radius: 3px !important;}
+	.run-bt {color: @color-grey-4 !important; background-color: transparent !important; text-transform:none; color: @color-white !important; min-width: 50px; border:@color-dark-3 solid 2px !important;}
+	.run-bt:hover {background:@color-connected !important; color:@color-white !important; border:@color-connected solid 2px !important;}
+
+	.stop-bt {color: @color-grey-4 !important; background-color: transparent !important;	text-transform:none; color: @color-white !important; min-width: 50px; border:@color-dark-3 solid 2px !important;}
+	.stop-bt:hover {background:@color-red !important; color:@color-white !important; border:@color-red solid 2px !important;}
+
+	.update-bt {background: @color-red !important;}
+	.height-priority .v-image__image {background-size: auto 24px !important;}
+}
+
+.v-window {
+	code {display: none !important;}
+}
+.v-window__container { background: @color-white; height: 100% !important;}
+.v-window-item {
+	img {height: 100%; width: auto;}
+}
+
+.shell-box {-webkit-box-flex: 1; -webkit-flex: 1 0 100%; flex: 1 0 100%; min-width: 0;}
+
+.manager-box {
+	.v-card__text {padding: 0; overflow: hidden; color: @color-black; max-height: 55%; padding: 0 !important; min-height: 100px; overflow: auto;}
+	.v-window {overflow-y: auto; overflow-x: hidden; height: calc(~"100% - 55%") !important;}
+	.d-flex {align-items: center;}
+	.v-window__container { background: @color-white; height: 100% !important;}
+	.v-tab .v-image {height: 24px; width: 24px; margin-right: 5px;}
+}
+
+.theme--light.v-card .v-card__text {color: @color-black;}
+
+
+
+.manager-search {font-weight: 300; color: @color-black; padding: 5px 10px 0 0 !important;
+	input{padding:4px 0 0px 0 !important;}
+}
+.manager-search:hover, .manager-search:focus {outline: none;}
+
+.orange--text {color: @color-highlight !important; caret-color:@color-highlight !important; }
+
+input {caret-color:@color-highlight !important;  }
+
+.task{font-size: 13px; border-bottom: 1px @color-grey-2 solid; display: flex;
+	td{padding:10px; margin:0;}
+	td:first-child {padding-left: 20px;
+		div {margin-top: 2px; font-size: 12px;}
+	}
+	td:last-child {padding-right: 20px;
+	}
+	.v-image {max-width: 30px; margin-right: 10px;}
+	.v-image__image {background-size: 24px; width: 30px;}
+}
+
+// .xterm {
+// 	width: 100%;height: 100%; border: @color-black solid 5px; color: @color-light-2; background: @color-black; -webkit-user-select: auto; font-family: "DejaVu Sans Mono", "Liberation Mono", monospace;  font-size: 14px;  line-height: 14px;
+// 	 /* Custom */
+// 	   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+// 			-moz-box-sizing: border-box; /* Firefox, other Gecko */
+// 			   box-sizing: border-box; /* Opera/IE 8+ */
+// }
+
+.scroll-box {height:100%; overflow-y: scroll;}
+
+.input-container {justify-content: space-between;
+	.v-input {box-sizing: border-box; margin: 0 5px; width: calc(1/3*100% - (1 - 1/3)*10px);}
+}
+
+.signal img {height: auto;}
+
+.networkinfo {font-size: 14px;}
+
+.project-box-1 {width:calc(~"100% - 195px"); float: right;}
+.project-box-2 {width:100%;}
+
+.project-tree-on {width: 195px; display: inline-block; float: left; position: relative; background: @color-grey-1;}
+.project-tree-off {width: 0px; display: none; position: relative;}
+
+.fileexplorer-actions {
+	text-transform:none;
+	color: @color-black !important;
+    min-width: 36px;
+	padding:0;
+	margin: 3px !important;
+	.v-image {max-height: 18px;}
+	.v-image__image{background-size: 18px auto;}
+}
+
+.fileexplorer-actions:hover { 
+	background:@color-highlight !important;
+	.v-image__image {filter: invert(100%);}
+}
+
+.fileexplorer-dialog {
+	position:absolute;
+	z-index:98;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	background:rgba(0,0,0,0.5) !important;
+	> div {
+	    position: absolute;
+		z-index: 99;
+		background: @color-white;
+		width: 50%;
+		padding: 25px 25px 10px 25px;
+		top: 40%;
+		margin: auto;
+		left: 0;
+		right: 0;
+		border-radius: 10px;
+	}
+}
+
+.tree-classic {
+    min-width: 195px;
+    margin: 0px;
+    position: relative;
+    background: @color-white;
+}
+
+.projectTree { min-width:200px; margin:0px; position:relative; background:@color-white;
+	.tree-classic {
+		min-width: 195px;
+		margin: 0px;
+		position: relative;
+		background: @color-white;
+		margin-bottom: 95px;
+	}
+}
+
+.tree-classic li i {
+outline:none;
+}
+
+.show-hide-console {
+	position: absolute;
+    top: -30px;
+    right: 10px;
+    text-align: center;
+    z-index: 80;
+	background: @color-black;
+    padding: 0;
+	text-decoration: none !important;
+	button {height: 24px;}
+	.v-image__image{background-size: 12px auto; filter: invert(100); height: 24px;}
+}
+
+.show-hide-console:hover {
+    background: @color-highlight;
+}
+
+
+.tree-hide {
+    position: absolute;
+    top: 40%;
+    left: -15px;
+	z-index: 100;
+	img {height: 29px;}
+}
+
+.tree-hide button, .tree-hide button:hover {
+	min-width:initial !important;
+	min-height:initial;
+	padding:0 !important;
+	margin:0px;
+	position:relative;
+	background: transparent !important;
+}
+
+.tree-hide button:hover, .tree-hide button:focus {
+	img {filter: invert(100%);}
+	background: transparent !important;
+}
+
+.tree-show {
+	position:absolute;
+	top:40%;
+	left: 181px;
+	z-index: 100;
+	img {height: 29px;}
+}
+
+.tree-show button, .tree-show button:hover {
+	min-width:initial !important;
+	min-height:initial;
+	padding:0 !important;
+	margin:0px;
+	position:relative;
+	background: transparent !important;
+}
+
+.tree-show button:hover, .tree-show button:focus {
+	img {filter: invert(100%);}
+	background: transparent !important;
+}
+
+.os-icon {
+	position:fixed;
+	top: 35px;
+    left: 320px;
+    z-index: 200;
+}
+
+.file-manager-actions {position: absolute; margin: auto; left: 0; right: 0; text-align: center; max-width: 200px;}
+
+.onofftoggle .v-input {display: block; flex: none; padding: 0 0 0 10px; margin-top: 0px;
+	.v-messages {display: none;}
+	.v-input__slot {margin-bottom: 2px;}
+}
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	margin:1% 0;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(0,0,0,0.1); 
+}
+
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	margin:1% 0;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(0,0,0,0.1); 
+}
+
+
+.about-box {
+
+	/* Scrollbar width */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+	
+	/* Track */
+	::-webkit-scrollbar-track {
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		margin:1% 0;
+	}
+	
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		background: rgba(255,255,255,0.2); 
+	}
+	::-webkit-scrollbar-thumb:window-inactive {
+		background: rgba(255,255,255,0.1); 
+	}
+
+}
+
+/* Spinning circle */
+.v-progress-circular {position: absolute; margin: auto; left: 0; right: 0; top: 0; bottom: 0; color:@color-highlight;}
+
+.icon-btn-lg {
+	text-transform:none;
+	color: @color-white !important;
+    min-width: 50px;
+	padding:12px;
+	position: absolute !important;
+    right: 10px;
+}
+
+.icon-btn-lg:hover { 
+	background:@color-highlight !important;
+}
+
+.codestatus {position:absolute; right: -14px; top: 20px; background:@color-dark-4 !important; color:@color-white !important; text-transform: capitalize; box-shadow: none !important; font-size: 14px !important; padding-right: 30px !important;}
+.codestatus:hover, .codestatus:active, .codestatus:focus {position:absolute; right: -10px; top: 20px; background:@color-highlight !important; color:@color-white !important;}
+
+.startuperror {font-size:18px; font-family: Arial, Helvetica, sans-serif; color:@color-white; text-align:center; padding: 10px 15px; position: absolute; margin: auto; width:100%; background: @color-error;}
+
+.v-alert__icon.v-icon {margin-top: 10px;}

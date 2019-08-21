@@ -1,0 +1,10 @@
+{
+    "PROJECT_SHELL": {
+        "message": "Shell",
+        "description": "The Shell tab, opens a terminal"
+    },
+    "SHELL_NO_SHELL": {
+        "message": "Conectați-vă la un dispozitiv pentru a activa terminalul",
+        "description": "The text that is displayed when the shell is not enabled"
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "PROJECT_DASHBOARD": {
+        "message": "El tablero de Control",
+        "description": "The Dashboard tab, used to send signals from a board."
+    },
+    "DASHBOARD_SIGNAL_NAME": {
+        "message": "El nombre de la señal",
+        "description": "Input text area for the name of the signal"
+    },
+    "DASHBOARD_SIGNAL_DESCRIPTION": {
+        "message": "Descripción",
+        "description": "Input text area for additional description of the signal"
+    },
+    "DASHBOARD_SIGNAL_COLOR": {
+        "message": "Color",
+        "description": "Button used to pick the color of the signal"
+    },
+    "NAME": {
+        "message": "Nombre",
+        "description": "Signal's name"
+    },
+    "DASHBOARD_ADD_SIGNAL": {
+        "message": "Añadir",
+        "description": "Button used to add a signal graph"
+    }
+}

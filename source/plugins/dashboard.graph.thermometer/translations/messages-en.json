@@ -1,0 +1,10 @@
+{
+    "THERMOMETER_GRAPH": {
+        "message": "THERMOMETER",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDTHERMOMETER": {
+        "message": "Thermometer - Add signal",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

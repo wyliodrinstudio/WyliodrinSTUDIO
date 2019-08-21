@@ -1,0 +1,242 @@
+{
+    "PROJECT_APPLICATION": {
+        "message": "Application",
+        "description": "Description of tab"
+    },
+    "PROJECT_DELETE_FOLDER": {
+        "message": "Delete Folder",
+        "description": "Delete a folder within a project"
+    },
+    "PROJECT_RENAME_FOLDER": {
+        "message": "Rename folder",
+        "description": "Rename a folder within a project"
+    },
+    "PROJECT_NEW_FOLDER": {
+        "message": "New folder",
+        "description": "Create a folder within a project"
+    },
+    "PROJECT_NEW_FOLDER_NAME": {
+        "message": "New Folder Name",
+        "description": "Label for the new name of the folder"
+    },
+    "PROJECT_FOLDER_SURE": {
+        "message": "Are you sure you want to delete this folder?",
+        "description": "Prompt asking for assurance on deleting a folder"
+    },
+    "PROJECT_DELETE_FILE": {
+        "message": "Delete File",
+        "description": "Delete a file within a project"
+    },
+    "PROJECT_RENAME_FILE": {
+        "message": "Rename File",
+        "description": "Rename a file within a project"
+    },
+    "PROJECT_NEW_FILE": {
+        "message": "New File",
+        "description": "Create a file within a project"
+    },
+    "PROJECT_NEW_FILE_NAME": {
+        "message": "New File Name",
+        "description": "Label for the new name of the file"
+    },
+    "PROJECT_FILE_SURE": {
+        "message": "Are you sure you want to delete this file?",
+        "description": "Prompt asking for assurance on deleting a file"
+    },
+    "PROJECT_NEW_NAME": {
+        "message": "New Name",
+        "description": "Label for the new name of the object"
+    },
+    "PROJECT_DELETE_PROJECT": {
+        "message": "Delete project",
+        "description": "Label for the dialog to delete a project within the workspace"
+    },
+    "PROJECT_LOAD_PROJECT": {
+        "message": "Load a project from the library",
+        "description": "Text meaning that there is no project loaded"
+    },
+    "PROJECT_PROJECT_SURE": {
+        "message": "Are you sure you want to delete this project?",
+        "description": "Prompt asking for assuruance on deleting a project"
+    },
+    "PROJECT_SHOW_CODE": {
+        "message": "Show Code",
+        "description": "Button designed to show the code behind a blockly"
+    },
+    "PROJECT_HIDE_CONSOLE": {
+        "message": "Hide Console",
+        "description": "Button designed to hide the console"
+    },
+    "PROJECT_WELCOME_CREATE_NEW_APP": {
+        "message": "Create New Application",
+        "description": "Button to create a new project within the workspace"
+    },
+    "PROJECT_LIBRARY": {
+        "message": "Projects Library",
+        "description": "Opens the projects library"
+    },
+    "PROJECT_LIBRARY_NAME": {
+        "message": "Project name",
+        "description": "Label for the name of the project"
+    },
+    "PROJECT_LIBRARY_NEW_PROJECT": {
+        "message": "Create project",
+        "description": "Create a project within the workspace"
+    },
+    "PROJECT_LIBRARY_RENAME": {
+        "message": "Rename",
+        "description": "Rename a project within the workspace"
+    },
+    "PROJECT_LIBRARY_DELETE": {
+        "message": "Delete",
+        "description": "Delete a project within the workspace"
+    },
+    "PROJECT_LIBRARY_CLONE": {
+        "message": "Clone",
+        "description": "Clone a project within the workspace"
+    },
+    "PROJECT_LIBRARY_IMPORT": {
+        "message": "Import",
+        "description": "Import a project from an archive"
+    },
+    "PROJECT_LIBRARY_CLOSE": {
+        "message": "Close",
+        "description": "Close a dialog"
+    },
+    "PROJECT_LIBRARY_EXPORT": {
+        "message": "Export",
+        "description": "Export a project from the workspace"
+    },
+    "PROJECT_LIBRARY_PROJECTS": {
+        "message": "Projects",
+        "description": "Label for the projects dialog"
+    },
+    "PROJECT_LIBRARY_OPTIONS": {
+        "message": "Options",
+        "description": "Label for the options menu"
+    },
+    "PROJECT_LIBRARY_LOAD_EXAMPLE": {
+        "message": "Load an Example",
+        "description": "Load a project Example"
+    },
+    "PROJECT_ERROR_LANGUAGE_ADDON": {
+        "message": "Register addon failed for language {language}",
+        "description": "The error message shown when a language addon fails to register"
+    },
+    "PROJECT_ERROR_REGISTER_EDITOR": {
+        "message": "Register editor failed for name {name} editor already registered",
+        "description": "The error message shown when an edtitor fails to register"
+    },
+    "PROJECT_ERROR_LOAD_PROJECTS": {
+        "message": "Error while loading the projects ({error})",
+        "description": "The error message shown when the projects fail to load"
+    },
+    "PROJECT_ERROR_SELECT_PROJECT": {
+        "message": "Error while selecting project {project} ({error})",
+        "description": " The error message shown when a project fails to be selected"
+    },
+    "PROJECT_ERROR_CREATE_PROJECT": {
+        "message": "Error while creating project {project} ({error})",
+        "description": "The error message shown when a project fails to be created"
+    },
+    "PROJECT_ERROR_RENAME_PROJECT": {
+        "message": "Error while renaming project {project} to {name} ({error})",
+        "description": "The error message shown when a project fails to be renamed"
+    },
+    "PROJECT_ERROR_CLONE_PROJECT": {
+        "message": "Error while cloning project {project} ({error})",
+        "description": "The error message shown when a project fails to be cloned"
+    },
+    "PROJECT_ERROR_DELETE_PROJECT": {
+        "message": "Error while deleting project {project} ({error})",
+        "description": "The error message shown when a project fails to be deleted"
+    },
+    "PROJECT_ERROR_IMPORT_PROJECT": {
+        "message": "Error while importing project {project} ({error})",
+        "description": "The error message shown when a project fails to be imported"
+    },
+    "PROJECT_ERROR_EXPORT_PROJECT": {
+        "message": "Error while exporting project {project} ({error})",
+        "description": "The error message shown when a project fails to be exported"
+    },
+    "PROJECT_ERROR_NEW_FOLDER": {
+        "message": "Error while creating new folder {folder} ({error})",
+        "description": "The error message shown when a folder fails to be created"
+    },
+    "PROJECT_ERROR_NEW_FILE": {
+        "message": "Error while creating new file {file} ({error})",
+        "description": "The error message shown when a file fails to be created"
+    },
+    "PROJECT_ERROR_RENAME_OBJECT": {
+        "message": "Error while renaming object {object} ({error})",
+        "description": "The error message shown when an object fails to be renamed"
+    },
+    "PROJECT_ERROR_DELETE_FOLDER": {
+        "message": "Error while deleting folder {folder} ({error})",
+        "description": "The error message shown when a folder fails to be deleted"
+    },
+    "PROJECT_ERROR_DELETE_FILE": {
+        "message": "Error while deleting file {file} ({error})",
+        "description": "The error message shown when a file fails to be deleted"
+    },
+    "PROJECTS_JSON_DO_NOT": {
+        "message": "Tried to edit project.json, DO NOT DO THIS",
+        "description": ""
+    },
+    "PROJECT_ERROR_SAVE_FILE": {
+        "message": "Error while saving file {file} ({error})",
+        "description": "The error message shown when a file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_FILE": {
+        "message": "Error while loading file {file} ({error})",
+        "description": "The error message shown when file fails to be loaded"
+    },
+    "PROJECT_ERROR_READ_DATA": {
+        "message": "Error while reading data for project {project} ({error})",
+        "description": "The error message shown when there is an error reading the data for the project"
+    },
+    "PROJECT_ERROR_NOT_FOLDER": {
+        "message": "Project folder {project} is not a folder",
+        "description": "The error message shown when there is no folder"
+    },
+    "PROJECT_ERROR_SAVE_SPECIAL_FILE": {
+        "message": "Error while saving special file {file} with data ({error})",
+        "description": "The error message shown when a special settings file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_SPECIAL_FILE": {
+        "message": "Error while loading special file {file} ({error})",
+        "description": "The error message shown when a special settings file fails to be loaded"
+    },
+    "PROJECT_ERROR_SEND_CODE": {
+        "message": "Error while sending file code {file} ({error})",
+        "description": "The error message shown when there is an error while sending the file code to the device"
+    },
+    "PROJECT_ERROR_PATH_INVALID": {
+        "message": "Error, path is not inside the workspace folder",
+        "description": "The error message shown when the specified path is not in the workspace folder"
+    },
+    "PROJECT_JSON_DO_NOT": {
+        "message": "Tried to edit project.json, DO NOT DO THIS",
+        "description": "The error message shown when there is an attempt at editing the project settings file"
+    },
+    "PROJECT_CLONE_PROJECT": {
+        "message": "Clone Project",
+        "description": "Label for the clone project dialog"
+    },
+    "PROJECT_RENAME_PROJECT": {
+        "message": "Rename Project",
+        "description": "Label for the rename project dialog"
+    },
+    "PROJECT_NAME_PROMPT": {
+        "message": "Please input the name of the project",
+        "description": "Label for the new name to be given to the project"
+    },
+    "PROJECT_NULL": {
+        "message": "One or more parameters are null",
+        "description": "One or more of the funciton's parameters are null"
+    },
+    "PATH_NULL": {
+        "message": "A path is null",
+        "description": "The given path turned out null"
+    }
+}

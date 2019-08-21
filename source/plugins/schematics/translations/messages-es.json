@@ -1,0 +1,22 @@
+{
+    "SCHEMATICS": {
+        "message": "Esquema",
+        "description": "The Schematics Tab, used to load a circuit diagram"
+    },
+    "ADD_SCHEMATIC": {
+        "message": "Add schematics",
+        "description": "Button used to add a schematics"
+    },
+    "DELETE_SCHEMATIC": {
+        "message": "Delete schematics",
+        "description": "Button used to delete a schematics"
+    },
+    "DELETE_MESSAGE": {
+        "message": "¿Desea borrar el esquema?",
+        "description": "Delete confirmation prompt question"
+    },
+    "DELETE_CONFIRMATION": {
+        "message": "Delete confirmation",
+        "description": "Delete confirmation prompt title"
+    }
+}

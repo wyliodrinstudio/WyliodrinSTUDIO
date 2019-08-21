@@ -1,0 +1,82 @@
+{
+    "CHAT": {
+        "message": "CHAT",
+        "description": "The Chat tab"
+    },
+    "CHAT_JOIN_CHANNEL": {
+        "message": "Joindre un channel",
+        "description": "Button used to connect to a channel."
+    },
+    "CHAT_NEW_CHANNEL": {
+        "message": "Entrer le nom du channel",
+        "description": "The name of the new channel"
+    },
+    "CHAT_PART_CHANNEL": {
+        "message": "Quitter le channel",
+        "description": "Button to leave a channel"
+    },
+    "CHAT_TYPE_MESSAGE": {
+        "message": "Saisissez un message",
+        "description": "Input message area label"
+    },
+    "CHAT_WELCOME_ADD_CHANNEL": {
+        "message": "Ajouter un nouveau channel",
+        "description": "Text used when the user wants to add a new channel"
+    },
+    "CHAT_TEXT_PART_CHANNEL": {
+        "message": "Êtes-vous sûr de vouloir quitter ce channel?",
+        "description": "Text of prompt that show up when the user wants to leave a channel."
+    },
+    "CHAT_CANCEL": {
+        "message": "Annuler",
+        "description": "The Cancel button"
+    },
+    "CHAT_DISCONNECT": {
+        "message": "Déconnecter",
+        "description": "The Disconnect button"
+    },
+    "CHAT_TAKEN_NAME": {
+        "message": "Your nickname is already in use. It has been changed to {nickName}",
+        "description": "Text of notification that shows up when the user tries to use a nickname already taken."
+    },
+    "CHAT_COULD_NOT_JOIN_CHANNEL": {
+        "message": "Ce channel n'a pas pu être rejoint! Veuillez en choisir un autre!",
+        "description": "Text of notification that shows up when the user can not connect to a certain channel"
+    },
+    "CHAT_TITLE_DISCONNECT": {
+        "message": "Déconnecter du serveur",
+        "description": "Title of the prompt that show up when the user wants to disconnect from the server"
+    },
+    "CHAT_TEXT_DISCONNECT": {
+        "message": "Êtes-vous sûr de vouloir vous déconnecter du serveur?",
+        "description": "Text of the prompt that show up when the user wants to disconnect from the server"
+    },
+    "CHAT_INSERT_CHANNEL_MESSAGE": {
+        "message": "S'il vous plaît tapez un message!",
+        "description": "Notification text when the user didn't write a message."
+    },
+    "CHAT_TITLE_WARNING": {
+        "message": "Quitter channel",
+        "description": "Title of prompt that show up when the user wants to leave a channel."
+    },
+    "CHAT_AVAILABLE_CHANNELS": {
+        "message": "Canaux disponibles",
+        "description": "List of the available channels"
+    },
+    "CHAT_USERS": {
+        "message": "Utilisateurs",
+        "description": "List with chat users."
+    },
+    "CHAT_INSERT_CHANNEL_NAME": {
+        "message": "S'il vous plaît tapez un nom de chaîne!",
+        "description": "Warning when the user didn't choose a channel name."
+    },
+    "CHAT_LOGIN_TITLE": {
+        "message": "Connexion au serveur",
+        "description": "Text when the user is connecting to a server."
+    },
+    "CHAT_LOGIN_BUTTON": {
+        "message": "Entrer",
+        "description": "The login button"
+    }
+}

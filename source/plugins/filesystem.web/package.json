@@ -1,0 +1,11 @@
+{
+    "name": "filesystem.web",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["filesystem"],
+        "provides": [],
+        "target": ["browser"]
+    }
+}

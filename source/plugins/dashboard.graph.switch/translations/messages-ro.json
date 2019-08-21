@@ -1,0 +1,14 @@
+{
+    "SWITCH_GRAPH": {
+        "message": "BUTON",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDSWITCH": {
+        "message": "Buton - Adăugare semnal",
+        "description": "Title of the prompt used to add a new signal"
+    },
+    "SWITCH_PUSH": {
+        "message": "Push",
+        "description": "Checkbox used to push values"
+    }
+}

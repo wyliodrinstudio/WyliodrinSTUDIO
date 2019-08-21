@@ -1,0 +1,18 @@
+{
+    "PROJECT_DASHBOARD": {
+        "message": "Vezérlőpult",
+        "description": "The Dashboard tab, used to send signals from a board."
+    },
+    "DASHBOARD_SIGNAL_NAME": {
+        "message": "Jel Megnevezése *",
+        "description": "Input text area for the name of the signal"
+    },
+    "DASHBOARD_SIGNAL_DESCRIPTION": {
+        "message": "Leírás",
+        "description": "Input text area for additional description of the signal"
+    },
+    "DASHBOARD_SIGNAL_COLOR": {
+        "message": "Szín",
+        "description": "Button used to pick the color of the signal"
+    }
+}

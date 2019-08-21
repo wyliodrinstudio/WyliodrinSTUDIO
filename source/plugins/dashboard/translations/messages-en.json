@@ -1,0 +1,94 @@
+{
+    "PROJECT_DASHBOARD": {
+        "message": "Dashboard",
+        "description": "The Dashboard tab, used to send signals from a board."
+    },
+    "DASHBOARD_VIEWER_INVALID_SIGNAL": {
+        "message": "Signal name invalid",
+        "description": "Warning that shows up when the signal name entered by the user is not correct."
+    },
+    "DASHBOARD_VIEWER_MOVE_LEFT": {
+        "message": "Move left",
+        "description": "Button used to move a graph to the left"
+    },
+    "DASHBOARD_VIEWER_MOVE_RIGHT": {
+        "message": "Move right",
+        "description": "Button used to move a graph to the right"
+    },
+    "DASHBOARD_VIEWER_GRAPH_SETTINGS": {
+        "message": "Graph settings",
+        "description": "Button that opens a prompt where the user can modify the graph's properties"
+    },
+    "DASHBOARD_VIEWER_ERASE_GRAPH": {
+        "message": "Erase graph",
+        "description": "Button used to delete a graph"
+    },
+    "DASHBOARD_SIGNAL_NAME": {
+        "message": "Signal Name *",
+        "description": "Input text area for the name of the signal"
+    },
+    "DASHBOARD_SIGNAL_DESCRIPTION": {
+        "message": "Description",
+        "description": "Input text area for additional description of the signal"
+    },
+    "DASHBOARD_SIGNAL_COLOR": {
+        "message": "Color",
+        "description": "Button used to pick the color of the signal"
+    },
+    "NAME": {
+        "message": "Name",
+        "description": "Signal's name"
+    },
+    "DASHBOARD_ADD_SIGNAL": {
+        "message": "Add",
+        "description": "Button used to add a signal graph"
+    },
+    "DASHBOARD_LOW_COLOR": {
+        "message": "Low color",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_LOW_VALUE": {
+        "message": "Low value",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_MID_COLOR": {
+        "message": "Mid color",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_MID_VALUE": {
+        "message": "Mid value",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_HIGH_COLOR": {
+        "message": "High color",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_MIN_AXES_VALUE": {
+        "message": "Minimum value",
+        "description": "Input text area foar the minimum value of an axis"
+    },
+    "DASHBOARD_MAX_AXES_VALUE": {
+        "message": "Maximum value",
+        "description": "Input text area foar the maximum value of an axis"
+    },
+    "DASHBOARD_KILOMETERS": {
+        "message": "Kilometers",
+        "description": "Unit of measure for speedometer and gauge"
+    },
+    "DASHBOARD_MILES": {
+        "message": "Miles",
+        "description": "Unit of measure for speedometer and gauge"
+    },
+    "DASHBOARD_MIN_VALUE": {
+        "message": "Minimum axes value",
+        "description": "Input text area foar the minimum value of an axis"
+    },
+    "DASHBOARD_MAX_VALUE": {
+        "message": "Maximum axes value",
+        "description": "Input text area foar the maximum value of an axis"
+    },
+    "DASHBOARD_AXIS_NAME": {
+        "message": "Axis name",
+        "description": "Name of an axis"
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "TOOLBAR_RESISTOR_COLOR_CODE": {
+        "message": "抵抗のカラーコード",
+        "description": "Option in the Help Menu which opens a dialog that makes a connection between the color of a resistor and it's value"
+    },
+    "RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER": {
+        "message": "色から番号まで",
+        "description": "Options that transforms the color in a value"
+    },
+    "RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR": {
+        "message": "番号から色まで",
+        "description": "Option that transforms the value in a color"
+    },
+    "RESISTOR_COLORCODE_STRIPES": {
+        "message": "ストライプ",
+        "description": "Number of stripes in the resistor"
+    },
+    "VALUE_FOUR": {
+        "message": "四",
+        "description": "Number 4"
+    },
+    "VALUE_FIVE": {
+        "message": "五",
+        "description": "Number 5"
+    },
+    "RESISTOR_COLORCODE_STRIPE": {
+        "message": "ストライプ",
+        "description": "Stripe option"
+    },
+    "VALUE_VALUE": {
+        "message": "値",
+        "description": "Stripe option"
+    },
+    "RESISTOR_COLORCODE_RESISTANCE": {
+        "message": "抵抗",
+        "description": "Label for the value of the resistance"
+    },
+    "VALUE_TOLERANCE": {
+        "message": "トレランス",
+        "description": "Tolerance of the resistor"
+    }
+}

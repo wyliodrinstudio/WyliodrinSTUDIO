@@ -1,0 +1,11 @@
+{
+    "REAL_FS_DO_NOT_EXIST_FS": {
+        "message": "The given filesystem could not be found! Please use one valid filesystem"
+    },
+    "REAL_FS_ALREADY_REGISTERED_FS": {
+        "message": "The given filesystem is already registered!"
+    },
+    "REAL_FS_NO_DEF_FS": {
+        "message": "No default filesystem, is there any filesystem registered?"
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "DEVICE_RPK_RUN": {
+        "message": "Ausführen",
+        "description": "The run button for an application"
+    },
+    "DEVICE_RPK_STOP": {
+        "message": "Stop",
+        "description": "The stop button for an application"
+    },
+    "DEVICE_RPK_TASK_MANAGER": {
+        "message": "Task Manager",
+        "description": "The button for the task manager "
+    },
+    "DEVICE_RPK_PACKAGE_MANAGER": {
+        "message": "Paketmanager",
+        "description": "The button for the package manager "
+    },
+    "DEVICE_RPK_NETWORK_MANAGER": {
+        "message": "Netzwerkmanager",
+        "description": "The button for the network manager "
+    },
+    "DEVICE_RPK_DISCONNECT": {
+        "message": "Verbindung trennen",
+        "description": "The disconnect option in the disconnect menu"
+    },
+    "DEVICE_RPK_RESTART": {
+        "message": "Verbindung trennen und Neustart",
+        "description": "The reboot and disconnect option in the disconnect menu"
+    },
+    "DEVICE_RPK_TURNOFF": {
+        "message": "Verbindung trennen und herunterfahren",
+        "description": "The power off and disconnect option in the disconnect menu"
+    }
+}

@@ -1,0 +1,238 @@
+{
+    "PROJECT_APPLICATION": {
+        "message": "Aplicație",
+        "description": "Descrierea tabului"
+    },
+    "PROJECT_DELETE_FOLDER": {
+        "message": "Șterge dosarul",
+        "description": "Șterge dosarul dintr-un proiect"
+    },
+    "PROJECT_RENAME_FOLDER": {
+        "message": "Redenumește dosarul",
+        "description": "Redenumește dosarul dintr-un proiect"
+    },
+    "PROJECT_NEW_FOLDER": {
+        "message": "Dosar nou",
+        "description": "Crează un dosar nou într-un proiect"
+    },
+    "PROJECT_NEW_FOLDER_NAME": {
+        "message": "Nume nou de dosar",
+        "description": "Etichetă pentru noul nume al unui dosar"
+    },
+    "PROJECT_FOLDER_SURE": {
+        "message": "Sunteți sigur că vreți să ștergeți acest dosar?",
+        "description": "Prompt ce întreabă dacă sunteți sigur că vreți să ștergeți dosarul"
+    },
+    "PROJECT_DELETE_FILE": {
+        "message": "Șterge fișierul",
+        "description": "Șterge fișierul dintr-un proiect"
+    },
+    "PROJECT_RENAME_FILE": {
+        "message": "Redenumește fișierul",
+        "description": "Redenumește fișierul dintr-un proiect"
+    },
+    "PROJECT_NEW_FILE": {
+        "message": "Fișier nou",
+        "description": "Crează un fișier nou într-un proiect"
+    },
+    "PROJECT_NEW_FILE_NAME": {
+        "message": "Nuume nou de fișier",
+        "description": "Etichetă pentru noul nume al unui fișier"
+    },
+    "PROJECT_FILE_SURE": {
+        "message": "Sunteți sigur că vreți să ștergeți acest fișier?",
+        "description": "Prompt ce întreabă dacă sunteți sigur că vreți să ștergeți fișierul"
+    },
+    "PROJECT_NEW_NAME": {
+        "message": "Nume nou",
+        "description": "Etichetă pentru noul nume al obiectului"
+    },
+    "PROJECT_DELETE_PROJECT": {
+        "message": "Șterge proiectul",
+        "description": "Etichetă pentru dialogul de ștergere al unui proiect"
+    },
+    "PROJECT_LOAD_PROJECT": {
+        "message": "Încarcă un proiect din librărie",
+        "description": "Text ce semnifică că nu există nici un proiect încărcat"
+    },
+    "PROJECT_PROJECT_SURE": {
+        "message": "Sunteți sigur că vreți să ștergeți acest proiect?",
+        "description": "Prompt ce întrebă dacă sunteți sigur că vreți să ștergeți dosarul"
+    },
+    "PROJECT_SHOW_CODE": {
+        "message": "Arată codul",
+        "description": "Buton ce arată codul din spatele unui block visual"
+    },
+    "PROJECT_HIDE_CONSOLE": {
+        "message": "Ascunde Consola",
+        "description": "Buton ce ascunde consola"
+    },
+    "PROJECT_WELCOME_CREATE_NEW_APP": {
+        "message": "Crează o nouă aplicație",
+        "description": "Buton pentru crearea unui nou proiect în spațiul de lucuru"
+    },
+    "PROJECT_LIBRARY": {
+        "message": "Librărie",
+        "description": "Deschide librăria de proiecte"
+    },
+    "PROJECT_LIBRARY_NAME": {
+        "message": "Numele proiectului",
+        "description": "Etichetă pentru numele proiectului"
+    },
+    "PROJECT_LIBRARY_NEW_PROJECT": {
+        "message": "Crează un proiect",
+        "description": "Crează un proiect în interiorul spațiului de lucuru"
+    },
+    "PROJECT_LIBRARY_RENAME": {
+        "message": "Redenumește",
+        "description": "Redenumește un proiect din interiorul spațiului de lucuru"
+    },
+    "PROJECT_LIBRARY_DELETE": {
+        "message": "Șterge",
+        "description": "Șterge un proiect din interiorul spațiului de lucuru"
+    },
+    "PROJECT_LIBRARY_CLONE": {
+        "message": "Clonează",
+        "description": "Clonează un proiect în interiorul spațiului de lucuru"
+    },
+    "PROJECT_LIBRARY_IMPORT": {
+        "message": "Import",
+        "description": "Importă un proiect în spațiul de lucuru"
+    },
+    "PROJECT_LIBRARY_CLOSE": {
+        "message": "Închide",
+        "description": "Închide un dialog"
+    },
+    "PROJECT_LIBRARY_EXPORT": {
+        "message": "Export",
+        "description": "Exportă un proiect din spațiul de lucuru"
+    },
+    "PROJECT_LIBRARY_PROJECTS": {
+        "message": "Proiecte",
+        "description": "Etichetă pentru dialogul de proiecte"
+    },
+    "PROJECT_LIBRARY_OPTIONS": {
+        "message": "Opțiuni",
+        "description": "Etichetă pentru meniul de opțiuni"
+    },
+    "PROJECT_LIBRARY_LOAD_EXAMPLE": {
+        "message": "Încarcă un exemplu",
+        "description": "Încarcă un exemplu de proiect"
+    },
+    "PROJECT_ERROR_LANGUAGE_ADDON": {
+        "message": "Înregistrarea addon-ului a eșuat pentru limba {language}",
+        "description": "Mesajul de eroare afișat atunci când un addon the limbă a eșuat în registrare"
+    },
+    "PROJECT_ERROR_REGISTER_EDITOR": {
+        "message": "Înregistrarea editorului a eșuat pentru numele {name} editorul este deja registrat",
+        "description": "Mesajul de eroare afișat atunci când un editor a eșuat să fie încărcat"
+    },
+    "PROJECT_ERROR_LOAD_PROJECTS": {
+        "message": "Eroare la încărcarea proiectelor ({error})",
+        "description": "Mesajul de eroare afișat atunci când proiectele eșuează să fie încărcat"
+    },
+    "PROJECT_ERROR_SELECT_PROJECT": {
+        "message": "Eroare la selectarea proiectului {project} ({error})",
+        "description": " Mesajul de eroare afișat atunci când a un proiect eșuează să fie selectat"
+    },
+    "PROJECT_ERROR_CREATE_PROJECT": {
+        "message": "Eroare la crearea proiectului {project} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un proiect eșuează să fie creat"
+    },
+    "PROJECT_ERROR_RENAME_PROJECT": {
+        "message": "Eroare la redenumirea proiectului {project} cu numele {name} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un proiect eșuează să fie redenumit"
+    },
+    "PROJECT_ERROR_CLONE_PROJECT": {
+        "message": "Eroare la clonarea proiectului {project} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un poriect eșuează să fie clonat"
+    },
+    "PROJECT_ERROR_DELETE_PROJECT": {
+        "message": "Eroare la ștergerea proiectului {project} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un proiect eșuează să fie șters"
+    },
+    "PROJECT_ERROR_IMPORT_PROJECT": {
+        "message": "Eroare la importarea proiectului {project} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un proiect eșuează să fie importat"
+    },
+    "PROJECT_ERROR_EXPORT_PROJECT": {
+        "message": "Eroare la exporting project {project} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un proiect eșuează să fie exportat"
+    },
+    "PROJECT_ERROR_NEW_FOLDER": {
+        "message": "Eroare la crearea unui nou dosar {folder} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un dosar eșuează să fie creat"
+    },
+    "PROJECT_ERROR_NEW_FILE": {
+        "message": "Eroare la crearea unui nou fișier {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un fișier eșuează să fie creat"
+    },
+    "PROJECT_ERROR_RENAME_OBJECT": {
+        "message": "Eroare la redenumirea obiectului {object} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un obiect eșuează să fie redenumit"
+    },
+    "PROJECT_ERROR_DELETE_FOLDER": {
+        "message": "Eroare la ștergerea dosarului {folder} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un dosar eșuează să fie șters"
+    },
+    "PROJECT_ERROR_DELETE_FILE": {
+        "message": "Eroare la ștergerea dosarului {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un fișier eșuează să fie șters"
+    },
+    "PROJECT_ERROR_SAVE_FILE": {
+        "message": "Eroare la salvarea fișierului {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un fișier eșuează să fie salvat"
+    },
+    "PROJECT_ERROR_LOAD_FILE": {
+        "message": "Eroare la încărcarea unui fișier {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un fișier eșuează să fie încărcat"
+    },
+    "PROJECT_ERROR_READ_DATA": {
+        "message": "Eroare la citirea datelor proiectului {project} ({error})",
+        "description": "Mesajul de eroare afișat atunci când apare o eroarea la citirea datelor desptre proiect"
+    },
+    "PROJECT_ERROR_NOT_FOLDER": {
+        "message": "Dosarul proiectului {project} nu este un dosar",
+        "description": "Mesajul de eroare afișat atunci când nu există un dosar pentru proiect"
+    },
+    "PROJECT_ERROR_SAVE_SPECIAL_FILE": {
+        "message": "Eroare la salvarea fișierului special {file} cu datele ({error})",
+        "description": "Mesajul de eroare afișat atunci când fișier special de setări eșuează să fie salvat"
+    },
+    "PROJECT_ERROR_LOAD_SPECIAL_FILE": {
+        "message": "Eroare la încărcarea fișierului special {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un fișier special de setări eșuează să fie încărcat"
+    },
+    "PROJECT_ERROR_SEND_CODE": {
+        "message": "Eroare la trimiterea codului fișierului {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când apare o eroare la trimiterea codului către dispozitiv"
+    },
+    "PROJECT_ERROR_PATH_INVALID": {
+        "message": "Eroare, calea nu se află în dosarul spațiului de lucuru",
+        "description": "Mesajul de eroare afișat atunci când calea specificată nu se află în dosarul spațiului de lucuru"
+    },
+    "PROJECT_JSON_DO_NOT": {
+        "message": "S-a încercat editarea fișierului project.json, NU FACEȚI ASTA",
+        "description": "Mesajul de eroare afișat atunci când există o încercare de editare a fișierului de setări a proiectului"
+    },
+    "PROJECT_CLONE_PROJECT": {
+        "message": "Clonează proiectul",
+        "description": "Etichetă pentru dialogul de clonare a proiect"
+    },
+    "PROJECT_RENAME_PROJECT": {
+        "message": "Redenumește proiectul",
+        "description": "Etichetă pentru dialogul de redenumire a proiect"
+    },
+    "PROJECT_NAME_PROMPT": {
+        "message": "Introduceți numele proiectului",
+        "description": "Etichetă pentru noul nume ce va fi dat proiectului"
+    },
+    "PROJECT_NULL": {
+        "message": "Un parametru este null",
+        "description": "One or more of the funciton's parameters are null"
+    },
+    "PATH_NULL": {
+        "message": "O cale este nulă",
+        "description": "The given path turned out null"
+    }
+}

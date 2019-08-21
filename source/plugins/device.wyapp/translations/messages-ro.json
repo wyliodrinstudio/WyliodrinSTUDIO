@@ -1,0 +1,34 @@
+{
+    "DEVICE_WYAPP_RUN": {
+        "message": "Rulați",
+        "description": "The run button for an application"
+    },
+    "DEVICE_WYAPP_STOP": {
+        "message": "Oprire",
+        "description": "The stop button for an application"
+    },
+    "DEVICE_WYAPP_TASK_MANAGER": {
+        "message": "Administrare procese",
+        "description": "The button for the task manager "
+    },
+    "DEVICE_WYAPP_PACKAGE_MANAGER": {
+        "message": "Administrare pachete",
+        "description": "The button for the package manager "
+    },
+    "DEVICE_WYAPP_NETWORK_MANAGER": {
+        "message": "Setări rețea",
+        "description": "The button for the network manager "
+    },
+    "DEVICE_WYAPP_DISCONNECT": {
+        "message": "Deconectați",
+        "description": "The disconnect option in the disconnect menu"
+    },
+    "DEVICE_WYAPP_RESTART": {
+        "message": "Reporniți și Deconectați",
+        "description": "The reboot and disconnect option in the disconnect menu"
+    },
+    "DEVICE_WYAPP_TURNOFF": {
+        "message": "Opriți și Deconectați",
+        "description": "The power off and disconnect option in the disconnect menu"
+    }
+}

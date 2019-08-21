@@ -1,0 +1,58 @@
+{
+    "DEVICE_WYAPP_RUN": {
+        "message": "Exécuter",
+        "description": "The run button for an application"
+    },
+    "DEVICE_WYAPP_STOP": {
+        "message": "Arrêt",
+        "description": "The stop button for an application"
+    },
+    "DEVICE_WYAPP_TASK_MANAGER": {
+        "message": "Gestionnaire de tâches",
+        "description": "The button for the task manager "
+    },
+    "DEVICE_WYAPP_PACKAGE_MANAGER": {
+        "message": "Gestion des paquets",
+        "description": "The button for the package manager "
+    },
+    "DEVICE_WYAPP_NETWORK_MANAGER": {
+        "message": "Gestion de réseau",
+        "description": "The button for the network manager "
+    },
+    "DEVICE_WYAPP_DISCONNECT": {
+        "message": "Déconnecter",
+        "description": "The disconnect option in the disconnect menu"
+    },
+    "DEVICE_WYAPP_RESTART": {
+        "message": "Redémarrer et Déconnecter",
+        "description": "The reboot and disconnect option in the disconnect menu"
+    },
+    "DEVICE_WYAPP_TURNOFF": {
+        "message": "Arrêter et Déconnecter",
+        "description": "The power off and disconnect option in the disconnect menu"
+    },
+    "DEVICE_WYAPP_ANOTHER_USER": {
+        "message": "L'appareil est déjà connecté à un autre utilisateur.",
+        "description": "The notification message when another use is connected to the board and the board is busy"
+    },
+    "DEVICE_WYAPP_SETTINGS": {
+        "message": "Paramètres de l'appareil",
+        "description": "Title of popup that contains details about the connected board"
+    },
+    "DEVICE_WYAPP_NAME": {
+        "message": "Nom",
+        "description": "Name of connected board"
+    },
+    "DEVICE_WYAPP_VERSION": {
+        "message": "Version",
+        "description": "Supervisor verson"
+    },
+    "DEVICE_WYAPP_OS": {
+        "message": "Système d'exploitation",
+        "description": "Operating system on the board"
+    },
+    "DEVICE_WYAPP_LANGUAGES": {
+        "message": "Langages",
+        "description": "Programming languages supported by the board"
+    }
+}

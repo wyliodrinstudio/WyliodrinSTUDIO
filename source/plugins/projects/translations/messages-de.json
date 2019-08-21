@@ -1,0 +1,58 @@
+{
+    "PROJECT_APPLICATION": {
+        "message": "Awedung",
+        "description": "Description of tab"
+    },
+    "PROJECT_NEW_FOLDER": {
+        "message": "Neuer Ordner",
+        "description": "Create a folder within a project"
+    },
+    "PROJECT_NEW_FILE": {
+        "message": "Neue Datei",
+        "description": "Create a file within a project"
+    },
+    "PROJECT_HIDE_CONSOLE": {
+        "message": "Konsole ausblenden",
+        "description": "Button designed to hide the console"
+    },
+    "PROJECT_WELCOME_CREATE_NEW_APP": {
+        "message": "Neue Anwendung erstellen",
+        "description": "Button to create a new project within the workspace"
+    },
+    "PROJECT_LIBRARY_IMPORT": {
+        "message": "Import",
+        "description": "Import a project from an archive"
+    },
+    "PROJECT_LIBRARY_RENAME": {
+        "message": "Umbenennen",
+        "description": "Rename a project within the workspace"
+    },
+    "PROJECT_LIBRARY_DELETE": {
+        "message": "Löschen",
+        "description": "Delete a project within the workspace"
+    },
+    "PROJECT_LIBRARY_CLOSE": {
+        "message": "Schließen",
+        "description": "Close a dialog"
+    },
+    "PROJECT_LIBRARY_EXPORT": {
+        "message": "Export",
+        "description": "Export a project from the workspace"
+    },
+    "PROJECT_LIBRARY_OPTIONS": {
+        "message": "Optionen",
+        "description": "Label for the options menu"
+    },
+    "PROJECT_LIBRARY_PROJECTS": {
+        "message": "Projekte",
+        "description": "Label for the projects dialog"
+    },
+    "PROJECT_LIBRARY_LOAD_EXAMPLE": {
+        "message": "Beispiel laden",
+        "description": "Load a project Example"
+    },
+    "PROJECT_LIBRARY_CLONE": {
+        "message": "Klonen",
+        "description": "Clone a project within the workspace"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "LINE_GRAPH": {
+        "message": "LINIE",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDLINE": {
+        "message": "Linie - Signal hinzufügen",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

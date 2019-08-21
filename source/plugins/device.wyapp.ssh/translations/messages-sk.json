@@ -1,0 +1,26 @@
+{
+    "NETWORK_AUTHENTICATE_IP": {
+        "message": "IP",
+        "description": "Internet Protocol (IP)"
+    },
+    "NETWORK_PORT": {
+        "message": "Port",
+        "description": "Number of port for the network connection"
+    },
+    "NETWORK_USERNAME": {
+        "message": "Používateľské meno",
+        "description": "Input text area for the name of the user on the raspberry pi"
+    },
+    "NETWORK_PASSWORD": {
+        "message": "Heslo",
+        "description": "Input text area for the password of the user on the raspberry pi"
+    },
+    "NETWORK_SHOWPASSWORD": {
+        "message": "Zobraziť heslo",
+        "description": "Switch use to make the password visible"
+    },
+    "DEVICE_CONNECT": {
+        "message": "Pripojiť",
+        "description": "Button used to connect to a device"
+    }
+}

@@ -1,0 +1,58 @@
+{
+    "PROJECT_APPLICATION": {
+        "message": "Application",
+        "description": "Description of tab"
+    },
+    "PROJECT_NEW_FOLDER": {
+        "message": "Nouveau dossier",
+        "description": "Create a folder within a project"
+    },
+    "PROJECT_NEW_FILE": {
+        "message": "Nouveau fichier",
+        "description": "Create a file within a project"
+    },
+    "PROJECT_HIDE_CONSOLE": {
+        "message": "Cacher la console",
+        "description": "Button designed to hide the console"
+    },
+    "PROJECT_WELCOME_CREATE_NEW_APP": {
+        "message": "Créer une nouvelle application",
+        "description": "Button to create a new project within the workspace"
+    },
+    "PROJECT_LIBRARY_IMPORT": {
+        "message": "Importer",
+        "description": "Import a project from an archive"
+    },
+    "PROJECT_LIBRARY_EXPORT": {
+        "message": "Exporter",
+        "description": "Export a project from the workspace"
+    },
+    "PROJECT_LIBRARY_OPTIONS": {
+        "message": "Options",
+        "description": "Label for the options menu"
+    },
+    "PROJECT_LIBRARY_RENAME": {
+        "message": "Renommer",
+        "description": "Rename a project within the workspace"
+    },
+    "PROJECT_LIBRARY_DELETE": {
+        "message": "Effacer",
+        "description": "Delete a project within the workspace"
+    },
+    "PROJECT_LIBRARY_CLOSE": {
+        "message": "Fermer",
+        "description": "Close a dialog"
+    },
+    "PROJECT_LIBRARY_PROJECTS": {
+        "message": "Projets",
+        "description": "Label for the projects dialog"
+    },
+    "PROJECT_LIBRARY_LOAD_EXAMPLE": {
+        "message": "Ouvrir un exemple",
+        "description": "Load a project Example"
+    },
+    "PROJECT_LIBRARY": {
+        "message": "Bibliothèque de projets",
+        "description": "Opens the projects library"
+    }
+}

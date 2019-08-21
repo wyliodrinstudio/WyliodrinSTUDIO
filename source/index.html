@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+		<style>
+			.wyliodrin-loading{
+				background: url('img/wyliodrin-logo.png') no-repeat transparent;
+				background-position-x: center;
+				background-position-y: 40%;
+				overflow: hidden;
+			}
+			.startuperror {
+				font-size:18px; 
+				font-family: Arial, Helvetica, sans-serif; 
+				color:#ffffff; 
+				text-align:center; 
+				padding: 10px 15px; 
+				position: absolute; 
+				margin: auto; 
+				width:100%; 
+				background: #d9534f;
+				display: none;
+			}
+			.loading {
+				font-size:18px; 
+				font-family: Arial, Helvetica, sans-serif; 
+				color:#000; 
+				text-align:center; 
+				padding: 10px 15px; 
+				position: absolute; 
+				margin: auto; 
+				width: 100%;
+				top: 58%;
+				background: #ffffff;
+			}
+			.loading-progress {
+				font-size:18px; 
+				font-family: Arial, Helvetica, sans-serif; 
+				text-align:center; 
+				padding: 0px;
+				position: absolute; 
+				margin: auto; 
+				top: 55%;
+				display: none;
+				left: 0;
+				right: 0;
+				width: 450px;
+				border-style: solid;
+				border-width: 0px;
+				border-color: #555;
+				background: #ffffff;
+			}
+			.loading-progress-bar {
+				font-size:18px; 
+				font-family: Arial, Helvetica, sans-serif; 
+				text-align:center; 
+				padding: 0px;
+				position: absolute; 
+				margin: auto; 
+				top: 55%;
+				height: 12px;
+				background: #d3431f;
+			}
+		</style>
+		<script src="http://localhost:8098"></script>
+	</head>
+	<body class="wyliodrin-loading">
+
+		<div id="app">
+
+		</div>
+		<div class="startuperror" id="startuperror">
+			
+		</div>
+
+		<div class="loading" id="loading">
+
+		</div>
+
+		<div class="loading-progress" id="loading-progress">
+			<div class="loading-progress-bar" id="loading-progress-bar" style="width:0%"></div>
+		  </div> 
+
+		<script>
+			require ('./vendor/index.js');
+			require ('./setup.js');
+		</script>
+	</body>
+</html>

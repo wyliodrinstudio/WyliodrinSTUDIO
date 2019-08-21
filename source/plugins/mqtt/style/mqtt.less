@@ -1,0 +1,32 @@
+@import '../../../style/var.less';
+
+.terminal-btns {position: absolute; right: 10px; top:10px;
+	button {border: @color-grey-6 0px solid ; border-radius: 30px; min-width: initial !important; background-color: transparent !important; color: @color-white !important; font-size: 12px; text-transform: initial; font-weight: 300; height: 24px !important; padding: 0 7px !important; margin: 0px !important; box-shadow: none !important;
+		.v-image {height: 10px;	width: 10px; filter: invert(100%) !important;}
+		.v-responsive__content {width: 10px !important;}
+	}
+	button:hover {border: @color-highlight 0px solid ; background-color: @color-highlight !important; color: @color-white ;}
+}
+
+.terminal-actions {background: @color-dark-1; color: @color-white; overflow: auto; padding: 10px 36px 10px 10px;
+	> span {display: inline-block; position: relative; float: left; line-height: 24px;}
+	.terminal-btns {float: right; display: inline; right: initial; top: initial; position: initial;
+		button {border: @color-grey-6 0px solid ; border-radius: 30px; min-width: initial !important; background-color: transparent !important; color: @color-white !important; font-size: 12px; text-transform: initial; font-weight: 300; height: 24px !important; padding: 0 5px !important; margin: 0px !important; box-shadow: none !important;
+			.v-image {height: 14px;	width: 14px; filter: invert(0%) !important;}
+			.v-responsive__content {width: 14px !important;}
+		}
+		button:hover {border: @color-highlight 0px solid ; background-color: @color-highlight !important; color: @color-white ;}
+	}
+
+	::v-deep .v-text-field__slot input {
+		font-size: 13px !important; font-weight: normal !important;
+	}
+
+	::v-deep .v-text-field__slot .v-label {
+		font-size: 13px !important; font-weight: normal !important; line-height: 13px !important;
+	}
+
+	.v-text-field {padding: 0; margin: 0 0 0 20px;
+		::v-deep input {padding: 2px 0 !important;}
+	}
+}

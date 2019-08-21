@@ -1,0 +1,26 @@
+{
+    "PROJECT_DASHBOARD": {
+        "message": "ダッシュボード",
+        "description": "The Dashboard tab, used to send signals from a board."
+    },
+    "DASHBOARD_VIEWER_INVALID_SIGNAL": {
+        "message": "Signal name invalid",
+        "description": "Warning that shows up when the signal name entered by the user is not correct."
+    },
+    "DASHBOARD_VIEWER_MOVE_LEFT": {
+        "message": "左に動きます",
+        "description": "Button used to move a graph to the left"
+    },
+    "DASHBOARD_VIEWER_MOVE_RIGHT": {
+        "message": "右に動きます",
+        "description": "Button used to move a graph to the right"
+    },
+    "DASHBOARD_VIEWER_GRAPH_SETTINGS": {
+        "message": "グラフの設定",
+        "description": "Button that opens a prompt where the user can modify the graph's properties"
+    },
+    "DASHBOARD_VIEWER_ERASE_GRAPH": {
+        "message": "グラフを消します",
+        "description": "Button used to delete a graph"
+    }
+}

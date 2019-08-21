@@ -1,0 +1,26 @@
+{
+    "PROJECT_DASHBOARD": {
+        "message": "Übersicht",
+        "description": "The Dashboard tab, used to send signals from a board."
+    },
+    "DASHBOARD_SIGNAL_NAME": {
+        "message": "Signalname *",
+        "description": "Input text area for the name of the signal"
+    },
+    "DASHBOARD_SIGNAL_DESCRIPTION": {
+        "message": "Beschreibung",
+        "description": "Input text area for additional description of the signal"
+    },
+    "DASHBOARD_SIGNAL_COLOR": {
+        "message": "Farbe",
+        "description": "Button used to pick the color of the signal"
+    },
+    "NAME": {
+        "message": "Name",
+        "description": "Signal's name"
+    },
+    "DASHBOARD_ADD_SIGNAL": {
+        "message": "Hinzufügen",
+        "description": "Button used to add a signal graph"
+    }
+}

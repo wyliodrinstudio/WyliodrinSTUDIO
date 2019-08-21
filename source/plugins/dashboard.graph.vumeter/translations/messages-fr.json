@@ -1,0 +1,10 @@
+{
+    "VUMETER_GRAPH": {
+        "message": "VU-MÈTRE",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDVUMETER": {
+        "message": "Vu-mètre - Ajouter un signal",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "PROJECT_NOTEBOOK": {
+        "message": "ノート",
+        "description": "The Notebook Tab, where the user can take it's own notes"
+    },
+    "NOTEBOOK_SELECT_IMAGE_ERROR": {
+        "message": "画像を選んでください。",
+        "description": "Notification error that shows up when the user didn't choose an image to load"
+    },
+    "NOTEBOOK_SELECT_FILE_ERROR": {
+        "message": "有効な画像を選んでください。",
+        "description": "Notification error that shows up when the user didn't choose a file to load"
+    }
+}

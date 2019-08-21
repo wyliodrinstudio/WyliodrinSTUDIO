@@ -1,0 +1,10 @@
+{
+    "GAUGE_GRAPH": {
+        "message": "JAUGE",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDGAUGE": {
+        "message": "Jauge - Ajouter signal",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

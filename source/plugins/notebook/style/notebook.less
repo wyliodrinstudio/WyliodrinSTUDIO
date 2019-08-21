@@ -1,0 +1,75 @@
+@import '../../../style/var.less';
+@import '../../../../node_modules/katex/dist/katex.css';
+@import '../../../../node_modules/highlight.js/styles/github.css';
+
+.notebook-box {height: calc(~"100% - 20px") !important; padding: 1%; overflow: auto;
+	li{ list-style: none; padding: 0; margin: 0 0 15px 0;border: @color-white 1px solid;}
+	li:hover {border: @color-grey-5 1px solid;}
+	.v-btn__content img{height: 24px; width: 24px; min-height: 24px; min-width: 24px;}
+	.ntbk-btn { min-width: initial; padding: 0 10px; margin: 0 1px !important; min-width: initial !important;
+		.v-image {height: 16px; width: 16px;}
+	}
+	.ntbk-btn:hover {
+		background:@color-highlight;
+		.v-image {filter: invert(100%);}
+		.v-image {opacity:1;}
+	}
+
+	.right {position: absolute; right: 10px;}
+
+	.v-card {box-shadow: none !important; cursor: pointer;}
+
+	.drpdown {max-width: 150px; margin-right: 15px; padding-top: 0px !important;}
+
+}
+
+.v-card__actions {border: 0;}
+
+.section-active {
+	padding:0px 0px 0px 0px;
+	border-radius: 2px;
+	border-width: 5px 1px 1px 1px !important;
+	border-color:@color-connected;
+	border-style:solid;
+	position:relative;
+	margin-bottom:10px;
+	width:100%;
+	-webkit-transition: padding 1s;
+    transition: padding 0.5s;
+	> div {padding: 10px;}
+	cursor: default;
+}
+
+
+.markdown-box {
+	textarea {width: 100%; border-left:@color-grey-5 solid 1px; border-right:@color-grey-5 solid 1px; border-bottom:@color-grey-5 solid 2px; padding: 10px}
+}
+
+.markdown-btns {
+	box-shadow: none !important;
+	background:@color-grey-5 !important;
+	padding: 0px !important;
+
+	.v-btn {
+		color:@color-black;
+		min-width:initial !important;
+		min-height:initial !important;
+		padding:6 !important;
+		height:30px !important;
+		margin:0px 3px 0 0 !important;
+		.v-image {opacity:0.6 !important;}
+		.v-image {height: 16px !important; width: 16px !important;}
+	}
+
+	.v-btn:hover {
+		background:@color-highlight;
+		.v-image {filter: invert(100%) !important;}
+		.v-image {opacity:1 !important;}
+	}
+}
+
+.new-item {font-size: 24px !important; font-weight: bold; padding: 10px !important;}
+
+.compiledmkd {padding: 10px 15px !important;
+	::v-deep h1 {font-size: 18px !important; font-weight: bold;}
+}

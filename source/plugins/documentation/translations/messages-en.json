@@ -1,0 +1,6 @@
+{
+    "WYLIODRIN_API": {
+        "message": "Wyliodrin API",
+        "description": "Option in the Help Menu, that redirects the user to the Wyliodrin API web page"
+    }
+}

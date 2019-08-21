@@ -1,0 +1,17 @@
+register all block - so they are displayable
+
+toolbox - add part
+	- device.type
+	- device.board
+	- function callback 
+
+// editor_visual
+registerBlocks (id, blocks, codes, toolbox, options {
+	mode: null / 'simple' / 'advanced'
+	type: null or type
+	board: null or board
+	visible (device) - if exists
+	language: 'python' / 'javascript' - string or function (device)
+});
+
+- last registered counts

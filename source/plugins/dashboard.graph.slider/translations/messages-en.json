@@ -1,0 +1,14 @@
+{
+    "SLIDER_GRAPH": {
+        "message": "SLIDER",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDSLIDER": {
+        "message": "Slider - Add signal",
+        "description": "Title of the prompt used to add a new signal"
+    },
+    "SLIDER_STEP": {
+        "message": "Step",
+        "description": "Type of slider"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "device.rpk",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace", "projects", "events"],
+        "optional": ["console", "mqtt"],
+        "provides": [],
+        "target": ["electron"]
+    }
+}

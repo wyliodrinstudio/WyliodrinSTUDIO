@@ -1,0 +1,26 @@
+{
+    "PROJECT_NOTEBOOK": {
+        "message": "Notebook",
+        "description": "The Notebook Tab, where the user can take it's own notes"
+    },
+    "NOTEBOOK_SELECT_IMAGE_ERROR": {
+        "message": "Veuillez sélectionner une image.",
+        "description": "Notification error that shows up when the user didn't choose an image to load"
+    },
+    "NOTEBOOK_SELECT_FILE_ERROR": {
+        "message": "Veuillez sélectionner un fichier valide.",
+        "description": "Notification error that shows up when the user didn't choose a file to load"
+    },
+    "NOTEBOOK_DELETE_ITEM_QUESTION": {
+        "message": "Êtes-vous sûr de vouloir supprimer cet élément?",
+        "description": "Confirmation prompt which ensures that the user really wants to delete the current notebook element"
+    },
+    "NOTEBOOK_DELETE_ITEM_TITLE": {
+        "message": "Supprimer un élément",
+        "description": "Title of the delete confirmation prompt"
+    },
+    "NOTEBOOK_LOAD_DATA_ERROR": {
+        "message": "Impossible de charger les notes.",
+        "description": "This error shwos up when notebook.json can't be parsed."
+    }
+}

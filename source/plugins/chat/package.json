@@ -1,0 +1,12 @@
+{
+    "name": "chat",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace"],
+        "disabled": true,
+        "provides": [],
+        "target": ["electron"]
+    }
+}

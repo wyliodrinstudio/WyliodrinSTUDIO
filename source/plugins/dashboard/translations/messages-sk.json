@@ -1,0 +1,26 @@
+{
+    "PROJECT_DASHBOARD": {
+        "message": "Riadiaca dosks",
+        "description": "The Dashboard tab, used to send signals from a board."
+    },
+    "DASHBOARD_SIGNAL_NAME": {
+        "message": "Názov signálu",
+        "description": "Input text area for the name of the signal"
+    },
+    "DASHBOARD_SIGNAL_DESCRIPTION": {
+        "message": "Popis",
+        "description": "Input text area for additional description of the signal"
+    },
+    "DASHBOARD_SIGNAL_COLOR": {
+        "message": "Farba",
+        "description": "Button used to pick the color of the signal"
+    },
+    "NAME": {
+        "message": "Názov",
+        "description": "Signal's name"
+    },
+    "DASHBOARD_ADD_SIGNAL": {
+        "message": "Pridať",
+        "description": "Button used to add a signal graph"
+    }
+}

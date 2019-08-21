@@ -1,0 +1,90 @@
+{
+    "PROJECT_APPLICATION": {
+        "message": "アプリケーション",
+        "description": "Description of tab"
+    },
+    "PROJECT_DELETE_FOLDER": {
+        "message": "フォルダを消します",
+        "description": "Delete a folder within a project"
+    },
+    "PROJECT_RENAME_FOLDER": {
+        "message": "フォルダをリネーム",
+        "description": "Rename a folder within a project"
+    },
+    "PROJECT_NEW_FOLDER": {
+        "message": "新しいフォルダ",
+        "description": "Create a folder within a project"
+    },
+    "PROJECT_NEW_FOLDER_NAME": {
+        "message": "新しいフォルダ名",
+        "description": "Label for the new name of the folder"
+    },
+    "PROJECT_DELETE_FILE": {
+        "message": "ファイルを消します",
+        "description": "Delete a file within a project"
+    },
+    "PROJECT_RENAME_FILE": {
+        "message": "ファイルをリネーム",
+        "description": "Rename a file within a project"
+    },
+    "PROJECT_NEW_FILE": {
+        "message": "新しいファイル",
+        "description": "Create a file within a project"
+    },
+    "PROJECT_NEW_FILE_NAME": {
+        "message": "新しいファイル名",
+        "description": "Label for the new name of the file"
+    },
+    "PROJECT_NEW_NAME": {
+        "message": "",
+        "description": "新しい名前"
+    },
+    "PROJECT_SHOW_CODE": {
+        "message": "コードを見せます",
+        "description": "Button designed to show the code behind a blockly"
+    },
+    "PROJECT_HIDE_CONSOLE": {
+        "message": "コンソールを隠します",
+        "description": "Button designed to hide the console"
+    },
+    "PROJECT_WELCOME_CREATE_NEW_APP": {
+        "message": "新しいアプリケーションを作ります",
+        "description": "Button to create a new project within the workspace"
+    },
+    "PROJECT_LIBRARY_RENAME": {
+        "message": "リネーム",
+        "description": "Rename a project within the workspace"
+    },
+    "PROJECT_LIBRARY_DELETE": {
+        "message": "消します",
+        "description": "Delete a project within the workspace"
+    },
+    "PROJECT_LIBRARY_CLONE": {
+        "message": "クローンします",
+        "description": "Clone a project within the workspace"
+    },
+    "PROJECT_LIBRARY_IMPORT": {
+        "message": "取り込みます",
+        "description": "Import a project from an archive"
+    },
+    "PROJECT_LIBRARY_CLOSE": {
+        "message": "クローズ",
+        "description": "Close a dialog"
+    },
+    "PROJECT_LIBRARY_EXPORT": {
+        "message": "輸出します",
+        "description": "Export a project from the workspace"
+    },
+    "PROJECT_LIBRARY_PROJECTS": {
+        "message": "プロジェクト",
+        "description": "Label for the projects dialog"
+    },
+    "PROJECT_LIBRARY_OPTIONS": {
+        "message": "設定",
+        "description": "Label for the options menu"
+    },
+    "PROJECT_LIBRARY_LOAD_EXAMPLE": {
+        "message": "例を載せ込みます",
+        "description": "Load a project Example"
+    }
+}

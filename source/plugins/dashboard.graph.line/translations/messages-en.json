@@ -1,0 +1,62 @@
+{
+    "LINE_GRAPH": {
+        "message": "LINE",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDLINE": {
+        "message": "Line - Add signal",
+        "description": "Title of the prompt used to add a new signal"
+    },
+    "LINE_STYLE": {
+        "message": "Style",
+        "description": "The style of a line signal"
+    },
+    "LINE_HIDE_LEGEND": {
+        "message": "Hide legend",
+        "description": "Checkbox option to hide the legend of a graph"
+    },
+    "LINE_FIX_AXES_VALUES": {
+        "message": "Fix axes values",
+        "description": "Checkbox option to fix the axis values for the line graph"
+    },
+    "LINE_LOGARITHMIC_AXES": {
+        "message": "Logarithmic axes",
+        "description": "Checkbox option to show logarithmic for the line graph"
+    },
+    "LINE_TIME_SERIES": {
+        "message": "Time series",
+        "description": "Checkbox option to show the time series for the line graph"
+    },
+    "LINE_SHOW_POINTS": {
+        "message": "Show points",
+        "description": "Checkbox option to show the points for the line graph"
+    },
+    "LINE_MAX_POINTS": {
+        "message": "Maximum points to show (0 means show all)",
+        "description": "Input text area for the maximum points to show in a line graph"
+    },
+    "LINE_AXIS_NAME": {
+        "message": "Axis name",
+        "description": "Name of the axis"
+    },
+    "LINE_OVERVIEW": {
+        "message": "Show overview",
+        "description": "Checkbox option to show an overview for the line graph"
+    },
+    "LINE_SCROLLBAR": {
+        "message": "Show scrollbar",
+        "description": "Checkbox option to show the scrollbar for the line graph"
+    },
+    "LINE_STEP": {
+        "message": "Step",
+        "description": "Type of line graph"
+    },
+    "LINE_STRAIGHT": {
+        "message": "Straight",
+        "description": "Type of line graph"
+    },
+    "LINE_SPLINE": {
+        "message": "Spline",
+        "description": "Type of line graph"
+    }
+}

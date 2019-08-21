@@ -1,0 +1,22 @@
+{
+    "SCHEMATICS": {
+        "message": "Scheme",
+        "description": "The Schematics Tab, used to load a circuit diagram"
+    },
+    "ADD_SCHEMATIC": {
+        "message": "Adaugă schemă",
+        "description": "Button used to add a schematics"
+    },
+    "DELETE_SCHEMATIC": {
+        "message": "Șterge schemă",
+        "description": "Button used to delete a schematics"
+    },
+    "DELETE_MESSAGE": {
+        "message": "Ești sigur(ă) că vrei să ștergi schema ?",
+        "description": "Delete confirmation prompt question"
+    },
+    "DELETE_CONFIRMATION": {
+        "message": "Confirmarea ștergerii",
+        "description": "Delete confirmation prompt title"
+    }
+}

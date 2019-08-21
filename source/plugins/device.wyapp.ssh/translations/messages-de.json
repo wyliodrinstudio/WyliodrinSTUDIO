@@ -1,0 +1,22 @@
+{
+    "NETWORK_AUTHENTICATE_IP": {
+        "message": "IP",
+        "description": "Internet Protocol (IP)"
+    },
+    "NETWORK_PORT": {
+        "message": "Port",
+        "description": "Number of port for the network connection"
+    },
+    "NETWORK_USERNAME": {
+        "message": "Benutzername",
+        "description": "Input text area for the name of the user on the raspberry pi"
+    },
+    "NETWORK_PASSWORD": {
+        "message": "Passwort",
+        "description": "Input text area for the password of the user on the raspberry pi"
+    },
+    "NETWORK_SHOWPASSWORD": {
+        "message": "Passwort anzeigen",
+        "description": "Switch use to make the password visible"
+    }
+}

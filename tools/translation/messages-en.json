@@ -1,0 +1,1580 @@
+{
+  "LANGUAGE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "English",
+    "description": "Button that indicates the current language of the program, represented by a flag"
+  },
+  "WORKSPACE_TOOLBAR_EXIT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Exit",
+    "description": "Close the program"
+  },
+  "WORKSPACE_TOOLBAR_FULLSCREEN": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Fullscreen",
+    "description": "Located in the upper right corner, enlarges the window across the entire screen"
+  },
+  "WORKSPACE_TOOLBAR_RESTORE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Restore",
+    "description": "Same button as Fullscreen, restores the window to it's previous dimension"
+  },
+  "WORKSPACE_TOOLBAR_MINIMIZE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Minimize",
+    "description": "Located in the upper right corner, reduces the window to a small title and hide its contents"
+  },
+  "WORKSPACE_TOOLBAR_SETUP": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Setup",
+    "description": "Located in the help menu"
+  },
+  "WORKSPACE_TOOLBAR_ABOUT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "About",
+    "description": "Located in the help menu, displays informations about the application"
+  },
+  "WORKSPACE_PROJECT_NOTEBOOK": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Notebook",
+    "description": "Tool for project management and task management"
+  },
+  "WORKSPACE_DEVICE_CONNECT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Connect",
+    "description": "Button used for connection"
+  },
+  "WORKSPACE_BOARD_CONNECT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Select a device to connect to",
+    "description": "Connect to a device"
+  },
+  "CLOSE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Close",
+    "description": "Close the current window"
+  },
+  "WORKSPACE_PROJECT_LIBRARY": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Projects Library",
+    "description": "Button that opens a modal with all the projects, with a folder icon as pictogram"
+  },
+  "WORKSPACE_DEVICE_DISCONNECT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Disconnect",
+    "description": "The Disconnect button"
+  },
+  "WORKSPACE_DISCONNECTED": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Disconnected",
+    "description": "Status of a device that is not connected."
+  },
+  "WORKSPACE_TOOLBAR_EXIT_QUESTION": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Are you sure you want to exit?",
+    "description": "Select if you are sure you want to exit"
+  },
+  "YES": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Yes",
+    "description": "The 'yes' button"
+  },
+  "NO": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "No",
+    "description": "The 'no' button"
+  },
+  "EXIT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Exit",
+    "description": "A button with the text exit"
+  },
+  "WORKSPACE_TOOLBAR_CLOSE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Close",
+    "description": "Close button"
+  },
+  "WORKSPACE_SET_MODE_ADVANCED": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Use Advanced Mode",
+    "description": "The menu to set the editor in advanced mode"
+  },
+  "WORKSPACE_SET_MODE_SIMPLE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Use Simple Mode",
+    "description": "The menu to set the editor in simple mode"
+  },
+  "CHAT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "CHAT",
+    "description": "The Chat tab"
+  },
+  "CHAT_CANCEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Cancel",
+    "description": "The Cancel button"
+  },
+  "CHAT_DISCONNECT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Disconnect",
+    "description": "The Disconnect button"
+  },
+  "CHAT_TYPE_MESSAGE": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Type message",
+    "description": "Input message area label"
+  },
+  "CHAT_PART_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Part channel",
+    "description": "Button to leave a channel"
+  },
+  "CHAT_TAKEN_NAME": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Your nickname is already in use. It has been changed to {nickName}",
+    "description": "Text of notification that shows up when the user tries to use a nickname already taken."
+  },
+  "CHAT_COULD_NOT_JOIN_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "This channel could not be joined! Please pick another one!",
+    "description": "Text of notification that shows up when the user can not connect to a certain channel"
+  },
+  "CHAT_TITLE_DISCONNECT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Disconnect from the server",
+    "description": "Title of the prompt that show up when the user wants to disconnect from the server"
+  },
+  "CHAT_TEXT_DISCONNECT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Are you sure you want to disconnect from the server?",
+    "description": "Text of the prompt that show up when the user wants to disconnect from the server"
+  },
+  "CHAT_INSERT_CHANNEL_MESSAGE": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Please type a message!",
+    "description": "Notification text when the user didn't write a message."
+  },
+  "CHAT_TITLE_WARNING": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Leaving channel",
+    "description": "Title of prompt that show up when the user wants to leave a channel."
+  },
+  "CHAT_TEXT_PART_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Are you sure you want to part this channel?",
+    "description": "Text of prompt that show up when the user wants to leave a channel."
+  },
+  "CHAT_WELCOME_ADD_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Add New Channel",
+    "description": "Text used when the user wants to add a new channel"
+  },
+  "CHAT_NEW_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Enter channel name",
+    "description": "The name of the new channel"
+  },
+  "CHAT_AVAILABLE_CHANNELS": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Available channels",
+    "description": "List of the available channels"
+  },
+  "CHAT_USERS": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Users",
+    "description": "List with chat users."
+  },
+  "CHAT_JOIN_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Join channel",
+    "description": "Button used to connect to a channel."
+  },
+  "CHAT_INSERT_CHANNEL_NAME": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Please enter a channel name!",
+    "description": "Warning when the user didn't choose a channel name."
+  },
+  "CHAT_LOGIN_TITLE": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Login to server",
+    "description": "Text when the user is connecting to a server."
+  },
+  "CHAT_LOGIN_BUTTON": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Login",
+    "description": "The login button"
+  },
+  "CONSOLE": {
+    "plugins": [
+      "console"
+    ],
+    "message": "Console",
+    "description": "The console name that is displayed in the status button"
+  },
+  "PROJECT_DASHBOARD": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Dashboard",
+    "description": "The Dashboard tab, used to send signals from a board."
+  },
+  "DASHBOARD_VIEWER_INVALID_SIGNAL": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Signal name invalid",
+    "description": "Warning that shows up when the signal name entered by the user is not correct."
+  },
+  "DASHBOARD_VIEWER_MOVE_LEFT": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Move left",
+    "description": "Button used to move a graph to the left"
+  },
+  "DASHBOARD_VIEWER_MOVE_RIGHT": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Move right",
+    "description": "Button used to move a graph to the right"
+  },
+  "DASHBOARD_VIEWER_GRAPH_SETTINGS": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Graph settings",
+    "description": "Button that opens a prompt where the user can modify the graph's properties"
+  },
+  "DASHBOARD_VIEWER_ERASE_GRAPH": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Erase graph",
+    "description": "Button used to delete a graph"
+  },
+  "DASHBOARD_SIGNAL_NAME": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Signal Name *",
+    "description": "Input text area for the name of the signal"
+  },
+  "DASHBOARD_SIGNAL_DESCRIPTION": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Description",
+    "description": "Input text area for additional description of the signal"
+  },
+  "DASHBOARD_SIGNAL_COLOR": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Color",
+    "description": "Button used to pick the color of the signal"
+  },
+  "NAME": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Name",
+    "description": "Signal's name"
+  },
+  "DASHBOARD_ADD_SIGNAL": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Add",
+    "description": "Button used to add a signal graph"
+  },
+  "DASHBOARD_LOW_COLOR": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Low color",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_LOW_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Low value",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_MID_COLOR": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Mid color",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_MID_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Mid value",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_HIGH_COLOR": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "High color",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_MIN_AXES_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Minimum value",
+    "description": "Input text area foar the minimum value of an axis"
+  },
+  "DASHBOARD_MAX_AXES_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Maximum value",
+    "description": "Input text area foar the maximum value of an axis"
+  },
+  "DASHBOARD_KILOMETERS": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Kilometers",
+    "description": "Unit of measure for speedometer and gauge"
+  },
+  "DASHBOARD_MILES": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Miles",
+    "description": "Unit of measure for speedometer and gauge"
+  },
+  "DASHBOARD_MIN_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Minimum axes value",
+    "description": "Input text area foar the minimum value of an axis"
+  },
+  "DASHBOARD_MAX_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Maximum axes value",
+    "description": "Input text area foar the maximum value of an axis"
+  },
+  "DASHBOARD_AXIS_NAME": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Axis name",
+    "description": "Name of an axis"
+  },
+  "EXTRA_GRAPH": {
+    "plugins": [
+      "dashboard.graph.extra"
+    ],
+    "message": "EXTRA",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDEXTRA": {
+    "plugins": [
+      "dashboard.graph.extra"
+    ],
+    "message": "Extra - Add signal",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "GAUGE_GRAPH": {
+    "plugins": [
+      "dashboard.graph.gauge"
+    ],
+    "message": "GAUGE",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDGAUGE": {
+    "plugins": [
+      "dashboard.graph.gauge"
+    ],
+    "message": "Gauge - Add signal",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "LINE_GRAPH": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "LINE",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDLINE": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Line - Add signal",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "LINE_STYLE": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Style",
+    "description": "The style of a line signal"
+  },
+  "LINE_HIDE_LEGEND": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Hide legend",
+    "description": "Checkbox option to hide the legend of a graph"
+  },
+  "LINE_FIX_AXES_VALUES": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Fix axes values",
+    "description": "Checkbox option to fix the axis values for the line graph"
+  },
+  "LINE_LOGARITHMIC_AXES": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Logarithmic axes",
+    "description": "Checkbox option to show logarithmic for the line graph"
+  },
+  "LINE_TIME_SERIES": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Time series",
+    "description": "Checkbox option to show the time series for the line graph"
+  },
+  "LINE_SHOW_POINTS": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Show points",
+    "description": "Checkbox option to show the points for the line graph"
+  },
+  "LINE_MAX_POINTS": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Maximum points to show (0 means show all)",
+    "description": "Input text area for the maximum points to show in a line graph"
+  },
+  "LINE_AXIS_NAME": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Axis name",
+    "description": "Name of the axis"
+  },
+  "LINE_OVERVIEW": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Show overview",
+    "description": "Checkbox option to show an overview for the line graph"
+  },
+  "LINE_SCROLLBAR": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Show scrollbar",
+    "description": "Checkbox option to show the scrollbar for the line graph"
+  },
+  "LINE_STEP": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Step",
+    "description": "Type of line graph"
+  },
+  "LINE_STRAIGHT": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Straight",
+    "description": "Type of line graph"
+  },
+  "LINE_SPLINE": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "Spline",
+    "description": "Type of line graph"
+  },
+  "SLIDER_GRAPH": {
+    "plugins": [
+      "dashboard.graph.slider"
+    ],
+    "message": "SLIDER",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDSLIDER": {
+    "plugins": [
+      "dashboard.graph.slider"
+    ],
+    "message": "Slider - Add signal",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "SLIDER_STEP": {
+    "plugins": [
+      "dashboard.graph.slider"
+    ],
+    "message": "Step",
+    "description": "Type of slider"
+  },
+  "SPEEDOMETER_GRAPH": {
+    "plugins": [
+      "dashboard.graph.speedometer"
+    ],
+    "message": "SPEEDOMETER",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDSPEEDOMETER": {
+    "plugins": [
+      "dashboard.graph.speedometer"
+    ],
+    "message": "Speedometer - Add signal",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "SWITCH_GRAPH": {
+    "plugins": [
+      "dashboard.graph.switch"
+    ],
+    "message": "SWITCH",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDSWITCH": {
+    "plugins": [
+      "dashboard.graph.switch"
+    ],
+    "message": "Switch - Add signal",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "SWITCH_PUSH": {
+    "plugins": [
+      "dashboard.graph.switch"
+    ],
+    "message": "Push",
+    "description": "Checkbox used to push values"
+  },
+  "THERMOMETER_GRAPH": {
+    "plugins": [
+      "dashboard.graph.thermometer"
+    ],
+    "message": "THERMOMETER",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDTHERMOMETER": {
+    "plugins": [
+      "dashboard.graph.thermometer"
+    ],
+    "message": "Thermometer - Add signal",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "VUMETER_GRAPH": {
+    "plugins": [
+      "dashboard.graph.vumeter"
+    ],
+    "message": "VU-METER",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDVUMETER": {
+    "plugins": [
+      "dashboard.graph.vumeter"
+    ],
+    "message": "Vu-meter - Add signal",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "DATABASE": {
+    "plugins": [
+      "databaselocal"
+    ],
+    "message": "DATABASE"
+  },
+  "DEVICE_RPK_RUN": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Run",
+    "description": "The run button for an application"
+  },
+  "DEVICE_RPK_STOP": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Stop",
+    "description": "The stop button for an application"
+  },
+  "DEVICE_RPK_TASK_MANAGER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Task Manager",
+    "description": "The button for the task manager "
+  },
+  "DEVICE_RPK_PACKAGE_MANAGER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Package Manager",
+    "description": "The button for the package manager "
+  },
+  "DEVICE_RPK_NETWORK_MANAGER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Network Manager",
+    "description": "The button for the network manager "
+  },
+  "DEVICE_RPK_DISCONNECT": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Disconnect",
+    "description": "The disconnect option in the disconnect menu"
+  },
+  "DEVICE_RPK_RESTART": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Reboot and Disconnect",
+    "description": "The reboot and disconnect option in the disconnect menu"
+  },
+  "DEVICE_RPK_TURNOFF": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Power Off and Disconnect",
+    "description": "The power off and disconnect option in the disconnect menu"
+  },
+  "DEVICE_RPK_ANOTHER_USER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "The device is already connected to another user.",
+    "description": "The notification message when another use is connected to the board and the board is busy"
+  },
+  "DEVICE_WYAPP_RUN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Run",
+    "description": "The run button for an application"
+  },
+  "DEVICE_WYAPP_STOP": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Stop",
+    "description": "The stop button for an application"
+  },
+  "DEVICE_WYAPP_TASK_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Task Manager",
+    "description": "The button for the task manager "
+  },
+  "DEVICE_WYAPP_PACKAGE_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Package Manager",
+    "description": "The button for the package manager "
+  },
+  "DEVICE_WYAPP_NETWORK_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Network Manager",
+    "description": "The button for the network manager "
+  },
+  "DEVICE_WYAPP_DISCONNECT": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Disconnect",
+    "description": "The disconnect option in the disconnect menu"
+  },
+  "DEVICE_WYAPP_RESTART": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Reboot and Disconnect",
+    "description": "The reboot and disconnect option in the disconnect menu"
+  },
+  "DEVICE_WYAPP_TURNOFF": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Power Off and Disconnect",
+    "description": "The power off and disconnect option in the disconnect menu"
+  },
+  "DEVICE_WYAPP_ANOTHER_USER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "The device is already connected to another user.",
+    "description": "The notification message when another use is connected to the board and the board is busy"
+  },
+  "DEVICE_WYAPP_SETTINGS": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Device Settings",
+    "description": "Title of popup that contains details about the connected board"
+  },
+  "DEVICE_WYAPP_NAME": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Name",
+    "description": "Name of connected board"
+  },
+  "DEVICE_WYAPP_VERSION": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Version",
+    "description": "Supervisor verson"
+  },
+  "DEVICE_WYAPP_OS": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Operating system",
+    "description": "Operating system on the board"
+  },
+  "DEVICE_WYAPP_LANGUAGES": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Languages",
+    "description": "Programming languages supported by the board"
+  },
+  "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Unable to load SerialPort WyApp Transport, serial devices over wyapp will not be available (error: {{error}})",
+    "description": "The error message shown when the serial port library has an error while being loaded"
+  },
+  "DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Unable to list the serial ports (error: {error})",
+    "description": "The error message shown when there is an werror while listing the serial ports"
+  },
+  "DEVICE_SERIAL_PORT": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Serial Port",
+    "description": "Input text area for the port number of a serial device"
+  },
+  "DEVICE_SERIAL_BAUDRATE": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Baud Rate",
+    "description": "Input text area for the baud rate of a serial device"
+  },
+  "NETWORK_AUTHENTICATE_IP": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "IP",
+    "description": "Internet Protocol (IP)"
+  },
+  "NETWORK_PORT": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Port",
+    "description": "Number of port for the network connection"
+  },
+  "NETWORK_USERNAME": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Username",
+    "description": "Input text area for the name of the user on the raspberry pi"
+  },
+  "NETWORK_PASSWORD": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Password",
+    "description": "Input text area for the password of the user on the raspberry pi"
+  },
+  "NETWORK_SHOWPASSWORD": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Show Password",
+    "description": "Switch use to make the password visible"
+  },
+  "DEVICE_CONNECT": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Connect",
+    "description": "Button used to connect to a device"
+  },
+  "DEVICE_SERIAL_OPTIONS": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Serial Connection",
+    "description": "The title of the serial device options dialog"
+  },
+  "DEVICE_BAUDRATE": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Baud Rate",
+    "description": "The baud rate input of the serial port options dialog"
+  },
+  "NETWORK_CONNECTION": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Network Connection",
+    "description": "Title of the popup used to connect to a device"
+  },
+  "WYLIODRIN_API": {
+    "plugins": [
+      "documentation"
+    ],
+    "message": "Wyliodrin API",
+    "description": "Option in the Help Menu, that redirects the user to the Wyliodrin API web page"
+  },
+  "TOOLBAR_RESISTOR_COLOR_CODE": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "Resistor color code",
+    "description": "Option in the Help Menu which opens a dialog that makes a connection between the color of a resistor and it's value"
+  },
+  "RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "FROM COLOR TO NUMBER",
+    "description": "Options that transforms the color in a value"
+  },
+  "RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "FROM NUMBER TO COLOR",
+    "description": "Option that transforms the value in a color"
+  },
+  "RESISTOR_COLORCODE_STRIPES": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "Stripes",
+    "description": "Number of stripes in the resistor"
+  },
+  "VALUE_FOUR": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "Four",
+    "description": "Number 4"
+  },
+  "VALUE_FIVE": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "Five",
+    "description": "Number 5"
+  },
+  "RESISTOR_COLORCODE_STRIPE": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "Stripe",
+    "description": "Stripe option"
+  },
+  "VALUE_VALUE": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "Value",
+    "description": "Value of the resistance"
+  },
+  "RESISTOR_COLORCODE_RESISTANCE": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "Resistance",
+    "description": "Label for the value of the resistance"
+  },
+  "VALUE_TOLERANCE": {
+    "plugins": [
+      "documentation.resistorcolorcodes"
+    ],
+    "message": "Tolerance",
+    "description": "Tolerance of the resistor"
+  },
+  "SEND_FEEDBACK_TITLE": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "Send feedback",
+    "description": "Option in the Help Menu to send a feedback"
+  },
+  "SEND_FEEDBACK_MESSAGE": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "Write your feedback",
+    "description": "Label of the input text area of the feedback"
+  },
+  "SEND_FEEDBACK_SEND": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "Send your feedback",
+    "description": "Button used to send the feecback"
+  },
+  "FEEDBACK_SCREENSHOT_ERROR": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "There was an error while capturing the page! Please try again",
+    "description": "Notification that shows up when  the system can't take a screenshot"
+  },
+  "SEND_FEEDBACK_CANCEL": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "Cancel",
+    "description": "Button to close the feedback dialog"
+  },
+  "REAL_FS_DO_NOT_EXIST_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "The given filesystem could not be found! Please use one valid filesystem"
+  },
+  "REAL_FS_ALREADY_REGISTERED_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "The given filesystem is already registered!"
+  },
+  "REAL_FS_NO_DEF_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "No default filesystem, is there any filesystem registered?"
+  },
+  "PROJECT_NOTEBOOK": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "Notebook",
+    "description": "The Notebook Tab, where the user can take it's own notes"
+  },
+  "NOTEBOOK_SELECT_IMAGE_ERROR": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "Please select an image.",
+    "description": "Notification error that shows up when the user didn't choose an image to load"
+  },
+  "NOTEBOOK_SELECT_FILE_ERROR": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "Please select a valid image.",
+    "description": "Notification error that shows up when the user didn't choose a file to load"
+  },
+  "NOTEBOOK_DELETE_ITEM_QUESTION": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "Are you sure you want to delete this element?",
+    "description": "Confirmation prompt which ensures that the user really wants to delete the current notebook element"
+  },
+  "NOTEBOOK_DELETE_ITEM_TITLE": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "Delete element",
+    "description": "Title of the delete confirmation prompt"
+  },
+  "NOTEBOOK_LOAD_DATA_ERROR": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "Unable to load the notebook data ({error})",
+    "description": "This error shwos up when notebook.json can't be parsed."
+  },
+  "PIN_LAYOUT": {
+    "plugins": [
+      "pinLayout"
+    ],
+    "message": "Pin Layout",
+    "description": "The Pin Layout tab title"
+  },
+  "PROJECT_APPLICATION": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Application",
+    "description": "Description of tab"
+  },
+  "PROJECT_DELETE_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Delete Folder",
+    "description": "Delete a folder within a project"
+  },
+  "PROJECT_RENAME_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Rename folder",
+    "description": "Rename a folder within a project"
+  },
+  "PROJECT_NEW_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "New folder",
+    "description": "Create a folder within a project"
+  },
+  "PROJECT_NEW_FOLDER_NAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "New Folder Name",
+    "description": "Label for the new name of the folder"
+  },
+  "PROJECT_FOLDER_SURE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Are you sure you want to delete this folder?",
+    "description": "Prompt asking for assurance on deleting a folder"
+  },
+  "PROJECT_DELETE_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Delete File",
+    "description": "Delete a file within a project"
+  },
+  "PROJECT_RENAME_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Rename File",
+    "description": "Rename a file within a project"
+  },
+  "PROJECT_NEW_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "New File",
+    "description": "Create a file within a project"
+  },
+  "PROJECT_NEW_FILE_NAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "New File Name",
+    "description": "Label for the new name of the file"
+  },
+  "PROJECT_FILE_SURE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Are you sure you want to delete this file?",
+    "description": "Prompt asking for assurance on deleting a file"
+  },
+  "PROJECT_NEW_NAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "New Name",
+    "description": "Label for the new name of the object"
+  },
+  "PROJECT_DELETE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Delete project",
+    "description": "Label for the dialog to delete a project within the workspace"
+  },
+  "PROJECT_LOAD_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Load a project from the library",
+    "description": "Text meaning that there is no project loaded"
+  },
+  "PROJECT_PROJECT_SURE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Are you sure you want to delete this project?",
+    "description": "Prompt asking for assuruance on deleting a project"
+  },
+  "PROJECT_SHOW_CODE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Show Code",
+    "description": "Button designed to show the code behind a blockly"
+  },
+  "PROJECT_HIDE_CONSOLE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Hide Console",
+    "description": "Button designed to hide the console"
+  },
+  "PROJECT_WELCOME_CREATE_NEW_APP": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Create New Application",
+    "description": "Button to create a new project within the workspace"
+  },
+  "PROJECT_LIBRARY": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Library",
+    "description": "Opens the projects library"
+  },
+  "PROJECT_LIBRARY_NAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Project name",
+    "description": "Label for the name of the project"
+  },
+  "PROJECT_LIBRARY_NEW_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Create project",
+    "description": "Create a project within the workspace"
+  },
+  "PROJECT_LIBRARY_RENAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Rename",
+    "description": "Rename a project within the workspace"
+  },
+  "PROJECT_LIBRARY_DELETE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Delete",
+    "description": "Delete a project within the workspace"
+  },
+  "PROJECT_LIBRARY_CLONE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Clone",
+    "description": "Clone a project within the workspace"
+  },
+  "PROJECT_LIBRARY_IMPORT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Import",
+    "description": "Import a project from an archive"
+  },
+  "PROJECT_LIBRARY_CLOSE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Close",
+    "description": "Close a dialog"
+  },
+  "PROJECT_LIBRARY_EXPORT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Export",
+    "description": "Export a project from the workspace"
+  },
+  "PROJECT_LIBRARY_PROJECTS": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Projects",
+    "description": "Label for the projects dialog"
+  },
+  "PROJECT_LIBRARY_OPTIONS": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Options",
+    "description": "Label for the options menu"
+  },
+  "PROJECT_LIBRARY_LOAD_EXAMPLE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Load an Example",
+    "description": "Load a project Example"
+  },
+  "PROJECT_ERROR_LANGUAGE_ADDON": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Register addon failed for language {language}",
+    "description": "The error message shown when a language addon fails to register"
+  },
+  "PROJECT_ERROR_REGISTER_EDITOR": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Register editor failed for name {name} editor already registered",
+    "description": "The error message shown when an edtitor fails to register"
+  },
+  "PROJECT_ERROR_LOAD_PROJECTS": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while loading the projects ({error})",
+    "description": "The error message shown when the projects fail to load"
+  },
+  "PROJECT_ERROR_SELECT_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while selecting project {project} ({error})",
+    "description": " The error message shown when a project fails to be selected"
+  },
+  "PROJECT_ERROR_CREATE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while creating project {project} ({error})",
+    "description": "The error message shown when a project fails to be created"
+  },
+  "PROJECT_ERROR_RENAME_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while renaming project {project} to {name} ({error})",
+    "description": "The error message shown when a project fails to be renamed"
+  },
+  "PROJECT_ERROR_CLONE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while cloning project {project} ({error})",
+    "description": "The error message shown when a project fails to be cloned"
+  },
+  "PROJECT_ERROR_DELETE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while deleting project {project} ({error})",
+    "description": "The error message shown when a project fails to be deleted"
+  },
+  "PROJECT_ERROR_IMPORT_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while importing project {project} ({error})",
+    "description": "The error message shown when a project fails to be imported"
+  },
+  "PROJECT_ERROR_EXPORT_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while exporting project {project} ({error})",
+    "description": "The error message shown when a project fails to be exported"
+  },
+  "PROJECT_ERROR_NEW_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while creating new folder {folder} ({error})",
+    "description": "The error message shown when a folder fails to be created"
+  },
+  "PROJECT_ERROR_NEW_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while creating new file {file} ({error})",
+    "description": "The error message shown when a file fails to be created"
+  },
+  "PROJECT_ERROR_RENAME_OBJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while renaming object {object} ({error})",
+    "description": "The error message shown when an object fails to be renamed"
+  },
+  "PROJECT_ERROR_DELETE_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while deleting folder {folder} ({error})",
+    "description": "The error message shown when a folder fails to be deleted"
+  },
+  "PROJECT_ERROR_DELETE_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while deleting file {file} ({error})",
+    "description": "The error message shown when a file fails to be deleted"
+  },
+  "PROJECTS_JSON_DO_NOT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Tried to edit project.json, DO NOT DO THIS",
+    "description": ""
+  },
+  "PROJECT_ERROR_SAVE_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while saving file {file} ({error})",
+    "description": "The error message shown when a file fails to be saved"
+  },
+  "PROJECT_ERROR_LOAD_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while loading file {file} ({error})",
+    "description": "The error message shown when file fails to be loaded"
+  },
+  "PROJECT_ERROR_READ_DATA": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while reading data for project {project} ({error})",
+    "description": "The error message shown when there is an error reading the data for the project"
+  },
+  "PROJECT_ERROR_NOT_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Project folder {project} is not a folder",
+    "description": "The error message shown when there is no folder"
+  },
+  "PROJECT_ERROR_SAVE_SPECIAL_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while saving special file {file} with data ({error})",
+    "description": "The error message shown when a special settings file fails to be saved"
+  },
+  "PROJECT_ERROR_LOAD_SPECIAL_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while loading special file {file} ({error})",
+    "description": "The error message shown when a special settings file fails to be loaded"
+  },
+  "PROJECT_ERROR_SEND_CODE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error while sending file code {file} ({error})",
+    "description": "The error message shown when there is an error while sending the file code to the device"
+  },
+  "PROJECT_ERROR_PATH_INVALID": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error, path is not inside the workspace folder",
+    "description": "The error message shown when the specified path is not in the workspace folder"
+  },
+  "PROJECT_JSON_DO_NOT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Tried to edit project.json, DO NOT DO THIS",
+    "description": "The error message shown when there is an attempt at editing the project settings file"
+  },
+  "PROJECT_CLONE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Clone Project",
+    "description": "Label for the clone project dialog"
+  },
+  "PROJECT_RENAME_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Rename Project",
+    "description": "Label for the rename project dialog"
+  },
+  "PROJECT_NAME_PROMPT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Please input the name of the project",
+    "description": "Label for the new name to be given to the project"
+  },
+  "PROJECT_NULL": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "One or more parameters are null",
+    "description": "One or more of the funciton's parameters are null"
+  },
+  "PATH_NULL": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "A path is null",
+    "description": "The given path turned out null"
+  },
+  "SCHEMATICS": {
+    "plugins": [
+      "schematics"
+    ],
+    "message": "Schematics",
+    "description": "The Schematics Tab, used to load a circuit diagram"
+  },
+  "ADD_SCHEMATIC": {
+    "plugins": [
+      "schematics"
+    ],
+    "message": "Add schematics",
+    "description": "Button used to add a schematics"
+  },
+  "DELETE_SCHEMATIC": {
+    "plugins": [
+      "schematics"
+    ],
+    "message": "Delete schematics",
+    "description": "Button used to delete a schematics"
+  },
+  "DELETE_MESSAGE": {
+    "plugins": [
+      "schematics"
+    ],
+    "message": "Are you sure you want to delete it ?",
+    "description": "Delete confirmation prompt question"
+  },
+  "DELETE_CONFIRMATION": {
+    "plugins": [
+      "schematics"
+    ],
+    "message": "Delete confirmation",
+    "description": "Delete confirmation prompt title"
+  },
+  "SCHEMATICS_IMPORT": {
+    "plugins": [
+      "schematics"
+    ],
+    "message": "Import your .svg schematics from Fritzing",
+    "description": "The message that appears when there is no picture"
+  },
+  "PROJECT_SHELL": {
+    "plugins": [
+      "shell"
+    ],
+    "message": "Shell",
+    "description": "The Shell tab, opens a terminal"
+  }
+}

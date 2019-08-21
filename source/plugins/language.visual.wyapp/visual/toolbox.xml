@@ -1,0 +1,45 @@
+<toolbox>
+    <category name="Date and Hour" colour="180">
+        <block type="get_date"></block>
+        <block type="get_time"></block>
+        <block type="format_numbers"></block>
+    </category>
+    <category name="HTTP" colour="230">
+        <block type="variables_set" id="4" inline="true" x="70" y="47">
+        <field name="VAR">http response</field>
+        <value name="VALUE">
+            <block type="http_get">
+            <value name="link">
+                <block type="text">
+                    <field name="TEXT">http://</field>
+                </block>
+            </value>
+            </block>
+        </value>
+        </block>
+        <block type="variables_set" id="4" inline="true" x="70" y="47">
+        <field name="VAR">http response</field>
+        <value name="VALUE">
+            <block type="http_post">
+            <value name="link">
+                <block type="text">
+                    <field name="TEXT">http://</field>
+                </block>
+            </value>
+            <value name="data">
+                <block type="dicts_create_with">
+                </block>
+            </value>
+            </block>
+            </value>
+        </block>
+        <block type="http_format">
+        <value name="data">
+            <block type="variables_get">
+                <field name="VAR">http response</field>
+            </block>
+        </value>
+        </block>
+    </category>
+    <sep />
+</toolbox>

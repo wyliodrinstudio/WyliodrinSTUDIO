@@ -1,0 +1,22 @@
+{
+    "SCHEMATICS": {
+        "message": "回路図",
+        "description": "The Schematics Tab, used to load a circuit diagram"
+    },
+    "ADD_SCHEMATIC": {
+        "message": "回路図を足します",
+        "description": "Button used to add a schematics"
+    },
+    "DELETE_SCHEMATIC": {
+        "message": "回路図を消します",
+        "description": "Button used to delete a schematics"
+    },
+    "DELETE_MESSAGE": {
+        "message": "これを削除してもよろしいですか？",
+        "description": "Delete confirmation prompt title"
+    },
+    "DELETE_CONFIRMATION": {
+        "message": "消すの確認",
+        "description": "The message that appears when there is no picture"
+    }
+}

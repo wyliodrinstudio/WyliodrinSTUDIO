@@ -1,0 +1,22 @@
+{
+    "SEND_FEEDBACK_TITLE": {
+        "message": "Send feedback",
+        "description": "Option in the Help Menu to send a feedback"
+    },
+    "SEND_FEEDBACK_MESSAGE": {
+        "message": "Write your feedback",
+        "description": "Label of the input text area of the feedback"
+    },
+    "SEND_FEEDBACK_SEND": {
+        "message": "Scrieți-vă feedback-ul",
+        "description": "Button used to send the feecback"
+    },
+    "FEEDBACK_SCREENSHOT_ERROR": {
+        "message": "A apărut o eroare la capturarea paginii! Vă rugăm să încercați din nou!",
+        "description": "Notification that shows up when  the system can't take a screenshot"
+    },
+    "SEND_FEEDBACK_CANCEL": {
+        "message": "Anulare",
+        "description": "Button to close the feedback dialog"
+    }
+}

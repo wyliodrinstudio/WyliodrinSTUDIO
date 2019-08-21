@@ -1,0 +1,34 @@
+{
+    "DEVICE_WYAPP_RUN": {
+        "message": "Spustiť",
+        "description": "The run button for an application"
+    },
+    "DEVICE_WYAPP_STOP": {
+        "message": "Zastaviť",
+        "description": "The stop button for an application"
+    },
+    "DEVICE_WYAPP_TASK_MANAGER": {
+        "message": "Správca úloh",
+        "description": "The button for the task manager "
+    },
+    "DEVICE_WYAPP_PACKAGE_MANAGER": {
+        "message": "Správca balíkov",
+        "description": "The button for the package manager "
+    },
+    "DEVICE_WYAPP_NETWORK_MANAGER": {
+        "message": "Správca siete",
+        "description": "The button for the network manager "
+    },
+    "DEVICE_WYAPP_DISCONNECT": {
+        "message": "Odpojiť",
+        "description": "The disconnect option in the disconnect menu"
+    },
+    "DEVICE_WYAPP_RESTART": {
+        "message": "Reštartovať a odpojiť",
+        "description": "The reboot and disconnect option in the disconnect menu"
+    },
+    "DEVICE_WYAPP_TURNOFF": {
+        "message": "Vypnúť a odpojiť",
+        "description": "The power off and disconnect option in the disconnect menu"
+    }
+}

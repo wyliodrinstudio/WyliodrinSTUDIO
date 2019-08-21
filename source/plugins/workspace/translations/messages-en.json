@@ -1,0 +1,102 @@
+{
+    "LANGUAGE": {
+        "message": "English",
+        "description": "Button that indicates the current language of the program, represented by a flag"
+    },
+    "WORKSPACE_TOOLBAR_EXIT": {
+        "message": "Exit",
+        "description": "Close the program"
+    },
+    "WORKSPACE_TOOLBAR_FULLSCREEN": {
+        "message": "Fullscreen",
+        "description": "Located in the upper right corner, enlarges the window across the entire screen"
+    },
+    "WORKSPACE_TOOLBAR_RESTORE": {
+        "message": "Restore",
+        "description": "Same button as Fullscreen, restores the window to it's previous dimension"
+    },
+    "WORKSPACE_TOOLBAR_MINIMIZE": {
+        "message": "Minimize",
+        "description": "Located in the upper right corner, reduces the window to a small title and hide its contents"
+    },
+    "WORKSPACE_TOOLBAR_SETUP": {
+        "message": "Setup",
+        "description": "Located in the help menu"
+    },
+    "WORKSPACE_TOOLBAR_ABOUT": {
+        "message": "About",
+        "description": "Located in the help menu, displays informations about the application"
+    },
+    "WORKSPACE_PROJECT_NOTEBOOK": {
+        "message": "Notebook",
+        "description": "Tool for project management and task management"
+    },
+    "WORKSPACE_DEVICE_CONNECT": {
+        "message": "Connect",
+        "description": "Button used for connection"
+    },
+    "WORKSPACE_BOARD_CONNECT": {
+        "message": "Select a device to connect to",
+        "description": "Connect to a device"
+    },
+    "CLOSE": {
+        "message": "Close",
+        "description": "Close the current window"
+    },
+    "WORKSPACE_PROJECT_LIBRARY": {
+        "message": "Projects Library",
+        "description": "Button that opens a modal with all the projects, with a folder icon as pictogram"
+    },
+    "WORKSPACE_DEVICE_DISCONNECT": {
+        "message": "Disconnect",
+        "description": "The Disconnect button"
+    },
+    "WORKSPACE_STATUS_DISCONNECTED": {
+        "message": "DISCONNECTED",
+        "description": "Status of a device that is not connected."
+    },
+    "WORKSPACE_STATUS_CONNECTED": {
+        "message": "CONNECTED",
+        "description": "Status of a device that is connected."
+    },
+    "WORKSPACE_STATUS_SYNCHRONIZING": {
+        "message": "SYNCHRONIZING",
+        "description": "Status of a device that is synchronizing."
+    },
+    "WORKSPACE_STATUS_CONNECTING": {
+        "message": "CONNECTING",
+        "description": "Status of a device that is connecting."
+    },
+    "WORKSPACE_STATUS_ERROR": {
+        "message": "ERROR",
+        "description": "Status of a device that has an error."
+    },
+    "WORKSPACE_TOOLBAR_EXIT_QUESTION": {
+        "message": "Are you sure you want to exit?",
+        "description": "Select if you are sure you want to exit"
+    },
+    "YES": {
+        "message": "Yes",
+        "description": "The 'yes' button"
+    },
+    "NO": {
+        "message": "No",
+        "description": "The 'no' button"
+    },
+    "EXIT": {
+        "message": "Exit",
+        "description": "A button with the text exit"
+    },
+    "WORKSPACE_TOOLBAR_CLOSE": {
+        "message": "Close",
+        "description": "Close button"
+    },
+    "WORKSPACE_SET_MODE_ADVANCED": {
+        "message": "Use Advanced Mode",
+        "description": "The menu to set the editor in advanced mode"
+    },
+    "WORKSPACE_SET_MODE_SIMPLE": {
+        "message": "Use Simple Mode",
+        "description": "The menu to set the editor in simple mode"
+    }
+}

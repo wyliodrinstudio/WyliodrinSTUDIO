@@ -1,0 +1,327 @@
+<toolbox>
+  <category name="Display" colour="0">
+    <block type="rpk_gui_drawstring">
+      <value name="str">
+        <shadow type="text">
+          <field name="TEXT"/>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_drawstringat">
+      <value name="str">
+        <shadow type="text">
+          <field name="TEXT"/>
+        </shadow>
+      </value>
+      <value name="X">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_drawpoint">
+      <value name="X">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_drawline">
+      <value name="X1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="X2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_drawhline">
+      <value name="X1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="X2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_drawvline">
+      <value name="X1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_drawrect">
+      <value name="X1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="X2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_fillrect">
+      <value name="X1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="X2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_drawcircle">
+      <value name="X">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="R">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_fillcircle">
+      <value name="X">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="R">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_drawellipse">
+      <value name="X1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="RX">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="RY">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_fillellipse">
+      <value name="X1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="Y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="RX">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="RY">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_gui_display_clear"/>
+    <block type="rpk_gui_display_newline"/>
+    <block type="rpk_gui_set_color">
+      <field name="Color">0x00FF0000</field>
+    </block>
+    <block type="rpk_gui_set_backlight">
+      <field name="Backlight">0</field>
+    </block>
+    <block type="rpk_gui_set_bk_color">
+      <field name="Color">0x00FF0000</field>
+    </block>
+  </category>
+  <category name="RGB" colour="240">
+    <block type="rpk_rgb_set_brightness">
+      <field name="Brightness">0</field>
+    </block>
+    <block type="rpk_rgb_set_color">
+      <field name="Color">0</field>
+    </block>
+    <block type="rpk_rgb_set_state">
+      <field name="NAME">0</field>
+      <field name="Color">0</field>
+    </block>
+    <block type="rpk_rgb_get_brightness"/>
+    <block type="rpk_rgb_get_color"/>
+  </category>
+  <category name="Sensors" colour="90">
+    <block type="rpk_sensors_get_light"/>
+    <block type="rpk_sensors_get_airquality"/>
+    <block type="rpk_sensors_get_pressure">
+      <field name="Measurement unit">1</field>
+    </block>
+    <block type="rpk_sensors_get_temperature">
+      <field name="Measurement unit">1</field>
+    </block>
+    <block type="rpk_sensors_get_motion"/>
+    <block type="rpk_sensors_get_freefall"/>
+    <block type="rpk_sensors_get_battery">
+      <field name="Properties">1</field>
+    </block>
+    <block type="rpk_sensors_get_accelerometer">
+      <field name="Axis">1</field>
+    </block>
+    <block type="rpk_sensors_get_gyroscope">
+      <field name="Axis">1</field>
+    </block>
+    <block type="rpk_sensors_set_buzzer">
+      <field name="NAME">0</field>
+    </block>
+    <block type="rpk_sensors_get_buzzer"/>
+  </category>
+  <category name="Touch" colour="180">
+    <block type="rpk_sensors_get_touch"/>
+    <block type="rpk_sensors_touch">
+      <field name="Value">1</field>
+    </block>
+  </category>
+  <category name="Switches" colour="45">
+    <block type="rpk_sensors_get_switch"/>
+    <block type="rpk_sensors_switch">
+      <field name="Value">1</field>
+    </block>
+  </category>
+  <category name="Time" colour="60">
+    <block type="rpk_timing_sleep">
+      <field name="measure_unit">1</field>
+      <value name="time">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  <category name="Console" colour="300">
+    <block type="rpk_console_log">
+      <value name="str">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_console_read"/>
+  </category>
+  <category name="Bluetooth" colour="210">
+    <block type="rpk_ble_write_int_8">
+      <value name="str">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_ble_write_int_16">
+      <value name="str">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_ble_write_int_32">
+      <value name="str">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="rpk_ble_read_int_8"/>
+    <block type="rpk_ble_read_int_16"/>
+    <block type="rpk_ble_read_int_32"/>
+  </category>
+  <sep/>
+</toolbox>
