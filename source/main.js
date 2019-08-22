@@ -1,8 +1,10 @@
-const app = require ('electron').app;
-const BrowserWindow = require ('electron').BrowserWindow;
-const ipcMain = require ('electron').ipcMain;
-const path = require ('path');
-const isDev = require ('electron-is-dev');
+const app = require('electron').app;
+const BrowserWindow = require('electron').BrowserWindow;
+const ipcMain = require('electron').ipcMain;
+const path = require('path');
+const isDev = require('electron-is-dev');
+
+app.commandLine.appendSwitch('enable-experimental-web-platform-features');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,13 +16,14 @@ let closing = false;
 
 function createWindow() {
 	// Create the browser window.
-	win = new BrowserWindow({ width: 1180,
+	win = new BrowserWindow({
+		width: 1180,
 		height: 800,
 		minWidth: 1150,
 		frame: false,
 		title: 'Wyliodrin STUDIO',
-		icon: path.join (__dirname, '/img/icons/linux/64x64.png'),
-		minHeight: 700, 
+		icon: path.join(__dirname, '/img/icons/linux/64x64.png'),
+		minHeight: 700,
 		webPreferences: {
 			nodeIntegration: true,
 			webSecurity: true,
@@ -32,20 +35,18 @@ function createWindow() {
 	win.loadFile('./index.html');
 
 	// Open the DevTools.
-	if (isDev)
-	{
+	if (isDev) {
 		// require('vue-devtools').install();
 		win.webContents.openDevTools();
 	}
 
-	win.on('close', function(e){
-		if (!loading && !closing)
-		{
+	win.on('close', function (e) {
+		if (!loading && !closing) {
 			win.webContents.send('close-ask');
-			e.preventDefault ();
+			e.preventDefault();
 		}
 	});
-	
+
 
 	// Emitted when the window is closed.
 	win.on('closed', () => {
@@ -55,13 +56,22 @@ function createWindow() {
 		win = null;
 	});
 
-	ipcMain.on ('loaded', () => {
+	ipcMain.on('loaded', () => {
 		loading = false;
 	});
 
-	ipcMain.on ('close', () => {
+	ipcMain.on('close', () => {
 		closing = true;
-		win.close ();
+		win.close();
+	});
+
+	win.webContents.on('select-bluetooth-device', (event, deviceList, callback) => {
+		event.preventDefault();
+		console.log (deviceList);
+		// This function needs to be called several times, otherwise only one single device is shown
+		// is this an electron issue?
+		
+		// TODO send devices back to renderer via ipc
 	});
 }
 
@@ -77,7 +87,7 @@ app.on('window-all-closed', () => {
 	// if (process.platform !== 'darwin') {
 	// 	app.quit();
 	// }
-	app.quit ();
+	app.quit();
 });
 
 app.on('activate', () => {

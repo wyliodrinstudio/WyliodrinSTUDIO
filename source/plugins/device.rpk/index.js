@@ -286,29 +286,13 @@ export function setup(options, imports, register)
 			return () => deviceEvents.removeListener ('update:'+device.id, fn);
 		},
 
-		// listDevices ()
-		// {
-		// 	navigator.bluetooth.requestDevice({
-		// 		acceptAllDevices:true
-		// 	}).then ((dev) => {
-		// 		console.log (dev);
-		// 		bleDevices = [];
-		// 		for (let device of dev)
-		// 		{
-		// 			bleDevices.push ({
-		// 				id: 'rpk:'+device.id,
-		// 				name: device.name || '(No Name)',
-		// 				address: 'BLE',
-		// 				connection: 'ble'
-		// 			});
-		// 		}
-		// 		updateDevices ();
-		// 	}).catch ((e) => { 
-		// 		studio.workspace.showError ('DEVICE_RPK_ERROR_BLE', {error: e.message}); 
-		// 		bleDevices = [];
-		// 		updateDevices ();
-		// 	});
-		// },
+		listDevices ()
+		{
+			/* force electron yo show devices */
+			navigator.bluetooth.requestDevice({
+				acceptAllDevices:true
+			});
+		},
 
 		getConnections ()
 		{
