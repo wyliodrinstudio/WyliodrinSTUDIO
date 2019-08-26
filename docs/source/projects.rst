@@ -1,19 +1,28 @@
 :orphan:
+
 Projects
-========
+===========
+|
+|
+
+The **"projects"** plugin is the second most important component in our application. Same as *"workspace"*, it has its own store, where we register the applications the user creates, in order to manage properly his activity.
 
 |
 
-1. _isPathValid(basePath, filePath)
+_isPathValid(basePath, filePath)
 """"""""""""""""""""""""""""""""""""""
-Checks if **basePath** can be found in **filePath** and returns *null* otherwise. The function **path.normalize()** is used here to transform a relative path into the absolute path.
+* *"basePath"* = the folder containing the project files
+* *"filePath"* = the full path
+
+It's an internal function, that we use in order to validate a path.
+It checks if **basePath** can be found in **filePath** and returns *null* otherwise. The function **path.normalize()** is used here to transform a relative path into the absolute path.
 
 
-2. getLanguage(languageID)
+getLanguage(languageID)
 """"""""""""""""""""""""""""
 Returns a language object with the following properties: id, title, icons, addons and options.
 
-3. registerLanguage(id, title, icon, options)
+registerLanguage(id, title, icon, options)
 """""""""""""""""""""""""""""""""""""""""""""""""
 Updates the **“languages”** array with an object referring to a programming language. The accepted languages are: *javascript*, *python*, *bash* and *visual*. 
 
@@ -28,23 +37,33 @@ For example, to add the python language, we had to register it in the *index.js*
 
 where **“python”**, the last parameter, is an object that contains the specifications of the python programming language, mentioned above.
 
-4. registerLanguageAddon(language, board, type, addon = {})
+registerLanguageAddon(language, board, type, addon = {})
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Adds an addon for an existing programming language.
+Applies an addon for an existing programming language. In this case, an addon refers to a specific feature that we set up for a board.
 
-5. _runLanguageFunction (fn, project, ...params)
+* *"language"* - language id
+* *"board"* - addon board
+* *"type"* - addon type
+* *"options"* - addon options
+
+_runLanguageFunction (fn, project, ...params)
 """"""""""""""""""""""""""""""""""""""""""""""""""
-Runs any function provided by a programming language.
-For example, we used it to create new projects: 
+RIt's an internal function, that runs any function provided by a programming language.
+
+For example, we used it in the *"projects*" folder, to create a function that creates new projects: 
 
 .. code-block:: javascript
 
 	this._runLanguageFunction ('createProject', project);
 
-
-6. registerEditor(name, languages, component, options = {})
+registerEditor(name, languages, component, options = {})
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Registers a new text editor.
+Registers a new text editor, using the ebeddable code editor Ace, in order to add a syntax highlighting textbox.
+
+* *"name"* - the name/id of the editor
+* *"language"* - the editor language
+* *"component"* - the component to display
+
 For example, in the *“projects.editor.ace”* we created an Ace Editor which supports some file types:
 
 .. code-block:: javascript
@@ -52,33 +71,47 @@ For example, in the *“projects.editor.ace”* we created an Ace Editor which s
 	studio.projects.registerEditor('EDITOR_ACE',['py','js','json','d','c','h','sh'], Ace);
 
 
-7. createEmptyProject(name, language)
+createEmptyProject(name, language)
 """""""""""""""""""""""""""""""""""""""
 Creates a new, empty project, having the name and language specified by the user.
+
 We called this function in the *“projects”* plugin (*AddProjectDialog.vue* component):
 
 .. code-block:: javascript
 
 	project = await this.studio.projects.createEmptyProject(this.projectName,this.languageID)
+
 where **projectName** and **languageID** can be modified depending on the user’s preferences.
 
-8. deleteProject(project)
+deleteProject(project)
 """""""""""""""""""""""""""
-This function deletes all the files related to the project chosen by the user.
 
-9. renameProject(project, newName)
+* *"project"* = name of the project the user wants to delete
+
+This function deletes all the files related to the project chosen by the user. It is called inside the **ProjectLibrary.vue** component, when the user clicks on the "Delete" button. After removing all the files, we dispatch to the projects store the *currentProject* and the *currentFile* as *null*.
+
+renameProject(project, newName)
 """""""""""""""""""""""""""""""""""""
-Replaces the name of a chosen project with the **“newName”** value, that is selected in the input text area.
+* *"project"* = name of the project the user wants to rename
+* *"newName"* = the new name that the user wants to assign to the current project
 
-10. cloneProject(project, newName)
+Replaces the name of a chosen project with the **“newName”** value, that is selected in the input text area. The function is also called inside the **ProjectLibrary.vue** component, when the user clicks on the *"Rename"* button.
+
+cloneProject(project, newName)
 """"""""""""""""""""""""""""""""""""
-Creates a duplicate of the selected project and it names it with the **“newName”** value chosen by the user.
+* *"project"* = name of the project the user wants to rename
+* *"newName"* = the name that the user wants to assign to the cloned project
 
-11. importProject(project,extension)
+Creates a duplicate of the selected project and it names it with the **“newName”** value chosen by the user. Same as **renameProject**, the function is called inside the **ProjectLibrary.vue** component, when the user clicks on the *"Clone"* button.
+
+importProject(project, extension)
 """""""""""""""""""""""""""""""""""""""
-Loads a new project tree from the user’s computer. The achive extension can be *“.zip”*, *“.tar”* (in this case the files will be extracted), or *‘.wylioapp”* (we are creating recursively the project folder).
+* *"project"* = project object
+* *"extension"* = archive extension (.zip/.tar/.wylioapp)
 
-12. recursiveCreating(necesarry) 
+Loads a new project tree from the user’s computer. The archive extension can be *“.zip”*, *“.tar”* (in this case the files will be extracted), or *‘.wylioapp”* (we are creating recursively the project folder).
+
+recursiveCreating(necesarry) 
 """""""""""""""""""""""""""""""""""""
 Generates the project tree structure with paths and names. **“necessary”** is an object representing the details about every file within the project
 
@@ -100,11 +133,14 @@ We are using it in the *importProject* function mentioned before (*.wylioapp* ex
         });
 
 
-13. exportProject(project,savePath)
+exportProject(project,savePath)
 """""""""""""""""""""""""""""""""""""
-Exports a project archive (*.zip* extension format) to the user’s computer, where **savePath** it the destination path selected by the user.
+* *"project"* = the current project chosen
+* *"savePath"* = the destination path selected by the user
 
-14. newFolder(project, name)
+Exports a project archive (*.zip* extension format) to the chose path in user’s computer.
+
+newFolder(project, name)
 """""""""""""""""""""""""""""""
 Creates a new folder in the current project.
 
@@ -113,7 +149,7 @@ Creates a new folder in the current project.
 
 This option is valid only in the *Advanced Mode*.
 
-15. newFile(project, name, data = '')
+newFile(project, name, data = '')
 """"""""""""""""""""""""""""""""""""""""
 Creates a new file in the current project.
 
@@ -123,7 +159,7 @@ Creates a new file in the current project.
 
 This option is valid only in the *Advanced Mode*.
 
-16. renameObject(project, newName, pathTo)
+renameObject(project, newName, pathTo)
 """""""""""""""""""""""""""""""""""""""""""
 Renames the selected file/ folder.
 
@@ -132,36 +168,40 @@ Renames the selected file/ folder.
 * "pathTo" = path to existing file/folder
 
 
-17. deleteFile(project, pathTo)
+deleteFile(project, pathTo)
 """""""""""""""""""""""""""""""""
 Deletes the current file of a project tree.
 
 * “project” = the project object
 * “pathTo” = the path to the selected file
 
-
-18. deleteFolder(project, pathTo)
+deleteFolder(project, pathTo)
 """"""""""""""""""""""""""""""""""""
 Deletes the selected folder of a project tree.
 
 * “project” = the project object
 * “pathTo” = the path to the folder
 
-19. loadProjects()
+loadProjects()
 """"""""""""""""""""""
 Loads the existing projects.
+
 We are using this function after each change that was made on the **Projects library**: *renameProject*, *cloneProject*, *importProject*.
 
 
-20. selectCurrentProject(project)
+selectCurrentProject(project)
 """"""""""""""""""""""""""""""""""
+* *"project"* = the project where the user decides to select
+
 Selects a project when the user clicks on it and it loads the data in the Application tab.
 
-21. loadPreviousSelectedCurrentProject()
+loadPreviousSelectedCurrentProject()
 """"""""""""""""""""""""""""""""""""""""""""
-Loads the last selected project from the local files.
+Loads the last selected project from the local files. 
 
-22. saveFile(project, name, buffer)
+We are using this function in the **Application.vue** component pf the *"projects"* plugin, in the *created()* section, because we want to load the last selected project at each new running of the application.
+
+saveFile(project, name, buffer)
 """"""""""""""""""""""""""""""""""""""
 Saves an edited file.
 
@@ -169,20 +209,20 @@ Saves an edited file.
 * “name” = the path to the file
 * “buffer” = the file buffer that will actually be saved
 
-23. loadFile(project, name)
+loadFile(project, name)
 """""""""""""""""""""""""""""
 Loads a file. It returns a string that represents the file content.
 
 * “project” = the project object
 * “name” = the full file name, including its path
 
-24. changeFile(name)
+changeFile(name)
 """"""""""""""""""""""
 Changes the current file in the store.
 
 * “name”=path to the file
 
-25. saveSpecialFile(project, name, content)
+saveSpecialFile(project, name, content)
 """"""""""""""""""""""""""""""""""""""""""""""
 Saves a special settings file.
 
@@ -202,7 +242,7 @@ where **this.elements** represents an array of notes that we create in the Noteb
 	:align: center
 	:height: 250px
 
-26. loadSpecialFile(project, name)
+loadSpecialFile(project, name)
 """"""""""""""""""""""""""""""""""""
 Loads a special settings file.
 
@@ -215,21 +255,24 @@ Given the example above, we call this function each time we are changing the pro
 
 	data = await this.studio.projects.loadSpecialFile(this.currentProject,'notebook.json');
 
-27. recursiveGeneration(project, file)
+recursiveGeneration(project, file)
 """""""""""""""""""""""""""""""""""""""""
 Recursively generates a deep object with all the contents of a project and returns an object, which is the root of the folder with all its contents.
 
 * "project" = Project object
 * "file" = File object
 
-28. generateStructure(project, isRoot=true)
+generateStructure(project, isRoot=true)
 """"""""""""""""""""""""""""""""""""""""""""""
+* *"project"*  the current project object 
+
 Generates the tree structure of a project and it returns the tree structure with items of type **recursiveGeneration** (explained above).
 
 
-29. getCurrentProject()
+getCurrentProject()
 """"""""""""""""""""""""""""
 Returns a project object loaded from the store.
+
 For example, we used this function to check if there is a project open, so we know if we should enable the “Notebook” tab.
 
 .. code-block:: javascript
@@ -240,9 +283,10 @@ For example, we used this function to check if there is a project open, so we kn
         }
     });
 
-30. getDefaultFileName(project)
+getDefaultFileName(project)
 """""""""""""""""""""""""""""""""
 Returns the default file name for a specified project, using the **_runLanguageFunction**.
+
 For example, in the *“language.python”* plugin, we create a *“python”* object, to which we associate the default file name *‘/main.py’*.
 
 .. code-block:: javascript
@@ -252,9 +296,10 @@ For example, in the *“language.python”* plugin, we create a *“python”* o
         }
 
 
-31. getDefaultRunFileName(project)
+getDefaultRunFileName(project)
 """""""""""""""""""""""""""""""""""""""
 Returns the default run file name for a specified project, using the **_runLanguageFunction**.
+
 Same as the **getDefaultFileName** function above,, in the *“language.python”* plugin, inside the *“python”* object we created, we associate the default run file name *‘/main.py’*.
 
 .. code-block:: javascript
@@ -263,9 +308,10 @@ Same as the **getDefaultFileName** function above,, in the *“language.python�
             return '/main.py';
         }
 
-32. getMakefile(project, filename)
+getMakefile(project, filename)
 """"""""""""""""""""""""""""""""""""""
 Similar to the 2 functions above, returns the makefile for the **“filename”** of a **“project”**.
+
 An example of use of this function can also be found in the *“language.python”* plugin:
 
 .. code-block:: javascript
@@ -276,9 +322,10 @@ An example of use of this function can also be found in the *“language.python�
             return 'run:\n\tpython main.py';
         }
 
-33. languageSpecificOption (project, option)
+languageSpecificOption (project, option)
 """""""""""""""""""""""""""""""""""""""""""""""
 Gets the default run file name of a language.
+
 We used it in the *“projects.editor.visual”* plugin, to obtain the source language of a specific project.
 
 .. code-block:: javascript
@@ -286,11 +333,20 @@ We used it in the *“projects.editor.visual”* plugin, to obtain the source la
 	sourceLanguage = this.studio.projects.languageSpecificOption (this.currentProject, 'sourceLanguage');
 
 
-34. getFileCode(project, pathTo)
+getFileCode(project, pathTo)
 """"""""""""""""""""""""""""""""""
 Gets the file code of a project.
 
-35. getCurrentFileCode()
+* *"project"* = the project object
+* *"pathTo"* = the path to the file
+
+To obtain the full path of the file where the code is located, we join the project folder and the **pathTo**, then we use the **_isPathVaild** function to validate this actual path. 
+To obtain the file code we are interested in, we use the 
+**readFile(actualPath)** function.
+
+getCurrentFileCode()
 """""""""""""""""""""""""""
 Get the current file code.
+
+This function returns an object representing the current project with its tree structure. We use the **getFromStore** function to obtain the *currentProject* and *currentFile* and, similar to the function above, we validate the path and call  the **readFile** function.
 
