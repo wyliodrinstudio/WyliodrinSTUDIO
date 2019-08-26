@@ -48,14 +48,17 @@ class TranslationPlugin {
 								// {
 								// 	console.log('Error in file: ' + path.join(TRANSLATION_READ,file) + '.' + e.message);
 								// }
-								console.log ('Language ' + fileTranslated.substring(9).toString() + ' added.');
+								// console.log ('Language ' + fileTranslated.substring(9).toString() + ' added.');
 								// console.log (newObject);
 								// languages.push(newObject);
 							}
 						}
 						catch(e)
 						{
-							console.log('Error: ' + e.message);
+							if (e.message.indexOf ('ENOENT') === -1)
+							{
+								console.log('Error: ' + e.message);
+							}
 						}
 					}
 				}
