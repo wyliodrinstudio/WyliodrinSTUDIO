@@ -34,6 +34,8 @@ class StudioPluginsElectron {
 			}
 			let build_package_json = _.assign ({}, package_json);
 			delete build_package_json.build;
+			delete build_package_json.scripts;
+			delete build_package_json.devDependencies;
 			fs.mkdirpSync ('./build');
 			fs.writeFileSync ('./build/package.json', JSON.stringify (build_package_json, null, 4));
 		});

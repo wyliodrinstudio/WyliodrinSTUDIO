@@ -55,16 +55,16 @@ class TranslationPlugin {
 						}
 						catch(e)
 						{
-							if (e.message.indexOf ('ENOENT') === -1)
-							{
-								console.log('Error: ' + e.message);
-							}
+							console.log('Error: ' + e.message);
 						}
 					}
 				}
 				catch(e)
 				{
-					console.log(e.message);
+					if (e.message.indexOf ('ENOENT') === -1)
+					{
+						console.log(e.message);
+					}
 				}
 
 			}
