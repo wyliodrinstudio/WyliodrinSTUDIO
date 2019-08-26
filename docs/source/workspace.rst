@@ -1,16 +1,24 @@
 :orphan:
+
 Workspace
 =========
 
 |
+
 “Workspace” is the main plugin in our application. It exports the 
 *"workspace”* object, containing a series of functions that we use in every other plugin.
 
 |
 
-1. registerTab(name, priority, component, options={}) 
+registerTab(name, priority, component, options={}) 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
-	Registers an item that may be disposed in the application
+Registers an item that may be disposed in the application.
+
+* *"name"* = element label, registered as a string that will be translated
+* *"priority"* = element priority in the list with all menu items: the tab with the lowest priority will be displayed to the left
+* *"component"* = the vue component attached to the current tab
+* *"options"* = additional options
+
 For example, in order to register the ‘Notebook’ tab, in the index.js file corresponding to the notebook plugin, we called the function:
 
 .. code-block:: javascript
@@ -20,17 +28,23 @@ For example, in order to register the ‘Notebook’ tab, in the index.js file c
 .. image:: images/registerTab.png
 	:align: center
 
-2. registerComponent(component)
+registerComponent(component)
 """""""""""""""""""""""""""""""
-Registers a new vue-component. As an example, we used it to register our Xterm component, in the *"xterm"* plugin
+Registers a new vue-component, named *"component"*. As an example, we used it to register our Xterm component, in the *"xterm"* plugin:
 
 .. code-block:: javascript
 
 	imports.workspace.registerComponent (Xterm);
 
-3. registerMenuItem(name, priority, component, options={})
+registerMenuItem(name, priority, component, options={})
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Registers an element in the app’s menu.
+
+* *"name"* = element label, registered as a string that will be translated
+* *"priority"* = element priority in the list with all menu items; same convention applied as for **registerTab** function
+* *"component"* = the vue component attached to the current item
+* *"options"* = additional options
+
 For example, we registered the item *“Wyliodrin API”* in the *"documentation"* plugin (index.js file)
 
 .. code-block:: javascript
@@ -42,9 +56,16 @@ where the component corresponds to a predefined function, that opens the actual 
 .. image:: images/registerMenuItem.png
 	:align: center
 
-4. registerToolbarButton (name, priority, action, iconURL, options = {})
+registerToolbarButton (name, priority, action, iconURL, options = {})
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Registers a new button in the app’s toolbar.
+
+* *"name"* = element label, registered as a string that will be translated
+* *"priority"* = element priority in the list with all toolbar buttons same convention applied as for **registerTab** function
+* *"action"* = the actions that the buttton will perform on click
+* *"iconURL"* = the image assigned
+* *"options"* = additional options
+
 For example, in order to register the **Project Library** button, we had to register it in the *index.js* file of the *“projects”* plugin:
 
 .. code-block:: javascript
@@ -58,9 +79,18 @@ The component corresponds to a function that opens a new window where the users 
 .. image:: images/registerToolbarButton.png
 	:align: center
 
-5. registerDeviceToolButton (deviceType, name, priority, action, iconURL, options = {}) 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+.. _registerDeviceToolButton:
+
+registerDeviceToolButton (deviceType, name, priority, action, iconURL, options = {}) 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Registers a new button used to manage the functioning of a device. These buttons show up only when a device is connected and they are specific for every device.
+
+* *"deviceType"* = the type of the device for which we want to create the button (for example: serial/ rpk)
+* *"priority"* = element priority in the list with all device buttons; same convention applied as for **registerTab** function
+* *"action"* = the actions that the buttton will perform on click
+* *"iconURL"* = the image assigned
+* *"options"* = additional options
 
 For example, when a raspberry pi is connected, we have the following buttons: **Run**, **Stop**, **TaskManager**, **PackageManager**, **NetworkManager**, which we registered in the *“device.wyapp”* plugin.
 
@@ -69,9 +99,15 @@ For example, when a raspberry pi is connected, we have the following buttons: **
 
 .. !!imagine butoane cu pi conectat
 
-6. registerStatusButton (name, priority, component, iconURL, options = {})
+registerStatusButton (name, priority, component, iconURL, options = {})
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Registers the buttons used to open the *console* or the *mqtt* server, like:
+Registers the buttons used to open the *console* or the *mqtt* server.
+
+* *"name"* = element label, registered as a string that will be translated
+* *"priority"* = element priority in the list with all status buttons; same convention applied as for **registerTab** function
+* *"component"* = the vue component attached to the current item
+* *"iconURL"* = the image assigned
+* *"options"* = additional options
 
 .. code-block:: javascript
 
@@ -82,21 +118,25 @@ Registers the buttons used to open the *console* or the *mqtt* server, like:
 	:width: 80px
 	:height: 50px
 
-7. registerStore (namespace, store)
+registerStore (namespace, store)
 """""""""""""""""""""""""""""""""""
-Registers the vuex store for a plugin
+Registers the Vuex store for a plugin.
+
+A *"store"* is basically a container that holds your application state. There are two things that make a Vuex store different from a plain global object: Vuex stores are reactive. When Vue components retrieve state from it, they will reactively and efficiently update if the store's state changes.
+
 For example, to register the store for the *“projects”* plugin, we had to call this function:
 
 .. code-block:: javascript
 
 	studio.workspace.registerStore('projects', projectStore);
+
 where project store had to be imported:
 
 .. code-block:: javascript
 
 	import projectStore from './store';
 
-8. getFromStore (namespace, variable)
+getFromStore (namespace, variable)
 """""""""""""""""""""""""""""""""""""
 Gets the value of the *“variable”* from the *“namespace”* store.
 We called this function to get the current project from our *“projects”* store:
@@ -105,7 +145,7 @@ We called this function to get the current project from our *“projects”* sto
 
 	let project = studio.workspace.getFromStore('projects', 'currentProject');
 
-9. dispatchToStore(namespace, action, data)
+dispatchToStore(namespace, action, data)
 """""""""""""""""""""""""""""""""""""""""""
 Sends data to the "namespace" store promptly. Similar as before, we used it in the *"projects"* plugin, to register the current project into the store:
 
@@ -113,10 +153,11 @@ Sends data to the "namespace" store promptly. Similar as before, we used it in t
 
 	this.studio.workspace.dispatchToStore('projects', 'currentProject', null);
 
-10. showNotification(text, values = {}, type = 'info', timeout = 6000)
+showNotification(text, values = {}, type = 'info', timeout = 6000)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Displays a customized vuetify notification. The type can be “info”, “success” or “warning” and the text and values can be translated using the **$t** function.
-For example, in the *"projects"* plugin, we check if the user entered a valid name for the project he wants to create. If negative, we call the showNotification function
+
+For example, in the *"projects"* plugin, we check if the user entered a valid name for the project he wants to create. If negative, we call the **showNotification** function.
 
 .. code-block:: javascript
 
@@ -127,9 +168,10 @@ For example, in the *"projects"* plugin, we check if the user entered a valid na
 .. image:: images/showNotification.png
 	:align: center
 
-11.	showError(text, values = {}, timeout = 6000)
+showError(text, values = {}, timeout = 6000)
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-Same as showNotification, it displays an error if the user is trying to perform an action not supported by the system.
+Same as **showNotification**, it displays an error if the user is trying to perform an action not supported by the system.
+
 For example, in the *“notebook”* plugin, we are sending an error if the user closes the upload image window without selecting a file:
 
 .. code-block:: javascript
@@ -139,9 +181,10 @@ For example, in the *“notebook”* plugin, we are sending an error if the user
 .. image:: images/showError.png
 	:align: center
 
-12. showPrompt(title, question, original, action, values = {})
+showPrompt(title, question, original, action, values = {})
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 A customized prompt pops up and when it’s necessary to collect data from users.
+
 For example, in our *“projects”* plugin, we open a customized prompt when the user chooses to rename a project.
 
 .. code-block:: javascript
@@ -153,7 +196,7 @@ For example, in our *“projects”* plugin, we open a customized prompt when th
 	:width: 500px
 	:height: 300px
 
-13. showConfirmationPrompt(title, question, values = {})
+showConfirmationPrompt(title, question, values = {})
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Same as **showPrompt**, except that it waits for the user to confirm the question by pressing a **Yes/No** button and it doesn’t have an input text area.
 
@@ -168,8 +211,9 @@ In the *“workspace”* plugin, we are using it to check if the user is sure th
 	:width: 500px
 	:height: 270px
 
+.. _showDialog:
 
-14. showDialog (title, component, options, buttons, values = {})
+showDialog (title, component, options, buttons, values = {})
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Similar to the other prompts, it’s used to collect data from the user.
 We are using it in the *“device.wyapp.ssh”* plugin to save the informations necessary in order to connect. 
@@ -188,20 +232,20 @@ where *‘SSHConnectionDialog’* is another Vue component which designs the dia
 	:width: 500px
 	:height: 300px
 
-15. showDeviceSettingsDialog()
+showDeviceSettingsDialog()
 """"""""""""""""""""""""""""""""
-Used to show the device settings dialog.
- .. !!!!!!!!!poza
+Used to show the device settings dialog. It can be opened if the user clicks on the currently connected device name, to see its specifications.
+.. !!!!!!!!!poza
 
-16. showConnectionSelectionDialog()
+showConnectionSelectionDialog()
 """"""""""""""""""""""""""""""""""""""""
 Dialog that is opened when the user clicks on the *‘Connect’* button and it shows all the devices the user can connect to.
 
 .. POZA!!!!!!!
 
-17. setWorkspaceTitle (title)
+setWorkspaceTitle (title)
 """"""""""""""""""""""""""""""""""
-Loads the title of the current project from the store and displays it as the workspace title. This action is done in the *“projects”* plugin.
+Loads the title of the current project from the store and displays it as the workspace **title**. This action is done in the *“projects”* plugin.
 
 .. code-block:: javascript
 
@@ -214,10 +258,13 @@ For example, if we create and select a new project, named **“My Project”**, 
 	:width: 450px
 	:height: 300px
 
-
-18. registerDeviceDriver (name, deviceDriver)
+registerDeviceDriver (name, deviceDriver)
 """"""""""""""""""""""""""""""""""""""""""""""""""""
-Registers a new device type. If the name of the new device type (**“name”**) can’t be found in the list with all device drivers, then the actual **“deviceDriver”** will be registered.
+* *"name"* = name of the new device type
+* *"deviceDriver"* = object created in the "setup" function of a "device" plugin, which consists of a series of functions necessary for a device: **defaultIcon**, **connect**, **settings**, **disconnect**.
+
+The function registers a new device type. If the name of the new device type can’t be found in the list with all device drivers, then the actual **“deviceDriver”** will be registered.
+
 We are using this function in the *“device.wyapp”* and *“device.rpk”* plugins to list a network, respectively a RPK device. Our **deviceDriver** is an object with its own specifications.
 
 .. code-block:: javascript
@@ -225,17 +272,20 @@ We are using this function in the *“device.wyapp”* and *“device.rpk”* pl
 	workspace = studio.workspace.registerDeviceDriver('wyapp', deviceDriver);
 
 First of all, a default image is set to this object so that it become easy for the user to connect to his favorite device.
+
 Then, we create the “connect” function, that sets up the transport (address, port), the connection and the device status. 
-??????+ partea cu packet????
+
 The next step is to update the device settings and after that to create the “disconnect” function.
+
 We also use a *getConnections* and *registerForUpdate* functions.
 
-Once the **deviceDriver registered**, if it can be connected, we register its specific buttons, using the **registerDeviceToolButton** function. 
+Once the **deviceDriver**  registered, if it can be connected, we register its specific buttons, using the **registerDeviceToolButton** function. 
 
 
-19. updateDevices(type, dev)
+updateDevices(type, dev)
 """""""""""""""""""""""""""""""
 This function searches for new devices and update the **availableDevices** list. We are using it in our *"device.wyapp"* plugins, each time we are searching for new devices.
+
 For example, in *“device.wyapp.ssh”* plugin:
 
 .. code-block:: javascript
@@ -243,9 +293,12 @@ For example, in *“device.wyapp.ssh”* plugin:
 	deviceDriver.updateDevices (sshDevices);
 
 
-20. _defaultDeviceIcon (device)
+_defaultDeviceIcon (device)
 """""""""""""""""""""""""""""""
+* *"device"* = the device for which the default image is set
+
 It's an internal function, used to assign a default icon to a device that doesn't already have a particular image attached.
+
 The default icon is:
 
 .. image:: images/device-icon.png
@@ -253,9 +306,24 @@ The default icon is:
 	:width: 70px
 	:height: 70px
 
-21. connect(device, options)
+connect(device, options)
 """""""""""""""""""""""""""""
-This function is obviously used to connect to a device. The device statuses are:
+This function is obviously used to connect to a device.
+
+* *"device"* = the device object that we want to connect
+* *"options"* = additional options 
+
+The first step is to chech if the device we are trying to connect really is an actual device type. If it can be found in our **deviceDrivers** list, then we trasmit it's type and status to the workspace store.
+
+getDevice()
+""""""""""""""""""""
+Returns a device from the store. We call the **getFromStore** function, wich returns the **device** objects, with all its properties.
+
+getStatus()
+"""""""""""""""""""
+Returns a device status from the store.
+
+The device statuses are:
 
 * *DISCONNECTED* - this is offline
 * *CONNECTING* - trying to connect
@@ -264,21 +332,11 @@ This function is obviously used to connect to a device. The device statuses are:
 * *ISSUE* - there is some issue, the system is partially functional
 * *ERROR* - there is an error with the system
 
-22. getDevice()
-""""""""""""""""""""
-Returns a device from the store.
-
-23. getStatus()
-"""""""""""""""""""
-Returns a device status from the store.
-
-24. disconnect ()
+disconnect ()
 """"""""""""""""""
 Disconnects from a device.
 
-
-
-
+The first step is to get the current device object, using the **getDevice()** function, then to check if it's an actual device type. If positive, we can disconnect the device.
 
 
 
