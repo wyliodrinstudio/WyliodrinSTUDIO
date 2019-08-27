@@ -1,5 +1,7 @@
 :orphan:
 
+.. _translations:
+
 Translations
 ==============
 
@@ -21,12 +23,12 @@ where PLUGIN will be replaced by the name of your plugin.
 
 For example, let’s say that in your message-en.json (English language) you want to translate the word *‘Close’*, that will be attached to a button.
 
-::
+.. code-block:: json
 
 	{
-	    “MYNEWPLUGIN_CLOSE”: {
-			“message”: “Close”,
-			“description”: “This button is used to close the current window.”
+	    "MYNEWPLUGIN_CLOSE": {
+			"message": "Close",
+			"description": "This button is used to close the current window."
 	    }
 	}
 
@@ -34,7 +36,7 @@ For example, let’s say that in your message-en.json (English language) you wan
 
 As you can imagine, in your *messages-fr.json* (French language), you’ll have:
 
-::
+.. code-block:: json
 
 	{
 	    “MYNEWPLUGIN_CLOSE”: {
@@ -52,11 +54,15 @@ Load and Send translation files
 
 Inside the Wyliodrin Studio 2 repository, you will find a directory named **tools**, which includes a **translation** sub-directory, with a **translation.js** main file. Here, you have 2 options to run this file:
 
+|
+
 .. code-block:: javascript
 
 	node translation.js
 
 This command joins all the key-value sets from all the existing plugins, for each language, into the messages-ln.json files from the current **translation** folder. It also checks for errors through all these files, using as reference file the english translation, and it let's you know if there are missing or duplicate keywords in a certain language.
+
+|
 
 .. code-block:: javascript
 
