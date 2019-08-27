@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "electron build/",
-		"postinstall": "mkdirp build && electron-builder install-app-deps",
+		"postinstall": "mkdirp build && webpack && electron-builder install-app-deps",
 		"pack": "webpack --mode=production && electron-builder --dir",
 		"dist": "webpack --mode=production && electron-builder"
 	},
@@ -158,6 +158,7 @@
 		"fs-extra": "^7.0.1",
 		"grabity": "^1.0.5",
 		"irc-upd": "^0.10.0",
+		"jszip": "^3.2.2",
 		"node-notifier": "^5.4.0",
 		"original-fs": "^1.0.0",
 		"screenshot-desktop": "^1.8.0",

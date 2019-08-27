@@ -87,10 +87,20 @@ let filesystem = {
 	{
 		return this._runFileSystemFn('isDirectory', false, path);
 	},
+	
+	lastModified(path)
+	{
+		return this._runFileSystemFn('lastModified',false,path);
+	},
 
 	getSize(path)
 	{
 		return this._runFileSystemFn('getSize', 0, path);
+	},
+
+	exportFolder(path,basePath)
+	{
+		return this._runFileSystemFn('exportFolder',null,path,basePath);
 	},
 
 	registerFileSystem (id, filesystem)
