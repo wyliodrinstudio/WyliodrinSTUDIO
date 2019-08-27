@@ -157,6 +157,7 @@
 		"fs-extra": "^7.0.1",
 		"grabity": "^1.0.5",
 		"irc-upd": "^0.10.0",
+		"jszip": "^3.2.2",
 		"node-notifier": "^5.4.0",
 		"original-fs": "^1.0.0",
 		"screenshot-desktop": "^1.8.0",

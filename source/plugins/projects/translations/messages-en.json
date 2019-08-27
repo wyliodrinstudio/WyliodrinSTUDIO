@@ -214,7 +214,11 @@
     "PROJECT_ERROR_PATH_INVALID": {
         "message": "Error, path is not inside the workspace folder",
         "description": "The error message shown when the specified path is not in the workspace folder"
-    },
+	},
+	"PROJECT_ERROR_CHANGE_DATE": {
+		"message": "Error, cannot write date {project} ({error})",
+		"description": "The error message shown when a date for a file fails to be written"
+	},
     "PROJECT_JSON_DO_NOT": {
         "message": "Tried to edit project.json, DO NOT DO THIS",
         "description": "The error message shown when there is an attempt at editing the project settings file"

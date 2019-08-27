@@ -175,6 +175,20 @@ let projects = {
 			return false;
 		}
 	},
+	async _changeDate(project){
+		let projectFolder = project.folder;
+		try {
+			let date = await studio.filesystem.lastModified(projectFolder);
+			date = new Date(date);
+			await studio.filesystem.writeFile(path.join(projectFolder, 'project.json'), JSON.stringify({
+				language: project.language,
+				date: date
+			}, null, 4));
+		} catch (e) {
+			studio.workspace.showError('PROJECT_ERROR_CHANGE_DATE', {project: projectFolder, error: e.message});
+		}
+		
+	},
 	/**
 	 * Create a new empty project
 	 * @param {string} name - Project name
@@ -191,12 +205,17 @@ let projects = {
 				if (!await studio.filesystem.pathExists(projectFolder)) {
 					await studio.filesystem.mkdirp(projectFolder);
 					await studio.filesystem.mkdirp(path.join(projectFolder, '.project'));
+					let date = await studio.filesystem.lastModified(projectFolder);
+					date = new Date(date);
 					await studio.filesystem.writeFile(path.join(projectFolder, 'project.json'), JSON.stringify({
-						language: language
+						language: language,
+						date: date
 					}, null, 4));
+					
 					let project = {
 						name: path.basename (projectFolder),
 						language: language,
+						date: date,
 						folder: projectFolder
 					};
 					// console.log(project);
@@ -420,7 +439,9 @@ let projects = {
 	 * 
 	 * @return {boolean} true if succsesful, false otherwise
 	 */
-	async exportProject(project,savePath) {
+	async exportProject(project) {
+		let projectPath = project.folder;
+		let zipped = await studio.filesystem.exportFolder(projectPath);
 		// if(project !== null && savePath !== null) {
 		// 	let projectFolder = project.folder;
 		// 	let destinationFolder = savePath;
@@ -718,10 +739,12 @@ let projects = {
 					try {
 						let projectData = JSON.parse((await studio.filesystem.readFile(path.join(projectFolder, 'project.json'))).toString());
 						language = projectData.language;
+						let date = projectData.date.split('.')[0];
 						// ERROR - astea vin aici, doar daca projectData exista folder-ul este un proiect
 						let project = {
 							name: projectName,
 							folder: projectFolder,
+							date: date,
 							language: language
 						};
 						//TODO return projects
