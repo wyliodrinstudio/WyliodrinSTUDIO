@@ -1,0 +1,204 @@
+:orphan:
+
+Dialogs and Notifications
+===========================
+
+In the *"workspace"* plugin you will find, additionally to the functions presented in the :ref:`API section <api>`, some functions design to create and display in the application some customized pop-ups, like dialogs, prompts and notifications.
+
+|
+
+Dialogs
+*********
+A dialog is a component that inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. It can usually be used to collect data from the user.
+
+.. _showDialog:
+
+showDialog
+^^^^^^^^^^^
+This is the main open-dialog function for the application. The parameters are:
+
+* *"title"* - the title of the dialog window
+* *"component"* - the Vue component to display
+* *"options"* - additional specifications, like width
+* *"buttons"* - the array of buttons to display
+
+The return is a *Promise* that will be resolved according to the user's response.
+
+An example of use:
+
+.. code-block:: javascript
+
+	this.studio.workspace.showDialog(AddProjectDialog,{width:512});
+
+where *AddProjectDialog* is a Vue component, having a specific design and functionalities.
+
+The result is the dialog that shows up when the user clicks on the **Project Library** button:
+
+.. image:: images/project_dialog.png
+
+|
+
+showDeviceSettingsDialog
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+Used to show the device settings dialog. 
+
+The function has no parameters.
+
+It's called if the user clicks on the currently connected device name, and opens a dialog where he can see its specifications.
+
+.. !!!!!!!!!poza
+
+|
+
+.. _showConnectionSelectionDialog:
+
+showConnectionSelectionDialog
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This function has no parameter.
+
+It's called when the user clicks on the *‘Connect’* button and it shows a dialog containing a list with all the devices available for connection.
+
+.. POZA!!!!!!!
+
+|
+
+Prompts
+*********
+
+A prompt is actually a dialog box that prompts the visitor for input. A prompt box is often used if you want the user to input a value before entering a page, for example write a text or click on a button that will perform a certain action.
+
+showPrompt
+^^^^^^^^^^^
+Shows a prompt that waits for the user input.
+
+The function parameters are:
+
+* *"title"* = the title of the window box 
+* *"question"* = the question / additional details adressed to the user
+* *"original"* = the initialcontent of the input text area
+* *"action"* = the action to perform
+* *"values = {}"* = empty object
+
+For example, in our *“projects”* plugin, we open a customized prompt when the user chooses to rename a project.
+
+.. code-block:: javascript
+
+	this.rename = await this.studio.workspace.showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
+
+.. image:: images/showPrompt.png
+	:align: center
+	:width: 500px
+	:height: 300px
+
+|
+
+showConfirmationPrompt
+^^^^^^^^^^^^^^^^^^^^^^^^
+Same as **showPrompt**, except that it waits for the user to confirm the question by pressing a **Yes/No** button and it doesn’t have an input text area.
+
+The function parameters are:
+
+* *"title"* = the title of the window prompt
+* *"question"* = the question that will be addressed to the user
+* *"values = {}"* = empty object
+
+In the *“workspace”* plugin, we are using it to check if the user is sure that he wants to close the app.
+
+.. code-block:: javascript
+
+	let value = await workspace.showConfirmationPrompt('EXIT', 'WORKSPACE_TOOLBAR_EXIT_QUESTION');
+
+.. image:: images/showConfirmationPrompt.png
+	:align: center
+	:width: 500px
+
+|
+
+Notifications
+**************
+
+The notifications are simple pop-ups that inform the user about unauthorized actions, required operations or system processes.
+
+The possible types for a notification are: *info*, *success*, and *warning*, and each type has a distinct color.
+
+showNotification
+^^^^^^^^^^^^^^^^^^
+
+Obviously, this function's purpose is to send a notification to the user's application.
+
+The function parameters are:
+
+* *"text"* = the text of the notification
+* *"values={}"* = empty object
+* *"type"* = info/succes/warning
+* *"timeout"* = the time frame in which the notification is displayed
+
+The code should look like this:
+
+.. code-block:: javascript
+
+	showNotification (text, values = {}, type = 'info', timeout = 6000)
+	{
+		if (this.vue)
+		{
+			if(type === 'info')
+				this.vue.$dialog.notify.info(this.vue.$t(text, values), {
+					position: 'bottom-right',
+					width: '700',
+					timeout: timeout
+				});
+		}
+	}
+
+We used the this.vue.$t(text, values) function in order to translate the notification text according to the current language.
+
+An example of use can be found in the *"projects"* plugin, where we check if the user entered a valid name for the project he wants to create. If negative, we call the **showNotification** function.
+
+.. code-block:: javascript
+
+	if(this.projectName === '') {
+		await this.studio.workspace.showNotification ('PROJECT_NAME_PROMPT');
+	}
+
+.. image:: images/showNotification.png
+	:align: center
+
+
+|
+
+showError
+^^^^^^^^^^
+
+This function is almost identical to the **showNotification** function. 
+
+The parameters are:
+
+* *"text"* = the text of the notification
+* *"values={}"* = empty object
+* *"timeout"* = the time frame in which the notification is displayed
+
+The difference can be spotted in the code, where we use the type *error* as default:
+
+.. code-block:: javascript
+
+	showError(text, values = {}, timeout = 6000)
+	{
+		if(this.vue)
+		{
+			this.vue.$dialog.notify.error(this.vue.$t (text, values), {
+				position: 'bottom-right',
+				width: '70%',
+				timeout
+			});
+		}
+	}
+
+For example, in the *“notebook”* plugin, we are sending an error if the user closes the upload image window without selecting a file:
+
+.. code-block:: javascript
+
+	this.studio.workspace.showError('NOTEBOOK_SELECT_IMAGE_ERROR');
+
+.. image:: images/showError.png
+	:align: center

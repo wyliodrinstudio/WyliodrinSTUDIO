@@ -1,5 +1,7 @@
 :orphan:
 
+.. _translations:
+
 Translations
 ==============
 
@@ -52,11 +54,15 @@ Load and Send translation files
 
 Inside the Wyliodrin Studio 2 repository, you will find a directory named **tools**, which includes a **translation** sub-directory, with a **translation.js** main file. Here, you have 2 options to run this file:
 
+|
+
 .. code-block:: javascript
 
 	node translation.js
 
 This command joins all the key-value sets from all the existing plugins, for each language, into the messages-ln.json files from the current **translation** folder. It also checks for errors through all these files, using as reference file the english translation, and it let's you know if there are missing or duplicate keywords in a certain language.
+
+|
 
 .. code-block:: javascript
 
