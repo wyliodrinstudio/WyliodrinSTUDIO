@@ -98,9 +98,14 @@ let filesystem = {
 		return this._runFileSystemFn('getSize', 0, path);
 	},
 
-	exportFolder(path,basePath)
+	openSaveDialog(options)
 	{
-		return this._runFileSystemFn('exportFolder',null,path,basePath);
+		return this._runFileSystemFn('openSaveDialog',null,options);
+	},
+
+	openLoadDialog(options)
+	{
+		return this._runFileSystemFn('openLoadDialog',null,options);
 	},
 
 	registerFileSystem (id, filesystem)
