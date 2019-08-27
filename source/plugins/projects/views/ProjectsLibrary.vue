@@ -3,13 +3,14 @@
 		<v-card-title small>
 			<span class="headline">{{$t('PROJECT_LIBRARY_PROJECTS')}}</span>
 			<v-spacer></v-spacer>
+			<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_SEARCH')" v-model="search"></v-text-field>
 		</v-card-title>
 		<v-card-text v-if="!projects || projects.length === 0" class="projects-container">
 		</v-card-text>
 		<v-card-text v-else>
 			<v-layout>
 				<v-list class="itemlist">
-					<template v-for="project in projects"  >
+					<template v-for="project in projectList"  >
 						<v-list-item :key="project.name" class="lib-app">
 							<v-list-item-avatar @click="selectProject(project)">
 								<img :src="'plugins/projects/data/img/languages/project/'+projectLanguage (project)+'.png'" avatar >
@@ -20,7 +21,7 @@
 									{{project.name}}
 									<span class="projlang">{{project.language}}</span>
 								</v-list-item-title>
-								<v-list-item-subtitle>February 16, 2019 @ 18:02</v-list-item-subtitle>
+								<v-list-item-subtitle style="word-wrap: break-word">{{new Date(project.date)}}</v-list-item-subtitle>
 
 								<v-list-item-subtitle>
 									<v-btn text class="lib-app-btn" @click="exportProject(project)">{{$t('PROJECT_LIBRARY_EXPORT')}}</v-btn>
@@ -62,8 +63,7 @@
 
 <script>
 import AddProjectDialog from './dialogs/AddProjectDialog.vue';
-// import { remote } from 'electron';
-// const dialog = remote.dialog;
+
 import path from 'path';
 let settings = {
 	workspace: {
@@ -81,11 +81,18 @@ export default {
 			rename:'',
 			filePath:'',
 			projects:[],
+			search:'',
 		};
 	},
 	components: {
 	},
-
+	computed:{
+		projectList(){
+			return this.projects.filter(project => {
+				return project.name.toLowerCase().includes(this.search.toLowerCase());
+			})
+		}
+	},
 	async created ()
 	{
 		this.projects = await this.studio.projects.loadProjects(false);
@@ -172,19 +179,12 @@ export default {
 		},
 		async exportProject (project)
 		{
-			// const options = {
-			// 	title:project.name,
-			// 	defaultPath: settings.workspace.path,
-			// 	filters: [
-			// 		{name:'zip', extensions: ['zip']}
-			// 	]
-			// };
-			// let savePath = dialog.showSaveDialog(null, options);
-			// if(await this.studio.projects.exportProject(project,savePath))
-			// {
-			// 	return true;
-			// }
-			// return false;
+			let basePath = settings.workspace.path;
+			if(await this.studio.projects.exportProject(project,basePath))
+			{
+				return true;
+			}
+			return false;
 		},
 		async importProject ()
 		{

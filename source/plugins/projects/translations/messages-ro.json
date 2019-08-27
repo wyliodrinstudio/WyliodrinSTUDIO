@@ -210,7 +210,11 @@
     "PROJECT_ERROR_PATH_INVALID": {
         "message": "Eroare, calea nu se află în dosarul spațiului de lucuru",
         "description": "Mesajul de eroare afișat atunci când calea specificată nu se află în dosarul spațiului de lucuru"
-    },
+	},
+	"PROJECT_ERROR_CHANGE_DATE": {
+		"message": "Eroare, nu se poate scrie data pentru proiect {project} ({error})",
+		"description": "The error message shown when a date for a file fails to be written"
+	},
     "PROJECT_JSON_DO_NOT": {
         "message": "S-a încercat editarea fișierului project.json, NU FACEȚI ASTA",
         "description": "Mesajul de eroare afișat atunci când există o încercare de editare a fișierului de setări a proiectului"
