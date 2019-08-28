@@ -4,6 +4,7 @@ import Application from './views/Application.vue';
 import ProjectsLibrary from './views/ProjectsLibrary.vue';
 import _ from 'lodash';
 import path from 'path';
+import JSZip from 'jszip';
 
 import projectStore from './store';
 
@@ -344,7 +345,7 @@ let projects = {
 	 *
 	 * @return {boolean} true if succsesful, false otherwise	 * 
 	 */
-	async importProject(project,extension) 
+	async importProject() 
 	{
 		// if(project !== null && extension !== null) {
 		// 	try {
@@ -384,7 +385,36 @@ let projects = {
 		// } else {
 		// 	studio.workspace.warn('PROJECt_ERROR_IMPORT_PROJECT', {project:project, error:'NULL'});
 		// 	return false;
-		// }
+		// }\
+		const options = {
+			title:'Select a project to import',
+			defaultPath: settings.workspace.path,
+			filters: [
+				{name:'imports', extensions: ['zip','wylioapp']}
+			]
+		};
+		
+		let filePath = studio.filesystem.openLoadDialog(options)[0];
+		console.log(filePath);
+		let pathing = path.join(settings.workspace.path,path.parse(filePath).name);
+		
+		let data = await studio.filesystem.readFile(filePath);
+		let zip = new JSZip;
+		if(await studio.filesystem.mkdirp(pathing)){
+			zip.loadAsync(data).then(function(contents) {
+				console.log(contents);
+				Object.keys(contents.files).forEach(function(filename) {
+					zip.file(filename).async('nodebuffer').then(async function(content) {
+						var dest = path.join(pathing,filename);
+						await studio.filesystem.writeFile(dest, content);
+					});
+				});
+			});
+			return true;
+		} else {
+			return false;
+		}
+		
 		
 	},
 	/**
@@ -441,36 +471,52 @@ let projects = {
 	 */
 	async exportProject(project) {
 		let projectPath = project.folder;
-		let zipped = await studio.filesystem.exportFolder(projectPath);
-		// if(project !== null && savePath !== null) {
-		// 	let projectFolder = project.folder;
-		// 	let destinationFolder = savePath;
-		// 	try {
-		// 		var output = await studio.filesystem.createWriteStream(destinationFolder);
-		// 		var archive = archiver('zip');
-
-		// 		output.on('close', function () {
-		// 			console.log(archive.pointer() + ' total bytes');
-		// 			console.log('archiver has been finalized and the output file descriptor has closed.');
-		// 		});
-		// 		archive.on('error', function (err) {
-		// 			throw err;
-		// 		});
-		// 		archive.pipe(output);
-		// 		archive.directory(projectFolder, false, {
-		// 			date: new Date()
-		// 		});
-		// 		archive.finalize();
-		// 		return true;
-		// 	} catch (e) {
-		// 		studio.workspace.showError('PROJECT_ERROR_EXPORT_PROJECT', {project: projectFolder, error: e.message});
-		// 		return false;
-		// 	}
-		// } else {
-		// 	studio.workspace.warn('PROJECT_ERROR_EXPORT_PROJECT', {project: project, error: 'NULL'});
-		// 	return false;
-		// }
+		const options = {
+			title:path.basename(projectPath),
+			defaultPath: settings.workspace.path,
+			filters: [
+				{name:'zip', extensions: ['zip']}
+			]
+		};
+		let savePath = studio.filesystem.openSaveDialog(options);
+		let zip = new JSZip();
+		if(await this._buildZipFromDirectory(projectPath, zip, projectPath)) {
+			const zipContent = await zip.generateAsync({
+				type: 'nodebuffer',
+				comment: 'Project Archive',
+				compression: 'DEFLATE',
+				compressionOptions: {
+					level: 9
+				}
+			});
+			console.log(zipContent);
+	
+			/** create zip file */
+			await studio.filesystem.writeFile(savePath, zipContent);
+		}
 		
+	},
+	async _buildZipFromDirectory(dir, zip, root) {
+		try {
+			const list = await studio.filesystem.readdir(dir);
+			if(list) {
+				for (let file of list) {
+					file = path.resolve(dir, file);
+					if (await studio.filesystem.isDirectory(file)) {
+						await this._buildZipFromDirectory(file, zip, root);
+					} else {
+						const filedata = await studio.filesystem.readFile(file);
+						if(filedata) {
+							zip.file(path.relative(root, file), filedata);
+						}
+						
+					}
+				}
+			}
+			return true;
+		} catch(e) {
+			console.error(e);
+		}  
 	},
 	/**
 	 * Recursively generate a deep object with all the contents of a project

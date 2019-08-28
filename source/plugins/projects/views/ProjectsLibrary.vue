@@ -188,20 +188,11 @@ export default {
 		},
 		async importProject ()
 		{
-			// const options = {
-			// 	title:'Select a project to import',
-			// 	defaultPath: settings.workspace.path,
-			// 	filters: [
-			// 		{name:'imports', extensions: ['zip','wylioapp']}
-			// 	]
-			// };
-			// let openPath = dialog.showOpenDialog(null, options);
-
-			// if(await this.studio.projects.importProject(openPath[0],path.extname(openPath[0]))){
-			// 	this.projects=await this.studio.projects.loadProjects(false);
-			// 	return true;
-			// }
-			// return false;
+			if(await this.studio.projects.importProject()){
+				this.projects=await this.studio.projects.loadProjects(false);
+				return true;
+			}
+			return false;
 		},
 		async renameProject (project)
 		{
