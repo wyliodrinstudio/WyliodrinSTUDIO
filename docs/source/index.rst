@@ -35,7 +35,7 @@ Once the application was installed and built, you can make changes, correct or c
    extension
    api
    translations
-   device_plugin
+   plugin
    dialogs_notifications
 
 

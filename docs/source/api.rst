@@ -5,6 +5,11 @@
 Wyliodrin Studio API
 =======================
 
+|
+|
+
+**Workspace plugin**
+***********************
 
 registerTab
 """"""""""""
@@ -23,7 +28,7 @@ For example, in order to register the ‘Notebook’ tab, in the index.js file c
 
 .. code-block:: javascript
 
-	studio.workspace.registerTab('PROJECT_NOTEBOOK', 300, Notebook)
+	registerTab('PROJECT_NOTEBOOK', 300, Notebook)
 
 .. image:: images/registerTab.png
 	:align: center
@@ -37,7 +42,7 @@ Registers a new vue-component. As an example, we used it to register our Xterm c
 
 .. code-block:: javascript
 
-	imports.workspace.registerComponent (Xterm);
+	registerComponent (Notebook);
 
 registerMenuItem
 """""""""""""""""""
@@ -56,7 +61,7 @@ For example, we registered the item *“Wyliodrin API”* in the *"documentation
 
 .. code-block:: javascript
 
-	studio.workspace.registerMenuItem ('WYLIODRIN_API', 10, () => documentation.openDocumentation());
+	registerMenuItem ('WYLIODRIN_API', 10, () => documentation.openDocumentation());
 
 where the component corresponds to a predefined function, that opens the actual documentation
 
@@ -77,15 +82,11 @@ The function parameters are:
 
 At first, we check if the *name* of the toolbar button can be found in our global **toolbarButtons** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created toolbarButton into the array, we sort them by priority and dispatch the array to the workspace store.
 
-For example, in order to register the **Project Library** button, we had to register it in the *index.js* file of the *“projects”* plugin:
+For example, we register a button having the translation key 'TOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the "You created a toolbar button" text. We need to specify the relative path to the image related to the button.
 
 .. code-block:: javascript
 
-	studio.workspace.registerToolbarButton('PROJECT_LIBRARY', 10, () => studio.workspace.showDialog(ProjectsLibrary, {
-	        width: 1000
-	    }), 'plugins/projects/data/img/icons/projects-icon.svg');
-
-The component corresponds to a function that opens a new window where the users can manage their projects.
+	registerToolbarButton('TOOLBAR_BUTTON', 10, () => showNotification('You created a toolbar button', 'plugins/projects/data/img/icons/button.svg');
 
 .. image:: images/registerToolbarButton.png
 	:align: center
@@ -115,6 +116,12 @@ For example, when a raspberry pi is connected, we have the following buttons: **
 
 .. !!imagine butoane cu pi conectat
 
+An example on how to use thihs function can be:
+
+.. code-block:: javascript
+
+	registerDeviceToolBotton('RUN', 10,  => showNotification('You clicked the Run button!', 'plugins/workspace/data/img/icons/button.svg')
+
 registerStatusButton 
 """"""""""""""""""""""
 Registers the buttons used to open the *console* or the *mqtt* server.
@@ -131,7 +138,7 @@ At first, we check if the *name* of the status button can be found in our global
 
 .. code-block:: javascript
 
-	studio.workspace.registerStatusButton('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg');
+	registerStatusButton('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg');
 
 .. image:: images/registerStatusButton.png
 	:align: center
@@ -154,7 +161,7 @@ For example, to register the store for the *“projects”* plugin, we had to ca
 
 .. code-block:: javascript
 
-	studio.workspace.registerStore('projects', projectStore);
+	registerStore('projects', projectStore);
 
 where project store had to be imported:
 
@@ -175,7 +182,7 @@ We called this function to get the current project from our *“projects”* sto
 
 .. code-block:: javascript
 
-	let project = studio.workspace.getFromStore('projects', 'currentProject');
+	let project = getFromStore('projects', 'currentProject');
 
 dispatchToStore
 """""""""""""""""""
@@ -191,7 +198,7 @@ Similar as before, we used it in the *"projects"* plugin, to register the curren
 
 .. code-block:: javascript
 
-	this.studio.workspace.dispatchToStore('projects', 'currentProject', null);
+	dispatchToStore('projects', 'currentProject', null);
 
 
 setWorkspaceTitle
@@ -207,7 +214,7 @@ This action is done in the *“projects”* plugin.
 
 .. code-block:: javascript
 
-	studio.workspace.setWorkspaceTitle (project.name);
+	setWorkspaceTitle (project.name);
 
 For example, if we create and select a new project, named **“My Project”**, the workspace title will look like: 
 
@@ -230,7 +237,7 @@ We are using this function in the *“device.wyapp”* and *“device.rpk”* pl
 
 .. code-block:: javascript
 
-	workspace = studio.workspace.registerDeviceDriver('wyapp', deviceDriver);
+	workspace = registerDeviceDriver('wyapp', deviceDriver);
 
 First of all, a default image is set to this object so that it become easy for the user to connect to his favorite device.
 
@@ -261,19 +268,6 @@ For example, in *“device.wyapp.ssh”* plugin:
 	deviceDriver.updateDevices (sshDevices);
 
 
-_defaultDeviceIcon
-"""""""""""""""""""
-* *"device"* = the device for which the default image is set
-
-It's an internal function, used to assign a default icon to a device that doesn't already have a particular image attached.
-
-The default icon is:
-
-.. image:: images/device-icon.png
-	:align: center
-	:width: 70px
-	:height: 70px
-
 connect
 """""""""
 This function is obviously used to connect to a device.
@@ -295,24 +289,8 @@ For example:
 
 .. code-block:: javascript
 
-	let device = studio.workspace.getDevice ();
-	if (device.type === 'rpk')
-	{
-		if (event === 'data')
-		{	
-			let characteristic = savedCharacteristics [device.id];
-			if (characteristic)
-			{
-				// console.log(data.toString().length);
-				device.sending = true;
-				// notificationMessagesReset();
-				await sendToConsole(device, characteristic, data);
+	let device = getDevice ();
 
-				device.sending = false;
-				// await sendConsole(characteristic, data.toString().charCodeAt(0));
-			}
-		}
-	}
 
 getStatus()
 """""""""""""""""""
@@ -335,15 +313,8 @@ The first step is to get the current device object, using the **getDevice()** fu
 
 |
 
-_isPathValid
-""""""""""""""
-It's an internal function, marked by "_", that we use in order to validate a path. Its parameters are:
-
-* *"basePath"* = the folder containing the project files
-* *"filePath"* = the full path
-
-It checks if **basePath** can be found in **filePath** and returns *null* otherwise. The function **path.normalize()** is used here to transform a relative path into the absolute path.
-
+**Projects plugin**
+**********************
 
 getLanguage
 """""""""""""""""
@@ -352,6 +323,8 @@ Returns a programming language object with the following properties: id, title, 
 The only parameter of the function is:
 
 * *"languageID"* = the unique id of a certain language
+
+.. _registerLanguage:
 
 registerLanguage
 """""""""""""""""""
@@ -372,7 +345,7 @@ For example, to add the python language, we had to register it in the *index.js*
 
 .. code-block:: javascript
 
-	studio.projects.registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
+	registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
 
 where **“python”**, the last parameter, is an object that contains the specifications of the python programming language, mentioned above.
 
@@ -393,21 +366,7 @@ The function parameters are:
 * *"type"* - addon type
 * *"options"* - addon options
 
-_runLanguageFunction
-""""""""""""""""""""""
-It's an internal function, that runs any function provided by a programming language.
-
-The parameters of this function are:
-
-* *"fn"* = the name of the function we want to create
-* *"project"* = the project object
-* *"params"* = array of params
-
-For example, we used it in the *"projects*" folder, to create a function that creates new projects: 
-
-.. code-block:: javascript
-
-	this._runLanguageFunction ('createProject', project);
+.. _editor:
 
 registerEditor
 """"""""""""""""
@@ -422,7 +381,7 @@ For example, in the *“projects.editor.ace”* we created an Ace Editor which s
 
 .. code-block:: javascript
 
-	studio.projects.registerEditor('EDITOR_ACE',['py','js','json','d','c','h','sh'], Ace);
+	registerEditor('EDITOR_ACE',['py','js','json','d','c','h','sh'], Ace);
 
 
 createEmptyProject
@@ -437,16 +396,26 @@ As an example, we called this function in the *“projects”* plugin (*AddProje
 
 .. code-block:: javascript
 
-	project = await this.studio.projects.createEmptyProject(this.projectName,this.languageID)
+	project = createEmptyProject('New project', 'py')
 
-where **projectName** and **languageID** can be modified depending on the user’s preferences.
+where **New project** is the name of your project and **py** is the language id for python.
 
 deleteProject
 """""""""""""""
 
+The parameter is:
+
 * *"project"* = name of the project the user wants to delete
 
 This function deletes all the files related to the project chosen by the user. It is called inside the **ProjectLibrary.vue** component, when the user clicks on the "Delete" button. After removing all the files, we dispatch to the projects store the *currentProject* and the *currentFile* as *null*.
+
+You can use the function like this:
+
+.. code-block:: javascript
+
+	deleteProject('New Project');
+
+Where **New Project** is the name of the project you want to delete.
 
 renameProject
 """"""""""""""
@@ -459,6 +428,14 @@ The function parameters are:
 
 The function is called inside the **ProjectLibrary.vue** component, when the user clicks on the *"Rename"* button.
 
+You can use the function like this:
+
+.. code-block:: javascript
+
+	renameProject('New Project', 'Renamed Project');
+
+Where **New Project** is the name of the project you want to rename and **Renamed Project** is the new name.
+
 cloneProject
 """"""""""""""
 Creates a duplicate of the selected project and it names it with the **“newName”** value chosen by the user. 
@@ -470,6 +447,14 @@ The function parameters are:
 
 Same as **renameProject**, the function is called inside the **ProjectLibrary.vue** component, when the user clicks on the *"Clone"* button.
 
+You can use the function like this:
+
+.. code-block:: javascript
+
+	cloneProject('New Project', 'Cloned Project');
+
+Where **New Project** is the name of the project you want to clone and **Cloned Project** is the name that your cloned project will have.
+
 importProject
 """"""""""""""""
 Loads a new project tree from the user’s computer. Its parameters are:
@@ -478,6 +463,16 @@ Loads a new project tree from the user’s computer. Its parameters are:
 * *"extension"* = archive extension (.zip/.tar/.wylioapp)
 
 The archive extension can be *“.zip”*, *“.tar”* (in this case the files will be extracted), or *‘.wylioapp”* (we are creating recursively the project folder).
+
+For example, you can use the function like this:
+
+You can use the function like this:
+
+.. code-block:: javascript
+
+	importProject('New Project', '.zip');
+
+Where **New Project** is the name of the project you want to import and **.zip** represents its extension.
 
 recursiveCreating
 """"""""""""""""""""""""""""
@@ -495,15 +490,6 @@ The parameter:
 
 We are using it in the *importProject* function mentioned before (*.wylioapp* extension)
 
-.. code-block:: javascript
-
-	for (let item of projectImport.tree) {
-        await this.recursiveCreating({
-            item: item,
-            prev: item,
-            folder: workspacePath
-        });
-
 
 exportProject
 """""""""""""
@@ -513,6 +499,14 @@ The function parameters are:
 * *"savePath"* = the destination path selected by the user
 
 Exports a project archive (*.zip* extension format) to the chose path in user’s computer.
+
+You can use the function like this:
+
+.. code-block:: javascript
+
+	exportProject('New Project', 'C:\Users\User\Desktop');
+
+Where **New Project** is the name of the project you want to export, and the second argument represents the path where your project will be exported to.
 
 newFolder
 """""""""""""
@@ -524,6 +518,14 @@ The parameters of this function are:
 
 This option is valid only in the *Advanced Mode*.
 
+You can use the function like this:
+
+.. code-block:: javascript
+
+	newProject('New Project', 'C:\Users\User\Desktop');
+
+Where **New Project** is the name of the project you want to create, and the second argument represents the path where your project will be created.
+
 newFile
 """"""""
 Creates a new file in the current project.
@@ -533,13 +535,12 @@ The function parameters are:
 * “name” = path to where to create the new folder
 * “data” =  data that will be written in the new file
 
-For example, when we create a new programming language, in its particular object we include the function *createProject*, that calls the **newFile** function and creates the main file of the project:
+For example, when we create a new programming language, in its particular object we use the **newFile** function and create the main file of the project:
 
-.. code-block:: javascript
+.. code-block:: javascript 
 
-	async createProject(name) {
-			await studio.projects.newFile(name, '/main.js', 'console.log(\'Hello from JavaScript\');');
-		}
+	newFile(name, '/main.js', 'console.log(\'Hello from JavaScript\');');
+
 
 This option is valid only in the *Advanced Mode*.
 
@@ -555,6 +556,14 @@ The function parameters are:
 
 Available only for the *Advanced Mode*, this function is called when the user choses the *Rename* option in the menu that shows up by right clicking on a folder/file.
 
+You can use the function like this:
+
+.. code-block:: javascript
+
+	exportProject('New Project', 'Project New Name', 'C:\Users\User\Desktop');
+
+Where **New Project** is the name of the project you want to rename, **Project New Name** is the new name that the file/folder will have and the last argument represents the path to your project.
+
 deleteFile
 """""""""""""""""""""""""""""""""
 Deletes the current file of a project tree.
@@ -564,6 +573,13 @@ The function parameters are:
 * “project” = the project object
 * “pathTo” = the path to the selected file
 
+.. code-block:: javascript
+
+	deleteFile('New Project', 'C:\Users\User\Desktop\file');
+
+
+Where **New Project** is the name of the project you want to modify and the second argument represents the path to the file you want to delete.
+
 deleteFolder
 """""""""""""
 Deletes the selected folder of a project tree.
@@ -572,6 +588,13 @@ The function parameters are:
 
 * “project” = the project object
 * “pathTo” = the path to the folder
+
+.. code-block:: javascript
+
+	deleteFolder('New Project', 'C:\Users\User\Desktop\folder');
+
+
+Where **New Project** is the name of the project you want to modify and the second argument represents the path to the folder you want to delete.
 
 loadProjects
 """""""""""""
@@ -583,19 +606,9 @@ For example:
 
 .. code-block:: javascript
 
-	async renameProject (project)
-	{
-		if(this.rename==''){
-			return false;
-		}
-		if (await this.studio.projects.renameProject(project,this.rename))
-		{
-			this.rename=='';
-			this.projects=await this.studio.projects.loadProjects(false);
-			return true;
-		}
-		this.rename=='';
-	}
+	let projects=loadProjects();
+
+In this case, *projects* will be an array with all the created projects.
 
 selectCurrentProject
 """"""""""""""""""""""
@@ -625,6 +638,14 @@ The function parameters are:
 * “name” = the path to the file
 * “buffer” = the file buffer that will actually be saved
 
+You can use the function like this:
+
+.. code-block:: javascript
+
+	saveFile('New Project', 'File_Name', [1, 2, 3]);
+
+Where **New Project** is the name of the project where you want to save a file, **File_Name** is the name you want to give to the saved file and the second argument represents the array that will be registered in your file.
+
 loadFile
 """""""""""
 Loads a file. It returns a string that represents the file content.
@@ -633,6 +654,15 @@ The function parameters are:
 
 * “project” = the project object
 * “name” = the full file name, including its path
+
+An example on how to use this function is:
+
+.. code-block:: javascript
+
+	loadFile('New Project', 'File_Name');
+
+
+Where **New Project** is the name of the project where you want to load a file from and **File_Name** is the name of the file whose content you want to load.
 
 changeFile
 """""""""""
@@ -651,19 +681,15 @@ This function parameters are:
 
 * “project” = the current project object
 * “name” = the special file name
-* “context” = the contect that will be saved in the special file
+* “content” = the content that will be saved in the special file
 
-For example, in order to save our notes written in the *“Notebook”* tab (*“notebook”* plugin), notes that are different for each project, we called this function. It created a special **“notebook.json”** file, where we keep the explicit data notes for every project.
+For example:
 
 .. code-block:: javascript
 
-	this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
+	saveSpecialFile('New Project', 'File_Name', [1, 2, 3]);
 
-where **this.elements** represents an array of notes that we create in the Notebook.
-
-.. image:: images/saveSpecialFiles.png
-	:align: center
-	:height: 250px
+Where **New Project** is the name of the project where you want to save a file, **File_Name** is the name you want to give to the saved file and the second argument represents the array that will be registered in your file.
 
 loadSpecialFile
 """"""""""""""""
@@ -674,11 +700,13 @@ The parameters are:
 * “project” = the current project object
 * name” = the special file name
 
-Given the example above, we call this function each time we are changing the project, so the Notebook can load its specific content for each project apart. 
+Given the example above, we call this function to load the content that was previously saved in the file
 
 .. code-block:: javascript
 
-	data = await this.studio.projects.loadSpecialFile(this.currentProject,'notebook.json');
+	let output = loadSpecialFile('New Project', 'File_Name');
+
+The value of the **output** variable will be the array: [1,2,3].
 
 recursiveGeneration
 """"""""""""""""""""
@@ -705,19 +733,17 @@ Returns a project object loaded from the store.
 
 The function has no parameters.
 
-For example, we used this function to check if there is a project open, so we know if we should enable the “Notebook” tab.
+For example:
 
 .. code-block:: javascript
 
-	studio.workspace.registerTab('PROJECT_NOTEBOOK', 300, Notebook, {
-        enabled () {
-            return !!studio.projects.getCurrentProject ();
-        }
-    });
+	let project = getCurrentProject();
+
+The value of the **project** variable will be *'New Project'*.
 
 getDefaultFileName
 """""""""""""""""""
-Returns the default file name for a specified project, using the **_runLanguageFunction**.
+Returns the default file name for a specified project.
 
 The only parameter is:
 
@@ -729,12 +755,12 @@ For example, in the *“language.python”* plugin, we create a *“python”* o
 
 	getDefaultFileName() {
             return '/main.py';
-        }
+    }
 
 
 getDefaultRunFileName
 """"""""""""""""""""""
-Returns the default run file name for a specified project, using the **_runLanguageFunction**.
+Returns the default run file name for a specified project.
 
 The only parameter is:
 
@@ -745,8 +771,8 @@ Same as the **getDefaultFileName** function above,, in the *“language.python�
 .. code-block:: javascript
 
 	getDefaultRunFileName() {
-            return '/main.py';
-        }
+        return '/main.py';
+    }
 
 getMakefile
 """"""""""""""
@@ -762,10 +788,8 @@ An example of use of this function can also be found in the *“language.python�
 .. code-block:: javascript
 
 	getMakefile(project, filename) {
-            if (filename[0] === '/') filename = filename.substring (1);
-            // TODO add filename
-            return 'run:\n\tpython main.py';
-        }
+        return 'run:\n\tpython main.py';
+    }
 
 languageSpecificOption
 """""""""""""""""""""""
@@ -776,11 +800,13 @@ The function parameters are:
 * *"project"* = the selected project object
 * *"option"* = the name of the option we want to obtain
 
-We used it in the *“projects.editor.visual”* plugin, to obtain the source language of a specific project.
+An example of use for this function could be:
 
 .. code-block:: javascript
 
-	sourceLanguage = this.studio.projects.languageSpecificOption (this.currentProject, 'sourceLanguage');
+	let sourceLanguage = languageSpecificOption ('New Project', 'sourceLanguage');
+
+The value of the **sourceLanguage** variable will be the default run file name, let's say *python*.
 
 
 getFileCode
@@ -792,7 +818,7 @@ The function parameters are:
 * *"project"* = the project object
 * *"pathTo"* = the path to the file
 
-To obtain the full path of the file where the code is located, we join the project folder and the **pathTo**, then we use the **_isPathVaild** function to validate this actual path. 
+To obtain the full path of the file where the code is located, we join the project folder and the **pathTo**, then we validate this actual path. 
 To obtain the file code we are interested in, we use the 
 **readFile(actualPath)** function.
 

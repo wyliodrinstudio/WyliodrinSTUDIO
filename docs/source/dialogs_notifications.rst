@@ -28,7 +28,7 @@ An example of use:
 
 .. code-block:: javascript
 
-	this.studio.workspace.showDialog(AddProjectDialog,{width:512});
+	showDialog(AddProjectDialog,{width:512});
 
 where *AddProjectDialog* is a Vue component, having a specific design and functionalities.
 
@@ -80,11 +80,11 @@ The function parameters are:
 * *"action"* = the action to perform
 * *"values = {}"* = empty object
 
-For example, in our *“projects”* plugin, we open a customized prompt when the user chooses to rename a project.
+For example, let's try to open a customized prompt when the user chooses to rename a project.
 
 .. code-block:: javascript
 
-	this.rename = await this.studio.workspace.showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
+	showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
 
 .. image:: images/showPrompt.png
 	:align: center
@@ -103,11 +103,11 @@ The function parameters are:
 * *"question"* = the question that will be addressed to the user
 * *"values = {}"* = empty object
 
-In the *“workspace”* plugin, we are using it to check if the user is sure that he wants to close the app.
+As an example, here's how we are using it to check if the user is sure that he wants to close the app.
 
 .. code-block:: javascript
 
-	let value = await workspace.showConfirmationPrompt('EXIT', 'WORKSPACE_TOOLBAR_EXIT_QUESTION');
+	showConfirmationPrompt('EXIT', 'WORKSPACE_TOOLBAR_EXIT_QUESTION');
 
 .. image:: images/showConfirmationPrompt.png
 	:align: center
@@ -138,32 +138,16 @@ The code should look like this:
 
 .. code-block:: javascript
 
-	showNotification (text, values = {}, type = 'info', timeout = 6000)
-	{
-		if (this.vue)
-		{
-			if(type === 'info')
-				this.vue.$dialog.notify.info(this.vue.$t(text, values), {
-					position: 'bottom-right',
-					width: '700',
-					timeout: timeout
-				});
-		}
-	}
+We used the the translation function in order to translate the notification text according to the current language.
 
-We used the this.vue.$t(text, values) function in order to translate the notification text according to the current language.
-
-An example of use can be found in the *"projects"* plugin, where we check if the user entered a valid name for the project he wants to create. If negative, we call the **showNotification** function.
+As an example of use, we can check if the user entered a valid name for the project he wants to create. If negative, we call the **showNotification** function.
 
 .. code-block:: javascript
 
-	if(this.projectName === '') {
-		await this.studio.workspace.showNotification ('PROJECT_NAME_PROMPT');
-	}
+	showNotification ('PROJECT_NAME_PROMPT');
 
 .. image:: images/showNotification.png
 	:align: center
-
 
 |
 
@@ -180,25 +164,12 @@ The parameters are:
 
 The difference can be spotted in the code, where we use the type *error* as default:
 
-.. code-block:: javascript
-
-	showError(text, values = {}, timeout = 6000)
-	{
-		if(this.vue)
-		{
-			this.vue.$dialog.notify.error(this.vue.$t (text, values), {
-				position: 'bottom-right',
-				width: '70%',
-				timeout
-			});
-		}
-	}
 
 For example, in the *“notebook”* plugin, we are sending an error if the user closes the upload image window without selecting a file:
 
 .. code-block:: javascript
 
-	this.studio.workspace.showError('NOTEBOOK_SELECT_IMAGE_ERROR');
+	showError('NOTEBOOK_SELECT_IMAGE_ERROR');
 
 .. image:: images/showError.png
 	:align: center

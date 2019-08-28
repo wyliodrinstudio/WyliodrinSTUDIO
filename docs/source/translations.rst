@@ -9,9 +9,9 @@ Translations
 
 As we mentioned before, each plugin has a **translations** folder, where we can find the **messages-ln.json** files, one for each language available in our application. These files contain an object with a list of key-value sets. In the *.vue* files you will use strings on different purposes (for example, to name a button) and you will need to update their translation according to the language you choose in the app.  This action is possible using our translation function, which you can find in our .vue files with the following syntax: 
 
-::
+.. code-block:: javascript
 
-	$t(‘PLUGIN_STRING_TO_TRANSLATE’)
+	$t('PLUGIN_STRING_TO_TRANSLATE')
 
 where PLUGIN will be replaced by the name of your plugin.
 
@@ -23,12 +23,12 @@ where PLUGIN will be replaced by the name of your plugin.
 
 For example, let’s say that in your message-en.json (English language) you want to translate the word *‘Close’*, that will be attached to a button.
 
-::
+.. code-block:: json
 
 	{
-	    “MYNEWPLUGIN_CLOSE”: {
-			“message”: “Close”,
-			“description”: “This button is used to close the current window.”
+	    "MYNEWPLUGIN_CLOSE": {
+			"message": "Close",
+			"description": "This button is used to close the current window."
 	    }
 	}
 
@@ -36,12 +36,12 @@ For example, let’s say that in your message-en.json (English language) you wan
 
 As you can imagine, in your *messages-fr.json* (French language), you’ll have:
 
-::
+.. code-block:: json
 
 	{
-	    “MYNEWPLUGIN_CLOSE”: {
-			“message”: “Fermer”,
-			“description”: “This button is used to close the current window.”
+	    "MYNEWPLUGIN_CLOSE": {
+			"message": "Close",
+			"description": "This button is used to close the current window."
 	    }
 	}
 
@@ -56,7 +56,7 @@ Inside the Wyliodrin Studio 2 repository, you will find a directory named **tool
 
 |
 
-.. code-block:: javascript
+.. code-block:: console
 
 	node translation.js
 
@@ -64,7 +64,7 @@ This command joins all the key-value sets from all the existing plugins, for eac
 
 |
 
-.. code-block:: javascript
+.. code-block:: console
 
 	node translation.js send
 

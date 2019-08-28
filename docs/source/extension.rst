@@ -3,59 +3,6 @@
 Extension methods
 ==================
 
-|
-
-Window Buttons
-***************
-
-These are the classic buttons used for handling the main window of our application: *Minimize*, *Fullscreen* and *Exit*. They are located in the top right corner and can be identified as:
-
-.. image:: images/window_buttons.png
-	:align: center
-
-We created this type of buttons inside the *"worskpace"* plugin, in the *Toolbar.vue* component:
-
-.. image:: images/vue_window.png
-	:align: center
-	:width: 700px
-	:height: 100px
-
-As you can observe, inside de **<span>** tag, we added a text label and we used the function **$t('WORKSPACE_TOOLBAR_FULLSCREEN')**. It will translate the unique id string and, according to the current language, you will see the translation, not this key. More details about the translations file format can be found in our :ref:`translations <translations>` section.
-
-.. image:: images/minimize.png
-	:align: center
-
-|
-
-Connection Button
-******************
-Also in the *workspace* plugin we added the connection button, which can be found inside the *DeviceTools.vue* component. It is visible only when there is no device connected to Wyliodrin Studio and it was designed like this:
-
-.. image:: images/connectionbuttonvue.png
-
-|
-
-.. image:: images/connectionbutton.png
-	:align: center
-
-On click, it calls the **showConnectionSelectionDialog** function, whose definition is:
-
-.. code-block:: javascript
-
-	async showConnectionSelectionDialog ()
-	{
-		let device = await this.studio.workspace.showConnectionSelectionDialog ();
-		console.log ('device');
-		if (device)
-		{
-			this.studio.workspace.connect (device);
-		}
-	}
-
-The :ref:`**showConnectionSelectionDialog** <showConnectionSelectionDialog>` function was previously defined in the *workspace* plugin and it opens a dialog where you can see all the available devices.
-
-|
-
 DeviceTool Buttons
 ********************
 
@@ -68,39 +15,13 @@ We added them in the *DeviceTools.vue* component:
 	:width: 700px
 	:height: 80px
 
+And this is how they look like:
+
+POZA PI CONECTAT
+
 They were previously registered using the **registerDeviceToolButton** function:
 
-.. code-block:: javascript
-
-	registerDeviceToolButton (deviceType, name, priority, action, iconURL, options = {})
-	{
-		// TODO verify name, priority, options.type and action to be the right value
-		options = _.merge ({
-			visible: () => true,
-			enabled: () => true
-		}, options);
-		let sameDeviceToolButton = deviceToolButtons.find ((toolbarButton) => toolbarButton.name === name);
-		if (!sameDeviceToolButton)
-		{
-			let item = {
-				type: deviceType,
-				name,
-				priority,
-				action,
-				iconURL,
-				enabled: options.enabled,
-				visible: options.visible,
-				buttonType: options.type
-			};
-			deviceToolButtons.push (item);
-			deviceToolButtons = deviceToolButtons.sort ((deviceToolButton1, deviceToolButton2) => deviceToolButton1.priority - deviceToolButton2.priority);
-			this.store.dispatch ('workspace/deviceToolButtons', deviceToolButtons);
-		}
-		else
-		{
-			this.warn ('Toolbar button '+name+' already exists in the toolbar');
-		}
-	}
+The parameters of this function are:
 
 * *"deviceType"* = the type of the device driver type the button is for
 * *"priority"* = element priority in the list with all device buttons; the button with the lowest priority will be displayed to the left
@@ -108,11 +29,13 @@ They were previously registered using the **registerDeviceToolButton** function:
 * *"iconURL"* = the image assigned
 * *"options"* = additional options
 
-An example on how to use this function to create this type of button can be found in the *device.wyapp* plugin, where we created the **Task Manager** button which opens its specific dialog when clicked:
+An example on how to use this function to create this type of buttons can be:
 
-.. image:: images/taskmanager.png
+.. code-block:: javascript
 
-.. POZA!!!!!!!
+	registerDeviceToolButton('DEVICETOOL_BUTTON', 10, () => showNotification ('You created a device tool button', 'success'));
+
+Here we register a device tool button having the translation key 'DEVICETOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the "You created a device tool button" text.
 
 Toolbar Buttons
 ****************
@@ -126,53 +49,19 @@ They are included in the *Toolbar.vue* file and saved into an array in the works
 
 In order to create this type of buttons, we implemented the **registerToolbarButton** function:
 
-.. code-block:: javascript
-
-	registerToolbarButton (name, priority, action, iconURL, options = {})
-	{
-		// TODO verify name, priority, options.type and action to be the right value
-		options = _.merge ({
-			visible: () => true,
-			enabled: () => true
-		}, options);
-		let sameToolbarButton = toolbarButtons.find ((toolbarButton) => toolbarButton.name === name);
-		if (!sameToolbarButton)
-		{
-			let item = {
-				type: deviceType,
-				name,
-				priority,
-				action,
-				iconURL,
-				enabled: options.enabled,
-				visible: options.visible,
-				buttonType: options.type
-			};
-			toolbarButtons.push (item);
-			toolbarButtons = toolbarButtons.sort ((toolbarButton1, toolbarButton2) => toolbarButton1.priority - toolbarButton2.priority);
-			this.store.dispatch ('workspace/toolbarButtons', toolbarButtons);
-		}
-		else
-		{
-			this.warn ('Toolbar button '+name+' already exists in the toolbar');
-		}
-	}
-
 * *"name"* = element label, registered as a string that will be translated
 * *"priority"* = element priority in the list with all toolbar buttons; the button with the lowest priority will be displayed to the left
 * *"action"* = the actions that the buttton will perform on click
 * *"iconURL"* = the image assigned
 * *"options"* = additional options
 
-For example, in order to register the **Project Library** button, we had to register it in the *index.js* file of the *“projects”* plugin:
+For example, you can use the function like this:
 
 .. code-block:: javascript
 
-	studio.workspace.registerToolbarButton('PROJECT_LIBRARY', 10, () => studio.workspace.showDialog(ProjectsLibrary, {
-	        width: 1000
-	    }), 'plugins/projects/data/img/icons/projects-icon.svg');
+	registerToolbarButton('TOOLBAR_BUTTON', 10, () => showNotification('You created a toolbar button', 'success'), 'plugins/projects/data/img/icons/projects-icon.svg');
 
-The component corresponds to a function that opens a new window where yous can manage their projects.
+we register a button having the translation key 'TOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the "You created a toolbar button" text. We need to specify the relative path to the image related to the button.
 
 .. image:: images/registerToolbarButton.png
 	:align: center
@@ -188,51 +77,16 @@ The menu button is included in the *Menu.vue* component, as a simple image butto
 
 If clicked, it opens a help menu including  some topics registered using the **registerMenuItem** function:
 
-.. code-block:: javascript
-
-	registerMenuItem (name, priority, action, options = {})
-	{
-		// TODO verify name, priority and action to be the right value
-		options = _.merge ({
-			visible: () => true,
-			enabled: () => true
-		}, options);
-		let sameMenuItem = menuItems.find ((menuItem) => menuItem.name === name);
-		if (!sameMenuItem)
-		{
-			let item = {
-				name,
-				priority,
-				action,
-				enabled: options.enabled,
-				visible: options.visible
-			};
-			menuItems.push (item);
-			menuItems = menuItems.sort ((menuItem1, menuItem2) => menuItem1.priority - menuItem2.priority);
-			this.store.dispatch ('workspace/menuItems', menuItems);
-		}
-		else
-		{
-			this.warn ('Menu item '+name+' already exists in the menu');
-		}
-	}
-
 * *"name"* = element label, registered as a string that will be translated as the menu item name
 * *"priority"* = element priority in the list with all menu items; hte item with the lowest priority is to the left
 * *"component"* = the vue component attached to the current item
 * *"options"* = additional options
 
-An example of use, which registers the item *'Use Advanced Mode'*
+An example of use, which registers the item *'New Menu Item'*
 
 .. code-block:: javascript
 
-	this.registerMenuItem ('WORKSPACE_SET_MODE_ADVANCED', 10, () => {
-			workspace.dispatchToStore('workspace','mode','advanced');	
-		}, {
-			visible (){
-				return workspace.getFromStore ('workspace', 'mode') === 'simple';
-			}
-		});
+	registerMenuItem ('WORKSPACE_NEW_MENU_ITEM', 10, () => showNotification('You registered a new menu item!', 'success'));
 
 The items registered in the menu are:
 
@@ -285,35 +139,6 @@ Tabs
 The tabs are components of our application and accomplish various functions that help you handling your projects.
 
 They are integrated with the **registerTab** function:
-
-.. code-block:: javascript
-
-	registerTab (name, priority, component, options = {})
-	{
-		options = _.merge ({
-			visible: () => true,
-			enabled: () => true
-		}, options);
-		let sameTab = tabs.find ((tab) => tab.name === name);
-		if (!sameTab)
-		{
-			this.registerComponent (component);
-			let item = {
-				name,
-				priority,
-				component: component.name,
-				enabled: options.enabled,
-				visible: options.visible
-			};
-			tabs.push (item);
-			tabs = tabs.sort ((tab1, tab2) => tab1.priority - tab2.priority);
-			this.store.dispatch ('workspace/tabs', tabs);
-		}
-		else
-		{
-			this.warn ('Tab '+name+' already exists in the workspace');
-		}
-	}
 
 * *"name"* = element label, registered as a string that will be translated
 * *"priority"* = element priority in the list with all menu items: the tab with the lowest priority will be displayed to the left
@@ -389,44 +214,9 @@ In the *Workspace.vue* file, we included all these tabs taking them from the sto
 Status Buttons
 ***************
 
-The last component of the workspace is represented by the status buttons: **Console** and **MQTT**. They are created using the **registerStatusButton** function:
+The last component of the workspace is represented by the status buttons: **Console** and **MQTT**. They are created using the **registerStatusButton** function.
 
-.. code-block:: javascript
-
-	registerStatusButton (name, priority, component, iconURL, options = {})
-	{
-		// TODO verify name, priority and action to be the right value
-		this.registerComponent (component);
-		options = _.merge ({
-			visible: () => true,
-			enabled: () => true,
-			inset: () => false,
-			height: () => '200px',
-			overlay: () => false
-		}, options);
-		let sameStatusButton = statusButtons.find ((statusButton) => statusButton.name === name);
-		if (!sameStatusButton)
-		{
-			let item = {
-				name,
-				priority,
-				component: component.name,
-				iconURL,
-				enabled: options.enabled,
-				visible: options.visible,
-				inset: options.inset,
-				height: options.height,
-				overlay: options.overlay
-			};
-			statusButtons.push (item);
-			statusButtons = statusButtons.sort ((statusButton1, statusButton2) => statusButton1.priority - statusButton2.priority);
-			this.store.dispatch ('workspace/statusButtons', statusButtons);
-		}
-		else
-		{
-			this.warn ('Toolbar button '+name+' already exists in the toolbar');
-		}
-	}
+The parameters of this function are:
 
 * *"name"* = element label, registered as a string that will be translated
 * *"priority"* = element priority in the list with all status buttons; the button with the lowest priority is to the left.
