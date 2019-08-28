@@ -396,20 +396,25 @@ let projects = {
 		
 		let filePath = studio.filesystem.openLoadDialog(options)[0];
 		console.log(filePath);
-		let pathing = path.join(settings.workspace.path,path.basename(filePath));
-		await studio.filesystem.readFile(filePath, async function(err, data) {
-			if (!err) {
-				var zip = new JSZip();
-				zip.loadAsync(data).then(function(contents) {
-					Object.keys(contents.files).forEach(function(filename) {
-						zip.file(filename).async('nodebuffer').then(async function(content) {
-							var dest = path.joing(pathing,filename);
-							await studio.filesystem.writefile(dest, content);
-						});
+		let pathing = path.join(settings.workspace.path,path.parse(filePath).name);
+		
+		let data = await studio.filesystem.readFile(filePath);
+		let zip = new JSZip;
+		if(await studio.filesystem.mkdirp(pathing)){
+			zip.loadAsync(data).then(function(contents) {
+				console.log(contents);
+				Object.keys(contents.files).forEach(function(filename) {
+					zip.file(filename).async('nodebuffer').then(async function(content) {
+						var dest = path.join(pathing,filename);
+						await studio.filesystem.writeFile(dest, content);
 					});
 				});
-			}
-		});
+			});
+			return true;
+		} else {
+			return false;
+		}
+		
 		
 	},
 	/**
@@ -475,11 +480,11 @@ let projects = {
 		};
 		let savePath = studio.filesystem.openSaveDialog(options);
 		let zip = new JSZip();
-        if(await this._buildZipFromDirectory(projectPath, zip, projectPath)) {
+		if(await this._buildZipFromDirectory(projectPath, zip, projectPath)) {
 			const zipContent = await zip.generateAsync({
 				type: 'nodebuffer',
 				comment: 'Project Archive',
-				compression: "DEFLATE",
+				compression: 'DEFLATE',
 				compressionOptions: {
 					level: 9
 				}
@@ -487,20 +492,20 @@ let projects = {
 			console.log(zipContent);
 	
 			/** create zip file */
-			await fs.writeFile(savePath, zipContent);
+			await studio.filesystem.writeFile(savePath, zipContent);
 		}
 		
 	},
 	async _buildZipFromDirectory(dir, zip, root) {
 		try {
-			const list = await fs.readdir(dir);
+			const list = await studio.filesystem.readdir(dir);
 			if(list) {
 				for (let file of list) {
-					file = path.resolve(dir, file)
-					if (await this.isDirectory(file)) {
-						this.buildZipFromDirectory(file, zip, root)
+					file = path.resolve(dir, file);
+					if (await studio.filesystem.isDirectory(file)) {
+						await this._buildZipFromDirectory(file, zip, root);
 					} else {
-						const filedata = await fs.readFile(file);
+						const filedata = await studio.filesystem.readFile(file);
 						if(filedata) {
 							zip.file(path.relative(root, file), filedata);
 						}
@@ -512,7 +517,7 @@ let projects = {
 		} catch(e) {
 			console.error(e);
 		}  
-    },
+	},
 	/**
 	 * Recursively generate a deep object with all the contents of a project
 	 * @param {Object} project - Project object
