@@ -7,10 +7,10 @@ General Architecture of Wyliodrin STUDIO
 
 Wyliodrin STUDIO consists of a series of plugins that we used to build the different parts of our application. 
 
-Basically, a plugin is a software component that helps you to add specific feature to a program. When a program supports plugins, it enables customization, which means that you will be able contribute to the development and improvement of our application.
+Basically, a plugin is a component of the program that will help you apply different features to our application. Due to the fact that Wyliodrin Studio supports plugins, it enables customization, which means that you will be able contribute to the development and improvement of our application.
 
 
-To design a pleasing, yet accessible and easy to use, interface for our users, we chose the `Vue framework <https://vuejs.org/v2/guide>`_. The connection between frontend and API has become a common point of challenge and complexity. Since we are using **Vue** to develop our frontend, the best solution to this problem is the `VueX <https://vuex.vuejs.org/>`_ library, which is deeply integrated into Vue and created to take advantage of Vue's Reactivity.
+To design a pleasing, yet accessible and easy to use interface for our users, we chose the `Vue framework <https://vuejs.org/v2/guide>`_. The connection between frontend and API has always been a challenge and required a lot of work because of its complexity. Since we are using **Vue** to develop our frontend, the best solution to this problem is the `VueX <https://vuex.vuejs.org/>`_ library, which is deeply integrated into Vue and exploits its reactivity.
 
 |
 
@@ -32,13 +32,29 @@ The main components that you’ll need to create for your plugin are:
 * The **views** folder: here you will design the user interface for your plugin, using the progressive framework *VUE*, so here you will be creating all your *.vue* files. (In our case, *MyVueFile.vue*)
 * The **package.json** file, which contains an object with the primary details regarding your plugin:
 
-	1. *“name”* : the name of your plugin (“my.new.plugin”)
-	2. *“version”*: *“0.0.1”*
-	3. *“main”*: the main file of the plugin, that we’ll call **“index.js”**
-	4. *“private”*: **false**/**true**, if you want your plugin to be seen by everyone or only by yourself
-	5. *“plugin”*: an object where we specify if our plugin consumes other plugins (it's using functions exported by these other plugins) and if it provides something, if necessary (our plugin will export functions to be used by other plugins). We also include here the *target* property, which specifies for each version of the program the plugin should be working: **browser** or **electron**.
+.. list-table::
 
-	As an example, a *package.json* file should look like this:
+	* - **"name"**
+	  - the name of the plugin (“button.example”)
+	* - **"version"**
+	  - "0.0.1"
+	* - **"main"**
+	  - the main file of the plugin, that will be “index.js”
+	* - **"plugin"**
+	  - an object where we specify the characteristics of the plugin
+
+The properties of the *"plugin"* component are:
+
+.. list-table::
+
+	* - **"consumes"**
+	  - we specify from which other plugins our plugin uses exported functions(required *"workspace"*)
+	* - **"provides"**
+	  - we specify if our plugin functions will be exported(*"example_button"*)
+	* - **"target"**
+	  - for which version of the program the plugin should be working: **browser** or **electron**
+
+As an example, a *package.json* file should look like this:
 
 .. image:: images/packagejson.png
 	:align: center
@@ -53,18 +69,9 @@ The main components that you’ll need to create for your plugin are:
 
 	import MyVueFile from './views/MyVueFile.vue'; 
 
-After that, you’ll need to instantiate an object (ex: *my_vue_file={};* ) that can be empty, or that can contain different functions that you’ll use. Then, you’ll have to export a function called “setup”, using the following syntax:
-	
-.. code-block:: javascript
+After that, you’ll need to instantiate an object that can be empty, or that can contain different functions that you’ll use. 
+Then, you’ll have to export a function called “setup”, which has the purpose to register your plugin and to make it functional inside the application.
 
-	export function setup(options, imports, register)
-	{ 
-	    const studio = imports;
-	    studio.workspace.functionName(param1, param2, MyVueFile);
-	    register(null, { 
-	    	my_vue_file: my_vue_file
-	    });
-	}
 
 * The **store.js** file: it's optional, useful if you need to store some variables states.
 * The **data** folder: contains a sub-directory, **img**, which can also include different folders that you’ll need in order to keep the images that you use inside your .vue files.
@@ -125,18 +132,4 @@ Also in the *workspace* plugin we added the connection button, which can be foun
 .. image:: images/connectionbutton.png
 	:align: center
 
-On click, it calls the **showConnectionSelectionDialog** function, whose definition is:
-
-.. code-block:: javascript
-
-	async showConnectionSelectionDialog ()
-	{
-		let device = await this.studio.workspace.showConnectionSelectionDialog ();
-		console.log ('device');
-		if (device)
-		{
-			this.studio.workspace.connect (device);
-		}
-	}
-
-The :ref:`showConnectionSelectionDialog <showConnectionSelectionDialog>` function was previously defined in the *workspace* plugin and it opens a dialog where you can see all the available devices.
+On click, it calls the :ref:`showConnectionSelectionDialog <showConnectionSelectionDialog>` that was previously defined in the *workspace* plugin and it opens a dialog where you can see all the available devices.

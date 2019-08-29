@@ -17,10 +17,16 @@ Registers an item that may be disposed in the application.
 
 The function parameters are:
 
-* *"name"* = element label, registered as a string that will be translated
-* *"priority"* = element priority in the list with all menu items: the tab with the lowest priority will be displayed to the left
-* *"component"* = the vue component attached to the current tab
-* *"options"* = additional options: **visible**, or **enabled**
+.. list-table::
+
+	* - **"name"** 
+	  - element label, registered as a string that will be translated
+	* - **"priority"** 
+	  - element priority in the list with all menu items: the tab with the lowest priority will be displayed to the left
+	* - **"component"** 
+	  - the vue component attached to the current tab
+	* - **"options"** 
+	  - additional options: **visible**, or **enabled**
 
 At first, we check if the *name* of the tab can be found in our global **tabs** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created tab into the array, we sort them by priority and dispatch the array to the workspace store.
 
@@ -36,7 +42,7 @@ For example, in order to register the ‘Notebook’ tab, in the index.js file c
 registerComponent
 """"""""""""""""""
 
-* *"component"* = the vue component we created as a *"MyVueFile.vue"*
+* **"component"** - the vue component we created as a *"MyVueFile.vue"*
 
 Registers a new vue-component. As an example, we used it to register our Xterm component, in the *"xterm"* plugin:
 
@@ -50,10 +56,16 @@ Registers an element in the app’s menu.
 
 The function parameters are:
 
-* *"name"* = element label, registered as a string that will be translated
-* *"priority"* = element priority in the list with all menu items; same convention applied as for **registerTab** function
-* *"component"* = the vue component attached to the current item
-* *"options"* = additional options: **visible**, or **enabled**
+.. list-table::
+
+	* - **"name"** 
+	  - element label, registered as a string that will be translated
+	* - **"priority"** 
+	  - element priority in the list with all menu items; same convention applied as for **registerTab** function
+	* - **"component"** 
+	  - the vue component attached to the current item
+	* - **"options"** 
+	  - additional options: **visible**, or **enabled**
 
 At first, we check if the *name* of the menu item can be found in our global **menuItems** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created menu item into the array, we sort them by priority and dispatch the array to the workspace store.
 
@@ -74,11 +86,18 @@ Registers a new button in the app’s toolbar.
 
 The function parameters are:
 
-* *"name"* = element label, registered as a string that will be translated
-* *"priority"* = element priority in the list with all toolbar buttons same convention applied as for **registerTab** function
-* *"action"* = the actions that the buttton will perform on click
-* *"iconURL"* = the image assigned
-* *"options"* = additional options: **visible**, or **enabled**
+.. list-table::
+
+	* - **"name"** 
+	  - element label, registered as a string that will be translated
+	* - **"priority"** 
+	  - element priority in the list with all toolbar buttons same convention applied as for **registerTab** function
+	* - **"action"** 
+	  - the actions that the buttton will perform on click
+	* - **"iconURL"** 
+	  - the image assigned
+	* - **"options"** 
+	  - additional options: **visible**, or **enabled**
 
 At first, we check if the *name* of the toolbar button can be found in our global **toolbarButtons** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created toolbarButton into the array, we sort them by priority and dispatch the array to the workspace store.
 
@@ -101,11 +120,18 @@ Registers a new button used to manage the functioning of a device. These buttons
 
 The function parameters are:
 
-* *"deviceType"* = the type of the device for which we want to create the button
-* *"priority"* = element priority in the list with all device buttons; same convention applied as for **registerTab** function
-* *"action"* = the actions that the buttton will perform on click
-* *"iconURL"* = the image assigned
-* *"options"* = additional options: **visible**, or **enabled**
+.. list-table::
+
+	* - **"deviceType"** 
+	  - the type of the device for which we want to create the button
+	* - **"priority"** 
+	  - element priority in the list with all device buttons; same convention applied as for **registerTab** function
+	* - **"action"** 
+	  - the actions that the buttton will perform on click
+	* - **"iconURL"**
+	  - the image assigned
+	* - **"options"**
+	  - additional options: **visible**, or **enabled**
 
 At first, we check if the *name* of the device button can be found in our global **deviceToolButtons** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created deviceToolButton into the array, we sort them by priority and dispatch the array to the workspace store.
 
@@ -128,11 +154,18 @@ Registers the buttons used to open the *console* or the *mqtt* server.
 
 The function parameters are:
 
-* *"name"* = element label, registered as a string that will be translated
-* *"priority"* = element priority in the list with all status buttons; same convention applied as for **registerTab** function
-* *"component"* = the vue component attached to the current item
-* *"iconURL"* = the image assigned
-* *"options"* = additional options: **visible**, or **enabled**
+.. list-table::
+
+	* - **"name"**
+	  - element label, registered as a string that will be translated
+	* - **"priority"**
+	  - element priority in the list with all status buttons; same convention applied as for **registerTab** function
+	* - **"component"**
+	  - the vue component attached to the current item
+	* - **"iconURL"**
+	  - the image assigned
+	* - **"options"**
+	  - additional options: **visible**, or **enabled**
 
 At first, we check if the *name* of the status button can be found in our global **statusButtons** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created statusButton into the array, we sort them by priority and dispatch the array to the workspace store.
 
@@ -154,8 +187,12 @@ A *"store"* is basically a container that holds your application state. There ar
 
 The function parameters are:
 
-* *"namespace"* = the name given to the store
-* *"store"* = the actual store object, imported from the *'./store'* file of the plugin
+.. list-table::
+
+	* - **"namespace"**
+	  - the name given to the store
+	* - **"store"**
+	  - the actual store object, imported from the *'./store'* file of the plugin
 
 For example, to register the store for the *“projects”* plugin, we had to call this function:
 
@@ -175,8 +212,12 @@ Gets the value of a variable from a certain store.
 
 The function parameters are: 
 
-* *"variable"* = the name of the variable that we want to process
-* *"namespace"* = the name of the store where the variable is registered
+.. list-table::
+
+	* - **"variable"**
+	  - the name of the variable that we want to process
+	* - **"namespace"**
+	  - the name of the store where the variable is registered
 
 We called this function to get the current project from our *“projects”* store:
 
@@ -190,9 +231,14 @@ Sends data to the store promptly.
 
 The function parameters are:
 
-* *"namespace"* = the name of the store where you want to dispatch
-* *"action"* = the variable that you want to update
-* *"data"* = the additional data that you want to send to the variable
+.. list-table:: 
+
+	* - **"namespace"**
+	  - the name of the store where you want to dispatch
+	* - **"action"**
+	  - the variable that you want to update
+	* - **"data"**
+	  - the additional data that you want to send to the variable
 
 Similar as before, we used it in the *"projects"* plugin, to register the current project into the store:
 
@@ -206,7 +252,10 @@ setWorkspaceTitle
 
 The only parameter of this function is: 
 
-* *"title"* = the title of the current project
+.. list-table::
+
+	* - **"title"**
+	  - the title of the current project
 
 Loads the title of the current project from the store and displays it as the workspace **title**. 
 
@@ -228,8 +277,12 @@ registerDeviceDriver
 
 The function parameters are:
 
-* *"name"* = name of the new device type
-* *"deviceDriver"* = object created in the "setup" function of a "device" plugin, which consists of a series of functions necessary for a device: **defaultIcon**, **connect**, **settings**, **disconnect**.
+.. list-table::
+
+	* - **"name"**
+	  - name of the new device type
+	* - **"deviceDriver"**
+	  - object created in the "setup" function of a "device" plugin, which consists of a series of functions necessary for a device: **defaultIcon**, **connect**, **settings**, **disconnect**.
 
 The function registers a new device type. If the name of the new device type can’t be found in the list with all device drivers, then the actual **“deviceDriver”** will be registered.
 
@@ -256,8 +309,12 @@ This function searches for new devices and update the **availableDevices** list.
 
 The parameters are:
 
-* *"type"* = the type of the device, it has to be previously registered using the *registerDeviceDriver* function
-* *"dev"* = the array of devices that will be updated
+.. list-table::
+
+	* - **"type"**
+	  - the type of the device, it has to be previously registered using the *registerDeviceDriver* function
+	* - **"dev"**
+	  - the array of devices that will be updated
 
 We are using it in our *"device.wyapp"* plugins, each time we are searching for new devices.
 
@@ -274,8 +331,12 @@ This function is obviously used to connect to a device.
 
 The function parameters are: 
 
-* *"device"* = the device object that we want to connect
-* *"options"* = additional options 
+.. list-table:: 
+
+	* - **"device"**
+	  - the device object that we want to connect
+	* - **"options"**
+	  - additional options 
 
 The first step is to chech if the device we are trying to connect really is an actual device type. If it can be found in our **deviceDrivers** list, then we trasmit its type and status to the workspace store.
 
@@ -322,7 +383,10 @@ Returns a programming language object with the following properties: id, title, 
 
 The only parameter of the function is:
 
-* *"languageID"* = the unique id of a certain language
+.. list-table::
+
+	* - **"languageID"**
+	  - the unique id of a certain language
 
 .. _registerLanguage:
 
@@ -331,10 +395,16 @@ registerLanguage
 Updates the **“languages”** array with an object referring to a programming language.
 The function parameters are:
 
-* *"id"* = the programming language unique id
-* *"title"* = the name of the programming language
-* *"icon"* = a representative image attached to the programming language
-* *"options"* = additional specifications
+.. list-table::
+
+	* - **"id"**
+	  - the programming language unique id
+	* - **"title"**
+	  - the name of the programming language
+	* - **"icon"**
+	  - a representative image attached to the programming language
+	* - **"options"**
+	  - additional specifications
 
 The accepted languages are: *javascript*, *python*, *bash* and *visual*. 
 
@@ -361,10 +431,16 @@ Applies an addon for an existing programming language. In this case, an addon re
 
 The function parameters are:
 
-* *"language"* - language id
-* *"board"* - addon board
-* *"type"* - addon type
-* *"options"* - addon options
+.. list-table::
+
+	* - **"language"**
+	  - language id
+	* - **"board"**
+	  - addon board
+	* - **"type"**
+	  - addon type
+	* - **"options"**
+	  - addon options
 
 .. _editor:
 
@@ -372,10 +448,16 @@ registerEditor
 """"""""""""""""
 Registers a new text editor, using the embeddable code editor Ace, in order to add a syntax highlighting textbox.
 
-* *"name"* - the name/id of the editor
-* *"language"* - the editor language
-* *"component"* - the component to display
-* *"options"* - the additional options **visible** and **enabled**
+.. list-table::
+
+	* - **"name"**
+	  - the name/id of the editor
+	* - **"language"**
+	  - the editor language
+	* - **"component"**
+	  - the component to display
+	* - **"options"**
+	  - the additional options **visible** and **enabled**
 
 For example, in the *“projects.editor.ace”* we created an Ace Editor which supports some file types:
 
@@ -389,8 +471,13 @@ createEmptyProject
 Creates a new, empty project, having the name and language specified by the user.
 
 The parameters are: 
-* *"name"* - the name the user wants to assign to the new project
-* *"language"* - the programming language selected for the project
+
+.. list-table:: 
+
+	* - **"name"**
+	  - the name the user wants to assign to the new project
+	* - **"language"**
+	  - the programming language selected for the project
 
 As an example, we called this function in the *“projects”* plugin (*AddProjectDialog.vue* component):
 
@@ -405,7 +492,10 @@ deleteProject
 
 The parameter is:
 
-* *"project"* = name of the project the user wants to delete
+.. list-table::
+
+	* - **"project"**
+	  - name of the project the user wants to delete
 
 This function deletes all the files related to the project chosen by the user. It is called inside the **ProjectLibrary.vue** component, when the user clicks on the "Delete" button. After removing all the files, we dispatch to the projects store the *currentProject* and the *currentFile* as *null*.
 
@@ -423,8 +513,12 @@ Replaces the name of a chosen project with the **“newName”** value, that is 
 
 The function parameters are:
 
-* *"project"* = name of the project the user wants to rename
-* *"newName"* = the new name that the user wants to assign to the current project
+.. list-table:: 
+
+	* - **"project"**
+	  - name of the project the user wants to rename
+	* - **"newName"**
+	  - the new name that the user wants to assign to the current project
 
 The function is called inside the **ProjectLibrary.vue** component, when the user clicks on the *"Rename"* button.
 
@@ -442,8 +536,12 @@ Creates a duplicate of the selected project and it names it with the **“newNam
 
 The function parameters are:
 
-* *"project"* = name of the project the user wants to rename
-* *"newName"* = the name that the user wants to assign to the cloned project
+.. list-table::
+
+	* - **"project"**
+	  - name of the project the user wants to rename
+	* - **"newName"**
+	  - the name that the user wants to assign to the cloned project
 
 Same as **renameProject**, the function is called inside the **ProjectLibrary.vue** component, when the user clicks on the *"Clone"* button.
 
@@ -459,8 +557,12 @@ importProject
 """"""""""""""""
 Loads a new project tree from the user’s computer. Its parameters are:
 
-* *"project"* = project object
-* *"extension"* = archive extension (.zip/.tar/.wylioapp)
+.. list-table::
+
+	* - **"project"**
+	  - project object
+	* - **"extension"**
+	  - archive extension (.zip/.tar/.wylioapp)
 
 The archive extension can be *“.zip”*, *“.tar”* (in this case the files will be extracted), or *‘.wylioapp”* (we are creating recursively the project folder).
 
@@ -480,13 +582,16 @@ Generates the project tree structure with paths and names.
 
 The parameter:
 
-* *“necessary”* = an object representing the details about every file within the project
+.. list-table::
 
-	* *necesarry.item* - file item
-	* *necessary.item.isdir* - is or not directory
-	* *necessary.item.children* - only if it's a directory
-	* *necessary.item.name* - name
-	* *necessary.item.content* - file content only if it's a file
+	* - **"necessary"**
+	  - an object representing the details about every file within the project
+
+* *necesarry.item* - file item
+* *necessary.item.isdir* - is or not directory
+* *necessary.item.children* - only if it's a directory
+* *necessary.item.name* - name
+* *necessary.item.content* - file content only if it's a file
 
 We are using it in the *importProject* function mentioned before (*.wylioapp* extension)
 
@@ -495,8 +600,12 @@ exportProject
 """""""""""""
 The function parameters are:
 
-* *"project"* = the current project chosen
-* *"savePath"* = the destination path selected by the user
+.. list-table::
+
+	* - **"project"**
+	  - the current project chosen
+	* - **"savePath"**
+	  - the destination path selected by the user
 
 Exports a project archive (*.zip* extension format) to the chose path in user’s computer.
 
@@ -513,8 +622,12 @@ newFolder
 Creates a new folder in the current project.
 The parameters of this function are:
 
-* “project” = the current project object”
-* “name” = path to where to create the new folder. 
+.. list-table::
+
+	* - **"project"**
+	  - the current project object”
+	* - **"name"**
+	  - path to where to create the new folder. 
 
 This option is valid only in the *Advanced Mode*.
 
@@ -531,9 +644,14 @@ newFile
 Creates a new file in the current project.
 The function parameters are:
 
-* “project” = the current project object”,
-* “name” = path to where to create the new folder
-* “data” =  data that will be written in the new file
+.. list-table::
+
+	* - **"project"**
+	  - the current project object,
+	* - **"name"**
+	  - path to where to create the new folder
+	* - **"data"**
+	  -  data that will be written in the new file
 
 For example, when we create a new programming language, in its particular object we use the **newFile** function and create the main file of the project:
 
@@ -550,9 +668,14 @@ Renames the selected file/ folder.
 
 The function parameters are:
 
-* “project” = the project object
-* “newName” = the new name of the project, chosen by the user
-* "pathTo" = path to existing file/folder
+.. list-table::
+
+	* - **"project"** 
+	  - the project object
+	* - **"newName"**
+	  - the new name of the project, chosen by the user
+	* - **"pathTo"**
+	  - path to existing file/folder
 
 Available only for the *Advanced Mode*, this function is called when the user choses the *Rename* option in the menu that shows up by right clicking on a folder/file.
 
@@ -570,8 +693,12 @@ Deletes the current file of a project tree.
 
 The function parameters are:
 
-* “project” = the project object
-* “pathTo” = the path to the selected file
+.. list-table::
+
+	* - **"project"**
+	  - the project object
+	* - **"pathTo"**
+	  - the path to the selected file
 
 .. code-block:: javascript
 
@@ -586,8 +713,12 @@ Deletes the selected folder of a project tree.
 
 The function parameters are:
 
-* “project” = the project object
-* “pathTo” = the path to the folder
+.. list-table::
+
+	* - **"project"**
+	  - the project object
+	* - **"pathTo"**
+	  - the path to the folder
 
 .. code-block:: javascript
 
@@ -606,7 +737,7 @@ For example:
 
 .. code-block:: javascript
 
-	let projects=loadProjects();
+	let projects = loadProjects();
 
 In this case, *projects* will be an array with all the created projects.
 
@@ -617,7 +748,10 @@ Selects a project when the user clicks on the image attached to it and it loads 
 
 The only parameter is:
 
-* *"project"* = the project where the user decides to select
+.. list-table::
+
+	* - **"project"**
+	  - the project where the user decides to select
 
 
 loadPreviousSelectedCurrentProject
@@ -634,9 +768,14 @@ Saves an edited file.
 
 The function parameters are:
 
-* “project” = the project object
-* “name” = the path to the file
-* “buffer” = the file buffer that will actually be saved
+.. list-table::
+
+	* - **"project"**
+	  - the project object
+	* - **"name"**
+	  - the path to the file
+	* - **"buffer"**
+	  - the file buffer that will actually be saved
 
 You can use the function like this:
 
@@ -652,8 +791,12 @@ Loads a file. It returns a string that represents the file content.
 
 The function parameters are:
 
-* “project” = the project object
-* “name” = the full file name, including its path
+.. list-table::
+
+	* - **"project"**
+	  - the project object
+	* - **"name"**
+	  - the full file name, including its path
 
 An example on how to use this function is:
 
@@ -670,7 +813,10 @@ Changes the current file in the store.
 
 The only parameter is:
 
-* “name”=path to the file
+.. list-table::
+
+	* - **"name"**
+	  - path to the file
 
 
 saveSpecialFile
@@ -679,9 +825,14 @@ Saves a special settings file.
 
 This function parameters are:
 
-* “project” = the current project object
-* “name” = the special file name
-* “content” = the content that will be saved in the special file
+.. list-table::
+
+	* - **"project"**
+	  - the current project object
+	* - **"name"**
+	  - the special file name
+	* - **"content"**
+	  - the content that will be saved in the special file
 
 For example:
 
@@ -697,8 +848,12 @@ Loads a special settings file.
 
 The parameters are:
 
-* “project” = the current project object
-* name” = the special file name
+.. list-table::
+
+	* - **"project"**
+	  - the current project object
+	* - **"name"**
+	  - the special file name
 
 Given the example above, we call this function to load the content that was previously saved in the file
 
@@ -714,8 +869,12 @@ Recursively generates a deep object with all the contents of a project and retur
 
 The function parameters are:
 
-* "project" = the selected project object
-* "file" = the file object
+.. list-table::
+
+	* - **"project"**
+	  - the selected project object
+	* - **"file"**
+	  - the file object
 
 generateStructure
 """"""""""""""""""""
@@ -724,8 +883,12 @@ Generates the tree structure of a project and it returns the tree structure with
 
 The parameters are:
 
-* *"project"*  the current project object 
-* *"isRoot=true"*
+.. list-table::
+
+	* - **"project"**
+	  - the current project object 
+	* - **"isRoot-true"**
+	  -  
 
 getCurrentProject
 """"""""""""""""""
@@ -737,7 +900,7 @@ For example:
 
 .. code-block:: javascript
 
-	let project = getCurrentProject();
+	let project - getCurrentProject();
 
 The value of the **project** variable will be *'New Project'*.
 
@@ -747,9 +910,12 @@ Returns the default file name for a specified project.
 
 The only parameter is:
 
-* *"project"* = the selcted project object
+.. list-table::
 
-For example, in the *“language.python”* plugin, we create a *“python”* object, to which we associate the default file name *‘/main.py’*.
+	* - **"project"**
+	  - the selcted project object
+
+For example, in the *- *"language.python"* plugin, we create a *“python”* object, to which we associate the default file name *‘/main.py’*.
 
 .. code-block:: javascript
 
@@ -764,7 +930,10 @@ Returns the default run file name for a specified project.
 
 The only parameter is:
 
-* *"project"* = the selcted project object
+.. list-table::
+
+	* - **"project"**
+	  - the selcted project object
 
 Same as the **getDefaultFileName** function above,, in the *“language.python”* plugin, inside the *“python”* object we created, we associate the default run file name *‘/main.py’*.
 
@@ -780,8 +949,12 @@ Similar to the 2 functions above, returns the makefile for the main file of a pr
 
 The function parameters are:
 
-* *"project"* = the selected project object
-* *"filename"* = the file name for the selected project
+.. list-table::
+
+	* - **"project"**
+	  - the selected project object
+	* - **"filename"**
+	  - the file name for the selected project
 
 An example of use of this function can also be found in the *“language.python”* plugin:
 
@@ -797,8 +970,12 @@ Gets the default run file name of a language.
 
 The function parameters are: 
 
-* *"project"* = the selected project object
-* *"option"* = the name of the option we want to obtain
+.. list-table::
+
+	* - **"project"**
+	  - the selected project object
+	* - **"option"**
+	  - the name of the option we want to obtain
 
 An example of use for this function could be:
 
@@ -815,8 +992,12 @@ Gets the file code of a project.
 
 The function parameters are:
 
-* *"project"* = the project object
-* *"pathTo"* = the path to the file
+.. list-table::
+
+	* - **"project"**
+	  - the project object
+	* - **"pathTo"**
+	  - the path to the file
 
 To obtain the full path of the file where the code is located, we join the project folder and the **pathTo**, then we validate this actual path. 
 To obtain the file code we are interested in, we use the 

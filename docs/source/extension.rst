@@ -23,11 +23,18 @@ They were previously registered using the **registerDeviceToolButton** function:
 
 The parameters of this function are:
 
-* *"deviceType"* = the type of the device driver type the button is for
-* *"priority"* = element priority in the list with all device buttons; the button with the lowest priority will be displayed to the left
-* *"action"* = the actions that the buttton will perform on click
-* *"iconURL"* = the image assigned
-* *"options"* = additional options
+.. list-table::
+
+	* - **"deviceType"**
+	  - the type of the device driver type the button is for
+	* - **"priority"**
+	  - element priority in the list with all device buttons; the button with the lowest priority will be displayed to the left
+	* - **"action"**
+	  - the actions that the buttton will perform on click
+	* - **"iconURL"**
+	  - the image assigned
+	* - **"options"**
+	  - additional options
 
 An example on how to use this function to create this type of buttons can be:
 
@@ -49,11 +56,18 @@ They are included in the *Toolbar.vue* file and saved into an array in the works
 
 In order to create this type of buttons, we implemented the **registerToolbarButton** function:
 
-* *"name"* = element label, registered as a string that will be translated
-* *"priority"* = element priority in the list with all toolbar buttons; the button with the lowest priority will be displayed to the left
-* *"action"* = the actions that the buttton will perform on click
-* *"iconURL"* = the image assigned
-* *"options"* = additional options
+.. list-table::
+
+	* - **"name"**
+	  - element label, registered as a string that will be translated
+	* - **"priority"**
+	  - element priority in the list with all toolbar buttons; the button with the lowest priority will be displayed to the left
+	* - **"action"**
+	  - the actions that the buttton will perform on click
+	* - **"iconURL"**
+	  - the image assigned
+	* - **"options"**
+	  - additional options
 
 For example, you can use the function like this:
 
@@ -77,10 +91,16 @@ The menu button is included in the *Menu.vue* component, as a simple image butto
 
 If clicked, it opens a help menu including  some topics registered using the **registerMenuItem** function:
 
-* *"name"* = element label, registered as a string that will be translated as the menu item name
-* *"priority"* = element priority in the list with all menu items; hte item with the lowest priority is to the left
-* *"component"* = the vue component attached to the current item
-* *"options"* = additional options
+.. list-table::
+
+	* - **"name"**
+	  - element label, registered as a string that will be translated as the menu item name
+	* - **"priority"**
+	  - element priority in the list with all menu items; hte item with the lowest priority is to the left
+	* - **"component"**
+	  - the vue component attached to the current item
+	* - **"options"**
+	  - additional options
 
 An example of use, which registers the item *'New Menu Item'*
 
@@ -117,18 +137,7 @@ A list with the currently available languages:
 .. image:: images/all_languages.png
 	:align: center 
 
-When a language is selected from the list, the **setLanguage** function is called:
-
-.. code-block:: javascript
-
-	setLanguage (languageId)
-	{
-		this.$i18n.locale = languageId;
-		// Trigger resize to make sure UI elements get updated
-		$(window).trigger ('resize');
-	}
-
-Internationalization (**i18n**) is the process of preparing software so that it can support local languages and cultural settings. 
+When a language is selected from the list, the **setLanguage** function is called, which is using the `internationalization (i18n) <https://en.wikipedia.org/wiki/Internationalization_and_localization>`_ process.
 
 So, the new language is updated and all the keys will be translated. More details about the translation function are discussed :ref:`here <translations>`.
 
@@ -140,10 +149,16 @@ The tabs are components of our application and accomplish various functions that
 
 They are integrated with the **registerTab** function:
 
-* *"name"* = element label, registered as a string that will be translated
-* *"priority"* = element priority in the list with all menu items: the tab with the lowest priority will be displayed to the left
-* *"component"* = the vue component attached to the current tab
-* *"options"* = additional options
+.. list-table::
+
+	* - **"name"**
+	  - element label, registered as a string that will be translated
+	* - **"priority"**
+	  - element priority in the list with all menu items: the tab with the lowest priority will be displayed to the left
+	* - **"component"**
+	  - the vue component attached to the current tab
+	* - **"options"**
+	  - additional options
 
 For example, in order to register the ‘Notebook’ tab, in the index.js file corresponding to the notebook plugin, we called the function:
 
@@ -218,11 +233,18 @@ The last component of the workspace is represented by the status buttons: **Cons
 
 The parameters of this function are:
 
-* *"name"* = element label, registered as a string that will be translated
-* *"priority"* = element priority in the list with all status buttons; the button with the lowest priority is to the left.
-* *"component"* = the vue component attached to the current item
-* *"iconURL"* = the image assigned
-* *"options"* = additional options
+.. list-table::
+
+	* - **"name"**
+	  - element label, registered as a string that will be translated
+	* - **"priority"**
+	  - element priority in the list with all status buttons; the button with the lowest priority is to the left.
+	* - **"component"**
+	  - the vue component attached to the current item
+	* - **"iconURL"**
+	  - the image assigned
+	* - **"options"**
+	  - additional options
 
 .. image:: images/registerStatusButton.png
 	:align: center

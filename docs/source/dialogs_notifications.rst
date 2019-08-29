@@ -3,13 +3,15 @@
 Dialogs and Notifications
 ===========================
 
+|
+
 In the *"workspace"* plugin you will find, additionally to the functions presented in the :ref:`API section <api>`, some functions design to create and display in the application some customized pop-ups, like dialogs, prompts and notifications.
 
 |
 
 Dialogs
 *********
-A dialog is a component that inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. It can usually be used to collect data from the user.
+A dialog is a component that inform users about a specific task and may contain important information, require decisions, or involve multiple actions or inputs. It can usually be used to collect data from the user.
 
 .. _showDialog:
 
@@ -17,10 +19,16 @@ showDialog
 ^^^^^^^^^^^
 This is the main open-dialog function for the application. The parameters are:
 
-* *"title"* - the title of the dialog window
-* *"component"* - the Vue component to display
-* *"options"* - additional specifications, like width
-* *"buttons"* - the array of buttons to display
+.. list-table::
+
+	* - **"title"**
+	  - the title of the dialog window
+	* - **"component"**
+	  - the Vue component to display
+	* - **"options"**
+	  - additional specifications, like width
+	* - **"buttons"**
+	  - the array of buttons to display
 
 The return is a *Promise* that will be resolved according to the user's response.
 
@@ -66,7 +74,7 @@ It's called when the user clicks on the *‘Connect’* button and it shows a di
 Prompts
 *********
 
-A prompt is actually a dialog box that prompts the visitor for input. A prompt box is often used if you want the user to input a value before entering a page, for example write a text or click on a button that will perform a certain action.
+A prompt is actually a dialog box that requires a user decision. A prompt box is often used if you want the user to input a value before entering a page, for example write a text or click on a button that will perform a certain action.
 
 showPrompt
 ^^^^^^^^^^^
@@ -74,11 +82,18 @@ Shows a prompt that waits for the user input.
 
 The function parameters are:
 
-* *"title"* = the title of the window box 
-* *"question"* = the question / additional details adressed to the user
-* *"original"* = the initialcontent of the input text area
-* *"action"* = the action to perform
-* *"values = {}"* = empty object
+.. list-table::
+
+	* - **"title"** 
+	  - the title of the window box 
+	* - **"question"**
+	  - the question / additional details adressed to the user
+	* - **"original"**
+	  - the initialcontent of the input text area
+	* - **"action"**
+	  - the action to perform
+	* - **"values = {}"**
+	  - empty object
 
 For example, let's try to open a customized prompt when the user chooses to rename a project.
 
@@ -99,9 +114,14 @@ Same as **showPrompt**, except that it waits for the user to confirm the questio
 
 The function parameters are:
 
-* *"title"* = the title of the window prompt
-* *"question"* = the question that will be addressed to the user
-* *"values = {}"* = empty object
+.. list-table::
+
+	* - **"title"**
+	  - the title of the window prompt
+	* - **"question"**
+	  - the question that will be addressed to the user
+	* - **"values = {}"**
+	  - empty object
 
 As an example, here's how we are using it to check if the user is sure that he wants to close the app.
 
@@ -129,14 +149,17 @@ Obviously, this function's purpose is to send a notification to the user's appli
 
 The function parameters are:
 
-* *"text"* = the text of the notification
-* *"values={}"* = empty object
-* *"type"* = info/succes/warning
-* *"timeout"* = the time frame in which the notification is displayed
+.. list-table::
 
-The code should look like this:
+	* - **"text"**
+	  - the text of the notification
+	* - **"values={}"**
+	  - empty object
+	* - **"type"**
+	  - info/succes/warning
+	* - **"timeout"**
+	  - the time frame in which the notification is displayed
 
-.. code-block:: javascript
 
 We used the the translation function in order to translate the notification text according to the current language.
 
@@ -158,12 +181,16 @@ This function is almost identical to the **showNotification** function.
 
 The parameters are:
 
-* *"text"* = the text of the notification
-* *"values={}"* = empty object
-* *"timeout"* = the time frame in which the notification is displayed
+.. list-table::
 
-The difference can be spotted in the code, where we use the type *error* as default:
+	* - **"text"**
+	  - the text of the notification
+	* - **"values={}"**
+	  - empty object
+	* - **"timeout"**
+	  - the time frame in which the notification is displayed
 
+The difference can be spotted in the code, where we use the type *error* as default.
 
 For example, in the *“notebook”* plugin, we are sending an error if the user closes the upload image window without selecting a file:
 

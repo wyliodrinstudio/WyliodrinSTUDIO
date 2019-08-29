@@ -15,11 +15,27 @@ The first step will be to create the **button.example** folder inside the *plugi
 
 As mentioned before, the content of this type of file has to be an object with the following properties:
 
-1. “name” : the name of the plugin (“button.example”)
-2. “version”: “0.0.1”
-3. “main”: the main file of the plugin, that will be “index.js”
-4. “private”: in this case **false**, we want the plugin to be visible
-5. “plugin”: the object where we specify if our plugin consumes other plugins (required *"workspace"*) and if it provides something (*"example_button"*. We also include here the *target* property, which specifies for each version of the program the plugin should be working: **browser** or **electron**.
+.. list-table::
+
+	* - **"name"**
+	  - the name of the plugin (“button.example”)
+	* - **"version"**
+	  - "0.0.1"
+	* - **"main"**
+	  - the main file of the plugin, that will be “index.js”
+	* - **"plugin"**
+	  - an object where we specify the characteristics of the plugin
+
+The properties of the *"plugin"* component are:
+
+.. list-table::
+
+	* - **"consumes"**
+	  - we specify from which other plugins our plugin uses exported functions(required *"workspace"*)
+	* - **"provides"**
+	  - we specify if our plugin functions will be exported(*"example_button"*)
+	* - **"target"**
+	  - for which version of the program the plugin should be working: **browser** or **electron**
 
 Finally, the content of our package.json will be:
 
@@ -36,23 +52,38 @@ Therefore, we'll only need to initiate a **studio** variable to *null* and to cr
 
 After that, we have to *export* a **setup** function, its parameters being:
 
-* *options* = additional options
-* *imports* = all the functions that the plugin collects from the plugins that it consumes * in our case, the functions exported by *workspace*)
-* *register* = a function that will register the plugin object
+.. list-table::
+
+	* - *options* 
+	  - additional options
+	* - *imports* 
+	  - all the functions that the plugin collects from the plugins that it consumes (in our case, the functions exported by *workspace*)
+	* - *register*
+	  - a function that will register the plugin object
 
 Inside this function, the **studio** variable instantiated before will receive the **imports** value.
 
 After that, we need to register our button, so we'll call the worskpace function **registerToolbarButton**, which has the following parameters:
 
-* *'EXAMPLE_BUTTON'* = the name of our button, a key string that will be translated
-* *20* = the priority of our button in the list of all toolbar buttons
-* *() => studio.workspace.showNotification* = the action that will be performed when the user clicks on this button
-* *plugins/button.example/data/img/button.png'* = the relative path to the image that will represent our button
+.. list-table::
+
+	* - **'EXAMPLE_BUTTON'**
+	  - the name of our button, a key string that will be translated
+	* - **20** 
+	  - integer number representing the priority of our button in the list of all toolbar buttons
+	* - **() => studio.workspace.showNotification**
+	  - the action that will be performed when the user clicks on this button
+	* - **plugins/button.example/data/img/button.png'** 
+	  - the relative path to the image that will represent our button
 
 The **showNotification** function is also called from the workspace and its parameters are:
 
-* *'NOTIFICATION_TEXT'* = the key string that will be translated and will represent the text of our notification
-* *'success'* = the notification type
+.. list-table::
+
+	* - **'NOTIFICATION_TEXT'** 
+	  - the key string that will be translated and will represent the text of our notification
+	* - **'success'** 
+	  - the notification type
 
 |
 
@@ -123,18 +154,11 @@ The next step is to create an object having your new board name, with the next f
 
 The final step is to register your board and, if it's necessary, the blocks that you'll use, from the *"editor_visual"* plugin:
 
-As an example, you can use our *"device.wyapp.raspberrypi"* plugin:
+For example, if you want to register a *raspberry pi* board, you should use this function:
 
 .. code-block:: javascript
 
-	studio.device_wyapp.registerBoard ('raspberrypi', raspberrypi);
-
-		studio.editor_visual.registerBlocksDefinitions ('raspberrypi', [firmata_blocks, picamera_blocks], [firmata_code, picamera_code], toolbox, 
-			{
-				type: 'wyapp', 
-				board: 'raspberrypi'
-			}
-		);
+	registerBoard ('raspberrypi', raspberrypi);
 
 |
 
@@ -154,77 +178,14 @@ As you can notice, we are modeling the **source** variable (*v-model="source"*),
 
 The option **@init="initEditor"** calls the *initEditor* function at initialization. This function is defined in *methods* and its purpose is to make a require on some modes, themes and snippets supported by the text editor:
 
-.. code-block:: javascript
-
-	initEditor (/*editor*/)
-	{
-		require('brace/ext/language_tools'); //language extension prerequsite...
-		// require('brace/mode/html');
-		require('brace/mode/sh');                
-		require('brace/mode/python');    //language
-		require('brace/mode/javascript');    //language
-		require('brace/mode/less');
-		require('brace/theme/chrome');
-		require('brace/theme/monokai');
-		require('brace/snippets/python'); //snippet
-		require('brace/snippets/javascript'); //snippet
-	}
 
 The option **:lang="sourceLanguage"** updates the mode according to the programming language, while **:options="editorOptions"** applies some customized options.
 
 In the **script** part, we nedd to add a *watch* property on the **filename** variable:
 
-.. code-block:: javascript
-
-	watch:
-	{
-		filename: // in functie de tipul fisierului vad ce mod dau
-		{
-			immediate: true,
-			async handler ()
-			{
-				switch (path.extname (this.filename))
-				{
-					case '.py':
-					{
-						this.sourceLanguage = 'python';
-						break;
-					}
-					case '.sh':
-					{
-						this.sourceLanguage = 'sh';
-						break;
-					}
-					case '.js':
-					{
-						this.sourceLanguage = 'javascript';
-						break;
-					}
-					default:
-					{
-						this.sourceLanguage = '';
-						break;
-					}
-				}
-				let source = await this.studio.projects.loadFile (this.project, this.filename);
-				if (source !== null) this.source = source.toString ();
-				else this.studio.workspace.showNotification ('Failed to load file '+this.filename);
-			}
-		}
-
 The purpose is to change the mode, meaning to update the *sourceLanguage* variable, according to che type/extension of the file.
 
 We are also watching the changes that occur on the **source** variable and when it's updated, we are saving the file that was edited with our editor.
-
-.. code-block:: javascript
-
-	async source (newValue, oldValue)
-		{
-			if (newValue !== oldValue)
-			{
-				await this.studio.projects.saveFile (this.project, this.filename, this.source);
-			}
-		}
 
 The content of the **index.js** file is classic. At first, we import the Vue component created before:
 
@@ -232,7 +193,7 @@ The content of the **index.js** file is classic. At first, we import the Vue com
 
 	import Ace from './views/AceEditor.vue';
 
-After that, inside the *setup* function, we register our nu editor using the workspace function :ref:`registerEditor <editor>`:
+After that, inside the *setup* function, we register our new editor using the workspace function :ref:`registerEditor <editor>`:
 
 .. code-block:: javascript
 
@@ -262,37 +223,22 @@ The language plugin doesn't have any Vue component, so we don't have to create t
 
 Inside the main file, **index.js**, we  obviously need to initialize the *studio* variable to null, and insinde the *setup* function it will receive all the imported functions from the "workspace" and "projects" plugin.
 
-The next step is to create the **python** object, that will have the following structure:
+The next step is to create the **python** object, its properties being:
 
-.. code-block:: javascript
+.. list-table::
 
-	let python = {
-		async createProject(name){
-			await studio.projects.newFile(name,'/main.py','print (\'Hello from Python\')');			
-		},
-		getDefaultFileName() {
-			return '/main.py';
-		},
-		getDefaultRunFileName() {
-			return '/main.py';
-		},
-		getMakefile(project, filename) {
-			if (filename[0] === '/') filename = filename.substring (1);
-			// TODO add filename
-			return 'run:\n\tpython main.py';
-		},
-	};
+	* - **createProject**
+	  - function where we use the *newFile* function from the *projects* plugin to create a **main.py** file
+	* - **getDefaultFileName**
+	  - function where we return the *'/main.py'* file
+	* - **getDefaultRunFileName**
+	  - function where we return the *'/main.py'* file
+	* - **getMakefile**
+	  - function that returns the content of the makefile for the chosen language ( here, *return 'run:\n\tpython main.py';*)
 
-So each programming language should have its own project, with a **main** file, which will have the corresponding extension (in this case, *.py*), and its content should also be representative. For example, on the first line of the *main.py* file, we will find the code line:
-
-.. code-block:: python
-
-	print (\'Hello from Python\')
-
-After that, we return the ***main** file as *default file name( and *default run file name*) and we also create and return the **makefile** of the project.
 
 The next step is to register the new programming language, using the function :ref:`registerLanguage <registerLanguage>`:
 
 .. code-block:: javascript
 
-	studio.projects.registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
+	registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
