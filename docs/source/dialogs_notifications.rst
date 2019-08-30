@@ -4,10 +4,9 @@ Dialogs and Notifications
 ===========================
 
 |
-
-In the *"workspace"* plugin you will find, additionally to the functions presented in the :ref:`API section <api>`, some functions design to create and display in the application some customized pop-ups, like dialogs, prompts and notifications.
-
 |
+
+In the *"workspace"* plugin you will find, additionally to the functions presented in the API sections, some functions design to create and display in the application some customized pop-ups, like dialogs, prompts and notifications.
 
 Dialogs
 *********
@@ -21,13 +20,13 @@ This is the main open-dialog function for the application. The parameters are:
 
 .. list-table::
 
-	* - **"title"**
+	* - *title*
 	  - the title of the dialog window
-	* - **"component"**
+	* - *component*
 	  - the Vue component to display
-	* - **"options"**
+	* - *options*
 	  - additional specifications, like width
-	* - **"buttons"**
+	* - *buttons*
 	  - the array of buttons to display
 
 The return is a *Promise* that will be resolved according to the user's response.
@@ -84,16 +83,16 @@ The function parameters are:
 
 .. list-table::
 
-	* - **"title"** 
+	* - *title* 
 	  - the title of the window box 
-	* - **"question"**
+	* - *question*
 	  - the question / additional details adressed to the user
-	* - **"original"**
+	* - *original*
 	  - the initialcontent of the input text area
-	* - **"action"**
+	* - *action*
 	  - the action to perform
-	* - **"values = {}"**
-	  - empty object
+	* - *values = {}*
+	  - empty object; the parameter is not mandatory when you call this function, its purpose being to insert the value of a variable in a translated text 
 
 For example, let's try to open a customized prompt when the user chooses to rename a project.
 
@@ -116,14 +115,14 @@ The function parameters are:
 
 .. list-table::
 
-	* - **"title"**
+	* - *title*
 	  - the title of the window prompt
-	* - **"question"**
+	* - *question*
 	  - the question that will be addressed to the user
-	* - **"values = {}"**
-	  - empty object
+	* - *values = {}*
+	  - empty object; the parameter is not mandatory when you call this function, its purpose being to insert the value of a variable in a translated text 
 
-As an example, here's how we are using it to check if the user is sure that he wants to close the app.
+For example, here's how we are using it to check if the user is sure that he wants to close the app.
 
 .. code-block:: javascript
 
@@ -142,6 +141,8 @@ The notifications are simple pop-ups that inform the user about unauthorized act
 
 The possible types for a notification are: *info*, *success*, and *warning*, and each type has a distinct color.
 
+.. _notification:
+
 showNotification
 ^^^^^^^^^^^^^^^^^^
 
@@ -151,13 +152,13 @@ The function parameters are:
 
 .. list-table::
 
-	* - **"text"**
+	* - *text*
 	  - the text of the notification
-	* - **"values={}"**
-	  - empty object
-	* - **"type"**
+	* - *values={}*
+	  - empty object; the parameter is not mandatory when you call this function, its purpose being to insert the value of a variable in a translated text 
+	* - *type*
 	  - info/succes/warning
-	* - **"timeout"**
+	* - *timeout*
 	  - the time frame in which the notification is displayed
 
 
@@ -183,11 +184,11 @@ The parameters are:
 
 .. list-table::
 
-	* - **"text"**
+	* - *text*
 	  - the text of the notification
-	* - **"values={}"**
-	  - empty object
-	* - **"timeout"**
+	* - *values={}*
+	  - empty object; the parameter is not mandatory when you call this function, its purpose being to insert the value of a variable in a translated text 
+	* - *timeout*
 	  - the time frame in which the notification is displayed
 
 The difference can be spotted in the code, where we use the type *error* as default.

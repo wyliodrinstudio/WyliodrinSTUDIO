@@ -10,13 +10,16 @@ Wyliodrin STUDIO consists of a series of plugins that we used to build the diffe
 Basically, a plugin is a component of the program that will help you apply different features to our application. Due to the fact that Wyliodrin Studio supports plugins, it enables customization, which means that you will be able contribute to the development and improvement of our application.
 
 
-To design a pleasing, yet accessible and easy to use interface for our users, we chose the `Vue framework <https://vuejs.org/v2/guide>`_. The connection between frontend and API has always been a challenge and required a lot of work because of its complexity. Since we are using **Vue** to develop our frontend, the best solution to this problem is the `VueX <https://vuex.vuejs.org/>`_ library, which is deeply integrated into Vue and exploits its reactivity.
+To design the user interface we chose the `Vue framework <https://vuejs.org/v2/guide>`_. The connection between frontend and API has always been a challenge and required a lot of work because of its complexity, but since we are using **Vue** to develop our frontend, the best solution to this problem is the `VueX <https://vuex.vuejs.org/>`_ library, which is deeply integrated into Vue and exploits its reactivity.
 
 |
 
-**ADD A NEW PLUGIN**
+PLUGIN ARCHITECTURE
+""""""""""""""""""""""
 
 .. _plugin:
+
+Each plugin is a folder in the **source/plugins**.
 
 In order to create your own plugin, you should open the folder that you cloned before with a source-code editor, like **Visual Studio Code**. After that, you will have to open the **plugins** folder, that represents the *"storage center"* for all the plugins and that is found inside the **source** folder. Here, in **plugins** you will create a new folder, named after the plugin you’d like to add. 
 
@@ -34,33 +37,41 @@ The main components that you’ll need to create for your plugin are:
 
 .. list-table::
 
-	* - **"name"**
+	* - *name*
 	  - the name of the plugin (“button.example”)
-	* - **"version"**
+	* - *version*
 	  - "0.0.1"
-	* - **"main"**
+	* - *main*
 	  - the main file of the plugin, that will be “index.js”
-	* - **"plugin"**
+	* - *plugin*
 	  - an object where we specify the characteristics of the plugin
 
 The properties of the *"plugin"* component are:
 
 .. list-table::
 
-	* - **"consumes"**
+	* - *consumes*
 	  - we specify from which other plugins our plugin uses exported functions(required *"workspace"*)
-	* - **"provides"**
+	* - *provides*
 	  - we specify if our plugin functions will be exported(*"example_button"*)
-	* - **"target"**
+	* - *target*
 	  - for which version of the program the plugin should be working: **browser** or **electron**
 
 As an example, a *package.json* file should look like this:
 
-.. image:: images/packagejson.png
-	:align: center
+.. code-block:: json
 
-
-
+	{
+		"name": "my.new.plugin",
+		"version": "0.0.1",
+		"main": "index.js",
+		"private": false,
+		"plugin": {
+			"consumes": ["workspace"],
+			"provides": ["my_new_plugin"],
+			"target" : ["browser", "electron"]
+		}
+	}
 
 * The **index.js** file, which will be your main file. Here, you need to import all the *.vue* files that you need to register. 
 	For example, the first line in your index.js will be: 
@@ -87,7 +98,8 @@ At the end, the folder should look like this:
 
 |
 
-**DEPENDENCIES**
+DEPENDENCIES
+""""""""""""""""
 
 As any other program, our application also requires to install new packages or modules that will be used by our plugins and which are known as **dependencies**. For the moment, all our dependencies can be found in the *package.json* file of the main folder, not separated in the *package.json* files of each plugin. The simple dependencies, the ones that we insall using the *--save* argument, are depending only on the platform, which means they are not working in browser (like *serialport*). For this reason, they should be saved as **devDependencies**, meaning that the argument will be *--save-dev*.
 
@@ -99,37 +111,72 @@ For example, if we want to install the *highcharts* module, the commannd that wi
 
 |
 
-Window Buttons
-***************
+Some of the most important architecture comoponents are:
 
-These are the classic buttons used for handling the main window of our application: *Minimize*, *Fullscreen* and *Exit*. They are located in the top right corner and can be identified as:
+CONNECTION BUTTON
+""""""""""""""""""""
 
-.. image:: images/window_buttons.png
+.. image:: images/connectionbutton.png
 	:align: center
 
-We created this type of buttons inside the *"worskpace"* plugin, in the *Toolbar.vue* component:
-
-.. image:: images/vue_window.png
-	:align: center
-	:width: 700px
-	:height: 100px
-
-As you can observe, inside de **<span>** tag, we added a text label and we used the function **$t('WORKSPACE_TOOLBAR_FULLSCREEN')**. It will translate the unique id string and, according to the current language, you will see the translation, not this key. More details about the translations file format can be found in our :ref:`translations <translations>` section.
-
-.. image:: images/minimize.png
-	:align: center
-
-|
-
-Connection Button
-******************
 Also in the *workspace* plugin we added the connection button, which can be found inside the *DeviceTools.vue* component. It is visible only when there is no device connected to Wyliodrin Studio and it was designed like this:
 
 .. image:: images/connectionbuttonvue.png
 
 |
 
-.. image:: images/connectionbutton.png
+On click, it calls the :ref:`showConnectionSelectionDialog <showConnectionSelectionDialog>` and it opens a dialog where the user can see all the available devices. By clicking on a device, he will be asked to input the technical specifications and the login credentials, in order to connect and enable the device functionalities. When the connection was successfully completed, the device status will change from *DISCONNECTED* to *CONNECTED*.
+
+TOOLBAR BUTTON
+""""""""""""""""
+The toolbar is a component located at the top of the window, on which you can add multiple elements. 
+
+.. image:: images/toolbar.png
+	:align: center
+	:width: 700px
+	:height: 50px
+
+The toolbar buttons are created using the **registerToolbarButton** function. One of the functionalities added in the toolbar using this function is the *Projects Library*, which opens a dialog where the user can manage its applications.
+
+TABS
+"""""
+
+.. image:: images/tabs.png
 	:align: center
 
-On click, it calls the :ref:`showConnectionSelectionDialog <showConnectionSelectionDialog>` that was previously defined in the *workspace* plugin and it opens a dialog where you can see all the available devices.
+The tabs are the main components of the workspace, created using the **registerTab** function. They offer the possibility to write and test the code for programming an IoT device, display sensors data, to import Frietzing schematics or to access the connected directly through the shell.
+
+The existing tabs at the moment are: **Application**, **Dashboard**, **Notebook**, **Schematics** and **Shell**.
+
+STATUS BUTTONS
+""""""""""""""""
+
+.. image:: images/registerStatusButton.png
+	:align: center
+	:width: 80px
+	:height: 50px
+
+The Status Buttons are created with the **registerStatusButton** function. They are used to open the *console* or the *mqtt* server.
+The **Console** button opens a console similar to the *shell*.
+
+The **MQTT** button opens an interface where you can choose the port where the *MQTT* server will be opened (publish-subscribe-based messaging protocol).
+
+MENU
+"""""
+The Menu is an element created on the toolbar component, represented by the following icon:
+
+.. image:: images/menu.png
+	:align: center
+
+When clicked, it opens a menu containing different elements that help the user learn more about Wyliodrin STUDIO, send his feedback or switch to the advanced mode.
+
+The components of the menu are:
+
+.. image:: images/menuitems.png
+	:align: center
+
+
+
+
+
+

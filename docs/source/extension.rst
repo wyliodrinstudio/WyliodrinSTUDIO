@@ -3,84 +3,11 @@
 Extension methods
 ==================
 
-DeviceTool Buttons
-********************
-
-These buttons are visible only when a device is connected and they can be different according to the device type.
-
-We added them in the *DeviceTools.vue* component:
-
-.. image:: images/devicetoolbuttons.png
-	:align: center
-	:width: 700px
-	:height: 80px
-
-And this is how they look like:
-
-POZA PI CONECTAT
-
-They were previously registered using the **registerDeviceToolButton** function:
-
-The parameters of this function are:
-
-.. list-table::
-
-	* - **"deviceType"**
-	  - the type of the device driver type the button is for
-	* - **"priority"**
-	  - element priority in the list with all device buttons; the button with the lowest priority will be displayed to the left
-	* - **"action"**
-	  - the actions that the buttton will perform on click
-	* - **"iconURL"**
-	  - the image assigned
-	* - **"options"**
-	  - additional options
-
-An example on how to use this function to create this type of buttons can be:
-
-.. code-block:: javascript
-
-	registerDeviceToolButton('DEVICETOOL_BUTTON', 10, () => showNotification ('You created a device tool button', 'success'));
-
-Here we register a device tool button having the translation key 'DEVICETOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the "You created a device tool button" text.
-
-Toolbar Buttons
-****************
-These buttons are located in the toolbar, on the top of the main window.
-They are included in the *Toolbar.vue* file and saved into an array in the workspace store.
-
-.. image:: images/toolbarbuttonsvue.png
-	:align: center
-	:width: 700px
-	:height: 80px
-
-In order to create this type of buttons, we implemented the **registerToolbarButton** function:
-
-.. list-table::
-
-	* - **"name"**
-	  - element label, registered as a string that will be translated
-	* - **"priority"**
-	  - element priority in the list with all toolbar buttons; the button with the lowest priority will be displayed to the left
-	* - **"action"**
-	  - the actions that the buttton will perform on click
-	* - **"iconURL"**
-	  - the image assigned
-	* - **"options"**
-	  - additional options
-
-For example, you can use the function like this:
-
-.. code-block:: javascript
-
-	registerToolbarButton('TOOLBAR_BUTTON', 10, () => showNotification('You created a toolbar button', 'success'), 'plugins/projects/data/img/icons/projects-icon.svg');
-
-we register a button having the translation key 'TOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the "You created a toolbar button" text. We need to specify the relative path to the image related to the button.
-
-.. image:: images/registerToolbarButton.png
-	:align: center
-
 |
+
+Wyliodrin STUDIO enables customization, which means that you may add plugins to extend its features. Plugins may register different components like buttons specially designed for devices, workspace tabs, status buttons, toolbar buttons or menus.
+
+Here is a list of plugins of this type, registered at this moment in Wyliodrin STUDIO:
 
 Menu
 *****
@@ -93,13 +20,13 @@ If clicked, it opens a help menu including  some topics registered using the **r
 
 .. list-table::
 
-	* - **"name"**
+	* - *name*
 	  - element label, registered as a string that will be translated as the menu item name
-	* - **"priority"**
+	* - *priority*
 	  - element priority in the list with all menu items; hte item with the lowest priority is to the left
-	* - **"component"**
+	* - *component*
 	  - the vue component attached to the current item
-	* - **"options"**
+	* - *options*
 	  - additional options
 
 An example of use, which registers the item *'New Menu Item'*
@@ -125,21 +52,36 @@ The items registered in the menu are:
 
 |
 
-Language
-**********
-The language button is included in the *LanguageMenu.vue* component and its corresponding image, a flag, changes dynamically according to the selected language.
+Toolbar Buttons
+****************
+These buttons are located in the toolbar, on the top of the main window.
+They are included in the *Toolbar.vue* file and saved into an array in the workspace store.
 
-.. image:: images/language.png
+In order to create this type of buttons, we implemented the **registerToolbarButton** function:
+
+.. list-table::
+
+	* - *name*
+	  - element label, registered as a string that will be translated
+	* - *priority*
+	  - element priority in the list with all toolbar buttons; the button with the lowest priority will be displayed to the left
+	* - *action*
+	  - the actions that the buttton will perform on click
+	* - *iconURL*
+	  - the image assigned
+	* - *options*
+	  - additional options
+
+For example, you can use the function like this:
+
+.. code-block:: javascript
+
+	registerToolbarButton('TOOLBAR_BUTTON', 10, () => showNotification('You created a toolbar button', 'success'), 'plugins/projects/data/img/icons/projects-icon.svg');
+
+we register a button having the translation key 'TOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the "You created a toolbar button" text. We need to specify the relative path to the image related to the button.
+
+.. image:: images/registerToolbarButton.png
 	:align: center
-
-A list with the currently available languages: 
-
-.. image:: images/all_languages.png
-	:align: center 
-
-When a language is selected from the list, the **setLanguage** function is called, which is using the `internationalization (i18n) <https://en.wikipedia.org/wiki/Internationalization_and_localization>`_ process.
-
-So, the new language is updated and all the keys will be translated. More details about the translation function are discussed :ref:`here <translations>`.
 
 |
 
@@ -151,13 +93,13 @@ They are integrated with the **registerTab** function:
 
 .. list-table::
 
-	* - **"name"**
+	* - *name*
 	  - element label, registered as a string that will be translated
-	* - **"priority"**
+	* - *priority*
 	  - element priority in the list with all menu items: the tab with the lowest priority will be displayed to the left
-	* - **"component"**
+	* - *component*
 	  - the vue component attached to the current tab
-	* - **"options"**
+	* - *options*
 	  - additional options
 
 For example, in order to register the ‘Notebook’ tab, in the index.js file corresponding to the notebook plugin, we called the function:
@@ -226,6 +168,42 @@ In the *Workspace.vue* file, we included all these tabs taking them from the sto
 
 |
 
+DeviceTool Buttons
+********************
+
+These buttons are visible only when a device is connected and they can be different according to the device type.
+
+We added them in the *DeviceTools.vue* component, and this is how they look like:
+
+POZA PI CONECTAT
+
+They were previously registered using the **registerDeviceToolButton** function:
+
+The parameters of this function are:
+
+.. list-table::
+
+	* - *deviceType*
+	  - the type of the device driver type the button is for
+	* - *priority*
+	  - element priority in the list with all device buttons; the button with the lowest priority will be displayed to the left
+	* - *action*
+	  - the actions that the buttton will perform on click
+	* - *iconURL*
+	  - the image assigned
+	* - *options*
+	  - additional options
+
+An example on how to use this function to create this type of buttons can be:
+
+.. code-block:: javascript
+
+	registerDeviceToolButton('DEVICETOOL_BUTTON', 10, () => showNotification ('You created a device tool button', 'success'));
+
+Here we register a device tool button having the translation key 'DEVICETOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the "You created a device tool button" text.
+
+|
+
 Status Buttons
 ***************
 
@@ -235,15 +213,15 @@ The parameters of this function are:
 
 .. list-table::
 
-	* - **"name"**
+	* - *name*
 	  - element label, registered as a string that will be translated
-	* - **"priority"**
+	* - *priority*
 	  - element priority in the list with all status buttons; the button with the lowest priority is to the left.
-	* - **"component"**
+	* - *component*
 	  - the vue component attached to the current item
-	* - **"iconURL"**
+	* - *iconURL*
 	  - the image assigned
-	* - **"options"**
+	* - *options*
 	  - additional options
 
 .. image:: images/registerStatusButton.png
@@ -264,3 +242,24 @@ The **Console** button opens a console similar to the *shell*.
 	studio.workspace.registerStatusButton('MQTT', 1, MQTTServer, 'plugins/mqtt/data/img/icons/mqtt-icon.png');
 
 The **MQTT** button opens an interface where you can choose the port where the *MQTT* server will be opened (the default port is 1883). MQTT is a publish-subscribe-based messaging protocol.
+
+|
+
+Language
+**********
+The language button is included in the *LanguageMenu.vue* component and its corresponding image, a flag, changes dynamically according to the selected language.
+
+.. image:: images/language.png
+	:align: center
+
+A list with the currently available languages: 
+
+.. image:: images/all_languages.png
+	:align: center 
+
+When a language is selected from the list, the **setLanguage** function is called, which is using the `internationalization (i18n) <https://en.wikipedia.org/wiki/Internationalization_and_localization>`_ process.
+
+So, the new language is updated and all the keys will be translated. More details about the translation function are discussed :ref:`here <translations>`.
+
+
+

@@ -17,30 +17,41 @@ As mentioned before, the content of this type of file has to be an object with t
 
 .. list-table::
 
-	* - **"name"**
+	* - *name*
 	  - the name of the plugin (“button.example”)
-	* - **"version"**
+	* - *version*
 	  - "0.0.1"
-	* - **"main"**
+	* - *main*
 	  - the main file of the plugin, that will be “index.js”
-	* - **"plugin"**
+	* - *plugin*
 	  - an object where we specify the characteristics of the plugin
 
 The properties of the *"plugin"* component are:
 
 .. list-table::
 
-	* - **"consumes"**
+	* - *consumes*
 	  - we specify from which other plugins our plugin uses exported functions(required *"workspace"*)
-	* - **"provides"**
+	* - *provides*
 	  - we specify if our plugin functions will be exported(*"example_button"*)
-	* - **"target"**
+	* - *target*
 	  - for which version of the program the plugin should be working: **browser** or **electron**
 
 Finally, the content of our package.json will be:
 
-.. image:: images/mypackagejson.png
-	:align: center
+.. code-block:: json
+
+	{
+		"name": "button.example",
+		"version": "0.0.1",
+		"main": "index.js",
+		"private": false,
+		"plugin": {
+			"consumes": ["workspace"],
+			"provides": ["button_example"],
+			"target" : ["browser", "electron"]
+		}
+	}
 
 |
 
@@ -67,30 +78,44 @@ After that, we need to register our button, so we'll call the worskpace function
 
 .. list-table::
 
-	* - **'EXAMPLE_BUTTON'**
+	* - *'EXAMPLE_BUTTON_NAME'*
 	  - the name of our button, a key string that will be translated
-	* - **20** 
+	* - *20* 
 	  - integer number representing the priority of our button in the list of all toolbar buttons
-	* - **() => studio.workspace.showNotification**
+	* - *() => studio.workspace.showNotification*
 	  - the action that will be performed when the user clicks on this button
-	* - **plugins/button.example/data/img/button.png'** 
+	* - *'plugins/button.example/data/img/button.png'* 
 	  - the relative path to the image that will represent our button
 
 The **showNotification** function is also called from the workspace and its parameters are:
 
 .. list-table::
 
-	* - **'NOTIFICATION_TEXT'** 
+	* - *'EXAMPLE_BUTTON_NOTIFICATION_TEXT'* 
 	  - the key string that will be translated and will represent the text of our notification
-	* - **'success'** 
+	* - *'success'* 
 	  - the notification type
 
 |
 
 By the end, our **index.js** file should look like this:
 
-.. image:: images/indexjs.png
-	:align: center
+.. code-block:: javascript
+
+	let studio = null;
+	let button_example = {};
+
+	export function setup(options, imports, register)
+	{
+		studio = imports;
+		studio.workspace.registerToolbarButton ('EXAMPLE_BUTTON_NAME', 20,
+			() => studio.workspace.showNotification ('EXAMPLE_BUTTON_NOTIFICATION_TEXT', 'success'),
+			'plugins/button.example/data/img/button.png');
+
+		register(null, {
+			button_example: button_example;
+		})
+	}
 
 As you noticed above, when we registered the image corresponding to our button, we specified its relative path, which includes some additional folders in our *button.example* plugin. So, inside the *button.example* directory we have to create the **data** folder, which will include another folder, called **img**. Here, we'll copy our image, its name being **button.png**.
 
@@ -106,13 +131,33 @@ As you can see in the :ref:`Translations <translations>` chapter, the value that
 
 By the and, your **messages-ln.json** (ln = language) files should look like this:
 
-.. image:: images/english.png
-	:align: center
+.. code-block:: json
+
+	{
+		"EXAMPLE_BUTTTON_NAME": {
+			"message": "Notify",
+			"description": "This button pops-up a notification."
+		},
+		"EXAMPLE_BUTTON_NOTIFICATION_TEXT": {
+			"messages": "You have successfully created your button!",
+			"description": "This is the notification text when the user clicks the button."
+		}
+	}
 
 |
 
-.. image:: images/french.png
-	:align: center
+.. code-block:: json
+
+	{
+		"EXAMPLE_BUTTTON_NAME": {
+			"message": "Notifier",
+			"description": "This button pops-up a notification."
+		},
+		"EXAMPLE_BUTTON_NOTIFICATION_TEXT": {
+			"messages": "Vous avez créé le bouton avec succès",
+			"description": "This is the notification text when the user clicks the button."
+		}
+	}
 
 To test if you successfully created your first plugin, you have to rebuild the program using the 2 commands for electron **npx webpack**, then **npm start**. 
 
@@ -121,20 +166,16 @@ POZA DIN APLICATIE
 
 |
 
-Write a device driver plugin
+How to add a wyapp board
 ******************************
 
-Now that you manage to create your own, simple plugin, the next step wold be to understand how the device driver plugins are made.
-
-An additional component will be a **"visual"** folder, which will include 4 **'.js'** files: *code_picamera*, *code_pyfirmata*, *definitions_picamera* and *definitions_pyfirmata*. The purpose of these files is to import the blocks necessary to run the code on your board.
+Now that you manage to create your own, simple plugin, the next step would be to understand how the device driver plugins are made.
 
 |
 
 If you're trying to add a new board plugin, our *"device.wyapp.raspberrypi"*, *"device.wyapp.beagleboneblack"* and *"device.wyapp.udooneo"* plugins may serve as a support for you.
 
-In the **index.js** file, you will have to import the 4 files mentioned above from the **visual** folder.
-
-After that, in the *setup* function, you nedd to create an event, so when the board is *'ready'*, you call the **registerPinLayout** function from our *"pinlayout"* plugin. The purpose of this function is to register the pins of your board in the **Pin Layout** tab, using the appropriate images that you saved in the *data* folder of our plugin.
+In the **index.js** file, inside the *setup* function, you nedd to create an event, so when the board is *'ready'*, you call the **registerPinLayout** function from our *"pinlayout"* plugin. The purpose of this function is to register the pins of your board in the **Pin Layout** tab, using the appropriate images that you saved in the *data* folder of our plugin.
 
 For example, if we are connected to a Raspberry Pi, the contect of the Pin Layout tab will be: 
 
@@ -152,7 +193,7 @@ The next step is to create an object having your new board name, with the next f
 
 |
 
-The final step is to register your board and, if it's necessary, the blocks that you'll use, from the *"editor_visual"* plugin:
+The final step is to register your board and, if it's necessary, the blocks that you'll use, from the *"editor_visual"* plugin.
 
 For example, if you want to register a *raspberry pi* board, you should use this function:
 
@@ -164,17 +205,16 @@ For example, if you want to register a *raspberry pi* board, you should use this
 
 How to write an editor plugin
 ********************************
+
+|
+
 Since you have all cleared about how to create a plugin ang the main files it should consist of, we can pass to the next tutorial, which includes the making of an editor plugin. The purpose of this type of plugins is to create a text editor, which is correlated to our *"projects"* plugin.
 
 The name of the editor plugins should be **projects.editor.**, followed by the name of the editor. To make things more clear, we'll use the *projects.editor.ace* plugin as an example.
 
-First, we need to create the **views** folder, where our **.vue** file will be included. The editor has to be integrated like this:
+First, we need to create the **views** folder, where our **.vue** file will be included. Here, you will have to create an **editor** tag, which is actually an imported module, installed as *'vue2-ace-editor'*.
 
-.. image::images/editor.png
-
-The **editor** tag is actually a module imported, installed as *'vue2-ace-editor'*.
-
-As you can notice, we are modeling the **source** variable (*v-model="source"*), to update the editor according to che canges that are made. 
+We are modeling the **source** variable (*v-model="source"*), to update the editor according to che canges that are made. 
 
 The option **@init="initEditor"** calls the *initEditor* function at initialization. This function is defined in *methods* and its purpose is to make a require on some modes, themes and snippets supported by the text editor:
 
@@ -227,13 +267,13 @@ The next step is to create the **python** object, its properties being:
 
 .. list-table::
 
-	* - **createProject**
+	* - *createProject*
 	  - function where we use the *newFile* function from the *projects* plugin to create a **main.py** file
-	* - **getDefaultFileName**
+	* - *getDefaultFileName*
 	  - function where we return the *'/main.py'* file
-	* - **getDefaultRunFileName**
+	* - *getDefaultRunFileName*
 	  - function where we return the *'/main.py'* file
-	* - **getMakefile**
+	* - *getMakefile*
 	  - function that returns the content of the makefile for the chosen language ( here, *return 'run:\n\tpython main.py';*)
 
 

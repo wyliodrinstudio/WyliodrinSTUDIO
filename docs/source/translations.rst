@@ -7,17 +7,32 @@ Translations
 
 |
 
-As we mentioned before, each plugin has a **translations** folder, where we can find the **messages-ln.json** files, one for each language available in our application. These files contain an object with a list of key-value sets. In the *.vue* files you will use strings on different purposes (for example, to name a button) and you will need to update their translation according to the language you choose in the app.  This action is possible using our translation function, which you can find in our .vue files with the following syntax: 
+As we mentioned before, each plugin has a **translations** folder, where we can find the **messages-ln.json** files, one for each language available in our application. These files contain an object with a list of key-value sets. In the *.vue* files you will use strings on different purposes (for example, to name a button) and you will need to update their translation according to the language you choose in the app.  This action is possible using our translation function **$t**, which can be called in 2 forms:
+
+**1. Vue template**
 
 .. code-block:: javascript
 
-	$t('PLUGIN_STRING_TO_TRANSLATE')
+	{{ $t('PLUGIN_STRING_TO_TRANSLATE') }}
 
-where PLUGIN will be replaced by the name of your plugin.
+where PLUGIN will be the name of your plugin and STRING_TO_TRANSLATE is a keyword for the actual text that you want to add.
+
+**2. Code**
+
+.. code-block:: javascript
+
+	this.vue.$t(text)
+
+where *text* is a parameter of a function (for example :ref:`showNotification <notification>`) that includes the translation function. We use **this.vue.$t(text)** so the program knows to translate the parameter *text*, regardless of the value it receives.
+When we call the showNotification function, *text* will also receive a keyword, for example:
+
+.. code-block:: javascript
+
+	showNotification('PLUGIN_STRING_TO_TRANSLATE');
 
 |
 
-‘PLUGIN_STRING_TO_TRANSLATE’ is a key that you will include in the messages-ln.json file, for each language. Its corresponding value is a new object, that contains a **message** (the translation itself) and a **description**. 
+In both situations, ‘PLUGIN_STRING_TO_TRANSLATE’ is a key that you will include in the messages-ln.json file, for each language. Its corresponding value is a new object, that contains a **message** (the translation itself) and a **description**. 
 
 |
 
