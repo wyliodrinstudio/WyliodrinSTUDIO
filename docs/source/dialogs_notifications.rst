@@ -6,11 +6,11 @@ Dialogs and Notifications
 |
 |
 
-In the *"workspace"* plugin you will find, additionally to the functions presented in the API sections, some functions design to create and display in the application some customized pop-ups, like dialogs, prompts and notifications.
+In the *"workspace"* plugin you will find, additionally to the functions presented in the API sections, some functions designed to create and display some customized pop-ups, like dialogs, prompts and notifications.
 
 Dialogs
 *********
-A dialog is a component that inform users about a specific task and may contain important information, require decisions, or involve multiple actions or inputs. It can usually be used to collect data from the user.
+A dialog is a component that informs users about a specific task and may contain important informations, require decisions, or involve multiple actions or inputs. It can usually be used to collect data from the user.
 
 .. _showDialog:
 
@@ -19,15 +19,28 @@ showDialog
 This is the main open-dialog function for the application. The parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *title*
 	  - the title of the dialog window
+	  - optional
+	  - ' '
 	* - *component*
 	  - the Vue component to display
+	  - required
+	  - \-
 	* - *options*
 	  - additional specifications, like width
+	  - optional
+	  - auto
 	* - *buttons*
 	  - the array of buttons to display
+	  - optional
+	  - []
 
 The return is a *Promise* that will be resolved according to the user's response.
 
@@ -82,17 +95,32 @@ Shows a prompt that waits for the user input.
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *title* 
 	  - the title of the window box 
+	  - optional
+	  - ' '
 	* - *question*
 	  - the question / additional details adressed to the user
+	  - optional
+	  - ' '
 	* - *original*
-	  - the initialcontent of the input text area
+	  - the initial content of the input text area
+	  - optional
+	  - ' '
 	* - *action*
 	  - the action to perform
+	  - optional
+	  - ' '
 	* - *values = {}*
-	  - empty object; the parameter is not mandatory when you call this function, its purpose being to insert the value of a variable in a translated text 
+	  - empty object, can be used to insert the value of a variable in a translated text 
+	  - optional
+	  - {}
 
 For example, let's try to open a customized prompt when the user chooses to rename a project.
 
@@ -114,13 +142,24 @@ Same as **showPrompt**, except that it waits for the user to confirm the questio
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *title*
 	  - the title of the window prompt
+	  - optional
+	  - ' '
 	* - *question*
 	  - the question that will be addressed to the user
+	  - optional
+	  - ' '
 	* - *values = {}*
-	  - empty object; the parameter is not mandatory when you call this function, its purpose being to insert the value of a variable in a translated text 
+	  - empty object, can be used to insert the value of a variable in a translated text 
+	  - optional
+	  - {}
 
 For example, here's how we are using it to check if the user is sure that he wants to close the app.
 
@@ -151,15 +190,28 @@ Obviously, this function's purpose is to send a notification to the user's appli
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *text*
 	  - the text of the notification
+	  - optional
+	  - ' '
 	* - *values={}*
-	  - empty object; the parameter is not mandatory when you call this function, its purpose being to insert the value of a variable in a translated text 
+	  - empty object, used to insert the value of a variable in a translated text
+	  - optional
+	  - {}
 	* - *type*
 	  - info/succes/warning
+	  - optional
+	  - 'info'
 	* - *timeout*
 	  - the time frame in which the notification is displayed
+	  - optional
+	  - 6000
 
 
 We used the the translation function in order to translate the notification text according to the current language.
@@ -183,13 +235,24 @@ This function is almost identical to the **showNotification** function.
 The parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *text*
 	  - the text of the notification
+	  - optional
+	  - ' '
 	* - *values={}*
-	  - empty object; the parameter is not mandatory when you call this function, its purpose being to insert the value of a variable in a translated text 
+	  - empty object, used to insert the value of a variable in a translated text 
+	  - optional
+	  - {}
 	* - *timeout*
 	  - the time frame in which the notification is displayed
+	  - optional
+	  - 6000
 
 The difference can be spotted in the code, where we use the type *error* as default.
 

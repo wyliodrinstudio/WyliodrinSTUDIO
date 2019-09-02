@@ -81,11 +81,11 @@ Installing Wyliodrin Studio
 
 |
 
-In order for you to can start prototyping IoT applications or move to the next level by using our professional solution to develop and deploy Internet of Things systems, we offer you 3 different thechniques of installing the Wyliodrin Studio IDE.
+In order for you to can start prototyping IoT applications or move to the next level by using our professional solution to develop and deploy Internet of Things systems, we offer you 3 different techniques of installing the Wyliodrin Studio IDE.
 
 |
 
-DOWNLOAD THE APPLICATION
+Download the application
 """"""""""""""""""""""""""
 
 For **Windows** users:
@@ -106,19 +106,19 @@ https://wyliodrin.studio/
 
 |
 
-USE THE WEB VERSION
+Use the web version
 """"""""""""""""""""""
 
-We offer you the possibility to run and use a browser version of Wyliodrin Studio, by copying the following link into your browser address bar:
+YYou also have the possibility to run and use a browser version of Wyliodrin Studio, by copying the following link into your browser address bar:
 
 **beta.wyliodrin.studio**
 
 |
 
-BULID FROM SOURCE
+Build from source
 """"""""""""""""""""
 
-If you wish to contribute to the improvement of the application or if you want to add your own features or plugins, we are pleased to inform you that our code is *open source*, which means that you cand find it on our Github.
+If you wish to contribute to the improvement of the application or if you want to add your own features or plugins, our code is *open source*, which means that you cand find it on our Github.
 
 To download the source code, you must have a GitHub account. Open a terminal and choose the folder where you’d want to clone our repository. In this case, we’ll use the home directory and run:
 
@@ -128,7 +128,7 @@ To download the source code, you must have a GitHub account. Open a terminal and
 
 |
 
-We offer you 2 procedures to build of the Wyliodrin Studio application:
+There are 2 procedures to build the Wyliodrin Studio application:
 
 For the **STANDALONE** version, you will have to run the following commands: 
 

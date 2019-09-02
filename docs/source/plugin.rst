@@ -11,31 +11,54 @@ In this section, we will try to create a new plugin, called **"button.example"**
 
 The purpose of this tutorial is to help you to better understand the idea of plugin, the steps that you need to follow, the structure and behavior of each component file, as they were explained in the :ref:`Architecture chapter <plugin>`.
 
-The first step will be to create the **button.example** folder inside the *plugins* directory. Then, we'll add the *package.json* file.
+The first step will be to create the *button.example* folder inside the *plugins* directory. 
 
-As mentioned before, the content of this type of file has to be an object with the following properties:
+Then, we'll add the **package.json** file. As mentioned before, the content of this type of file has to be an object with the following properties:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *name*
 	  - the name of the plugin (“button.example”)
+	  - required
+	  - \-
 	* - *version*
+	  - 0.0.1
+	  - required
 	  - "0.0.1"
 	* - *main*
 	  - the main file of the plugin, that will be “index.js”
+	  - required
+	  - "index.js"
 	* - *plugin*
 	  - an object where we specify the characteristics of the plugin
-
+	  - required
+	  - \-
 The properties of the *"plugin"* component are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *consumes*
-	  - we specify from which other plugins our plugin uses exported functions(required *"workspace"*)
+	  - we specify from which other plugins our plugin uses exported functions (required *"workspace"*)
+	  - required
+	  - ["workspace"]
 	* - *provides*
-	  - we specify if our plugin functions will be exported(*"example_button"*)
+	  - we specify if our plugin functions will be exported (*"example_button"*)
+	  - optional
+	  - []
 	* - *target*
 	  - for which version of the program the plugin should be working: **browser** or **electron**
+	  - required
+	  - \-
 
 Finally, the content of our package.json will be:
 
@@ -57,24 +80,35 @@ Finally, the content of our package.json will be:
 
 The second step is to create the main file, called **index.js**. 
 
-If you already read :ref:`this section <plugin>`, you probably noticed that in the **index.js** file we should've imported first the **.vue** files from the **views** folder. In this plugin tutorial, we only register a simple button, which means that we don't need a **.vue** file to design a specific Vue component.
+If you already read :ref:`this section <plugin>`, you probably noticed that in the **index.js** file we should've imported first the **.vue** files from the **views** folder. In this plugin tutorial, we only register a simple button, which means that we don't need a **.vue** file to design a specific Vue component., so the **views** folder will also be missing.
 
 Therefore, we'll only need to initiate a **studio** variable to *null* and to create an empty object called **button example**.
 
-After that, we have to *export* a **setup** function, its parameters being:
+After that, we have to export a *setup* function, its parameters being:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *options* 
 	  - additional options
+	  - optional
+	  - null
 	* - *imports* 
-	  - all the functions that the plugin collects from the plugins that it consumes (in our case, the functions exported by *workspace*)
+	  - all the functions that our plugin collects from the plugins that it consumes (in our case, the functions exported by *workspace*)
+	  - required
+	  - \-
 	* - *register*
 	  - a function that will register the plugin object
+	  - required
+	  - \-
 
 Inside this function, the **studio** variable instantiated before will receive the **imports** value.
 
-After that, we need to register our button, so we'll call the worskpace function **registerToolbarButton**, which has the following parameters:
+After that, we need to register our button, so we'll call the worskpace function **registerToolbarButton**, which will have the following parameters:
 
 .. list-table::
 
@@ -117,7 +151,7 @@ By the end, our **index.js** file should look like this:
 		})
 	}
 
-As you noticed above, when we registered the image corresponding to our button, we specified its relative path, which includes some additional folders in our *button.example* plugin. So, inside the *button.example* directory we have to create the **data** folder, which will include another folder, called **img**. Here, we'll copy our image, its name being **button.png**.
+As you noticed above, when we registered the image corresponding to our button, we specified its relative path, which includes some additional folders in our *button.example* plugin. So, inside the *button.example* directory we have to create the **data** folder, which will include another folder, called **img**. Here, we'll copy our image, its name being *button.png*.
 
 |
 
@@ -125,11 +159,11 @@ The last component missing from our plugin is the **translations** folder. More 
 
 Only to exemplify the content of this folder, we'll create the **messages-en.json** (english language) and **messages-fr.json** (french language).
 
-In our *index.js* file, you can notice that we used 2 strings having the following format: **'PLUGIN_STRING_TO_TRANSLATE'**, more precisely: *'EXAMPLE_BUTTON_NAME'* and *'EXAMPLE_BUTTON_NOTIFICATION_TEXT'*. It means that this key-strings have to be included in both our translation files.
+In our *index.js* file, you can notice that we used 2 strings having the following format: *'PLUGIN_STRING_TO_TRANSLATE'*, more precisely: *'EXAMPLE_BUTTON_NAME'* and *'EXAMPLE_BUTTON_NOTIFICATION_TEXT'*. It means that this key-strings have to be included in both our translation files.
 
 As you can see in the :ref:`Translations <translations>` chapter, the value that the key string will receive has to be an object with 2 properties: *message* (the actual translation), *description* (a short definition of the string to translate).
 
-By the and, your **messages-ln.json** (ln = language) files should look like this:
+By the end, your **messages-ln.json** (ln = language) files should look like this:
 
 .. code-block:: json
 
@@ -166,18 +200,90 @@ POZA DIN APLICATIE
 
 |
 
-How to add a wyapp board
-******************************
+How to create a device plugin
+*********************************
 
-Now that you manage to create your own, simple plugin, the next step would be to understand how the device driver plugins are made.
+This type of plugin allows you to add and use a new device to the Wyliodrin STUDIO platform, so you need to properly register its functions and characteristics.
 
 |
 
+The **data** folder should contain all the images that you need to represent the device (the icon displayed in the list of available devices) and its features (for example the DeviceToolButtons), but also, if needed, the additional files that you'll use to make your device work and run projects.
+
+|
+
+The **views** folder has to include every Vue component relied to your device, for example: disconnect, device settings or device manager dialogs.
+
+|
+
+The **package.json** file will have the classic format, but if it's necessary the "plugin" object will require an additional property, called **"optional"**, where you will specify if the plugin consumes the *console* or the *mqtt* plugins.
+
+|
+
+The **translations** folder will also have the usual structure, including the *messages-ln.json* files with the unique keys that you used in your device plugin, for each language of the program.
+
+|
+
+The main file **index.js** is the most important for this type of plugin, as its purpose is to include all the functions and characteristics that will make your device work. 
+
+You have to begin with importing all the Vue components that you created, and also all the modules and packages that your device requires in order to work properly.
+
+After that, you will create the functions needed to search and update your device type:
+
+	**loadDevice**: uses a specialized module to scan the operating system of the client and search for your type of device.
+
+	**listDevice**: will try to return a list of the available devices, if they can be found.
+
+	**updateDevices**: simply call the workspace :ref:`updateDevices <updateDevices>` function.
+
+	**searchDevices**: checks systematically the list with all the available devices found, trying to find those having the name or the description fitting your type of device;
+
+	adds a new object to the *devices* array, with the relevant properties: unique *id*, *name*, *description*, *address*, *priority*, *icon*, type of *board*, type of *connection*, and others additional properties depending on the type of the device.
+
+
+Inside the *setup* function, you have to create the object you will register and export for your plugin, its properties being the functions that will help the user manage your device on the Wyliodrin Studio platform:
+
+	**defaultIcon**: correlates a default icon to a device that doesn't have any particular image already attached
+
+	**registerForUpdade**: registers to receive updates for a device
+
+	**getConnections**: returns the connections array for every unique device id
+
+	**connect**: connects the device to Wyliodrin Studio; if there is no connection previously created for the current unique id of the device, it will create a data transport path conforming with the type of your device;
+
+	after that, according to the current status,  you will bring up to date your device, using the *updateDevices* function and you will set up its functioning characteristics.
+
+		The device statuses are:
+
+		* *DISCONNECTED* - the device is offline
+		* *CONNECTING* - trying to connect
+		* *SYNCHRONIZING* - trying to synchronize with the device
+		* *CONNECTED* - the device is online
+		* *ISSUE* - there is some issue, the system is partially functional
+		* *ERROR* - there is an error with the system
+
+	**disconnect**: opens a dialog where the user chooses the way he wants to disconnect the device; the methods of disconnection are:
+
+		* *StandBy* - 
+		* *Disconnect* - 
+		* *Turn-Off* - 
+
+After creating the new device object, you have to register it using the workspace function :ref:`registerDeviceDriver <registerDevice>` and generate the specific buttons for your type of device, using also an workspace function: :ref:`registerDeviceToolButton`. 
+
+Each device should have a **Run** button, that will run the code written by the user in the current project, and a **Stop** button, to interrupt the current project from running, but you can always add others particular buttons, specialized to execute yor own functions. These buttons should include 2 properties, *visible* and *enabled*, whose values become *true* only if there is a device connected.
+
+Also, if your device interacts with the *console* or the *mqtt* server, you will have to create some specific functions that will establish the data transfer protocol.
+
+|
+
+How to add a wyapp board
+***************************
+
+
 If you're trying to add a new board plugin, our *"device.wyapp.raspberrypi"*, *"device.wyapp.beagleboneblack"* and *"device.wyapp.udooneo"* plugins may serve as a support for you.
 
-In the **index.js** file, inside the *setup* function, you nedd to create an event, so when the board is *'ready'*, you call the **registerPinLayout** function from our *"pinlayout"* plugin. The purpose of this function is to register the pins of your board in the **Pin Layout** tab, using the appropriate images that you saved in the *data* folder of our plugin.
+In the **index.js** file, inside the *setup* function, you need to create an event, so when the board is *'ready'*, you call the **registerPinLayout** function from our *"pinlayout"* plugin. The purpose of this function is to register the pins of your board in the **Pin Layout** tab, using the appropriate images that you saved in the *data* folder of our plugin.
 
-For example, if we are connected to a Raspberry Pi, the contect of the Pin Layout tab will be: 
+.. For example, if we are connected to a Raspberry Pi, the content of the Pin Layout tab will be: 
 
 .. POZA
 
@@ -206,38 +312,11 @@ For example, if you want to register a *raspberry pi* board, you should use this
 How to write an editor plugin
 ********************************
 
-|
+The purpose of an editor plugin is to create a code editor, which is correlated to our *"projects"* plugin.
 
-Since you have all cleared about how to create a plugin ang the main files it should consist of, we can pass to the next tutorial, which includes the making of an editor plugin. The purpose of this type of plugins is to create a text editor, which is correlated to our *"projects"* plugin.
+The name of the editor plugins should be **projects.editor.**, followed by the name of the editor. 
 
-The name of the editor plugins should be **projects.editor.**, followed by the name of the editor. To make things more clear, we'll use the *projects.editor.ace* plugin as an example.
-
-First, we need to create the **views** folder, where our **.vue** file will be included. Here, you will have to create an **editor** tag, which is actually an imported module, installed as *'vue2-ace-editor'*.
-
-We are modeling the **source** variable (*v-model="source"*), to update the editor according to che canges that are made. 
-
-The option **@init="initEditor"** calls the *initEditor* function at initialization. This function is defined in *methods* and its purpose is to make a require on some modes, themes and snippets supported by the text editor:
-
-
-The option **:lang="sourceLanguage"** updates the mode according to the programming language, while **:options="editorOptions"** applies some customized options.
-
-In the **script** part, we nedd to add a *watch* property on the **filename** variable:
-
-The purpose is to change the mode, meaning to update the *sourceLanguage* variable, according to che type/extension of the file.
-
-We are also watching the changes that occur on the **source** variable and when it's updated, we are saving the file that was edited with our editor.
-
-The content of the **index.js** file is classic. At first, we import the Vue component created before:
-
-.. code-block:: javascript
-
-	import Ace from './views/AceEditor.vue';
-
-After that, inside the *setup* function, we register our new editor using the workspace function :ref:`registerEditor <editor>`:
-
-.. code-block:: javascript
-
-	studio.projects.registerEditor('EDITOR_ACE',['py','js','json','d','c','h','sh'], Ace);
+First, you need to create the **views** folder, where your **.vue** files will be included. Inside the *EditorAce.vue* file, you will have to create an **editor** tag, which is actually an imported module, installed as *'vue2-ace-editor'*. The editor will be dynamically updated according to the changes that are made in the code. An *initEditor* function is required here at initialization, to import the modes, themes and snippets supported by your editor. The mode will be updated according to the programming language, marked by the type/extension of the file.
 
 |
 
@@ -252,7 +331,7 @@ As an example, we'll use our **language.python** plugin.
 As you can notice, the name of this type of plugins should begin with *"language."*, which will be followed by the actual name of the programming language that you want to register.
 
 
-As any other plugin, it's also required to have a *package.json* file, having the classic format. It's necessary to mention that this type of plugin **consumes** both *"workspace"* and *"projects"* plugins, and their **target** are *"electron"* and *"browser"*.
+As any other plugin, it's also required to have a *package.json* file, having the classic format. It's necessary to mention that this type of plugin **consumes** both *"workspace"* and *"projects"* plugins, and their **target** are both *"electron"* and *"browser"*.
 
 The language plugin doesn't have any Vue component, so we don't have to create the **views** folder, but we need the **data** folder to save a characteristic image for the programming language. For example, for our *language.python* plugin, the image in the **data/img** folder is:
 
@@ -261,7 +340,7 @@ The language plugin doesn't have any Vue component, so we don't have to create t
 	:width: 70px
 	:height: 70px
 
-Inside the main file, **index.js**, we  obviously need to initialize the *studio* variable to null, and insinde the *setup* function it will receive all the imported functions from the "workspace" and "projects" plugin.
+Inside the main file, **index.js**, we obviously need to initialize the *studio* variable to null, and inside the *setup* function it will receive all the imported functions from the "workspace" and "projects" plugin.
 
 The next step is to create the **python** object, its properties being:
 
@@ -274,7 +353,7 @@ The next step is to create the **python** object, its properties being:
 	* - *getDefaultRunFileName*
 	  - function where we return the *'/main.py'* file
 	* - *getMakefile*
-	  - function that returns the content of the makefile for the chosen language ( here, *return 'run:\n\tpython main.py';*)
+	  - function that returns the content of the makefile for the chosen language (here, *return 'run:\n\tpython main.py';*)
 
 
 The next step is to register the new programming language, using the function :ref:`registerLanguage <registerLanguage>`:
@@ -282,3 +361,55 @@ The next step is to register the new programming language, using the function :r
 .. code-block:: javascript
 
 	registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
+
+|
+
+How to add a language addon plugin
+*************************************
+
+This type of plugin modifies the language plugin for certain devices. For instant, we are using it for visual and rpk. To design your own language addon, you will have to create a new plugin folder, called *"language.visual."*, followed by the type of the device you want the language addon for.
+
+|
+
+The first step is to create a new folder, **visual**, where you will add .................. *.js* files.
+
+You will also have to create a *toolbox.xml* file, where you will include the actual design of the blocks you want to be available for your device.
+
+|
+
+The **index.js** file will first import the *xml* module and the *toolbox.xml* file, the second one as a string, using the *raw-loader* module. More details about this webpack loader can be found `here <https://github.com/webpack-contrib/raw-loader>`_.
+
+Then, you will import the code and the blocks from the *.js* files included in the *visual* folder.
+
+The *setup* function will register the changes you made for your device, using the projects function :ref:`register`. The final step is to parse the toolbox string imported before and then to register the blocks using the **registerBlocksDefinitions** function from the *projects.editor.visual* plugin. 
+
+The parameters of this function are:
+
+.. list-table::
+		:widths: 17 55 15 7
+
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
+	* - *id*
+	  - the id of the device
+	  - required
+	  - \-
+	* - *blocks*
+	  - the blockly visual blocks
+	  - required
+	  - \-
+	* - *code*
+	  - the blockly code
+	  - required
+	  - \-
+	* - *toolbox*
+	  - the parsed toolbox string
+	  - required
+	  - \-
+	* - *options*
+	  - additional options, an object where you can specify the device type and the board
+	  - optional
+	  - {}
+

@@ -16,15 +16,28 @@ Registers an item that may be disposed in the application.
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *name* 
-	  - element label, registered as a string that will be translated
+	  - element label, registered as a string that will be translated, representing the name of the tab
+	  - required
+	  -  \-
 	* - *priority* 
-	  - element priority in the list with all menu items: the tab with the lowest priority will be displayed to the left
+	  - element priority in the list of tabs; the tab with the lowest priority will be displayed to the left
+	  - required
+	  -  \-
 	* - *component* 
-	  - the vue component attached to the current tab
+	  - the vue component of the new tab, containing all the functionalities
+	  - required
+	  -  \-
 	* - *options* 
-	  - additional options: **visible**, or **enabled**
+	  - additional options, like **visible** or **enabled**; the tab is available for user interaction according to the value of these options
+	  - optional
+	  - {}
 
 At first, we check if the *name* of the tab can be found in our global **tabs** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created tab into the array, we sort them by priority and dispatch the array to the workspace store.
 
@@ -45,15 +58,22 @@ registerComponent
 The only parameter is:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *component* 
 	  - the vue component we created as a *"MyVueFile.vue"*
+	  - required
+	  - \-
 
 Registers a new vue-component. As an example, we used it to register our Xterm component, in the *"xterm"* plugin:
 
 .. code-block:: javascript
 
-	registerComponent (Notebook);
+	registerComponent(Xterm);
 
 |
 
@@ -64,15 +84,28 @@ Registers an element in the app’s menu.
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *name* 
-	  - element label, registered as a string that will be translated
+	  - element label, registered as a string that will be translated, representing the name of the menu item
+	  - required
+	  - \-
 	* - *priority* 
 	  - element priority in the list with all menu items; same convention applied as for **registerTab** function
+	  - required
+	  - \-
 	* - *component* 
 	  - the vue component attached to the current item
+	  - required
+	  - \-
 	* - *options* 
-	  - additional options: **visible**, or **enabled**
+	  - additional options, like **visible** or **enabled**; the item is available for user interaction according to the value of these options
+	  - optional
+	  - {}
 
 At first, we check if the *name* of the menu item can be found in our global **menuItems** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created menu item into the array, we sort them by priority and dispatch the array to the workspace store.
 
@@ -96,17 +129,32 @@ Registers a new button in the app’s toolbar.
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *name* 
-	  - element label, registered as a string that will be translated
+	  - element label, registered as a string that will be translated, representing the actual name of the toolbar button
+	  - required
+	  - \-
 	* - *priority* 
-	  - element priority in the list with all toolbar buttons same convention applied as for **registerTab** function
+	  - element priority in the list with all toolbar buttons; same convention applied as for **registerTab** function
+	  - required
+	  - \-
 	* - *action* 
 	  - the actions that the buttton will perform on click
+	  - required
+	  - \-
 	* - *iconURL* 
 	  - the image assigned
+	  - required
+	  - \-
 	* - *options* 
-	  - additional options: **visible**, or **enabled**
+	  - additional options, like **visible** or **enabled**; the button is available for user interaction according to the value of these options
+	  - optional
+	  - {}
 
 At first, we check if the *name* of the toolbar button can be found in our global **toolbarButtons** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created toolbarButton into the array, we sort them by priority and dispatch the array to the workspace store.
 
@@ -131,23 +179,36 @@ Registers a new button used to manage the functioning of a device. These buttons
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *deviceType* 
 	  - the type of the device for which we want to create the button
+	  - required
+	  - \-
 	* - *priority* 
 	  - element priority in the list with all device buttons; same convention applied as for **registerTab** function
+	  - required
+	  - \-
 	* - *action* 
 	  - the actions that the buttton will perform on click
+	  - required
+	  - \-
 	* - *iconURL*
 	  - the image assigned
+	  - required
+	  - \-
 	* - *options*
-	  - additional options: **visible**, or **enabled**
+	  - additional options, like **visible** or **enabled**; the button is available for user interaction according to the value of these options
+	  - optional
+	  - {}
 
 At first, we check if the *name* of the device button can be found in our global **deviceToolButtons** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created deviceToolButton into the array, we sort them by priority and dispatch the array to the workspace store.
 
-For example, when a raspberry pi is connected, we have the following buttons: 
-
-**Run**, **Stop**, **TaskManager**, **PackageManager**, **NetworkManager**
+For example, when a Raspberry Pi board is connected, the following buttons become available: **Run**, **Stop**, **TaskManager**, **PackageManager**, **NetworkManager**
 
 
 .. !!imagine butoane cu pi conectat
@@ -167,17 +228,32 @@ Registers the buttons used to open the *console* or the *mqtt* server.
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *name*
-	  - element label, registered as a string that will be translated
+	  - element label, registered as a string that will be translated, representing the name of the status button
+	  - required
+	  - \-
 	* - *priority*
 	  - element priority in the list with all status buttons; same convention applied as for **registerTab** function
+	  - required
+	  - \-
 	* - *component*
 	  - the vue component attached to the current item
+	  - required
+	  - \-
 	* - *iconURL*
 	  - the image assigned
+	  - required
+	  - \-
 	* - *options*
-	  - additional options: **visible**, or **enabled**
+	  - additional options, like **visible** or **enabled**; the tab is available for user interaction according to the value of these options
+	  - optional
+	  - {}
 
 At first, we check if the *name* of the status button can be found in our global **statusButtons** array and if the result is null, we create a new object using the parameters as properties. After pushing the newly created statusButton into the array, we sort them by priority and dispatch the array to the workspace store.
 
@@ -196,17 +272,26 @@ registerStore
 """"""""""""""""
 Registers the Vuex store for a plugin.
 
-A *"store"* is basically a container that holds your application state. There are two things that make a Vuex store different from a plain global object: Vuex stores are reactive. When Vue components retrieve state from it, they will reactively and efficiently update if the store's state changes.
+A *"store"* is basically a container that holds your application state. Since a Vuex store is reactive, when a Vue component needs or changes a variable state, it will reactively and efficiently update the values.
 
 
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *namespace*
 	  - the name given to the store
+	  - required
+	  - \-
 	* - *store*
-	  - the actual store object, imported from the *'./store'* file of the plugin
+	  - the actual store object, imported from the *'store.js'* file of the plugin
+	  - required 
+	  - \-
 
 For example, to register the store for the *“projects”* plugin, we had to call this function:
 
@@ -229,11 +314,20 @@ Gets the value of a variable from a certain store.
 The function parameters are: 
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *variable*
-	  - the name of the variable that we want to process
+	  - the name of the variable that you want to process
+	  - required
+	  - \-
 	* - *namespace*
 	  - the name of the store where the variable is registered
+	  - required
+	  - \-
 
 We called this function to get the current project from our *“projects”* store:
 
@@ -250,13 +344,24 @@ Sends data to the store promptly.
 The function parameters are:
 
 .. list-table:: 
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *namespace*
-	  - the name of the store where you want to dispatch
+	  - the name of the store where you want to dispatch data
+	  - required
+	  - \-
 	* - *action*
 	  - the variable that you want to update
+	  - required
+	  - \-
 	* - *data*
 	  - the additional data that you want to send to the variable
+	  - optional
+	  - ''
 
 Similar as before, we used it in the *"projects"* plugin, to register the current project into the store:
 
@@ -268,15 +373,23 @@ Similar as before, we used it in the *"projects"* plugin, to register the curren
 
 setWorkspaceTitle
 """"""""""""""""""""
+Loads the title of the current project from the store and displays it as the workspace **title**. 
 
 The only parameter of this function is: 
 
 .. list-table::
+		:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *title*
 	  - the title of the current project
+	  - required
+	  - \-
 
-Loads the title of the current project from the store and displays it as the workspace **title**. 
+
 
 This action is done in the *“projects”* plugin.
 
@@ -293,58 +406,80 @@ For example, if we create and select a new project, named **“My Project”**, 
 
 |
 
+.. _registerDevice:
+
 registerDeviceDriver
-"""""""""""""""""""""""""""""""
+"""""""""""""""""""""""
 
 The function parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *name*
 	  - name of the new device type
+	  - required
+	  - \-
 	* - *deviceDriver*
-	  - object created in the "setup" function of a "device" plugin, which consists of a series of functions necessary for a device: **defaultIcon**, **connect**, **settings**, **disconnect**.
+	  - object representing a device, consists of a series of functions necessary to represent, connect, disconnect or set up a device
+	  - required
+	  - \-
 
 The function registers a new device type. If the name of the new device type can’t be found in the list with all device drivers, then the actual **“deviceDriver”** will be registered.
 
-We are using this function in the *“device.wyapp”* and *“device.rpk”* plugins to list a network, respectively a RPK device. Our **deviceDriver** is an object with its own specifications.
+An example on how you can register a new device driver, where 'my_device' will be the name of your device driver:
 
 .. code-block:: javascript
 
-	workspace = registerDeviceDriver('wyapp', deviceDriver);
+	registerDeviceDriver('my_device', deviceDriver);
 
-First of all, a default image is set to this object so that it become easy for the user to connect to his favorite device.
 
-Then, we create the “connect” function, that sets up the transport (address, port), the connection and the device status. 
+.. First of all, a default image is set to this object so that it become easy for the user to connect to his favorite device.
 
-The next step is to update the device settings and after that to create the “disconnect” function.
+.. Then, we create the “connect” function, that sets up the transport (address, port), the connection and the device status. 
 
-We also use a *getConnections* and *registerForUpdate* functions.
+.. The next step is to update the device settings and after that to create the “disconnect” function.
 
-Once the **deviceDriver**  registered, if it can be connected, we register its specific buttons, using the **registerDeviceToolButton** function. 
+.. We also use a *getConnections* and *registerForUpdate* functions.
+
+.. Once the **deviceDriver**  registered, if it can be connected, we register its specific buttons, using the **registerDeviceToolButton** function. 
 
 |
 
+.. _updateDevices:
+
 updateDevices
 """""""""""""""""
-This function searches for new devices and update the **availableDevices** list.
+This function searches for new devices and updates the list all the devices that are available for a user connected to Wyliodrin Studio.
 
 The parameters are:
 
 .. list-table::
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *type*
 	  - the type of the device, it has to be previously registered using the *registerDeviceDriver* function
+	  - required
+	  - \-
 	* - *dev*
 	  - the array of devices that will be updated
+	  - required
+	  - \-
 
-We are using it in our *"device.wyapp"* plugins, each time we are searching for new devices.
 
-For example, in *“device.wyapp.ssh”* plugin:
+For example, if you have an array of new devices named *'myDevices'*, here's how you can update it:
 
 .. code-block:: javascript
 
-	deviceDriver.updateDevices (sshDevices);
+	updateDevices (myDevices);
 
 |
 
@@ -355,19 +490,30 @@ This function is obviously used to connect to a device.
 The function parameters are: 
 
 .. list-table:: 
+	:widths: 17 55 15 7
 
+	* - Property title
+	  - Description
+	  - Required / Optional
+	  - Default value
 	* - *device*
 	  - the device object that we want to connect
+	  - required
+	  - \-
 	* - *options*
-	  - additional options 
+	  - additional options that the device requires in order to create the connection
+	  - required
+	  - \-
 
-The first step is to chech if the device we are trying to connect really is an actual device type. If it can be found in our **deviceDrivers** list, then we trasmit its type and status to the workspace store.
+The first step is to check if the device we are trying to connect is an actual device type. If it can be found in our *deviceDrivers* list, then we trasmit its type and status to the workspace store.
 
 |
 
-getDevice()
+getDevice
 """""""""""""""""
-Returns a device from the store. We call the **getFromStore** function, wich returns the **device** objects, with all its properties.
+Returns a device from the store. 
+
+This function has no parameters and it's using the **getFromStore** function, which returns a **device** object, with all its properties.
 
 We are using it each time we want to work with the currently connected device and we want to know its type.
 
@@ -379,7 +525,7 @@ For example:
 
 |
 
-getStatus()
+getStatus
 """""""""""""""""""
 Returns a device status from the store.
 
@@ -394,8 +540,12 @@ The device statuses are:
 
 |
 
-disconnect ()
+disconnect
 """"""""""""""""""
 Disconnects from a device.
 
-The first step is to get the current device object, using the **getDevice()** function, then to check if it's an actual device type. If positive, we can disconnect the device.
+The first step is to get the current device object, using the **getDevice** function, then to check if it's an actual device type. If positive, we can disconnect the device, which means that we will delete its connections and characteristics, as reported by the type of disconnection that the user chooses:
+
+* *StandBy* - 
+* *Disconnect* - 
+* *Turn Off* - 
