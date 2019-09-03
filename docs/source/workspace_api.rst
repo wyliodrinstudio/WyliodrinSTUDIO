@@ -9,6 +9,9 @@ Workspace plugin API
 
 |
 
+Data Types
+""""""""""
+
 .. autoclass:: Device
 
 |
@@ -17,10 +20,14 @@ Workspace plugin API
 
 |
 
+=========
+
+Tabs
+"""""""""
+
 .. autofunction:: registerTab
 
 |
-
 
 .. autofunction:: registerMenuItem
 
@@ -36,6 +43,9 @@ Workspace plugin API
 
 |
 
+Status Bar
+""""""""""
+
 .. autofunction:: registerStatusButton
 
 |
@@ -47,6 +57,9 @@ Workspace plugin API
 .. autofunction:: closeStatusButton
 
 |
+
+Data Store
+""""""""""
 
 .. autofunction:: registerStore
 
@@ -60,6 +73,9 @@ Workspace plugin API
 
 |
 
+Vue
+"""""""
+
 .. autofunction:: registerComponent
 
 |
@@ -67,6 +83,9 @@ Workspace plugin API
 .. autofunction:: setWorkspaceTitle
 
 |
+
+Device Drivers
+""""""""""""""
 
 .. _registerDevice:
 
