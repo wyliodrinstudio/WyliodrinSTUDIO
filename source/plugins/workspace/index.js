@@ -255,6 +255,10 @@ let workspace = {
 	 * @param {Vue} component the Vue component to display
 	 * 
 	 * @returns {disposable} an item that may be disposed {:js:func:`disposable`}
+	 *
+	 * @example
+	 * 	
+	 * 		registerTab('PROJECT_NOTEBOOK', 300, Notebook)
 	 */
 	registerTab (name, priority, component, options = {})
 	{
@@ -291,6 +295,10 @@ let workspace = {
 	 * @param {Function} action - the function to run when clicked
 	 * 
 	 * @returns {disposable} - an item that may be disposed
+	 * 
+	 * @example
+	 * 
+	 * 		registerMenuItem('WYLIODRIN_API', 10, () => documentation.openDocumentation());
 	 */
 	registerMenuItem (name, priority, action, options = {})
 	{
@@ -320,13 +328,15 @@ let workspace = {
 	},
 
 	/**
-	 * Register a new menu item, use before start
-	 * @param {string} name - the name/id of the menu item
-	 * @param {number} priority - the priority of the tab, lower is to the left
-	 * @param {Vue} component - the Vue component to display
-	 * @param {Function} action - the function to run when clicked
+	 * Rename a menu item
+	 * @param {string} prevName - the initial name of the item
+	 * @param {string} actualName - the actual name of the item
 	 * 
 	 * @returns {disposable} - an item that may be disposed
+	 * 
+	 * @example
+	 * 
+	 * 		renameMenuItem('WYLIODRIN_API', 'WYLIODRIN_STUDIO_API');
 	 */
 	renameMenuItem (prevName,actualName)
 	{
@@ -364,6 +374,10 @@ let workspace = {
 	 * @param {Function} action - the function to run when clicked
 	 * 
 	 * @returns {disposable} - an item that may be disposed
+	 * 
+	 * @example
+	 * 
+	 * 		registerToolbarButton('TOOLBAR_BUTTON', 10, () => showNotification('You created a toolbar button!'), 'plugins/projects/data/img/icons/button.svg');
 	 */
 	registerToolbarButton (name, priority, action, iconURL, options = {})
 	{
@@ -395,13 +409,17 @@ let workspace = {
 
 	/**
 	 * Register a new device tool button, use before start
-	 * @oaram {string} deviceType - the device driver type the button is for
+	 * @param {string} deviceType - the device driver type the button is for
 	 * @param {string} name - the name/id of the menu item
 	 * @param {number} priority - the priority of the tab, lower is to the left
 	 * @param {Vue} component - the Vue component to display
 	 * @param {Function} action - the function to run when clicked
 	 * 
 	 * @returns {disposable} - an item that may be disposed
+	 * 
+	 * @example
+	 * 
+	 * 		registerDeviceToolBotton('RUN', 10,  => showNotification('You clicked the Run button!'), 'plugins/workspace/data/img/icons/button.svg');
 	 */
 	registerDeviceToolButton (deviceType, name, priority, action, iconURL, options = {})
 	{
@@ -441,6 +459,10 @@ let workspace = {
 	 * @param {Function} action - the function to run when clicked
 	 * 
 	 * @returns {disposable} - an item that may be disposed
+	 * 
+	 * @example
+	 * 
+	 * 		registerStatusButton('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg');
 	 */
 	registerStatusButton (name, priority, component, iconURL, options = {})
 	{
@@ -480,6 +502,10 @@ let workspace = {
 	/**
 	 * Open status button
 	 * @param {string} name
+	 * 
+	 * @example
+	 * 
+	 * 		openStatusButton('CONSOLE');
 	 */
 	openStatusButton (name)
 	{
@@ -488,6 +514,10 @@ let workspace = {
 
 	/**
 	 * Close status button
+	 * 
+	 * @example
+	 * 
+	 * 		closeStatusButton('CONSOLE');
 	 */
 	closeStatusButton ()
 	{
@@ -500,6 +530,10 @@ let workspace = {
 	 * @param {Store} store - the priority of the tab, lower is to the left
 	 * 
 	 * @returns {undefined} 
+	 * 
+	 * @example
+	 * 
+	 * 		registerStore('projects', projectStore);
 	 */
 	registerStore (namespace, store)
 	{
@@ -515,19 +549,27 @@ let workspace = {
 	},
 
 	/**
-	 * 
+	 * Gets the value of a variable from a selected store.
 	 * @param {string} namespace 
 	 * @param {string} variable 
+	 * 
+	 * @example
+	 * 
+	 * 		let project = getFromStore('projects', 'currentProject');
 	 */
 	getFromStore (namespace, variable)
 	{
 		return _.cloneDeep (this.store.getters [namespace+'/'+variable]);
 	},
 	/**
-	 * 
+	 * Sends data to a selected store promptly.
 	 * @param {string} namespace 
 	 * @param {string} action 
 	 * @param {Object} data 
+	 * 
+	 * @example
+	 * 
+	 * 		dispatchToStore('projects', 'currentProject', null);
 	 */
 	dispatchToStore (namespace, action, data)
 	{
@@ -536,6 +578,10 @@ let workspace = {
 	/**
 	 * Register a component
 	 * @param {Vue} component 
+	 * 
+	 * @example
+	 * 
+	 * 		registerComponent(MyComponent);
 	 */
 	registerComponent (component)
 	{
@@ -551,7 +597,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 		
-	 * 		studio.workspace.showNotification ('TRASNLATED_TEXT_ID', {title: 'the title'}, 5000);
+	 * 		studio.workspace.showNotification ('TRANSLATED_TEXT_ID', {title: 'the title'}, 5000);
 	 */
 	showNotification (text, values = {}, type = 'info', timeout = 6000)
 	{
@@ -583,6 +629,17 @@ let workspace = {
 			this.error ('Notification is not available, please initialize Vue engine first.');
 		}
 	},
+
+	/**
+	 * Show an error notification
+	 * @param {string} text - the translatable ID of the text to be displayed
+	 * @param {Object} [value={}] - values to insert into the translatable text
+	 * @param {number} [timeout=6000] - timeout until the notification is dismissed automatically (0 for never)
+	 * 
+	 * @example
+	 * 		
+	 * 		studio.workspace.showError ('TRANSLATED_TEXT_ID', {title: 'the title'}, 5000);
+	 */
 	showError(text, values = {}, timeout = 6000)
 	{
 		if(this.vue)
@@ -595,6 +652,18 @@ let workspace = {
 		}
 	},
 	
+	/**
+	 * Show a customized prompt that waits for user input
+	 * @param {string} title - the translatable title of the prompt to be displayed
+	 * @param {string} question - the translatable question of the prompt to be displayed
+	 * @param {string} original - the original translatable content of the input area
+	 * @param {Object} action - the action performed
+	 * @param {Object} [value={}] - values to insert into the translatable text
+	 * 
+	 * @example
+	 * 		
+	 * 		showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
+	 */
 	showPrompt(title, question, original, action, values = {})
 	{
 		return this.showDialog(PromptDialog, {
@@ -626,7 +695,17 @@ let workspace = {
 			values
 		});
 	},
-	
+
+	/**
+	 * Show a customized prompt that waits for user confirmation
+	 * @param {string} title - the translatable title of the prompt to be displayed
+	 * @param {string} question - the translatable question of the prompt to be displayed
+	 * @param {Object} [values={}] - values to insert into the translatable text
+	 * 
+	 * @example
+	 * 		
+	 * 		showConfirmationPrompt('EXIT', 'WORKSPACE_TOOLBAR_EXIT_QUESTION');
+	 */
 	showConfirmationPrompt(title, question, values = {})
 	{
 		return this.showDialog(QuestionDialog, {
@@ -642,6 +721,10 @@ let workspace = {
 	 * @param {Vue} component - the Vue component to display
 	 * @param {Object} options - additional like width
 	 * @param {Object[]} buttons - the array of buttons to display
+	 * 
+	 * @example
+	 * 
+	 * 		showDialog(AddProjectDialog,{width:512});
 	 */
 	showDialog (title, component, options, buttons, values = {})
 	{
@@ -722,6 +805,10 @@ let workspace = {
 
 	/**
 	 * Set the workspace title (usually the project name)
+	 * 
+	 * @example
+	 * 
+	 * 		setWorkspaceTitle (project.name);
 	 */
 	setWorkspaceTitle (title)
 	{
@@ -733,6 +820,9 @@ let workspace = {
 	 * Register device type
 	 * @param {string} name - device type name
 	 * @param {DeviceDriver} deviceDriver - actual device driver
+	 * 
+	 * @example
+	 * 		registerDeviceDriver('my_device', deviceDriver);
 	 */
 	registerDeviceDriver (name, deviceDriver)
 	{
@@ -761,6 +851,10 @@ let workspace = {
 	 * Update the list of devices for the device driver *type*
 	 * @param {string} type - device type, has to be registered
 	 * @param {Device[]} dev - a list of devices (:js:func:`Device`)
+	 * 
+	 * @example
+	 * 
+	 * 		updateDevices (myDevices);
 	 */
 	updateDevices (type, dev)
 	{
@@ -805,16 +899,24 @@ let workspace = {
 
 	/**
 	 * Connect to a device
+	 * 
+	 *   Statuses:
+	 * 
+	 *   DISCONNECTED - this is offline
+	 * 
+	 *   CONNECTING - trying to connect
+	 * 
+	 *   SYNCHRONIZING - trying to synchronize with the device
+	 * 
+	 *   CONNECTED - this is online
+	 * 
+	 *   ISSUE - there is some issue, the system is partially functional
+	 * 
+	 *   ERROR - there is an error with the system
+	 * 
 	 * @param {Device} device - the device to connect to
 	 * @param {Device} options - connect options
 	 * 
-	 * statuyses
-	 *   DISCONNECTED - this is offline
-	 *   CONNECTING - trying to connect
-	 *   SYNCHRONIZING - trying to synchronize with the device
-	 *   CONNECTED - this is online
-	 *   ISSUE - there is some issue, the system is partially functional
-	 *   ERROR - there is an error with the system
 	 */
 	async connect (device, options)
 	{
@@ -869,7 +971,11 @@ let workspace = {
 		}
 	},
 	/**
-	 * Get the status
+	 * Return a device from the store. 
+	 * 
+	 * @example
+	 * 
+	 * 		let device = getDevice ();
 	 */
 	getDevice ()
 	{
@@ -877,7 +983,11 @@ let workspace = {
 	},
 
 	/**
-	 * Get the status
+	 * Get the status of a device.
+	 * 
+	 * @example
+	 * 
+	 * let status = getStatus();
 	 */
 	getStatus ()
 	{

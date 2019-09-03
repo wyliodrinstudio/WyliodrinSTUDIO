@@ -8,6 +8,8 @@ import JSZip from 'jszip';
 
 import projectStore from './store';
 
+
+
 let settings = {
 	workspace: {
 		path: path.join(require('os').homedir(), 'WyliodrinSTUDIO'),
@@ -20,11 +22,12 @@ let projects = {
 
 	store: null,
 	languages: [],
-	//orice de register, dai warn nu error
+	
 	/**
 	 * Validate a path
 	 * @param {string} basePath - project folder
 	 * @param {string} filePath - full path
+	 * 
 	 * @returns {string} - path if path is in project, null otherwise
 	 */
 	_isPathValid(basePath, filePath) {
@@ -44,9 +47,11 @@ let projects = {
 		}
 
 	},
+
 	/**
 	 * Get a language object
 	 * @param {string} languageID - the id of said language
+	 * 
 	 */
 	getLanguage(languageID) {
 		if(languageID !== null){	
@@ -66,6 +71,10 @@ let projects = {
 	 * @param {string} title - language title
 	 * @param {string} icon - language icon
 	 * @param {Object} options - language options
+	 * 
+	 * @example
+	 * 
+	 * 		registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
 	 */
 	registerLanguage(id, title, icon, options) {
 		/**
@@ -92,11 +101,12 @@ let projects = {
 		}
 	},
 	/**
-	 * Add an addon to an already existing language;
+	 * Add an addon to an already existing language.
 	 * @param {Object} language - language id
 	 * @param {Object} board - addon board
 	 * @param {Object} type - addon type
 	 * @param {Object} options - addon options
+	 * 
 	 */
 	registerLanguageAddon(language, board, type, addon = {}) {
 		if (!board) board = '*';
@@ -112,7 +122,7 @@ let projects = {
 
 	},
 	/**
-	 * Run an undetermined language function
+	 * Run an undetermined language function.
 	 * @param {string} fn - function name
 	 * @param {Object} project - project object
 	 * @param {array} params - array of params - variable size
@@ -151,6 +161,10 @@ let projects = {
 	 * @param {Vue} component - the component to display
 	 * 
 	 * @returns {disposable} - an item that may be disposed
+	 * 
+	 * @example
+	 * 
+	 * 		registerEditor('EDITOR_ACE',['py','js'], Ace);
 	 */
 	registerEditor(name, languages, component, options = {}) {
 		options = _.merge({
@@ -195,7 +209,11 @@ let projects = {
 	 * @param {string} name - Project name
 	 * @param {string} language - Project language
 	 * 
-	 * @return {Object} project object
+	 * @returns {Object} project object
+	 * 
+	 * @example
+	 * 
+	 * 		project = createEmptyProject('MyProject', 'py')
 	 */
 	async createEmptyProject(name, language) {
 		// name = name.replace(/\.\./g, '_').replace(/\\|\//g, '_');
@@ -238,7 +256,11 @@ let projects = {
 	 * Delete a project
 	 * @param {Object} project - Project object
 	 * 
-	 * @return {boolean} true if succsesful, false otherwise
+	 * @returns {boolean} true if succsesful, false otherwise
+	 * 
+	 * @example
+	 * 
+	 * 		deleteProject('MyProject');
 	 */
 	async deleteProject(project) {
 		if(project !== null) {
@@ -266,7 +288,11 @@ let projects = {
 	 * @param {Object} project - Project object
 	 * @param {string} newName - New project name
 	 * 
-	 * @return {boolean} true if succsesful, false otherwise
+	 * @returns {boolean} true if succsesful, false otherwise
+	 * 
+	 * @example
+	 * 
+	 * 		renameProject('MyProject', 'MyRenamedProject');
 	 */
 	async renameProject(project, newName) {
 		// ERROR - project trebuie verificat la null si dat warning in consola (asta un e tradus)
@@ -304,7 +330,10 @@ let projects = {
 	 * @param {Object} project - Project object
 	 * @param {string} newName - Cloned project name
 	 * 
-	 * @return {boolean} true if succsesful, false otherwise	 * 
+	 * @returns {boolean} true if succsesful, false otherwise
+	 * 
+	 * @example
+	 * 		cloneProject('MyNewProject', 'MyClonedProject'); 
 	 */
 	async cloneProject(project, newName) {
 		if (newName == '') {
@@ -343,7 +372,11 @@ let projects = {
 	 * @param {Object} project - project object
 	 * @param {string} extension - archive extension (.zip/.tar/.wylioapp)
 	 *
-	 * @return {boolean} true if succsesful, false otherwise	 * 
+	 * @returns {boolean} true if succsesful, false otherwise
+	 * 
+	 * @example
+	 * 
+	 * 		importProject('MyNewProject', '.zip'); 
 	 */
 	async importProject() 
 	{
@@ -419,15 +452,23 @@ let projects = {
 	},
 	/**
 	 * Recursively generate the project tree structure with paths and names
-	 * @param {Object} necesarry - Object representing the details about every file withing the project
+	 * 
 	 *	necesarry.item - file item
+	 *
 	 * 	necessary.item.isdir - is or not directory
+	 *
 	 * 	necessary.item.children - only if it's a directory
+     *
 	 * 	necessary.item.name - name
+	 *
 	 *  necessary.item.content - file content only if it's a file
-	 * @return {boolean} true if succsesful, false otherwise 
+	 *	 
+	 *
+	 * @param {Object} necesarry - Object representing the details about every file withing the project
+	 *
+	 * @returns {boolean} true if succsesful, false otherwise 
+	 *
 	 */
-
 	async recursiveCreating(necesarry) {
 		if(necesarry !== null) {
 			if (necesarry.item.isdir) {
@@ -467,7 +508,11 @@ let projects = {
 	 * @param {Object} project - project object
 	 * @param {string} savePath - path to export to
 	 * 
-	 * @return {boolean} true if succsesful, false otherwise
+	 * @returns {boolean} true if succsesful, false otherwise
+	 * 
+	 * @example
+	 * 
+	 * 		exportProject('MyNewProject', 'C:\Users\User\Desktop');
 	 */
 	async exportProject(project) {
 		let projectPath = project.folder;
@@ -520,14 +565,23 @@ let projects = {
 	},
 	/**
 	 * Recursively generate a deep object with all the contents of a project
+	 * 
+	 * 
+	 *  file - contents of the file/folder
+	 * 
+	 *  file.file - extension if it's a file
+	 * 
+	 *  file.children - children if it's a folder
+	 * 
+	 * 	file.path - path to object 
+	 * 
+	 *  file.name - name of object 
+	 * 
+	 * 
 	 * @param {Object} project - Project object
 	 * @param {Object} file - File object
-	 *  file - contents of the file/folder
-	 *  file.file - extension if it's a file
-	 *  file.children - children if it's a folder
-	 * 	file.path - path to object
-	 *  file.name - name of object
-	 * @return {Object} the root of the folder with all its contents
+	 * 
+	 * @returns {Object} the root of the folder with all its contents
 	 */
 	async recursiveGeneration(project, file) {
 		if(project !== null && file !== null) {
@@ -581,6 +635,10 @@ let projects = {
 	 * Create a new folder in the project
 	 * @param {Object} project - Project object
 	 * @param {string} name - path to where to create the folder
+	 * 
+	 * @example
+	 * 
+	 * 		newFolder('MyNewProject', 'C:\Users\User\Desktop');
 	 */
 	async newFolder(project, name) {
 		if(project !== null && name !== null){
@@ -619,6 +677,10 @@ let projects = {
 	 * @param {Object} project - project object
 	 * @param {string} name - path to where to create the file
 	 * @param {string} data - data to be written to file 
+	 * 
+	 * @example
+	 * 
+	 * 		newFile(name, '/main.js', 'console.log(\'Hello from JavaScript\');');
 	 */
 	async newFile(project, name, data = '') {
 		if(project !== null && name !== null && data !== null) {
@@ -661,6 +723,10 @@ let projects = {
 	 * @param {Object} project - project object
 	 * @param {string} newName - new name
 	 * @param {string} pathTo - path to existing file/folder
+	 * 
+	 * @example
+	 * 
+	 * 		renameObject('ObjectName', 'ObjectNewName', 'C:\Users\User\Desktop');
 	 */
 	async renameObject(project, newName, pathTo) {
 		if(project !== null && newName !== null && pathTo !== null) {
@@ -700,6 +766,10 @@ let projects = {
 	 * Delete a file
 	 * @param {Object} project - project object
 	 * @param {string} pathTo - path to the file
+	 * 
+	 * @example
+	 * 
+	 * 		deleteFile('MyNewProject', 'C:\Users\User\Desktop\file');
 	 */
 	async deleteFile(project, pathTo) {
 		if(project !== null && pathTo !== null) {
@@ -738,6 +808,10 @@ let projects = {
 	 * Delete a folder
 	 * @param {Object} project - project object
 	 * @param {string} pathTo - path to the folder
+	 * 
+	 * @example
+	 * 
+	 * 		deleteFolder('MyNewProject', 'C:\Users\User\Desktop\folder');
 	 */
 	async deleteFolder(project, pathTo) {
 		if(project !== null && pathTo !== null) {
@@ -771,6 +845,10 @@ let projects = {
 	/**
 	 * Load existing projects
 	 * @returns {Object} - project object
+	 * 
+	 * @example
+	 * 
+	 * 		let projects = loadProjects();
 	 */
 	async loadProjects() {
 		let projectsVariable = [];
@@ -814,7 +892,7 @@ let projects = {
 	/**
 	 * Select a project
 	 * @param {string} project - project object
-	 * @return {boolean} true if succsesful, false otherwise
+	 * @returns {boolean} true if succsesful, false otherwise
 	 */
 	async selectCurrentProject(project) {
 		if(project){
@@ -885,6 +963,10 @@ let projects = {
 	/**
 	 * Load a previous selected project
 	 * no params, loads from local files
+	 * 
+	 * @example
+	 * 
+	 * 	let project = loadPreviousSelectedCurrentProject();
 	 */
 	async loadPreviousSelectedCurrentProject() {
 		let project = studio.settings.loadValue('projects', 'currentProject', null);
@@ -903,6 +985,10 @@ let projects = {
 	 * @param {string} name - path to file
 	 * @param {string} buffer - file buffer to be saved
 	 * @returns {disposable} - an item that may be disposed
+	 * 
+	 * @example
+	 * 
+	 * 		saveFile('MyNewProject', 'FileName', [1, 2, 3]);
 	 */
 	async saveFile(project, name, buffer) {
 		// TODO optimize file writes
@@ -938,6 +1024,10 @@ let projects = {
 	 * @param {Project} project - project object
 	 * @param {string} name - full file name with path
 	 * @returns {string} filecontent
+	 * 
+	 * @example
+	 * 
+	 * 		let fileContent = loadFile('MyNewProject', 'FileName');
 	 */
 	async loadFile(project, name) {
 		if(project !== null && name !== null) {
@@ -989,6 +1079,10 @@ let projects = {
 	 * @param {Object} project - project object
 	 * @param {string} name - the path to the file
 	 * @param {string} content - the content of the file
+	 * 
+	 * @example
+	 * 
+	 * 		saveSpecialFile('MyNewProject', 'SpecialFileName', [1, 2, 3]);
 	 */
 	async saveSpecialFile(project, name, content) {
 		if(project !== null && name !== null && content !== null){
@@ -1017,6 +1111,10 @@ let projects = {
 	 * @param {string} name - the path to the file
 	 * 
 	 * @returns {disposable} - an item that may be disposed
+	 * 	 
+	 * @example
+	 * 
+	 * 		loadSpecialFile('MyNewProject', 'SpecialFileName');
 	 */
 	async loadSpecialFile(project, name) {
 		if(project !== null && name !== null) {
@@ -1045,9 +1143,12 @@ let projects = {
 		}
 	},
 	/**
-	 * Generate the tree structure of a projec
-	 * @param {Object} - project object
-	 * @returns {Object} - the tree structure with items of type @recurviseGeneration item
+	 * Generate the tree structure of a project
+	 * @param {Object} project - project object
+	 * @param {boolean} isRoot - true
+	 * 
+	 * @returns {Object} - the tree structure with items of type @recursiveGeneration item
+	 * 
 	 */
 	async generateStructure(project, isRoot=true) {
 		if(project !== null) {
@@ -1081,7 +1182,7 @@ let projects = {
 	},
 	/**
 	 * Get the current project structure
-	 * @return {object} project object
+	 * @returns {object} project object
 	 */
 	getCurrentProject() {
 		let project = studio.workspace.getFromStore('projects', 'currentProject');
@@ -1100,6 +1201,7 @@ let projects = {
 	/**
 	 * Get the default file name of a language
 	 * @param {Object} project - project object
+	 * 
 	 */
 	getDefaultFileName(project) {
 		if(project !== null) {
@@ -1112,6 +1214,7 @@ let projects = {
 	/**
 	 * Get the default run file name of a language
 	 * @param {Object} project - project object
+	 * 
 	 */
 	getDefaultRunFileName(project) {
 		if(project !== null) {
@@ -1137,6 +1240,10 @@ let projects = {
 	 * Get the default run file name of a language
 	 * @param {Object} project - project object
 	 * @param {string} option - option
+	 * 
+	 * @example
+	 * 
+	 * 		let sourceLanguage = languageSpecificOption ('MyNewProject', 'sourceLanguage');
 	 */
 	languageSpecificOption (project, option) {
 		return this._runLanguageFunction(option, project);

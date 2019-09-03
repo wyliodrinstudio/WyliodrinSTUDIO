@@ -16,37 +16,9 @@ The menu button is included in the *Menu.vue* component, as a simple image butto
 .. image:: images/menu.png
 	:align: center
 
-If clicked, it opens a help menu including  some topics registered using the **registerMenuItem** function. The parameters of this function are:
+If clicked, it opens a help menu including  some topics registered using the **registerMenuItem** function. 
 
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *name*
-	  - element label, registered as a string that will be translated as the menu item name
-	  - required
-	  - \-
-	* - *priority*
-	  - element priority in the list with all menu items; the item with the lowest priority is to the left
-	  - required
-	  - \-
-	* - *component*
-	  - the vue component attached to the current item
-	  - required
-	  - \-
-	* - *options*
-	  - additional options
-	  - optional
-	  - {}
-
-An example of use, which registers the item *'New Menu Item'*, that will display a notification when opened:
-
-.. code-block:: javascript
-
-	registerMenuItem ('WORKSPACE_NEW_MENU_ITEM', 10, () => showNotification('You registered a new menu item!', 'success'));
+.. autofunction:: registerMenuItem
 
 |
 
@@ -74,39 +46,7 @@ They are included in the *Toolbar.vue* file and saved into an array in the works
 
 In order to create this type of buttons, we implemented the **registerToolbarButton** function:
 
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *name*
-	  - element label, registered as a string that will be translated
-	  -	required
-	  - \-
-	* - *priority*
-	  - element priority in the list with all toolbar buttons; the button with the lowest priority will be displayed to the left
-	  - required
-	  - \-
-	* - *action*
-	  - the actions that the buttton will perform on click
-	  - required
-	  - \-
-	* - *iconURL*
-	  - the image assigned
-	  - optional
-	  - ''
-	* - *options*
-	  - additional options
-	  - optional 
-	  - {}
-
-For example, you can use the function like this:
-
-.. code-block:: javascript
-
-	registerToolbarButton('TOOLBAR_BUTTON', 10, () => showNotification('You created a toolbar button', 'success'), 'plugins/projects/data/img/icons/toolbar-button.svg');
+.. autofunction:: registerToolbarButton
 
 we register a button having the translation key 'TOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the content: "You created a toolbar button". We need to specify the relative path to the image related to the button.
 
@@ -135,37 +75,9 @@ Tabs
 *****
 The tabs are components of our application and accomplish various functions that help you handling your projects.
 
-They are integrated with the **registerTab** function, having the following parameters:
+They are integrated with the **registerTab** function:
 
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *name*
-	  - element label, registered as a string that will be translated
-	  - required
-	  - \-
-	* - *priority*
-	  - element priority in the list with all menu items: the tab with the lowest priority will be displayed to the left
-	  - required
-	  - \-
-	* - *component*
-	  - the vue component attached to the current tab
-	  - required
-	  - \-
-	* - *options*
-	  - additional options
-	  - optional
-	  - {}
-
-For example, in order to register the ‘Notebook’ tab in the notebook plugin we called the function:
-
-.. code-block:: javascript
-
-	studio.workspace.registerTab('PROJECT_NOTEBOOK', 300, Notebook);
+.. autofunction:: registerTab
 
 A list of the currently existing tabs:
 
@@ -238,41 +150,7 @@ POZA PI CONECTAT
 
 They were previously registered using the **registerDeviceToolButton** function:
 
-The parameters of this function are:
-
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *deviceType*
-	  - the type of the device driver type the button is for
-	  - required
-	  - \-
-	* - *priority*
-	  - element priority in the list with all device buttons; the button with the lowest priority will be displayed to the left
-	  - required
-	  - \-
-	* - *action*
-	  - the action that the buttton will perform on click
-	  - required
-	  - \-
-	* - *iconURL*
-	  - the image assigned
-	  - optional
-	  - ''
-	* - *options*
-	  - additional options and properties
-	  - optional
-	  - {}
-
-An example on how to use this function to create this type of buttons can be:
-
-.. code-block:: javascript
-
-	registerDeviceToolButton('DEVICETOOL_BUTTON', 10, () => showNotification ('You created a device tool button!', 'success'));
+.. autofunction:: registerDeviceToolButton
 
 Here, we registered a device tool button having the translation key 'DEVICETOOL_BUTTON', the priority 10, that on click will pop up a notification with the content: "You created a device tool button!".
 
@@ -283,54 +161,12 @@ Status Buttons
 
 The last component of the workspace is represented by the status buttons: **Console** and **MQTT**. They are created using the **registerStatusButton** function.
 
-The parameters of this function are:
-
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *name*
-	  - element label, registered as a string that will be translated
-	  - required
-	  - \-
-	* - *priority*
-	  - element priority in the list with all status buttons; the button with the lowest priority is to the left.
-	  - required
-	  - \-
-	* - *component*
-	  - the vue component attached to the current item
-	  - required
-	  - \-
-	* - *iconURL*
-	  - the image assigned
-	  - optional
-	  - ''
-	* - *options*
-	  - additional options and properties
-	  - optional
-	  - {}
-
 .. image:: images/registerStatusButton.png
 	:align: center
 
-An overview on how the buttons were created:
+.. autofunction:: registerStatusButton
 
-.. code-block:: javascript
-
-	studio.workspace.registerStatusButton ('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg');
-
-The **Console** button opens a console similar to the *shell*.
-
-|
-
-.. code-block:: javascript
-
-	studio.workspace.registerStatusButton('MQTT', 1, MQTTServer, 'plugins/mqtt/data/img/icons/mqtt-icon.png');
-
-The **MQTT** button opens an interface where you can choose the port where the *MQTT* server will be opened (the default port is 1883). MQTT is a publish-subscribe-based messaging protocol.
+The **Console** button opens a console similar to the *shell*, while the **MQTT** button opens an interface where you can choose the port where the *MQTT* server will be opened (the default port is 1883). MQTT is a publish-subscribe-based messaging protocol.
 
 
 
