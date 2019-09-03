@@ -438,25 +438,25 @@ export default {
 <style lang="less" scoped>
 
 .folder-open {
-background: url('plugins/projects/data/img/icons/48px.png') no-repeat -36px -218px !important;
-	width: 128px;
-	height: 128px;
+background: url('plugins/projects/data/img/icons/32px.png') no-repeat 0px -32px !important;
+	width: 32px;
+	height: 32px;
 }
 
 .folder-closed {
-background: url('plugins/projects/data/img/icons/48px.png') no-repeat -436px -40px !important;
-	width: 128px;
-	height: 108px;
+background: url('plugins/projects/data/img/icons/32px.png') no-repeat -64px 0px !important;
+	width: 32px;
+	height: 32px;
 }
 .file {
-background: url('plugins/projects/data/img/icons/48px.png') no-repeat -252px -30px !important;
-	width: 96px;
-	height: 128px;
+background: url('plugins/projects/data/img/icons/32px.png') no-repeat -32px 0px !important;
+	width: 32px;
+	height: 32px;
 }
 .project {
-	background: url('imgs/48px.png') no-repeat -246px -218px !important;
-	width: 108px;
-	height: 128px;
+	background: url('imgs/32px.png') no-repeat -32px -64px !important;
+	width: 32px;
+	height: 32x;
 }
 
 </style>

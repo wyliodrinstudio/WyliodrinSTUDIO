@@ -133,6 +133,12 @@ let workspace = {
 					accent: '#e54225',
 					error: '#971c19',
 				  },
+				  dark: {
+					primary: '#e54225',
+					secondary: '#ffffff',
+					accent: '#e54225',
+					error: '#971c19',
+				  },
 				},
 			  },
 			icons: {
