@@ -38,6 +38,7 @@ Then, we'll add the **package.json** file. As mentioned before, the content of t
 	  - an object where we specify the characteristics of the plugin
 	  - required
 	  - \-
+
 The properties of the *"plugin"* component are:
 
 .. list-table::

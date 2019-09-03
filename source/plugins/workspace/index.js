@@ -13,6 +13,20 @@ import QuestionDialog from './views/QuestionDialog.vue';
 import PromptDialog from './views/PromptDialog.vue';
 import studioStore from './store';
 
+/**
+ * a function that is called when the item may be deleted
+ * @callback disposable
+ */
+
+/**
+ * Device Identification
+ * @typedef {Object} Device
+ * @property {String} id unique id for the device (determined by the driver)
+ * @property {String} name name of the device
+ * @property {String} type type of the device (the device type id that reported the device)
+ */
+
+
 let deviceDrivers = {};
 let availableDevices = [];
 let translations = {
@@ -230,11 +244,11 @@ let workspace = {
 
 	/**
 	 * Register a new tab, use before start
-	 * @param {string} name - the name/id of the tab
-	 * @param {number} priority - the priority of the tab, lower is to the left
-	 * @param {Vue} component - the component to display
+	 * @param {string} name the translation ID of the title of the tab
+	 * @param {number} priority the priority of the tab, lower is to the left
+	 * @param {Vue} component the Vue component to display
 	 * 
-	 * @returns {disposable} - an item that may be disposed
+	 * @returns {disposable} an item that may be disposed {:js:func:`disposable`}
 	 */
 	registerTab (name, priority, component, options = {})
 	{
@@ -524,10 +538,14 @@ let workspace = {
 	},
 
 	/**
+	 * Show a notification
+	 * @param {string} text - the translatable ID of the text to be displayed
+	 * @param {Object} [value={}] - values to insert into the translatable text
+	 * @param {number} [timeout=6000] - timeout until the notification is dismissed automatically (0 for never)
 	 * 
-	 * @param {string} text 
-	 * @param {Object} values 
-	 * @param {number} timeout 
+	 * @example
+	 * 		
+	 * 		studio.workspace.showNotification ('TRASNLATED_TEXT_ID', {title: 'the title'}, 5000);
 	 */
 	showNotification (text, values = {}, type = 'info', timeout = 6000)
 	{
@@ -734,9 +752,9 @@ let workspace = {
 	},
 
 	/**
-	 * Update devices
+	 * Update the list of devices for the device driver *type*
 	 * @param {string} type - device type, has to be registered
-	 * @param {[Device]} dev - devices
+	 * @param {Device[]} dev - a list of devices (:js:func:`Device`)
 	 */
 	updateDevices (type, dev)
 	{
