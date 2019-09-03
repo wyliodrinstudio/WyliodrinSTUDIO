@@ -152,7 +152,7 @@ On click, it calls the :ref:`showConnectionSelectionDialog <showConnectionSelect
 
 |
 
-Toolbar Button
+Toolbar Buttons
 ****************
 The toolbar is a component located at the top of the window, on which you can add multiple elements. 
 
@@ -161,7 +161,10 @@ The toolbar is a component located at the top of the window, on which you can ad
 	:width: 700px
 	:height: 50px
 
-The toolbar buttons are created using the **registerToolbarButton** function. One of the functionalities added in the toolbar using this function is the *Projects Library*, which opens a dialog where the user can manage its applications.
+The toolbar buttons are created using the **registerToolbarButton** function. One of the functionalities added in the toolbar using this function is the *Projects Library*, which opens a dialog where the user can manage his applications.
+
+.. image:: images/registerToolbarButton.png
+	:align: center
 
 |
 

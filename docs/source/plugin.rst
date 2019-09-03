@@ -112,6 +112,7 @@ Inside this function, the **studio** variable instantiated before will receive t
 After that, we need to register our button, so we'll call the worskpace function **registerToolbarButton**, which will have the following parameters:
 
 .. list-table::
+	:widths: 30 70
 
 	* - *'EXAMPLE_BUTTON_NAME'*
 	  - the name of our button, a key string that will be translated
@@ -125,6 +126,7 @@ After that, we need to register our button, so we'll call the worskpace function
 The **showNotification** function is also called from the workspace and its parameters are:
 
 .. list-table::
+	:widths: 30 70
 
 	* - *'EXAMPLE_BUTTON_NOTIFICATION_TEXT'* 
 	  - the key string that will be translated and will represent the text of our notification
@@ -268,7 +270,7 @@ Inside the *setup* function, you have to create the object you will register and
 		* *Disconnect* - 
 		* *Turn-Off* - 
 
-After creating the new device object, you have to register it using the workspace function :ref:`registerDeviceDriver <registerDevice>` and generate the specific buttons for your type of device, using also an workspace function: :ref:`registerDeviceToolButton`. 
+After creating the new device object, you have to register it using the workspace function :ref:`registerDeviceDriver <registerDevice>` and generate the specific buttons for your type of device, using also an workspace function: :ref:`registerDeviceToolButton <registerDeviceToolButton>`. 
 
 Each device should have a **Run** button, that will run the code written by the user in the current project, and a **Stop** button, to interrupt the current project from running, but you can always add others particular buttons, specialized to execute yor own functions. These buttons should include 2 properties, *visible* and *enabled*, whose values become *true* only if there is a device connected.
 
@@ -346,6 +348,7 @@ Inside the main file, **index.js**, we obviously need to initialize the *studio*
 The next step is to create the **python** object, its properties being:
 
 .. list-table::
+	:widths: 35 70
 
 	* - *createProject*
 	  - function where we use the *newFile* function from the *projects* plugin to create a **main.py** file
@@ -382,12 +385,12 @@ The **index.js** file will first import the *xml* module and the *toolbox.xml* f
 
 Then, you will import the code and the blocks from the *.js* files included in the *visual* folder.
 
-The *setup* function will register the changes you made for your device, using the projects function :ref:`register`. The final step is to parse the toolbox string imported before and then to register the blocks using the **registerBlocksDefinitions** function from the *projects.editor.visual* plugin. 
+The *setup* function will register the changes you made for your device, using the projects function :ref:`registerLanguageAddon <registerLanguageAddon>`. The final step is to parse the toolbox string imported before and then to register the blocks using the **registerBlocksDefinitions** function from the *projects.editor.visual* plugin. 
 
 The parameters of this function are:
 
 .. list-table::
-		:widths: 17 55 15 7
+	:widths: 17 55 15 7
 
 	* - Property title
 	  - Description

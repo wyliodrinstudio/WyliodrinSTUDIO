@@ -14,57 +14,9 @@ A dialog is a component that informs users about a specific task and may contain
 
 .. _showDialog:
 
-showDialog
-^^^^^^^^^^^
-This is the main open-dialog function for the application. The parameters are:
+.. autofunction:: showDialog
 
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *title*
-	  - the title of the dialog window
-	  - optional
-	  - ' '
-	* - *component*
-	  - the Vue component to display
-	  - required
-	  - \-
-	* - *options*
-	  - additional specifications, like width
-	  - optional
-	  - auto
-	* - *buttons*
-	  - the array of buttons to display
-	  - optional
-	  - []
-
-The return is a *Promise* that will be resolved according to the user's response.
-
-An example of use:
-
-.. code-block:: javascript
-
-	showDialog(AddProjectDialog,{width:512});
-
-where *AddProjectDialog* is a Vue component, having a specific design and functionalities.
-
-The result is the dialog that shows up when the user clicks on the **Project Library** button:
-
-.. image:: images/project_dialog.png
-
-|
-
-showDeviceSettingsDialog
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-Used to show the device settings dialog. 
-
-The function has no parameters.
-
-It's called if the user clicks on the currently connected device name, and opens a dialog where he can see its specifications.
+.. autofunction:: showDeviceSettingsDialog
 
 .. !!!!!!!!!poza
 
@@ -72,12 +24,7 @@ It's called if the user clicks on the currently connected device name, and opens
 
 .. _showConnectionSelectionDialog:
 
-showConnectionSelectionDialog
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This function has no parameter.
-
-It's called when the user clicks on the *‘Connect’* button and it shows a dialog containing a list with all the devices available for connection.
+.. autofunction:: showConnectionSelectionDialog
 
 .. POZA!!!!!!!
 
@@ -88,84 +35,18 @@ Prompts
 
 A prompt is actually a dialog box that requires a user decision. A prompt box is often used if you want the user to input a value before entering a page, for example write a text or click on a button that will perform a certain action.
 
-showPrompt
-^^^^^^^^^^^
-Shows a prompt that waits for the user input.
+|
 
-The function parameters are:
-
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *title* 
-	  - the title of the window box 
-	  - optional
-	  - ' '
-	* - *question*
-	  - the question / additional details adressed to the user
-	  - optional
-	  - ' '
-	* - *original*
-	  - the initial content of the input text area
-	  - optional
-	  - ' '
-	* - *action*
-	  - the action to perform
-	  - optional
-	  - ' '
-	* - *values = {}*
-	  - empty object, can be used to insert the value of a variable in a translated text 
-	  - optional
-	  - {}
-
-For example, let's try to open a customized prompt when the user chooses to rename a project.
-
-.. code-block:: javascript
-
-	showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
+.. autofunction:: showPrompt
 
 .. image:: images/showPrompt.png
 	:align: center
 	:width: 500px
-	:height: 300px
+	:height: 270px
 
 |
 
-showConfirmationPrompt
-^^^^^^^^^^^^^^^^^^^^^^^^
-Same as **showPrompt**, except that it waits for the user to confirm the question by pressing a **Yes/No** button and it doesn’t have an input text area.
-
-The function parameters are:
-
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *title*
-	  - the title of the window prompt
-	  - optional
-	  - ' '
-	* - *question*
-	  - the question that will be addressed to the user
-	  - optional
-	  - ' '
-	* - *values = {}*
-	  - empty object, can be used to insert the value of a variable in a translated text 
-	  - optional
-	  - {}
-
-For example, here's how we are using it to check if the user is sure that he wants to close the app.
-
-.. code-block:: javascript
-
-	showConfirmationPrompt('EXIT', 'WORKSPACE_TOOLBAR_EXIT_QUESTION');
+.. autofunction:: showConfirmationPrompt
 
 .. image:: images/showConfirmationPrompt.png
 	:align: center
@@ -182,85 +63,14 @@ The possible types for a notification are: *info*, *success*, and *warning*, and
 
 .. _notification:
 
-showNotification
-^^^^^^^^^^^^^^^^^^
-
-Obviously, this function's purpose is to send a notification to the user's application.
-
-The function parameters are:
-
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *text*
-	  - the text of the notification
-	  - optional
-	  - ' '
-	* - *values={}*
-	  - empty object, used to insert the value of a variable in a translated text
-	  - optional
-	  - {}
-	* - *type*
-	  - info/succes/warning
-	  - optional
-	  - 'info'
-	* - *timeout*
-	  - the time frame in which the notification is displayed
-	  - optional
-	  - 6000
-
-
-We used the the translation function in order to translate the notification text according to the current language.
-
-As an example of use, we can check if the user entered a valid name for the project he wants to create. If negative, we call the **showNotification** function.
-
-.. code-block:: javascript
-
-	showNotification ('PROJECT_NAME_PROMPT');
+.. autofunction:: showNotification
 
 .. image:: images/showNotification.png
 	:align: center
 
 |
 
-showError
-^^^^^^^^^^
-
-This function is almost identical to the **showNotification** function. 
-
-The parameters are:
-
-.. list-table::
-	:widths: 17 55 15 7
-
-	* - Property title
-	  - Description
-	  - Required / Optional
-	  - Default value
-	* - *text*
-	  - the text of the notification
-	  - optional
-	  - ' '
-	* - *values={}*
-	  - empty object, used to insert the value of a variable in a translated text 
-	  - optional
-	  - {}
-	* - *timeout*
-	  - the time frame in which the notification is displayed
-	  - optional
-	  - 6000
-
-The difference can be spotted in the code, where we use the type *error* as default.
-
-For example, in the *“notebook”* plugin, we are sending an error if the user closes the upload image window without selecting a file:
-
-.. code-block:: javascript
-
-	showError('NOTEBOOK_SELECT_IMAGE_ERROR');
+.. autofunction:: showError
 
 .. image:: images/showError.png
 	:align: center
