@@ -1,13 +1,15 @@
 <template>
 	<v-toolbar class="titlebar">
 		<!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
+		<v-toolbar-items class="ml-2 titlebar-buttons">
+			<Menu></Menu>
+		</v-toolbar-items>
 		<v-toolbar-title>
 			<v-img src="plugins/workspace/data/img/logo/wyliodrin-small-logo.png" alt="Wyliodrin" title="Wyliodrin" class="logo"></v-img>
 		</v-toolbar-title>
 		<v-spacer></v-spacer>
 		<v-toolbar-items class="hidden-sm-and-down titlebar-buttons">
 			<LanguageMenu></LanguageMenu>
-			<Menu></Menu>
 			<v-tooltip v-for="toolbarButton in toolbarButtons" :key="toolbarButton.name" bottom v-show="toolbarButton.visible()" :disabled="!toolbarButton.enabled()">
 				<template v-slot:activator="{ on }">
 					<v-btn @click.stop="toolbarButton.action" v-on="on">

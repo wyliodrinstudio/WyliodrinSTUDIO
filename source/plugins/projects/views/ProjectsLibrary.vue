@@ -3,7 +3,7 @@
 		<v-card-title small>
 			<span class="headline">{{$t('PROJECT_LIBRARY_PROJECTS')}}</span>
 			<v-spacer></v-spacer>
-			<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_SEARCH')" v-model="search"></v-text-field>
+			<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_SEARCH')" v-model="search" single-line dark class="projsearch" append-icon="search"></v-text-field>
 		</v-card-title>
 		<v-card-text v-if="!projects || projects.length === 0" class="projects-container">
 		</v-card-text>
