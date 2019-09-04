@@ -243,10 +243,18 @@ let workspace = {
 	},
 
 	/**
-	 * Register a new tab, use before start
+	 * Register a new tab, that may be disposed in the application.
+	 * 
+	 * At first, we check if the *name* of the tab can be found in our global **tabs** 
+	 * array and if the result is null, we create a new object using the parameters 
+	 * as properties. After pushing the newly created tab into the array, we sort 
+	 * them by priority and dispatch the array to the workspace store.
+	 * 
 	 * @param {string} name the translation ID of the title of the tab
 	 * @param {number} priority the priority of the tab, lower is to the left
 	 * @param {Vue} component the Vue component to display
+	 * @param {Object} options additional options, like **visible** or **enabled**; 
+	 * the tab is available for user interaction according to the value of these options
 	 * 
 	 * @returns {disposable} an item that may be disposed {:js:func:`disposable`}
 	 *

@@ -43,6 +43,8 @@ Tabs
 
 |
 
+===========
+
 Status Bar
 """"""""""
 
@@ -58,6 +60,7 @@ Status Bar
 
 |
 
+===========
 Data Store
 """"""""""
 
@@ -73,6 +76,8 @@ Data Store
 
 |
 
+==========
+
 Vue
 """""""
 
@@ -83,6 +88,8 @@ Vue
 .. autofunction:: setWorkspaceTitle
 
 |
+
+=================
 
 Device Drivers
 """"""""""""""
