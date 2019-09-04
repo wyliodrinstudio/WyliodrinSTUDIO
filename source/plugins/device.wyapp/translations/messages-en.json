@@ -47,6 +47,10 @@
         "message": "Version",
         "description": "Supervisor verson"
     },
+    "DEVICE_WYAPP_LIBWYLIODRIN": {
+        "message": "Wyliodrin Library Version",
+        "description": "The used version of the Wyliodrin Library."
+    },
     "DEVICE_WYAPP_OS": {
         "message": "Operating system",
         "description": "Operating system on the board"

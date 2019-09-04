@@ -10,6 +10,16 @@ import projectStore from './store';
 
 
 
+/**
+ * Project Identification
+ * @typedef {Object} Project
+ * @property {string} date - date and time of project creation
+ * @property {string} folder - absolute path to the project
+ * @property {string} language - programming language of the project
+ * @property {string} name - the actual name of the project
+ */
+
+
 let settings = {
 	workspace: {
 		path: path.join(require('os').homedir(), 'WyliodrinSTUDIO'),
@@ -49,8 +59,13 @@ let projects = {
 	},
 
 	/**
-	 * Get a language object
+	 * Get a language object.
+	 * 
+	 * Returns a programming language object with the following properties: id, title, icons, addons and options
+	 * 
 	 * @param {string} languageID - the id of said language
+	 * 
+	 * @returns {disposable} an item that may be disposed {:js:func:`disposable`}
 	 * 
 	 */
 	getLanguage(languageID) {
@@ -66,11 +81,17 @@ let projects = {
 	},
 
 	/**
-	 * Register a language object
+	 * Register a language object.
+	 * 
+	 * Update the **“languages”** array with an object referring to a programming language.
+	 * The accepted languages are: *javascript*, *python*, *bash* and *visual*. 
+	 * 
 	 * @param {string} id - language id
 	 * @param {string} title - language title
 	 * @param {string} icon - language icon
 	 * @param {Object} options - language options
+	 * 
+	 * @returns {disposable} an item that may be disposed {:js:func:`disposable`}
 	 * 
 	 * @example
 	 * 
@@ -102,10 +123,15 @@ let projects = {
 	},
 	/**
 	 * Add an addon to an already existing language.
+	 * 
+	 * In this case, an addon refers to a specific feature that we set up for a board.
+	 * 
 	 * @param {Object} language - language id
 	 * @param {Object} board - addon board
 	 * @param {Object} type - addon type
 	 * @param {Object} options - addon options
+	 * 
+	 * @returns {boolean}
 	 * 
 	 */
 	registerLanguageAddon(language, board, type, addon = {}) {
@@ -155,7 +181,8 @@ let projects = {
 	},
 
 	/**
-	 * Register a new editor, use before start
+	 * Register a new editor for a programming language, use before start.
+	 * 
 	 * @param {string} name - the name/id of the tab
 	 * @param {number} language - the editor language
 	 * @param {Vue} component - the component to display
@@ -205,11 +232,14 @@ let projects = {
 		
 	},
 	/**
-	 * Create a new empty project
+	 * Create a new empty project.
+	 * 
+	 * 
+	 * The name and the programming language corresponding to the project are selected by the user.
 	 * @param {string} name - Project name
 	 * @param {string} language - Project language
 	 * 
-	 * @returns {Object} project object
+	 * @returns {Project} project object
 	 * 
 	 * @example
 	 * 
@@ -253,14 +283,20 @@ let projects = {
 		
 	},
 	/**
-	 * Delete a project
-	 * @param {Object} project - Project object
+	 * Delete a project.
+	 * 
+	 * This function deletes all the files related to the project chosen by the user. It is called inside the **ProjectLibrary.vue** 
+	 * component, when the user clicks on the "Delete" button. After removing all the files, we dispatch to the projects store 
+	 * the *currentProject* and the *currentFile* as *null*.
+	 * 
+	 * @param {Project} project - Project object
 	 * 
 	 * @returns {boolean} true if succsesful, false otherwise
 	 * 
 	 * @example
 	 * 
 	 * 		deleteProject('MyProject');
+	 * 
 	 */
 	async deleteProject(project) {
 		if(project !== null) {
@@ -284,8 +320,10 @@ let projects = {
 	},
 
 	/**
-	 * Rename a project
-	 * @param {Object} project - Project object
+	 * Rename a project.
+	 * 
+	 * Replace the name of a chosen project with the **“newName”** value, that is selected in the input text area.
+	 * @param {Project} project - Project object
 	 * @param {string} newName - New project name
 	 * 
 	 * @returns {boolean} true if succsesful, false otherwise
@@ -326,8 +364,10 @@ let projects = {
 		
 	},
 	/**
-	 * Clone project
-	 * @param {Object} project - Project object
+	 * Clone project.
+	 * 
+	 * Creates a duplicate of the selected project and assigns the **“newName”** value, chosen by the user. 
+	 * @param {Project} project - Project object
 	 * @param {string} newName - Cloned project name
 	 * 
 	 * @returns {boolean} true if succsesful, false otherwise
@@ -368,8 +408,11 @@ let projects = {
 		
 	},
 	/**
-	 * Import a project archive
-	 * @param {Object} project - project object
+	 * Import a project archive.
+	 * 
+	 * Loads a new project tree from the user’s computer. The archive extension can be *“.zip”*, *“.tar”* 
+	 * (in this case the files will be extracted), or *‘.wylioapp”* (we are creating recursively the project folder).
+	 * @param {Project} project - project object
 	 * @param {string} extension - archive extension (.zip/.tar/.wylioapp)
 	 *
 	 * @returns {boolean} true if succsesful, false otherwise
@@ -504,8 +547,10 @@ let projects = {
 		
 	},
 	/**
-	 * Export a project archive
-	 * @param {Object} project - project object
+	 * Export a project archive.
+	 * 
+	 * The archive (*.zip* extension format) will be saved to the chosen path in user’s computer.
+	 * @param {Project} project - project object
 	 * @param {string} savePath - path to export to
 	 * 
 	 * @returns {boolean} true if succsesful, false otherwise
@@ -578,7 +623,7 @@ let projects = {
 	 *  file.name - name of object 
 	 * 
 	 * 
-	 * @param {Object} project - Project object
+	 * @param {Project} project - Project object
 	 * @param {Object} file - File object
 	 * 
 	 * @returns {Object} the root of the folder with all its contents
@@ -632,10 +677,18 @@ let projects = {
 		
 	},
 	/**
-	 * Create a new folder in the project
-	 * @param {Object} project - Project object
+	 * Create a new folder in the project.
+	 * 
+	 * The first step is to check if the project has a valid structure and then to validate its path.
+	 * After that, we create the new folder using the **mkdirp** function.
+	 * 
+	 * This option is valid only in the *Advanced Mode*.
+	 * 
+	 * @param {Project} project - Project object
 	 * @param {string} name - path to where to create the folder
 	 * 
+	 * @returns {boolean} true if succsesful, false otherwise
+	 *
 	 * @example
 	 * 
 	 * 		newFolder('MyNewProject', 'C:\Users\User\Desktop');
@@ -673,8 +726,14 @@ let projects = {
 		}
 	},
 	/**
-	 * Create a new file in the project
-	 * @param {Object} project - project object
+	 * Create a new file in the project.
+	 * 
+	 * The first step is to check if the project has a valid structure and then to validate its path.
+	 * After that, we create the new file using the **writeFile** function, which will frite an empty 
+	 * string inside the file.
+	 * 
+	 * This option is valid only in the *Advanced Mode*.
+	 * @param {Project} project - project object
 	 * @param {string} name - path to where to create the file
 	 * @param {string} data - data to be written to file 
 	 * 
@@ -719,8 +778,16 @@ let projects = {
 		}
 	},
 	/**
-	 * Rename a file/folder
-	 * @param {Object} project - project object
+	 * Rename a file/folder.
+	 * 
+	 * First, we check if the project has a valid structure, then we also validate its path. The next step
+	 * is to try to rename the selected file/folder by using the **writeFile** function, that will write data
+	 * to the new path(including the new name of the file/folder chosen by the user). 
+	 * 
+	 * Available only for the *Advanced Mode*, this function is called when the user choses the *Rename* option in the menu that shows
+	 * up by right clicking on a folder/file.
+	 * 
+	 * @param {Project} project - project object
 	 * @param {string} newName - new name
 	 * @param {string} pathTo - path to existing file/folder
 	 * 
@@ -763,8 +830,13 @@ let projects = {
 		
 	},
 	/**
-	 * Delete a file
-	 * @param {Object} project - project object
+	 * Delete a file.
+	 * 
+	 * The first step is to validate the project structure and the path to the chosen file. After that,
+	 * we dispatch to the projects store the null value for the *currentFile* variable and we delete the 
+	 * file from our file system using the **remove** function.
+	 * 
+	 * @param {Project} project - project object
 	 * @param {string} pathTo - path to the file
 	 * 
 	 * @example
@@ -805,8 +877,12 @@ let projects = {
 		
 	},
 	/**
-	 * Delete a folder
-	 * @param {Object} project - project object
+	 * Delete a folder.
+	 * 
+	 * The first step is to validate the project structure and the path to the chosen folder. After that,
+	 * we delete the folder from our file system using the **remove** function.
+	 * 
+	 * @param {Project} project - project object
 	 * @param {string} pathTo - path to the folder
 	 * 
 	 * @example
@@ -843,8 +919,14 @@ let projects = {
 		}
 	},
 	/**
-	 * Load existing projects
-	 * @returns {Object} - project object
+	 * Load existing projects.
+	 * 
+	 * This function has no parameter. It creates a list with all the existing projects when it's called, by reading all the
+	 * folders from the main path, *workspacePath*.
+	 * 
+	 * We are using it after each change that was made on the **Projects library**: *renameProject*, *cloneProject*, *importProject*.
+	 * 
+	 * @returns {Project[]} - a list of projects
 	 * 
 	 * @example
 	 * 
@@ -890,8 +972,15 @@ let projects = {
 
 	},
 	/**
-	 * Select a project
-	 * @param {string} project - project object
+	 * Select a project.
+	 * 
+	 * When the user clicks on the image attached to a project, this function is called and used to load the data in the Application tab.
+	 * The function tries to validate the project by checking if it exists and if its an actual directory, then reads the content
+	 * of the main file using the **readFile** function and parses the resulted string. The final step is to identify the programming 
+	 * language initially associated to the project, to dispatch the data to the projects store and to properly load the content.
+	 * 
+	 * @param {Project} project - project object
+	 * 
 	 * @returns {boolean} true if succsesful, false otherwise
 	 */
 	async selectCurrentProject(project) {
@@ -961,8 +1050,8 @@ let projects = {
 		}		
 	},
 	/**
-	 * Load a previous selected project
-	 * no params, loads from local files
+	 * Load a previous selected project. 
+	 * The function has no params, loads from local files.
 	 * 
 	 * @example
 	 * 
@@ -980,8 +1069,13 @@ let projects = {
 		}
 	},
 	/**
-	 * Save an edited file
-	 * @param {Object} project - project object
+	 * Save an edited file.
+	 * 
+	 * The first step is to validate the project structure and its path. After that, in order to save the created file,
+	 * we make a new directory and try to write the content of the *buffet* to the path that will include the *name* 
+	 * of the file.
+	 * 
+	 * @param {Project} project - project object
 	 * @param {string} name - path to file
 	 * @param {string} buffer - file buffer to be saved
 	 * @returns {disposable} - an item that may be disposed
@@ -1020,7 +1114,12 @@ let projects = {
 	},
 
 	/**
-	 * Load a file
+	 * Load a file.
+	 * 
+	 * First, we validate the project structure and the its path. If the result is positive, we load the content of the 
+	 * selected file by reading the data that was previously saved in it, using the **readFile** function, and we return 
+	 * the resulted string.
+	 * 
 	 * @param {Project} project - project object
 	 * @param {string} name - full file name with path
 	 * @returns {string} filecontent
@@ -1054,6 +1153,10 @@ let projects = {
 	},
 	/**
 	 * Change the current file
+	 * 
+	 * The first step is to verify if the current file actually exists in the projects store, then we store and 
+	 * dispatch its new path.
+	 * 
 	 * @param {string} name - path to file
 	 */
 	async changeFile(name) {
@@ -1075,8 +1178,12 @@ let projects = {
 		}
 	},
 	/**
-	 * Save a special settings file
-	 * @param {Object} project - project object
+	 * Save a special settings file.
+	 * 
+	 * The first step is to validate the project structure and its path. After that, in order to save the created file,
+	 * we make a new directory and try to write the content of the *buffet* to the path that will include the *name* 
+	 * of the file.
+	 * @param {Project} project - project object
 	 * @param {string} name - the path to the file
 	 * @param {string} content - the content of the file
 	 * 
@@ -1106,8 +1213,13 @@ let projects = {
 		}
 	},
 	/**
-	 * Save a special settings file
-	 * @param {Object} project - project object
+	 * Load a special settings file.
+	 * 
+	 * First, we validate the project structure and the its path. If the result is positive, we load the content of the 
+	 * selected file by reading the data that was previously saved in it, using the **readFile** function, and we return 
+	 * the resulted string.
+	 * 
+	 * @param {Project} project - project object
 	 * @param {string} name - the path to the file
 	 * 
 	 * @returns {disposable} - an item that may be disposed
@@ -1144,8 +1256,11 @@ let projects = {
 	},
 	/**
 	 * Generate the tree structure of a project
-	 * @param {Object} project - project object
+	 * @param {Project} project - project object
 	 * @param {boolean} isRoot - true
+	 * 
+	 * If the project was created, we list the content of its main folder using the **readdir** function. 
+	 * After that, we are recursively creating its components, files adn children.
 	 * 
 	 * @returns {Object} - the tree structure with items of type @recursiveGeneration item
 	 * 
@@ -1182,7 +1297,10 @@ let projects = {
 	},
 	/**
 	 * Get the current project structure
-	 * @returns {object} project object
+	 * 
+	 * We call the **getFromStore** function to load the content of the *currentProject* variable from the projects store.
+	 * 
+	 * @returns {Project} project object
 	 */
 	getCurrentProject() {
 		let project = studio.workspace.getFromStore('projects', 'currentProject');
@@ -1199,8 +1317,14 @@ let projects = {
 		}
 	},
 	/**
-	 * Get the default file name of a language
-	 * @param {Object} project - project object
+	 * Get the default file name of a language.
+	 * 
+	 * Usually, the name of this file is 'main.ext', where *ext* is the extention 
+	 * corresponding to the programming language that defines the project.
+	 * 
+	 * @param {Project} project - project object
+	 * 
+	 * @returns {disposable} an item that may be disposed {:js:func:`disposable`}
 	 * 
 	 */
 	getDefaultFileName(project) {
@@ -1212,8 +1336,14 @@ let projects = {
 	},
 
 	/**
-	 * Get the default run file name of a language
-	 * @param {Object} project - project object
+	 * Get the default run file name of a language.
+	 * 
+	 * Usually, the name of this file is 'main.ext', where *ext* is the extention 
+	 * corresponding to the programming language that defines the project.
+	 * 
+	 * @param {Project} project - project object
+	 * 
+	 * @returns {disposable} an item that may be disposed {:js:func:`disposable`}
 	 * 
 	 */
 	getDefaultRunFileName(project) {
@@ -1226,7 +1356,10 @@ let projects = {
 
 	/**
 	 * Get the makefile for file name of a language
+	 * 
 	 * @param {Object} project - project object
+	 * 
+	 * @returns {disposable} an item that may be disposed {:js:func:`disposable`}
 	 */
 	getMakefile(project, filename) {
 		if(project !== null) {
@@ -1238,8 +1371,11 @@ let projects = {
 
 	/**
 	 * Get the default run file name of a language
-	 * @param {Object} project - project object
+	 * 
+	 * @param {Project} project - project object
 	 * @param {string} option - option
+	 * 
+	 * @returns {disposable} an item that may be disposed {:js:func:`disposable`}
 	 * 
 	 * @example
 	 * 
@@ -1250,10 +1386,17 @@ let projects = {
 	},
 
 	/**
-	 * Get the file code
+	 * Get the file code.
+	 * 
+	 * To get the content of the file, we need first to validate the structure of the 
+	 * parent project and the path that corresponds to the file. After that, the code written 
+	 * into the file will be obtained by reading the content of the selected file (**readFile** function).
+	 * 
+	 * @param {Project} project - project object
 	 * @param {string} path - the path to the file
 	 * 
 	 * @returns {Object} - the current file code
+	 * 
 	 */
 	async getFileCode(project, pathTo) {
 		if(project !== null && pathTo !== null) {
@@ -1280,9 +1423,13 @@ let projects = {
 		}
 	},
 	/**
-	 * Get the current file code
+	 * Get the current file code.
 	 * 
-	 * @returns {Object} - the current project with it's tree structure
+	 * To get the content of the current file, we need first to load it from the projects store, using the **getFromStore** 
+	 * function. After that, we need to validate its path. Finally, in order to obtain the code written inside this file, 
+	 * we have to read its content (**readFile** function).
+	 * 
+	 * @returns {Object} - the current file code
 	 */
 	
 	async getCurrentFileCode() {

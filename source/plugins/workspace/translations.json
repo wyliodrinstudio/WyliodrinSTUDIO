@@ -196,6 +196,7 @@
          "DEVICE_WYAPP_SETTINGS": "Device Settings",
          "DEVICE_WYAPP_NAME": "Name",
          "DEVICE_WYAPP_VERSION": "Version",
+         "DEVICE_WYAPP_LIBWYLIODRIN": "Wyliodrin Library Version",
          "DEVICE_WYAPP_OS": "Operating system",
          "DEVICE_WYAPP_LANGUAGES": "Languages",
          "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": "Unable to load SerialPort WyApp Transport, serial devices over wyapp will not be available (error: {{error}})",

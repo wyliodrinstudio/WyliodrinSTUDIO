@@ -21,9 +21,9 @@ import studioStore from './store';
 /**
  * Device Identification
  * @typedef {Object} Device
- * @property {String} id unique id for the device (determined by the driver)
- * @property {String} name name of the device
- * @property {String} type type of the device (the device type id that reported the device)
+ * @property {String} id  - unique id for the device (determined by the driver)
+ * @property {String} name - name of the device
+ * @property {String} type - type of the device (the device type id that reported the device)
  */
 
 
@@ -251,7 +251,7 @@ let workspace = {
 	/**
 	 * Register a new tab, that may be disposed in the application.
 	 * 
-	 * At first, we check if the *name* of the tab can be found in our global **tabs** 
+	 * At first, we check if the *name* of the tab can be found in the global **tabs** 
 	 * array and if the result is null, we create a new object using the parameters 
 	 * as properties. After pushing the newly created tab into the array, we sort 
 	 * them by priority and dispatch the array to the workspace store.
@@ -296,11 +296,18 @@ let workspace = {
 	},
 	
 	/**
-	 * Register a new menu item, use before start
+	 * Register a new menu item, use before start.
+	 * 
+	 * At first, we check if the *name* of the menu item can be found in the global 
+	 * **menuItems** array and if the result is null, we create a new object using 
+	 * the parameters as properties. After pushing the newly created menu item into 
+	 * the array, we sort them by priority and dispatch the array to the workspace store.
+	 * 
 	 * @param {string} name - the name/id of the menu item
 	 * @param {number} priority - the priority of the tab, lower is to the left
-	 * @param {Vue} component - the Vue component to display
 	 * @param {Function} action - the function to run when clicked
+	 * @param {Object} options additional options, like **visible** or **enabled**; 
+	 * the tab is available for user interaction according to the value of these options
 	 * 
 	 * @returns {disposable} - an item that may be disposed
 	 * 
@@ -336,7 +343,14 @@ let workspace = {
 	},
 
 	/**
-	 * Rename a menu item
+	 * Rename a menu item.
+	 * 
+	 * Check if the element **prevName** can be found in the global **menuItems**
+	 * array. If positive, the element is deleted from the array and we create a 
+	 * new menu item having the same properties as the previous one, but with the 
+	 * new **actualName**. The new item is pushed into the array and *menuItems*
+	 * is sorted again.
+	 * 
 	 * @param {string} prevName - the initial name of the item
 	 * @param {string} actualName - the actual name of the item
 	 * 
@@ -375,11 +389,19 @@ let workspace = {
 	},
 
 	/**
-	 * Register a new toolbar button, use before start
+	 * Register a new toolbar button, use before start.
+	 * 
+	 * At first, we check if the *name* of the toolbar button can be found in the global 
+	 * **toolbarButtons** array and if the result is null, we create a new object using 
+	 * the parameters as properties. After pushing the newly created toolbarButton into 
+	 * the array, we sort them by priority and dispatch the array to the workspace store.
+	 * 
 	 * @param {string} name - the name/id of the menu item
 	 * @param {number} priority - the priority of the tab, lower is to the left
-	 * @param {Vue} component - the Vue component to display
 	 * @param {Function} action - the function to run when clicked
+	 * @param {string} iconURL - the relative path to the image assigned 
+	 * @param {Object} options additional options, like **visible** or **enabled**; 
+	 * the button is available for user interaction according to the value of these options
 	 * 
 	 * @returns {disposable} - an item that may be disposed
 	 * 
@@ -416,12 +438,27 @@ let workspace = {
 	},
 
 	/**
-	 * Register a new device tool button, use before start
+	 * Register a new device tool button, use before start.
+	 * 
+	 * 
+	 * This type of button is used to manage the functioning of a device and 
+	 * it becomes visible only when a device is connected and they are specific for every device.
+	 * 
+	 * At first, we check if the *name* of the device button can be found in the global 
+	 * **deviceToolButtons** array and if the result is null, we create a new object 
+	 * using the parameters as properties. After pushing the newly created deviceToolButton 
+	 * into the array, we sort them by priority and dispatch the array to the workspace store.
+
+	 * For example, when a Raspberry Pi board is connected, the following buttons become available: 
+	 * **Run**, **Stop**, **TaskManager**, **PackageManager**, **NetworkManager**.
+
 	 * @param {string} deviceType - the device driver type the button is for
 	 * @param {string} name - the name/id of the menu item
 	 * @param {number} priority - the priority of the tab, lower is to the left
-	 * @param {Vue} component - the Vue component to display
 	 * @param {Function} action - the function to run when clicked
+	 * @param {string} iconURL - the relative path to the image assigned 
+	 * @param {Object} options additional options, like **visible** or **enabled**; 
+	 * the button is available for user interaction according to the value of these options
 	 * 
 	 * @returns {disposable} - an item that may be disposed
 	 * 
@@ -460,11 +497,22 @@ let workspace = {
 	},
 
 	/**
-	 * Register a new toolbar button, use before start
+	 * Register a new status button, use before start.
+	 * 
+	 * At first, we check if the *name* of the status button can be found in the global
+	 * **statusButtons** array and if the result is null, we create a new object using 
+	 * the parameters as properties. After pushing the newly created statusButton into 
+	 * the array, we sort them by priority and dispatch the array to the workspace store.
+	 * 
+	 * The *statusButtons* registered at the moment can open the **Console** and 
+	 * the **Mqtt** server interface.
+	 * 
 	 * @param {string} name - the name/id of the menu item
 	 * @param {number} priority - the priority of the tab, lower is to the left
 	 * @param {Vue} component - the Vue component to display
-	 * @param {Function} action - the function to run when clicked
+	 * @param {string} iconURL - the relative path to the image assigned 
+	 * @param {Object} options additional options, like **visible** or **enabled**; 
+	 * the button is available for user interaction according to the value of these options
 	 * 
 	 * @returns {disposable} - an item that may be disposed
 	 * 
@@ -508,8 +556,11 @@ let workspace = {
 	},
 
 	/**
-	 * Open status button
-	 * @param {string} name
+	 * Open a status button, using the **dispatchToStore** function to send to
+	 * the *activeStatusButton* variable from the workspace store the value 
+	 * of the chosen status button.
+	 * 
+	 * @param {string} name - the name of the status button to open
 	 * 
 	 * @example
 	 * 
@@ -521,11 +572,13 @@ let workspace = {
 	},
 
 	/**
-	 * Close status button
+	 * Close a status button, using the **dispatchToStore** function to send to
+	 * the *activeStatusButton* variable from the workspace store an empty string,
+	 * which means that the currently open status button is no longer available.
 	 * 
 	 * @example
 	 * 
-	 * 		closeStatusButton('CONSOLE');
+	 * 		closeStatusButton();
 	 */
 	closeStatusButton ()
 	{
@@ -533,15 +586,21 @@ let workspace = {
 	},
 
 	/**
-	 * Register a new namespaced store, use before start
+	 * Register a new namespaced store, use before start.
+	 * 
+	 * A *"store"* is basically a container that holds the application state.
+	 * Since a Vuex store is reactive, when a Vue component needs or changes 
+	 * a variable state, it will reactively and efficiently update the values.
+	 * 
 	 * @param {string} namespace - the name/id of the menu item
-	 * @param {Store} store - the priority of the tab, lower is to the left
+	 * @param {Object} store - the actual store object, imported from the *'store.js'* file of the plugin
 	 * 
 	 * @returns {undefined} 
 	 * 
 	 * @example
 	 * 
 	 * 		registerStore('projects', projectStore);
+	 * 
 	 */
 	registerStore (namespace, store)
 	{
@@ -558,8 +617,9 @@ let workspace = {
 
 	/**
 	 * Gets the value of a variable from a selected store.
-	 * @param {string} namespace 
-	 * @param {string} variable 
+	 * 
+	 * @param {string} namespace - the name of the store where the variable is registered
+	 * @param {string} variable - the name of the variable to process
 	 * 
 	 * @example
 	 * 
@@ -571,9 +631,9 @@ let workspace = {
 	},
 	/**
 	 * Sends data to a selected store promptly.
-	 * @param {string} namespace 
-	 * @param {string} action 
-	 * @param {Object} data 
+	 * @param {string} namespace - the name of the store where the data will be dispatched
+	 * @param {string} action - the variable to be updated
+	 * @param {Object} data - additional data to send to the variable
 	 * 
 	 * @example
 	 * 
@@ -584,8 +644,8 @@ let workspace = {
 		return this.store.dispatch(namespace+'/'+action, _.cloneDeep (data));
 	},
 	/**
-	 * Register a component
-	 * @param {Vue} component 
+	 * Register a Vue component.
+	 * @param {Vue} component - the Vue component to be registered
 	 * 
 	 * @example
 	 * 
@@ -598,9 +658,11 @@ let workspace = {
 	},
 
 	/**
-	 * Show a notification
+	 * Show a notification that will inform the user about the current application state.
+	 *
 	 * @param {string} text - the translatable ID of the text to be displayed
-	 * @param {Object} [value={}] - values to insert into the translatable text
+	 * @param {Object} [values={}] - values to insert into the translatable text
+	 * @param {string} type - the notification type: info/success/warning
 	 * @param {number} [timeout=6000] - timeout until the notification is dismissed automatically (0 for never)
 	 * 
 	 * @example
@@ -639,7 +701,11 @@ let workspace = {
 	},
 
 	/**
-	 * Show an error notification
+	 * Show an error notification. 
+	 * 
+	 * Similar to the **showNotification** function, the only difference being the type *error*
+	 * used as default.
+	 * 
 	 * @param {string} text - the translatable ID of the text to be displayed
 	 * @param {Object} [value={}] - values to insert into the translatable text
 	 * @param {number} [timeout=6000] - timeout until the notification is dismissed automatically (0 for never)
@@ -661,7 +727,8 @@ let workspace = {
 	},
 	
 	/**
-	 * Show a customized prompt that waits for user input
+	 * Show a customized prompt that waits for user input.
+	 * 
 	 * @param {string} title - the translatable title of the prompt to be displayed
 	 * @param {string} question - the translatable question of the prompt to be displayed
 	 * @param {string} original - the original translatable content of the input area
@@ -705,7 +772,9 @@ let workspace = {
 	},
 
 	/**
-	 * Show a customized prompt that waits for user confirmation
+	 * Show a customized prompt that waits for user confirmation, by clicking on a 
+	 * *Yes/No* button.
+	 * 
 	 * @param {string} title - the translatable title of the prompt to be displayed
 	 * @param {string} question - the translatable question of the prompt to be displayed
 	 * @param {Object} [values={}] - values to insert into the translatable text
@@ -724,15 +793,18 @@ let workspace = {
 	},
 
 	/**
-	 * Show a dialog
+	 * Show a dialog that can contain informations about an application component
+	 * or that can require user actions.
+	 * 
 	 * @param {string|object} title - the title of the dialog window
 	 * @param {Vue} component - the Vue component to display
 	 * @param {Object} options - additional like width
 	 * @param {Object[]} buttons - the array of buttons to display
+	 * @param {Object} [values={}] - values to insert into the translatable text
 	 * 
 	 * @example
 	 * 
-	 * 		showDialog(AddProjectDialog,{width:512});
+	 * 		showDialog(NetworkConnectionDialog, {width:512});
 	 */
 	showDialog (title, component, options, buttons, values = {})
 	{
@@ -770,7 +842,10 @@ let workspace = {
 	},
 
 	/**
-	 * Show the device settings dialog
+	 * Show the device settings dialog.
+	 * 
+	 * It's called if the user clicks on the currently connected device name, and opens a dialog where he can see its specifications.
+	 * 
 	 * @param {Device} device - device
 	 */
 	showDeviceSettingsDialog ()
@@ -798,6 +873,8 @@ let workspace = {
 
 	/**
 	 * Show the connect selection dialog
+	 * 
+	 * It's called when the user clicks on the *‘Connect’* button and it shows a dialog containing a list with all the devices available for connection.
 	 */
 	showConnectionSelectionDialog ()
 	{
@@ -814,6 +891,8 @@ let workspace = {
 	/**
 	 * Set the workspace title (usually the project name)
 	 * 
+	 * Loads the title of the current project from the store and displays it as the workspace **title**. 
+	 * 
 	 * @example
 	 * 
 	 * 		setWorkspaceTitle (project.name);
@@ -825,9 +904,14 @@ let workspace = {
 	},
 
 	/**
-	 * Register device type
+	 * Register device type.
+	 * 
+	 * If the name of the new device type can’t be found in the list with all 
+	 * device drivers, then the actual **“deviceDriver”** will be registered.
+	 * 
 	 * @param {string} name - device type name
-	 * @param {DeviceDriver} deviceDriver - actual device driver
+	 * @param {DeviceDriver} deviceDriver - actual device driver, consists of a series 
+	 * of functions necessary to represent, connect, disconnect or set up a device.
 	 * 
 	 * @example
 	 * 		registerDeviceDriver('my_device', deviceDriver);
@@ -856,7 +940,11 @@ let workspace = {
 	},
 
 	/**
-	 * Update the list of devices for the device driver *type*
+	 * Update the list of devices for the device driver *type*.
+	 * 
+	 * This function searches for new devices and brings up to date the list of 
+	 * all the devices that are available for a user connected to Wyliodrin Studio.
+	 * 
 	 * @param {string} type - device type, has to be registered
 	 * @param {Device[]} dev - a list of devices (:js:func:`Device`)
 	 * 
@@ -906,7 +994,11 @@ let workspace = {
 	},
 
 	/**
-	 * Connect to a device
+	 * Connect to a device.
+	 * 
+	 * The first step is to check if the device we are trying to connect is an 
+	 * actual device type. If it can be found in our *deviceDrivers* list, then 
+	 * we transmit its type and status to the workspace store.
 	 * 
 	 *   Statuses:
 	 * 
@@ -922,11 +1014,12 @@ let workspace = {
 	 * 
 	 *   ERROR - there is an error with the system
 	 * 
+	 * 
 	 * @param {Device} device - the device to connect to
 	 * @param {Device} options - connect options
 	 * 
 	 */
-	async connect (device, options)
+	async connect(device, options)
 	{
 		// TODO should check for connection?
 		if (this.getStatus () !== 'DISCONNECTED')
@@ -981,6 +1074,10 @@ let workspace = {
 	/**
 	 * Return a device from the store. 
 	 * 
+	 * This function has no parameters and it's using the **getFromStore** function, 
+	 * which returns a **device** object, with all its properties. We are using it each 
+	 * time we want to work with the currently connected device and we want to know its type.
+	 *
 	 * @example
 	 * 
 	 * 		let device = getDevice ();
@@ -993,6 +1090,10 @@ let workspace = {
 	/**
 	 * Get the status of a device.
 	 * 
+	 * The function has no parameters and calls the **getFromStore** function, which returns
+	 * from the workspace store a string representing the current status of the device 
+	 * the user tries to work with.
+	 * 
 	 * @example
 	 * 
 	 * let status = getStatus();
@@ -1003,7 +1104,19 @@ let workspace = {
 	},
 
 	/**
-	 * Disconnect from a device
+	 * Disconnect from a device.
+	 * 
+	 * The first step is to get the current device object, using the **getDevice** function, 
+	 * then to check if it's an actual device type. If positive, we can disconnect the device, 
+	 * which means that we will delete its connections and characteristics, as reported by the 
+	 * type of disconnection that the user chooses:
+	 *
+	 * *StandBy* - 
+	 * 
+	 * *Disconnect* - 
+	 * 
+	 * *Turn Off* -
+	 *
 	 */
 	async disconnect ()
 	{

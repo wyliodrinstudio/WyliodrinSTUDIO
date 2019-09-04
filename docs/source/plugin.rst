@@ -198,7 +198,13 @@ By the end, your **messages-ln.json** (ln = language) files should look like thi
 
 To test if you successfully created your first plugin, you have to rebuild the program using the 2 commands for electron **npx webpack**, then **npm start**. 
 
-POZA DIN APLICATIE
+.. image:: images/examplebutton.png
+	:align: center
+
+|
+
+.. image:: images/exampleNotification.png
+	:align: center
 
 
 |
@@ -278,6 +284,8 @@ Also, if your device interacts with the *console* or the *mqtt* server, you will
 
 |
 
+.. _wyappBoard:
+
 How to add a wyapp board
 ***************************
 
@@ -286,9 +294,12 @@ If you're trying to add a new board plugin, our *"device.wyapp.raspberrypi"*, *"
 
 In the **index.js** file, inside the *setup* function, you need to create an event, so when the board is *'ready'*, you call the **registerPinLayout** function from our *"pinlayout"* plugin. The purpose of this function is to register the pins of your board in the **Pin Layout** tab, using the appropriate images that you saved in the *data* folder of our plugin.
 
-.. For example, if we are connected to a Raspberry Pi, the content of the Pin Layout tab will be: 
+For example, if we are connected to a Raspberry Pi, the content of the Pin Layout tab will be: 
 
-.. POZA
+.. image:: images/pinlayout.png
+	:align: center
+	:width: 500px
+	:height: 400px
 
 The next step is to create an object having your new board name, with the next functions:
 

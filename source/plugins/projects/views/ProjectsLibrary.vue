@@ -96,6 +96,7 @@ export default {
 	async created ()
 	{
 		this.projects = await this.studio.projects.loadProjects(false);
+		console.log(this.projects[0]);
 	},
 	mounted() {
 		this.$refs.button.$el.focus();

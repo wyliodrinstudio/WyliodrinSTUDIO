@@ -16,9 +16,19 @@ A dialog is a component that informs users about a specific task and may contain
 
 .. autofunction:: showDialog
 
+.. image:: images/showDialog.png
+	:align: center
+	:width: 550px
+	:height: 350px
+
+|
+
 .. autofunction:: showDeviceSettingsDialog
 
-.. !!!!!!!!!poza
+.. image:: images/deviceSettingsDialog.png
+	:align: center
+	:width: 470px
+	:height: 380px
 
 |
 
@@ -26,7 +36,8 @@ A dialog is a component that informs users about a specific task and may contain
 
 .. autofunction:: showConnectionSelectionDialog
 
-.. POZA!!!!!!!
+.. image:: images/connectionDialog.png
+	:align: center
 
 |
 

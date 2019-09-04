@@ -9,6 +9,25 @@ The **"projects"** plugin is the second most important component in our applicat
 
 |
 
+===========
+
+Data Types
+""""""""""
+
+|
+
+.. autoclass:: Project
+
+|
+
+.. autofunction:: disposable
+
+======================
+
+Programming Languages
+"""""""""""""""""""""""
+|
+
 .. autofunction:: getLanguage
 
 |
@@ -26,6 +45,15 @@ The **"projects"** plugin is the second most important component in our applicat
 |
 
 .. autofunction:: registerEditor
+
+|
+
+.. autofunction:: languageSpecificOption
+
+===========
+
+Projects
+""""""""
 
 |
 
@@ -61,26 +89,6 @@ The **"projects"** plugin is the second most important component in our applicat
 
 |
 
-.. autofunction:: newFolder
-
-|
-
-.. autofunction:: newFile
-
-|
-
-.. autofunction:: renameObject
-
-|
-
-.. autofunction:: deleteFile
-
-|
-
-.. autofunction:: deleteFolder
-
-|
-
 .. autofunction:: loadProjects
 
 |
@@ -90,6 +98,29 @@ The **"projects"** plugin is the second most important component in our applicat
 |
 
 .. autofunction:: loadPreviousSelectedCurrentProject
+
+|
+
+.. autofunction:: generateStructure
+
+|
+
+.. autofunction:: getCurrentProject
+
+|
+
+====================
+
+Files and Folders
+""""""""""""""""""
+
+|
+
+.. autofunction:: newFile
+
+|
+
+.. autofunction:: deleteFile
 
 |
 
@@ -113,14 +144,6 @@ The **"projects"** plugin is the second most important component in our applicat
 
 |
 
-.. autofunction:: generateStructure
-
-|
-
-.. autofunction:: getCurrentProject
-
-|
-
 .. autofunction:: getDefaultFileName
 
 |
@@ -133,12 +156,20 @@ The **"projects"** plugin is the second most important component in our applicat
 
 |
 
-.. autofunction:: languageSpecificOption
-
-|
-
 .. autofunction:: getFileCode
 
 |
 
 .. autofunction:: getCurrentFileCode
+
+|
+
+.. autofunction:: newFolder
+
+|
+
+.. autofunction:: deleteFolder
+
+|
+
+.. autofunction:: renameObject
