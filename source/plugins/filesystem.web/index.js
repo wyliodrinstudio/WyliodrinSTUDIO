@@ -362,7 +362,20 @@ let web_filesystem = {
 		await this.insertElementFiles(paths[paths.length - 1], 1, parentId);
 		let objIns = await db.files.where(['name+type+parent']).equals([paths[paths.length - 1], 1, parentId]).toArray();
 		await this.insertElementData(objIns[0].id, buffer.toString('base64'), buffer.length);
-	}
+	},
+
+	lastModifier(path)
+	{
+		//TODO
+		return false;
+	},
+	openSaveDialog(options) {
+		return false;
+	},
+	openLoadDialog(options) {
+		return false;
+	},
+
 };
 export default function setup(options, imports, register) {
 	const studio = imports;

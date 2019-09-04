@@ -161,6 +161,7 @@
 		"node-notifier": "^5.4.0",
 		"original-fs": "^1.0.0",
 		"screenshot-desktop": "^1.8.0",
-		"ssh2": "^0.8.2"
+		"ssh2": "^0.8.2",
+		"vue-filereader": "^0.1.1"
 	}
 }

@@ -69,7 +69,7 @@ let filesystem_real = {
 	},
 	openLoadDialog(options) {
 		return 	dialog.showOpenDialog(null, options);
-    },
+	},
 
 };
 
