@@ -3,8 +3,8 @@
 		<template v-slot:activator="{ on: menu }">
 			<v-menu offset-y close-on-click>
 				<template v-slot:activator="{ on: tooltip }">
-					<v-btn slot="activator" v-on="{ ...tooltip, ...menu }">
-						<v-img src="plugins/workspace/data/img/icons/help-icon.svg" aria-label="Menu" ></v-img>
+					<v-btn slot="activator" v-on="{ ...tooltip, ...menu }" class="cucu">
+						<v-img src="plugins/workspace/data/img/icons/menu-icon.svg" aria-label="Menu" ></v-img>
 					</v-btn>
 				</template>
 				<v-list>

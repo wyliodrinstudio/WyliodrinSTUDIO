@@ -24,9 +24,9 @@ copyright = u'2019, Diana Ghindaoanu'
 author = u'Diana Ghindaoanu'
 
 # The short X.Y version
-version = u''
+version = u'2.0.0'
 # The full version, including alpha/beta/rc tags
-release = u''
+release = u'beta'
 
 
 # -- General configuration ---------------------------------------------------
@@ -39,7 +39,7 @@ release = u''
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.doctest',
+    'sphinx_js', 'sphinx.ext.doctest'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -86,7 +86,7 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['nstatic']
+# html_static_path = ['nstatic']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -103,6 +103,10 @@ html_static_path = ['nstatic']
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'WyliodrinStudiodoc'
+
+primary_domain = 'js'
+js_source_path = ['../source/plugins/workspace', '../source/plugins/projects']
+root_for_relative_js_paths = '../source/plugins'
 
 
 # -- Options for LaTeX output ------------------------------------------------
