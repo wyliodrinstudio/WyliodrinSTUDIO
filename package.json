@@ -46,6 +46,7 @@
 	},
 	"homepage": "https://github.com/alexandruradovici/WyliodrinSTUDIO2#readme",
 	"devDependencies": {
+		"@mdi/font": "^4.2.95",
 		"brace": "^0.11.1",
 		"copy-webpack-plugin": "^5.0.3",
 		"css-loader": "^3.0.0",
@@ -65,7 +66,7 @@
 		"less": "^3.9.0",
 		"less-loader": "^5.0.0",
 		"marked": "git+https://github.com/wyliodrinstudio/marked.git",
-		"material-design-icons-iconfont": "^4.0.4",
+		"material-design-icons-iconfont": "^4.0.5",
 		"msgpack5": "^4.2.1",
 		"node-blockly": "https://github.com/wyliodrinstudio/node-blockly.git",
 		"raw-loader": "^3.1.0",
@@ -158,9 +159,14 @@
 		"fs-extra": "^7.0.1",
 		"grabity": "^1.0.5",
 		"irc-upd": "^0.10.0",
+		"material-design-icons": "^3.0.1",
+		"material-icons": "^0.3.1",
+		"moment": "^2.24.0",
+		"moment-timezone": "^0.5.26",
 		"node-notifier": "^5.4.0",
 		"original-fs": "^1.0.0",
 		"screenshot-desktop": "^1.8.0",
-		"ssh2": "^0.8.2"
+		"ssh2": "^0.8.2",
+		"vue-filereader": "^0.1.1"
 	}
 }

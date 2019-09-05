@@ -5,7 +5,6 @@ import ProjectsLibrary from './views/ProjectsLibrary.vue';
 import _ from 'lodash';
 import path from 'path';
 import JSZip from 'jszip';
-
 import projectStore from './store';
 
 
@@ -428,6 +427,9 @@ let projects = {
 		}
 		
 	},
+	async importDialog(){
+		return await studio.filesystem.openLoadDialog();
+	},
 	/**
 	 * This function imports a project archive.
 	 * 
@@ -443,75 +445,28 @@ let projects = {
 	 * 
 	 * 		importProject('MyNewProject', '.zip'); 
 	 */
-	async importProject() 
+	async importProject(file) 
 	{
-		// if(project !== null && extension !== null) {
-		// 	try {
-		// 		if (extension === '.zip' || extension === '.tar') {
-		// 			let name = path.basename(project, '.zip');
-		// 			let projectFolder = path.join(workspacePath, name);
-		// 			var zip = new AdmZip(project);
-		// 			projectFolder = this._isPathValid(workspacePath, projectFolder);
-		// 			if (projectFolder !== null) {
-		// 				await zip.extractAllTo(projectFolder, true);
-		// 				await this.loadProjects(false);
-		// 			} else {
-		// 				studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
-		// 			}	
-		// 		} else if (extension === '.wylioapp') {
-		// 			let projectImport = JSON.parse((await studio.filesystem.readFile(project)).toString());
-		// 			let projectFolder = path.join(workspacePath, projectImport.title);
-		// 			let json = path.join(projectFolder, 'project.json');
-		// 			for (let item of projectImport.tree) {
-		// 				await this.recursiveCreating({
-		// 					item: item,
-		// 					prev: item,
-		// 					folder: workspacePath
-		// 				});
-		// 				await studio.filesystem.writeFile(json, JSON.stringify({
-		// 					language: projectImport.language,
-		// 					notebook: projectImport.notebook
-		// 				}, null, 4));
-		// 				await this.loadProjects(false);
-		// 			}
-		// 		}
-		// 		return true;
-		// 	} catch (e) {
-		// 		studio.workspace.showError('PROJECT_ERROR_IMPORT_PROJECT', {project: project, error: e.message});
-		// 	}
-		// 	return false;
+		await console.log(file);
+		// console.log(filePath);
+		// let pathing = path.join(settings.workspace.path,path.parse(filePath).name);
+		
+		// let data = await studio.filesystem.readFile(filePath);
+		// let zip = new JSZip;
+		// if(await studio.filesystem.mkdirp(pathing)){
+		// 	zip.loadAsync(data).then(function(contents) {
+		// 		console.log(contents);
+		// 		Object.keys(contents.files).forEach(function(filename) {
+		// 			zip.file(filename).async('nodebuffer').then(async function(content) {
+		// 				var dest = path.join(pathing,filename);
+		// 				await studio.filesystem.writeFile(dest, content);
+		// 			});
+		// 		});
+		// 	});
+		// 	return true;
 		// } else {
-		// 	studio.workspace.warn('PROJECt_ERROR_IMPORT_PROJECT', {project:project, error:'NULL'});
 		// 	return false;
-		// }\
-		const options = {
-			title:'Select a project to import',
-			defaultPath: settings.workspace.path,
-			filters: [
-				{name:'imports', extensions: ['zip','wylioapp']}
-			]
-		};
-		
-		let filePath = studio.filesystem.openLoadDialog(options)[0];
-		console.log(filePath);
-		let pathing = path.join(settings.workspace.path,path.parse(filePath).name);
-		
-		let data = await studio.filesystem.readFile(filePath);
-		let zip = new JSZip;
-		if(await studio.filesystem.mkdirp(pathing)){
-			zip.loadAsync(data).then(function(contents) {
-				console.log(contents);
-				Object.keys(contents.files).forEach(function(filename) {
-					zip.file(filename).async('nodebuffer').then(async function(content) {
-						var dest = path.join(pathing,filename);
-						await studio.filesystem.writeFile(dest, content);
-					});
-				});
-			});
-			return true;
-		} else {
-			return false;
-		}
+		// }
 		
 		
 	},
@@ -592,7 +547,7 @@ let projects = {
 				{name:'zip', extensions: ['zip']}
 			]
 		};
-		let savePath = studio.filesystem.openSaveDialog(options);
+		let savePath = studio.filesystem.openSaveDialog();
 		let zip = new JSZip();
 		if(await this._buildZipFromDirectory(projectPath, zip, projectPath)) {
 			const zipContent = await zip.generateAsync({
@@ -1477,7 +1432,6 @@ export default async function setup(options, imports, register) {
 	studio.workspace.registerToolbarButton('PROJECT_LIBRARY', 10, () => studio.workspace.showDialog(ProjectsLibrary, {
 		width: 1000
 	}), 'plugins/projects/data/img/icons/projects-icon.svg');
-
 	register(null, {
 		projects: projects
 	});

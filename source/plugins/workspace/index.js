@@ -1282,7 +1282,10 @@ export function setup (options, imports, register)
 		workspace.close ();
 	});
 	Vue.use (VueI18n);
-	Vue.use(Vuetify);
+	Vue.use(Vuetify, {
+		font: 'mdi',
+		iconfont:'mdi'
+	});
 	Vue.use (Vuex);
 	
 	/* Store */

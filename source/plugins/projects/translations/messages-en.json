@@ -234,7 +234,11 @@
     "PROJECT_NAME_PROMPT": {
         "message": "Please input the name of the project",
         "description": "Label for the new name to be given to the project"
-    },
+	},
+	"PROJECT_LIBRARY_SEARCH":{
+		"message":"Search",
+		"description":"Label to search for projects"
+	},
     "PROJECT_NULL": {
         "message": "One or more parameters are null",
         "description": "One or more of the funciton's parameters are null"
