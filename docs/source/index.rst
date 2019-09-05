@@ -54,28 +54,6 @@ Also, the recognized programming languages at the time are:
 
 |
 
-**NXP Rapid IoT**
-
-Rapid IoT is a product that allows fast prototyping of IoT products. The official IDE provided by NXP allows a lot of flexibility when building IoT products but requires advanced knowledge of embedded programming to get started. Knowledge such as bare-metal embedded programming and/or FreeRTOS is required. 
-
-Wyliodrin STUDIO covers the STEM segment and the prototyping segment. It is the perfect tool to get new users started with Rapid IoT by offering three ways of programming:
-
-1. Scripting languages: MicroPython and JerryScript
-2. Visual Programming that translates to MicroPython and JavaScript
-3. C/C++ programming to make an easy transition towards the professional IDE
-
-**STEM segment**
-
-Rapid IoT is a great tool for STEM education. It is a powerful MCU that is already linked to several sensors, has a display and a UI (buttons and touch) interface and is ready to be connected using BLE or Thread.
-
-From our experience in using IoT in teaching STEM, one of the most difficult problems is hooking up hardware and making the components works. Students lose a lot of time (and interest) when debugging sensor connections. With the Rapid IoT, this problem is solved. Students can focus on building an interesting and innovative project using IoT instead of fixing hardware connection issues.
-
-**Fast prototyping segment**
-
-The main issue when prototyping is how fast one can get a project working. While professional IDEs are able to optimize and create great technical products, they are not fit for fast development. One needs to read a lot  of documentation to make the project work. This is where prototyping IDE complement the professional ones. While compromising speed and efficiency, prototyping IDEs provide scripting languages and several other tools that can speed up the building of the prototype.
-
-|
-
 Installing Wyliodrin Studio
 *****************************
 
