@@ -17,7 +17,7 @@ The first step will be to create the *button.example* folder inside the *plugins
 
 Each plugin contains 2 special folders:
 
-The first one the **data** folder, that has to be copied exactly as it is created in the *build* folder of the program. This **data** directory will include all the images and icons needed to represent the components of a plugin, but also other aditionals files needed in order to make your plugin run properly. 
+The first one is the **data** folder, that has to be copied exactly as it is created in the *build* folder of the program. This **data** directory will include all the images used to represent the components of a plugin (tool buttons, icons), but also other aditionals files needed in order to make your plugin run properly.
 
 |
 
@@ -230,7 +230,7 @@ Let's suppose that you want to create your own device plugin, called **"device_a
 
 |
 
-The **data** folder should contain all the images that you need to represent the device (the icon displayed in the list of available devices) and its features (for example the DeviceToolButtons), but also, if needed, the additional files that you'll use to make your device work and run projects.
+The **data** folder should contain all the images that you need to represent the device (the icon displayed in the list of available devices) and its features (for example, the DeviceToolButtons), but also, if needed, the additional files that you'll use to make your device run projects.
 
 |
 
@@ -729,7 +729,7 @@ The *setup* function will register the changes you made for your device, using t
 
 			sourceLanguage ()
 			{
-				return 'myawesomelanguage';
+				return 'awesomelanguage';
 			}
 		});
 

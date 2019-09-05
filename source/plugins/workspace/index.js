@@ -1202,12 +1202,9 @@ let workspace = {
 	},
 
 	/**
-	 * Disconnect from a device.
-	 * 
-	 * The first step is to get the current device object, using the **getDevice** function, 
-	 * then to check if it's an actual device type. If positive, we can disconnect the device, 
-	 * which means that we will delete its connections and characteristics, as reported by the 
-	 * type of disconnection that the user chooses:
+	 * This function disconnects the currently connected device from Wyliodrin STUDIO, which means 
+	 * that it deletes the connections and characteristics of this device, as reported by the type 
+	 * of disconnection that the user chooses:
 	 *
 	 * *StandBy* - 
 	 * 
