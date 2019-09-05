@@ -39,7 +39,7 @@ release = u'beta'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx_js', 'sphinx.ext.doctest'
+    'sphinx_rtd_theme', 'sphinx_js', 'sphinx.ext.doctest'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -75,7 +75,7 @@ pygments_style = None
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -105,7 +105,7 @@ html_theme = 'alabaster'
 htmlhelp_basename = 'WyliodrinStudiodoc'
 
 primary_domain = 'js'
-js_source_path = ['../source/plugins/workspace', '../source/plugins/projects']
+js_source_path = ['../source/plugins/workspace', '../source/plugins/projects', '../source/plugins/settings']
 root_for_relative_js_paths = '../source/plugins'
 
 

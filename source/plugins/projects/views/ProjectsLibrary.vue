@@ -102,7 +102,6 @@ export default {
 	async created ()
 	{
 		this.projects = await this.studio.projects.loadProjects(false);
-		console.log(moment());
 	},
 	mounted() {
 		this.$refs.button.$el.focus();

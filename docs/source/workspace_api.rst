@@ -12,6 +12,8 @@ Workspace plugin API
 Data Types
 """"""""""
 
+|
+
 .. autoclass:: Device
 
 |
@@ -24,6 +26,8 @@ Data Types
 
 Tabs
 """""""""
+
+|
 
 .. autofunction:: registerTab
 
@@ -43,8 +47,12 @@ Tabs
 
 |
 
+===========
+
 Status Bar
 """"""""""
+
+|
 
 .. autofunction:: registerStatusButton
 
@@ -58,8 +66,12 @@ Status Bar
 
 |
 
+===========
+
 Data Store
 """"""""""
+
+|
 
 .. autofunction:: registerStore
 
@@ -73,8 +85,12 @@ Data Store
 
 |
 
+==========
+
 Vue
 """""""
+
+|
 
 .. autofunction:: registerComponent
 
@@ -84,8 +100,12 @@ Vue
 
 |
 
+=================
+
 Device Drivers
 """"""""""""""
+
+|
 
 .. _registerDevice:
 
@@ -112,3 +132,9 @@ Device Drivers
 |
 
 .. autofunction:: disconnect
+
+|
+
+.. _showConnectionSelectionDialog:
+
+.. autofunction:: showConnectionSelectionDialog

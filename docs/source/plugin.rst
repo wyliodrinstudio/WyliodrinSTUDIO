@@ -5,13 +5,63 @@ How to write a plugin
 
 |
 
-Getting started
+.. _simple:
+
+Simple plugin
 *****************
 In this section, we will try to create a new plugin, called **"button.example"**, that will add a toolbar button which will show a notification when is clicked.
 
 The purpose of this tutorial is to help you to better understand the idea of plugin, the steps that you need to follow, the structure and behavior of each component file, as they were explained in the :ref:`Architecture chapter <plugin>`.
 
 The first step will be to create the *button.example* folder inside the *plugins* directory. 
+
+Each plugin contains 2 special folders:
+
+The first one the **data** folder, that has to be copied exactly as it is created in the *build* folder of the program. This **data** directory will include all the images and icons needed to represent the components of a plugin, but also other aditionals files needed in order to make your plugin run properly. 
+
+|
+
+The second special component is the **translations** folder, which will contain the translatable key strings from your plugin, and also their translations.
+
+More details about how the translation function works can be found :ref:`here <translations>`.
+
+Only to exemplify the content of this folder, we'll create the **messages-en.json** (english language) and **messages-fr.json** (french language).
+
+In our *index.js* file, you can notice that we used 2 strings having the following format: *'PLUGIN_STRING_TO_TRANSLATE'*, more precisely: *'EXAMPLE_BUTTON_NAME'* and *'EXAMPLE_BUTTON_NOTIFICATION_TEXT'*. It means that this key-strings have to be included in both our translation files.
+
+As you can see in the :ref:`Translations <translations>` chapter, the value that the key string will receive has to be an object with 2 properties: *message* (the actual translation), *description* (a short definition of the string to translate).
+
+By the end, your **messages-ln.json** (ln = language) files should look like this:
+
+.. code-block:: json
+
+	{
+		"EXAMPLE_BUTTTON_NAME": {
+			"message": "Notify",
+			"description": "This button pops-up a notification."
+		},
+		"EXAMPLE_BUTTON_NOTIFICATION_TEXT": {
+			"messages": "You have successfully created your button!",
+			"description": "This is the notification text when the user clicks the button."
+		}
+	}
+
+|
+
+.. code-block:: json
+
+	{
+		"EXAMPLE_BUTTTON_NAME": {
+			"message": "Notifier",
+			"description": "This button pops-up a notification."
+		},
+		"EXAMPLE_BUTTON_NOTIFICATION_TEXT": {
+			"messages": "Vous avez créé le bouton avec succès",
+			"description": "This is the notification text when the user clicks the button."
+		}
+	}
+
+|
 
 Then, we'll add the **package.json** file. As mentioned before, the content of this type of file has to be an object with the following properties:
 
@@ -79,7 +129,7 @@ Finally, the content of our package.json will be:
 
 |
 
-The second step is to create the main file, called **index.js**. 
+The next step is to create the main file, called **index.js**. 
 
 If you already read :ref:`this section <plugin>`, you probably noticed that in the **index.js** file we should've imported first the **.vue** files from the **views** folder. In this plugin tutorial, we only register a simple button, which means that we don't need a **.vue** file to design a specific Vue component., so the **views** folder will also be missing.
 
@@ -154,51 +204,19 @@ By the end, our **index.js** file should look like this:
 		})
 	}
 
-As you noticed above, when we registered the image corresponding to our button, we specified its relative path, which includes some additional folders in our *button.example* plugin. So, inside the *button.example* directory we have to create the **data** folder, which will include another folder, called **img**. Here, we'll copy our image, its name being *button.png*.
+As you noticed above, when we registered the image corresponding to our button, we specified its relative path, which includes some additional folders in our *button.example* plugin. 
 
 |
-
-The last component missing from our plugin is the **translations** folder. More details about how the translation function works can be found :ref:`here <translations>`.
-
-Only to exemplify the content of this folder, we'll create the **messages-en.json** (english language) and **messages-fr.json** (french language).
-
-In our *index.js* file, you can notice that we used 2 strings having the following format: *'PLUGIN_STRING_TO_TRANSLATE'*, more precisely: *'EXAMPLE_BUTTON_NAME'* and *'EXAMPLE_BUTTON_NOTIFICATION_TEXT'*. It means that this key-strings have to be included in both our translation files.
-
-As you can see in the :ref:`Translations <translations>` chapter, the value that the key string will receive has to be an object with 2 properties: *message* (the actual translation), *description* (a short definition of the string to translate).
-
-By the end, your **messages-ln.json** (ln = language) files should look like this:
-
-.. code-block:: json
-
-	{
-		"EXAMPLE_BUTTTON_NAME": {
-			"message": "Notify",
-			"description": "This button pops-up a notification."
-		},
-		"EXAMPLE_BUTTON_NOTIFICATION_TEXT": {
-			"messages": "You have successfully created your button!",
-			"description": "This is the notification text when the user clicks the button."
-		}
-	}
-
-|
-
-.. code-block:: json
-
-	{
-		"EXAMPLE_BUTTTON_NAME": {
-			"message": "Notifier",
-			"description": "This button pops-up a notification."
-		},
-		"EXAMPLE_BUTTON_NOTIFICATION_TEXT": {
-			"messages": "Vous avez créé le bouton avec succès",
-			"description": "This is the notification text when the user clicks the button."
-		}
-	}
 
 To test if you successfully created your first plugin, you have to rebuild the program using the 2 commands for electron **npx webpack**, then **npm start**. 
 
-POZA DIN APLICATIE
+.. image:: images/examplebutton.png
+	:align: center
+
+|
+
+.. image:: images/exampleNotification.png
+	:align: center
 
 
 |
@@ -257,14 +275,23 @@ Inside the *setup* function, you have to create the object you will register and
 
 		The device statuses are:
 
-		* *DISCONNECTED* - the device is offline
-		* *CONNECTING* - trying to connect
-		* *SYNCHRONIZING* - trying to synchronize with the device
-		* *CONNECTED* - the device is online
-		* *ISSUE* - there is some issue, the system is partially functional
-		* *ERROR* - there is an error with the system
+.. list-table::
 
-	**disconnect**: opens a dialog where the user chooses the way he wants to disconnect the device; the methods of disconnection are:
+	* - DISCONNECTED
+	  - the device is offline
+	* - CONNECTING
+	  - trying to connect
+	* - SYNCHRONIZING
+	  - trying to synchronize with the device
+	* - CONNECTED
+	  - the device is online
+	* - ISSUE
+	  - there is some issue, the system is partially functional
+	* - ERROR
+	  - there is an error with the system
+
+
+**disconnect**: opens a dialog where the user chooses the way he wants to disconnect the device; the methods of disconnection are:
 
 		* *StandBy* - 
 		* *Disconnect* - 
@@ -278,6 +305,8 @@ Also, if your device interacts with the *console* or the *mqtt* server, you will
 
 |
 
+.. _wyappBoard:
+
 How to add a wyapp board
 ***************************
 
@@ -286,9 +315,12 @@ If you're trying to add a new board plugin, our *"device.wyapp.raspberrypi"*, *"
 
 In the **index.js** file, inside the *setup* function, you need to create an event, so when the board is *'ready'*, you call the **registerPinLayout** function from our *"pinlayout"* plugin. The purpose of this function is to register the pins of your board in the **Pin Layout** tab, using the appropriate images that you saved in the *data* folder of our plugin.
 
-.. For example, if we are connected to a Raspberry Pi, the content of the Pin Layout tab will be: 
+For example, if we are connected to a Raspberry Pi, the content of the Pin Layout tab will be: 
 
-.. POZA
+.. image:: images/pinlayout.png
+	:align: center
+	:width: 500px
+	:height: 400px
 
 The next step is to create an object having your new board name, with the next functions:
 
@@ -329,42 +361,75 @@ How to write a language plugin
 
 The purpose of this type of plugins is to register a new programming language that will be supported by the Wyliodrin Studio IDE.
 
-As an example, we'll use our **language.python** plugin.
+For example, we'll try to add a new programming language, called "MyAwesomeLanguage", whit the *".aws"* extension:
 
-As you can notice, the name of this type of plugins should begin with *"language."*, which will be followed by the actual name of the programming language that you want to register.
+As you can notice, the name of this type of plugins should begin with *"language."*, which will be followed by the actual name of the programming language that you want to register, which means that you will have to create a new folder, **"language.myawesomelanguage"**.
 
 
-As any other plugin, it's also required to have a *package.json* file, having the classic format. It's necessary to mention that this type of plugin **consumes** both *"workspace"* and *"projects"* plugins, and their **target** are both *"electron"* and *"browser"*.
+As any other plugin, it's  required to have a *package.json* file, having the classic format. It's necessary to mention that this type of plugin **consumes** both *"workspace"* and *"projects"* plugins, and their **target** are both *"electron"* and *"browser"*.
 
-The language plugin doesn't have any Vue component, so we don't have to create the **views** folder, but we need the **data** folder to save a characteristic image for the programming language. For example, for our *language.python* plugin, the image in the **data/img** folder is:
+So, the content of your package.json should look like that:
 
-.. image:: images/language.python.png
+.. code-block:: json
+
+	{
+		"name": "language.myawesomelanguage",
+	    "version": "0.0.1",
+	    "main": "index.js",
+	    "private": true,
+	    "plugin": {
+	        "consumes": ["workspace","projects"],
+	        "provides": [],
+	        "target": ["electron", "browser"]
+	    }
+	}
+
+The language plugin doesn't have any Vue component, so we don't have to create the **views** folder, but we need the **data** folder to save a characteristic image for the programming language. Let's pick as example for our *language.myawesomelanguage* plugin, an icon that we will save in the **data/img** folder:
+
+.. image:: images/awesome.png
 	:align: center
-	:width: 70px
-	:height: 70px
+	:width: 90px
+	:height: 90px
 
 Inside the main file, **index.js**, we obviously need to initialize the *studio* variable to null, and inside the *setup* function it will receive all the imported functions from the "workspace" and "projects" plugin.
 
-The next step is to create the **python** object, its properties being:
+The next step is to create the **awesome** object, containing the options of our programming language:
 
-.. list-table::
-	:widths: 35 70
+.. code-block:: javascript
 
-	* - *createProject*
-	  - function where we use the *newFile* function from the *projects* plugin to create a **main.py** file
-	* - *getDefaultFileName*
-	  - function where we return the *'/main.py'* file
-	* - *getDefaultRunFileName*
-	  - function where we return the *'/main.py'* file
-	* - *getMakefile*
-	  - function that returns the content of the makefile for the chosen language (here, *return 'run:\n\tpython main.py';*)
+	let studio = null;
+
+	export default function setup (options, imports, register)
+	{
+		studio = imports;
+		
+		let awsome = {
+			async createProject(name){
+				await studio.projects.newFile(name,'/main.aws','print ("Hello from Awesome")');			
+			},
+			getDefaultFileName() {
+				return '/main.aws';
+			},
+			getDefaultRunFileName() {
+				return '/main.aws';
+			},
+			getMakefile(project, filename) {
+				if (filename[0] === '/') 
+					filename = filename.substring (1);
+
+				return 'run:\n\tawesome main.aws';
+			},
+		};
+
 
 
 The next step is to register the new programming language, using the function :ref:`registerLanguage <registerLanguage>`:
 
 .. code-block:: javascript
 
-	registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
+	studio.projects.registerLanguage('awesome', 'awesome', 'plugins/language.myawesomelanguage/data/img/awesome.png', awesome);
+
+where the last parameter represents the *awesome* object we created before.
 
 |
 
@@ -372,6 +437,8 @@ How to add a language addon plugin
 *************************************
 
 This type of plugin modifies the language plugin for certain devices. For instant, we are using it for visual and rpk. To design your own language addon, you will have to create a new plugin folder, called *"language.visual."*, followed by the type of the device you want the language addon for.
+
+For example, let's say that you want to create an addon for your *Awesome* device and you need to create a new plugin, called **language.visual.awesome**
 
 |
 
@@ -383,9 +450,46 @@ You will also have to create a *toolbox.xml* file, where you will include the ac
 
 The **index.js** file will first import the *xml* module and the *toolbox.xml* file, the second one as a string, using the *raw-loader* module. More details about this webpack loader can be found `here <https://github.com/webpack-contrib/raw-loader>`_.
 
+.. code-block:: javascript
+
+	import xml from 'xml-js';
+	import toolboxStr from 'raw-loader!./visual/toolbox.xml';
+
 Then, you will import the code and the blocks from the *.js* files included in the *visual* folder.
 
-The *setup* function will register the changes you made for your device, using the projects function :ref:`registerLanguageAddon <registerLanguageAddon>`. The final step is to parse the toolbox string imported before and then to register the blocks using the **registerBlocksDefinitions** function from the *projects.editor.visual* plugin. 
+.. code-block:: javascript
+
+	let blocks = require ('./visual/definitions_for_awesome.js');
+	let code = require ('./visual/code_for_awesome.js');
+
+The *setup* function will register the changes you made for your device, using the projects function :ref:`registerLanguageAddon <registerLanguageAddon>`. 
+
+.. code-block:: javascript
+	
+	let studio = null;
+	export function setup (options, imports, register)
+	{
+		studio = imports;
+
+		studio.projects.registerLanguageAddon ('visual', 'awesome', 'awesome', {
+			getDefaultRunFileName ()
+			{
+				return '/main.visual.js';
+			},
+
+			sourceLanguage ()
+			{
+				return 'myawesomelanguage';
+			}
+		});
+
+		let toolbox = xml.xml2js (toolboxStr);
+		studio.editor_visual.registerBlocksDefinitions ('awesome', blocks, code, toolbox, {type: 'awesome', board: 'awesome'});
+
+		register (null, {});
+	}
+
+As you can notice, the final step is to parse the toolbox string imported before and then to register the blocks using the **registerBlocksDefinitions** function from the *projects.editor.visual* plugin. 
 
 The parameters of this function are:
 
@@ -417,3 +521,18 @@ The parameters of this function are:
 	  - optional
 	  - {}
 
+Of course, you also need to have a **package.json** file, where you should mention that your language addon plugin also consumes "editor_visual", because it's using the *registerBlockDefinitions* function.
+
+.. code-block:: json
+
+	{
+	    "name": "language.visual.awesome",
+	    "version": "0.0.1",
+	    "main": "index.js",
+	    "private": true,
+	    "plugin": {
+	        "consumes": ["workspace","projects","editor_visual"],
+	        "provides": [],
+	        "target": ["electron"]
+	    }
+	}

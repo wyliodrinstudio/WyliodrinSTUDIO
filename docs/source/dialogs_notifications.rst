@@ -16,17 +16,41 @@ A dialog is a component that informs users about a specific task and may contain
 
 .. autofunction:: showDialog
 
-.. autofunction:: showDeviceSettingsDialog
+For example, having the :ref:`simple` created, let's say that when the button is clicked ,you want to open a simple dialog with an input text area. This is how you will use the **showDialog** function:
 
-.. !!!!!!!!!poza
+.. code-block:: javascript
+
+	studio.workspace.showDialog ('EXAMPLE_BUTTON_DIALOG_TITLE', ButtonDialog);
+
+where **ButtonDialog** will represent the Vue component that you will need to create in the *views* directory, its purpose being to design and to add functionalities to the dialog box.
+
+Let's suppose you want to create a simple dialog, which has an input text area and a "Close" button. For this, in the **template** section you will have to use the *<v-card>* component, where you will add the input box (*<v-text-field>*) and the button (*<v-btn>*, inside the *<v-card-actions>*).
+
+Inside the **script** section, you will define the methods that your component needs, which means the *close()* function:
+
+.. code-block:: javascript
+
+	close() {
+		this.$root.$emit ('submit', undefined);
+	}
+
+By the end, when you click on the button, the **showDialog** function result will be:
+
+.. image:: images/showDialog.png
+	:align: center
+	:width: 470px
+	:height: 370px
 
 |
 
-.. _showConnectionSelectionDialog:
+.. autofunction:: showDeviceSettingsDialog
 
-.. autofunction:: showConnectionSelectionDialog
+.. image:: images/deviceSettingsDialog.png
+	:align: center
+	:width: 470px
+	:height: 380px
 
-.. POZA!!!!!!!
+
 
 |
 
@@ -38,6 +62,8 @@ A prompt is actually a dialog box that requires a user decision. A prompt box is
 |
 
 .. autofunction:: showPrompt
+
+This prompt is used to rename a project.
 
 .. image:: images/showPrompt.png
 	:align: center
@@ -67,6 +93,7 @@ The possible types for a notification are: *info*, *success*, and *warning*, and
 
 .. image:: images/showNotification.png
 	:align: center
+
 
 |
 

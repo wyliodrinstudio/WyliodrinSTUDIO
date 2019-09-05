@@ -125,15 +125,143 @@ At the end, the folder should look like this:
 Dependencies
 """"""""""""""""
 
-As any other program, our application also requires to install new packages or modules that will be used by our plugins and which are known as **dependencies**. For the moment, all our dependencies can be found in the *package.json* file of the main folder, not distributed in the *package.json* files of each plugin. The simple dependencies, the ones that we install using the *--save* argument, are depending only on the platform, which means they are not working in browser (like *serialport*). For this reason, they should be saved as **devDependencies**, meaning that the argument will be *--save-dev*.
+We are using the **webpack** module to process the Wyliodrin STUDIO application. If you're not familiarized with webpack, you should consult the theory presented in their `documentation <https://webpack.js.org/concepts/>`_, in order to understand which are the core concepts and how the modules that we use are mapped into the "dependency graph".
 
-For example, if we want to install the *highcharts* module, the command that we will run in the terminal is:
+As you probably read before, there are 2 different options to build the code, depending on the version that you are using:
 
-.. code-block:: javascript
+- *Standalone* 
+
+.. code-block:: console
+
+	npx webpack
+
+- *Browser*
+
+.. code-block:: console
+
+	npx webpack --config=webpack.browser.config.js
+
+|
+
+Once the code was built, a folder named **"build"** is created. Its content represents the distribution code, which means a "minimized and optimized output of our build process that will eventually be loaded". More details can also be found `here <https://webpack.js.org/guides/getting-started/>`_.
+
+To pack (or "bundle") a dependency, we need to install the module locally. These dependencies are copied in the *build* folder, but they are not available yet for the browser version of Wyliodrin STUDIO.
+
+.. code-block:: console
+
+	npm install archiver --save
+
+
+|
+
+We also created the **devDependencies** option, which allow to some particular dependencies to work not only for the electron edition, but also for the browser one. They are saved in the main *package.json* file of the program, as *devDependencies* property, and they are installed using the command:
+
+.. code-block:: console
 
 	npm install highcharts --save-dev
 
 |
+
+Imports
+********
+
+Each plugin exports in its main file "index.js" a **setup** function, designed to register the plugin. The structure of this function is:
+
+.. code-block:: javascript
+
+	export function setup(options, imports, register)
+	{
+		/* the function code */
+	}
+
+
+As you can see, one of the parameters of this function is **imports**.
+
+The *imports* object has as purpose to collect all the functions and dependencies from the other plugins that our plugin consumes.
+
+For example, let's suppose that you have a plugin called *"test.plugin"*, which depends on the "workspace" and "projects" plugins. This means that the content of its *package.json* file will be:
+
+.. code-block:: json
+
+	{
+	    "name": "test.plugin",
+	    "version": "0.0.1",
+	    "main": "index.js",
+	    "private": false,
+	    "plugin": {
+	        "consumes": ["workspace", "projects"],
+	        "provides": [],
+	        "target": ["electron", "browser"]
+	    }
+	}
+
+The fact that your plugin *consumes* these 2 plugins means that the **imports** object will include all their modules and will allow you to access all their functions. Therefore, your *setup* function from the "index.js" file could look like this:
+
+.. code-block:: javascript
+
+	let studio = null;
+
+	export function setup (options, imports, register)
+	{
+		studio = imports;
+
+		/* use the registerTab function from the workspace plugin */
+		studio.workspace.registerTab('TEST_TAB', 100, TestTab, {
+			visible ()
+			{
+				/* use the getCurrentProject function from the projects plugin to make 
+				the tab visible only if there is a project opened */
+
+				return !!studio.projects.getCurrentProject();
+			}
+		});
+	}
+
+|
+
+Provides
+************
+
+As it was specified in :ref:`this <plugin>` section, **"provides"** is a property assigned to the "plugin" property in the *package.json* file of each plugin. The idea around this property is to indicate if a plugin will export its own functions and modules to be used by other plugins. 
+
+For example, let's assume that you have the same plugin, "test.plugin", which doesn't provide anything. This means that all its functions will be private and no other plugin will pe able to use them, not even if it specifies that it *"consumes"* your plugin.
+
+In this case, the *package.json* file of your plugin will look like this:
+
+.. code-block:: json
+
+	{
+	    "name": "test.plugin",
+	    "version": "0.0.1",
+	    "main": "index.js",
+	    "private": true,
+	    "plugin": {
+	        "consumes": [],
+	        "provides": [],
+	        "target": ["electron", "browser"]
+	    }
+	}
+
+But if you want for your plugin to provide all its functions so that the others plugins may access and use them, you have to indicate this option inside the *"provides"* property. You should be careful at the fact that the provided object should not contain and "." in its name, unlike the plugin name.
+
+Therefore, the content of the *package.json* should be:
+
+.. code-block:: json
+
+	{
+	    "name": "test.plugin",
+	    "version": "0.0.1",
+	    "main": "index.js",
+	    "private": true,
+	    "plugin": {
+	        "consumes": [],
+	        "provides": ["test_plugin"],
+	        "target": ["electron", "browser"]
+	    }
+	}
+
+As you can see, your "test.plugin" provides the *"test_plugin"* object, which means that if another plugin it's using its functions, it should consume the same *"test_plugin"* object.
+
 |
 
 Architecture Components:

@@ -26,7 +26,12 @@ export async function setup (options, imports, register)
 	
 	let settings = {
 		/**
-		 * Save plugin settings
+		 * Save plugin settings. 
+		 * 
+		 * For each plugin that this function is called for, we create an object with 
+		 * the data that will be stored and we use the filesystem function **writeFile** to 
+		 * save the parsed content into the *SETTINGS_FILE*
+		 * 
 		 * @param {string} plugin - plugin name
 		 * @param {Object} data - plugin data
 		 */
@@ -46,8 +51,13 @@ export async function setup (options, imports, register)
 			}
 		},
 		/**
-		 * Load plugin settings
+		 * Load plugin settings.
+		 * 
+		 * For the selected plugin, we display the data saved inside the special settings file.
+		 * 
 		 * @param {string} plugin - plugin name
+		 * 
+		 * @returns {Object} - the data inside the settings file
 		 */
 		loadSettings (plugin)
 		{
@@ -61,7 +71,15 @@ export async function setup (options, imports, register)
 		},
 
 		/**
-		 * Store value to settings
+		 * Store value to settings.
+		 * 
+		 * The function first loads the existing settings of the selected project, then updates 
+		 * the chosen property of the object with the *value*.
+		 * 
+		 * @param {string} plugin - plugin name
+		 * @param {string} name - property name
+		 * @param {Object} value - the value to be associated to the property
+		 * 
 		 */
 		storeValue (plugin, name, value)
 		{
@@ -71,7 +89,17 @@ export async function setup (options, imports, register)
 		},
 
 		/**
-		 * Load value from settings
+		 * Load value from settings.
+		 * 
+		 * We first load the settings from a chosen plugin using the **loadSettings** function. 
+		 * If the setting object exists and if there is a value for the chosen *name* property, 
+		 * we return that value.
+		 * 
+		 * @param {string} plugin - plugin name
+		 * @param {string} name - property name
+		 * @param {Object} value - the value to be associated to the property 
+		 * 
+		 * @returns {string} - the value in the settings file
 		 */
 		loadValue (plugin, name, value)
 		{
