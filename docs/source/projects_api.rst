@@ -20,6 +20,10 @@ Data Types
 
 |
 
+.. autoclass:: Language
+
+|
+
 .. autofunction:: disposable
 
 ======================

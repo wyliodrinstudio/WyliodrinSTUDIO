@@ -132,3 +132,9 @@ Device Drivers
 |
 
 .. autofunction:: disconnect
+
+|
+
+.. _showConnectionSelectionDialog:
+
+.. autofunction:: showConnectionSelectionDialog
