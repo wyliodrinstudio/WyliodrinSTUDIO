@@ -224,7 +224,9 @@ To test if you successfully created your first plugin, you have to rebuild the p
 How to create a device plugin
 *********************************
 
-This type of plugin allows you to add and use a new device to the Wyliodrin STUDIO platform, so you need to properly register its functions and characteristics.
+This type of plugin allows you to add and use a new device to the Wyliodrin STUDIO platform, so you need to properly register its functions and characteristics. 
+
+Let's suppose that you want to create your own device plugin, called **"device_awesome"**.
 
 |
 
@@ -232,15 +234,76 @@ The **data** folder should contain all the images that you need to represent the
 
 |
 
-The **views** folder has to include every Vue component relied to your device, for example: disconnect, device settings or device manager dialogs.
+The **views** folder has to include every Vue component relied to your device, for example: disconnect, device settings or device manager dialogs. In this situation, we will create the **AwesomeDisconnectDialog.vue** component, that will contain the button that disconnects the device:
+
+::
+
+	<template>
+		<v-card class="disconnect">
+			<v-tooltip>
+				<template #activator="data">
+					<v-btn @click.stop="disconnect" class="icon-btn" ref="reference">
+						<img src="plugins/device.awesome/data/img/icons/disconnect-icon.svg" :alt="$t('DEVICE_AWESOME_DISCONNECT')" class="s24">
+					</v-btn>
+				</template>
+				<span>{{$t('DEVICE_AWESOME_DISCONNECT')}}</span>
+			</v-tooltip>
+		</v-card>
+	</template>
+
+The *script* part will define the *disconnect* function and also an *esc* function, that will close the dialog containing the Disconnect Button when the user presses the 'Esc' key:
+
+.. code-block:: javascript
+
+	export default {
+		name: 'AwesomeDisconnectDialog',
+		methods: {
+			disconnect ()
+			{
+				this.$root.$emit ('submit', {
+					disconnect: 'disconnect'
+				});
+			},
+			esc() {
+				this.$root.$emit('submit');
+			}
+		}
+	}
+
 
 |
 
-The **package.json** file will have the classic format, but if it's necessary the "plugin" object will require an additional property, called **"optional"**, where you will specify if the plugin consumes the *console* or the *mqtt* plugins.
+The **package.json** file will have the classic format, but if it's necessary the "plugin" object will require an additional property, called **"optional"**, where you will specify if the plugin consumes the *console* or the *mqtt* plugins. 
+
+For the example created, it won't be necessary, so the content of this file will be:
+
+.. code-block:: json
+
+	{
+	    "name": "device.awesome",
+	    "version": "0.0.1",
+	    "main": "index.js",
+	    "private": true,
+	    "plugin": {
+	        "consumes": ["workspace", "projects"],
+	        "provides": [],
+	        "target": ["electron"]
+	    }
+	}
+
 
 |
 
 The **translations** folder will also have the usual structure, including the *messages-ln.json* files with the unique keys that you used in your device plugin, for each language of the program.
+
+.. code-block:: json
+
+	{
+		"DEVICE_AWESOME_DISCONNECT": {
+			"message": "Disconnect",
+			"description": "This button is used to disconnect a device."
+		}
+	}
 
 |
 
@@ -248,32 +311,172 @@ The main file **index.js** is the most important for this type of plugin, as its
 
 You have to begin with importing all the Vue components that you created, and also all the modules and packages that your device requires in order to work properly.
 
+For the "device_awesome" plugin, the header of this file could look like this:
+
+.. code-block:: javascript
+
+	/* Here you will import all the modules required for the functioning of your device */
+
+	import AwesomeDisconnectDialog from './views/AwesomeDisconnectDialog.vue';
+
+	import { EventEmitter } from 'events';
+	import { connect } from 'http2';
+
+	let deviceEvents = new EventEmitter ();
+
+	let awesome_module = null;
+
+	let studio = null;
+	let workspace = null;
+	let devices = [];
+
+	let awesomeDevices = [];
+
+	let connections = {};
+
 After that, you will create the functions needed to search and update your device type:
 
-	**loadDevice**: uses a specialized module to scan the operating system of the client and search for your type of device.
+**loadDevice**: uses a specialized module to scan the operating system of the client and search for your type of device.
 
-	**listDevice**: will try to return a list of the available devices, if they can be found.
+.. code-block:: javascript
 
-	**updateDevices**: simply call the workspace :ref:`updateDevices <updateDevices>` function.
+	function loadAwesome ()
+	{
+		try
+		{
+			/* Any module that will allow you to find the type of device you have chosen*/
 
-	**searchDevices**: checks systematically the list with all the available devices found, trying to find those having the name or the description fitting your type of device;
+			return require ('awesome_module');
+		}
+		catch (e)
+		{
+			studio.workspace.error ('device_awesome: Awesome is not available '+e.message);
+			return {
+				list: function ()
+				{
+					return [
+					];
+				}
+			};
+		}
+	}
 
-	adds a new object to the *devices* array, with the relevant properties: unique *id*, *name*, *description*, *address*, *priority*, *icon*, type of *board*, type of *connection*, and others additional properties depending on the type of the device.
+**listDevice**: will try to return a list of the available devices, if they can be found.
+
+.. code-block:: javascript
+
+	async function listAwesome ()
+	{
+		let ports = [];
+		try 
+		{
+			ports = await awesome_module.list ();
+		}
+		catch (e)
+		{
+			studio.workspace.error ('device_awesome: failed to list awesome '+e.message);
+		}
+		return ports;
+	}
+
+**updateDevices**: simply call the workspace :ref:`updateDevices <updateDevices>` function.
+
+.. code-block:: javascript
+
+	function updateDevices()
+	{
+		workspace.updateDevices ([...devices, ...awesomeDevices]);
+	}
+
+**searchDevices**: checks systematically the list with all the available devices found, trying to find those having the name or the description fitting your type of device, then adds a new object to the *devices* array, with the relevant properties: unique *id*, *name*, *description*, *address*, *priority*, *icon*, type of *board*, type of *connection*, and others additional options.
+
+.. code-block:: javascript
+
+	function search ()
+	{
+		if(!discoverAwesomeDevicesTimer)
+		{
+			discoverAwesomeDevicesTimer = setInterval (async () => {
+				let awesome_devices = await listAwesome ();
+				devices = [];
+				for(let awesomeDevice of awesome_devices)
+				{
+					/* Search only for the devices that have the same specifications as your Awesome Device,
+					  then push the object into the *devices* array and set its properties.
+					*/
+					devices.push(awesomeDevice);
+				}
+				updateDevices ();
+			},5000);
+		}
+	}
 
 
-Inside the *setup* function, you have to create the object you will register and export for your plugin, its properties being the functions that will help the user manage your device on the Wyliodrin Studio platform:
+Inside the *setup* function, you first have to obtain the list of devices that fit your *awesome* type:
 
-	**defaultIcon**: correlates a default icon to a device that doesn't have any particular image already attached
+.. code-block:: javascript
 
-	**registerForUpdade**: registers to receive updates for a device
+	export function setup (options, imports, register)
+	{
+		studio = imports; 
+		awesome_module = loadAwesome();
+		search();
 
-	**getConnections**: returns the connections array for every unique device id
+		/*Code explained below*/
+	}
+	
 
-	**connect**: connects the device to Wyliodrin Studio; if there is no connection previously created for the current unique id of the device, it will create a data transport path conforming with the type of your device;
+Afther that, you to create the object you will register and export for your plugin, its properties being the functions that will help the user manage your device on the Wyliodrin Studio platform:
 
-	after that, according to the current status,  you will bring up to date your device, using the *updateDevices* function and you will set up its functioning characteristics.
+**defaultIcon**: correlates a default icon to a device that doesn't have any particular image already attached
 
-		The device statuses are:
+.. code-block:: javascript
+
+	defaultIcon ()
+	{
+		return 'plugins/device.awesome/data/img/icons/awesome.png';
+	}
+
+**registerForUpdade**: registers to receive updates for a device
+
+.. code-block:: javascript
+
+	registerForUpdate (device, fn)
+	{
+		deviceEvents.on ('update:'+device.id, fn);
+		return () => deviceEvents.removeListener ('update:'+device.id, fn);
+	}
+
+**getConnections**: returns the connections array for every unique device id
+
+.. code-block:: javascript
+
+	getConnections ()
+	{
+		let connections = [];
+		for (let deviceId in connections)
+		{
+			connections.push (connections[deviceId].device);
+		}
+		return connections;
+	}
+
+**connect**: connects the device to Wyliodrin Studio; if there is no connection previously created for the current unique id of the device, you should create a data transport path conforming with the type of your device;
+
+.. code-block:: javascript
+
+	connect(device, options)
+	{
+		/* Here goes the actual code that you will write in order to connect the device. */
+
+		setTimeout(() => {
+			device.status = 'CONNECTED';
+		}, 1000);
+	}
+
+after that, according to the current status,  you will bring up to date your device, using the *updateDevices* function and you will set up its functioning characteristics.
+
+	The device statuses are:
 
 .. list-table::
 
@@ -297,11 +500,57 @@ Inside the *setup* function, you have to create the object you will register and
 		* *Disconnect* - 
 		* *Turn-Off* - 
 
-After creating the new device object, you have to register it using the workspace function :ref:`registerDeviceDriver <registerDevice>` and generate the specific buttons for your type of device, using also an workspace function: :ref:`registerDeviceToolButton <registerDeviceToolButton>`. 
+.. code-block:: javascript
 
-Each device should have a **Run** button, that will run the code written by the user in the current project, and a **Stop** button, to interrupt the current project from running, but you can always add others particular buttons, specialized to execute yor own functions. These buttons should include 2 properties, *visible* and *enabled*, whose values become *true* only if there is a device connected.
+	disconnect(device, options)
+	{
+		/* Here goes the actual code that you will write in order to connect the device. */
+		setTimeout(() => {
+			device.status = 'DISCONNECTED';
+		}, 1000);
+	}
+
+After creating the new device object, you have to register it using the workspace function :ref:`registerDeviceDriver <registerDevice>`.
+.. code-block:: javascript
+
+	workspace = studio.workspace.registerDeviceDriver('awesome', device_awesome);
+
+Here you can also generate the specific buttons for your type of device, using also an workspace function: :ref:`registerDeviceToolButton <registerDeviceToolButton>`. 
+
+For the *awesome device* we create a **Run** button, that will run the code written by the user in the current project.
+
+.. code-block:: javascript
+
+	workspace.registerDeviceToolButton('DEVICE_AWESOME_RUN', 10 async () => {
+		let device = studio.workspace.getDevice ();
+
+		/* Here goes the actual code that will make your device run the code */
+		console.log('Run');
+		}, 'plugins/device.awesome/data/img/icons/run-icon.svg',
+
+		/* The aditional options that make the Run Button visible and enabled only if there is a connected device 
+		and its type is *awesome* */
+		{
+			visible () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.connection === 'awesome');
+			},
+			enabled () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.connection === 'awesome');
+			},
+			type: 'run'
+		});
 
 Also, if your device interacts with the *console* or the *mqtt* server, you will have to create some specific functions that will establish the data transfer protocol.
+
+At the end of the setup function, we register the *device_awesome* object:
+
+.. code-block:: javascript
+
+	register(null, {
+		device_awesome
+	});
 
 |
 
@@ -363,7 +612,7 @@ The purpose of this type of plugins is to register a new programming language th
 
 For example, we'll try to add a new programming language, called "MyAwesomeLanguage", whit the *".aws"* extension:
 
-As you can notice, the name of this type of plugins should begin with *"language."*, which will be followed by the actual name of the programming language that you want to register, which means that you will have to create a new folder, **"language.myawesomelanguage"**.
+As you can notice, the name of this type of plugins should begin with *"language."*, which will be followed by the actual name of the programming language that you want to register, which means that you will have to create a new folder, **"language.awesome"**.
 
 
 As any other plugin, it's  required to have a *package.json* file, having the classic format. It's necessary to mention that this type of plugin **consumes** both *"workspace"* and *"projects"* plugins, and their **target** are both *"electron"* and *"browser"*.
@@ -373,7 +622,7 @@ So, the content of your package.json should look like that:
 .. code-block:: json
 
 	{
-		"name": "language.myawesomelanguage",
+		"name": "language.awesome",
 	    "version": "0.0.1",
 	    "main": "index.js",
 	    "private": true,
@@ -384,7 +633,7 @@ So, the content of your package.json should look like that:
 	    }
 	}
 
-The language plugin doesn't have any Vue component, so we don't have to create the **views** folder, but we need the **data** folder to save a characteristic image for the programming language. Let's pick as example for our *language.myawesomelanguage* plugin, an icon that we will save in the **data/img** folder:
+The language plugin doesn't have any Vue component, so we don't have to create the **views** folder, but we need the **data** folder to save a characteristic image for the programming language. Let's pick as example for our *language.awesome* plugin, an icon that we will save in the **data/img** folder:
 
 .. image:: images/awesome.png
 	:align: center
@@ -420,6 +669,7 @@ The next step is to create the **awesome** object, containing the options of our
 				return 'run:\n\tawesome main.aws';
 			},
 		};
+	}
 
 
 
@@ -427,7 +677,7 @@ The next step is to register the new programming language, using the function :r
 
 .. code-block:: javascript
 
-	studio.projects.registerLanguage('awesome', 'awesome', 'plugins/language.myawesomelanguage/data/img/awesome.png', awesome);
+	studio.projects.registerLanguage('awesome', 'awesome', 'plugins/language.awesome/data/img/awesome.png', awesome);
 
 where the last parameter represents the *awesome* object we created before.
 

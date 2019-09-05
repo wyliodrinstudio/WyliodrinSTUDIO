@@ -754,11 +754,6 @@ let workspace = {
 	 * 		
 	 * 		studio.workspace.showNotification ('TRANSLATED_TEXT_ID', {title: 'the title'}, 'success', 5000);
 	 * 
-	 * @example
-	 * 
-	 * 		studio.workspace.showNotification('TRANSLATED_TEXT_ID: ' + this.value);
-	 * 
-	 * // In this situation, this.value is a variable updated in the code.
 	 *
 	 */
 	showNotification (text, values = {}, type = 'info', timeout = 6000)
@@ -809,11 +804,6 @@ let workspace = {
 	 * 		
 	 * 		studio.workspace.showError ('TRANSLATED_TEXT_ID', {title: 'the title'}, 5000);
 	 * 
-	 * @example
-	 * 
-	 * 		studio.workspace.showError('TRANSLATED_TEXT_ID: ' + this.value);
-	 * 
-	 * // In this situation, this.value is a variable updated in the code.
 	 * 
 	 */
 	showError(text, values = {}, timeout = 6000)

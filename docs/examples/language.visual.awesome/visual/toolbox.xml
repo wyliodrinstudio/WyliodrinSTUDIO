@@ -1,0 +1,13 @@
+<toolbox>
+  <category name="CategoryName" colour="0">
+    <block type="block_type">
+      <value name="value_name">
+        <shadow type="text">
+          <field name="TEXT"/>
+        </shadow>
+      </value>
+    </block>
+  </category>
+  
+  <!-- Any other block type or category required by your language -->
+</toolbox>
