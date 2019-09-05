@@ -1,7 +1,7 @@
 import Dexie from 'dexie';
 
 var db = new Dexie('FileSystemDataBase');
-
+var $ = require ('jquery');
 let web_filesystem = {
 	async getUserFolder ()
 	{
@@ -369,12 +369,16 @@ let web_filesystem = {
 		//TODO
 		return false;
 	},
+	registerLoadInput(id){
+		document.querySelector(id).append('<input type="file" id="importFile" name="importFile" @change="importProject" v-show="false">');
+	},
 	openSaveDialog(options) {
 		return false;
 	},
-	openLoadDialog(options) {
-		return false;
+	openLoadDialog(that) {
+		return $(that.$el).find('#importFile').trigger('click');
 	},
+
 
 };
 export default function setup(options, imports, register) {
@@ -384,7 +388,7 @@ export default function setup(options, imports, register) {
 		data: '++id,&fileId,data,size'
 	});
 	db.open();
-
+	this.registerLoadInput('div');
 	studio.filesystem.registerFileSystem('webfs', web_filesystem);
 	register(null, {});
 }

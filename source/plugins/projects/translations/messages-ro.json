@@ -230,7 +230,11 @@
     "PROJECT_NAME_PROMPT": {
         "message": "Introduceți numele proiectului",
         "description": "Etichetă pentru noul nume ce va fi dat proiectului"
-    },
+	},
+	"PROJECT_LIBRARY_SEARCH":{
+		"message":"Caută",
+		"description":"Label to search for projects"
+	},
     "PROJECT_NULL": {
         "message": "Un parametru este null",
         "description": "One or more of the funciton's parameters are null"

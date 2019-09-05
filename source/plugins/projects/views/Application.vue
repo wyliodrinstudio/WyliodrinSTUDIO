@@ -12,6 +12,7 @@
 						<img src="plugins/projects/data/img/filem-show.png" >
 					</v-btn>
 				</div>
+				
 				<div :class="projectTree" class="project-tree-on" v-if="advanced">
 					<v-app id="inspire">
 					<v-treeview
@@ -23,13 +24,13 @@
 					>
 					<template v-slot:prepend="{item, open}">
 						<p v-if="item.name === currentProject.folder" class="project">
-
+								
 						</p>
 						<p v-else-if="item.file" class="file" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
 
 						</p>
 						<p v-else-if="open" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
-							<!-- {{ open ? 'md-folder-open' : 'md-folder' }} -->
+							
 						</p>
 							
 						<p v-else class="folder-closed" text @contextmenu="fileItem = item,showFolder($event)">
@@ -139,6 +140,7 @@
 			<!--  -->
 		</div>
 		<div :class="editorBox" class="hs-100">
+			<v-icon>mdi-account</v-icon>
 			<component v-if="currentEditor && currentFile" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
 			<p v-else-if="currentFile === null">The project has no files, create one</p>	
 		</div>
@@ -160,7 +162,8 @@
 // de trimis ace even
 import { mapGetters } from 'vuex';
 import path from 'path';
-import ProjectsLibrary from './ProjectsLibrary.vue'
+import ProjectsLibrary from './ProjectsLibrary.vue';
+
 export default {
 	name: 'Application',
 	props: ['active'],
@@ -180,15 +183,15 @@ export default {
 
 			open: ['public'],
 			files: {
-				html: 'md-language-html5',
-				js: 'md-nodejs',
-				json: 'md-json',
-				md: 'md-markdown',
-				pdf: 'md-file-pdf',
-				png: 'md-file-image',
-				txt: 'md-file-document-outline',
-				xls: 'md-file-excel',
-				visual: 'md-file-visual'
+				html: 'mdi_language_html5',
+				js: 'mdi_nodejs',
+				json: 'mdi_json',
+				md: 'mdi_markdown',
+				pdf: 'mdi_file_pdf',
+				png: 'mdi_file_image',
+				txt: 'mdi_file_document_outline',
+				xls: 'mdi_file_excel',
+				visual: 'mdi_file_visual'
 			},
 			tree: [],
 			items:[],

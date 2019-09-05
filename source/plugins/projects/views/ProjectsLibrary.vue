@@ -1,5 +1,5 @@
 <template>
-	<v-card class="library-box">
+	<v-card id="projectsLibrary" class="library-box">
 		<v-card-title small>
 			<span class="headline">{{$t('PROJECT_LIBRARY_PROJECTS')}}</span>
 			<v-spacer></v-spacer>
@@ -21,10 +21,13 @@
 									{{project.name}}
 									<span class="projlang">{{project.language}}</span>
 								</v-list-item-title>
-								<v-list-item-subtitle style="word-wrap: break-word">{{new Date(project.date)}}</v-list-item-subtitle>
+								<v-list-item-subtitle style="word-wrap: break-word">{{formatDate(project.date)}}</v-list-item-subtitle>
 
 								<v-list-item-subtitle>
-									<v-btn text class="lib-app-btn" @click="exportProject(project)">{{$t('PROJECT_LIBRARY_EXPORT')}}</v-btn>
+									<div id="export_button">
+										<v-btn text class="lib-app-btn" @click="exportProject(project)">{{$t('PROJECT_LIBRARY_EXPORT')}}</v-btn>
+
+									</div>
 									<v-menu offset-y>
 										<template v-slot:activator="{ on }">
 											<v-btn text class="lib-app-btn" v-on="on">{{$t('PROJECT_LIBRARY_OPTIONS')}}</v-btn>
@@ -55,7 +58,9 @@
 				<v-img src="plugins/projects/data/img/icons/projects-icon.svg"></v-img>
 			</v-btn> ce e asta? -->
 			<v-btn text @click ="addProjectDialog()" class="newapp">{{$t('PROJECT_WELCOME_CREATE_NEW_APP')}}</v-btn>
-			<v-btn text @click="importProject()">{{$t('PROJECT_LIBRARY_IMPORT')}}</v-btn>
+			<div id="import_button">
+				<v-btn text @click="importDialogOpen()">{{$t('PROJECT_LIBRARY_IMPORT')}}</v-btn>
+			</div>
 			<v-btn text @click="close" ref="button">{{$t('PROJECT_LIBRARY_CLOSE')}}</v-btn>
 		</v-card-actions>
 	</v-card>
@@ -63,8 +68,9 @@
 
 <script>
 import AddProjectDialog from './dialogs/AddProjectDialog.vue';
-
+import moment from 'moment-timezone';
 import path from 'path';
+import $ from 'jquery';
 let settings = {
 	workspace: {
 		path: path.join (require('os').homedir(), 'WyliodrinSTUDIO')
@@ -96,6 +102,7 @@ export default {
 	async created ()
 	{
 		this.projects = await this.studio.projects.loadProjects(false);
+		console.log(moment());
 	},
 	mounted() {
 		this.$refs.button.$el.focus();
@@ -107,6 +114,10 @@ export default {
 		close ()
 		{
 			this.$root.$emit ('submit');
+		},
+		formatDate(date){
+			// return moment(date).format('dddd, MMMM Do YYYY, h:mm:ss a');
+			return moment(date).tz(moment.tz.guess()).add(3, 'hours').format('LLLL');
 		},
 		async addProjectDialog ()
 		{
@@ -186,9 +197,18 @@ export default {
 			}
 			return false;
 		},
-		async importProject ()
+		async importDialogOpen() {
+			let event = await this.studio.projects.importDialog();
+			console.log(event);
+			if(event !=null){
+				this.importProject(event);
+				return true;
+			}
+			return false;
+		},
+		async importProject (event)
 		{
-			if(await this.studio.projects.importProject()){
+			if(await this.studio.projects.importProject(event.target.files[0])){
 				this.projects=await this.studio.projects.loadProjects(false);
 				return true;
 			}

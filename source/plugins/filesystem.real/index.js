@@ -1,12 +1,17 @@
 import os from 'os';
 import fs, { truncateSync } from 'fs-extra';
 import path from 'path';
-
+var $ = require ('jquery'); //temp
 import { remote } from 'electron';
 const dialog = remote.dialog;
 let studio = null;
 
 let filesystem_real = {
+	event:null,
+	getDefaultFolder ()
+	{
+		return path.join(this.getUserFolder(), 'WyliodrinSTUDIO')
+	},
 	getUserFolder ()
 	{
 		return os.homedir ();
@@ -67,16 +72,38 @@ let filesystem_real = {
 	openSaveDialog(options) {
 		return dialog.showSaveDialog(null, options);
 	},
-	openLoadDialog(options) {
-		return 	dialog.showOpenDialog(null, options);
-	},
+	openLoadDialog() {
+		// const options = {
+		// 	title:'Select a project to import',
+		// 	defaultPath: this.getDefaultFolder(),
+		// 	filters: [
+		// 		{name:'imports', extensions: ['zip','wylioapp']}
+		// 	]
+		// };
+		// let event = {
+		// 	target: {
+		// 		files: dialog.showOpenDialog(null, options)
+		// 	}
+		// };
+		// return event;
+		$('#importFile').trigger('click');
+		return null;
+		
 
+	},
+	registerInput(){
+		$('body').append('<input type="file" id="importFile" name="importFile" v-show="false">');
+		console.log($('#importfile'));
+		$('#importFile').change(e => {
+			this.event = e;
+		});
+		
+	}
 };
 
 export default function setup(options, imports, register) {
 	studio = imports;
-
+	filesystem_real.registerInput();
 	studio.filesystem.registerFileSystem('fs', filesystem_real);
-
 	register(null, {});
 }
