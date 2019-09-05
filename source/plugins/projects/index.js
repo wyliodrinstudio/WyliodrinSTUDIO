@@ -547,7 +547,7 @@ let projects = {
 				{name:'zip', extensions: ['zip']}
 			]
 		};
-		let savePath = studio.filesystem.openSaveDialog(options);
+		let savePath = studio.filesystem.openSaveDialog();
 		let zip = new JSZip();
 		if(await this._buildZipFromDirectory(projectPath, zip, projectPath)) {
 			const zipContent = await zip.generateAsync({

@@ -3,6 +3,7 @@ import Dexie from 'dexie';
 var db = new Dexie('FileSystemDataBase');
 var $ = require ('jquery');
 let web_filesystem = {
+	event:null,
 	async getUserFolder ()
 	{
 		await this.mkdirp('/user');
@@ -364,21 +365,25 @@ let web_filesystem = {
 		await this.insertElementData(objIns[0].id, buffer.toString('base64'), buffer.length);
 	},
 
-	lastModifier(path)
+	lastModified(path)
 	{
 		//TODO
 		return false;
 	},
-	registerLoadInput(id){
-		document.querySelector(id).append('<input type="file" id="importFile" name="importFile" @change="importProject" v-show="false">');
+	openSaveDialog() {
+		$('#importFile').trigger('click');
+		return null;
 	},
-	openSaveDialog(options) {
-		return false;
+	openLoadDialog() {
+		$('#importFile').trigger('click');
+		return null;
 	},
-	openLoadDialog(that) {
-		return $(that.$el).find('#importFile').trigger('click');
-	},
-
+	registerLoadInput(){
+		$('body').append('<input type="file" id="importFile" name="importFile" v-show="false">');
+		$('#importFile').change(e => {
+			this.event = e;
+		});	
+	}
 
 };
 export default function setup(options, imports, register) {
@@ -388,7 +393,7 @@ export default function setup(options, imports, register) {
 		data: '++id,&fileId,data,size'
 	});
 	db.open();
-	this.registerLoadInput('div');
+	web_filesystem.registerLoadInput();
 	studio.filesystem.registerFileSystem('webfs', web_filesystem);
 	register(null, {});
 }
