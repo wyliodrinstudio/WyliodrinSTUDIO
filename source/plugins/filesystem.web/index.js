@@ -371,7 +371,7 @@ let web_filesystem = {
 		return false;
 	},
 	openSaveDialog() {
-		$('#importFile').trigger('click');
+		//TODO
 		return null;
 	},
 	openLoadDialog() {
