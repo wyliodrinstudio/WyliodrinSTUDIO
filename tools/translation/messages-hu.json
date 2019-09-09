@@ -330,7 +330,7 @@
   },
   "PIN_LAYOUT": {
     "plugins": [
-      "pinLayout"
+      "pinlayout"
     ],
     "message": "Pin Kiosztás",
     "description": "The Pin Layout tab title"

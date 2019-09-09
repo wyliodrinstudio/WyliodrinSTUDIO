@@ -344,7 +344,7 @@
   },
   "PIN_LAYOUT": {
     "plugins": [
-      "pinLayout"
+      "pinlayout"
     ],
     "message": "Diagrama de asignación de pines",
     "description": "The Pin Layout tab title"

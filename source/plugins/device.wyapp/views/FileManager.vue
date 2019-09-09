@@ -58,7 +58,7 @@
 							<span>{{'New_firmware' | translate}}</span>
 						</v-tooltip>
 					</div>
-					<v-btn text @click="close">{{$t('TOOLBAR_CLOSE')}}</v-btn>
+					<v-btn text @click="close">{{$t('CLOSE')}}</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>

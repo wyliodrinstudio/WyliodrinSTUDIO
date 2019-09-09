@@ -58,5 +58,29 @@
     "DEVICE_WYAPP_LANGUAGES": {
         "message": "Languages",
         "description": "Programming languages supported by the board"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_IP": {
+        "message": "IP",
+        "description": "IP Address for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_MASK": {
+        "message": "Mask",
+        "description": "Mask for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
+        "message": "Broadcast", 
+        "description": "Broadcast for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
+        "message": "Hardware Address",
+        "description": "Hardware Address for the wired network"
+    },
+    "DEVICE_WYAPP_UNINSTALL": {
+        "message": "Uninstall",
+        "description": "Button to uninstall a package."
+    },
+    "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
+        "message": "Device name",
+        "description": "Name of the connected device"
     }
 }

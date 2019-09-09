@@ -3,13 +3,13 @@
 		<!--<div v-if="network.up">Connected <img src="img/icons/wifi-strength-100.png" aria-label="Signal strenght"></div>
 		<div v-else>Disconnected</div>-->
 		<div class="networkinfo">
-			<strong>IP:</strong> {{network.ip}}
+			<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_IP')}}:</strong> {{network.ip}}
 			<br>
-			<strong>Mask:</strong> {{network.m}}
+			<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_MASK')}}:</strong> {{network.m}}
 			<br>
-			<strong>Broadcast:</strong> {{network.b}}
+			<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_BROADCAST')}}:</strong> {{network.b}}
 			<br>
-			<strong>Hardware Address:</strong> {{network.h}}
+			<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_HARDWARE')}}:</strong> {{network.h}}
 		</div>
 	</div>
 </template>

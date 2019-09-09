@@ -1,5 +1,6 @@
 {
     "DATABASE": {
-        "message": "DATABASE"
+        "message": "DATABASE",
+        "description": "Name of the Database tab."
     }
 }

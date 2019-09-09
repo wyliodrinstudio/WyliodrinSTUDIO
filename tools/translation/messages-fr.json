@@ -90,7 +90,7 @@
     "message": "Déconnecter",
     "description": "The Disconnect button"
   },
-  "WORKSPACE_DISCONNECTED": {
+  "WORKSPACE_STATUS_DISCONNECTED": {
     "plugins": [
       "workspace"
     ],
@@ -1002,7 +1002,7 @@
   },
   "PIN_LAYOUT": {
     "plugins": [
-      "pinLayout"
+      "pinlayout"
     ],
     "message": "Plan de broches",
     "description": "The Pin Layout tab title"
@@ -1097,6 +1097,13 @@
     ],
     "message": "Ouvrir un exemple",
     "description": "Load a project Example"
+  },
+  "PROJECT_LIBRARY": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Bibliothèque de projets",
+    "description": "Opens the projects library"
   },
   "SCHEMATICS": {
     "plugins": [
