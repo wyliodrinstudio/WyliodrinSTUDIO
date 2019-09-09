@@ -275,6 +275,7 @@ let projects = {
 		// name = name.replace(/\.\./g, '_').replace(/\\|\//g, '_');
 		let projectFolder = path.join(workspacePath, name);
 		projectFolder = this._isPathValid(workspacePath,projectFolder);
+		console.log(projectFolder);
 		if(projectFolder !== null && language !== null && name !== null){
 			try {
 				if (!await studio.filesystem.pathExists(projectFolder)) {
@@ -448,28 +449,32 @@ let projects = {
 	 * 
 	 * 		importProject('MyNewProject', '.zip'); 
 	 */
-	async importProject(file) 
+	async importProject(fileName, data, type) 
 	{
-		await console.log(file);
-		// console.log(filePath);
-		// let pathing = path.join(settings.workspace.path,path.parse(filePath).name);
+		if(type === 'wylioapp'){
+			console.log('wylioapp');
+			//TODO
+		} else {
+			let name = path.basename(fileName);
+			let pathing = path.join(workspacePath,name.split('.').slice(0, -1).join('.'));
+			pathing = this._isPathValid(workspacePath,pathing);
+			let zip = new JSZip;
+			await studio.filesystem.mkdirp(pathing);
+			if(await studio.filesystem.isDirectory(pathing)){
+				zip.loadAsync(data).then(function(contents) {
+					Object.keys(contents.files).forEach(function(filename) {
+						zip.file(filename).async('nodebuffer').then(async function(content) {
+							var dest = path.join(pathing,filename);
+							await studio.filesystem.writeFile(dest, content);
+						});
+					});
+				});
+				return true;
+			} else {
+				return false;
+			}
+		}
 		
-		// let data = await studio.filesystem.readFile(filePath);
-		// let zip = new JSZip;
-		// if(await studio.filesystem.mkdirp(pathing)){
-		// 	zip.loadAsync(data).then(function(contents) {
-		// 		console.log(contents);
-		// 		Object.keys(contents.files).forEach(function(filename) {
-		// 			zip.file(filename).async('nodebuffer').then(async function(content) {
-		// 				var dest = path.join(pathing,filename);
-		// 				await studio.filesystem.writeFile(dest, content);
-		// 			});
-		// 		});
-		// 	});
-		// 	return true;
-		// } else {
-		// 	return false;
-		// }
 		
 		
 	},
@@ -543,14 +548,8 @@ let projects = {
 	 */
 	async exportProject(project) {
 		let projectPath = project.folder;
-		const options = {
-			title:path.basename(projectPath),
-			defaultPath: settings.workspace.path,
-			filters: [
-				{name:'zip', extensions: ['zip']}
-			]
-		};
-		let savePath = studio.filesystem.openSaveDialog();
+
+		
 		let zip = new JSZip();
 		if(await this._buildZipFromDirectory(projectPath, zip, projectPath)) {
 			const zipContent = await zip.generateAsync({
@@ -561,10 +560,15 @@ let projects = {
 					level: 9
 				}
 			});
-			console.log(zipContent);
-	
+			let savePath = await studio.filesystem.openExportDialog(zipContent, {
+				filename: project.name +'.zip',
+				filetypes:['zip','tar']
+			});
 			/** create zip file */
-			await studio.filesystem.writeFile(savePath, zipContent);
+			if(savePath !== null){
+				await studio.filesystem.writeFile(savePath, zipContent);
+			}
+			
 		}
 		
 	},
@@ -921,6 +925,7 @@ let projects = {
 				if (await studio.filesystem.isDirectory(projectFolder)) {
 					try {
 						let projectData = JSON.parse((await studio.filesystem.readFile(path.join(projectFolder, 'project.json'))).toString());
+						console.log(projectData);
 						language = projectData.language;
 						let date = projectData.date.split('.')[0];
 						// ERROR - astea vin aici, doar daca projectData exista folder-ul este un proiect

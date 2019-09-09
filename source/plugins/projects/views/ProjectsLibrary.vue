@@ -189,27 +189,42 @@ export default {
 		},
 		async exportProject (project)
 		{
-			let basePath = settings.workspace.path;
-			if(await this.studio.projects.exportProject(project,basePath))
+			if(await this.studio.projects.exportProject(project))
 			{
+				this.projects=await this.studio.projects.loadProjects(false);
 				return true;
 			}
 			return false;
 		},
 		async importDialogOpen() {
-			let files = await this.studio.filesystem.openImportDialog();
-			console.log(files);
+			let files = await this.studio.filesystem.openImportDialog({
+				title:'Import',
+				filetypes:['zip','tar','wylioapp']
+			});
 			if (files.length > 0)
 			{
 				// use first file
 				let fileData = await this.studio.filesystem.readImportFile (files[0]);
-				console.log (fileData);
+				let type = '';
+				if(files) {
+					if(path.extname(files[0].name) === 'wylioapp'){
+						type = 'json'; 
+					} else {
+						type = 'archive';
+					}
+					if(await this.importProject(files[0].name,fileData,type))
+					{
+						this.projects=await this.studio.projects.loadProjects(false);
+						return true;
+					}
+				}
+				
 			}
 			return false;
 		},
-		async importProject (event)
+		async importProject (fileName,fileData,type)
 		{
-			if(await this.studio.projects.importProject(event.target.files[0])){
+			if(await this.studio.projects.importProject(fileName,fileData,type)){
 				this.projects=await this.studio.projects.loadProjects(false);
 				return true;
 			}

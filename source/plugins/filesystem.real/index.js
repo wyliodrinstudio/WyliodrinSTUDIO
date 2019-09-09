@@ -78,7 +78,7 @@ let filesystem_real = {
 		return dialog.showSaveDialog(null, options);
 		// TODO save the actual data to the file
 	},
-	readImpoprtFile (file)
+	readImportFile (file)
 	{
 		return this.readFile (file.name);
 	},
