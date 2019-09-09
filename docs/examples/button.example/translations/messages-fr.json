@@ -6,5 +6,13 @@
 	"EXAMPLE_BUTTON_NOTIFICATION_TEXT": {
 		"message" : "Vous avez créé le bouton avec succès!",
 		"description": "This is the notification text"
+	},
+	"BUTTON_EXAMPLE_DIALOG_TITLE": {
+		"message": "Titre du dialogue",
+		"description": "This is the title of the dialog."
+	},
+	"BUTTON_EXAMPLE_INPUT_TEXT": {
+		"message": "S'il vous plait, entrez votre texte ici.",
+		"description": "This is the content of the dialog."
 	}
 }

@@ -11,7 +11,7 @@
 			</v-tooltip>
 		</div>
 		<div class="terminal-actions">
-			<span v-if="status === 'running'">MQTT Server {{status}} port {{port}}</span>
+			<span v-if="status === 'running'">MQTT Server {{status}} Port {{port}}</span>
 			<span v-else>MQTT Server {{status}}</span>
 			<span v-if="status !== 'running'">
 				<v-text-field color="primary"

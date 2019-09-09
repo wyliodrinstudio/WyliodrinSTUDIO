@@ -365,7 +365,7 @@
   },
   "PIN_LAYOUT": {
     "plugins": [
-      "pinLayout"
+      "pinlayout"
     ],
     "message": "端子配置",
     "description": "The Pin Layout tab title"

@@ -51,7 +51,7 @@
         "message": "Déconnecter",
         "description": "The Disconnect button"
     },
-    "WORKSPACE_DISCONNECTED": {
+    "WORKSPACE_STATUS_DISCONNECTED": {
         "message": "Déconnecté",
         "description": "Status of a device that is not connected."
     },

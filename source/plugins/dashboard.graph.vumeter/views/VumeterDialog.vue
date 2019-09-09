@@ -18,7 +18,7 @@
 		</v-card-text>
 		<v-card-actions>
 			<v-btn text @click="close">{{$t('CLOSE')}}</v-btn>
-			<v-btn text @click="createChart">{{$t('DASHBOARD_ADD_DIALOG')}}</v-btn>
+			<v-btn text @click="createChart">{{$t('DASHBOARD_ADD_SIGNAL')}}</v-btn>
 		</v-card-actions>
 		
     </v-card>

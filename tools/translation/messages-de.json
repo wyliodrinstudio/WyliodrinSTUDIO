@@ -484,7 +484,7 @@
   },
   "PIN_LAYOUT": {
     "plugins": [
-      "pinLayout"
+      "pinlayout"
     ],
     "message": "Pinbelegung",
     "description": "The Pin Layout tab title"

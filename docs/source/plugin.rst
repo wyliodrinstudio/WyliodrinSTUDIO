@@ -3,6 +3,7 @@
 How to write a plugin
 =========================
 
+
 |
 
 .. _simple:
@@ -46,7 +47,6 @@ By the end, your **messages-ln.json** (ln = language) files should look like thi
 		}
 	}
 
-|
 
 .. code-block:: json
 
@@ -131,7 +131,7 @@ Finally, the content of our package.json will be:
 
 The next step is to create the main file, called **index.js**. 
 
-If you already read :ref:`this section <plugin>`, you probably noticed that in the **index.js** file we should've imported first the **.vue** files from the **views** folder. In this plugin tutorial, we only register a simple button, which means that we don't need a **.vue** file to design a specific Vue component., so the **views** folder will also be missing.
+If you already read :ref:`this section <plugin>`, you probably noticed that in the **index.js** file we should've imported first the **.vue** files from the **views** folder. In this plugin tutorial, we only register a simple button, which means that we don't need a **.vue** file to design a specific Vue component, so the **views** folder will also be missing.
 
 Therefore, we'll only need to initiate a **studio** variable to *null* and to create an empty object called **button example**.
 
@@ -164,7 +164,7 @@ After that, we need to register our button, so we'll call the worskpace function
 .. list-table::
 	:widths: 30 70
 
-	* - *'EXAMPLE_BUTTON_NAME'*
+	* - *'BUTTON_EXAMPLE_NAME'*
 	  - the name of our button, a key string that will be translated
 	* - *20* 
 	  - integer number representing the priority of our button in the list of all toolbar buttons
@@ -178,7 +178,7 @@ The **showNotification** function is also called from the workspace and its para
 .. list-table::
 	:widths: 30 70
 
-	* - *'EXAMPLE_BUTTON_NOTIFICATION_TEXT'* 
+	* - *'BUTTON_EXAMPLE_NOTIFICATION_TEXT'* 
 	  - the key string that will be translated and will represent the text of our notification
 	* - *'success'* 
 	  - the notification type
@@ -196,7 +196,7 @@ By the end, our **index.js** file should look like this:
 	{
 		studio = imports;
 		studio.workspace.registerToolbarButton ('EXAMPLE_BUTTON_NAME', 20,
-			() => studio.workspace.showNotification ('EXAMPLE_BUTTON_NOTIFICATION_TEXT', 'success'),
+			() => studio.workspace.showNotification ('EXAMPLE_BUTTON_NOTIFICATION_TEXT'),
 			'plugins/button.example/data/img/button.png');
 
 		register(null, {
@@ -218,6 +218,8 @@ To test if you successfully created your first plugin, you have to rebuild the p
 .. image:: images/exampleNotification.png
 	:align: center
 
+If you want to test this plugin, you will have to search for **"button.example"** in the *docs/examples* folder and copy it inside the *source/plugins* folder, then rebuild the application to make the new plugin available.
+
 
 |
 
@@ -226,7 +228,7 @@ How to create a device plugin
 
 This type of plugin allows you to add and use a new device to the Wyliodrin STUDIO platform, so you need to properly register its functions and characteristics. 
 
-Let's suppose that you want to create your own device plugin, called **"device_awesome"**.
+Let's suppose that you want to create your own device plugin, called **"device.awesome"**.
 
 |
 
@@ -234,7 +236,9 @@ The **data** folder should contain all the images that you need to represent the
 
 |
 
-The **views** folder has to include every Vue component relied to your device, for example: disconnect, device settings or device manager dialogs. In this situation, we will create the **AwesomeDisconnectDialog.vue** component, that will contain the button that disconnects the device:
+The **views** folder has to include every Vue component relied to your device, for example: disconnect, device settings or device manager dialogs. 
+
+For this example, we will create the **AwesomeDisconnectDialog.vue** component, that will contain the button that disconnects the device:
 
 ::
 
@@ -426,7 +430,7 @@ Inside the *setup* function, you first have to obtain the list of devices that f
 	}
 	
 
-Afther that, you to create the object you will register and export for your plugin, its properties being the functions that will help the user manage your device on the Wyliodrin Studio platform:
+After that, you will create the object you will register and export for your plugin, its properties being the functions that will help the user manage your device on the Wyliodrin Studio platform:
 
 **defaultIcon**: correlates a default icon to a device that doesn't have any particular image already attached
 
@@ -511,6 +515,7 @@ after that, according to the current status,  you will bring up to date your dev
 	}
 
 After creating the new device object, you have to register it using the workspace function :ref:`registerDeviceDriver <registerDevice>`.
+
 .. code-block:: javascript
 
 	workspace = studio.workspace.registerDeviceDriver('awesome', device_awesome);
@@ -551,6 +556,10 @@ At the end of the setup function, we register the *device_awesome* object:
 	register(null, {
 		device_awesome
 	});
+
+|
+
+If you want to test this plugin, you will have to search for **"device.awesome"** in the *docs/examples* folder and copy it inside the *source/plugins* folder, then rebuild the application to make the new plugin available.
 
 |
 
@@ -610,7 +619,7 @@ How to write a language plugin
 
 The purpose of this type of plugins is to register a new programming language that will be supported by the Wyliodrin Studio IDE.
 
-For example, we'll try to add a new programming language, called "MyAwesomeLanguage", whit the *".aws"* extension:
+For example, we'll try to add a new programming language, called "MyAwesomeLanguage", with the *".aws"* extension:
 
 As you can notice, the name of this type of plugins should begin with *"language."*, which will be followed by the actual name of the programming language that you want to register, which means that you will have to create a new folder, **"language.awesome"**.
 
@@ -652,7 +661,7 @@ The next step is to create the **awesome** object, containing the options of our
 	{
 		studio = imports;
 		
-		let awsome = {
+		let awesome = {
 			async createProject(name){
 				await studio.projects.newFile(name,'/main.aws','print ("Hello from Awesome")');			
 			},
@@ -680,6 +689,10 @@ The next step is to register the new programming language, using the function :r
 	studio.projects.registerLanguage('awesome', 'awesome', 'plugins/language.awesome/data/img/awesome.png', awesome);
 
 where the last parameter represents the *awesome* object we created before.
+
+|
+
+If you want to test this plugin, you will have to search for **"language.awesome"** in the *docs/examples* folder and copy it inside the *source/plugins* folder, then rebuild the application to make the new plugin available.
 
 |
 
@@ -786,3 +799,7 @@ Of course, you also need to have a **package.json** file, where you should menti
 	        "target": ["electron"]
 	    }
 	}
+
+|
+
+If you want to test this plugin, you will have to search for **"language.visual.awesome"** in the *docs/examples* folder and copy it inside the *source/plugins* folder, then rebuild the application to make the new plugin available.

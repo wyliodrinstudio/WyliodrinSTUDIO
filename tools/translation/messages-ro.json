@@ -90,12 +90,40 @@
     "message": "Deconectare",
     "description": "The Disconnect button"
   },
-  "WORKSPACE_DISCONNECTED": {
+  "WORKSPACE_STATUS_DISCONNECTED": {
     "plugins": [
       "workspace"
     ],
-    "message": "Deconectat",
+    "message": "DECONECTAT",
     "description": "Status of a device that is not connected."
+  },
+  "WORKSPACE_STATUS_CONNECTED": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "CONECTAT",
+    "description": "Status of a device that is connected."
+  },
+  "WORKSPACE_STATUS_SYNCHRONIZING": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "SUNCRONIZARE",
+    "description": "Status of a device that is synchronizing."
+  },
+  "WORKSPACE_STATUS_CONNECTING": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "CONECATRE",
+    "description": "Status of a device that is connecting."
+  },
+  "WORKSPACE_STATUS_ERROR": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "EROARE",
+    "description": "Status of a device that has an error."
   },
   "WORKSPACE_TOOLBAR_EXIT_QUESTION": {
     "plugins": [
@@ -285,6 +313,13 @@
     ],
     "message": "Consola",
     "description": "The console name that is displayed in the status button"
+  },
+  "CONSOLE_NO_SHELL": {
+    "plugins": [
+      "console"
+    ],
+    "message": "Rulati un proiect pentru a activa consola",
+    "description": "The text that is displayed when the console is not enabled"
   },
   "PROJECT_DASHBOARD": {
     "plugins": [
@@ -818,6 +853,41 @@
     "message": "Conectare la adresă",
     "description": "Title of the popup used to connect to a device"
   },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Autentificat la serverul de dispozitive",
+    "description": "The notification the user sees when authetnicated with the devices server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Eroare la server: {error}",
+    "description": "The error notification the user sees with the error for the websocket server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Deconectat de la serverul de dispozitive",
+    "description": "The notification the user sees when disconnected from the devices server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Folositi Studio aici?",
+    "description": "The title of the question dialog the user sees when there is another connection with his id"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Mai exista o instanta de Studio activa si puteti folosi doar o instanta la un moment dat. Dotiti sa folositi Studio aici?",
+    "description": "The question dialog text the user sees when there is another instance connected with his id"
+  },
   "TOOLBAR_RESISTOR_COLOR_CODE": {
     "plugins": [
       "documentation.resistorcolorcodes"
@@ -967,7 +1037,7 @@
   },
   "PIN_LAYOUT": {
     "plugins": [
-      "pinLayout"
+      "pinlayout"
     ],
     "message": "Așezarea pinilor",
     "description": "The Pin Layout tab title"
@@ -1076,13 +1146,6 @@
     ],
     "message": "Sunteți sigur că vreți să ștergeți acest proiect?",
     "description": "Prompt ce întrebă dacă sunteți sigur că vreți să ștergeți dosarul"
-  },
-  "PROJECT_SHOW_CODE": {
-    "plugins": [
-      "projects"
-    ],
-    "message": "Arată codul",
-    "description": "Buton ce arată codul din spatele unui block visual"
   },
   "PROJECT_HIDE_CONSOLE": {
     "plugins": [
@@ -1343,6 +1406,13 @@
     "message": "Eroare, calea nu se află în dosarul spațiului de lucuru",
     "description": "Mesajul de eroare afișat atunci când calea specificată nu se află în dosarul spațiului de lucuru"
   },
+  "PROJECT_ERROR_CHANGE_DATE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Eroare, nu se poate scrie data pentru proiect {project} ({error})",
+    "description": "The error message shown when a date for a file fails to be written"
+  },
   "PROJECT_JSON_DO_NOT": {
     "plugins": [
       "projects"
@@ -1371,6 +1441,13 @@
     "message": "Introduceți numele proiectului",
     "description": "Etichetă pentru noul nume ce va fi dat proiectului"
   },
+  "PROJECT_LIBRARY_SEARCH": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Caută",
+    "description": "Label to search for projects"
+  },
   "PROJECT_NULL": {
     "plugins": [
       "projects"
@@ -1384,6 +1461,20 @@
     ],
     "message": "O cale este nulă",
     "description": "The given path turned out null"
+  },
+  "EDITOR_VISUAL_SHOW_CODE": {
+    "plugins": [
+      "projects.editor.visual"
+    ],
+    "message": "Afisați Sursa",
+    "description": "Button designed to show the code behind a blockly"
+  },
+  "EDITOR_VISUAL_HIDE_CODE": {
+    "plugins": [
+      "projects.editor.visual"
+    ],
+    "message": "Ascundeți Sursa",
+    "description": "Button designed to show the code behind a blockly"
   },
   "SCHEMATICS": {
     "plugins": [
@@ -1426,5 +1517,12 @@
     ],
     "message": "Shell",
     "description": "The Shell tab, opens a terminal"
+  },
+  "SHELL_NO_SHELL": {
+    "plugins": [
+      "shell"
+    ],
+    "message": "Conectați-vă la un dispozitiv pentru a activa terminalul",
+    "description": "The text that is displayed when the shell is not enabled"
   }
 }

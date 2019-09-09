@@ -3,6 +3,10 @@
         "message": "CHAT",
         "description": "The Chat tab"
     },
+    "CHAT_CHANNEL": {
+        "message": "Channel",
+        "description": "A chat channel"
+    },
     "CHAT_CANCEL": {
         "message": "Cancel",
         "description": "The Cancel button"

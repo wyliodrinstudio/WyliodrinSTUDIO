@@ -249,8 +249,7 @@ let workspace = {
 	},
 
 	/**
-	 * This function will register a new tab in the workspace. A tab is a component that will allow the management of the users projects 
-	 * and the interaction with the device that is connected to Wyliodrin STUDIO. 
+	 * This function will register a new tab in the workspace. 
 	 * 
 	 * Each tab has a *title*, that will be displayed in the workspace, a *priority*, which refers to the position of a tab in the list 
 	 * of tabs, a *component*, representing the actual content and funtionality of the tab, and aditional *options*, that will authorize 
@@ -319,7 +318,7 @@ let workspace = {
 	 * A menu item is a component that will allow the "analysis" of Wyliodrin STUDIO, the purpose of the menu being to include details about 
 	 * the application and its operation. 
 	 * 
-	 * Each menu item has a *name*, that will be displayed in the menu, a *priority*, which refers to the position of an element in the list 
+	 * Each item has a *name*, that will be displayed in the menu, a *priority*, which refers to the position of an element in the list 
 	 * of menu items, an *action*, representing the content that will be opened when the item is selected, and aditional *options*, that will 
 	 * authorize or will block the user access, depending on their value.
 	 * 
@@ -417,9 +416,7 @@ let workspace = {
 
 	/**
 	 * 
-	 * This function will register a new button in the toolbar that is displayed in the top of the window. 
-	 * A toolbar button is an element that will perform different actions when clicked, according to the component that is relied to it. For example, 
-	 * these buttons may open dialogs that require user inputs.
+	 * This function will register a new button in the toolbar. 
 	 * 
 	 * Each toolbar button has a translatable *name*, that will be displayed under it on mouse hover, a *priority*, which refers to the position of 
 	 * an element in the toolbar buttons list, an *action*, representing the content that will be opened when the button is selected, an *icon* that will 
@@ -489,15 +486,13 @@ let workspace = {
 	 * This function is used to register a new device tool button, specific for every device type.
 	 * 
 	 * 
-	 * This type of button is used to manage the functioning of a device and it becomes visible only when a device is connected.
-	 *
 	 * For example, when a Raspberry Pi board is connected, the following buttons become available: 
 	 * **Run**, **Stop**, **TaskManager**, **PackageManager**, **NetworkManager**.
 	 * 
 	 * Each device button require a *deviceType*, to know for which type of device we are registering the customized button, 
 	 * it has a translatable *name*, that will be displayed under it on mouse hover, a *priority*, which refers to the position of 
 	 * an element in the device buttons list, an *action*, representing the content that will be opened when the button is selected, an *icon* that will 
-	 * represent the actual symbol of the button and on which the user will be able to click, and aditional 
+	 * be the actual symbol of the button and on which the user will be able to click, and aditional 
 	 * *options*, that will authorize or will block the user access, depending on their value.
 	 * 
 	 *
@@ -563,8 +558,6 @@ let workspace = {
 
 	/**
 	 * This function will register a new button in the status bar that is displayed in the bottom of the window. 
-	 * A status button is an element that will perform different actions when clicked, according to the component that is relied to it. For example, 
-	 * these buttons may open terminals or interfaces that require user inputs.
 	 * 
 	 * Each status button has a translatable *name*, that will be displayed under it on mouse hover, a *priority*, which refers to the position of 
 	 * an element in the status buttons list, a *component*, representing the content that will be shown when the button is clicked, an *icon* that will 

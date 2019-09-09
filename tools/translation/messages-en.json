@@ -90,12 +90,40 @@
     "message": "Disconnect",
     "description": "The Disconnect button"
   },
-  "WORKSPACE_DISCONNECTED": {
+  "WORKSPACE_STATUS_DISCONNECTED": {
     "plugins": [
       "workspace"
     ],
-    "message": "Disconnected",
+    "message": "DISCONNECTED",
     "description": "Status of a device that is not connected."
+  },
+  "WORKSPACE_STATUS_CONNECTED": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "CONNECTED",
+    "description": "Status of a device that is connected."
+  },
+  "WORKSPACE_STATUS_SYNCHRONIZING": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "SYNCHRONIZING",
+    "description": "Status of a device that is synchronizing."
+  },
+  "WORKSPACE_STATUS_CONNECTING": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "CONNECTING",
+    "description": "Status of a device that is connecting."
+  },
+  "WORKSPACE_STATUS_ERROR": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "ERROR",
+    "description": "Status of a device that has an error."
   },
   "WORKSPACE_TOOLBAR_EXIT_QUESTION": {
     "plugins": [
@@ -152,6 +180,13 @@
     ],
     "message": "CHAT",
     "description": "The Chat tab"
+  },
+  "CHAT_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Channel",
+    "description": "A chat channel"
   },
   "CHAT_CANCEL": {
     "plugins": [
@@ -292,6 +327,13 @@
     ],
     "message": "Console",
     "description": "The console name that is displayed in the status button"
+  },
+  "CONSOLE_NO_SHELL": {
+    "plugins": [
+      "console"
+    ],
+    "message": "Run a project to enable the console",
+    "description": "The text that is displayed when the console is not enabled"
   },
   "PROJECT_DASHBOARD": {
     "plugins": [
@@ -671,18 +713,19 @@
     "message": "Vu-meter - Add signal",
     "description": "Title of the prompt used to add a new signal"
   },
-  "DATABASE": {
-    "plugins": [
-      "databaselocal"
-    ],
-    "message": "DATABASE"
-  },
   "DEVICE_RPK_RUN": {
     "plugins": [
       "device.rpk"
     ],
     "message": "Run",
     "description": "The run button for an application"
+  },
+  "DEVICE_FLASH_JAVASCRIPT": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Flash Javascript",
+    "description": "The flash javascript button for an application"
   },
   "DEVICE_RPK_STOP": {
     "plugins": [
@@ -712,6 +755,13 @@
     "message": "Network Manager",
     "description": "The button for the network manager "
   },
+  "DEVICE_RPK_STANDBY": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Stand-by",
+    "description": "The stand-by option in the disconnect menu."
+  },
   "DEVICE_RPK_DISCONNECT": {
     "plugins": [
       "device.rpk"
@@ -739,6 +789,13 @@
     ],
     "message": "The device is already connected to another user.",
     "description": "The notification message when another use is connected to the board and the board is busy"
+  },
+  "DEVICE_RPK_ERROR_BLE": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "List devices failed ({error}).",
+    "description": "The error shown when list devices for ble fails"
   },
   "DEVICE_WYAPP_RUN": {
     "plugins": [
@@ -824,6 +881,13 @@
     "message": "Version",
     "description": "Supervisor verson"
   },
+  "DEVICE_WYAPP_LIBWYLIODRIN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Wyliodrin Library Version",
+    "description": "The used version of the Wyliodrin Library."
+  },
   "DEVICE_WYAPP_OS": {
     "plugins": [
       "device.wyapp"
@@ -837,6 +901,48 @@
     ],
     "message": "Languages",
     "description": "Programming languages supported by the board"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_IP": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "IP",
+    "description": "IP Address for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_MASK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Mask",
+    "description": "Mask for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Broadcast",
+    "description": "Broadcast for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Hardware Address",
+    "description": "Hardware Address for the wired network"
+  },
+  "DEVICE_WYAPP_UNINSTALL": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Uninstall",
+    "description": "Button to uninstall a package."
+  },
+  "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Device name",
+    "description": "Name of the connected device"
   },
   "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": {
     "plugins": [
@@ -928,6 +1034,41 @@
     ],
     "message": "Network Connection",
     "description": "Title of the popup used to connect to a device"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Authenticated to websocket device server",
+    "description": "The notification the user sees when authetnicated with the devices server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Server error: {error}",
+    "description": "The error notification the user sees with the error for the websocket server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Disconnected from the websocket devices server",
+    "description": "The notification the user sees when disconnected from the devices server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Use Studio here?",
+    "description": "The title of the question dialog the user sees when there is another connection with his id"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "There is another Studio instance connected to the server with your id. You are not able to use multiple connections. Would you like to use Studio here?",
+    "description": "The question dialog text the user sees when there is another instance connected with his id"
   },
   "WYLIODRIN_API": {
     "plugins": [
@@ -1045,19 +1186,29 @@
     "plugins": [
       "filesystem"
     ],
-    "message": "The given filesystem could not be found! Please use one valid filesystem"
+    "message": "The given filesystem could not be found! Please use one valid filesystem",
+    "description": "This is the text of an error that shows up when the chosen filesystem is not valid."
   },
   "REAL_FS_ALREADY_REGISTERED_FS": {
     "plugins": [
       "filesystem"
     ],
-    "message": "The given filesystem is already registered!"
+    "message": "The given filesystem is already registered!",
+    "description": "This is the text of a warning when the chosen filesystem was registered before."
   },
   "REAL_FS_NO_DEF_FS": {
     "plugins": [
       "filesystem"
     ],
-    "message": "No default filesystem, is there any filesystem registered?"
+    "message": "No default filesystem, is there any filesystem registered?",
+    "description": "This is the text of an error displayed when there is no default filesystem registered."
+  },
+  "DATABASE": {
+    "plugins": [
+      "filesystem.web"
+    ],
+    "message": "DATABASE",
+    "description": "Name of the Database tab."
   },
   "PROJECT_NOTEBOOK": {
     "plugins": [
@@ -1103,7 +1254,7 @@
   },
   "PIN_LAYOUT": {
     "plugins": [
-      "pinLayout"
+      "pinlayout"
     ],
     "message": "Pin Layout",
     "description": "The Pin Layout tab title"
@@ -1213,13 +1364,6 @@
     "message": "Are you sure you want to delete this project?",
     "description": "Prompt asking for assuruance on deleting a project"
   },
-  "PROJECT_SHOW_CODE": {
-    "plugins": [
-      "projects"
-    ],
-    "message": "Show Code",
-    "description": "Button designed to show the code behind a blockly"
-  },
   "PROJECT_HIDE_CONSOLE": {
     "plugins": [
       "projects"
@@ -1238,7 +1382,7 @@
     "plugins": [
       "projects"
     ],
-    "message": "Library",
+    "message": "Projects Library",
     "description": "Opens the projects library"
   },
   "PROJECT_LIBRARY_NAME": {
@@ -1428,7 +1572,7 @@
       "projects"
     ],
     "message": "Tried to edit project.json, DO NOT DO THIS",
-    "description": ""
+    "description": "The error message when the user is trying to edit the project.json file of a project."
   },
   "PROJECT_ERROR_SAVE_FILE": {
     "plugins": [
@@ -1486,6 +1630,13 @@
     "message": "Error, path is not inside the workspace folder",
     "description": "The error message shown when the specified path is not in the workspace folder"
   },
+  "PROJECT_ERROR_CHANGE_DATE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Error, cannot write date {project} ({error})",
+    "description": "The error message shown when a date for a file fails to be written"
+  },
   "PROJECT_JSON_DO_NOT": {
     "plugins": [
       "projects"
@@ -1514,6 +1665,13 @@
     "message": "Please input the name of the project",
     "description": "Label for the new name to be given to the project"
   },
+  "PROJECT_LIBRARY_SEARCH": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Search",
+    "description": "Label to search for projects"
+  },
   "PROJECT_NULL": {
     "plugins": [
       "projects"
@@ -1527,6 +1685,20 @@
     ],
     "message": "A path is null",
     "description": "The given path turned out null"
+  },
+  "EDITOR_VISUAL_SHOW_CODE": {
+    "plugins": [
+      "projects.editor.visual"
+    ],
+    "message": "Show Code",
+    "description": "Button designed to show the code behind a blockly"
+  },
+  "EDITOR_VISUAL_HIDE_CODE": {
+    "plugins": [
+      "projects.editor.visual"
+    ],
+    "message": "Hide Code",
+    "description": "Button designed to show the code behind a blockly"
   },
   "SCHEMATICS": {
     "plugins": [
@@ -1576,5 +1748,12 @@
     ],
     "message": "Shell",
     "description": "The Shell tab, opens a terminal"
+  },
+  "SHELL_NO_SHELL": {
+    "plugins": [
+      "shell"
+    ],
+    "message": "Connect to a device to enable the shell",
+    "description": "The text that is displayed when the shell is not enabled"
   }
 }

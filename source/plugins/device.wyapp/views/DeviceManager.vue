@@ -3,7 +3,7 @@
 		<v-dialog :value="show" persistent content-class="library-box">
 			<v-card class="manager-box">
 				<v-card-title>
-					<span class="headline">{{$t('WYLIODRIN_USERINTERFACE_devicename')}}</span>
+					<span class="headline">{{$t('DEVICE_WYAPP_WYLIODRIN_DEVICENAME')}}</span>
 					<v-spacer></v-spacer>
 				</v-card-title>
 				<v-card-text>
@@ -11,7 +11,7 @@
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn text @click="studio.hideDeviceManager">{{$t('TOOLBAR_CLOSE')}}</v-btn>
+					<v-btn text @click="studio.hideDeviceManager">{{$t('CLOSE')}}</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
