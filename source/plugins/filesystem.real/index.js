@@ -67,7 +67,7 @@ let filesystem_real = {
 			return false;
 		}
 	},
-	openExportDialog(data, opts) {
+	openExportDialog(data, opts = {}) {
 		const options = {
 			title:opts.title || 'Export',
 			defaultPath: this.getDefaultFolder(),
@@ -82,7 +82,7 @@ let filesystem_real = {
 	{
 		return this.readFile (file.name);
 	},
-	async openImportDialog(opts) {
+	async openImportDialog(opts = {}) {
 		const options = {
 			title: opts.title || 'Import',
 			defaultPath: this.getDefaultFolder(),
@@ -92,11 +92,14 @@ let filesystem_real = {
 		};
 		let files = await dialog.showOpenDialog(null, options);
 		let list = [];
-		for (let f of files)
+		if (files)
 		{
-			list.push ({
-				name: f
-			});
+			for (let f of files)
+			{
+				list.push ({
+					name: f
+				});
+			}
 		}
 		return list;
 	},

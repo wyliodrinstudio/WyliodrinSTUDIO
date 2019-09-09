@@ -59,10 +59,6 @@
         "message": "Sunteți sigur că vreți să ștergeți acest proiect?",
         "description": "Prompt ce întrebă dacă sunteți sigur că vreți să ștergeți dosarul"
     },
-    "PROJECT_SHOW_CODE": {
-        "message": "Arată codul",
-        "description": "Buton ce arată codul din spatele unui block visual"
-    },
     "PROJECT_HIDE_CONSOLE": {
         "message": "Ascunde Consola",
         "description": "Buton ce ascunde consola"

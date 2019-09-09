@@ -98,7 +98,7 @@ let filesystem = {
 		return this._runFileSystemFn('getSize', 0, path);
 	},
 
-	openExportDialog(data, options)
+	openExportDialog(data, options = {})
 	{
 		return this._runFileSystemFn('openExportDialog',null,data, options);
 	},
@@ -108,7 +108,7 @@ let filesystem = {
 		return this._runFileSystemFn('readImportFile',null,file);
 	},
 
-	openImportDialog(options)
+	openImportDialog(options = {})
 	{
 		return this._runFileSystemFn('openImportDialog',null,options);
 	},
