@@ -117,12 +117,12 @@ In this situation, "title" is a variable that represents the title of the notifi
 
 	{
 		"TRANSLATED_TEXT_ID": {
-			"message": "This is the text of your {title}",
+			"message": "The title of your workspace is: {title}",
 			"description": "Text of the notification the user created."
 		}
 	}
 
-*title* will be *notification*.
+*title* will be the actual name of your workspace, in this example: *Workspace Title*.
 
 |
 
@@ -138,9 +138,9 @@ Similar to *showNotification*, "title" is a variable that represents the title o
 
 	{
 		"TRANSLATED_TEXT_ID": {
-			"message": "This is the text of your {title}",
+			"message": "The device: {title} was unable to connect.",
 			"description": "Text of the notification the user created."
 		}
 	}
 
-*title* will be *error notification*.
+*title* will be the name of the device  you are trying to connect, in this example: *AwesomeDevice*.
