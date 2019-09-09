@@ -12,7 +12,7 @@ import projectStore from './store';
 /**
  * Project Identification
  * @typedef {Object} Project
- * @property {string} date - date and time of project creation
+ * @property {string} date - date and time of the last time the project was accsesed
  * @property {string} folder - absolute path to the project
  * @property {string} language - programming language of the project
  * @property {string} name - the actual name of the project
@@ -21,10 +21,11 @@ import projectStore from './store';
 /**
  * Programming Language Identification
  * @typedef {Object} Language
- * @property {object} addons - the specific features of the language
- * @property {string} icon - path to the image representing the language
+ * @property {object} addons - the specific features of the language // language addons
+ * @property {string} icon - path to the language image
  * @property {string} id - language name
- * @property  {Object} options - language run options 
+ * @property {array} pictograms - array of language specific pictograms
+ * @property  {Object} options - language functions 
  */
 
 
@@ -34,6 +35,7 @@ let settings = {
 		projects: []
 	}
 };
+
 let editors = [];
 
 let projects = {
@@ -94,7 +96,7 @@ let projects = {
 	 * 
 	 * Every new language has an *id*, its unique identifier, a *title*, which is the actual 
 	 * name of the programming language, a characteristic *icon*, and its own *options* required 
-	 * in orger to be runnable.
+	 * in order to be working properly.
 	 * 
 	 * 
 	 * The accepted languages are: *javascript*, *python*, *bash* and *visual*. 
@@ -109,7 +111,7 @@ let projects = {
 	 * 
 	 * 		registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
 	 */
-	registerLanguage(id, title, icon, options) {
+	registerLanguage(id, title, icon, pictograms, options) {
 		/**
 		 * Options = {
 		 * 		mode
@@ -119,6 +121,7 @@ let projects = {
 		 * 		vezi exemplu in index device.wyapp si index device.wyapp.raspberrypi
 		 * }
 		 */
+		if(pictograms==[]) pictograms = [];
 		if (!options) options = {};
 		if(id !== null && title !== null && icon !== null)
 		{
@@ -127,22 +130,23 @@ let projects = {
 				title,
 				icon,
 				addons: {},
-				options: options
+				options: options,
+				pictograms:pictograms
 			});
 		} else {
 			studio.workspace.warn('PROJECTS_NULL');
 		}
 	},
 	/**
-	 * This function is used to set an addon to an already existing language. In this case, an addon refers to a 
+	 * This function is used to add an addon to an already existing language. In this case, an addon refers to a 
 	 * specific feature that can be set for a board.
 	 * 
 	 * Each addon requires the programming *language* unique id, the type of the *board* for which the feature 
 	 * will be set, the *type* of the actual addon, and the additional functioning options of the feature.
 	 * 
 	 * @param {Object} language - language id
-	 * @param {Object} board - addon board
-	 * @param {Object} type - addon type
+	 * @param {string} board - addon board
+	 * @param {string} type - addon type
 	 * @param {Object} options - addon options
 	 * 
 	 * @returns {boolean} - true if successful, false otherwise
@@ -164,7 +168,7 @@ let projects = {
 	/**
 	 * Run an undetermined language function.
 	 * @param {string} fn - function name
-	 * @param {Object} project - project object
+	 * @param {Project} project - project object
 	 * @param {array} params - array of params - variable size
 	 * 
 	 * @returns {unknown} - the result of said function 
@@ -195,15 +199,16 @@ let projects = {
 	},
 
 	/**
-	 * This function registers a new editor for a programming language.
+	 * This function registers a new type of editor.
 	 * 
 	 * The editor has a *name*, which is a translatable string that will be dispayed as the 
-	 * title of the editor, a *language*, that can be an array with all the supported programming languages id's, 
+	 * title of the editor, *languages*, which represent the array with all the supported programming languages id's, 
 	 * and a Vue *component*, representing the actual content and design of the editor tab. 
 	 * 
 	 * @param {string} name - the name/id of the editor
-	 * @param {number} language - the editor language
+	 * @param {string[]} languages - the editor languages
 	 * @param {Vue} component - the component to display
+	 * @param {array} options - the editor options
 	 * 
 	 * @returns {boolean} - true if successful, false otherwise
 	 * 
@@ -235,6 +240,7 @@ let projects = {
 			return false;
 		}
 	},
+
 	async _changeDate(project){
 		let projectFolder = project.folder;
 		try {
@@ -252,8 +258,8 @@ let projects = {
 	/**
 	 * This function creates a new empty project.
 	 * 
-	 * Each project require a name, that will be enterd by the user as a text in 
-	 * the input area, and a programming *language* that the project will support, 
+	 * Each project requires a name, that will be enterd by the user as a text in 
+	 * the input area, and a programming *language* that the project will use, 
 	 * also chosen by the user.
 	 *
 	 * @param {string} name - Project name
@@ -303,9 +309,9 @@ let projects = {
 		
 	},
 	/**
-	 * This function deletes all the files related to the project chosen by the use, when he clicks on the "Delete" button. 
+	 * This function deletes all the files related to the project chosen by the user, when he clicks on the "Delete" button. 
 	 * 
-	 * After removing all the files, the *currentProject* and the *currentFile* are dispatched to the projects store as *null*.
+	 * After removing all the files, the *currentProject* and *currentFile* are dispatched to the projects store as *null*.
 	 * 
 	 * @param {Project} project - Project object
 	 * 
@@ -526,7 +532,7 @@ let projects = {
 	/**
 	 * This function exports a project archive.
 	 * 
-	 * It's required to know the project that the user will export, including all  its files and folders, 
+	 * It's required to know the project that the user will export, including all of its files and folders, 
 	 * and the path to where the project will be saved in the user's computer. The archive will have
 	 * the *.zip* extension.
 	 * 
@@ -590,22 +596,16 @@ let projects = {
 	/**
 	 * Recursively generate a deep object with all the contents of a project
 	 * 
-	 * 
-	 *  file - contents of the file/folder
-	 * 
-	 *  file.file - extension if it's a file
-	 * 
-	 *  file.children - children if it's a folder
-	 * 
-	 * 	file.path - path to object 
-	 * 
-	 *  file.name - name of object 
-	 * 
+	 * @typedef {Object} file - contents of the file/folder
+	 * @property {string} file - extension if it's a file
+	 * @property {file[]} children - children if it's a folder
+	 * @property {string} path - path to object 
+	 * @property {string} name - name of object 
 	 * 
 	 * @param {Project} project - Project object
-	 * @param {Object} file - File object
+	 * @param {file} file - File object
 	 * 
-	 * @returns {Object} the root of the folder with all its contents
+	 * @returns {file} the root of the folder with all its contents
 	 */
 	async recursiveGeneration(project, file) {
 		if(project !== null && file !== null) {
@@ -656,7 +656,7 @@ let projects = {
 		
 	},
 	/**
-	 * This function creates a new folder inside a project. For this, is required to know 
+	 * This function creates a new folder inside a project. For this, it is required that we know 
 	 * the *project* for which the new folder is generated and the *name* that the folder 
 	 * will have. The name is actually represented by the absolute path to where the 
 	 * folder will be created.
@@ -705,10 +705,10 @@ let projects = {
 		}
 	},
 	/**
-	 * This function creates a new file inside a project. For this, is required to know 
+	 * This function creates a new file inside a project. For this, it is required that we know 
 	 * the *project* for which the new file is generated, the *name* that the file 
 	 * will have (actually represented by the absolute path to where the 
-	 * file will be created), and, if necessary, the informations that will be written in the file.
+	 * file will be created), and, if necessary, the information that will be written in the file.
 	 * 
 	 * This option is valid only in the *Advanced Mode*.
 	 * 
@@ -902,7 +902,7 @@ let projects = {
 	/**
 	 * Load existing projects.
 	 * 
-	 * This function has no parameter. It creates a list with all the existing projects when it's called, by reading all the
+	 * This function has no parameters. It creates a list with all the existing projects when it's called, by reading all the
 	 * folders from the main path, *workspacePath*.
 	 * 
 	 * 
@@ -952,7 +952,7 @@ let projects = {
 
 	},
 	/**
-	 * This function selects a project from the list with all the project, when the users clicks on it, 
+	 * This function selects a project from the list with all the projects, when the users clicks on it, 
 	 * and it displays the content of the *project* in the Application tab.
 	 * 
 	 * @param {Project} project - project object
@@ -961,7 +961,7 @@ let projects = {
 	 */
 	async selectCurrentProject(project) {
 		if(project){
-			let projectFolder = project.folder;
+			let projectFolder = project.folder;  
 			if (projectFolder !== null && await studio.filesystem.pathExists(projectFolder)) {
 				try {
 					if (await studio.filesystem.isDirectory(projectFolder)) {
@@ -1027,7 +1027,7 @@ let projects = {
 	},
 	/**
 	 * Load a previous selected project. 
-	 * The function has no params, loads from local files.
+	 * The function has no params, loads the project from local files.
 	 * 
 	 * @example
 	 * 
@@ -1037,7 +1037,7 @@ let projects = {
 		let project = studio.settings.loadValue('projects', 'currentProject', null);
 		let file = studio.settings.loadValue('projects', 'currentFile', null);
 
-		if (project !== {} && project !== null) {
+		if (project !== {} && project !== null) { 
 			await this.selectCurrentProject(project);
 		}
 		if (file !== {} && file !== null) {
@@ -1045,7 +1045,7 @@ let projects = {
 		}
 	},
 	/**
-	 * The purpose of this function is to save a file and it requires the *project* corresponding to the file, 
+	 * The purpose of this function is to save a file. It requires the *project* in which the file resides, 
 	 * the *name* of the file, actually represented as the path to the file, and a *buffer* containing the data that 
 	 * will be saved in the created file.
 	 * 
@@ -1090,7 +1090,7 @@ let projects = {
 
 	/**
 	 * This function loads the content of a file that was previously saved. In order to 
-	 * open the file, it's needed to know the *project* that the file belongs to and the
+	 * open the file, it's needed to know the *project* that the file belongs to, and the
 	 * full *name* of the file, meaning its path.
 	 * 
 	 * @param {Project} project - project object
@@ -1126,7 +1126,7 @@ let projects = {
 		}
 	},
 	/**
-	 * Changes the current file.
+	 * Changes the current file to another one.
 	 * 
 	 * @param {string} name - path to file
 	 * 
@@ -1187,7 +1187,7 @@ let projects = {
 	},
 	/**
 	 * This function loads the content of a special settings file that was previously saved. In order to 
-	 * open the file, it's needed to know the *project* that the file belongs to and the
+	 * open the file, it's needed to know the *project* that the file belongs to, and the
 	 * full *name* of the file, meaning its path.
 	 * 
 	 * @param {Project} project - project object
@@ -1232,7 +1232,7 @@ let projects = {
 	 * @param {boolean} isRoot - true
 	 * 
 	 * 
-	 * @returns {Object} - the tree structure with items of type @recursiveGeneration item
+	 * @returns {file} - the tree structure
 	 * 
 	 */
 	async generateStructure(project, isRoot=true) {
@@ -1289,7 +1289,7 @@ let projects = {
 	/**
 	 * The purpose of this function is to obtain the default file name of a *project*.
 	 * 
-	 * Usually, the name of this file is 'main.ext', where *ext* is the extention 
+	 * Usually, the name of this file is 'main.ext', where *ext* is the extension 
 	 * corresponding to the programming language that defines the project.
 	 * 
 	 * @param {Project} project - project object
@@ -1308,7 +1308,7 @@ let projects = {
 	/**
 	 * Get the default run file name of a *project*.
 	 * 
-	 * Usually, the name of this file is 'main.ext', where *ext* is the extention 
+	 * Usually, the name of this file is 'main.ext', where *ext* is the extension 
 	 * corresponding to the programming language that defines the project.
 	 * 
 	 * @param {Project} project - project object
@@ -1327,7 +1327,7 @@ let projects = {
 	/**
 	 * This function's purpose is to get the makefile for file name of a *project*.
 	 * 
-	 * @param {Object} project - project object
+	 * @param {Project} project - project object
 	 * 
 	 * @returns {string} - name of the makefile
 	 */

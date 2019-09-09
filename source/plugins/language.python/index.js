@@ -34,7 +34,7 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
+	studio.projects.registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png',[], python);
 
 	register (null, {});
 }

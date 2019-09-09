@@ -205,9 +205,9 @@ export default {
 			}
 			return false;
 		},
-		async importProject (file)
+		async importProject (event)
 		{
-			if(await this.studio.projects.importProject(file)){
+			if(await this.studio.projects.importProject(event.target.files[0])){
 				this.projects=await this.studio.projects.loadProjects(false);
 				return true;
 			}

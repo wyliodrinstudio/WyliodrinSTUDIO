@@ -23,17 +23,17 @@
 					:open-on-click="true"
 					>
 					<template v-slot:prepend="{item, open}">
-						<p v-if="item.name === currentProject.folder" class="project">
-								
+						<p v-if="item.name === currentProject.name">
+							<v-img contain :src="languageImage()" avatar ></v-img>
 						</p>
 						<p v-else-if="item.file" class="file" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
 
 						</p>
-						<p v-else-if="open" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="open && item.name !== currentProject.name" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
 							
 						</p>
 							
-						<p v-else class="folder-closed" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="item.name !== currentProject.name" class="folder-closed" text @contextmenu="fileItem = item,showFolder($event)">
 
 						</p>
 						<v-menu
@@ -286,11 +286,37 @@ export default {
 		}
 	},
 	methods: {
-		_clickAction(item){
-			
+		languageImage ()
+		{
+			// TODO check if language is known, not only that it exists
+			let device = studio.workspace.getDevice ();
+			if (this.currentProject.language && !device){
+				return this.studio.projects.getLanguage(this.currentProject.language).icon;
+			} else if(device.type && device.board) {
+				return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':' + board].icon;
+			} else if (!addon && board) {
+				return this.studio.projects.getLanguage(this.currentProject.language).addons['*:' + board].icon;
+			} else if (!addon && type) {
+				return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':*'].icon;
+			} else return 'unknown';
 		},
-		async _spatiu(){
-			await this.studio.projects.getCurrentFileCode();	
+		getPictogram(filename)
+		{
+			let language = this.studio.projects.getLanguage(this.currentProject.language);
+			let pictograms = language.pictograms;
+			let ext = path.extname(filename);
+			if(pictograms != []){
+				for( let pict of pictograms) {
+					if(pict.extension && ext === pict.extension) {
+						return pict.icon;
+					} else if(path.basename(filename).match(pict.filename)) {
+						return pict.icon;
+					} else {
+						return this.baseFileIcon;
+					}
+				}
+			}
+			
 		},
 		showFile(e) {
 			this.fileMenu = false;

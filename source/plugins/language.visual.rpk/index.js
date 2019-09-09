@@ -21,7 +21,8 @@ export function setup (options, imports, register)
 		sourceLanguage ()
 		{
 			return 'javascript';
-		}
+		},
+		icon:''
 	});
 
 
