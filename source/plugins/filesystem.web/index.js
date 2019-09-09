@@ -1,9 +1,12 @@
 import Dexie from 'dexie';
+import EventEmitter from 'events';
+
+let events = new EventEmitter ();
 
 var db = new Dexie('FileSystemDataBase');
 var $ = require ('jquery');
 let web_filesystem = {
-	event:null,
+	_importData :null,
 	async getUserFolder ()
 	{
 		await this.mkdirp('/user');
@@ -297,7 +300,6 @@ let web_filesystem = {
 			};
 			await removeDirectory(lastElement, pathUntil);
 		}
-        
 	},
 
 	// src, dest
@@ -370,18 +372,69 @@ let web_filesystem = {
 		//TODO
 		return false;
 	},
-	openSaveDialog() {
-		//TODO
+	openExportDialog(data, options = {}) {
+		let element = document.createElement('a');
+		element.setAttribute('href', 'data:base64,' + data.toString ('base64'));
+		element.setAttribute('download', options.filename);
+
+		element.style.display = 'none';
+		document.body.appendChild(element);
+
+		element.click();
+
+		document.body.removeChild(element);
 		return null;
 	},
-	openLoadDialog() {
+	openImportDialog(options = {}) {
+		// this._importData = null;
+		this._registerLoadInput (options.filetypes || []);
+		events.removeAllListeners ();
 		$('#importFile').trigger('click');
-		return null;
+		$('body').one ('focus', '*', function (e) {
+			console.log ('focus');
+			setTimeout (() => {
+				// on change sghould fire first, so this should not fire if there is a file selected
+				events.emit ('load', new Error ('ENODATA'));
+			}, 1000);
+			e.stopPropagation ();
+		});
+		return new Promise ((resolve/*, reject*/) => {
+			events.once ('load', (error, list) => {
+				console.log (error);
+				if (error) resolve ([]);
+				else resolve (list);
+			});
+		});
 	},
-	registerLoadInput(){
-		$('body').append('<input type="file" id="importFile" name="importFile" v-show="false">');
-		$('#importFile').change(e => {
-			this.event = e;
+	readImportFile (f)
+	{
+		return new Promise ((resolve, reject) =>
+		{
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				resolve (Buffer.from (e.target.result));	
+			};
+			reader.onerror = function ()
+			{
+				reject (new Error ('ENOENT'));
+			};
+			reader.readAsArrayBuffer (f);
+		});
+	},
+	_registerLoadInput(filetypes = []){
+		// TODO verify filetypes
+		let accept = filetypes.join ('|');
+		$('#importFile').off().remove ();
+		$('body').append('<input type="file" id="importFile" name="importFile" style="display: none;" accept="'+accept+'">');
+		$('#importFile').on ('change', e => {
+			console.log ($(e.target).val());
+			let list = [];
+			for (let f of e.target.files)
+			{
+				console.log (f);
+				list.push (f);
+			}
+			events.emit ('load', null, list);
 		});	
 	}
 
@@ -393,7 +446,6 @@ export default function setup(options, imports, register) {
 		data: '++id,&fileId,data,size'
 	});
 	db.open();
-	web_filesystem.registerLoadInput();
 	studio.filesystem.registerFileSystem('webfs', web_filesystem);
 	register(null, {});
 }
