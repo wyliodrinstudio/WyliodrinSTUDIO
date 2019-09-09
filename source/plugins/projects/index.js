@@ -433,9 +433,6 @@ let projects = {
 		}
 		
 	},
-	async importDialog(){
-		return await studio.filesystem.openLoadDialog();
-	},
 	/**
 	 * This function imports a project archive.
 	 * 

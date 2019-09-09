@@ -1,7 +1,6 @@
 import os from 'os';
-import fs, { truncateSync } from 'fs-extra';
+import fs from 'fs-extra';
 import path from 'path';
-var $ = require ('jquery'); //temp
 import { remote } from 'electron';
 const dialog = remote.dialog;
 let studio = null;
@@ -68,26 +67,41 @@ let filesystem_real = {
 			return false;
 		}
 	},
-	openSaveDialog() {
+	openExportDialog(data, opts = {}) {
 		const options = {
-			title:'Select a project to import',
+			title:opts.title || 'Export',
 			defaultPath: this.getDefaultFolder(),
 			filters: [
-				{name:'imports', extensions: ['zip','wylioapp']}
+				{name:'export', extensions: opts.filetypes || []}
 			]
 		};
 		return dialog.showSaveDialog(null, options);
+		// TODO save the actual data to the file
 	},
-	openLoadDialog() {
+	readImpoprtFile (file)
+	{
+		return this.readFile (file.name);
+	},
+	async openImportDialog(opts = {}) {
 		const options = {
-			title:'Select a project to import',
+			title: opts.title || 'Import',
 			defaultPath: this.getDefaultFolder(),
 			filters: [
-				{name:'imports', extensions: ['zip','wylioapp']}
+				{name:'import', extensions: opts.filetypes || []}
 			]
 		};
-		return dialog.showOpenDialog(null, options)[0];
-
+		let files = await dialog.showOpenDialog(null, options);
+		let list = [];
+		if (files)
+		{
+			for (let f of files)
+			{
+				list.push ({
+					name: f
+				});
+			}
+		}
+		return list;
 	},
 	
 };

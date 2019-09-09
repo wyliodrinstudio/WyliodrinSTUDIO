@@ -16,7 +16,7 @@ A dialog is a component that informs users about a specific task and may contain
 
 .. autofunction:: showDialog
 
-For example, having the :ref:`simple` created, let's say that when the button is clicked ,you want to open a simple dialog with an input text area. This is how you will use the **showDialog** function:
+For example, having the :ref:`simple` created, let's say that when the button is clicked, you want to open a simple dialog with an input text area. This is how you will call the **showDialog** function when you register the toolbar button:
 
 .. code-block:: javascript
 
@@ -24,14 +24,41 @@ For example, having the :ref:`simple` created, let's say that when the button is
 
 where **ButtonDialog** will represent the Vue component that you will need to create in the *views* directory, its purpose being to design and to add functionalities to the dialog box.
 
-Let's suppose you want to create a simple dialog, which has an input text area and a "Close" button. For this, in the **template** section you will have to use the *<v-card>* component, where you will add the input box (*<v-text-field>*) and the button (*<v-btn>*, inside the *<v-card-actions>*).
+Let's suppose you want to create a simple dialog, which has an input text area and a "Close" button. The content of the *ButtonDialog.vue* component will be:
 
-Inside the **script** section, you will define the methods that your component needs, which means the *close()* function:
+:: 
+
+	<template>
+		<v-card>
+			<v-card-text>
+				{{$t('BUTTON_EXAMPLE_INPUT_TEXT')}}
+				<v-text-field></v-text-field>
+			</v-card-text>
+
+			<v-card-actions>
+				<v-btn text @click="close">Close</v-btn>
+			</v-card-actions>
+		</v-card>
+		
+	</template>
+
+
+Inside the **script** section, you will define the methods that your component needs:
 
 .. code-block:: javascript
 
-	close() {
-		this.$root.$emit ('submit', undefined);
+	export default {
+		name: 'ButtonDialog',
+		data() {
+			return {
+
+			}
+		},
+		methods: {
+			close() {
+				this.$root.$emit ('submit', undefined);
+			}
+		}
 	}
 
 By the end, when you click on the button, the **showDialog** function result will be:
@@ -40,16 +67,6 @@ By the end, when you click on the button, the **showDialog** function result wil
 	:align: center
 	:width: 470px
 	:height: 370px
-
-|
-
-.. autofunction:: showDeviceSettingsDialog
-
-.. image:: images/deviceSettingsDialog.png
-	:align: center
-	:width: 470px
-	:height: 380px
-
 
 
 |
@@ -94,6 +111,18 @@ The possible types for a notification are: *info*, *success*, and *warning*, and
 .. image:: images/showNotification.png
 	:align: center
 
+In this situation, "title" is a variable that represents the title of the notification and will be included in the *messages-ln.json* translation files as it follows:
+
+.. code-block:: json
+
+	{
+		"TRANSLATED_TEXT_ID": {
+			"message": "The title of your workspace is: {title}",
+			"description": "Text of the notification the user created."
+		}
+	}
+
+*title* will be the actual name of your workspace, in this example: *Workspace Title*.
 
 |
 
@@ -101,3 +130,17 @@ The possible types for a notification are: *info*, *success*, and *warning*, and
 
 .. image:: images/showError.png
 	:align: center
+
+
+Similar to *showNotification*, "title" is a variable that represents the title of the error notification and will be included in the *messages-ln.json* translation files as it follows:
+
+.. code-block:: json
+
+	{
+		"TRANSLATED_TEXT_ID": {
+			"message": "The device: {title} was unable to connect.",
+			"description": "Text of the notification the user created."
+		}
+	}
+
+*title* will be the name of the device  you are trying to connect, in this example: *AwesomeDevice*.

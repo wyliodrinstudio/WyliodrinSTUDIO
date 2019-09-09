@@ -4,7 +4,7 @@
 		<div ref="visual">
 			
 		</div>
-		<v-btn class="codestatus" id="codestatus" @click="deClick">{{$t('PROJECT_SHOW_CODE')}}</v-btn>
+		<v-btn class="codestatus" id="codestatus" @click="showCode">{{show?$t('EDITOR_VISUAL_HIDE_CODE'):$t('EDITOR_VISUAL_SHOW_CODE')}}</v-btn>
 		<!-- <VisualAce v-if="show" :extension="'py'" v-model="pythonVisualSource"></VisualAce> -->
 	</div>
 </template>
@@ -239,9 +239,10 @@ export default {
 				
 			// }
 		},
-		deClick()
+		showCode()
 		{
 			this.show = !this.show;
+			process.nextTick (this.resize);
 		}
 	},
 	mounted ()

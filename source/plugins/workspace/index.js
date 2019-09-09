@@ -754,11 +754,6 @@ let workspace = {
 	 * 		
 	 * 		studio.workspace.showNotification ('TRANSLATED_TEXT_ID', {title: 'the title'}, 'success', 5000);
 	 * 
-	 * @example
-	 * 
-	 * 		studio.workspace.showNotification('TRANSLATED_TEXT_ID: ' + this.value);
-	 * 
-	 * // In this situation, this.value is a variable updated in the code.
 	 *
 	 */
 	showNotification (text, values = {}, type = 'info', timeout = 6000)
@@ -809,11 +804,6 @@ let workspace = {
 	 * 		
 	 * 		studio.workspace.showError ('TRANSLATED_TEXT_ID', {title: 'the title'}, 5000);
 	 * 
-	 * @example
-	 * 
-	 * 		studio.workspace.showError('TRANSLATED_TEXT_ID: ' + this.value);
-	 * 
-	 * // In this situation, this.value is a variable updated in the code.
 	 * 
 	 */
 	showError(text, values = {}, timeout = 6000)
@@ -1212,12 +1202,9 @@ let workspace = {
 	},
 
 	/**
-	 * Disconnect from a device.
-	 * 
-	 * The first step is to get the current device object, using the **getDevice** function, 
-	 * then to check if it's an actual device type. If positive, we can disconnect the device, 
-	 * which means that we will delete its connections and characteristics, as reported by the 
-	 * type of disconnection that the user chooses:
+	 * This function disconnects the currently connected device from Wyliodrin STUDIO, which means 
+	 * that it deletes the connections and characteristics of this device, as reported by the type 
+	 * of disconnection that the user chooses:
 	 *
 	 * *StandBy* - 
 	 * 

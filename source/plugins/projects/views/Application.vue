@@ -140,7 +140,6 @@
 			<!--  -->
 		</div>
 		<div :class="editorBox" class="hs-100">
-			<v-icon>mdi-account</v-icon>
 			<component v-if="currentEditor && currentFile" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
 			<p v-else-if="currentFile === null">The project has no files, create one</p>	
 		</div>

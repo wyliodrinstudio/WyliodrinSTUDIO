@@ -59,10 +59,6 @@
         "message": "Are you sure you want to delete this project?",
         "description": "Prompt asking for assuruance on deleting a project"
     },
-    "PROJECT_SHOW_CODE": {
-        "message": "Show Code",
-        "description": "Button designed to show the code behind a blockly"
-    },
     "PROJECT_HIDE_CONSOLE": {
         "message": "Hide Console",
         "description": "Button designed to hide the console"

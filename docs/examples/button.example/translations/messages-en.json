@@ -1,0 +1,14 @@
+{
+	"EXAMPLE_BUTTON_NAME": {
+		"message": "Notify",
+		"description": "This button pops-up a notification"
+	},
+	"EXAMPLE_BUTTON_NOTIFICATION_TEXT": {
+		"message" : "Button Dialog Title",
+		"description": "This is the notification text"
+	},
+	"BUTTON_EXAMPLE_INPUT_TEXT": {
+		"message": "Please input your text here",
+		"description": "This is the content of the dialog."
+	}
+}
