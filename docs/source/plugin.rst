@@ -3,11 +3,6 @@
 How to write a plugin
 =========================
 
-|
-
-This chapter will introduce you to the creation of different types of plugins. 
-
-The actual plugins built for these tutorials can be found in the *docs/examples* folder and you can test an example by copying it inside the *source/plugins* folder. After that, you will have to rebuild the application to make the new plugin available.
 
 |
 
@@ -223,6 +218,8 @@ To test if you successfully created your first plugin, you have to rebuild the p
 .. image:: images/exampleNotification.png
 	:align: center
 
+If you want to test this plugin, you will have to search for **"button.example"** in the *docs/examples* folder and copy it inside the *source/plugins* folder, then rebuild the application to make the new plugin available.
+
 
 |
 
@@ -231,7 +228,7 @@ How to create a device plugin
 
 This type of plugin allows you to add and use a new device to the Wyliodrin STUDIO platform, so you need to properly register its functions and characteristics. 
 
-Let's suppose that you want to create your own device plugin, called **"device_awesome"**.
+Let's suppose that you want to create your own device plugin, called **"device.awesome"**.
 
 |
 
@@ -562,6 +559,10 @@ At the end of the setup function, we register the *device_awesome* object:
 
 |
 
+If you want to test this plugin, you will have to search for **"device.awesome"** in the *docs/examples* folder and copy it inside the *source/plugins* folder, then rebuild the application to make the new plugin available.
+
+|
+
 .. _wyappBoard:
 
 How to add a wyapp board
@@ -691,6 +692,10 @@ where the last parameter represents the *awesome* object we created before.
 
 |
 
+If you want to test this plugin, you will have to search for **"language.awesome"** in the *docs/examples* folder and copy it inside the *source/plugins* folder, then rebuild the application to make the new plugin available.
+
+|
+
 How to add a language addon plugin
 *************************************
 
@@ -794,3 +799,7 @@ Of course, you also need to have a **package.json** file, where you should menti
 	        "target": ["electron"]
 	    }
 	}
+
+|
+
+If you want to test this plugin, you will have to search for **"language.visual.awesome"** in the *docs/examples* folder and copy it inside the *source/plugins* folder, then rebuild the application to make the new plugin available.
