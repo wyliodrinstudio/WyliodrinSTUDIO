@@ -45,14 +45,15 @@ The items currently registered in the menu are:
 
 Toolbar Buttons
 ****************
-These buttons are located in the toolbar, on the top of the main window.
-They are included in the *Toolbar.vue* file and saved into an array in the workspace store.
+These buttons are located in the toolbar, on the top of the main window. A toolbar button is an element that will perform different actions when clicked, according to the component that is relied to it. For example, these buttons may open dialogs that require user inputs.
 
 In order to create this type of buttons, we implemented the **registerToolbarButton** function:
 
 .. autofunction:: registerToolbarButton
 
-we register a button having the translation key 'TOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the content: "You created a toolbar button". We need to specify the relative path to the image related to the button.
+we register a button having the translation key 'TOOLBAR_BUTTON', the priority 10, that on click will pop up a notification with the content: "You created a toolbar button". We need to specify the relative path to the image related to the button. 
+
+This function also modifies the default value of the *visible* additional options, making the button visible for the user only after 8 AM.
 
 .. image:: images/registerToolbarButton.png
 	:align: center
@@ -77,7 +78,7 @@ When a language is selected from the list, the **setLanguage** function is calle
 
 Tabs
 *****
-The tabs are components of our application and accomplish various functions that help you handling your projects.
+The tabs are components of our application and accomplish various functions that help you handling your projects and interacting with the device that is connected to Wyliodrin STUDIO. 
 
 They are integrated with the **registerTab** function:
 
@@ -92,7 +93,7 @@ A list of the currently existing tabs:
 
 **1. APPLICATION**
 
-This tab opens the main file of your project. Here, you can write your code using one of the supported programming lanugages: *javascript*, *python*, *bash* or *visual* (using blocks). When a device is connected to Wyliodrin STUDIO, you can also use its *Run* button to run the code.
+This tab represents the main tool the management of one project. Here, you can write your code using one of the supported programming lanugages: *javascript*, *python*, *bash* or *visual* (using blocks). When a device is connected to Wyliodrin STUDIO, you can also use its *Run* button to run the code.
 
 If you is using the *Advanced Mode*, you will be able to see in the left part of the window your project tree, which includes all the folder and files you created.
 
@@ -166,12 +167,16 @@ They were previously registered using the **registerDeviceToolButton** function:
 
 Here, we registered a device tool button having the translation key 'DEVICETOOL_BUTTON', the priority 10, that on click will pop up a notification with the content: "You created a device tool button!".
 
+The button will be visible for an user only after 8 AM.
+
 |
 
 Status Buttons
 ***************
 
-The last component of the workspace is represented by the status buttons: **Console** and **MQTT**. They are created using the **registerStatusButton** function.
+The last component of the workspace is represented by the status buttons: **Console** and **MQTT**. A status button is an element that will perform different actions when clicked, according to the component that is relied to it. For example, these buttons may open terminals or interfaces that require user inputs.
+
+They are created using the **registerStatusButton** function.
 
 .. image:: images/registerStatusButton.png
 	:align: center
@@ -195,7 +200,7 @@ The main plugin, *"dashboard"*, designs the Dashboard tab, which contains the li
 
 .. _registerGraph:
 
-Inside the *index.js* file, we created the **registerGraph** function, that registers a graph component, with its data, options and settings, and constantly updates the *graphs* array in the *dashboard store*.The parameters of this function are:
+Inside the *index.js* file, we created the **registerGraph** function, that registers a graph component, with its data, options and settings, and constantly updates the *graphs* array in the *dashboard store*. The parameters of this function are:
 
 .. list-table::
 	:widths: 30 70
@@ -205,15 +210,15 @@ Inside the *index.js* file, we created the **registerGraph** function, that regi
 	* - *name*
 	  - graph label, translatable string
 	* - *priority*
-	  - graph priority in the list of all graphs, lower means higher
+	  - graph priority in the list of all graphs, lower means higher in the list of all graphs
 	* - *iconURL*
 	  - the relative path to the image representing the graph
 	* - *component*
-	  - the Vue component to display when the uset chooses to draw a graph
+	  - the Vue component to display when the user chooses to draw a graph
 	* - *options*
 	  - additional options
 
-Also here we create the functions **registerForSignal** and **emitSignal**, that will be called by the graphs, respectively by the connected device.
+Also here we create the functions **registerForSignal** and **emitSignal**, that will be used by the graphs and the connected device.
 
 Here's a list of the graphs that are currently available in the application:
 
@@ -285,7 +290,7 @@ The **views** folder contains 2 Vue components:
 
 The **index.js** file of each graph has the purpose to call the :ref:`registerGraph <registerGraph>` function from the main plugin dashboard, where the *component* parameter is the *NameGraph* Vue component, and the *options* parameter is represented by on object where we define the *setup* property. Here, we call a function that opens the *NameDialog* component and updates each graph's setup options according to the data inputted by the user.
 
-Of course, in the ***package.json** file we have to specify that each dashboard.graph plugin consumes the main *dashboard* plugin.
+Of course, in the **package.json** file we have to specify that each dashboard.graph plugin consumes the main *dashboard* plugin.
 
 |
 

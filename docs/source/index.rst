@@ -35,7 +35,6 @@ For the moment, the devices supported by the platform are:
 
 * Raspberry Pi
 * UDOO Neo
-* Arduino
 * BeagleBone Black
 
 .. image:: images/devices.png

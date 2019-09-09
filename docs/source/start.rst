@@ -33,7 +33,7 @@ https://wyliodrin.studio/
 Use the web version
 """"""""""""""""""""""
 
-YYou also have the possibility to run and use a browser version of Wyliodrin Studio, by copying the following link into your browser address bar:
+You also have the possibility to run and use a browser version of Wyliodrin Studio, by copying the following link into your browser address bar:
 
 **beta.wyliodrin.studio**
 
@@ -42,9 +42,9 @@ YYou also have the possibility to run and use a browser version of Wyliodrin Stu
 Build from source
 """"""""""""""""""""
 
-If you wish to contribute to the improvement of the application or if you want to add your own features or plugins, our code is *open source*, which means that you cand find it on our Github.
+If you wish to contribute to the improvement of the application or if you want to add your own features or plugins, our code is *open source*, which means you can clone it from our Github.
 
-To download the source code, you must have a GitHub account. Open a terminal and choose the folder where you’d want to clone our repository. In this case, we’ll use the home directory and run:
+To download the source code, you must have a GitHub account. Open a terminal, choose the folder where you want to clone our repository and run the following command:
 
 .. code-block:: bash
 
@@ -52,7 +52,7 @@ To download the source code, you must have a GitHub account. Open a terminal and
 
 |
 
-There are 2 procedures to build the Wyliodrin Studio application:
+There are 2 methods to build the application:
 
 For the **STANDALONE** version, you will have to run the following commands: 
 
@@ -70,6 +70,6 @@ For the **BROWSER** edition, you will use:
 
 |
 
-Once the application was installed and built, you can make changes, correct or customize our source code, in order to improve it.
+Once the application was installed and built, you can make changes on our source code, in order to improve it.
 
 |

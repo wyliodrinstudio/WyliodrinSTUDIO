@@ -9,7 +9,7 @@ Translations
 
 Each plugin has a **translations** folder, where you can find the **messages-ln.json** files, one for each language available in our application. These files contain an object with a list of key-value sets. 
 
-In the *.vue* files you will use strings on different purposes (for example, to name a button) and you will need to update their translation according to the language you choose in the app.  This action is possible using our translation function **$t**, which can be called in 2 forms:
+In the *.vue* files you will use strings on different purposes (for example, to name a button) and you will need to update their translation according to the language you choose in the app.  This action is possible using our translation function **$t**, that can be used in 2 forms:
 
 **1. Vue template**
 

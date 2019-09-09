@@ -66,7 +66,7 @@ By the end, when you click on the button, the **showDialog** function result wil
 .. image:: images/showDialog.png
 	:align: center
 	:width: 470px
-	:height: 370px
+	:height: 350px
 
 
 |
