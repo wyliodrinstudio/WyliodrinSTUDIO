@@ -197,11 +197,13 @@ export default {
 			return false;
 		},
 		async importDialogOpen() {
-			let file = await this.studio.projects.importDialog();
-			console.log(file);
-			if(event !=null){
-				this.importProject(file);
-				return true;
+			let files = await this.studio.filesystem.openImportDialog();
+			console.log(files);
+			if (files.length > 0)
+			{
+				// use first file
+				let fileData = await this.studio.filesystem.readImportFile (files[0]);
+				console.log (fileData);
 			}
 			return false;
 		},
