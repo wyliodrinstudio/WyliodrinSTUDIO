@@ -464,7 +464,7 @@ export default {
 		},
 		async exportFile (item)
 		{
-			if (await this.studio.projects.exportFile(item.path,item.name))
+			if (await this.studio.projects.exportFile(this.currentProject,item.path))
 			{
 				await this.refresh();
 			}
@@ -473,15 +473,16 @@ export default {
 		{
 			let files = await this.studio.filesystem.openImportDialog({
 				title:'Import',
-				filetypes:['zip','tar','wylioapp']
+				filetypes:[]
 			});
 			if (files.length > 0)
 			{
 				// use first file
 				let fileData = await this.studio.filesystem.readImportFile (files[0]);
 				if(files) {
-					let filePath = path.join(item.path,files[0].name);
-					if(await this.importFile(files[0].name,fileData,item.path))
+					let filePath = path.join(item.path,path.basename(files[0].name));
+					console.log(files[0].name);
+					if(await this.studio.projects.newFile(this.currentProject,filePath,fileData))
 					{
 						await this.refresh();
 					}
