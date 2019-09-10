@@ -98,10 +98,23 @@ uiSocket.on ('connection', (socket) => {
 				}
 			}
 			else
-			if (packet && packet.id && packet.t === 'p')
+			if (id)
 			{
-				let device = users[id].devices[packet.id];
-				if (device.socket) device.socket.send (JSON.stringify (packet));
+				if (packet && packet.id && packet.t === 'p')
+				{
+					let device = users[id].devices[packet.id];
+					if (device.socket) device.socket.send (JSON.stringify (packet));
+				}
+				else
+				if (packet && packet.t === 'ping')
+				{
+					console.log ('UISocket ping');
+					socket.send (JSON.stringify ({t: 'pong'}));
+				}
+				else
+				{
+					console.log ('UISocket unknown packet '+JSON.stringify (packet));
+				}
 			}
 			else
 			{
