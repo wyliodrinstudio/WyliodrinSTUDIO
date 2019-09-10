@@ -13,7 +13,7 @@
     },
     "PROJECT_NEW_FOLDER": {
         "message": "Dosar nou",
-        "description": "Crează un dosar nou într-un proiect"
+        "description": "Creează un dosar nou într-un proiect"
     },
     "PROJECT_NEW_FOLDER_NAME": {
         "message": "Nume nou de dosar",
@@ -33,7 +33,7 @@
     },
     "PROJECT_NEW_FILE": {
         "message": "Fișier nou",
-        "description": "Crează un fișier nou într-un proiect"
+        "description": "Creează un fișier nou într-un proiect"
 	},
 	"PROJECT_IMPORT_FILE": {
         "message": "Importă fișier",
@@ -72,7 +72,7 @@
         "description": "Buton ce ascunde consola"
     },
     "PROJECT_WELCOME_CREATE_NEW_APP": {
-        "message": "Crează o nouă aplicație",
+        "message": "Creează o nouă aplicație",
         "description": "Buton pentru crearea unui nou proiect în spațiul de lucuru"
     },
     "PROJECT_LIBRARY": {
@@ -84,8 +84,8 @@
         "description": "Etichetă pentru numele proiectului"
     },
     "PROJECT_LIBRARY_NEW_PROJECT": {
-        "message": "Crează un proiect",
-        "description": "Crează un proiect în interiorul spațiului de lucuru"
+        "message": "Creează un proiect",
+        "description": "Creează un proiect în interiorul spațiului de lucuru"
     },
     "PROJECT_LIBRARY_RENAME": {
         "message": "Redenumește",
@@ -246,5 +246,13 @@
     "PATH_NULL": {
         "message": "O cale este nulă",
         "description": "The given path turned out null"
+    },
+    "PROJECTS_NO_PROJECT": {
+        "message": "Încă nu aveți niciun proiect",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
+    },
+    "PROJECTS_CREATE_APPLICATION": {
+        "message": "Apăsați butonul \"Creează o aplicație nouă\" de mai jos",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
     }
 }
