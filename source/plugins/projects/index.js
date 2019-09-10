@@ -81,6 +81,7 @@ let projects = {
 	getLanguage(languageID) {
 		if(languageID !== null){	
 			for (let language of this.languages) {
+				console.log(language);
 				if (language.id === languageID) return language;
 			}
 			return null;
@@ -454,6 +455,21 @@ let projects = {
 		if(type === 'wylioapp'){
 			console.log('wylioapp');
 			//TODO
+			let projectImport = JSON.parse(data.toString());
+			let projectFolder = path.join(workspacePath, projectImport.title);
+			let json = path.join(projectFolder, 'project.json');
+			for (let item of projectImport.tree) {
+				await this.recursiveCreating({
+					item: item,
+					prev: item,
+					folder: workspacePath
+				});
+				await studio.filesystem.writeFile(json, JSON.stringify({
+					language: projectImport.language,
+					notebook: projectImport.notebook
+				}, null, 4));
+				await this.loadProjects(false);
+			}
 		} else {
 			let name = path.basename(fileName);
 			let pathing = path.join(workspacePath,name.split('.').slice(0, -1).join('.'));
@@ -562,7 +578,8 @@ let projects = {
 			});
 			let savePath = await studio.filesystem.openExportDialog(zipContent, {
 				filename: project.name +'.zip',
-				filetypes:['zip','tar']
+				filetypes:['zip','tar'],
+				type:'data:application/zip;base64,'
 			});
 			/** create zip file */
 			if(savePath !== null){

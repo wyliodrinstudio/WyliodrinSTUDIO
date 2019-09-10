@@ -34,6 +34,14 @@
     "PROJECT_NEW_FILE": {
         "message": "Fișier nou",
         "description": "Crează un fișier nou într-un proiect"
+	},
+	"PROJECT_IMPORT_FILE": {
+        "message": "Importă fișier",
+        "description": "Import a file within a project"
+	},
+	"PROJECT_EXPORT_FILE": {
+        "message": "Exportă fișier",
+        "description": "Export a file from the project"
     },
     "PROJECT_NEW_FILE_NAME": {
         "message": "Nuume nou de fișier",
