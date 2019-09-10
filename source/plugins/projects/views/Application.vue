@@ -374,17 +374,44 @@ export default {
 			let type = device.type;
 			let board = device.board;
 
-			if(type === 'none' && board === 'none') {
-				return this.iteratePictograms(pictograms, filename);
+			if(pictograms && pictograms.length > 0 && type === 'none' && board === 'none') {
+				for( let pict of pictograms) {
+					if(pict.extension && ext === pict.extension) {
+						return pict.icon;
+					} else if(pict.filename && path.basename(filename).match(pict.filename)) {
+						return pict.icon;
+					}
+				}
 			} else if(type !== 'none' && board !== 'none') {
 				let addonPictograms = addons[type + ':' + board].pictograms;
-				return this.iteratePictograms(addonPictograms, filename);
-			} else if (!addon && board !== 'none') {
+				if(addonPictograms && addonPictograms.length > 0) {
+					for( let pict of addonPictograms) {
+						if(pict.extension && ext === pict.extension) {
+							return pict.icon;
+						} else if(pict.filename && path.basename(filename).match(pict.filename)) {
+							return pict.icon;
+						}
+					}
+				}
+				
+			} else if (!addons && board !== 'none') {
 				let addonPictograms = addons['*:' + board].pictograms;
-				return this.iteratePictograms(addonPictograms, filename);
-			} else if (!addon && type !== 'none') {
+				for( let pict of addonPictograms) {
+					if(pict.extension && ext === pict.extension) {
+						return pict.icon;
+					} else if(pict.filename && path.basename(filename).match(pict.filename)) {
+						return pict.icon;
+					}
+				}
+			} else if (!addons && type !== 'none') {
 				let addonPictograms = addons[type + ':*'].pictograms;
-				return this.iteratePictograms(addonPictograms, filename);
+				for( let pict of addonPictograms) {
+					if(pict.extension && ext === pict.extension) {
+						return pict.icon;
+					} else if(pict.filename && path.basename(filename).match(pict.filename)) {
+						return pict.icon;
+					}
+				}
 			}
 			return this.baseFileIcon;
 			
