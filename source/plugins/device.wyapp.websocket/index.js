@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 import ReconnectingWebSocket from 'reconnectingwebsocket';
 import uuid from 'uuid';
+import DeviceSetup from './views/DeviceSetup.vue';
 
 const NETWORK_PRIORITY_HIGH = 99;
 // const NETWORK_PRIORITY_LOW = 0;
@@ -208,7 +209,7 @@ export function setup (options, imports, register)
 		{
 			if (device.id === 'wyapp:websocket:newdevice')
 			{
-				workspace.showNotification ('use token '+token);
+				workspace.showDialog (DeviceSetup, {token});
 				return null;
 			}
 			else
