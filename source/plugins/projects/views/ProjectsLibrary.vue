@@ -6,6 +6,11 @@
 			<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_SEARCH')" v-model="search" single-line dark class="projsearch" append-icon="search"></v-text-field>
 		</v-card-title>
 		<v-card-text v-if="!projects || projects.length === 0" class="projects-container">
+			<div class="noprojmsg">
+				<strong>You don't have any projects yet</strong>
+				<br>
+				<span>Click the "Create new Application" buton below</span>
+			</div>
 		</v-card-text>
 		<v-card-text v-else>
 			<v-layout>

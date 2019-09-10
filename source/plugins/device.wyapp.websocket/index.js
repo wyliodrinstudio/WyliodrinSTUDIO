@@ -116,11 +116,16 @@ export function setup (options, imports, register)
 	let token = settings.loadValue ('device.wyapp.websocket', 'userid', newtoken);
 	if (token === newtoken) settings.storeValue ('device.wyapp.websocket', 'userid', token);
 
+	let pingPongTimeout = null;
+
+	let errorAlreadyShown = false;
+
 	socket = new ReconnectingWebSocket ((location.protocol==='http:'?'ws':'wss')+'://'+location.hostname+':'+location.port+'/socket/ui');
 
 	socket.onopen = function ()
 	{
 		connected = true;
+		errorAlreadyShown = false;
 		socket.send (JSON.stringify({t:'a', token: token}));
 		// console.log ('UI Socket sent authenticate');
 	};
@@ -135,8 +140,11 @@ export function setup (options, imports, register)
 			{
 				if (data.authenticated === true) 
 				{
-					workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED');
+					workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED', {}, 'success');
 					authenticated = true;
+					pingPongTimeout = setInterval (() => {
+						if (authenticated) socket.send (JSON.stringify ({t: 'ping'}));
+					}, 20*1000);
 					updateDevices ();
 				}
 				if (data.e === 'unique')
@@ -177,7 +185,11 @@ export function setup (options, imports, register)
 
 	socket.onerror = function (err)
 	{
-		workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR', {error: err.message});
+		if (!errorAlreadyShown)
+		{
+			workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR', {error: err.message});
+			errorAlreadyShown = true;
+		}
 	};
 	
 	socket.onclose = function ()
@@ -186,7 +198,8 @@ export function setup (options, imports, register)
 		authenticated = false;
 		websocketDevices = [];
 		updateDevices ();
-		workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED');
+		clearInterval (pingPongTimeout);
+		workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED', {}, 'warning');
 	};
 
 	deviceDriver = wyapp.registerTransport ('websocket', {
@@ -199,10 +212,10 @@ export function setup (options, imports, register)
 				return null;
 			}
 			else
-			return {
-				address: device.address,
-				port: device.port
-			};
+				return {
+					address: device.address,
+					port: device.port
+				};
 		}
 	});
 
