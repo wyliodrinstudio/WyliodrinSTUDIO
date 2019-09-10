@@ -776,6 +776,24 @@ let projects = {
 			return false;
 		}
 	},
+	async exportFile(project, filePath) {
+		try {
+			filePath = path.join(project.folder,filePath);
+			console.log(path.basename(filePath));
+			let content = await studio.filesystem.readFile(filePath);
+			let savePath = await studio.filesystem.openExportDialog(content, {
+				filename: path.basename(filePath),
+				filetypes:[path.extname(filePath)],
+				type:'data:application;base64,'
+			});
+			if(savePath !== null){
+				await studio.filesystem.writeFile(savePath, content);
+			}
+		} catch (e) {
+			console.error(e);
+		}
+		
+	},
 	/**
 	 * This function is used to rename a file or a folder included in the currently open project.
 	 * 
