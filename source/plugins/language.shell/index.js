@@ -34,7 +34,7 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/language.shell/data/img/shell.png',[], shell);
+	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/language.shell/data/img/shellLittle.png',[], shell);
 
 	register (null, {});
 }

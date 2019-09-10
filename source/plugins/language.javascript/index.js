@@ -44,7 +44,7 @@ export default function setup(options, imports, register) {
 		},
 	};
 
-	studio.projects.registerLanguage('javascript', 'JavaScript', 'plugins/language.javascript/data/img/javascript.png',[], javaScript);
+	studio.projects.registerLanguage('javascript', 'JavaScript', 'plugins/language.javascript/data/img/javascriptLittle.png',[], javaScript);
 
 	register(null, {});
 }

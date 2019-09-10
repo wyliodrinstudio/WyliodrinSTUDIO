@@ -39,7 +39,7 @@ export default function setup(options, imports, register) {
 		}
 	};
 
-	studio.projects.registerLanguage('visual', 'Visual', 'plugins/language.visual/data/img/visual.png',[], visual);
+	studio.projects.registerLanguage('visual', 'Visual', 'plugins/language.visual/data/img/visualLittle.png',[], visual);
 
 	register(null, {});
 }
