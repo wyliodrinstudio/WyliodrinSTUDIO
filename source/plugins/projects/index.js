@@ -81,7 +81,6 @@ let projects = {
 	getLanguage(languageID) {
 		if(languageID !== null){	
 			for (let language of this.languages) {
-				console.log(language);
 				if (language.id === languageID) return language;
 			}
 			return null;
@@ -122,7 +121,7 @@ let projects = {
 		 * 		vezi exemplu in index device.wyapp si index device.wyapp.raspberrypi
 		 * }
 		 */
-		if(pictograms==[]) pictograms = [];
+		if(!pictograms) pictograms = [];
 		if (!options) options = {};
 		if(id !== null && title !== null && icon !== null)
 		{

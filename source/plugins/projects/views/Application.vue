@@ -26,7 +26,8 @@
 						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
 							<v-img contain :src="languageImage()" avatar ></v-img>
 						</p>
-						<p v-else-if="item.file" class="file" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
+						<p v-else-if="item.file" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
+							<v-img contain :src="getPictogram(item.name)" avatar ></v-img>
 						</p>
 						<p v-else-if="open && item.name !== currentProject.name" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
 							
@@ -247,7 +248,8 @@ export default {
 			y: 0,
 			menuItems: ['create file', 'create directory','delete file','delete directory'],
 
-			showConsole: false
+			showConsole: false,
+			baseFileIcon:'plugins/projects/data/img/icons/file.png',
 		};
 	},
 	computed: {
@@ -335,24 +337,26 @@ export default {
 		{
 			// TODO check if language is known, not only that it exists
 			let device = this.studio.workspace.getDevice ();
+			console.log(device);
 			let type = device.type;
 			let board = device.board;
-			// if (this.currentProject.language && !device){
+			if (this.currentProject.language && type === 'none' && board === 'none'){
 				return this.studio.projects.getLanguage(this.currentProject.language).icon;
-			// } else if(device.type && device.board) {
-			// 	return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':' + board].icon;
-			// } else if (!addon && board) {
-			// 	return this.studio.projects.getLanguage(this.currentProject.language).addons['*:' + board].icon;
-			// } else if (!addon && type) {
-			// 	return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':*'].icon;
-			// } else return 'unknown';
+			} else if(type !== 'none' && board !== 'none') {
+				return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':' + board].icon;
+			} else if (!addon && board !== 'none') {
+				return this.studio.projects.getLanguage(this.currentProject.language).addons['*:' + board].icon;
+			} else if (!addon && type !== 'none') {
+				return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':*'].icon;
+			} else return 'unknown';
 		},
 		getPictogram(filename)
 		{
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
 			let pictograms = language.pictograms;
+			
 			let ext = path.extname(filename);
-			if(pictograms != []){
+			if(pictograms && pictograms.length > 0) {
 				for( let pict of pictograms) {
 					if(pict.extension && ext === pict.extension) {
 						return pict.icon;
@@ -362,6 +366,8 @@ export default {
 						return this.baseFileIcon;
 					}
 				}
+			} else {
+				return this.baseFileIcon;
 			}
 			
 		},
