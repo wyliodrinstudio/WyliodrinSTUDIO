@@ -826,7 +826,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 		
-	 * showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
+	 * showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','');
 	 */
 	showPrompt(title, question, original, action, values = {})
 	{

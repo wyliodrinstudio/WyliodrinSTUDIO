@@ -28,6 +28,15 @@ import projectStore from './store';
  * @property  {Object} options - language functions 
  */
 
+/**
+ * File Identification
+ * @typedef {Object} file - contents of the file/folder
+ * @property {string} file - extension if it's a file
+ * @property {file[]} children - children if it's a folder
+ * @property {string} path - path to object 
+ * @property {string} name - name of object 
+ */
+
 
 let settings = {
 	workspace: {
@@ -259,7 +268,7 @@ let projects = {
 	/**
 	 * This function creates a new empty project.
 	 * 
-	 * Each project requires a name, that will be enterd by the user as a text in 
+	 * Each project requires a name, that will be entered by the user as a text in 
 	 * the input area, and a programming *language* that the project will use, 
 	 * also chosen by the user.
 	 *
@@ -618,16 +627,11 @@ let projects = {
 	/**
 	 * Recursively generate a deep object with all the contents of a project
 	 * 
-	 * @typedef {Object} file - contents of the file/folder
-	 * @property {string} file - extension if it's a file
-	 * @property {file[]} children - children if it's a folder
-	 * @property {string} path - path to object 
-	 * @property {string} name - name of object 
-	 * 
 	 * @param {Project} project - Project object
 	 * @param {file} file - File object
 	 * 
 	 * @returns {file} the root of the folder with all its contents
+	 * 
 	 */
 	async recursiveGeneration(project, file) {
 		if(project !== null && file !== null) {

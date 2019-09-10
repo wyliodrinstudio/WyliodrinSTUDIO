@@ -9,10 +9,6 @@ Wyliodrin STUDIO enables customization, which means that you may add plugins to 
 
 Here is a list of plugins of this type, registered at this moment in Wyliodrin STUDIO:
 
-
-Extension buttons
-""""""""""""""""""
-
 .. _menu:
 
 Menu

@@ -1,7 +1,7 @@
 :orphan:
 
-Studio API
-************
+Wyliodrin Studio API
+*************************
 
 |
 
@@ -188,6 +188,7 @@ Data Types
 
 .. autoclass:: Language
 
+.. autoclass:: file
 
 .. autofunction:: disposable
 
