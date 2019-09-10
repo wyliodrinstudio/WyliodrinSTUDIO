@@ -336,8 +336,9 @@ export default {
 		languageImage ()
 		{
 			// TODO check if language is known, not only that it exists
+			let language = this.studio.projects.getLanguage(this.currentProject.language);
+			let addons = language.addons;
 			let device = this.studio.workspace.getDevice ();
-			console.log(device);
 			let type = device.type;
 			let board = device.board;
 			if (this.currentProject.language && type === 'none' && board === 'none'){
@@ -350,25 +351,42 @@ export default {
 				return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':*'].icon;
 			} else return 'unknown';
 		},
-		getPictogram(filename)
-		{
-			let language = this.studio.projects.getLanguage(this.currentProject.language);
-			let pictograms = language.pictograms;
-			
-			let ext = path.extname(filename);
+		iteratePictograms(pictograms, filename) {
 			if(pictograms && pictograms.length > 0) {
 				for( let pict of pictograms) {
 					if(pict.extension && ext === pict.extension) {
 						return pict.icon;
-					} else if(path.basename(filename).match(pict.filename)) {
+					} else if(pict.filename && path.basename(filename).match(pict.filename)) {
 						return pict.icon;
-					} else {
-						return this.baseFileIcon;
 					}
 				}
-			} else {
 				return this.baseFileIcon;
 			}
+		},
+		getPictogram(filename)
+		{
+			let language = this.studio.projects.getLanguage(this.currentProject.language);
+			let addons = language.addons;
+			let pictograms = language.pictograms;
+			
+			let ext = path.extname(filename);
+			let device = this.studio.workspace.getDevice ();
+			let type = device.type;
+			let board = device.board;
+
+			if(type === 'none' && board === 'none') {
+				return this.iteratePictograms(pictograms, filename);
+			} else if(type !== 'none' && board !== 'none') {
+				let addonPictograms = addons[type + ':' + board].pictograms;
+				return this.iteratePictograms(addonPictograms, filename);
+			} else if (!addon && board !== 'none') {
+				let addonPictograms = addons['*:' + board].pictograms;
+				return this.iteratePictograms(addonPictograms, filename);
+			} else if (!addon && type !== 'none') {
+				let addonPictograms = addons[type + ':*'].pictograms;
+				return this.iteratePictograms(addonPictograms, filename);
+			}
+			return this.baseFileIcon;
 			
 		},
 		showFile(e) {
