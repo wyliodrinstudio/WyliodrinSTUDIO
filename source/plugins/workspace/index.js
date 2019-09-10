@@ -27,6 +27,7 @@ import studioStore from './store';
  */
 
 
+
 let deviceDrivers = {};
 let availableDevices = [];
 let translations = {
@@ -255,20 +256,20 @@ let workspace = {
 	 * of tabs, a *component*, representing the actual content and funtionality of the tab, and aditional *options*, that will authorize 
 	 * or will block the user access, depending on their value.
 	 * 
-	 *
-	 * The default value of these options is  **() => return true**, which means the tab will be visible and will allow user access, 
-	 * but it can be customized at the moment of the registration of one tab. 
+	 * The default value of these options is  **() => return true**, which means the menu item will be visible and will allow user access, 
+	 * but it can be customized at the moment of the registration of one element. 
 	 * 
-	 * If the value of *enabled* will be changed to another function, the name of the tab will still be visible in the list of all tabs, but 
-	 * it won't permit any user action, because the tab will not become usable until the return value of the function will be *true*.
+	 * If the value of *enabled* will be changed to another function, the name of the menu item will still be visible in the list of all menu items, but 
+	 * it won't permit any user action, because the item will not become usable until the return value of the function will be *true*.
 	 * 
-	 * If the value of the *visible* option is changed to another function, the name of the tab will not appear in the list with all tabs 
-	 * until the return value of the function will become *true*; in this case, when the tab is visible, it becomes automatically *enabled*.
+	 * If the value of the *visible* option is changed to another function, the name of the menu item will not appear in the list with all menu items 
+	 * until the return value of the function will become *true*; in this case, when the element is visible, it becomes automatically *enabled*.
+	 * 
 	 * 
 	 * @param {string} name the translation ID of the title of the tab
 	 * @param {number} priority the priority of the tab, lower is to the left
 	 * @param {Vue} component the Vue component to display
-	 * @param {Object} options additional options, like **visible** or **enabled**; 
+	 * @param {options} options additional options, like **visible** or **enabled**; 
 	 * the tab is available for user interaction according to the value of these options;
 	 * 
 	 * 
@@ -279,11 +280,11 @@ let workspace = {
 	 * 	
 	 * let time = new Date();
 	 * 
- 	 *	registerTab('PROJECT_NOTEBOOK', 300, Notebook, {
-	 *		enabled () {
+ 	 * registerTab('PROJECT_NOTEBOOK', 300, Notebook, {
+	 * 		enabled () {
 	 *			return time.getHours() > 8;
 	 *		}
-	 *	});)
+	 * });
 	 * 
 	 */
 	registerTab (name, priority, component, options = {})
@@ -342,7 +343,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		registerMenuItem('WYLIODRIN_API', 10, () => documentation.openDocumentation());
+	 * registerMenuItem('WYLIODRIN_API', 10, () => documentation.openDocumentation());
 	 */
 	registerMenuItem (name, priority, action, options = {})
 	{
@@ -384,7 +385,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		renameMenuItem('WYLIODRIN_API', 'WYLIODRIN_STUDIO_API');
+	 * renameMenuItem('WYLIODRIN_API', 'WYLIODRIN_STUDIO_API');
 	 */
 	renameMenuItem (prevName,actualName)
 	{
@@ -446,13 +447,11 @@ let workspace = {
 	 * 
 	 * let time = new Date();
 	 * 
-	 * 	registerToolbarButton('TOOLBAR_BUTTON', 10, () => showNotification('You created a toolbar button!'), 
-	 * 		'plugins/projects/data/img/icons/button.svg',
-	 * 		{
-	 * 			visible() {
-	 * 				return time.getHours() > 8;
-	 * 			}
-	 * 		});
+	 * registerToolbarButton('TOOLBAR_BUTTON', 10, () => showNotification('You created a toolbar button!'), 'plugins/projects/data/img/icons/button.svg', {
+	 * 		visible() {
+	 * 			return time.getHours() > 8;
+	 * 		}
+	 * });
 	 */
 	registerToolbarButton (name, priority, action, iconURL, options = {})
 	{
@@ -519,7 +518,7 @@ let workspace = {
 	 * 
 	 * let time = new Date();
 	 * 
-	 * 	registerDeviceToolBotton('RUN', 10,  => showNotification('You clicked the Run button!'), 
+	 * registerDeviceToolBotton('RUN', 10,  => showNotification('You clicked the Run button!'), 
 	 * 		'plugins/workspace/data/img/icons/button.svg', {
 	 * 		visible() {
 	 * 			return time.getHours() > 8;
@@ -588,7 +587,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		registerStatusButton('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg');
+	 * registerStatusButton('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg');
 	 */
 	registerStatusButton (name, priority, component, iconURL, options = {})
 	{
@@ -634,7 +633,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		openStatusButton('CONSOLE');
+	 * openStatusButton('CONSOLE');
 	 */
 	openStatusButton (name)
 	{
@@ -648,7 +647,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		closeStatusButton();
+	 * closeStatusButton();
 	 */
 	closeStatusButton ()
 	{
@@ -669,7 +668,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		registerStore('projects', projectStore);
+	 * registerStore('projects', projectStore);
 	 * 
 	 */
 	registerStore (namespace, store)
@@ -693,7 +692,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		let project = getFromStore('projects', 'currentProject');
+	 * let project = getFromStore('projects', 'currentProject');
 	 */
 	getFromStore (namespace, variable)
 	{
@@ -709,7 +708,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		dispatchToStore('projects', 'currentProject', null);
+	 * dispatchToStore('projects', 'currentProject', null);
 	 */
 	dispatchToStore (namespace, action, data)
 	{
@@ -722,7 +721,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		registerComponent(MyComponent);
+	 * registerComponent(MyComponent);
 	 */
 	registerComponent (component)
 	{
@@ -745,7 +744,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 		
-	 * 		studio.workspace.showNotification ('TRANSLATED_TEXT_ID', {title: 'the title'}, 'success', 5000);
+	 * studio.workspace.showNotification ('TRANSLATED_TEXT_ID', {title: 'the title'}, 'success', 5000);
 	 * 
 	 *
 	 */
@@ -795,7 +794,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 		
-	 * 		studio.workspace.showError ('TRANSLATED_TEXT_ID', {title: 'the title'}, 5000);
+	 * studio.workspace.showError ('TRANSLATED_TEXT_ID', {title: 'the title'}, 5000);
 	 * 
 	 * 
 	 */
@@ -827,7 +826,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 		
-	 * 		showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
+	 * showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
 	 */
 	showPrompt(title, question, original, action, values = {})
 	{
@@ -874,7 +873,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 		
-	 * 		showConfirmationPrompt('EXIT', 'WORKSPACE_TOOLBAR_EXIT_QUESTION');
+	 * showConfirmationPrompt('EXIT', 'WORKSPACE_TOOLBAR_EXIT_QUESTION');
 	 */
 	showConfirmationPrompt(title, question, values = {})
 	{
@@ -989,7 +988,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		setWorkspaceTitle (project.name);
+	 * setWorkspaceTitle (project.name);
 	 */
 	setWorkspaceTitle (title)
 	{
@@ -1007,7 +1006,8 @@ let workspace = {
 	 * of functions necessary to represent, connect, disconnect or set up a device.
 	 * 
 	 * @example
-	 * 		registerDeviceDriver('my_device', deviceDriver);
+	 * 		
+	 * registerDeviceDriver('my_device', deviceDriver);
 	 */
 	registerDeviceDriver (name, deviceDriver)
 	{
@@ -1042,7 +1042,7 @@ let workspace = {
 	 * 
 	 * @example
 	 * 
-	 * 		updateDevices (myDevices);
+	 * updateDevices (myDevices);
 	 */
 	updateDevices (type, dev)
 	{
@@ -1171,7 +1171,7 @@ let workspace = {
 	 *
 	 * @example
 	 * 
-	 * 		let device = getDevice ();
+	 * let device = getDevice ();
 	 */
 	getDevice ()
 	{
