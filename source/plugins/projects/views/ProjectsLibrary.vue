@@ -7,9 +7,9 @@
 		</v-card-title>
 		<v-card-text v-if="!projects || projects.length === 0" class="projects-container">
 			<div class="noprojmsg">
-				<strong>You don't have any projects yet</strong>
+				<strong>{{$t('PROJECTS_NO_PROJECT')}}</strong>
 				<br>
-				<span>Click the "Create new Application" buton below</span>
+				<span>{{$t('PROJECTS_CREATE_APPLICATION')}}</span>
 			</div>
 		</v-card-text>
 		<v-card-text v-else>

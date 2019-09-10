@@ -16,15 +16,7 @@ A dialog is a component that informs users about a specific task and may contain
 
 .. autofunction:: showDialog
 
-For example, having the :ref:`simple` created, let's say that when the button is clicked, you want to open a simple dialog with an input text area. This is how you will call the **showDialog** function when you register the toolbar button:
-
-.. code-block:: javascript
-
-	studio.workspace.showDialog ('EXAMPLE_BUTTON_DIALOG_TITLE', ButtonDialog);
-
-where **ButtonDialog** will represent the Vue component that you will need to create in the *views* directory, its purpose being to design and to add functionalities to the dialog box.
-
-Let's suppose you want to create a simple dialog, which has an input text area and a "Close" button. The content of the *ButtonDialog.vue* component will be:
+For example, having the :ref:`simple` created, let's say that when the button is clicked, you want to open a simple dialog with an input text area and a "Close" button. The content of the *ButtonDialog.vue* component will be:
 
 :: 
 
@@ -39,7 +31,6 @@ Let's suppose you want to create a simple dialog, which has an input text area a
 				<v-btn text @click="close">Close</v-btn>
 			</v-card-actions>
 		</v-card>
-		
 	</template>
 
 
@@ -61,7 +52,65 @@ Inside the **script** section, you will define the methods that your component n
 		}
 	}
 
-By the end, when you click on the button, the **showDialog** function result will be:
+The *index.js* file will have the following structure:
+
+.. code-block:: javascript
+
+	import ButtonDialog from './views/ButtonDialog.vue';
+
+	let studio = null;
+
+	export function setup(options, imports, register)
+	{
+		studio = imports;
+
+		/* Register a toolbar button that on click will reveal a dialog with the specified title, image and component */
+		studio.workspace.registerToolbarButton ('BUTTON_EXAMPLE_NAME', 20, 
+			() => studio.workspace.showDialog ('BUTTON_EXAMPLE_DIALOG_TITLE', ButtonDialog),
+			'plugins/button.example/data/img/button.png');
+		
+		register(null, {
+			button_example: button_example
+		});
+	}
+
+The *title* parameter is not mandatory when you call the **showDialog** function, because you can choose the title of a dialog box within the Vue file that designs this component.
+
+For example:
+
+:: 
+
+	<template>
+		<v-card>
+			<v-card-title>
+				{{ $t('BUTTON_EXAMPLE_DIALOG_TITLE') }}
+			</v-card-title>
+
+			<v-card-text>
+				{{$t('BUTTON_EXAMPLE_INPUT_TEXT')}}
+				<v-text-field></v-text-field>
+			</v-card-text>
+
+			<v-card-actions>
+				<v-btn text @click="close">Close</v-btn>
+			</v-card-actions>
+		</v-card>
+	</template>
+
+
+The **script** section will have the same structure as before, while within the **index.js** file you will have to register your button as it follows:
+
+.. code-block:: javascript
+
+	studio.workspace.registerToolbarButton ('BUTTON_EXAMPLE_NAME', 20, 
+		() => studio.workspace.showDialog (ButtonDialog),
+		'plugins/button.example/data/img/button.png');
+
+As you can notice, the **showDialog** function will use only the *ButtonDialog* component as parameter.
+
+|
+
+In both situations the result will be the same:
 
 .. image:: images/showDialog.png
 	:align: center
@@ -80,7 +129,9 @@ A prompt is actually a dialog box that requires a user decision. A prompt box is
 
 .. autofunction:: showPrompt
 
-This prompt is used to rename a project.
+This prompt is used to rename a project. The 'PROJECT_RENAME_PROJECT' is a translatable key string that corresponds to the title of the prompt (*Rename Project*) and 'PROJECT_NAME_PROMPT' represents the question or the statement addressed to the user (*Please input the name of the project*). Both key strings have to be included within the translations files.
+
+The **showPrompt** function will return the value inputted by the user if he will click on *OK* and null otherwise, so that you can perform different actions depending on its answer. 
 
 .. image:: images/showPrompt.png
 	:align: center

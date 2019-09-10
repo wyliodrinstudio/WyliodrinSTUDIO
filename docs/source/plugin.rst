@@ -34,6 +34,8 @@ As you can see in the :ref:`Translations <translations>` chapter, the value that
 
 By the end, your **messages-ln.json** (ln = language) files should look like this:
 
+*"messages-en.json"*:
+
 .. code-block:: json
 
 	{
@@ -47,6 +49,9 @@ By the end, your **messages-ln.json** (ln = language) files should look like thi
 		}
 	}
 
+|
+
+*"messages-fr.json"*:
 
 .. code-block:: json
 
@@ -194,11 +199,15 @@ By the end, our **index.js** file should look like this:
 
 	export function setup(options, imports, register)
 	{
+		/* Collect the objects exported by the consumed plugins */
 		studio = imports;
+
+		/* Create a toolbar button that will display a notification */
 		studio.workspace.registerToolbarButton ('EXAMPLE_BUTTON_NAME', 20,
 			() => studio.workspace.showNotification ('EXAMPLE_BUTTON_NOTIFICATION_TEXT'),
 			'plugins/button.example/data/img/button.png');
 
+		/* Register the object that this plugin will provide */
 		register(null, {
 			button_example: button_example;
 		})
@@ -255,6 +264,10 @@ For this example, we will create the **AwesomeDisconnectDialog.vue** component, 
 		</v-card>
 	</template>
 
+	<script>
+		/* The actual code goes here */
+	</script>
+
 The *script* part will define the *disconnect* function and also an *esc* function, that will close the dialog containing the Disconnect Button when the user presses the 'Esc' key:
 
 .. code-block:: javascript
@@ -264,11 +277,14 @@ The *script* part will define the *disconnect* function and also an *esc* functi
 		methods: {
 			disconnect ()
 			{
+				/* Send the 'disconnect' tag */
 				this.$root.$emit ('submit', {
 					disconnect: 'disconnect'
 				});
 			},
-			esc() {
+			esc() 
+			{
+				/* Emit the 'submit' signal from the child component to notify the parent that the dialog has to be closed */
 				this.$root.$emit('submit');
 			}
 		}
@@ -348,7 +364,7 @@ After that, you will create the functions needed to search and update your devic
 	{
 		try
 		{
-			/* Any module that will allow you to find the type of device you have chosen*/
+			/* Any module that will allow you to find the type of device you have chosen */
 
 			return require ('awesome_module');
 		}
@@ -405,9 +421,8 @@ After that, you will create the functions needed to search and update your devic
 				devices = [];
 				for(let awesomeDevice of awesome_devices)
 				{
-					/* Search only for the devices that have the same specifications as your Awesome Device,
-					  then push the object into the *devices* array and set its properties.
-					*/
+					/* Search only for the devices that have the same specifications as your Awesome Device, array and set its properties.*/
+
 					devices.push(awesomeDevice);
 				}
 				updateDevices ();
@@ -426,7 +441,7 @@ Inside the *setup* function, you first have to obtain the list of devices that f
 		awesome_module = loadAwesome();
 		search();
 
-		/*Code explained below*/
+		/* Code explained below */
 	}
 	
 
@@ -529,12 +544,12 @@ For the *awesome device* we create a **Run** button, that will run the code writ
 	workspace.registerDeviceToolButton('DEVICE_AWESOME_RUN', 10 async () => {
 		let device = studio.workspace.getDevice ();
 
-		/* Here goes the actual code that will make your device run the code */
+		/* Here goes the actual code that will make your device run a project */
 		console.log('Run');
 		}, 'plugins/device.awesome/data/img/icons/run-icon.svg',
 
 		/* The aditional options that make the Run Button visible and enabled only if there is a connected device 
-		and its type is *awesome* */
+		and its type is "awesome" */
 		{
 			visible () {
 				let device = studio.workspace.getDevice ();
@@ -646,7 +661,7 @@ The language plugin doesn't have any Vue component, so we don't have to create t
 
 .. image:: images/awesome.png
 	:align: center
-	:width: 90px
+	:width: 110px
 	:height: 90px
 
 Inside the main file, **index.js**, we obviously need to initialize the *studio* variable to null, and inside the *setup* function it will receive all the imported functions from the "workspace" and "projects" plugin.
@@ -662,15 +677,23 @@ The next step is to create the **awesome** object, containing the options of our
 		studio = imports;
 		
 		let awesome = {
+
+			/* Create the main file of each project, "main.aws" */
 			async createProject(name){
 				await studio.projects.newFile(name,'/main.aws','print ("Hello from Awesome")');			
 			},
+
+			/* Return the name of the default file */
 			getDefaultFileName() {
 				return '/main.aws';
 			},
+
+			/* Return the name of the default run file */
 			getDefaultRunFileName() {
 				return '/main.aws';
 			},
+
+			/* Return the content of the makefile */
 			getMakefile(project, filename) {
 				if (filename[0] === '/') 
 					filename = filename.substring (1);

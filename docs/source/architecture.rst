@@ -10,7 +10,7 @@ Wyliodrin STUDIO consists of a series of plugins that we used to build the diffe
 Basically, a plugin is a component of the program that will help you apply different features. Due to the fact that Wyliodrin Studio supports plugins, it enables customization, which means that you will be able contribute to the development and improvement of our application.
 
 
-To design the user interface we chose the `Vue framework <https://vuejs.org/v2/guide>`_. The connection between frontend and API has always been a challenge and required a lot of work because of its complexity, but since we are using **Vue** to develop our frontend, the best solution to this problem is the `VueX <https://vuex.vuejs.org/>`_ library, which is deeply integrated into Vue and exploits its reactivity.
+To design the user interface we chose the `Vue framework <https://vuejs.org/v2/guide>`_ and for data synchronization we used `VueX <https://vuex.vuejs.org/>`_ library, which is deeply integrated into Vue and exploits its reactivity.
 
 |
 
@@ -27,12 +27,17 @@ In order to create your own plugin, you should open the folder that you cloned b
 	:align: center
 
 
-The plugin name will be lowercase, and the words separated by “.”
+We recommand for the plugin name to be lowercase, and the words separated by “.”
 For example, we’ll create the **my.new.plugin** folder.
 
 The main components that you’ll need to create for your plugin are:
 
-* The **views** folder: here you will be creating all your *.vue* files to will design the user interface for your plugin. (In our case, *MyVueFile.vue*)
+
+
+* The **data** folder: contains a sub-directory, **img**, which can also include different folders that you’ll need in order to keep the images that you use inside your .vue files.
+* The **style** folder: contains the *.less* files, where we apply the CSS design for the different vue-components.
+* The **translations** folder: consists of the *messages-ln.json* files(ln=language abbreviation). More details regarding this subject can be found :ref:`here <translations>`.
+* The **views** folder, optional, recommended only if you will create *.vue* files to  design the user interface for your plugin. (For example, it can contain the file *MyVueFile.vue*)
 * The **package.json** file, which contains an object with the primary details regarding your plugin:
 
 .. list-table::
@@ -97,21 +102,32 @@ As an example, a *package.json* file should look like this:
 		}
 	}
 
-* The **index.js** file, which will be your main file. Here, you need to import all the *.vue* files that you need to register. 
-	For example, the first line in your index.js will be: 
+* The **index.js** file, which will be your main file. 
+
+Here, you can import all the *.vue* files that you need to register. 
+
+For example, if you previously create some Vue components to design the user interface, the first line in your index.js could look like that: 
 
 .. code-block:: javascript
 
 	import MyVueFile from './views/MyVueFile.vue'; 
 
-After that, you’ll need to instantiate an object that can be empty, or that can contain different functions that you’ll use. 
-Then, you’ll have to export a function called “setup”, which has the purpose to register your plugin and to make it functional inside the application.
+After that, you’ll need to instantiate an object that can be empty, or that can contain different functions that you’ll use.
 
+The most important component of this file is the **setup** function that has to be exported, its purpose being to register your plugin and to make it functional inside the application.
 
-* The **store.js** file: it's optional, useful if you need to store some variables states.
-* The **data** folder: contains a sub-directory, **img**, which can also include different folders that you’ll need in order to keep the images that you use inside your .vue files.
-* The **style** folder: contains the *.less* files, where we apply the CSS design for the different vue-components.
-* The **translations** folder: consists of the *messages-ln.json* files(ln=language abbreviation). More details regarding this subject can be found :ref:`here <translations>`.
+.. code-block:: javascript
+
+	export function setup(options, imports, register)
+	{
+		/* Collect the functions exported by the consumed plugins */
+		studio = imports;
+
+		/* Here goes your code */
+
+		register(null, {});
+
+	}
 
 |
 
@@ -242,6 +258,18 @@ In this case, the *package.json* file of your plugin will look like this:
 	    }
 	}
 
+And the *index.js* file will look like this:
+
+.. code-block:: javascript
+
+	export function setup (options, imports, register)
+	{
+		studio = imports;
+
+		/*Here goes your code*/
+		register (null, {});
+	}
+
 But if you want for your plugin to provide all its functions so that the others plugins may access and use them, you have to indicate this option inside the *"provides"* property. You should be careful at the fact that the provided object should not contain and "." in its name, unlike the plugin name.
 
 Therefore, the content of the *package.json* should be:
@@ -262,23 +290,25 @@ Therefore, the content of the *package.json* should be:
 
 As you can see, your "test.plugin" provides the *"test_plugin"* object, which means that if another plugin it's using its functions, it should consume the same *"test_plugin"* object.
 
+In this situation, the *index.js* file will have the following structure:
+
+.. code-block:: javascript
+
+	export function setup (options, imports, register) 
+	{
+		studio = imports;
+
+		/* Here goes your code*/
+
+		register (null, {
+			test_plugin: test_plugin
+		});
+	}
+
 |
 
-Architecture Components:
+Architecture Components
 """"""""""""""""""""""""""
-
-Connection Button
-******************
-
-In the *workspace* plugin we added the connection button, which was designed inside the *DeviceTools.vue* component. It is visible only when there is no device connected to Wyliodrin Studio.
-
-.. image:: images/connectionbutton.png
-	:align: center
-
-
-On click, it calls the :ref:`showConnectionSelectionDialog <showConnectionSelectionDialog>` and it opens a dialog where the user can see all the available devices. By clicking on a device, he will be asked to input the technical specifications and the login credentials, in order to connect and enable the device functionalities. When the connection was successfully completed, the device status will change from *DISCONNECTED* to *CONNECTED*.
-
-|
 
 Toolbar Buttons
 ****************
@@ -296,6 +326,8 @@ The toolbar buttons are created using the **registerToolbarButton** function. On
 
 |
 
+You can learn more about this component :ref:`here <toolbarButtons>`.
+
 Tabs
 *****
 
@@ -304,23 +336,9 @@ Tabs
 
 The tabs are the main components of the workspace, created using the **registerTab** function. They offer the possibility to write and test the code for programming an IoT device, display sensors data, import Frietzing schematics or access the connected device directly through the shell.
 
-The existing tabs at the moment are: **Application**, **Dashboard**, **Notebook**, **Schematics** and **Shell**.
+The existing tabs at the moment are: **Application**, **Dashboard**, **Notebook**, **Schematics**, **Pin Layout** and **Shell**.
 
-|
-
-Status Buttons
-*****************
-
-.. image:: images/registerStatusButton.png
-	:align: center
-	:width: 80px
-	:height: 50px
-
-The Status Buttons are created with the **registerStatusButton** function. They are used to open the *console* or the *mqtt* server.
-
-The **Console** button opens a console similar to the *shell*.
-
-The **MQTT** button opens an interface where you can choose the port where the *MQTT* server will be opened (publish-subscribe-based messaging protocol).
+You can find more details about the tabs in :ref:`this <tabs>` section.
 
 |
 
@@ -339,7 +357,52 @@ The components of the menu are:
 .. image:: images/menuitems.png
 	:align: center
 
+A better presentation of the menu component and the menu items can be found in :ref:`this <menu>` section.
 
+|
+
+Connection Button
+******************
+
+In the *workspace* plugin we added the connection button, which was designed inside the *DeviceTools.vue* component. It is visible only when there is no device connected to Wyliodrin Studio.
+
+.. image:: images/connectionbutton.png
+	:align: center
+
+
+On click, it calls the :ref:`showConnectionSelectionDialog <showConnectionSelectionDialog>` and it opens a dialog where the user can see all the available devices. By clicking on a device, he will be asked to input the technical specifications and the login credentials, in order to connect and enable the device functionalities. When the connection was successfully completed, the device status will change from *DISCONNECTED* to *CONNECTED*.
+
+|
+
+DeviceTool Buttons
+********************
+
+These buttons are visible only when a device is connected, because they will replace the *Connection Button*, and they can be different according to the device type.
+
+We added them in the *DeviceTools.vue* component, and this is how they look like:
+
+.. image:: images/devicetoolbuttons.png
+	:align: center
+
+A better description of this component can be found :ref:`here <devicetool>`.
+
+|
+
+Status Buttons
+*****************
+
+.. image:: images/registerStatusButton.png
+	:align: center
+	:width: 80px
+	:height: 50px
+
+The Status Buttons are created with the **registerStatusButton** function. They are used to open the *console* or the *mqtt* server.
+
+The **Console** button opens a console similar to the *shell*.
+
+The **MQTT** button opens an interface where you can choose the port where the *MQTT* server will be opened (publish-subscribe-based messaging protocol).
+
+You can learn more about the status buttons :ref:`here <statusbutton>`.
 
 
 

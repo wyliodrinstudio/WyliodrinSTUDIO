@@ -28,6 +28,15 @@ import projectStore from './store';
  * @property  {Object} options - language functions 
  */
 
+/**
+ * File Identification
+ * @typedef {Object} file - contents of the file/folder
+ * @property {string} file - extension if it's a file
+ * @property {file[]} children - children if it's a folder
+ * @property {string} path - path to object 
+ * @property {string} name - name of object 
+ */
+
 
 let settings = {
 	workspace: {
@@ -109,7 +118,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
+	 * registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
 	 */
 	registerLanguage(id, title, icon, pictograms, options) {
 		/**
@@ -214,7 +223,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		registerEditor('EDITOR_ACE',['py','js'], Ace);
+	 * registerEditor('EDITOR_ACE',['py','js'], Ace);
 	 */
 	registerEditor(name, languages, component, options = {}) {
 		options = _.merge({
@@ -258,7 +267,7 @@ let projects = {
 	/**
 	 * This function creates a new empty project.
 	 * 
-	 * Each project requires a name, that will be enterd by the user as a text in 
+	 * Each project requires a name, that will be entered by the user as a text in 
 	 * the input area, and a programming *language* that the project will use, 
 	 * also chosen by the user.
 	 *
@@ -269,7 +278,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		project = createEmptyProject('MyProject', 'py')
+	 * project = createEmptyProject('MyProject', 'py')
 	 */
 	async createEmptyProject(name, language) {
 		// name = name.replace(/\.\./g, '_').replace(/\\|\//g, '_');
@@ -320,7 +329,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		deleteProject('MyProject');
+	 * deleteProject('MyProject');
 	 * 
 	 */
 	async deleteProject(project) {
@@ -357,7 +366,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		renameProject('MyProject', 'MyRenamedProject');
+	 * renameProject('MyProject', 'MyRenamedProject');
 	 */
 	async renameProject(project, newName) {
 		// ERROR - project trebuie verificat la null si dat warning in consola (asta un e tradus)
@@ -400,7 +409,9 @@ let projects = {
 	 * @returns {boolean} true if succsesful, false otherwise
 	 * 
 	 * @example
-	 * 		cloneProject('MyNewProject', 'MyClonedProject'); 
+	 * 
+	 * cloneProject('MyNewProject', 'MyClonedProject'); 
+	 * 
 	 */
 	async cloneProject(project, newName) {
 		if (newName == '') {
@@ -447,7 +458,8 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		importProject('MyNewProject', '.zip'); 
+	 * importProject('MyNewProject', '.zip');
+	 *  
 	 */
 	async importProject(fileName, data, type) 
 	{
@@ -559,7 +571,8 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		exportProject('MyNewProject', 'C:\Users\User\Desktop');
+	 * exportProject('MyNewProject', 'C:\Users\User\Desktop');
+	 * 
 	 */
 	async exportProject(project) {
 		let projectPath = project.folder;
@@ -613,16 +626,11 @@ let projects = {
 	/**
 	 * Recursively generate a deep object with all the contents of a project
 	 * 
-	 * @typedef {Object} file - contents of the file/folder
-	 * @property {string} file - extension if it's a file
-	 * @property {file[]} children - children if it's a folder
-	 * @property {string} path - path to object 
-	 * @property {string} name - name of object 
-	 * 
 	 * @param {Project} project - Project object
 	 * @param {file} file - File object
 	 * 
 	 * @returns {file} the root of the folder with all its contents
+	 * 
 	 */
 	async recursiveGeneration(project, file) {
 		if(project !== null && file !== null) {
@@ -687,7 +695,7 @@ let projects = {
 	 *
 	 * @example
 	 * 
-	 * 		newFolder('MyNewProject', 'C:\Users\User\Desktop');
+	 * newFolder('MyNewProject', 'C:\Users\User\Desktop');
 	 */
 	async newFolder(project, name) {
 		if(project !== null && name !== null){
@@ -737,7 +745,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		newFile('MyNewProject', '/main.js', 'console.log(\'Hello from JavaScript\');');
+	 * newFile('MyNewProject', '/main.js', 'console.log(\'Hello from JavaScript\');');
 	 */
 	async newFile(project, name, data = '') {
 		if(project !== null && name !== null && data !== null) {
@@ -810,7 +818,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		renameObject('MyNewProject', 'ObjectNewName', 'C:\Users\User\Desktop');
+	 * renameObject('MyNewProject', 'ObjectNewName', 'C:\Users\User\Desktop');
 	 */
 	async renameObject(project, newName, pathTo) {
 		if(project !== null && newName !== null && pathTo !== null) {
@@ -857,7 +865,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		deleteFile('MyNewProject', 'C:\Users\User\Desktop\file');
+	 * deleteFile('MyNewProject', 'C:\Users\User\Desktop\file');
 	 */
 	async deleteFile(project, pathTo) {
 		if(project !== null && pathTo !== null) {
@@ -903,7 +911,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		deleteFolder('MyNewProject', 'C:\Users\User\Desktop\folder');
+	 * deleteFolder('MyNewProject', 'C:\Users\User\Desktop\folder');
 	 */
 	async deleteFolder(project, pathTo) {
 		if(project !== null && pathTo !== null) {
@@ -945,7 +953,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		let projects = loadProjects();
+	 * let projects = loadProjects();
 	 */
 	async loadProjects() {
 		let projectsVariable = [];
@@ -1067,7 +1075,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 	let project = loadPreviousSelectedCurrentProject();
+	 * let project = loadPreviousSelectedCurrentProject();
 	 */
 	async loadPreviousSelectedCurrentProject() {
 		let project = studio.settings.loadValue('projects', 'currentProject', null);
@@ -1136,7 +1144,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		let fileContent = loadFile('MyNewProject', 'FileName');
+	 * let fileContent = loadFile('MyNewProject', 'FileName');
 	 */
 	async loadFile(project, name) {
 		if(project !== null && name !== null) {
@@ -1198,7 +1206,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		saveSpecialFile('MyNewProject', 'SpecialFileName', [1, 2, 3]);
+	 * saveSpecialFile('MyNewProject', 'SpecialFileName', [1, 2, 3]);
 	 */
 	async saveSpecialFile(project, name, content) {
 		if(project !== null && name !== null && content !== null){
@@ -1233,7 +1241,7 @@ let projects = {
 	 * 	 
 	 * @example
 	 * 
-	 * 		loadSpecialFile('MyNewProject', 'SpecialFileName');
+	 * loadSpecialFile('MyNewProject', 'SpecialFileName');
 	 */
 	async loadSpecialFile(project, name) {
 		if(project !== null && name !== null) {
@@ -1388,7 +1396,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		let sourceLanguage = languageSpecificOption ('MyNewProject', 'sourceLanguage');
+	 * let sourceLanguage = languageSpecificOption ('MyNewProject', 'sourceLanguage');
 	 */
 	languageSpecificOption (project, option) {
 		return this._runLanguageFunction(option, project);
