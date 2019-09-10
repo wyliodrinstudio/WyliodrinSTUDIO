@@ -34,6 +34,14 @@
     "PROJECT_NEW_FILE": {
         "message": "New File",
         "description": "Create a file within a project"
+	},
+	"PROJECT_IMPORT_FILE": {
+        "message": "Import File",
+        "description": "Import a file within a project"
+	},
+	"PROJECT_EXPORT_FILE": {
+        "message": "Export File",
+        "description": "Export a file from the project"
     },
     "PROJECT_NEW_FILE_NAME": {
         "message": "New File Name",

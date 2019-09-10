@@ -23,19 +23,37 @@
 					:open-on-click="true"
 					>
 					<template v-slot:prepend="{item, open}">
-						<p v-if="item.name === currentProject.folder" class="project">
-								
+						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
+							<v-img contain :src="languageImage()" avatar ></v-img>
 						</p>
 						<p v-else-if="item.file" class="file" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
-
 						</p>
-						<p v-else-if="open" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="open && item.name !== currentProject.name" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
 							
 						</p>
-							
-						<p v-else class="folder-closed" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="item.name !== currentProject.name" class="folder-closed" text @contextmenu="fileItem = item,showFolder($event)">
 
 						</p>
+						<v-menu
+							v-model="projectMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="newFolder(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="newFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="importFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+
 						<v-menu
 							v-model="folderMenu"
 							:position-x="x"
@@ -56,6 +74,9 @@
 									<v-list-item @click="newFile(fileItem)">
 										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
 									</v-list-item>
+									<v-list-item @click="importFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
 								</v-list>
 							</v-menu>
 
@@ -73,25 +94,43 @@
 									<v-list-item @click="renameObject(fileItem)">
 										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
 									</v-list-item>
+									<v-list-item @click="exportFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
 								</v-list>
 							</v-menu>
 					</template>
-					<template v-slot:label="{item, open}">        
-						<p style="width:100%;" v-if="!item.file" text @contextmenu="fileItem = item,showFolder($event)"> 
-							
-							<!-- <v-icon v-if="open" class="folder-open">
-							{{ open ? 'md-folder-open' : 'md-folder' }}
-							</v-icon>
-							
-							<v-icon v-else class="folder-close">
-
-							</v-icon> -->
+					<template v-slot:label="{item, open}">
+						<p style="width:100%;" v-if="!item.file && item.name === currentProject.name" text @contextmenu="fileItem = item,showProject($event)"> 
+							{{item.name}}                  
+						</p>
+						<p style="width:100%;" v-else-if="!item.file && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
 						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
 							{{item.name}} 
 						</p>
-							<v-menu
+						<v-menu
+							v-model="projectMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="newFolder(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="newFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="importFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+
+						<v-menu
 							v-model="folderMenu"
 							:position-x="x"
 							:position-y="y"
@@ -111,6 +150,9 @@
 									<v-list-item @click="newFile(fileItem)">
 										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
 									</v-list-item>
+									<v-list-item @click="importFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
 								</v-list>
 							</v-menu>
 
@@ -127,6 +169,9 @@
 									</v-list-item>
 									<v-list-item @click="renameObject(fileItem)">
 										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="exportFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
 									</v-list-item>
 								</v-list>
 							</v-menu>
@@ -197,6 +242,7 @@ export default {
 			type:null,
 			fileMenu: false,
 			folderMenu:false,
+			projectMenu:false,
 			x: 0,
 			y: 0,
 			menuItems: ['create file', 'create directory','delete file','delete directory'],
@@ -285,15 +331,44 @@ export default {
 		}
 	},
 	methods: {
-		_clickAction(item){
-			
+		languageImage ()
+		{
+			// TODO check if language is known, not only that it exists
+			let device = this.studio.workspace.getDevice ();
+			let type = device.type;
+			let board = device.board;
+			// if (this.currentProject.language && !device){
+				return this.studio.projects.getLanguage(this.currentProject.language).icon;
+			// } else if(device.type && device.board) {
+			// 	return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':' + board].icon;
+			// } else if (!addon && board) {
+			// 	return this.studio.projects.getLanguage(this.currentProject.language).addons['*:' + board].icon;
+			// } else if (!addon && type) {
+			// 	return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':*'].icon;
+			// } else return 'unknown';
 		},
-		async _spatiu(){
-			await this.studio.projects.getCurrentFileCode();	
+		getPictogram(filename)
+		{
+			let language = this.studio.projects.getLanguage(this.currentProject.language);
+			let pictograms = language.pictograms;
+			let ext = path.extname(filename);
+			if(pictograms != []){
+				for( let pict of pictograms) {
+					if(pict.extension && ext === pict.extension) {
+						return pict.icon;
+					} else if(path.basename(filename).match(pict.filename)) {
+						return pict.icon;
+					} else {
+						return this.baseFileIcon;
+					}
+				}
+			}
+			
 		},
 		showFile(e) {
 			this.fileMenu = false;
 			this.folderMenu = false;
+			this.projectMenu = false;
 			e.preventDefault();
 			this.fileMenu = false;
 			this.x = e.clientX;
@@ -305,12 +380,25 @@ export default {
 		showFolder(e) {
 			this.fileMenu = false;
 			this.folderMenu = false;
+			this.projectMenu = false;
 			e.preventDefault();
 			this.folderMenu = false;
 			this.x = e.clientX;
 			this.y = e.clientY;
 			this.$nextTick(() => {
 				this.folderMenu = true;
+			});
+		},
+		showProject(e) {
+			this.fileMenu = false;
+			this.folderMenu = false;
+			this.projectMenu = false;
+			e.preventDefault();
+			this.projectMenu = false;
+			this.x = e.clientX;
+			this.y = e.clientY;
+			this.$nextTick(() => {
+				this.projectMenu = true;
 			});
 		},
 		changeClassHide(){
@@ -373,6 +461,35 @@ export default {
 				await this.studio.projects.newFile(this.currentProject,path.join(item.path,fileName));
 				await this.refresh();
 			}
+		},
+		async exportFile (item)
+		{
+			if (await this.studio.projects.exportFile(this.currentProject,item.path))
+			{
+				await this.refresh();
+			}
+		},
+		async importFile (item)
+		{
+			let files = await this.studio.filesystem.openImportDialog({
+				title:'Import',
+				filetypes:[]
+			});
+			if (files.length > 0)
+			{
+				// use first file
+				let fileData = await this.studio.filesystem.readImportFile (files[0]);
+				if(files) {
+					let filePath = path.join(item.path,path.basename(files[0].name));
+					console.log(files[0].name);
+					if(await this.studio.projects.newFile(this.currentProject,filePath,fileData))
+					{
+						await this.refresh();
+					}
+				}
+				
+			}
+			return false;
 		},
 		async renameObject (item)
 		{
