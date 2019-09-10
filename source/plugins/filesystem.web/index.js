@@ -373,8 +373,9 @@ let web_filesystem = {
 		return false;
 	},
 	openExportDialog(data, options = {}) {
+		//data to take from options - type
 		let element = document.createElement('a');
-		element.setAttribute('href', 'data:application/zip;base64,' + data.toString ('base64'));
+		element.setAttribute('href', options.type + data.toString ('base64'));
 		element.setAttribute('download', options.filename);
 
 		element.style.display = 'none';
