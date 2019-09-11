@@ -96,17 +96,9 @@ You may download device images that have them installed from Wyliodrin.
 You will need 
 
 * [NodeJS](http://www.nodejs.org) version 10 or higher.
-* [grunt](http://gruntjs.com/)
 
 ### Build Instructions for Windows users
 
-#### Build using the provided script
-
-Just run the [build.cmd](./build.cmd) script as administrator.
-
-*or*
-
-#### You may build Wyliodrin STUDIO yourself
 
 	npm install
 	npx electron-rebuild
