@@ -228,7 +228,7 @@
          "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET": "There is another Studio instance connected to the server with your id. You are not able to use multiple connections. Would you like to use Studio here?",
          "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": "Add Device",
          "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": "Device Name",
-         "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": "Please eneter a valid device name",
+         "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": "Please enter a valid device name",
          "WYLIODRIN_API": "Wyliodrin API",
          "TOOLBAR_RESISTOR_COLOR_CODE": "Resistor color code",
          "RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER": "FROM COLOR TO NUMBER",
