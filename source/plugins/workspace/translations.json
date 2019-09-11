@@ -354,7 +354,13 @@
          "EXIT": "Exit",
          "WORKSPACE_TOOLBAR_CLOSE": "Close",
          "WORKSPACE_SET_MODE_ADVANCED": "Use Advanced Mode",
-         "WORKSPACE_SET_MODE_SIMPLE": "Use Simple Mode"
+         "WORKSPACE_SET_MODE_SIMPLE": "Use Simple Mode",
+         "ABOUT_DEVELOPED_BY": "Developed by",
+         "ABOUT_MAINTAINER": "Maintainer",
+         "ABOUT_UI_UX": "UI/UX",
+         "ABOUT_DEVELOPMENT": "Developer",
+         "ABOUT_LICENSE": "License",
+         "ABOUT_LICENSE_TITLE": "Usage License"
       },
       "es": {
          "CHAT": "CHAT",

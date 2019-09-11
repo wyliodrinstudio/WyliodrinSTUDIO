@@ -5,8 +5,10 @@ const CopyPlugin = require('copy-webpack-plugin');
 const TranslationPlugin = require ('./webpack.translation.js');
 const webpack = require ('webpack');
 const plugins = require ('./webpack.plugins.js');
+const license = './LICENSE';
 
 const package_json = require ('./package.json');
+
 const fs = require ('fs-extra');
 const _ = require ('lodash');
 
@@ -38,6 +40,9 @@ class StudioPluginsElectron {
 			delete build_package_json.devDependencies;
 			fs.mkdirpSync ('./build');
 			fs.writeFileSync ('./build/package.json', JSON.stringify (build_package_json, null, 4));
+
+			let build_license = _.assign ({}, license);
+			fs.writeFileSync ('./build/LICENSE', build_license);
 		});
 	
 	}

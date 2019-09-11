@@ -98,5 +98,29 @@
     "WORKSPACE_SET_MODE_SIMPLE": {
         "message": "Use Simple Mode",
         "description": "The menu to set the editor in simple mode"
+    },
+    "ABOUT_DEVELOPED_BY": {
+        "message": "Developed by",
+        "description": "Text for authors of Wyliodrin Studio"
+    },
+    "ABOUT_MAINTAINER": {
+        "message": "Maintainer",
+        "description": "Maintainer of Wyliodrin Studio"
+    },
+    "ABOUT_UI_UX": {
+        "message": "UI/UX",
+        "description": "User Interface for Wyliodrin Studio"
+    },
+    "ABOUT_DEVELOPMENT": {
+        "message": "Developer",
+        "description": "Contributor to Wylidron Studio Development"
+    },
+    "ABOUT_LICENSE": {
+        "message": "License",
+        "description": "Button to show the license"
+    },
+    "ABOUT_LICENSE_TITLE": {
+        "message": "Usage License",
+         "description": "Title of the license popup"
     }
 }
