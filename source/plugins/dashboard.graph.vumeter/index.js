@@ -9,7 +9,7 @@ export default function setup (options, imports, register)
 	studio.dashboard.registerGraph('VUMETER_GRAPH', 30, 'plugins/dashboard.graph.vumeter/data/img/icons/vumeter.png', VumeterGraph, {
 		setup: (data) => {
 			return studio.workspace.showDialog(VumeterDialog,{
-				width:1500,
+				width:600,
 				data:data
 			});
 		}

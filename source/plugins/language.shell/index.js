@@ -17,6 +17,12 @@ export default function setup (options, imports, register)
 			}
 		}
 	}, */
+	let pictograms = [
+		{
+			extension: '.sh',
+			icon:'plugins/language.shell/data/img/shellLittle.png'
+		}
+	];
 	let shell = {
 		async createProject(name){
 			await studio.projects.newFile(name,'/main.sh','echo "Hello from Shell"');
@@ -34,7 +40,7 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/language.shell/data/img/shellLittle.png',[], shell);
+	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/language.shell/data/img/shellLittle.png',pictograms, shell);
 
 	register (null, {});
 }

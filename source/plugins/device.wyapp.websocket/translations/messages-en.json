@@ -33,5 +33,10 @@
 	{
 		"message": "Device Name",
 		"description": "The name of the device with instructions on how to add a new device"
+	},
+	"WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID":
+	{
+		"message": "Please enter a valid device name",
+		"description": "The message the user receives when he did not enter a valid name for a new device"
 	}
 }

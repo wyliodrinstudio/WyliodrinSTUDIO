@@ -5,9 +5,8 @@
 		</v-card-title>
 		<v-card-text>
 			<v-text-field autofocus :label="$t('WYAPP_WEBSOCKET_NEW_DEVICE_NAME')" required v-model="value"></v-text-field>
-		</v-card-text>
-		<v-card-text>
-			<pre>{{json}}</pre>
+			<pre v-show="nameValid">{{json}}</pre>
+			<div v-show="!nameValid">{{$t('WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID')}}</div>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>
@@ -28,7 +27,11 @@ export default {
 	computed: {
 		json ()
 		{
-			return JSON.stringify ({token: this.token, id: this.value, server: window.location.href+'/socket/remote'}, null, 2);
+			return JSON.stringify ({token: this.token, id: this.value.trim (), server: window.location.href+'socket/remote'}, null, 2);
+		},
+		nameValid ()
+		{
+			return (this.value.trim ().length > 0);
 		}
 	},
 	methods: {
