@@ -82,5 +82,9 @@
     "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
         "message": "Device name",
         "description": "Name of the connected device"
+    },
+    "DEVICE_WYAPP_INSTALL": {
+        "message": "Install",
+        "description": "Button to install a package."
     }
 }

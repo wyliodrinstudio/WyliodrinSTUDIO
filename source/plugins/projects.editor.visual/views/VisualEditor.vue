@@ -48,16 +48,10 @@ export default {
 		initVisual ()
 		{
 			let Blockly = this.studio.editor_visual.getBlockly();
-			console.log('init');
-			console.log (this.$el);
 			let visualPanel = this.$el;
-			console.log (visualPanel);
 			let blocklyDiv = this.$refs.visual;
-			console.log (blocklyDiv);
 
 			let jsToolbox = [];
-
-			console.log ()
 
 			let toolbox = this.getToolBox ();
 
@@ -126,7 +120,6 @@ export default {
 			let toolboxes = this.studio.editor_visual.getToolboxes ();
 			for (let blocks of toolboxes)
 			{
-				console.log (blocks);
 				if (((blocks.type === undefined && blocks.board === undefined) 
 						|| (blocks.type === this.device.type && (blocks.board === undefined || blocks.board === this.device.board)))
 						&& blocks.visible())
@@ -146,7 +139,6 @@ export default {
 		},
 		update ()
 		{
-			console.log ('update');
 			if (this.workspace)
 			{
 				this.workspace.updateToolbox (this.getToolBox());
@@ -170,7 +162,6 @@ export default {
 							this.visualSource = visualSource;
 							this.saveVisualSource(this.visualSource, 'py');
 							this.extension = 'py';
-							console.log('python changed');
 						}
 					}
 					catch (e)
@@ -189,8 +180,6 @@ export default {
 							this.visualSource = visualSource;
 							this.saveVisualSource(this.visualSource, 'js');
 							this.extension = 'js';
-							console.log('javascript changed');
-							console.log(visualSource);
 						}
 					}
 					catch (e)

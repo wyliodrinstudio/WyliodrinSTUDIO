@@ -102,7 +102,14 @@ class Connection extends EventEmitter
 
 	send (tag, data)
 	{
-		this.wyapp.send (tag, data);
+		if (this.wyapp)
+		{
+			this.wyapp.send (tag, data);
+		}
+		else
+		{
+			console.error ('Unable to send data to device '+this.device.id+', no link');
+		}
 	}
 
 	disconnect (options)
@@ -124,6 +131,8 @@ class Connection extends EventEmitter
 export function setup(options, imports, register)
 {
 	studio = imports;
+
+	let packages = {};
 
 	let deviceDriver = {
 		defaultIcon()
@@ -609,7 +618,36 @@ export function setup(options, imports, register)
 		getBoardDriver (name)
 		{
 			return boards[name];
-		}
+		},
+
+		/**
+		 * Register a package for a language
+		 * @param {string} language 
+		 * @param {string} board 
+		 * @param {PackageInformation} packageInformation 
+		 */
+		registerLanguagePackage (language, board, packageInformation)
+		{
+			if (!board) board = '*';
+			if (!packages[language]) packages[language] = {'*':{}};
+			if (!packages[language][board]) packages[language][board] = {};
+			packages[language][board][packageInformation.name] = packageInformation;
+		},
+
+		/**
+		 * Retrieve the language packages for a language
+		 * @param {Device} device 
+		 * @param {string} language 
+		 */
+		getLanguagePackages (device, language)
+		{
+			let p = {};
+			if (packages[language])
+			{
+				p = _.assign ({}, packages[language]['*'], packages[language][device.board]);
+			}
+			return p;
+		},
 	};
 
 	studio.shell.register ((event, id, ...data) =>
