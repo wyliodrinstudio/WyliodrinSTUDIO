@@ -38,6 +38,7 @@ For the moment, the devices supported by the platform are:
 * BeagleBone Black
 
 .. image:: images/devices.png
+	:align: center
 
 Also, the recognized programming languages at the time are:
 
@@ -61,8 +62,7 @@ Also, the recognized programming languages at the time are:
    architecture
    start
    extension
-   workspace_api
-   projects_api
+   api
    plugin
    translations
    dialogs_notifications

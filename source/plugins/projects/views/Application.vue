@@ -26,7 +26,8 @@
 						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
 							<v-img contain :src="languageImage()" avatar ></v-img>
 						</p>
-						<p v-else-if="item.file" class="file" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
+						<p v-else-if="item.file !== undefined" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
+							<v-img contain :src="getPictogram(item.path)" avatar ></v-img>
 						</p>
 						<p v-else-if="open && item.name !== currentProject.name" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
 							
@@ -101,10 +102,10 @@
 							</v-menu>
 					</template>
 					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="!item.file && item.name === currentProject.name" text @contextmenu="fileItem = item,showProject($event)"> 
+						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @contextmenu="fileItem = item,showProject($event)"> 
 							{{item.name}}                  
 						</p>
-						<p style="width:100%;" v-else-if="!item.file && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)"> 
+						<p style="width:100%;" v-else-if="item.file  === undefined && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
 						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
@@ -247,7 +248,8 @@ export default {
 			y: 0,
 			menuItems: ['create file', 'create directory','delete file','delete directory'],
 
-			showConsole: false
+			showConsole: false,
+			baseFileIcon:'plugins/projects/data/img/icons/file.png',
 		};
 	},
 	computed: {
@@ -334,35 +336,91 @@ export default {
 		languageImage ()
 		{
 			// TODO check if language is known, not only that it exists
+			let language = this.studio.projects.getLanguage(this.currentProject.language);
+			let addons = language.addons;
 			let device = this.studio.workspace.getDevice ();
 			let type = device.type;
 			let board = device.board;
-			// if (this.currentProject.language && !device){
-				return this.studio.projects.getLanguage(this.currentProject.language).icon;
-			// } else if(device.type && device.board) {
-			// 	return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':' + board].icon;
-			// } else if (!addon && board) {
-			// 	return this.studio.projects.getLanguage(this.currentProject.language).addons['*:' + board].icon;
-			// } else if (!addon && type) {
-			// 	return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':*'].icon;
-			// } else return 'unknown';
+			if(type !== 'none' && board !== 'none' && addons[type + ':' + board] && addons[type + ':' + board].icon) {
+				return addons[type + ':' + board].icon;
+			} else if (addons && board !== 'none' && addons['*:' + board] && addons['*:' + board].icon) {
+				return addons['*:' + board].icon;
+			} else if (addons && type !== 'none' && addons[type + ':*'] && addons[type + ':*'].icon) {
+				return addons[type + ':*'].icon;
+			} else if (this.currentProject.language && type === 'none' && board === 'none' ){
+				return language.icon;
+			} else return 'unknown';
+		},
+		iteratePictograms(pictograms, filename) {
+			if(pictograms && pictograms.length > 0) {
+				for( let pict of pictograms) {
+					if(pict.extension && ext === pict.extension) {
+						return pict.icon;
+					} else if(pict.filename && filename.split('.').slice(0, -1).join('.').match(pict.filename)) {
+						return pict.icon;
+					}
+				}
+				return this.baseFileIcon;
+			}
 		},
 		getPictogram(filename)
 		{
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
+			let addons = language.addons;
 			let pictograms = language.pictograms;
+			
 			let ext = path.extname(filename);
-			if(pictograms != []){
-				for( let pict of pictograms) {
-					if(pict.extension && ext === pict.extension) {
-						return pict.icon;
-					} else if(path.basename(filename).match(pict.filename)) {
-						return pict.icon;
-					} else {
-						return this.baseFileIcon;
+			let device = this.studio.workspace.getDevice ();
+			let type = device.type;
+			let board = device.board;
+			if(type !== 'none' && board !== 'none' && addons[type + ':' + board]) {
+				let addonPictograms = addons[type + ':' + board].pictograms;
+				if(addonPictograms && addonPictograms.length > 0) {
+					for( let pict of addonPictograms) {
+						if(pict.extension && ext === pict.extension) {
+							return pict.icon;
+						} else if(pict.filename && filename.match(pict.filename)) {
+							return pict.icon;
+						}
+					}
+				}
+				
+			} else if (addons && board !== 'none' && addons['*:' + board]) {
+				let addonPictograms = addons['*:' + board].pictograms;
+				if(addonPictograms && addonPictograms.length > 0) {
+					for( let pict of addonPictograms) {
+						if(pict.extension && ext === pict.extension) {
+							return pict.icon;
+						} else if(pict.filename && filename.match(pict.filename)) {
+							
+							return pict.icon;
+						}
+					}
+				}
+			} else if (addons && type !== 'none' && addons[type + ':*']) {
+				let addonPictograms = addons[type + ':*'].pictograms;
+				if(addonPictograms && addonPictograms.length > 0) {
+					for( let pict of addonPictograms) {
+						if(pict.extension && ext === pict.extension) {
+							return pict.icon;
+						} else if(pict.filename && filename.match(pict.filename)) {
+					
+							return pict.icon;
+						}
+					}
+				}
+			} else if(type === 'none' && board === 'none') {
+				if(pictograms && pictograms.length > 0) {
+					for( let pict of pictograms) {
+						if(pict.extension && ext === pict.extension) {
+							return pict.icon;
+						} else if(pict.filename && filename.match(pict.filename)) {
+							return pict.icon;
+						}
 					}
 				}
 			}
+			return this.baseFileIcon;
 			
 		},
 		showFile(e) {
@@ -464,7 +522,7 @@ export default {
 		},
 		async exportFile (item)
 		{
-			if (await this.studio.projects.exportFile(item.path,item.name))
+			if (await this.studio.projects.exportFile(this.currentProject,item.path))
 			{
 				await this.refresh();
 			}
@@ -473,15 +531,16 @@ export default {
 		{
 			let files = await this.studio.filesystem.openImportDialog({
 				title:'Import',
-				filetypes:['zip','tar','wylioapp']
+				filetypes:[]
 			});
 			if (files.length > 0)
 			{
 				// use first file
 				let fileData = await this.studio.filesystem.readImportFile (files[0]);
 				if(files) {
-					let filePath = path.join(item.path,files[0].name);
-					if(await this.importFile(files[0].name,fileData,item.path))
+					let filePath = path.join(item.path,path.basename(files[0].name));
+					console.log(files[0].name);
+					if(await this.studio.projects.newFile(this.currentProject,filePath,fileData))
 					{
 						await this.refresh();
 					}

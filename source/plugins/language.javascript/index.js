@@ -27,6 +27,12 @@ export default function setup(options, imports, register) {
 				getCurrentProject,
 			}
 	 */
+	let pictograms = [
+		{
+			extension: '.js',
+			icon:'plugins/language.javascript/data/img/javascriptIcon.png'
+		}
+	];
 	let javaScript = {
 		async createProject(name) {
 			await studio.projects.newFile(name, '/main.js', 'console.log(\'Hello from JavaScript\');');
@@ -44,7 +50,7 @@ export default function setup(options, imports, register) {
 		},
 	};
 
-	studio.projects.registerLanguage('javascript', 'JavaScript', 'plugins/language.javascript/data/img/javascript.png',[], javaScript);
+	studio.projects.registerLanguage('javascript', 'JavaScript', 'plugins/language.javascript/data/img/javascriptLittle.png',pictograms, javaScript);
 
 	register(null, {});
 }

@@ -23,5 +23,10 @@
 	{
 		"message": "Mai exista o instanta de Studio activa si puteti folosi doar o instanta la un moment dat. Dotiti sa folositi Studio aici?",
 		"description": "The question dialog text the user sees when there is another instance connected with his id"
+	},
+	"WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID":
+	{
+		"message": "Va rog dati un nume pentru dispozitivul nou",
+		"description": "The message the user receives when he did not eneter a valid name for a new device"
 	}
 }

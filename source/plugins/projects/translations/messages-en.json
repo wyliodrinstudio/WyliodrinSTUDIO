@@ -250,5 +250,14 @@
     "PATH_NULL": {
         "message": "A path is null",
         "description": "The given path turned out null"
+    },
+    "PROJECTS_NO_PROJECT": {
+        "message": "You don't have any projects yet",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
+    },
+    "PROJECTS_CREATE_APPLICATION": {
+        "message": "Click the \"Create new Application\" button below",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
+
     }
 }

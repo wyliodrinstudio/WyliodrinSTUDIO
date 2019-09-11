@@ -17,6 +17,12 @@ export default function setup (options, imports, register)
 			}
 		}
 	}, */
+	let pictograms = [
+		{
+			extension: '.py',
+			icon:'plugins/language.python/data/img/pythonLittle.png'
+		}
+	];
 	let python = {
 		async createProject(name){
 			await studio.projects.newFile(name,'/main.py','print (\'Hello from Python\')');			
@@ -34,7 +40,7 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png',[], python);
+	studio.projects.registerLanguage('python', 'Python', 'plugins/language.python/data/img/pythonLittle.png',pictograms, python);
 
 	register (null, {});
 }

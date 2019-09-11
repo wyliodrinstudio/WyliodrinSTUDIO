@@ -70,7 +70,7 @@ let filesystem_real = {
 	openExportDialog(data, opts = {}) {
 		const options = {
 			title:opts.title || 'Export',
-			defaultPath: this.getDefaultFolder(),
+			defaultPath: path.join(this.getDefaultFolder(),opts.filename),
 			filters: [
 				{name:'export', extensions: opts.filetypes || []}
 			]

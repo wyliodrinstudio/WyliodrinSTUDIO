@@ -54,5 +54,14 @@
     "PROJECT_LIBRARY": {
         "message": "Bibliothèque de projets",
         "description": "Opens the projects library"
+    },
+    "PROJECTS_NO_PROJECT": {
+        "message": "Vous n'avez pas encore de projets.",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
+    },
+    "PROJECTS_CREATE_APPLICATION": {
+        "message": "Cliquez sur le bouton \"Créer une nouvelle application\" ci-dessous",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
+
     }
 }
