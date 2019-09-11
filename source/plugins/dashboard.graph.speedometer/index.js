@@ -9,7 +9,7 @@ export default function setup (options, imports, register)
 	studio.dashboard.registerGraph('SPEEDOMETER_GRAPH', 30, 'plugins/dashboard.graph.speedometer/data/img/icons/speedometer.png', SpeedometerGraph, {
 		setup: (data) => {
 			return studio.workspace.showDialog(SpeedometerDialog,{
-				width:1500,
+				width:600,
 				data:data
 			});
 		}
