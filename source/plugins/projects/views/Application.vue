@@ -27,7 +27,7 @@
 							<v-img contain :src="languageImage()" avatar ></v-img>
 						</p>
 						<p v-else-if="item.file !== undefined" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
-							<v-img contain :src="getPictogram(item.name)" avatar ></v-img>
+							<v-img contain :src="getPictogram(item.path)" avatar ></v-img>
 						</p>
 						<p v-else-if="open && item.name !== currentProject.name" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
 							

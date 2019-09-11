@@ -9,7 +9,7 @@ export default function setup (options, imports, register)
 	studio.dashboard.registerGraph('SWITCH_GRAPH', 30, 'plugins/dashboard.graph.switch/data/img/icons/switch.png', SwitchGraph, {
 		setup: (data) => {
 			return studio.workspace.showDialog(SwitchDialog,{
-				width:1500,
+				width:600,
 				data:data
 			});
 		}

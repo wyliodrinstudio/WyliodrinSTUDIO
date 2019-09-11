@@ -8,7 +8,7 @@ export default function setup (options, imports, register)
 	studio.dashboard.registerGraph('SLIDER_GRAPH', 30, 'plugins/dashboard.graph.slider/data/img/icons/slider.png', SliderGraph, {
 		setup: (data) => {
 			return studio.workspace.showDialog(SliderDialog,{
-				width:1500,
+				width:600,
 				data:data
 			});
 		}

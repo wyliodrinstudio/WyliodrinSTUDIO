@@ -36,7 +36,7 @@
 	},
 	"WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID":
 	{
-		"message": "Please eneter a valid device name",
-		"description": "The message the user receives when he did not eneter a valid name for a new device"
+		"message": "Please enter a valid device name",
+		"description": "The message the user receives when he did not enter a valid name for a new device"
 	}
 }

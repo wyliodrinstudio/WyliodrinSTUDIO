@@ -16,6 +16,16 @@ export default function setup(options, imports, register) {
 			}
 		}
 	}, */
+	let pictograms = [
+		{
+			extension: '.visual',
+			icon:'plugins/language.visual/data/img/visualLittle.png'
+		},
+		{
+			extension: '.py',
+			icon:'plugins/language.visual/data/img/pythonLittle.png'
+		}
+	];
 	let visual = {
 		async createProject(project) {
 			await studio.projects.newFile(project, 'main.visual', '<xml></xml>');
@@ -39,7 +49,7 @@ export default function setup(options, imports, register) {
 		}
 	};
 
-	studio.projects.registerLanguage('visual', 'Visual', 'plugins/language.visual/data/img/visualLittle.png',[], visual);
+	studio.projects.registerLanguage('visual', 'Visual', 'plugins/language.visual/data/img/visualLittle.png',pictograms, visual);
 
 	register(null, {});
 }

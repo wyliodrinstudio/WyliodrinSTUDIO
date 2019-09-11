@@ -9,7 +9,7 @@ export default function setup (options, imports, register)
 	studio.dashboard.registerGraph('EXTRA_GRAPH', 10, 'plugins/dashboard.graph.extra/data/img/icons/extra.png', ExtraGraph, {
 		setup: (data) => {
 			return studio.workspace.showDialog(ExtraDialog,{
-				width:1500,
+				width:600,
 				data:data
 			});
 		}
