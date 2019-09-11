@@ -11,12 +11,13 @@
 			</tr>-->
 			<tr v-for="packageData in packages" :key="packageData.n" class="w-100 task">
 				<td class="w-30">
-					<h3>{{packageData.n}}</h3>
-					<div>{{packageData.v}}</div>
+					<h3>{{packageData.name}}</h3>
+					<div>{{packageData.version}}</div>
 				</td>
-				<td class="w-50 d-flex">Description goes here</td>
+				<td class="w-50 d-flex">{{packageData.description}}</td>
 				<td class="w-20 text-right">
-					<v-btn text class="lib-app-btn">{{$t('DEVICE_WYAPP_UNINSTALL')}}</v-btn>
+					<v-btn text v-show="packageData.installed" class="lib-app-btn">{{$t('DEVICE_WYAPP_UNINSTALL')}}</v-btn>
+					<v-btn text v-show="!packageData.installed" class="lib-app-btn">{{$t('DEVICE_WYAPP_INSTALL')}}</v-btn>
 				</td>
 			</tr>
 		</table>

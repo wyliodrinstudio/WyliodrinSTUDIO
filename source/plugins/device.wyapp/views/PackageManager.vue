@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import PackagesList from './PackagesList.vue';
 import { mapGetters } from 'vuex';
 export default {
@@ -81,7 +82,7 @@ export default {
 	methods: {
 		knows (languageId)
 		{
-			return this.device.properties.capabilities && this.device.properties.capabilities.languages && this.device.properties.capabilities.languages[languageId];
+			return this.device.properties.languages && this.device.properties.languages[languageId];
 		},
 		close ()
 		{
@@ -91,7 +92,23 @@ export default {
 		{
 			if (data.a === 'p')
 			{
-				this.packages[data.l] = data.p;
+				let packages = this.studio.device_wyapp.getLanguagePackages (this.device, data.l);
+				// console.log (packages);
+				for (let packageInformation of data.p)
+				{
+					packages[packageInformation.n] = _.assign (packages[packageInformation.n], {
+						name: packageInformation.n,
+						version: packageInformation.v,
+						installed: true
+					});
+				}
+				let packagesData = [];
+				for (let name in packages)
+				{
+					packagesData.push (packages[name]);
+				}
+				console.log (packages);
+				this.packages[data.l] = packagesData;
 			}
 		},
 		esc() {
