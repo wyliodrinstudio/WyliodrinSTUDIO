@@ -39,16 +39,13 @@
 				<v-text-field :label="$t('DASHBOARD_MAX_AXES_VALUE')" type="number" step=0.1 v-model="newdata.maxAxesValue" class="col-md-6"></v-text-field>
 				<div class="col-md-12">
 					<span>Measurement system:</span>
-					<v-menu offset-y>
-						<template v-slot:activator="{ on }">
-							<v-btn color="primary" dark v-on="on">{{ $t(newdata.menuElement)}}</v-btn>
-						</template>
-						<v-list>
-							<v-list-item v-for="(item, index) in newdata.items" :key="index" @click="change(item)">
-								<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-							</v-list-item>
-						</v-list>
-					</v-menu>
+					<v-select class="drpdown"
+						:items="newdata.items"
+						v-model="newdata.menuElement"
+						item-text = "title"
+						item-value = "title"
+						hide-details
+					></v-select>
 				</div>
 			</div>
 		</v-card-text>
@@ -82,10 +79,10 @@ export default {
 				maxAxesValue: 1000,
 				axisName: '',
 				items: [
-					{title: 'DASHBOARD_KILOMETERS'},
-					{title: 'DASHBOARD_MILES'}
+					{title: 'KILOMETERS'},
+					{title: 'MILES'}
 				],
-				menuElement: 'DASHBOARD_KILOMETERS',
+				menuElement: 'KILOMETERS',
 				figureName: '',
 				speedometerLowColor: '#48f542',
 				speedometerMidColor: '#fafa1b',

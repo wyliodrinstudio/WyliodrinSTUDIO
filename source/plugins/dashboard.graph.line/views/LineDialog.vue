@@ -18,16 +18,13 @@
 				</div>
 				<div class="col-md-4">
 					<span>{{$t('LINE_STYLE')}}</span>
-					<v-menu offset-y>
-						<template v-slot:activator="{ on }">
-							<v-btn color="primary" dark v-on="on">{{$t(newdata.chartType)}}</v-btn>
-						</template>
-						<v-list>
-							<v-list-item v-for="(item, index) in newdata.items" :key="index" @click="change(item)">
-								<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-							</v-list-item>
-						</v-list>
-					</v-menu>
+					<v-select class="drpdown"
+						:items="newdata.items"
+						v-model="newdata.chartType"
+						item-text = "title"
+						item-value = "title"
+						hide-details
+					></v-select>
 				</div>
 				<v-text-field :label="$t('DASHBOARD_MIN_AXES_VALUE')" type="number" step=0.1 v-model="newdata.minAxesValue" class="col-md-6"></v-text-field>
 				<v-text-field :label="$t('DASHBOARD_MAX_AXES_VALUE')" type="number" step=0.1 v-model="newdata.maxAxesValue" class="col-md-6"></v-text-field>
@@ -68,11 +65,11 @@ export default {
 				signalColor:'#b9f5f1',
 				figureName: '',
 				items: [
-					{ title: 'LINE_STEP' },
-					{ title: 'LINE_STRAIGHT' },
-					{ title: 'LINE_SPLINE' }
+					{ title: 'STEP' },
+					{ title: 'STRAIGHT' },
+					{ title: 'SPLINE' }
 				],
-				chartType: 'LINE_STEP',
+				chartType: 'STEP',
 				legendCheckbox: false,
 				axesCheckbox: false,
 				logCheckbox: false,
