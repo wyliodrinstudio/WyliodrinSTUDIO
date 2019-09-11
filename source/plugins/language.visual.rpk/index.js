@@ -22,7 +22,17 @@ export function setup (options, imports, register)
 		{
 			return 'javascript';
 		},
-		icon:''
+		icon:'plugins/language.visual.rpk/data/img/testIcon.png',
+		pictograms:[
+			{
+				extension:'.rpk',
+				icon:'plugins/language.visual.rpk/data/img/test1.png'
+			},
+			{
+				filename:/rpk.*/,
+				icon:'plugins/language.visual.rpk/data/img/test2.png',
+			}
+		]
 	});
 
 

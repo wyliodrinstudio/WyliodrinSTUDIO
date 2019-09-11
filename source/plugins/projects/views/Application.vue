@@ -26,7 +26,7 @@
 						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
 							<v-img contain :src="languageImage()" avatar ></v-img>
 						</p>
-						<p v-else-if="item.file" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
+						<p v-else-if="item.file !== undefined" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
 							<v-img contain :src="getPictogram(item.name)" avatar ></v-img>
 						</p>
 						<p v-else-if="open && item.name !== currentProject.name" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
@@ -102,10 +102,10 @@
 							</v-menu>
 					</template>
 					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="!item.file && item.name === currentProject.name" text @contextmenu="fileItem = item,showProject($event)"> 
+						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @contextmenu="fileItem = item,showProject($event)"> 
 							{{item.name}}                  
 						</p>
-						<p style="width:100%;" v-else-if="!item.file && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)"> 
+						<p style="width:100%;" v-else-if="item.file  === undefined && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
 						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
@@ -341,14 +341,14 @@ export default {
 			let device = this.studio.workspace.getDevice ();
 			let type = device.type;
 			let board = device.board;
-			if (this.currentProject.language && type === 'none' && board === 'none'){
-				return this.studio.projects.getLanguage(this.currentProject.language).icon;
-			} else if(type !== 'none' && board !== 'none') {
-				return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':' + board].icon;
-			} else if (!addon && board !== 'none') {
-				return this.studio.projects.getLanguage(this.currentProject.language).addons['*:' + board].icon;
-			} else if (!addon && type !== 'none') {
-				return this.studio.projects.getLanguage(this.currentProject.language).addons[type + ':*'].icon;
+			if(type !== 'none' && board !== 'none' && addons[type + ':' + board] && addons[type + ':' + board].icon) {
+				return addons[type + ':' + board].icon;
+			} else if (addons && board !== 'none' && addons['*:' + board] && addons['*:' + board].icon) {
+				return addons['*:' + board].icon;
+			} else if (addons && type !== 'none' && addons[type + ':*'] && addons[type + ':*'].icon) {
+				return addons[type + ':*'].icon;
+			} else if (this.currentProject.language && type === 'none' && board === 'none' ){
+				return language.icon;
 			} else return 'unknown';
 		},
 		iteratePictograms(pictograms, filename) {
@@ -356,7 +356,7 @@ export default {
 				for( let pict of pictograms) {
 					if(pict.extension && ext === pict.extension) {
 						return pict.icon;
-					} else if(pict.filename && path.basename(filename).match(pict.filename)) {
+					} else if(pict.filename && filename.split('.').slice(0, -1).join('.').match(pict.filename)) {
 						return pict.icon;
 					}
 				}
@@ -373,43 +373,50 @@ export default {
 			let device = this.studio.workspace.getDevice ();
 			let type = device.type;
 			let board = device.board;
-
-			if(pictograms && pictograms.length > 0 && type === 'none' && board === 'none') {
-				for( let pict of pictograms) {
-					if(pict.extension && ext === pict.extension) {
-						return pict.icon;
-					} else if(pict.filename && path.basename(filename).match(pict.filename)) {
-						return pict.icon;
-					}
-				}
-			} else if(type !== 'none' && board !== 'none') {
+			if(type !== 'none' && board !== 'none' && addons[type + ':' + board]) {
 				let addonPictograms = addons[type + ':' + board].pictograms;
 				if(addonPictograms && addonPictograms.length > 0) {
 					for( let pict of addonPictograms) {
 						if(pict.extension && ext === pict.extension) {
 							return pict.icon;
-						} else if(pict.filename && path.basename(filename).match(pict.filename)) {
+						} else if(pict.filename && filename.match(pict.filename)) {
 							return pict.icon;
 						}
 					}
 				}
 				
-			} else if (!addons && board !== 'none') {
+			} else if (addons && board !== 'none' && addons['*:' + board]) {
 				let addonPictograms = addons['*:' + board].pictograms;
-				for( let pict of addonPictograms) {
-					if(pict.extension && ext === pict.extension) {
-						return pict.icon;
-					} else if(pict.filename && path.basename(filename).match(pict.filename)) {
-						return pict.icon;
+				if(addonPictograms && addonPictograms.length > 0) {
+					for( let pict of addonPictograms) {
+						if(pict.extension && ext === pict.extension) {
+							return pict.icon;
+						} else if(pict.filename && filename.match(pict.filename)) {
+							
+							return pict.icon;
+						}
 					}
 				}
-			} else if (!addons && type !== 'none') {
+			} else if (addons && type !== 'none' && addons[type + ':*']) {
 				let addonPictograms = addons[type + ':*'].pictograms;
-				for( let pict of addonPictograms) {
-					if(pict.extension && ext === pict.extension) {
-						return pict.icon;
-					} else if(pict.filename && path.basename(filename).match(pict.filename)) {
-						return pict.icon;
+				if(addonPictograms && addonPictograms.length > 0) {
+					for( let pict of addonPictograms) {
+						if(pict.extension && ext === pict.extension) {
+							return pict.icon;
+						} else if(pict.filename && filename.match(pict.filename)) {
+					
+							return pict.icon;
+						}
+					}
+				}
+			} else if(type === 'none' && board === 'none') {
+				if(pictograms && pictograms.length > 0) {
+					for( let pict of pictograms) {
+						if(pict.extension && ext === pict.extension) {
+							return pict.icon;
+						} else if(pict.filename && filename.match(pict.filename)) {
+							return pict.icon;
+						}
 					}
 				}
 			}
