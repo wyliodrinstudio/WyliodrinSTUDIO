@@ -255,6 +255,8 @@
          "NOTEBOOK_DELETE_ITEM_QUESTION": "Are you sure you want to delete this element?",
          "NOTEBOOK_DELETE_ITEM_TITLE": "Delete element",
          "NOTEBOOK_LOAD_DATA_ERROR": "Unable to load the notebook data ({error})",
+         "NOTEBOOK_RESET_NOTEBOOK_TITLE": "Reset Notebook",
+         "NOTEBOOK_RESET_NOTEBOOK_QUESTION": "Are you sure you want to reset the notebook?\nYou will lose all the notes for this project.",
          "PIN_LAYOUT": "Pin Layout",
          "PROJECT_APPLICATION": "Application",
          "PROJECT_DELETE_FOLDER": "Delete Folder",

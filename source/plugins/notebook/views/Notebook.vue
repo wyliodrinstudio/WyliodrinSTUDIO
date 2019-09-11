@@ -52,6 +52,15 @@
 									<span>Add</span>
 								</v-tooltip>
 
+								<v-tooltip bottom>
+									<template v-slot:activator="{ on }">
+										<v-btn @click="resetNotebook" class="ntbk-btn">
+											<v-img src="plugins/notebook/data/img/icons/reset-icon.png" class="s24"></v-img>
+										</v-btn>
+									</template>
+									<span>Reset Notebook</span>
+								</v-tooltip>
+
 								<v-tooltip bottom v-if="element.type==='markdown'">
 									<template v-slot:activator="{ on }">
 									<v-btn text @click="element.editable = !element.editable" class="ntbk-btn right">
@@ -270,6 +279,34 @@ export default {
 		notebook = this;
 	},
 	methods: {
+		async resetNotebook () {
+			let value = await this.studio.workspace.showCustomConfirmationPrompt(
+				'NOTEBOOK_RESET_NOTEBOOK_TITLE',
+				'NOTEBOOK_RESET_NOTEBOOK_QUESTION',
+				{
+					false: this.$t('NO'),
+					true: {
+						color: 'orange',
+						text: this.$t('YES'),
+						handle: () => {
+							return new Promise(resolve => {
+								setTimeout(resolve, 100);
+							});
+						}
+					}
+				}
+			);
+			console.log(value);
+			if (value === 'yes')
+			{
+				this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: ''}];
+				if (this.currentProject)
+				{
+					this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
+				}
+			}
+			
+		},
 		itemTypeName (type)
 		{
 			return this.items.find ((item) => item.type === type).title;
