@@ -321,6 +321,12 @@ export default {
 			// 	})
 			// }
 			this.showTree = this.advanced;
+			if(this.showTree === true) {
+				this.studio.workspace.setWorkspaceTitle(path.basename(this.currentFile));
+			} else {
+				this.studio.workspace.setWorkspaceTitle(this.currentProject.name);
+			}
+			
 		},
 		type()
 		{
@@ -351,25 +357,13 @@ export default {
 				return language.icon;
 			} else return 'unknown';
 		},
-		iteratePictograms(pictograms, filename) {
-			if(pictograms && pictograms.length > 0) {
-				for( let pict of pictograms) {
-					if(pict.extension && ext === pict.extension) {
-						return pict.icon;
-					} else if(pict.filename && filename.split('.').slice(0, -1).join('.').match(pict.filename)) {
-						return pict.icon;
-					}
-				}
-				return this.baseFileIcon;
-			}
-		},
 		getPictogram(filename)
 		{
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
 			let addons = language.addons;
 			let pictograms = language.pictograms;
 			
-			let ext = path.extname(filename);
+			let ext = path.extname(filename).toLowerCase();
 			let device = this.studio.workspace.getDevice ();
 			let type = device.type;
 			let board = device.board;
@@ -467,15 +461,14 @@ export default {
 		},
 		async changeSource(item)
 		{
-			this.changed=true;
-			await this.studio.projects.changeFile(item.path);
+			await this.studio.projects.changeFile(this.currentProject,item.path);
 		},
 		async dirTree() 
 		{
 			if (this.currentProject)
 			{
 				let filename = this.currentProject.folder;
-				if(this.items != this.previous){
+				if(this.items !== this.previous){
 					this.items = [];
 				}
 				let components = await this.studio.filesystem.readdir(filename);
@@ -500,6 +493,7 @@ export default {
 				this.items = root;
 				this.previous = this.items;
 				console.log(this.items);
+				console.log(this.currentFile);
 			}
 		},
 		async newFolder (item)
@@ -556,17 +550,18 @@ export default {
 				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FOLDER', 'PROJECT_NEW_FOLDER_NAME', item.name, 'PROJECT_NEW_NAME');
 				if (newName)
 				{
-					await this.studio.projects.renameObject(this.currentProject,newName,item.path);
-					await this.refresh();
+					if(await this.studio.projects.renameObject(this.currentProject,newName,item.path))
+						await this.refresh();
 				}
 			}
 			else
 			{
+
 				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FILE', 'PROJECT_NEW_FILE_NAME', item.name, 'PROJECT_NEW_NAME');
 				if (newName)
 				{
-					await this.studio.projects.renameObject(this.currentProject,newName,item.path);
-					await this.refresh();
+					if(await this.studio.projects.renameObject(this.currentProject,newName,item.path))
+						await this.refresh();
 				}
 			}
 		},
@@ -575,8 +570,10 @@ export default {
 			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_FILE', 'PROJECT_FILE_SURE');
 			if (allow)
 			{
-				await this.studio.projects.deleteFile(this.currentProject,item.path);
-				await this.refresh();
+				if(await this.studio.projects.deleteFile(this.currentProject,item.path)) {
+					await this.refresh();
+				}
+					
 			}
 		},
 		async deleteFolder (item)
@@ -584,8 +581,8 @@ export default {
 			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_FOLDER', 'PROJECT_FOLDER_SURE');
 			if (allow)
 			{
-				await this.studio.projects.deleteFolder(this.currentProject,item.path);
-				await this.refresh();
+				if(await this.studio.projects.deleteFolder(this.currentProject,item.path))
+					await this.refresh();
 			}
 		},
 		/////
