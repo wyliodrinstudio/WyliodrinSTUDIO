@@ -821,6 +821,7 @@ let projects = {
 	 * renameObject('MyNewProject', 'ObjectNewName', 'C:\Users\User\Desktop');
 	 */
 	async renameObject(project, newName, pathTo) {
+		
 		if(project !== null && newName !== null && pathTo !== null) {
 			if (path.basename(pathTo) === 'project.json' || newName === 'project.json') {
 				studio.workspace.showError('PROJECT_JSON_DO_NOT');
@@ -838,14 +839,17 @@ let projects = {
 				if (pathToRename !== null && newFile !== null) {
 					try {
 						await studio.filesystem.rename(pathToRename, newFile);
-						return true;
+						if(await this.changeFile(project,newFile.replace(projectFolder, '')))
+							return true;
 					} catch (e) {
 						studio.workspace.showError('PROJECT_ERROR_RENAME_OBJECT', {object: pathToRename, error: e.message});
-						return false;
+						if(await this.changeFile(project,pathTo))
+							return false;
 					}
 				} else {
 					studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
-					return false;
+					if(await this.changeFile(project,pathTo))
+						return false;
 				}
 			}
 		} else {
@@ -877,13 +881,17 @@ let projects = {
 					let pathToDelete = path.join(projectFolder, pathTo);
 					pathToDelete = this._isPathValid(projectFolder,pathToDelete);
 					if (pathToDelete !== null) {
-						if(pathTo === studio.workspace.getFromStore('projects','currentFile')) {
-							studio.workspace.dispatchToStore('projects','currentFile',null);
+						let resp = null;
+						if(resp !== false){
+							if (await studio.filesystem.pathExists(pathToDelete)) {
+								await studio.filesystem.remove(pathToDelete);
+								if(pathTo === studio.workspace.getFromStore('projects','currentFile')) {
+									resp = await this.changeFile(project,null);
+								}
+								return true;
+							}
 						}
-						if (await studio.filesystem.pathExists(pathToDelete)) {
-							await studio.filesystem.remove(pathToDelete);
-							return true;
-						}
+						
 					} else {
 						studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
 						return false;
@@ -1085,7 +1093,7 @@ let projects = {
 			await this.selectCurrentProject(project);
 		}
 		if (file !== {} && file !== null) {
-			await this.changeFile(file);
+			await this.changeFile(project,file);
 		}
 	},
 	/**
@@ -1175,22 +1183,27 @@ let projects = {
 	 * @param {string} name - path to file
 	 * 
 	 */
-	async changeFile(name) {
+	async changeFile(project, name) {
 
 		if(name !== null) {
-			if (studio.workspace.getFromStore('projects', 'currentFile') && path.basename(studio.workspace.getFromStore('projects', 'currentFile')) != 'project.json') {
+			if (path.basename(name) != 'project.json') {
+				await studio.workspace.setWorkspaceTitle(path.basename(name));
 				if (name !== '') {
 					await studio.settings.storeValue('projects', 'currentFile', name);
 					await studio.workspace.dispatchToStore('projects', 'currentFile', name);
+					return true;
 				}
 			} else {
 				studio.workspace.warn('Selecting file project.json, ignoring');
-				return null;
+				return true;
 			}
-			return null;
+			return true;
 		} else {
-			studio.workspace.error('Error selecting current file, file is null');
-			return null;
+			await studio.workspace.setWorkspaceTitle(project.name);
+			studio.workspace.warn('Error selecting current file, file is null, dispatching null');
+			await studio.settings.storeValue('projects', 'currentFile', null);
+			await studio.workspace.dispatchToStore('projects', 'currentFile', null);
+			return true;
 		}
 	},
 	/**
