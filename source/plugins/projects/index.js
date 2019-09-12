@@ -839,16 +839,16 @@ let projects = {
 				if (pathToRename !== null && newFile !== null) {
 					try {
 						await studio.filesystem.rename(pathToRename, newFile);
-						if(await this.changeFile(newFile.replace(projectFolder, '')))
+						if(await this.changeFile(project,newFile.replace(projectFolder, '')))
 							return true;
 					} catch (e) {
 						studio.workspace.showError('PROJECT_ERROR_RENAME_OBJECT', {object: pathToRename, error: e.message});
-						if(await this.changeFile(pathTo))
+						if(await this.changeFile(project,pathTo))
 							return false;
 					}
 				} else {
 					studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
-					if(await this.changeFile(pathTo))
+					if(await this.changeFile(project,pathTo))
 						return false;
 				}
 			}
@@ -886,7 +886,7 @@ let projects = {
 							if (await studio.filesystem.pathExists(pathToDelete)) {
 								await studio.filesystem.remove(pathToDelete);
 								if(pathTo === studio.workspace.getFromStore('projects','currentFile')) {
-									resp = await this.changeFile(null);
+									resp = await this.changeFile(project,null);
 								}
 								return true;
 							}
@@ -1093,7 +1093,7 @@ let projects = {
 			await this.selectCurrentProject(project);
 		}
 		if (file !== {} && file !== null) {
-			await this.changeFile(file);
+			await this.changeFile(project,file);
 		}
 	},
 	/**
@@ -1183,9 +1183,11 @@ let projects = {
 	 * @param {string} name - path to file
 	 * 
 	 */
-	async changeFile(name) {
+	async changeFile(project, name) {
+
 		if(name !== null) {
 			if (path.basename(name) != 'project.json') {
+				await studio.workspace.setWorkspaceTitle(path.basename(name));
 				if (name !== '') {
 					await studio.settings.storeValue('projects', 'currentFile', name);
 					await studio.workspace.dispatchToStore('projects', 'currentFile', name);
@@ -1197,6 +1199,7 @@ let projects = {
 			}
 			return true;
 		} else {
+			await studio.workspace.setWorkspaceTitle(project.name);
 			studio.workspace.warn('Error selecting current file, file is null, dispatching null');
 			await studio.settings.storeValue('projects', 'currentFile', null);
 			await studio.workspace.dispatchToStore('projects', 'currentFile', null);

@@ -321,6 +321,12 @@ export default {
 			// 	})
 			// }
 			this.showTree = this.advanced;
+			if(this.showTree === true) {
+				this.studio.workspace.setWorkspaceTitle(path.basename(this.currentFile));
+			} else {
+				this.studio.workspace.setWorkspaceTitle(this.currentProject.name);
+			}
+			
 		},
 		type()
 		{
@@ -455,7 +461,7 @@ export default {
 		},
 		async changeSource(item)
 		{
-			await this.studio.projects.changeFile(item.path);
+			await this.studio.projects.changeFile(this.currentProject,item.path);
 		},
 		async dirTree() 
 		{

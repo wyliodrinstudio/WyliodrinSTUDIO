@@ -23,11 +23,7 @@
 					:open-on-click="true"
 					>
 					<template v-slot:prepend="{item, open}">
-						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
-							<v-img contain :src="languageImage()" avatar ></v-img>
-						</p>
-						<p v-else-if="item.file !== undefined" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
-							<v-img contain :src="getPictogram(item.path)" avatar ></v-img>
+						<p v-if="item.file !== undefined" class="file" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
 						</p>
 						<p v-else-if="open && item.name" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
 							
@@ -35,25 +31,6 @@
 						<p v-else-if="item.name" class="folder-closed" text @contextmenu="fileItem = item,showFolder($event)">
 
 						</p>
-						<v-menu
-							v-model="projectMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
 
 						<v-menu
 							v-model="folderMenu"
@@ -102,34 +79,12 @@
 							</v-menu>
 					</template>
 					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @contextmenu="fileItem = item,showProject($event)"> 
-							{{item.name}}                  
-						</p>
-						<p style="width:100%;" v-else-if="item.file  === undefined && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)"> 
+						<p style="width:100%;" v-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
 						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
 							{{item.name}} 
 						</p>
-						<v-menu
-							v-model="projectMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
 
 						<v-menu
 							v-model="folderMenu"
@@ -287,7 +242,9 @@ module.exports = {
 			switch1:false,
 			fileMenu: false,
 			folderMenu:false,
-			fileItem: null
+			fileItem: null,
+			x: 0,
+			y: 0,
 		};
 	},
 	computed: {
@@ -338,18 +295,18 @@ module.exports = {
 </script>
 <style lang="less" scoped>
 .folder-open {
-background: url('plugins/projects/data/img/icons/32px.png') no-repeat 0px -32px !important;
+background: url('plugins/device.wyapp/data/img/icons/32px.png') no-repeat 0px -32px !important;
 	width: 32px;
 	height: 32px;
 }
 
 .folder-closed {
-background: url('plugins/projects/data/img/icons/32px.png') no-repeat -64px 0px !important;
+background: url('plugins/device.wyapp/data/img/icons/32px.png') no-repeat -64px 0px !important;
 	width: 32px;
 	height: 32px;
 }
 .file {
-background: url('plugins/projects/data/img/icons/32px.png') no-repeat -32px 0px !important;
+background: url('plugins/device.wyapp/data/img/icons/32px.png') no-repeat -32px 0px !important;
 	width: 32px;
 	height: 32px;
 }
