@@ -5,8 +5,9 @@
 			<v-spacer></v-spacer>
 			<v-tooltip bottom>
 				<template #activator="data">
-					<v-btn text class="icon-btn-lg" aria-label="Refresh">
-						<v-img src="img/icons/refresh-icon.svg" aria-label="Refreshr" v-on="data.on"></v-img>
+					<v-btn text class="icon-btn" aria-label="Refresh">
+						<!-- <v-img contain src="plugins/device.wyapp/data/img/icons/refresh-icon.svg" aria-label="Refreshr" v-on="data.on"></v-img> -->
+						Refresh
 					</v-btn>
 				</template>
 				<span>{{$t('DEVICE_WYAPP_REFRESH')}}</span>
@@ -23,12 +24,12 @@
 					:open-on-click="true"
 					>
 					<template v-slot:prepend="{item, open}">
-						<p v-if="item.file !== undefined" class="file" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
+						<p v-if="item.file !== undefined" class="file" @contextmenu="fileItem = item,showFile($event)">
 						</p>
-						<p v-else-if="open && item.name" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="open && item.name" class="folder-open" @click="fileItem = item, cwd=item.path" text @contextmenu="fileItem = item,showFolder($event)">
 							
 						</p>
-						<p v-else-if="item.name" class="folder-closed" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="item.name" class="folder-closed" text  @click="fileItem = item, cwd=item.path" @contextmenu="fileItem = item,showFolder($event)">
 
 						</p>
 
@@ -79,10 +80,10 @@
 							</v-menu>
 					</template>
 					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+						<p style="width:100%;" v-if="item.file  === undefined" text  @click="fileItem = item, cwd=item.path" @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
-						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
+						<p v-else style="width:100%;" text  @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
 							{{item.name}} 
 						</p>
 
@@ -137,7 +138,24 @@
 			</template>
 			</div>
 			<div :class="editorBox" class="hs-100">
-				<p>The project has no files, create one</p>	
+				<v-list>
+					<v-subheader v-if="fileItem !== null">{{fileItem.name}}</v-subheader>
+
+					<v-list-item-group v-if="fileItem !== null" v-model="item" color="primary">
+						<v-list-item v-for="item in fileItem.children" :key="item.key">
+							<v-list-item-icon>
+								<p v-if="item.file !== undefined" class="file" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
+								</p>
+								<p v-else-if="item.name" class="folder-open" @click="fileItem = item" text @contextmenu="fileItem = item,showFolder($event)">
+								</p>
+							</v-list-item-icon>
+							<v-list-item-content>
+								<v-list-item-title v-text="item.name"></v-list-item-title>
+							</v-list-item-content>
+						</v-list-item>
+					</v-list-item-group>
+					<p v-else>No folder selected</p>
+				</v-list>
 			</div>
 		</v-card-text>
 		<v-card-actions>
@@ -170,9 +188,10 @@
 
 <script>
 const mapGetters = require ('vuex').mapGetters;
-module.exports = {
+import path from 'path';
+export default {
 	name: 'FileManager',
-	props: ['show'],
+	props: ['connection'],
 	data () {
 		return {
 			open: ['public'],
@@ -187,64 +206,16 @@ module.exports = {
 				xls: 'mdi-file-excel'
 			},
 			tree: [],
-			items: [
-				{
-					name: '.git'
-				},
-				{
-					name: 'node_modules'
-				},
-				{
-					name: 'public',
-					children: [
-						{
-							name: 'static',
-							children: [{
-								name: 'logo.png',
-								file: 'png'
-							}]
-						},
-						{
-							name: 'favicon.ico',
-							file: 'png'
-						},
-						{
-							name: 'index.html',
-							file: 'html'
-						}
-					]
-				},
-				{
-					name: '.gitignore',
-					file: 'txt'
-				},
-				{
-					name: 'babel.config.js',
-					file: 'js'
-				},
-				{
-					name: 'package.json',
-					file: 'json'
-				},
-				{
-					name: 'README.md',
-					file: 'md'
-				},
-				{
-					name: 'vue.config.js',
-					file: 'js'
-				},
-				{
-					name: 'yarn.lock',
-					file: 'txt'
-				}
-			],
+			items: [],
 			switch1:false,
 			fileMenu: false,
 			folderMenu:false,
-			fileItem: null,
+			fileItem:null,
+			pieData:null,
+			cwd:'/',
 			x: 0,
 			y: 0,
+			item:1,
 		};
 	},
 	computed: {
@@ -252,15 +223,95 @@ module.exports = {
 			device: 'link/device'//,
 			//connection: 'link/connection'
 		}),
+		projectTree ()
+		{
+			return 'project-tree-on hs-100';
+		},
+		editorBox ()
+		{
+			return 'project-box-1';
+		},
+	},
+	watch: {
+		pieData(){
+			if(this.items.length < 1) {
+				this.updateFileTree(this.pieData,this.items);
+			} else {
+				this.updateChildren(this.cwd,this.items);
+			}
+		},
+		cwd(){
+			this.connection.send('fe', {
+			a: 'ls',
+			b:this.cwd
+		});
+		}
 	},
 	created () {
-		
+		this.connection.send('fe', {
+			a: 'ls',
+			b:'/'
+		});
+		this.connection.on('tag:fe1',this.update);
 	},
 	destroyed ()
 	{
-		
+		this.connection.removeListener('tag:fe1',this.update);
 	},
 	methods: {
+		list(cwd){
+			this.connection.send('fe',
+			{
+				a: 'ls',
+				l:cwd
+			})
+		},
+		update(data){
+			this.pieData=data
+		},
+		updateFileTree(data, tree){
+			if(data) {
+				for(let item of data) {
+					if(item.isdir) {
+						tree.push({
+							name: item.name,
+							children:[],
+							path:this.cwd+item.name+'/',
+							size:item.size,
+							key: item.name+item.size+'folder'
+						});
+					} else if(item.isfile) {
+						tree.push({
+							name:item.name,
+							file:path.extname(item.name),
+							path:this.cwd+item.name+'/',
+							size:item.size,
+							key:item.name+item.size+'file'
+						});
+					} else if(item.islink) {
+						tree.push({
+							name:item.name,
+							link:true,
+							path:this.cwd+item.name+'/',
+							size:item.size,
+							key:item.name+item.size+'link'
+						})
+					}
+				}
+			}
+		},
+		updateChildren(cwd, array) {
+			if(this.items) {
+				for(let item of array) {
+					if(item.path === this.cwd && item.children !== undefined) {
+						this.updateFileTree(this.pieData,item.children);
+						break;
+					} else if (item.children !== undefined && item.path.includes(cwd)) {
+						this.updateChildren(item.path,array);
+					}
+				}
+			}
+		},
 		showFile(e) {
 			this.fileMenu = false;
 			this.folderMenu = false;

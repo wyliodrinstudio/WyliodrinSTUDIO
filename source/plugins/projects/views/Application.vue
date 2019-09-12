@@ -224,7 +224,7 @@ export default {
 
 			previous:[],
 
-			showTree: this.advanced,
+			showTreeshowTree: this.advanced,
 
 			open: ['public'],
 			files: {
@@ -246,8 +246,6 @@ export default {
 			projectMenu:false,
 			x: 0,
 			y: 0,
-			menuItems: ['create file', 'create directory','delete file','delete directory'],
-
 			showConsole: false,
 			baseFileIcon:'plugins/projects/data/img/icons/file.png',
 		};
