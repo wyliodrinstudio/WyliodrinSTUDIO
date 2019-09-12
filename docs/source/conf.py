@@ -106,7 +106,7 @@ htmlhelp_basename = 'WyliodrinStudiodoc'
 
 primary_domain = 'js'
 js_source_path = ['../../source/plugins/workspace', '../../source/plugins/projects', '../../source/plugins/settings']
-root_for_relative_js_paths = '../source/plugins'
+root_for_relative_js_paths = '../../source/plugins'
 
 
 # -- Options for LaTeX output ------------------------------------------------
