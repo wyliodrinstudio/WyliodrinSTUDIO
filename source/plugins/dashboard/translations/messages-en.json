@@ -90,5 +90,17 @@
     "DASHBOARD_AXIS_NAME": {
         "message": "Axis name",
         "description": "Name of an axis"
+    },
+    "DASHBOARD_DELETE_TITLE": {
+        "message": "Delete Signal",
+        "description": "Title of confirmation prompt when the user tries to delete a signal"
+    },
+    "DASHBOARD_DELETE_QUESTION": {
+        "message": "Are you sure you want to delete this signal?",
+        "description": "Delete signal confirmation "
+    },
+    "DASHBOARD_NO_TITLE": {
+        "message": "Please choose a name for the signal.",
+        "description": "Notification text when the user didn't chose a name for the signal"
     }
 }
