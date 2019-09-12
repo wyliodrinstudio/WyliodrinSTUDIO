@@ -116,7 +116,7 @@ module.exports = {
 		],
 	},
 	externals: [nodeExternals({
-		whitelist: [...Object.keys(package_json.devDependencies), /^highcharts\/.*/, 'async', 'vue-asyncable', /^brace\/.*/, /^node-blockly\/.*/]
+		whitelist: [...Object.keys(package_json.devDependencies), /^highcharts\/.*/, 'async', 'vue-asyncable', /^brace\/.*/, /^node-blockly\/.*/, 'set-immediate-shim', 'lie', 'pako', 'readable-stream']
 	})],
 	mode: 'none',
 	node: {
