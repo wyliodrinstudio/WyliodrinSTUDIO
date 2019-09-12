@@ -1,6 +1,6 @@
 {
 	"name": "wyliodrinstudio",
-	"version": "2.0.0-beta",
+	"version": "2.0.3-beta",
 	"description": "Wyliodrin STUDIO 2",
 	"main": "main.js",
 	"scripts": {
