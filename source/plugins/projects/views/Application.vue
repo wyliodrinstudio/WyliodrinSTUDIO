@@ -14,7 +14,6 @@
 				</div>
 				
 				<div :class="projectTree" class="project-tree-on" v-if="advanced">
-					<v-app id="inspire">
 					<v-treeview
 					v-model="tree"
 					:open="open"
@@ -180,7 +179,6 @@
 					
 					</v-treeview>
 						
-				</v-app>
 				</div> 
 			</div>
 			<!--  -->
@@ -224,7 +222,7 @@ export default {
 
 			previous:[],
 
-			showTreeshowTree: this.advanced,
+			showTree: this.advanced,
 
 			open: ['public'],
 			files: {

@@ -446,7 +446,7 @@ export function setup(options, imports, register)
 									children: []
 								};
 								tpChildren.push (folder);
-								setFiles (file.children, folder.children, path.join (filenamePath, file.name));
+								await setFiles (file.children, folder.children, path.join (filenamePath, file.name));
 							}
 							else
 							{
