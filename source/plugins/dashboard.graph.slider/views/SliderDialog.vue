@@ -68,7 +68,11 @@ export default {
 		},
 		createChart()
 		{
-			this.$root.$emit ('submit', this.newdata);
+			let title = this.newdata.signalTitle.replace(/ /g,'');
+			if(title.length > 0)
+				this.$root.$emit ('submit', this.newdata);
+			else
+				this.studio.workspace.showNotification('DASHBOARD_NO_TITLE');
 		}
 	}
 }

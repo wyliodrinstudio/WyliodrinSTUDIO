@@ -86,5 +86,17 @@
     "DASHBOARD_MAX_VALUE": {
         "message": "Valeur maximale",
         "description": "Input text area foar the maximum value of an axis"
+    },
+    "DASHBOARD_DELETE_TITLE": {
+        "message": "Supprimer un signal",
+        "description": "Title of confirmation prompt when the user tries to delete a signal"
+    },
+    "DASHBOARD_DELETE_QUESTION": {
+        "message": "Êtes-vous sûr de vouloir supprimer ce signal?",
+        "description": "Delete signal confirmation "
+    },
+    "DASHBOARD_NO_TITLE": {
+        "message": "Veuillez choisir un nom pour le signal.",
+        "description": "Notification text when the user didn't chose a name for the signal"
     }
 }
