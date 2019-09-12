@@ -26,7 +26,7 @@ author = u'Diana Ghindaoanu'
 # The short X.Y version
 version = u'2.0.0'
 # The full version, including alpha/beta/rc tags
-release = u'beta'
+release = u'2.0.0-beta'
 
 
 # -- General configuration ---------------------------------------------------
