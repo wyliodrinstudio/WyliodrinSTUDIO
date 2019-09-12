@@ -417,6 +417,8 @@ export function setup(options, imports, register)
 					studio.console.reset ();
 					let structure = await studio.projects.generateStructure (project);
 
+					console.log (structure);
+
 					let tp = {
 						name: project.name,
 						isroot: true,
@@ -444,7 +446,7 @@ export function setup(options, imports, register)
 									children: []
 								};
 								tpChildren.push (folder);
-								setFiles (file.children, folder.children, path.join (filenamePath, file.name));
+								await setFiles (file.children, folder.children, path.join (filenamePath, file.name));
 							}
 							else
 							{
@@ -458,6 +460,8 @@ export function setup(options, imports, register)
 					};
 
 					await setFiles (structure.children, tp.children[0].children, '/');
+
+					console.log (tp);
 
 					let xtrem = studio.console.getSize ();
 

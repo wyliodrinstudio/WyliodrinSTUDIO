@@ -1198,7 +1198,7 @@ let projects = {
 				return true;
 			}
 			return true;
-		} else {
+		} else if (project !== null) {
 			await studio.workspace.setWorkspaceTitle(project.name);
 			studio.workspace.warn('Error selecting current file, file is null, dispatching null');
 			await studio.settings.storeValue('projects', 'currentFile', null);
