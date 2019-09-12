@@ -12,6 +12,7 @@ import NotificationLayout from './views/NotificationLayout.vue';
 import QuestionDialog from './views/QuestionDialog.vue';
 import PromptDialog from './views/PromptDialog.vue';
 import studioStore from './store';
+import AboutDialog from './views/AboutDialog.vue';
 
 /**
  * a function that is called when the item may be deleted
@@ -207,7 +208,7 @@ let workspace = {
 		});
 
 		this.registerMenuItem ('WORKSPACE_TOOLBAR_ABOUT', 100, () => {
-			
+			this.showDialog(AboutDialog);
 		});
 
 		// this.registerTab('Application', 20, () => {

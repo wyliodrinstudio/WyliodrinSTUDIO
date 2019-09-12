@@ -9,7 +9,7 @@ export default function setup (options, imports, register)
 	studio.dashboard.registerGraph('THERMOMETER_GRAPH', 30, 'plugins/dashboard.graph.thermometer/data/img/icons/thermometer.png', ThermometerGraph, {
 		setup: (data) => {
 			return studio.workspace.showDialog(ThermometerDialog,{
-				width:1500,
+				width:600,
 				data:data
 			});
 		}

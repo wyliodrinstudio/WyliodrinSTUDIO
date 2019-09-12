@@ -61,5 +61,10 @@ export function setup (options, imports, register)
 	/* Register Icon */
 	studio.device_wyapp.registerBoard ('beagleboneblack', beagleboneblack);
 
+	studio.device_wyapp.registerLanguagePackage ('nodejs', 'raspberrypi', {
+		name: 'onoff',
+		description: 'GPIO access and interrupt detection with Node.js on Linux boards like the Raspberry Pi, C.H.I.P. or BeagleBone.'
+	});
+
 	register (null, {});
 }

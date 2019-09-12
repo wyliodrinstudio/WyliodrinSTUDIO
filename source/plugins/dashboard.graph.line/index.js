@@ -9,7 +9,7 @@ export default function setup (options, imports, register)
 	studio.dashboard.registerGraph('LINE_GRAPH', 30, 'plugins/dashboard.graph.line/data/img/icons/line.png', LineGraph, {
 		setup: (data) => {
 			return studio.workspace.showDialog(LineDialog,{
-				width:1500,
+				width:600,
 				data:data
 			});
 		},

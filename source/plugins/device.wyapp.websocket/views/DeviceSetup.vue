@@ -5,12 +5,8 @@
 		</v-card-title>
 		<v-card-text>
 			<v-text-field autofocus :label="$t('WYAPP_WEBSOCKET_NEW_DEVICE_NAME')" required v-model="value"></v-text-field>
-		</v-card-text>
-		<v-card-text v-show="nameValid">
-			<pre>{{json}}</pre>
-		</v-card-text>
-		<v-card-text v-show="!nameValid">
-			{{$t('WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID')}}
+			<pre v-show="nameValid">{{json}}</pre>
+			<div v-show="!nameValid">{{$t('WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID')}}</div>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>

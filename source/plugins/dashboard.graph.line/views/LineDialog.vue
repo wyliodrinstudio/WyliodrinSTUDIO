@@ -1,50 +1,48 @@
 <template>
-	<v-card>
+	<v-card class="graphDialog">
 		<v-card-title>{{$t('DASHBOARD_ADDLINE')}}</v-card-title>
 
 		<v-card-text >
-           <div layout-padding class="signal-details">
-				<v-text-field autofocus color ="orange" :label="$t('DASHBOARD_SIGNAL_NAME')" required v-model="newdata.signalTitle">{{$t('DASHBOARD_SIGNAL_NAME')}}</v-text-field>
-				<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.signalDescription">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>
-				<div class="form__field">
-					<div class="form__label">{{$t('DASHBOARD_SIGNAL_COLOR')}}</div>
+           <div layout-padding class="signal-details row">
+				<v-text-field autofocus color ="orange" :label="$t('DASHBOARD_SIGNAL_NAME')" required v-model="newdata.signalTitle" class="col-md-6">{{$t('DASHBOARD_SIGNAL_NAME')}}</v-text-field>
+				<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.signalDescription" class="col-md-6">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>			
+			</div>
+			
+			<div class="sig-properties row">
+				<v-text-field :label="$t('NAME')" v-model="newdata.figureName" class="col-md-5"></v-text-field>	
+				<div class="form__field col-md-3">
+					<div class="form__label">{{$t('DASHBOARD_SIGNAL_COLOR')}}:</div>
 					<div class="form__input">
 						<swatches v-model="newdata.signalColor" colors="text-advanced" popover-to="right"></swatches>
 					</div>
-				</div>				
-			</div>
-			
-			<div class="sig-properties">
-				<div>
-					<span>{{$t('LINE_STYLE')}}</span>
-					<v-menu offset-y>
-						<template v-slot:activator="{ on }">
-							<v-btn color="primary" dark v-on="on">{{$t(newdata.chartType)}}</v-btn>
-						</template>
-						<v-list>
-							<v-list-item v-for="(item, index) in newdata.items" :key="index" @click="change(item)">
-								<v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-							</v-list-item>
-						</v-list>
-					</v-menu>
 				</div>
-				<v-text-field :label="$t('NAME')" v-model="newdata.figureName"></v-text-field>
-				<v-checkbox :label="$t('LINE_HIDE_LEGEND')" v-model="newdata.legendCheckbox" ></v-checkbox>
-				<v-checkbox :label="$t('LINE_FIX_AXES_VALUES')" v-model="newdata.axesCheckbox" ></v-checkbox>
-				<v-checkbox :label="$t('LINE_LOGARITHMIC_AXES')" v-model="newdata.logCheckbox" ></v-checkbox>
-				<v-checkbox :label="$t('LINE_TIME_SERIES')" v-model="newdata.timeCheckbox" ></v-checkbox>
-				<v-text-field :label="$t('DASHBOARD_MIN_AXES_VALUE')" type="number" step=0.1 v-model="newdata.minAxesValue"></v-text-field>
-				<v-text-field :label="$t('DASHBOARD_MAX_AXES_VALUE')" type="number" step=0.1 v-model="newdata.maxAxesValue"></v-text-field>
-				<v-checkbox :label="$t('LINE_SHOW_POINTS')" v-model="newdata.pointsCheckbox" ></v-checkbox>
-				<v-text-field :label="$t('LINE_MAX_POINTS')" type="number" step=1 v-model="newdata.maxPointsToShow"></v-text-field>
-				<v-text-field :label="$t('LINE_AXIS_NAME')" v-model="newdata.axisName"></v-text-field>
-				<v-checkbox :label="$t('LINE_OVERVIEW')" v-model="newdata.overviewCheckbox" ></v-checkbox>
-				<v-checkbox :label="$t('LINE_SCROLLBAR')" v-model="newdata.scrollbarCheckbox" ></v-checkbox>	
+				<div class="col-md-4">
+					<span>{{$t('LINE_STYLE')}}</span>
+					<v-select class="drpdown"
+						:items="newdata.items"
+						v-model="newdata.chartType"
+						item-text = "title"
+						item-value = "title"
+						hide-details
+					></v-select>
+				</div>
+				<v-text-field :label="$t('DASHBOARD_MIN_AXES_VALUE')" type="number" step=0.1 v-model="newdata.minAxesValue" class="col-md-6"></v-text-field>
+				<v-text-field :label="$t('DASHBOARD_MAX_AXES_VALUE')" type="number" step=0.1 v-model="newdata.maxAxesValue" class="col-md-6"></v-text-field>
+				<v-text-field :label="$t('LINE_MAX_POINTS')" type="number" step=1 v-model="newdata.maxPointsToShow" class="col-md-6"></v-text-field>
+				<v-text-field :label="$t('LINE_AXIS_NAME')" v-model="newdata.axisName" class="col-md-6"></v-text-field>
+				<v-checkbox hide-details :label="$t('LINE_HIDE_LEGEND')" v-model="newdata.legendCheckbox" class="col-md-4"></v-checkbox>
+				<v-checkbox hide-details :label="$t('LINE_FIX_AXES_VALUES')" v-model="newdata.axesCheckbox" class="col-md-4"></v-checkbox>
+				<v-checkbox hide-details :label="$t('LINE_LOGARITHMIC_AXES')" v-model="newdata.logCheckbox" class="col-md-4"></v-checkbox>
+				<v-checkbox hide-details :label="$t('LINE_TIME_SERIES')" v-model="newdata.timeCheckbox" class="col-md-4"></v-checkbox>
+				<v-checkbox hide-details :label="$t('LINE_SHOW_POINTS')" v-model="newdata.pointsCheckbox" class="col-md-4"></v-checkbox>
+				<v-checkbox hide-details :label="$t('LINE_OVERVIEW')" v-model="newdata.overviewCheckbox" class="col-md-4"></v-checkbox>
+				<v-checkbox hide-details :label="$t('LINE_SCROLLBAR')" v-model="newdata.scrollbarCheckbox" class="col-md-12"></v-checkbox>	
 			</div>
 		</v-card-text>
 		<v-card-actions>
+			<v-spacer></v-spacer>
 			<v-btn text @click="close">{{$t('CLOSE')}}</v-btn>
-			<v-btn text @click="createChart">{{$t('DASHBOARD_ADD_SIGNAL')}}</v-btn>
+			<v-btn text @click="createChart" class="newapp">{{$t('DASHBOARD_ADD_SIGNAL')}}</v-btn>
 		</v-card-actions>
 		
     </v-card>
@@ -67,11 +65,11 @@ export default {
 				signalColor:'#b9f5f1',
 				figureName: '',
 				items: [
-					{ title: 'LINE_STEP' },
-					{ title: 'LINE_STRAIGHT' },
-					{ title: 'LINE_SPLINE' }
+					{ title: 'STEP' },
+					{ title: 'STRAIGHT' },
+					{ title: 'SPLINE' }
 				],
-				chartType: 'LINE_STEP',
+				chartType: 'STEP',
 				legendCheckbox: false,
 				axesCheckbox: false,
 				logCheckbox: false,

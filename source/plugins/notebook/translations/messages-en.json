@@ -22,5 +22,13 @@
     "NOTEBOOK_LOAD_DATA_ERROR": {
         "message": "Unable to load the notebook data ({error})",
         "description": "This error shwos up when notebook.json can't be parsed."
+    },
+    "NOTEBOOK_RESET_NOTEBOOK_TITLE": {
+        "message": "Reset Notebook",
+        "description": "Title of the reset confirmation prompt"
+    },
+    "NOTEBOOK_RESET_NOTEBOOK_QUESTION": {
+        "message": "Are you sure you want to reset the notebook?\nYou will lose all the notes for this project.",
+        "description": "Confirmation prompt which ensures that the user really wants to reset the notebook"
     }
 }

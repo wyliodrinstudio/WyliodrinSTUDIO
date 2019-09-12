@@ -9,7 +9,7 @@ export default function setup (options, imports, register)
 	studio.dashboard.registerGraph('GAUGE_GRAPH', 30, 'plugins/dashboard.graph.gauge/data/img/icons/gauge.png', GaugeGraph, {
 		setup: (data) => {
 			return studio.workspace.showDialog(GaugeDialog,{
-				width:1500,
+				width:600,
 				data:data
 			});
 		}

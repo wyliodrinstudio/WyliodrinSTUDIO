@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron';
 import { remote } from 'electron';
+import { shell } from 'electron';
 import { EventEmitter } from 'events';
 
 let system = {
@@ -35,6 +36,10 @@ let system = {
 				window.unmaximize();
 			}
 		}
+	},
+	openLink (url)
+	{
+		shell.openExternal(url);
 	}
 };
 
