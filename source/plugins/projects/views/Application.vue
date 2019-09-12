@@ -455,7 +455,6 @@ export default {
 		},
 		async changeSource(item)
 		{
-			this.changed=true;
 			await this.studio.projects.changeFile(item.path);
 		},
 		async dirTree() 
@@ -463,7 +462,7 @@ export default {
 			if (this.currentProject)
 			{
 				let filename = this.currentProject.folder;
-				if(this.items != this.previous){
+				if(this.items !== this.previous){
 					this.items = [];
 				}
 				let components = await this.studio.filesystem.readdir(filename);
@@ -488,6 +487,7 @@ export default {
 				this.items = root;
 				this.previous = this.items;
 				console.log(this.items);
+				console.log(this.currentFile);
 			}
 		},
 		async newFolder (item)
@@ -544,17 +544,18 @@ export default {
 				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FOLDER', 'PROJECT_NEW_FOLDER_NAME', item.name, 'PROJECT_NEW_NAME');
 				if (newName)
 				{
-					await this.studio.projects.renameObject(this.currentProject,newName,item.path);
-					await this.refresh();
+					if(await this.studio.projects.renameObject(this.currentProject,newName,item.path))
+						await this.refresh();
 				}
 			}
 			else
 			{
+
 				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FILE', 'PROJECT_NEW_FILE_NAME', item.name, 'PROJECT_NEW_NAME');
 				if (newName)
 				{
-					await this.studio.projects.renameObject(this.currentProject,newName,item.path);
-					await this.refresh();
+					if(await this.studio.projects.renameObject(this.currentProject,newName,item.path))
+						await this.refresh();
 				}
 			}
 		},
@@ -563,8 +564,10 @@ export default {
 			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_FILE', 'PROJECT_FILE_SURE');
 			if (allow)
 			{
-				await this.studio.projects.deleteFile(this.currentProject,item.path);
-				await this.refresh();
+				if(await this.studio.projects.deleteFile(this.currentProject,item.path)) {
+					await this.refresh();
+				}
+					
 			}
 		},
 		async deleteFolder (item)
@@ -572,8 +575,8 @@ export default {
 			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_FOLDER', 'PROJECT_FOLDER_SURE');
 			if (allow)
 			{
-				await this.studio.projects.deleteFolder(this.currentProject,item.path);
-				await this.refresh();
+				if(await this.studio.projects.deleteFolder(this.currentProject,item.path))
+					await this.refresh();
 			}
 		},
 		/////

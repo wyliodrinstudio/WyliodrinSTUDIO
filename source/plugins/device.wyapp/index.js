@@ -508,8 +508,22 @@ export function setup(options, imports, register)
 			type: 'stop'
 		});
 
+		/* Register the File Manager button */
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_FILE_MANAGER', 20, () => {
+			let device = studio.workspace.getDevice ();
+			let value = studio.workspace.showDialog(FileManager, {
+				width:550,
+				connection: connections[device.id]
+			});
+		}, 'plugins/device.wyapp/data/img/icons/fileexplorer-icon.svg', {
+			visible () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED');
+			}
+		});
+		
 		/* Register the Task Manager button */
-		workspace.registerDeviceToolButton ('DEVICE_WYAPP_TASK_MANAGER', 20, () => {
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_TASK_MANAGER', 30, () => {
 			let device = studio.workspace.getDevice ();
 			let value = studio.workspace.showDialog(TaskManager, {
 				width:550,
@@ -519,19 +533,6 @@ export function setup(options, imports, register)
 			visible () {
 				let device = studio.workspace.getDevice ();
 				return (device.status === 'CONNECTED' && device.properties.taskManager === true);
-			}
-		});
-		/* Register the File Manager button */
-		workspace.registerDeviceToolButton ('DEVICE_WYAPP_FILE_MANAGER', 30, () => {
-			let device = studio.workspace.getDevice ();
-			let value = studio.workspace.showDialog(FileManager, {
-				width:550,
-				connection: connections[device.id]
-			});
-		}, 'plugins/device.wyapp/data/img/icons/task-icon.svg', {
-			visible () {
-				let device = studio.workspace.getDevice ();
-				return (device.status === 'CONNECTED');
 			}
 		});
 
