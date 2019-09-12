@@ -351,25 +351,13 @@ export default {
 				return language.icon;
 			} else return 'unknown';
 		},
-		iteratePictograms(pictograms, filename) {
-			if(pictograms && pictograms.length > 0) {
-				for( let pict of pictograms) {
-					if(pict.extension && ext === pict.extension) {
-						return pict.icon;
-					} else if(pict.filename && filename.split('.').slice(0, -1).join('.').match(pict.filename)) {
-						return pict.icon;
-					}
-				}
-				return this.baseFileIcon;
-			}
-		},
 		getPictogram(filename)
 		{
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
 			let addons = language.addons;
 			let pictograms = language.pictograms;
 			
-			let ext = path.extname(filename);
+			let ext = path.extname(filename).toLowerCase();
 			let device = this.studio.workspace.getDevice ();
 			let type = device.type;
 			let board = device.board;

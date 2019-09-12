@@ -9,6 +9,7 @@ import DeviceSettings from './views/DeviceSettings.vue';
 
 import DisconnectDialog from './views/DisconnectDialog.vue';
 import NetworkManager from './views/NetworkManager.vue';
+import FileManager from './views/FileManager.vue';
 import PackageManager from './views/PackageManager.vue';
 import TaskManager from './views/TaskManager.vue';
 
@@ -511,9 +512,22 @@ export function setup(options, imports, register)
 				return (device.status === 'CONNECTED' && device.properties.taskManager === true);
 			}
 		});
+		/* Register the File Manager button */
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_FILE_MANAGER', 30, () => {
+			let device = studio.workspace.getDevice ();
+			let value = studio.workspace.showDialog(FileManager, {
+				width:550,
+				connection: connections[device.id]
+			});
+		}, 'plugins/device.wyapp/data/img/icons/task-icon.svg', {
+			visible () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED');
+			}
+		});
 
 		/* Register the Package Manager button */
-		workspace.registerDeviceToolButton ('DEVICE_WYAPP_PACKAGE_MANAGER', 30, () => {
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_PACKAGE_MANAGER', 40, () => {
 			let device = studio.workspace.getDevice ();
 			let value = studio.workspace.showDialog(PackageManager, {
 				width:550,
@@ -525,9 +539,10 @@ export function setup(options, imports, register)
 				return (device.status === 'CONNECTED' && device.properties.packageManager === true);
 			}
 		});
+		
 
 		/* Register the Network Manager button */
-		workspace.registerDeviceToolButton ('DEVICE_WYAPP_NETWORK_MANAGER', 40, () => {
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_NETWORK_MANAGER', 50, () => {
 			let device = studio.workspace.getDevice ();
 			let value = studio.workspace.showDialog(NetworkManager, {
 				width:550,
