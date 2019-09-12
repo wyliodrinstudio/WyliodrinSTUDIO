@@ -30,6 +30,7 @@
 						{{ $t('DASHBOARD_VIEWER_ERASE_GRAPH') }}
 						</v-tooltip>
 					</v-btn>
+					<div class="graph-description">{{ signal.data.signalDescription }}</div>
 					<component :is="signal.component" :data="signal.data" class="graph-box" :class="'graph-box-'+signals.width"></component>
 				</div>	
 			</li>
@@ -116,9 +117,12 @@ export default {
 				console.log(e.message);
 			}
 		},
-		erase(signal)
+		async erase(signal)
 		{
-			this.signals = this.signals.filter(e=>e.id !== signal.id)
+			let allow = await this.studio.workspace.showConfirmationPrompt ('DASHBOARD_DELETE_TITLE', 'DASHBOARD_DELETE_QUESTION');
+
+			if(allow === 'yes')
+				this.signals = this.signals.filter(e=>e.id !== signal.id);
 		},
 		async addSignal (graph)
 		{
