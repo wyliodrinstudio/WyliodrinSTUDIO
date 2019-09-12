@@ -16,7 +16,7 @@ export default {
 			sourceLanguage: 'python',
 			editorOptions: {
 				fontSize: '12pt',
-				readOnly: false
+				readOnly: false,
 			}
 		};
 	},
@@ -28,6 +28,7 @@ export default {
 			require('brace/mode/sh');                
 			require('brace/mode/python');    //language
 			require('brace/mode/javascript');    //language
+			require('brace/mode/makefile');    //language
 			require('brace/mode/less');
 			require('brace/theme/chrome');
 			require('brace/theme/monokai');
@@ -45,27 +46,35 @@ export default {
 			immediate: true,
 			async handler ()
 			{
-				switch (path.extname (this.filename))
+				if (this.filename)
 				{
-					case '.py':
+					if (path.basename (this.filename).toLowerCase().startsWith ('makefile'))
 					{
-						this.sourceLanguage = 'python';
-						break;
+						this.sourceLanguage = 'makefile';
 					}
-					case '.sh':
+					else
+					switch (path.extname (this.filename))
 					{
-						this.sourceLanguage = 'sh';
-						break;
-					}
-					case '.js':
-					{
-						this.sourceLanguage = 'javascript';
-						break;
-					}
-					default:
-					{
-						this.sourceLanguage = '';
-						break;
+						case '.py':
+						{
+							this.sourceLanguage = 'python';
+							break;
+						}
+						case '.sh':
+						{
+							this.sourceLanguage = 'sh';
+							break;
+						}
+						case '.js':
+						{
+							this.sourceLanguage = 'javascript';
+							break;
+						}
+						default:
+						{
+							this.sourceLanguage = '';
+							break;
+						}
 					}
 				}
 				let source = await this.studio.projects.loadFile (this.project, this.filename);
