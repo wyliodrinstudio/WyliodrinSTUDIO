@@ -19,10 +19,10 @@
 			</v-tabs>
 			<v-tabs-items v-model="active">
 				<v-tab-item :key="'python'" fill-height>
-					<PackagesList language="python" :packages="packages.python"></PackagesList>
+					<PackagesList language="python" :packages="packages.python" @install="install" @uninstall="uninstall"></PackagesList>
 				</v-tab-item>
 				<v-tab-item :key="'nodejs'" fill-height>
-					<PackagesList language="nodejs" :packages="packages.nodejs"></PackagesList>
+					<PackagesList language="nodejs" :packages="packages.nodejs" @install="install" @uninstall="uninstall"></PackagesList>
 				</v-tab-item>
 			</v-tabs-items>
 		</v-card-text>
@@ -96,10 +96,11 @@ export default {
 				// console.log (packages);
 				for (let packageInformation of data.p)
 				{
-					packages[packageInformation.n] = _.assign (packages[packageInformation.n], {
+					packages[packageInformation.n] = _.assign ({}, packages[packageInformation.n], {
 						name: packageInformation.n,
 						version: packageInformation.v,
-						installed: true
+						installed: true,
+						working: false
 					});
 				}
 				let packagesData = [];
@@ -110,6 +111,21 @@ export default {
 				console.log (packages);
 				this.packages[data.l] = packagesData;
 			}
+			else 
+			if (data.a === 'i')
+			{
+				if (data.e !== undefined)
+				{
+					if (data.e !== 0)
+					{
+						this.studio.workspace.showError ('DEVICE_WYAPP_PACKAGE_INSTALL_ERROR', {language: data.l, packageName: data.p});
+					}
+					this.connection.send ('pm', {
+						a: 'p',
+						l: data.l
+					});
+				}
+			}
 		},
 		esc() {
 			this.close();
@@ -117,6 +133,37 @@ export default {
 		close ()
 		{
 			this.$root.$emit ('submit');
+		},
+		install (data)
+		{
+			this.connection.send ('pm', {
+				a: 'i',
+				l: data.language,
+				p: data.package.name
+			});
+			this.working (data.language, data.package.name);
+		},
+		uninstall (data)
+		{
+			this.connection.send ('pm', {
+				a: 'u',
+				l: data.language,
+				p: data.package.name
+			});
+			this.working (data.language, data.package.name);
+		},
+		working (language, packageName)
+		{
+			this.packages[language] = this.packages[language].map ((p) => {
+				if (p.name === packageName)
+				{
+					return _.assign ({}, p, {working: true});
+				}
+				else
+				{
+					return p;
+				}
+			});
 		}
 	}
 }

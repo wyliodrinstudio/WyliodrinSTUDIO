@@ -86,5 +86,13 @@
     "DEVICE_WYAPP_INSTALL": {
         "message": "Install",
         "description": "Button to install a package."
+    },
+    "DEVICE_WYAPP_PACKAGE_INSTALL_ERROR": {
+        "message": "Failed to install {language} package {packageName}.",
+        "description": "The error the users sees when a packages failes to install"
+    },
+    "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": {
+        "message": "Failed to uninstall {language} package {packageName}.",
+        "description": "The error the users sees when a packages failes to uninstall"
     }
 }

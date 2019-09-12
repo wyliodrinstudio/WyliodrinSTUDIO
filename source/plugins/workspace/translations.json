@@ -212,6 +212,8 @@
          "DEVICE_WYAPP_UNINSTALL": "Uninstall",
          "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": "Device name",
          "DEVICE_WYAPP_INSTALL": "Install",
+         "DEVICE_WYAPP_PACKAGE_INSTALL_ERROR": "Failed to install {language} package {packageName}.",
+         "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": "Failed to uninstall {language} package {packageName}.",
          "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": "Unable to load SerialPort WyApp Transport, serial devices over wyapp will not be available (error: {{error}})",
          "DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR": "Unable to list the serial ports (error: {error})",
          "DEVICE_SERIAL_PORT": "Serial Port",

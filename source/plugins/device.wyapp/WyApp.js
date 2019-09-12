@@ -254,11 +254,19 @@ export default class WyApp extends EventEmitter
 							{
 								let packet = msgpack.decode (rawPacket);
 								// console.log (packet);
-								this.emit ('packet', packet);
+								try
+								{
+									this.emit ('packet', packet);
+								}
+								catch (e)
+								{
+									console.error (e.message);
+								}
 							}
 							catch (e)
 							{
-								this.emit ('error', e.message);
+								// this.emit ('error', e.message);
+								console.error (e.message);
 								// console.log ('Packet error '+e.message);
 							}
 						}

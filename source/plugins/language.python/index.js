@@ -36,7 +36,7 @@ export default function setup (options, imports, register)
 		getMakefile(project, filename) {
 			if (filename[0] === '/') filename = filename.substring (1);
 			// TODO add filename
-			return 'run:\n\tpython main.py';
+			return 'run:\n\tpython3 main.py';
 		},
 	};
 
