@@ -319,12 +319,6 @@ export default {
 			// 	})
 			// }
 			this.showTree = this.advanced;
-			if(this.showTree === true) {
-				this.studio.workspace.setWorkspaceTitle(path.basename(this.currentFile));
-			} else {
-				this.studio.workspace.setWorkspaceTitle(this.currentProject.name);
-			}
-			
 		},
 		type()
 		{
