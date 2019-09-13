@@ -17,6 +17,9 @@ export default {
 			editorOptions: {
 				fontSize: '12pt',
 				readOnly: false,
+				enableBasicAutocompletion: true,
+				enableSnippets: true,
+				enableLiveAutocompletion: true
 			}
 		};
 	},
@@ -24,17 +27,31 @@ export default {
 		initEditor (/*editor*/)
 		{
 			require('brace/ext/language_tools'); //language extension prerequsite...
-			// require('brace/mode/html');
+			require('brace/ext/searchbox');
+			require('brace/ext/settings_menu');
+
+			require('brace/worker/javascript');
+
 			require('brace/mode/sh');                
 			require('brace/mode/python');    //language
 			require('brace/mode/javascript');    //language
 			require('brace/mode/makefile');    //language
+			require('brace/mode/css');
 			require('brace/mode/html');    //language
 			require('brace/mode/less');
+			require('brace/mode/json');
+
 			require('brace/theme/chrome');
 			require('brace/theme/monokai');
+			
 			require('brace/snippets/python'); //snippet
 			require('brace/snippets/javascript'); //snippet
+			require('brace/snippets/makefile'); //snippet
+			require('brace/snippets/html'); //snippet
+			require('brace/snippets/json'); //snippet
+			require('brace/snippets/sh'); //snippet
+			require('brace/snippets/css'); //snippet
+			require('brace/snippets/less'); //snippet
 		}
 	},
 	components: {
@@ -74,6 +91,21 @@ export default {
 						case '.js':
 						{
 							this.sourceLanguage = 'javascript';
+							break;
+						}
+						case '.json':
+						{
+							this.sourceLanguage = 'json';
+							break;
+						}
+						case '.css':
+						{
+							this.sourceLanguage = 'css';
+							break;
+						}
+						case '.less':
+						{
+							this.sourceLanguage = 'less';
 							break;
 						}
 						default:

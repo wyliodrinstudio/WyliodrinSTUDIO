@@ -1,7 +1,7 @@
 <template>
 	<div class="fill-height">
 		<div class="terminal-actions">
-			<span>Title: {{currentTerminalTitle}}</span>
+			<span>{{currentTerminalTitle}}</span>
 			<div class="terminal-btns">
 				<v-tooltip top>
 					<template v-slot:activator="{ on }">
