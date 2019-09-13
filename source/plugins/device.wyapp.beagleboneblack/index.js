@@ -61,9 +61,14 @@ export function setup (options, imports, register)
 	/* Register Icon */
 	studio.device_wyapp.registerBoard ('beagleboneblack', beagleboneblack);
 
-	studio.device_wyapp.registerLanguagePackage ('nodejs', 'raspberrypi', {
+	studio.projects.registerLanguagePackage ('nodejs', 'raspberrypi', {
 		name: 'onoff',
 		description: 'GPIO access and interrupt detection with Node.js on Linux boards like the Raspberry Pi, C.H.I.P. or BeagleBone.'
+	});
+
+	studio.projects.registerLanguagePackage ('nodejs', 'raspberrypi', {
+		name: 'bonescript',
+		description: 'BoneScript is a node.js library for physical computing on embedded Linux, starting with support for BeagleBone.'
 	});
 
 	register (null, {});

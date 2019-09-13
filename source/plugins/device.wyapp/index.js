@@ -638,36 +638,7 @@ export function setup(options, imports, register)
 		getBoardDriver (name)
 		{
 			return boards[name];
-		},
-
-		/**
-		 * Register a package for a language
-		 * @param {string} language 
-		 * @param {string} board 
-		 * @param {PackageInformation} packageInformation 
-		 */
-		registerLanguagePackage (language, board, packageInformation)
-		{
-			if (!board) board = '*';
-			if (!packages[language]) packages[language] = {'*':{}};
-			if (!packages[language][board]) packages[language][board] = {};
-			packages[language][board][packageInformation.name] = packageInformation;
-		},
-
-		/**
-		 * Retrieve the language packages for a language
-		 * @param {Device} device 
-		 * @param {string} language 
-		 */
-		getLanguagePackages (device, language)
-		{
-			let p = {};
-			if (packages[language])
-			{
-				p = _.assign ({}, packages[language]['*'], packages[language][device.board]);
-			}
-			return p;
-		},
+		}
 	};
 
 	studio.shell.register ((event, id, ...data) =>

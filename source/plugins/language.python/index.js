@@ -42,5 +42,40 @@ export default function setup (options, imports, register)
 
 	studio.projects.registerLanguage('python', 'Python', 'plugins/language.python/data/img/pythonLittle.png',pictograms, python);
 
+	studio.projects.registerLanguagePackage ('python', null, [
+		{
+			name: 'requests',
+			description: 'Requests is the only Non-GMO HTTP library for Python, safe for human consumption.'
+		},
+		{
+			name: 'scrapy',
+			description: 'Scrapy, a fast high-level web crawling & scraping framework for Python.'
+		},
+		{
+			name: 'tensorflow',
+			description: 'An end-to-end open source machine learning platform'
+		},
+		{
+			name: 'scrapy',
+			description: 'Scrapy, a fast high-level web crawling & scraping framework for Python.'
+		},
+		{
+			name: 'numpy',
+			description: 'NumPy is the fundamental package for scientific computing with Python.'
+		},
+		{
+			name: 'Flask',
+			description: 'The Python micro framework for building web applications.'
+		},
+		{
+			name: 'opcua',
+			description: 'LGPL Pure Python OPC-UA Client and Server'
+		},
+		{
+			name: 'asyncua',
+			description: 'OPC UA library for python > 3.6 asyncio'
+		},
+	]);
+
 	register (null, {});
 }

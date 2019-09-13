@@ -7,6 +7,8 @@ import path from 'path';
 import JSZip from 'jszip';
 import projectStore from './store';
 
+let packages = {};
+
 
 
 /**
@@ -1470,6 +1472,39 @@ let projects = {
 		} else {
 			studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
 		}
+	},
+
+	/**
+	 * Register a package for a language
+	 * @param {string} language 
+	 * @param {string} board 
+	 * @param {PackageInformation|PackageInformation[]} packageInformationArray 
+	 */
+	registerLanguagePackage (language, board, packageInformationArray)
+	{
+		if (!_.isArray (packageInformationArray)) packageInformationArray = [packageInformationArray];
+		for (let packageInformation of packageInformationArray)
+		{
+			if (!board) board = '*';
+			if (!packages[language]) packages[language] = {'*':{}};
+			if (!packages[language][board]) packages[language][board] = {};
+			packages[language][board][packageInformation.name] = packageInformation;
+		}
+	},
+
+	/**
+	 * Retrieve the language packages for a language
+	 * @param {Device} device 
+	 * @param {string} language 
+	 */
+	getLanguagePackages (device, language)
+	{
+		let p = {};
+		if (packages[language])
+		{
+			p = _.assign ({}, packages[language]['*'], packages[language][device.board]);
+		}
+		return p;
 	},
 	//getDefaultFileName(Project)
 	//Daca nu e placa -> language normal al proiectului -> iau main de acolo
