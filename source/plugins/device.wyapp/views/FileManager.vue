@@ -296,11 +296,16 @@ export default {
 					if(item.path === this.cwd && item.children !== undefined) {
 						this.updateFileTree(this.pieData,item.children);
 						break;
-					} else if (item.children !== undefined && item.path.includes(cwd)) {
+					} else if (item.children !== undefined && this.isChildOf(cwd,item.path)) {
 						this.updateChildren(item.path,array);
 					}
 				}
 			}
+		},
+		_isChildOf(child,parent) {
+			if (child === parent) return false;
+			const parentTokens = parent.split(path.sep).filter(i => i.length);
+			return parentTokens.every((t, i) => child.split(path.sep)[i] === t);
 		},
 		showFile(e) {
 			this.fileMenu = false;
