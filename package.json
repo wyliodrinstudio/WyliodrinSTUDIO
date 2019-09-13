@@ -76,6 +76,7 @@
 		"uuid": "^3.3.2",
 		"validator": "^10.11.0",
 		"vue": "^2.6.10",
+		"vue-async-computed": "^3.7.0",
 		"vue-chartjs": "^3.4.2",
 		"vue-clickaway": "^2.2.2",
 		"vue-devtools": "^5.1.0",

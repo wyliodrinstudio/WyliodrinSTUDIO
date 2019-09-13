@@ -7,6 +7,8 @@ import path from 'path';
 import JSZip from 'jszip';
 import projectStore from './store';
 
+let packages = {};
+
 
 
 /**
@@ -489,11 +491,16 @@ let projects = {
 			await studio.filesystem.mkdirp(pathing);
 			if(await studio.filesystem.isDirectory(pathing)){
 				zip.loadAsync(data).then(function(contents) {
-					Object.keys(contents.files).forEach(function(filename) {
-						zip.file(filename).async('nodebuffer').then(async function(content) {
-							var dest = path.join(pathing,filename);
-							await studio.filesystem.writeFile(dest, content);
-						});
+					Object.keys(contents.files).forEach(async function(key) {
+						if (contents.files[key].dir){
+							var dest = path.join(pathing,key);
+							await studio.filesystem.mkdirp(dest);
+						} else {
+							zip.file(key).async('nodebuffer').then(async function(content) {
+								var dest = path.join(pathing,key);
+								await studio.filesystem.writeFile(dest, content);
+							});
+						}
 					});
 				});
 				return true;
@@ -608,6 +615,7 @@ let projects = {
 				for (let file of list) {
 					file = path.resolve(dir, file);
 					if (await studio.filesystem.isDirectory(file)) {
+						zip.folder(path.relative(root, file));
 						await this._buildZipFromDirectory(file, zip, root);
 					} else {
 						const filedata = await studio.filesystem.readFile(file);
@@ -975,7 +983,6 @@ let projects = {
 				if (await studio.filesystem.isDirectory(projectFolder)) {
 					try {
 						let projectData = JSON.parse((await studio.filesystem.readFile(path.join(projectFolder, 'project.json'))).toString());
-						console.log(projectData);
 						language = projectData.language;
 						let date = projectData.date.split('.')[0];
 						// ERROR - astea vin aici, doar daca projectData exista folder-ul este un proiect
@@ -1011,7 +1018,7 @@ let projects = {
 	 * 
 	 * @returns {boolean} true if succsesful, false otherwise
 	 */
-	async selectCurrentProject(project) {
+	async selectCurrentProject(project,firstLoad) {
 		if(project){
 			let projectFolder = project.folder;  
 			if (projectFolder !== null && await studio.filesystem.pathExists(projectFolder)) {
@@ -1034,7 +1041,7 @@ let projects = {
 				//select file
 				if (project) {
 					studio.workspace.dispatchToStore('projects', 'currentProject', null);
-					await studio.settings.storeValue('projects', 'currentFile', null);
+					await studio.settings.storeValue('projects', 'currentProject', null);
 					studio.workspace.dispatchToStore('projects', 'currentFile', null);
 					await studio.settings.storeValue('projects', 'currentFile', null);
 
@@ -1049,7 +1056,7 @@ let projects = {
 					// Close file in editor and make sure project is consistent
 					await studio.settings.storeValue('projects', 'currentProject', project);
 					let language = this.getLanguage(project.language);
-					if (language) {
+					if (language && firstLoad) {
 						// let content = await studio.filesystem.readdir(projectFolder);
 						// let pathing = '';
 						// let editors = studio.workspace.getFromStore('projects', 'editors');
@@ -1061,7 +1068,7 @@ let projects = {
 							studio.workspace.dispatchToStore('projects', 'currentFile', null);
 						}
 
-						await studio.settings.storeValue('projects', 'currentFile', studio.workspace.getFromStore('projects', 'currentFile'));
+						await studio.settings.storeValue('projects', 'currentFile', mainFile);
 
 					}
 				}
@@ -1090,11 +1097,16 @@ let projects = {
 		let file = studio.settings.loadValue('projects', 'currentFile', null);
 
 		if (project !== {} && project !== null) { 
-			await this.selectCurrentProject(project);
+			if(await this.selectCurrentProject(project, false)) {
+				if (file !== {} && file !== null) {
+					console.log('changed file');
+					console.log(file);
+					await this.changeFile(project,file);
+				}
+			}
+			
 		}
-		if (file !== {} && file !== null) {
-			await this.changeFile(project,file);
-		}
+		
 	},
 	/**
 	 * The purpose of this function is to save a file. It requires the *project* in which the file resides, 
@@ -1470,6 +1482,39 @@ let projects = {
 		} else {
 			studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
 		}
+	},
+
+	/**
+	 * Register a package for a language
+	 * @param {string} language 
+	 * @param {string} board 
+	 * @param {PackageInformation|PackageInformation[]} packageInformationArray 
+	 */
+	registerLanguagePackage (language, board, packageInformationArray)
+	{
+		if (!_.isArray (packageInformationArray)) packageInformationArray = [packageInformationArray];
+		for (let packageInformation of packageInformationArray)
+		{
+			if (!board) board = '*';
+			if (!packages[language]) packages[language] = {'*':{}};
+			if (!packages[language][board]) packages[language][board] = {};
+			packages[language][board][packageInformation.name] = packageInformation;
+		}
+	},
+
+	/**
+	 * Retrieve the language packages for a language
+	 * @param {Device} device 
+	 * @param {string} language 
+	 */
+	getLanguagePackages (device, language)
+	{
+		let p = {};
+		if (packages[language])
+		{
+			p = _.assign ({}, packages[language]['*'], packages[language][device.board]);
+		}
+		return p;
 	},
 	//getDefaultFileName(Project)
 	//Daca nu e placa -> language normal al proiectului -> iau main de acolo

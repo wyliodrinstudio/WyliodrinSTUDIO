@@ -259,5 +259,25 @@
         "message": "Click the \"Create new Application\" button below",
         "description": "Message displayed in the Projects Library when the list of projects is empty."
 
+    },
+    "PROJECTS_STORAGE_NOT_PERSISTENT": 
+    {
+        "message": "The storage system is not persistent. This means your projects might be deleted any time without notice. To avoid this, please export your projects frequently.",
+        "description": "The message the user sees in the Projects Library when persistent storage is not available. We recommend you to use Firefox."
+    },
+    "PROJECTS_STORAGE_ASK_PERSISTENT": 
+    {
+        "message": "The storage system is not persistent. Please allow permission to make the storage peristent.",
+        "description": "The message the user sees in the Projects Library when persistent storage is available but not permitted."
+    },
+    "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": 
+    {
+        "message": "Allow Persistance",
+        "description": "The button the user clicks to ask persistance."
+    },
+    "PROJECTS_STORAGE_BROWSER_ERROR": 
+    {
+        "message": "If your browser didn't ask you if you allow persistence, there might be an issue with your browser. To prevent losing your projects, you should add this website to the bookmarks, use it more often and frequenlty export your projects. We also recommend you to use Firefox.",
+        "description": "The message the user sees in the Projects Library when persistent storage is not available."
     }
 }

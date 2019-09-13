@@ -70,12 +70,12 @@ export function setup (options, imports, register)
 	/* Register Icon */
 	studio.device_wyapp.registerBoard ('raspberrypi', raspberrypi);
 
-	studio.device_wyapp.registerLanguagePackage ('nodejs', 'raspberrypi', {
+	studio.projects.registerLanguagePackage ('nodejs', 'raspberrypi', {
 		name: 'onoff',
 		description: 'GPIO access and interrupt detection with Node.js on Linux boards like the Raspberry Pi, C.H.I.P. or BeagleBone.'
 	});
 
-	studio.device_wyapp.registerLanguagePackage ('python', 'raspberrypi', {
+	studio.projects.registerLanguagePackage ('python', 'raspberrypi', {
 		name: 'gpiozero',
 		description: 'A simple interface to GPIO devices with Raspberry Pi.'
 	});

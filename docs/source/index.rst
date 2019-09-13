@@ -59,8 +59,9 @@ Also, the recognized programming languages at the time are:
 .. toctree::
    :maxdepth: 3
    
-   architecture
    start
+   boards
+   architecture
    extension
    api
    plugin

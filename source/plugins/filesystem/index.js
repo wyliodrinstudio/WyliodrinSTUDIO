@@ -138,6 +138,23 @@ let filesystem = {
 			studio.workspace.error ('REAL_FS_DO_NOT_EXIST_FS');
 		}
 	},
+
+	/**
+	 * Is the filesystem persistent?
+	 * @returns {string} - never/prompt/persisted
+	 */
+	isPersistent ()
+	{
+		return this._runFileSystemFn ('isPersistent');
+	},
+
+	/**
+	 * Make the filesystem persistent (for web usually)
+	 */
+	setPersistent ()
+	{
+		return this._runFileSystemFn ('setPersistent');
+	}
 };
 
 export default function setup(options, imports, register) {
