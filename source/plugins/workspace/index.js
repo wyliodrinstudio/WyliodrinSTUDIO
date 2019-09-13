@@ -193,9 +193,7 @@ let workspace = {
 		// this.registerMenuItem ('TOOLBAR_SETUP', 10, () => {
 		// 	console.log ('menu item setup');
 		// });
-		this.registerMenuItem ('WORKSPACE_DOCUMENTATION', 10, () => {
-			system.openLink('https://wyliodrinstudio.readthedocs.io/en/latest/');
-		});
+		
 		this.registerMenuItem ('WORKSPACE_SET_MODE_SIMPLE', 10, () => {
 			workspace.dispatchToStore('workspace','mode', 'simple');
 		}, {

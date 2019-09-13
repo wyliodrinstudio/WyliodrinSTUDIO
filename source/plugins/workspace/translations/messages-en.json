@@ -126,9 +126,5 @@
     "ABOUT_PROVIDED_BY": {
         "message": "Provided by",
         "description": "Provider of Wyliodrin STUDIO"
-    },
-    "WORKSPACE_DOCUMENTATION": {
-        "message": "Documentation",
-        "description": "Open a new window with the documentation of Wyliodrin STUDIO"
     }
 }

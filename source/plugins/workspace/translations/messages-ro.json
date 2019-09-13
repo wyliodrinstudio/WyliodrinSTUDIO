@@ -94,9 +94,5 @@
     "WORKSPACE_SET_MODE_SIMPLE": {
         "message": "Mod Simplu",
         "description": "The menu to set the editor in simple mode"
-    },
-    "WORKSPACE_DOCUMENTATION": {
-        "message": "Documentație",
-        "description": "Open a new window with the documentation of Wyliodrin STUDIO"
     }
 }

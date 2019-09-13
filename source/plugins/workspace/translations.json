@@ -235,7 +235,7 @@
          "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": "Add Device",
          "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": "Device Name",
          "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": "Please enter a valid device name",
-         "WYLIODRIN_API": "Wyliodrin API",
+         "DOCUMENTATION": "Documentation",
          "TOOLBAR_RESISTOR_COLOR_CODE": "Resistor color code",
          "RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER": "FROM COLOR TO NUMBER",
          "RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR": "FROM NUMBER TO COLOR",
@@ -374,8 +374,7 @@
          "ABOUT_DEVELOPMENT": "Developer",
          "ABOUT_LICENSE": "License",
          "ABOUT_LICENSE_TITLE": "Usage License",
-         "ABOUT_PROVIDED_BY": "Provided by",
-         "WORKSPACE_DOCUMENTATION": "Documentation"
+         "ABOUT_PROVIDED_BY": "Provided by"
       },
       "es": {
          "CHAT": "CHAT",
@@ -557,6 +556,7 @@
          "DEVICE_SERIAL_OPTIONS": "Connexion sériale",
          "DEVICE_BAUDRATE": "Débit en bauds",
          "NETWORK_CONNECTION": "Connection à l'adresse",
+         "DOCUMENTATION": "Documentation",
          "TOOLBAR_RESISTOR_COLOR_CODE": "Code couleur de résistance",
          "RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER": "DE COULEUR À VALEUR",
          "RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR": "DE VALEUR À COULEUR",
@@ -879,6 +879,7 @@
          "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE": "Folositi Studio aici?",
          "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET": "Mai exista o instanta de Studio activa si puteti folosi doar o instanta la un moment dat. Dotiti sa folositi Studio aici?",
          "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": "Va rog dati un nume pentru dispozitivul nou",
+         "DOCUMENTATION": "Documentație",
          "TOOLBAR_RESISTOR_COLOR_CODE": "Codul culorilor pentru rezistențe",
          "RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER": "DIN CULOARE ÎN VALOARE",
          "RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR": "DIN NUMĂR ÎN CULOARE",
@@ -1001,8 +1002,7 @@
          "NO": "Nu",
          "EXIT": "Ieșire",
          "WORKSPACE_SET_MODE_ADVANCED": "Mod Avansat",
-         "WORKSPACE_SET_MODE_SIMPLE": "Mod Simplu",
-         "WORKSPACE_DOCUMENTATION": "Documentație"
+         "WORKSPACE_SET_MODE_SIMPLE": "Mod Simplu"
       },
       "sk": {
          "CHAT": "CHAT",
