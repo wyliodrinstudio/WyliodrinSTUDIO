@@ -15,6 +15,8 @@ import studioStore from './store';
 import AboutDialog from './views/AboutDialog.vue';
 import AsyncComputed from 'vue-async-computed';
 
+let settings = null;
+
 /**
  * a function that is called when the item may be deleted
  * @callback disposable
@@ -196,6 +198,7 @@ let workspace = {
 		
 		this.registerMenuItem ('WORKSPACE_SET_MODE_SIMPLE', 10, () => {
 			workspace.dispatchToStore('workspace','mode', 'simple');
+			settings.storeValue('workspace', 'mode', 'simple');
 		}, {
 			visible (){
 				return workspace.getFromStore ('workspace', 'mode') !== 'simple';
@@ -204,6 +207,8 @@ let workspace = {
 	
 		this.registerMenuItem ('WORKSPACE_SET_MODE_ADVANCED', 10, () => {
 			workspace.dispatchToStore('workspace','mode','advanced');	
+			settings.storeValue('workspace', 'mode', 'advanced');
+
 		}, {
 			visible (){
 				return workspace.getFromStore ('workspace', 'mode') === 'simple';
@@ -1290,6 +1295,12 @@ export function setup (options, imports, register)
 
 	/* Register the store */
 	workspace.registerStore ('workspace', studioStore);
+
+	settings = imports.settings;
+	let mode = settings.loadValue('workspace', 'mode', 'simple');
+	console.log(mode);
+
+	workspace.dispatchToStore('workspace','mode', mode);
 
 	register (null, {
 		workspace: workspace
