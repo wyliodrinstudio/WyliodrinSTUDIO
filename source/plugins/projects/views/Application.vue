@@ -301,7 +301,9 @@ export default {
 	watch: {
 		currentFile ()
 		{
-			this.dirTree(this.currentProject);
+			this.dirTree();
+			console.log(this.items);
+
 		},
 		async source ()
 		{
@@ -462,6 +464,7 @@ export default {
 					this.items = [];
 				}
 				let components = await this.studio.filesystem.readdir(filename);
+				console.log(components);
 				let files = [];
 				for(let item of components){
 					let file = await this.studio.projects.recursiveGeneration(this.currentProject,
@@ -480,8 +483,10 @@ export default {
 					children:files,
 					path:filename.replace(this.currentProject.folder, '')
 				}];
+				// root.sort((a, b) => (a.priority >= b.priority) ? 1 : -1)
 				this.items = root;
 				this.previous = this.items;
+				console.log(this.items);
 			}
 		},
 		async newFolder (item)
@@ -575,7 +580,7 @@ export default {
 		},
 		/////
 		async refresh(){
-			await this.dirTree(this.currentProject.folder);
+			await this.dirTree();
 		},
 		projectLibrary(){
 			this.studio.workspace.showDialog(ProjectsLibrary, {
@@ -590,7 +595,7 @@ export default {
 	async created ()
 	{
 		await this.studio.projects.loadPreviousSelectedCurrentProject();
-		// await this.dirTree(this.currentFile);
+		await this.dirTree();
 		
 	}
 }

@@ -469,10 +469,9 @@ let web_filesystem = {
 	{
 		if (path.startsWith('/'))
 			path = path.substring(1);
-		let paths = path.split('/');
 		if (path.endsWith('/'))
 			paths.pop();
-		
+		let paths = path.split('/');
 		let parentId;
 		try {
 			parentId = await this.getLastParentId(paths, 1);
@@ -490,10 +489,9 @@ let web_filesystem = {
 		if (typeof buffer !== 'object') buffer = Buffer.from (buffer);
 		if (path.startsWith('/'))
 			path = path.substring(1);
-		let paths = path.split('/');	
 		if (path.endsWith('/'))
 			paths.pop();
-		
+		let paths = path.split('/');
 		let parentId;
 		try {
 			parentId = await this.getLastParentId(paths, 1);
