@@ -13,6 +13,7 @@ import QuestionDialog from './views/QuestionDialog.vue';
 import PromptDialog from './views/PromptDialog.vue';
 import studioStore from './store';
 import AboutDialog from './views/AboutDialog.vue';
+import AsyncComputed from 'vue-async-computed';
 
 /**
  * a function that is called when the item may be deleted
@@ -173,6 +174,8 @@ let workspace = {
 		{
 			this.error ('Loading translations failed '+e.message);
 		}
+
+		Vue.use(AsyncComputed);
 
 		Vue.translation = translations;
 
