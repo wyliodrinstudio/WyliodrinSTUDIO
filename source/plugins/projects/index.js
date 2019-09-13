@@ -1052,7 +1052,7 @@ let projects = {
 					});
 
 					studio.workspace.dispatchToStore('projects', 'currentProject', project);
-					studio.workspace.setWorkspaceTitle (project.name);
+					// studio.workspace.setWorkspaceTitle (project.name);
 					// Close file in editor and make sure project is consistent
 					await studio.settings.storeValue('projects', 'currentProject', project);
 					let language = this.getLanguage(project.language);
@@ -1199,7 +1199,7 @@ let projects = {
 
 		if(name !== null) {
 			if (path.basename(name) != 'project.json') {
-				await studio.workspace.setWorkspaceTitle(path.basename(name));
+				// await studio.workspace.setWorkspaceTitle(path.basename(name));
 				if (name !== '') {
 					await studio.settings.storeValue('projects', 'currentFile', name);
 					await studio.workspace.dispatchToStore('projects', 'currentFile', name);
@@ -1211,7 +1211,7 @@ let projects = {
 			}
 			return true;
 		} else if (project !== null) {
-			await studio.workspace.setWorkspaceTitle(project.name);
+			// await studio.workspace.setWorkspaceTitle(project.name);
 			studio.workspace.warn('Error selecting current file, file is null, dispatching null');
 			await studio.settings.storeValue('projects', 'currentFile', null);
 			await studio.workspace.dispatchToStore('projects', 'currentFile', null);
