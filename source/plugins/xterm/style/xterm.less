@@ -15,7 +15,8 @@
 	.v-image {height: 48px; width: 48px; margin: 35px auto 10px !important; filter: invert(60%) !important;}
 }
 
-.shell-box {
+.shell-box {background: @color-black;
+	> .fill-height {height: calc(~"100% - 64px");}
 	> .terminal-actions {background: @color-dark-1; color: @color-white; overflow: auto; padding: 10px 10px 10px 10px;
 		> span {display: inline-block; position: relative; float: left; line-height: 24px;}
 		.terminal-btns {float: right; display: inline;
