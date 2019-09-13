@@ -15,12 +15,13 @@ This will show how to set up a Raspberry Pi device.
 
 |
 
-Download the configured image
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Download the pre-configured image
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The easiest way to set up a Raspberry Pi board so that it becomes available for the Wyliodrin STUDIO IDE is to download an image that is already configured.
 
-You can find the image for **Raspberry Pi Zero** and **Raspberry Pi 1** `here <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_2019_09_13.zip>`_.
+
+Download the image for `Raspberry Pi Zero** and **Raspberry Pi 1** `here <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_2019_09_13.zip>`_.
 
 
 For **Raspberry Pi 2, 3 and 4** you can download the image archive `here <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_13.zip>`_.
