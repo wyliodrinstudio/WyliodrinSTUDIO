@@ -185,7 +185,7 @@ export default {
 		},
 		async selectProject (project)
 		{
-			if(await this.studio.projects.selectCurrentProject(project)){
+			if(await this.studio.projects.selectCurrentProject(project,true)){
 				this.close ();
 			}
 		},

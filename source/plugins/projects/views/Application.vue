@@ -482,8 +482,6 @@ export default {
 				}];
 				this.items = root;
 				this.previous = this.items;
-				console.log(this.items);
-				console.log(this.currentFile);
 			}
 		},
 		async newFolder (item)
