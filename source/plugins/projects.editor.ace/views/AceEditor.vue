@@ -109,7 +109,6 @@ export default {
 			if (newValue !== oldValue)
 			{
 				// this.$emit ('input', this.source);
-				console.log (this.source);
 				await this.studio.projects.saveFile (this.project, this.filename, this.source);
 			}
 		}
