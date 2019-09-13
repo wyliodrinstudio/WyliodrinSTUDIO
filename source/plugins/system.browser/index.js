@@ -6,7 +6,7 @@ let system = {
 
 	close ()
 	{
-		window.close ();
+		location.href = 'https://wyliodrin.studio';
 	},
 
 	minimize ()
@@ -17,15 +17,7 @@ let system = {
 	fullscreen ()
 	{
 		let isFullscreen = () => {
-			let fullscreen;
-			if (!window.screenTop && !window.screenY) { 
-				fullscreen = true;
-			}
-			else
-			{
-				fullscreen = false;
-			}
-			return fullscreen;
+			return document.fullscreenElement !== null;
 		};
 		if (isFullscreen ())
 		{
