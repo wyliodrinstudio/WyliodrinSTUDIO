@@ -121,6 +121,10 @@
     },
     "ABOUT_LICENSE_TITLE": {
         "message": "Usage License",
-         "description": "Title of the license popup"
+        "description": "Title of the license popup"
+    },
+    "ABOUT_PROVIDED_BY": {
+        "message": "Provided by",
+        "description": "Provider of Wyliodrin STUDIO"
     }
 }

@@ -104,6 +104,21 @@ let filesystem_real = {
 		return list;
 	},
 	
+	/**
+	 * Is the filesystem persistent?
+	 */
+	isPersistent ()
+	{
+		return 'persistent';
+	},
+
+	/**
+	 * Make the filesystem persistent (for web usually)
+	 */
+	setPersistent ()
+	{
+		return;
+	}
 };
 
 export default function setup(options, imports, register) {

@@ -536,3 +536,206 @@ The main functions of the settings plugin are:
 |
 
 .. autofunction:: storeValue
+
+|
+
+
+.. Protocol
+.. ===========
+
+.. The interaction between a device connected to Wyliodrin STUDIO and the user who wants to transmit and receive data to and from it is possible as long as a well defined protocol is established.
+
+.. The transferred packets are required to include:
+
+.. * t - tag, to know which component of the program serves as "bridge" between the user and the device
+.. * d - data, object with the tags of the actions and options
+
+.. Shell
+.. """""""
+
+.. **Open**
+
+
+.. Send to device:
+
+.. * t:'s'
+.. * d: {a:'o', c:columns, r:rows}
+
+.. .. list-table
+
+.. 	* - Label
+.. 	  - Description
+.. 	* - 's'
+.. 	  - the shell tag
+.. 	* - a
+.. 	  - tag for the action to be performed
+.. 	* - 'o'
+.. 	  - open the shell action tag
+.. 	* - c
+.. 	  - terminal columns number tag
+.. 	* - r
+.. 	  - terminal rows number tag
+
+.. |
+
+.. Receive from the device
+
+.. * t:'s'
+.. * d: {a:'o', r:'d'}
+
+.. |
+
+.. * t:'s'
+.. * d: {a:'o', r:'e', e:error}
+
+.. .. list-table
+
+.. 	* - Label
+.. 	  - Description
+.. 	* - 's'
+.. 	  - the shell tag
+.. 	* - a
+.. 	  - tag for the action to be performed
+.. 	* - 'o'
+.. 	  - open the shell action tag
+.. 	* - r
+.. 	  - tag for the response received from the device
+.. 	* - 'd'
+.. 	  - 
+.. 	* - 'e'
+.. 	  - error occured tag
+.. 	* - e
+.. 	  - the actual error tag
+
+.. |
+
+.. **Keys**
+
+
+.. Send to device:
+
+.. * t:'s'
+.. * d:{a:'k', t:keys}
+
+.. list-table
+
+.. 	* - Label
+.. 	  - Description
+.. 	* - 's'
+.. 	  - the shell tag
+.. 	* - a
+.. 	  - tag for the action to be performed
+.. 	* - 'k'
+.. 	  - tag for key written in the terminal
+.. 	* - t
+.. 	  - 
+.. 	* - keys
+.. 	  - 
+
+.. |
+
+.. Receive from the device:
+
+.. * t:'s'
+.. * d:{a:'k', t:keys}
+
+.. |
+
+.. * t:'s'
+.. * d:{a:'e', e:error}
+
+.. .. list-table::
+
+.. 	* - Label
+.. 	  - Description
+.. 	* - 's'
+.. 	  - the shell tag
+.. 	* - a
+.. 	  - tag for the action to be performed
+.. 	* - 'e'
+.. 	  - error tag
+.. 	* - t
+.. 	  - 
+.. 	* - keys
+.. 	  - 
+.. 	* - 'e'
+.. 	  - error occured tag
+.. 	* - e
+.. 	  - the actual error tag
+
+.. |
+
+.. **Resize**
+
+.. Send to device:
+
+.. * t:'s'
+.. * d:{a:'r', c:columns, r:rows}
+
+.. .. list-table
+
+.. 	* - Label
+.. 	  - Description
+.. 	* - 's'
+.. 	  - the shell tag
+.. 	* - 'r'
+.. 	  - resize the shell tag
+.. 	* - c
+.. 	  - terminal columns number tag
+.. 	* - r
+.. 	  - terminal rows number tag
+
+.. |
+
+.. **Stop**
+
+.. Send to device:
+
+.. * t:'s'
+.. * d:{a:'s'}
+
+.. .. list-table
+
+.. 	* - Label
+.. 	  - Description
+.. 	* - 's'
+.. 	  - the shell tag
+.. 	* - 's'
+.. 	  - stop the shell tag
+
+.. |
+
+.. Receive from the device
+
+.. * t:'s'
+.. * d:{a:'s', r:'d'}
+
+.. |
+
+.. * t:'s'
+.. * d:{a:'s', r:'e', e:error}
+
+.. .. list-table
+
+.. 	* - Label
+.. 	  - Description
+.. 	* - 's'
+.. 	  - the shell tag
+.. 	* - 's'
+.. 	  - stop the shell tag
+.. 	* - r
+.. 	  - tag for the device response
+.. 	* - 'd'
+.. 	  - 
+.. 	* - 'e'
+.. 	  - error response tag
+.. 	* - e
+.. 	  - the actual error tag
+
+.. |
+
+.. Project
+.. """"""""
+
+.. **Run**
+

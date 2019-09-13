@@ -37,10 +37,10 @@ async function loadPlugins (progress = () => {}) {
 	plugins.push ({name:'device.wyapp', consumes:["workspace","events","console","projects","shell","notebook","dashboard"], provides:["device_wyapp"], setup: plugin.setup || plugin.default || plugin});
 	progress ('device.wyapp.beagleboneblack', 12, 36);
 	plugin = await import ('../plugins/device.wyapp.beagleboneblack/index.js');
-	plugins.push ({name:'device.wyapp.beagleboneblack', consumes:["device_wyapp","workspace","events"], provides:[], setup: plugin.setup || plugin.default || plugin});
+	plugins.push ({name:'device.wyapp.beagleboneblack', consumes:["device_wyapp","workspace","events","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});
 	progress ('device.wyapp.raspberrypi', 13, 36);
 	plugin = await import ('../plugins/device.wyapp.raspberrypi/index.js');
-	plugins.push ({name:'device.wyapp.raspberrypi', consumes:["device_wyapp","workspace","events","editor_visual"], provides:[], setup: plugin.setup || plugin.default || plugin});
+	plugins.push ({name:'device.wyapp.raspberrypi', consumes:["device_wyapp","workspace","events","editor_visual","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});
 	progress ('device.wyapp.udooneo', 14, 36);
 	plugin = await import ('../plugins/device.wyapp.udooneo/index.js');
 	plugins.push ({name:'device.wyapp.udooneo', consumes:["device_wyapp","workspace","events"], provides:[], setup: plugin.setup || plugin.default || plugin});
@@ -59,9 +59,9 @@ async function loadPlugins (progress = () => {}) {
 	progress ('filesystem.web', 19, 36);
 	plugin = await import ('../plugins/filesystem.web/index.js');
 	plugins.push ({name:'filesystem.web', consumes:["filesystem"], provides:[], setup: plugin.setup || plugin.default || plugin});
-	progress ('language.javascript', 20, 36);
-	plugin = await import ('../plugins/language.javascript/index.js');
-	plugins.push ({name:'language.javascript', consumes:["workspace","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});
+	progress ('language.nodejs', 20, 36);
+	plugin = await import ('../plugins/language.nodejs/index.js');
+	plugins.push ({name:'language.nodejs', consumes:["workspace","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});
 	progress ('language.python', 21, 36);
 	plugin = await import ('../plugins/language.python/index.js');
 	plugins.push ({name:'language.python', consumes:["workspace","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});

@@ -29,6 +29,7 @@ export default {
 			require('brace/mode/python');    //language
 			require('brace/mode/javascript');    //language
 			require('brace/mode/makefile');    //language
+			require('brace/mode/html');    //language
 			require('brace/mode/less');
 			require('brace/theme/chrome');
 			require('brace/theme/monokai');
@@ -63,6 +64,11 @@ export default {
 						case '.sh':
 						{
 							this.sourceLanguage = 'sh';
+							break;
+						}
+						case '.html':
+						{
+							this.sourceLanguage = 'html';
 							break;
 						}
 						case '.js':
@@ -103,7 +109,6 @@ export default {
 			if (newValue !== oldValue)
 			{
 				// this.$emit ('input', this.source);
-				console.log (this.source);
 				await this.studio.projects.saveFile (this.project, this.filename, this.source);
 			}
 		}

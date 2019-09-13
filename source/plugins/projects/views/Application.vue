@@ -14,7 +14,6 @@
 				</div>
 				
 				<div :class="projectTree" class="project-tree-on" v-if="advanced">
-					<v-app id="inspire">
 					<v-treeview
 					v-model="tree"
 					:open="open"
@@ -180,7 +179,6 @@
 					
 					</v-treeview>
 						
-				</v-app>
 				</div> 
 			</div>
 			<!--  -->
@@ -246,8 +244,6 @@ export default {
 			projectMenu:false,
 			x: 0,
 			y: 0,
-			menuItems: ['create file', 'create directory','delete file','delete directory'],
-
 			showConsole: false,
 			baseFileIcon:'plugins/projects/data/img/icons/file.png',
 		};
@@ -321,12 +317,6 @@ export default {
 			// 	})
 			// }
 			this.showTree = this.advanced;
-			if(this.showTree === true) {
-				this.studio.workspace.setWorkspaceTitle(path.basename(this.currentFile));
-			} else {
-				this.studio.workspace.setWorkspaceTitle(this.currentProject.name);
-			}
-			
 		},
 		type()
 		{
@@ -492,8 +482,6 @@ export default {
 				}];
 				this.items = root;
 				this.previous = this.items;
-				console.log(this.items);
-				console.log(this.currentFile);
 			}
 		},
 		async newFolder (item)

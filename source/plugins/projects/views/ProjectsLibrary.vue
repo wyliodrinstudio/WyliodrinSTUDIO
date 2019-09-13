@@ -55,6 +55,23 @@
 					</template>
 				</v-list>
 			</v-layout>
+			<v-alert v-if="persistent === 'never'"
+				type="error"
+				class="mb-4"
+				>
+					{{$t('PROJECTS_STORAGE_NOT_PERSISTENT')}}
+			</v-alert>
+			<v-alert v-if="persistent === 'prompt'"
+				type="warning"
+				class="mb-4"
+				>
+					<v-row align="center">
+						<v-col class="grow">{{$t('PROJECTS_STORAGE_ASK_PERSISTENT')}}</v-col>
+						<v-col class="shrink">
+							<v-btn @click="askPersistent">{{$t('PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT')}}</v-btn>
+						</v-col>
+					</v-row>
+			</v-alert>
 		</v-card-text>
 		<v-card-actions>
 			<v-btn text>{{$t('PROJECT_LIBRARY_LOAD_EXAMPLE')}}</v-btn>
@@ -102,6 +119,12 @@ export default {
 			return this.projects.filter(project => {
 				return project.name.toLowerCase().includes(this.search.toLowerCase());
 			})
+		}
+	},
+	asyncComputed: {
+		persistent ()
+		{
+			return this.studio.filesystem.isPersistent ();
 		}
 	},
 	async created ()
@@ -162,7 +185,7 @@ export default {
 		},
 		async selectProject (project)
 		{
-			if(await this.studio.projects.selectCurrentProject(project)){
+			if(await this.studio.projects.selectCurrentProject(project,true)){
 				this.close ();
 			}
 		},
@@ -258,6 +281,12 @@ export default {
 			}
 			this.rename=='';
 		},
+		async askPersistent ()
+		{
+			await this.studio.filesystem.isPersistent ();
+			await this.studio.filesystem.setPersistent ();
+			this.$asyncComputed.persistent.update ();
+		}
 	}
 }
 </script>

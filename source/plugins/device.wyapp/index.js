@@ -417,6 +417,8 @@ export function setup(options, imports, register)
 					studio.console.reset ();
 					let structure = await studio.projects.generateStructure (project);
 
+					console.log (structure);
+
 					let tp = {
 						name: project.name,
 						isroot: true,
@@ -444,7 +446,7 @@ export function setup(options, imports, register)
 									children: []
 								};
 								tpChildren.push (folder);
-								setFiles (file.children, folder.children, path.join (filenamePath, file.name));
+								await setFiles (file.children, folder.children, path.join (filenamePath, file.name));
 							}
 							else
 							{
@@ -458,6 +460,8 @@ export function setup(options, imports, register)
 					};
 
 					await setFiles (structure.children, tp.children[0].children, '/');
+
+					console.log (tp);
 
 					let xtrem = studio.console.getSize ();
 
@@ -634,36 +638,7 @@ export function setup(options, imports, register)
 		getBoardDriver (name)
 		{
 			return boards[name];
-		},
-
-		/**
-		 * Register a package for a language
-		 * @param {string} language 
-		 * @param {string} board 
-		 * @param {PackageInformation} packageInformation 
-		 */
-		registerLanguagePackage (language, board, packageInformation)
-		{
-			if (!board) board = '*';
-			if (!packages[language]) packages[language] = {'*':{}};
-			if (!packages[language][board]) packages[language][board] = {};
-			packages[language][board][packageInformation.name] = packageInformation;
-		},
-
-		/**
-		 * Retrieve the language packages for a language
-		 * @param {Device} device 
-		 * @param {string} language 
-		 */
-		getLanguagePackages (device, language)
-		{
-			let p = {};
-			if (packages[language])
-			{
-				p = _.assign ({}, packages[language]['*'], packages[language][device.board]);
-			}
-			return p;
-		},
+		}
 	};
 
 	studio.shell.register ((event, id, ...data) =>
