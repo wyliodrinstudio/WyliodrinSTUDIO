@@ -8,15 +8,42 @@ Boards Setup
 Raspberry Pi
 ***************
 
-This will show how to set up a Raspberry Pi device. This will imply flashing an image with the OS (Raspbian), installing the container engine (docker), installing the STUDIO Supervisor container and setting up some configuration files.
+This will show how to set up a Raspberry Pi device. 
 
 .. image:: images/raspberrypi.png
 	:align: center
 
 |
 
-Download the image
-"""""""""""""""""""
+Download the pre-configured image
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The easiest way to set up a Raspberry Pi board so that it becomes available for the Wyliodrin STUDIO IDE is to download an image that is already configured.
+
+
+Download the image for `Raspberry Pi Zero** and **Raspberry Pi 1** `here <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_2019_09_13.zip>`_.
+
+
+For **Raspberry Pi 2, 3 and 4** you can download the image archive `here <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_13.zip>`_.
+
+
+Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flash>` it. After that, you can simply insert the SD card into the Raspberry Pi and your board should be visible within Wyliodrin STUDIO.
+
+|
+
+=========================
+
+|
+
+Set up the board manually
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+However, you can also choose to configure the required image by yourself.
+
+This will imply flashing an image with the OS (Raspbian), installing the STUDIO Supervisor container and setting up some configuration files.
+
+Download the Raspbian image
+"""""""""""""""""""""""""""
 
 You will need to:
 
@@ -29,6 +56,8 @@ Raspbian is provided in two flavors, **Desktop** and **Lite**. The first one is 
 Download the `Raspbian Lite <https://www.raspberrypi.org/downloads/raspbian/>`_ image from the Raspberry Pi foundation. This is the standard OS for the Raspberry Pi provided by the manufacturer.
 
 |
+
+.. _flash:
 
 Flash the image
 """""""""""""""""
@@ -54,7 +83,7 @@ To be able to access the Studio network, the Raspberry Pi needs to run the STUDI
 
 After writing the SD Card, insert it into the Raspberry Pi and start the Raspberry Pi. You will have to access it. This can be done either by:
 
-* connecting the Raspberry Pi to the network and use a SSH to connect to it (If you are using **Raspberry Pi 0** and you want to use SSH, you will need an USB-OTG adapter to get connected to the network.)
+* connecting the Raspberry Pi to the network and use a SSH to connect to it (If you are using **Raspberry Pi Zero** and you want to use SSH, you will need an USB-OTG adapter to get connected to the network.)
 * connect a monitor and a keyboard to the Raspberry Pi
 
 .. note::

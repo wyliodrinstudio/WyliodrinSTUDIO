@@ -299,6 +299,10 @@ export default {
 		}
 	},
 	watch: {
+		currentProject ()
+		{
+			this.updateTitle ();
+		},
 		currentFile ()
 		{
 			this.dirTree();
@@ -309,16 +313,21 @@ export default {
 		{
 			await this.studio.projects.saveFile(this.currentProject,this.currentFile,this.source);
 		},
-		async mode()
+		mode:
 		{
-			// if(this.mode===true){
-			// 	await this.changeSource({
-			// 		name:('main'+this.extension),
-			// 		file:this.extension,
-			// 		path:('main'+this.extension)
-			// 	})
-			// }
-			this.showTree = this.advanced;
+			immediate: true,
+			async handler ()
+			{
+				// if(this.mode===true){
+				// 	await this.changeSource({
+				// 		name:('main'+this.extension),
+				// 		file:this.extension,
+				// 		path:('main'+this.extension)
+				// 	})
+				// }
+				this.updateTitle ();
+				this.showTree = this.advanced;
+			}
 		},
 		type()
 		{
@@ -586,6 +595,16 @@ export default {
 			this.studio.workspace.showDialog(ProjectsLibrary, {
 				width: 1000
 			});
+		},
+		updateTitle ()
+		{
+			console.log ('title');
+			if (this.currentProject)
+			{
+				if (this.advanced && this.currentFile) this.studio.workspace.setWorkspaceTitle (this.currentFile);
+				else this.studio.workspace.setWorkspaceTitle (this.currentProject.name);
+			}
+			else this.studio.workspace.setWorkspaceTitle ('');
 		}
 		
 		// async newFirmware(){

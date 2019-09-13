@@ -13,6 +13,9 @@ import QuestionDialog from './views/QuestionDialog.vue';
 import PromptDialog from './views/PromptDialog.vue';
 import studioStore from './store';
 import AboutDialog from './views/AboutDialog.vue';
+import AsyncComputed from 'vue-async-computed';
+
+let settings = null;
 
 /**
  * a function that is called when the item may be deleted
@@ -174,6 +177,8 @@ let workspace = {
 			this.error ('Loading translations failed '+e.message);
 		}
 
+		Vue.use(AsyncComputed);
+
 		Vue.translation = translations;
 
 		const i18n = new VueI18n ({
@@ -190,9 +195,10 @@ let workspace = {
 		// this.registerMenuItem ('TOOLBAR_SETUP', 10, () => {
 		// 	console.log ('menu item setup');
 		// });
-
+		
 		this.registerMenuItem ('WORKSPACE_SET_MODE_SIMPLE', 10, () => {
 			workspace.dispatchToStore('workspace','mode', 'simple');
+			settings.storeValue('workspace', 'mode', 'simple');
 		}, {
 			visible (){
 				return workspace.getFromStore ('workspace', 'mode') !== 'simple';
@@ -201,6 +207,8 @@ let workspace = {
 	
 		this.registerMenuItem ('WORKSPACE_SET_MODE_ADVANCED', 10, () => {
 			workspace.dispatchToStore('workspace','mode','advanced');	
+			settings.storeValue('workspace', 'mode', 'advanced');
+
 		}, {
 			visible (){
 				return workspace.getFromStore ('workspace', 'mode') === 'simple';
@@ -210,7 +218,7 @@ let workspace = {
 		this.registerMenuItem ('WORKSPACE_TOOLBAR_ABOUT', 100, () => {
 			this.showDialog(AboutDialog);
 		});
-
+		
 		// this.registerTab('Application', 20, () => {
 		// 	console.log('tab item Application');
 		// });
@@ -1287,6 +1295,12 @@ export function setup (options, imports, register)
 
 	/* Register the store */
 	workspace.registerStore ('workspace', studioStore);
+
+	settings = imports.settings;
+	let mode = settings.loadValue('workspace', 'mode', 'simple');
+	console.log(mode);
+
+	workspace.dispatchToStore('workspace','mode', mode);
 
 	register (null, {
 		workspace: workspace

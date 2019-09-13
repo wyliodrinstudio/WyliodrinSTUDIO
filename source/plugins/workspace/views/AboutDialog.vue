@@ -24,7 +24,7 @@
 		<v-card-actions>
 
 			<div class="provided">
-				<p>{{$t('ABOUT_PROVIDED_BY')}} <a href='https://wyliodrin.com/' target="_blank" @click="openLink">Wyliodrin SRL</a></p>
+				<p>{{$t('ABOUT_PROVIDED_BY')}} <a target="_blank" @click="openLink">Wyliodrin SRL</a></p>
 			</div>
 			<v-btn text @click="openLicense">{{$t('ABOUT_LICENSE')}}</v-btn>
 			<v-btn text @click="close">{{$t('CLOSE')}}</v-btn>

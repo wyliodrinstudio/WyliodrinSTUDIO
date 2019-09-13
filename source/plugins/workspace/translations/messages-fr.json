@@ -70,5 +70,9 @@
     "EXIT": {
         "message": "Sortie",
         "description": "A button with the text exit"
+    },
+    "WORKSPACE_DOCUMENTATION": {
+        "message": "Documentation",
+        "description": "Open a new window with the documentation of Wyliodrin STUDIO"
     }
 }
