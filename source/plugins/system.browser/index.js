@@ -35,6 +35,10 @@ let system = {
 		{
 			document.body.requestFullscreen ();
 		}
+	},
+	openLink (url)
+	{
+		window.open(url);
 	}
 };
 
