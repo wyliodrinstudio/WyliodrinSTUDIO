@@ -1,13 +1,9 @@
 <template>
   <v-layout row justify-center>
-    <v-card>
-      <v-toolbar>
-        <v-toolbar-title>
-          <div class="md-toolbar-tools">
-            <span>{{$t('TOOLBAR_RESISTOR_COLOR_CODE')}}</span>
-          </div>
-        </v-toolbar-title>
-      </v-toolbar>
+    <v-card width="640">
+      <v-card-title>
+        <span class="md-toolbar-tools">{{$t('TOOLBAR_RESISTOR_COLOR_CODE')}}</span>
+      </v-card-title>
       <v-tabs>
         <v-tab @click="CtN=true">
           <v-tab-label>{{ $t('RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER')}}</v-tab-label>
@@ -17,99 +13,137 @@
         </v-tab>
       </v-tabs>
       <v-card-text v-if="CtN">
-        <div layout="row" layout-padding>
-          <label>{{ $t('RESISTOR_COLORCODE_STRIPES')}}</label>
-          <select v-model="number">
-            <option value="4">{{ $t('VALUE_FOUR')}}</option>
-            <option value="5">{{ $t('VALUE_FIVE')}}</option>
-          </select>
-
-          <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} 1</label>
-          <select v-model="color1">
-            <option
-              :value="index"
-              v-for="(color, index) in colors"
-              :key="index"
-            >{{color}}</option>
-          </select>
-
-          <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} 2</label>
-          <select v-model="color2">
-            <option
-              :value="index"
-              v-for="(color, index) in colors"
-              :key="index"
-            >{{color}}</option>
-          </select>
-          <label v-show="number==5">{{ $t('RESISTOR_COLORCODE_STRIPE')}} 3</label>
-          <select v-show="number==5" v-model="color3">
-            <option v-show="number==5"
-              :value="index"
-              v-for="(color, index) in colors"
-              :key="index"
-            >{{color}}</option>
-          </select>
-
-          <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} {{4-(5-number)}}</label>
-          <select v-model="color4">
-            <option
-              :value="color.value"
-              v-for="(color, index) in multiplier"
-              :key="index"
-            >{{color.color}}</option>
-          </select>
-
-          <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} {{5-(5-number)}}</label>
-          <select v-model="color5">
-            <option
-              :value="color.value"
-              v-for="(color, index) in tolerance"
-              :key="index"
-            >{{color.color}}</option>
-          </select>
-
-          <div>
-            <span>
-              <b>{{ $t('VALUE_VALUE')}}:</b>
-              {{r}} {{u}}&Omega;
-            </span>
-            <span style="padding-left:10px;">&plusmn;{{color5}}%</span>
-          </div>
+        <div>
+          <v-container>
+            <v-row>
+              <v-col>
+                <label>{{ $t('RESISTOR_COLORCODE_STRIPES')}}</label>
+                <v-select
+                  height="16"
+                  v-model="number"
+                  :items="numbers"
+                  item-text="label"
+                  item-value="value"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} 1</label>
+                <v-select
+                  height="16"
+                  v-model="color1"
+                  :items="colors"
+                  item-text="color"
+                  item-value="index"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} 2</label>
+                <v-select
+                  height="16"
+                  v-model="color2"
+                  :items="colors"
+                  item-text="color"
+                  item-value="index"
+                ></v-select>
+              </v-col>
+              <v-col v-show="number==5">
+                <label v-show="number==5">{{ $t('RESISTOR_COLORCODE_STRIPE')}} 3</label>
+                <v-select
+                  height="16"
+                  v-show="number==5"
+                  v-model="color3"
+                  :items="colors"
+                  item-text="color"
+                  item-value="index"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} {{4-(5-number)}}</label>
+                <v-select
+                  height="16"
+                  v-model="color4"
+                  :items="multiplier"
+                  item-text="color"
+                  item-value="value"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} {{5-(5-number)}}</label>
+                <v-select
+                  height="16"
+                  v-model="color5"
+                  :items="tolerance"
+                  item-text="color"
+                  item-value="value"
+                ></v-select>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
+        <div align="center">
+          <img src="plugins/documentation.resistorcolorcodes/data/img/resistorcolorcode.png" />
         </div>
       </v-card-text>
       <v-card-text v-else>
         <div>
-          {{$t('RESISTOR_COLORCODE_RESISTANCE')}} {{$t('RESISTOR_COLORCODE_STRIPES')}} {{$t('VALUE_TOLERANCE')}}<br>
-          <input
-            :label="$t('RESISTOR_COLORCODE_RESISTANCE')"
-            placeholder="Enter a number"
-            v-model="Secondvaluenumber"
-          />
-          <b>&Omega;</b>
-
-          <select v-model="Secondvaluestripes" :label="$t('RESISTOR_COLORCODE_STRIPES')">
-            <option value="4">{{ $t('VALUE_FOUR')}}</option>
-            <option value="5">{{ $t('VALUE_FIVE')}}</option>
-          </select>
-
-          <select v-model="Secondvaluetolerance" :label="$t('VALUE_TOLERANCE')">
-            <option
-              v-for="(value,index) in Secondtolerance"
-              :key="index"
-              :value="value.color"
-            >{{value.value}}</option>
-          </select>
+          <v-container>
+            <v-row>
+              <v-col>
+                {{$t('RESISTOR_COLORCODE_RESISTANCE')}}
+                <b>&Omega;</b>
+                <v-text-field autofocus height="16" placeholder="Enter a number" v-model="Secondvaluenumber"></v-text-field>
+              </v-col>
+              <v-col>
+                {{$t('RESISTOR_COLORCODE_STRIPES')}}
+                <v-select
+                  height="16"
+                  v-model="Secondvaluestripes"
+                  :items="numbers"
+                  item-text="label"
+                  item-value="value"
+                ></v-select>
+              </v-col>
+              <v-col>
+                {{$t('VALUE_TOLERANCE')}}
+                <v-select
+                  height="16"
+                  v-model="Secondvaluetolerance"
+                  :items="Secondtolerance"
+                  item-text="value"
+                  item-value="color"
+                ></v-select>
+              </v-col>
+            </v-row>
+          </v-container>
         </div>
-
-        <div>
-          <span>
-            <b>{{ $t('VALUE_VALUE') }}:</b>
-            {{Secondr}} {{Secondu}}&Omega;
-          </span>
+        <div style="text-align:center;">
+          <img src="plugins/documentation.resistorcolorcodes/data/img/left.png" />
+          <img :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe1 + '.png'" />
+          <img :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe2 + '.png'" />
+          <img :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe3 + '.png'" />
+          <img
+            v-show="Secondvaluestripes==='5'"
+            :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe4 + '.png'"
+          />
+          <img src="plugins/documentation.resistorcolorcodes/data/img/none.png" />
+          <img
+            :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondvaluetolerance + '.png'"
+          />
+          <img src="plugins/documentation.resistorcolorcodes/data/img/right.png" />
         </div>
       </v-card-text>
       <v-card-actions>
-        <v-btn text @click="close" ref="reference">{{$t('EXIT')}}</v-btn>
+        <div v-show="CtN">
+          <b>{{ $t('VALUE_VALUE')}}:</b>
+          {{r}} {{u}}&Omega;
+          <span style="padding-left:10px;">&plusmn;{{color5}}%</span>
+        </div>
+        <div v-show="!CtN">
+          <b>{{ $t('VALUE_VALUE') }}:</b>
+          {{Secondr}} {{Secondu}}&Omega;
+        </div>
+        <v-spacer></v-spacer>
+        <v-btn right text @click="close" ref="reference">{{$t('EXIT')}}</v-btn>
       </v-card-actions>
     </v-card>
   </v-layout>
@@ -122,17 +156,18 @@ module.exports = {
   data() {
     return {
       CtN: true,
+      numbers: [{ value: "4", label: "Four" }, { value: "5", label: "Five" }],
       colors: [
-        "Black",
-        "Brown",
-        "Red",
-        "Orange",
-        "Yellow",
-        "Green",
-        "Blue",
-        "Violet",
-        "Gray",
-        "White"
+        { index: 0, color: "Black" },
+        { index: 1, color: "Brown" },
+        { index: 2, color: "Red" },
+        { index: 3, color: "Orange" },
+        { index: 4, color: "Yellow" },
+        { index: 5, color: "Green" },
+        { index: 6, color: "Blue" },
+        { index: 7, color: "Violet" },
+        { index: 8, color: "Gray" },
+        { index: 9, color: "White" }
       ],
 
       multiplier: [
@@ -216,14 +251,14 @@ module.exports = {
           value: 10
         }
       ],
-      number: 4,
+      number: "4",
       color1: 0,
       color2: 0,
       color3: 0,
       color4: 1,
       color5: 0,
       r: 0,
-      u: 0,
+      u: "",
       //END FIRST
       //BEGIN SECOND
       second: {},
@@ -412,13 +447,18 @@ module.exports = {
   },
   mounted() {
     this.$refs.reference.$el.focus();
-  }, 
+  },
+  updated() {
+    if (this.CtN) {
+      this.$refs.reference.$el.focus();
+    }
+  },
   methods: {
     esc() {
       this.close();
     },
     close() {
-      this.$root.$emit('submit');
+      this.$root.$emit("submit");
     }
   }
 };
