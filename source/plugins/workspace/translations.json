@@ -332,6 +332,7 @@
          "PROJECTS_STORAGE_NOT_PERSISTENT": "The storage system is not persistent. This means your projects might be deleted any time without notice. To avoid this, please export your projects frequently.",
          "PROJECTS_STORAGE_ASK_PERSISTENT": "The storage system is not persistent. Please allow permission to make the storage peristent.",
          "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": "Allow Persistance",
+         "PROJECTS_STORAGE_BROWSER_ERROR": "If your browser didn't ask you if you allow persistence, there might be an issue with your browser. To prevent losing your projects, you should add this website to the bookmarks, use it more often and frequenlty export your projects. We also recommend you to use Firefox.",
          "EDITOR_VISUAL_SHOW_CODE": "Show Code",
          "EDITOR_VISUAL_HIDE_CODE": "Hide Code",
          "SCHEMATICS": "Schematics",
@@ -372,7 +373,9 @@
          "ABOUT_UI_UX": "UI/UX",
          "ABOUT_DEVELOPMENT": "Developer",
          "ABOUT_LICENSE": "License",
-         "ABOUT_LICENSE_TITLE": "Usage License"
+         "ABOUT_LICENSE_TITLE": "Usage License",
+         "ABOUT_PROVIDED_BY": "Provided by",
+         "WORKSPACE_DOCUMENTATION": "Documentation"
       },
       "es": {
          "CHAT": "CHAT",
@@ -592,6 +595,10 @@
          "PROJECT_LIBRARY": "Bibliothèque de projets",
          "PROJECTS_NO_PROJECT": "Vous n'avez pas encore de projets.",
          "PROJECTS_CREATE_APPLICATION": "Cliquez sur le bouton \"Créer une nouvelle application\" ci-dessous",
+         "PROJECTS_STORAGE_NOT_PERSISTENT": "Le système de stockage n'est pas persistant. Cela signifie que vos projets peuvent être supprimés à tout moment sans préavis. Pour éviter cela, exportez fréquemment vos projets.",
+         "PROJECTS_STORAGE_ASK_PERSISTENT": "Le système de stockage n'est pas persistant. Veuillez autoriser rendre le stockage persistant.",
+         "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": "Autoriser la persistance",
+         "PROJECTS_STORAGE_BROWSER_ERROR": "Si votre navigateur ne vous demande pas d'autoriser la persistance, il s'agit d'un problème avec votre navigateur. Pour éviter de perdre vos projets, vous devez ajouter ce site Web aux bookmarks, l’utiliser souvent et exporter fréquemment vos projets. Nous vous recommandons également d'utiliser Firefox.",
          "SCHEMATICS": "Schémas",
          "ADD_SCHEMATIC": "Ajouter schémas",
          "DELETE_SCHEMATIC": "Supprimer schémas",
@@ -615,7 +622,8 @@
          "WORKSPACE_TOOLBAR_EXIT_QUESTION": "Êtes-vous sûr de vouloir quitter?",
          "YES": "Oui",
          "NO": "Non",
-         "EXIT": "Sortie"
+         "EXIT": "Sortie",
+         "WORKSPACE_DOCUMENTATION": "Documentation"
       },
       "hu": {
          "CHAT": "CHAT",
@@ -957,6 +965,10 @@
          "PATH_NULL": "O cale este nulă",
          "PROJECTS_NO_PROJECT": "Încă nu aveți niciun proiect",
          "PROJECTS_CREATE_APPLICATION": "Apăsați butonul \"Creează o aplicație nouă\" de mai jos",
+         "PROJECTS_STORAGE_NOT_PERSISTENT": "Sistemul de stocare nu este persistent, ceea ce înseamnă că proiectele dvs. ar putea fi șterse oricând, fără notificare prealabilă. Pentru a evita acest lucru, vă rugăm să exportați proiectele frecvent.",
+         "PROJECTS_STORAGE_ASK_PERSISTENT": "Sistemul de stocare nu este persistent. Vă rugăm să permiteți stocarea persistentă.",
+         "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": "Permiteți Persistența",
+         "PROJECTS_STORAGE_BROWSER_ERROR": "Dacă browser-ul dvs. nu v-a întrebat dacă permiteți persistența, ar putea fi o problemă cu browserul. Pentru a preveni pierderea proiectelor, ar trebui să adăugați acest site web la marcaje, să-l utilizați mai des și să exportați frecvent proiectele. De asemenea, vă recomandăm să utilizați Firefox.",
          "EDITOR_VISUAL_SHOW_CODE": "Afisați Sursa",
          "EDITOR_VISUAL_HIDE_CODE": "Ascundeți Sursa",
          "SCHEMATICS": "Scheme",
@@ -989,7 +1001,8 @@
          "NO": "Nu",
          "EXIT": "Ieșire",
          "WORKSPACE_SET_MODE_ADVANCED": "Mod Avansat",
-         "WORKSPACE_SET_MODE_SIMPLE": "Mod Simplu"
+         "WORKSPACE_SET_MODE_SIMPLE": "Mod Simplu",
+         "WORKSPACE_DOCUMENTATION": "Documentație"
       },
       "sk": {
          "CHAT": "CHAT",

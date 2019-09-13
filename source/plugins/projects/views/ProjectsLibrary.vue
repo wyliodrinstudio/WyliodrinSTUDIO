@@ -65,12 +65,19 @@
 				type="warning"
 				class="mb-4"
 				>
+				<div v-if="notPersistent === false">
 					<v-row align="center">
 						<v-col class="grow">{{$t('PROJECTS_STORAGE_ASK_PERSISTENT')}}</v-col>
 						<v-col class="shrink">
 							<v-btn @click="askPersistent">{{$t('PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT')}}</v-btn>
 						</v-col>
 					</v-row>
+				</div>
+				<div v-else>
+					<v-row align="center">
+						<v-col class="grow">{{$t('PROJECTS_STORAGE_BROWSER_ERROR')}}</v-col>
+					</v-row>
+				</div>
 			</v-alert>
 		</v-card-text>
 		<v-card-actions>
@@ -110,6 +117,7 @@ export default {
 			filePath:'',
 			projects:[],
 			search:'',
+			notPersistent: false
 		};
 	},
 	components: {
@@ -284,7 +292,12 @@ export default {
 		async askPersistent ()
 		{
 			await this.studio.filesystem.isPersistent ();
-			await this.studio.filesystem.setPersistent ();
+			
+			let persistent = await this.studio.filesystem.setPersistent ();
+
+			if (persistent === false)
+				this.notPersistent = true;
+
 			this.$asyncComputed.persistent.update ();
 		}
 	}
