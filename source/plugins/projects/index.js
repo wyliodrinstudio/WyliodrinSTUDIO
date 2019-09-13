@@ -1516,6 +1516,10 @@ let projects = {
 		}
 		return p;
 	},
+	showProjectsLibrary()
+	{
+		studio.workspace.showDialog(ProjectsLibrary, {width: 1000});
+	}
 	//getDefaultFileName(Project)
 	//Daca nu e placa -> language normal al proiectului -> iau main de acolo
 	//Vezi daca ai placa -> verific daca am si type si board -> daca da, il iau pe asta
@@ -1531,9 +1535,7 @@ export default async function setup(options, imports, register) {
 
 	studio.workspace.registerTab('PROJECT_APPLICATION', 100, Application);
 
-	studio.workspace.registerToolbarButton('PROJECT_LIBRARY', 10, () => studio.workspace.showDialog(ProjectsLibrary, {
-		width: 1000
-	}), 'plugins/projects/data/img/icons/projects-icon.svg');
+	studio.workspace.registerToolbarButton('PROJECT_LIBRARY', 10, () => projects.showProjectsLibrary(), 'plugins/projects/data/img/icons/projects-icon.svg');
 	register(null, {
 		projects: projects
 	});

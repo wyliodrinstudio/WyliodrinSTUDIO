@@ -1302,6 +1302,9 @@ export function setup (options, imports, register)
 
 	workspace.dispatchToStore('workspace','mode', mode);
 
+
+	
+
 	register (null, {
 		workspace: workspace
 	});

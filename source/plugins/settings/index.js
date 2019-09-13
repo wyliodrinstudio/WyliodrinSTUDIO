@@ -104,7 +104,7 @@ export async function setup (options, imports, register)
 		loadValue (plugin, name, value)
 		{
 			let data = this.loadSettings (plugin);
-			if (data && data[name]) return data[name];
+			if (data && data[name] !== undefined) return data[name];
 			else return value;
 		}
 	};
