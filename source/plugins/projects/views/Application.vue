@@ -312,17 +312,21 @@ export default {
 		{
 			await this.studio.projects.saveFile(this.currentProject,this.currentFile,this.source);
 		},
-		async mode()
+		mode:
 		{
-			// if(this.mode===true){
-			// 	await this.changeSource({
-			// 		name:('main'+this.extension),
-			// 		file:this.extension,
-			// 		path:('main'+this.extension)
-			// 	})
-			// }
-			this.updateTitle ();
-			this.showTree = this.advanced;
+			immediate: true,
+			async handler ()
+			{
+				// if(this.mode===true){
+				// 	await this.changeSource({
+				// 		name:('main'+this.extension),
+				// 		file:this.extension,
+				// 		path:('main'+this.extension)
+				// 	})
+				// }
+				this.updateTitle ();
+				this.showTree = this.advanced;
+			}
 		},
 		type()
 		{
