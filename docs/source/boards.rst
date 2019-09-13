@@ -13,35 +13,33 @@ This will show how to set up a Raspberry Pi device.
 .. image:: images/raspberrypi.png
 	:align: center
 
+|
+
 Download the configured image
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The easiest way to set up a Raspberry Pi board so that it becomes available for the Wyliodrin STUDIO IDE is to download an image that is already configured.
 
-Download image for **Raspberry Pi Zero** and **Raspberry Pi 1**:
+You can find the image for **Raspberry Pi Zero** and **Raspberry Pi 1** `here <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_2019_09_13.zip>`_.
 
-https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_2019_09_13.zip
 
-|
+For **Raspberry Pi 2, 3 and 4** you can download the image archive `here <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_13.zip>`_.
 
-Download image for **Raspberry Pi 2, 3 and 4**:
 
-https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_13.zip
-
-|
-
-Once the image downloaded, the only thing that you have to do is to :ref:`flash <flash>` it. After that, you can simply insert the SD card into the Raspberry Pi and your board should be visible within Wyliodrin STUDIO.
+Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flash>` it. After that, you can simply insert the SD card into the Raspberry Pi and your board should be visible within Wyliodrin STUDIO.
 
 |
 
 =========================
 
+|
+
 Set up the board manually
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-However, you can also choose the configure the required image by yourself.
+However, you can also choose to configure the required image by yourself.
 
-This will imply flashing an image with the OS (Raspbian), installing the container engine (docker), installing the STUDIO Supervisor container and setting up some configuration files.
+This will imply flashing an image with the OS (Raspbian), installing the STUDIO Supervisor container and setting up some configuration files.
 
 Download the Raspbian image
 """""""""""""""""""""""""""
