@@ -113,5 +113,13 @@
     "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
         "message": "Other Network",
         "description": "The option to connect to a network that is not displayed"
-    }
+	},
+	"DEVICE_WYAPP_REFRESH": {
+		"message": "Refresh",
+		"description": "The option to refresh the file tree"
+	},
+	"DEVICE_WYAPP_FILE_MANAGER": {
+		"message": "File manager",
+		"description": "The option to refresh the file tree"
+	}
 }
