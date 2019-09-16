@@ -45,7 +45,7 @@ function resetPackageLogs (packageName)
 function addPackageLogs (packageName, log)
 {
 	if (!packagesInstallLogs[packageName]) packagesInstallLogs[packageName] = log;
-	else packagesInstallLogs[packageName] = packagesInstallLogs[packageName] + logs;
+	else packagesInstallLogs[packageName] = packagesInstallLogs[packageName] + log;
 }
 
 function getPackageLogs (packageName)
