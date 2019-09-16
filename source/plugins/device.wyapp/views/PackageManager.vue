@@ -45,7 +45,7 @@ function resetPackageLogs (packageName)
 function addPackageLogs (packageName, log)
 {
 	if (!packagesInstallLogs[packageName]) packagesInstallLogs[packageName] = log;
-	else packagesInstallLogs[packageName] = packagesInstallLogs[packageName] + logs;
+	else packagesInstallLogs[packageName] = packagesInstallLogs[packageName] + log;
 }
 
 function getPackageLogs (packageName)
@@ -192,7 +192,7 @@ export default {
 		},
 		install (data)
 		{
-			resetPackageLogs (data.languages+':'+data.packages.name);
+			resetPackageLogs (data.languages+':'+data.package.name);
 			this.connection.send ('pm', {
 				a: 'i',
 				l: data.language,
