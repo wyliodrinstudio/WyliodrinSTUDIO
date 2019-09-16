@@ -90,23 +90,19 @@ let closeAsking = false;
 
 let system = null;
 
-function getLanguage ()
-{
+function getLanguage() {
 	let languageString = navigator.language;
-	let languageId = languageString.split ('-')[0];
+	let languageId = languageString.split('-')[0];
 	if (translations.TRANSLATION[languageString]) return languageString;
 	return languageId;
 }
 
-function sortDevices (devices)
-{
-	return devices.sort ((device1, device2) => {
+function sortDevices(devices) {
+	return devices.sort((device1, device2) => {
 		let priority = device1.priority - device2.priority;
-		if (priority === 0)
-		{
-			if (device1.name !== device2.name)
-			{
-				priority = (device1.name < device2.name)?-100:100;
+		if (priority === 0) {
+			if (device1.name !== device2.name) {
+				priority = (device1.name < device2.name) ? -100 : 100;
 			}
 		}
 		return priority;
@@ -125,27 +121,26 @@ let workspace = {
 	vue: null,
 
 	/* Start the application */
-	start (studio)
-	{
+	start(studio) {
 		Vue.prototype.studio = studio;
 
-		let vuetify = new Vuetify ({
+		let vuetify = new Vuetify({
 			theme: {
 				themes: {
-				  light: {
-					primary: '#e54225',
-					secondary: '#3c5459',
-					accent: '#e54225',
-					error: '#971c19',
-				  },
-				  dark: {
-					primary: '#e54225',
-					secondary: '#ffffff',
-					accent: '#e54225',
-					error: '#971c19',
-				  },
+					light: {
+						primary: '#e54225',
+						secondary: '#3c5459',
+						accent: '#e54225',
+						error: '#971c19',
+					},
+					dark: {
+						primary: '#e54225',
+						secondary: '#ffffff',
+						accent: '#e54225',
+						error: '#971c19',
+					},
 				},
-			  },
+			},
 			icons: {
 				iconfont: 'md',
 			},
@@ -163,31 +158,29 @@ let workspace = {
 		Vue.config.productionTip = false;
 
 		/* Store */
-		Vue.mixin ({
+		Vue.mixin({
 			store: this.store
 		});
 
 		/* Translations */
-		try
-		{
-			translations = require ('./translations.json');
+		try {
+			translations = require('./translations.json');
 		}
-		catch (e)
-		{
-			this.error ('Loading translations failed '+e.message);
+		catch (e) {
+			this.error('Loading translations failed ' + e.message);
 		}
 
 		Vue.use(AsyncComputed);
 
 		Vue.translation = translations;
 
-		const i18n = new VueI18n ({
-			locale: getLanguage (),
+		const i18n = new VueI18n({
+			locale: getLanguage(),
 			fallbackLocale: 'en',
 			messages: translations.TRANSLATION
 		});
 
-		Vue.mixin ({
+		Vue.mixin({
 			i18n
 		});
 
@@ -195,30 +188,30 @@ let workspace = {
 		// this.registerMenuItem ('TOOLBAR_SETUP', 10, () => {
 		// 	console.log ('menu item setup');
 		// });
-		
-		this.registerMenuItem ('WORKSPACE_SET_MODE_SIMPLE', 10, () => {
-			workspace.dispatchToStore('workspace','mode', 'simple');
+
+		this.registerMenuItem('WORKSPACE_SET_MODE_SIMPLE', 10, () => {
+			workspace.dispatchToStore('workspace', 'mode', 'simple');
 			settings.storeValue('workspace', 'mode', 'simple');
 		}, {
-			visible (){
-				return workspace.getFromStore ('workspace', 'mode') !== 'simple';
+			visible() {
+				return workspace.getFromStore('workspace', 'mode') !== 'simple';
 			}
 		});
-	
-		this.registerMenuItem ('WORKSPACE_SET_MODE_ADVANCED', 10, () => {
-			workspace.dispatchToStore('workspace','mode','advanced');	
+
+		this.registerMenuItem('WORKSPACE_SET_MODE_ADVANCED', 10, () => {
+			workspace.dispatchToStore('workspace', 'mode', 'advanced');
 			settings.storeValue('workspace', 'mode', 'advanced');
 
 		}, {
-			visible (){
-				return workspace.getFromStore ('workspace', 'mode') === 'simple';
+			visible() {
+				return workspace.getFromStore('workspace', 'mode') === 'simple';
 			}
 		});
 
-		this.registerMenuItem ('WORKSPACE_TOOLBAR_ABOUT', 100, () => {
+		this.registerMenuItem('WORKSPACE_TOOLBAR_ABOUT', 100, () => {
 			this.showDialog(AboutDialog);
 		});
-		
+
 		// this.registerTab('Application', 20, () => {
 		// 	console.log('tab item Application');
 		// });
@@ -235,7 +228,7 @@ let workspace = {
 		// 	console.log('tab item Shell');
 		// });
 
-		Vue.use (VuetifyDialog,{
+		Vue.use(VuetifyDialog, {
 			context: {
 				vuetify
 			},
@@ -244,16 +237,15 @@ let workspace = {
 				height: 500
 			}
 		});
-		
+
 		Vue.prototype.$dialog.layout('default', DialogLayout);
 		Vue.prototype.$dialog.layout('notification', NotificationLayout);
 
-		this.vue = new Vue ({
+		this.vue = new Vue({
 			el: '#app',
 			vuetify,
-			render: function (render)
-			{
-				return render (Studio);
+			render: function (render) {
+				return render(Studio);
 			}
 		});
 	},
@@ -296,16 +288,14 @@ let workspace = {
 	 * });
 	 * 
 	 */
-	registerTab (name, priority, component, options = {})
-	{
-		options = _.merge ({
+	registerTab(name, priority, component, options = {}) {
+		options = _.merge({
 			visible: () => true,
 			enabled: () => true
 		}, options);
-		let sameTab = tabs.find ((tab) => tab.name === name);
-		if (!sameTab)
-		{
-			this.registerComponent (component);
+		let sameTab = tabs.find((tab) => tab.name === name);
+		if (!sameTab) {
+			this.registerComponent(component);
 			let item = {
 				name,
 				priority,
@@ -313,16 +303,15 @@ let workspace = {
 				enabled: options.enabled,
 				visible: options.visible
 			};
-			tabs.push (item);
-			tabs = tabs.sort ((tab1, tab2) => tab1.priority - tab2.priority);
-			this.store.dispatch ('workspace/tabs', tabs);
+			tabs.push(item);
+			tabs = tabs.sort((tab1, tab2) => tab1.priority - tab2.priority);
+			this.store.dispatch('workspace/tabs', tabs);
 		}
-		else
-		{
-			this.warn ('Tab '+name+' already exists in the workspace');
+		else {
+			this.warn('Tab ' + name + ' already exists in the workspace');
 		}
 	},
-	
+
 	/**
 	 * This function will register a new item in the menu that is displayed in the top left corner of the window. 
 	 * A menu item is a component that will allow the "analysis" of Wyliodrin STUDIO, the purpose of the menu being to include details about 
@@ -354,16 +343,14 @@ let workspace = {
 	 * 
 	 * registerMenuItem('WYLIODRIN_API', 10, () => documentation.openDocumentation());
 	 */
-	registerMenuItem (name, priority, action, options = {})
-	{
+	registerMenuItem(name, priority, action, options = {}) {
 		// TODO verify name, priority and action to be the right value
-		options = _.merge ({
+		options = _.merge({
 			visible: () => true,
 			enabled: () => true
 		}, options);
-		let sameMenuItem = menuItems.find ((menuItem) => menuItem.name === name);
-		if (!sameMenuItem)
-		{
+		let sameMenuItem = menuItems.find((menuItem) => menuItem.name === name);
+		if (!sameMenuItem) {
 			let item = {
 				name,
 				priority,
@@ -371,13 +358,12 @@ let workspace = {
 				enabled: options.enabled,
 				visible: options.visible
 			};
-			menuItems.push (item);
-			menuItems = menuItems.sort ((menuItem1, menuItem2) => menuItem1.priority - menuItem2.priority);
-			this.store.dispatch ('workspace/menuItems', menuItems);
+			menuItems.push(item);
+			menuItems = menuItems.sort((menuItem1, menuItem2) => menuItem1.priority - menuItem2.priority);
+			this.store.dispatch('workspace/menuItems', menuItems);
 		}
-		else
-		{
-			this.warn ('Menu item '+name+' already exists in the menu');
+		else {
+			this.warn('Menu item ' + name + ' already exists in the menu');
 		}
 	},
 
@@ -396,31 +382,27 @@ let workspace = {
 	 * 
 	 * renameMenuItem('WYLIODRIN_API', 'WYLIODRIN_STUDIO_API');
 	 */
-	renameMenuItem (prevName,actualName)
-	{
+	renameMenuItem(prevName, actualName) {
 		// TODO verify name, priority and action to be the right value
-		let sameMenuItem = menuItems.find ((menuItem) => menuItem.name === prevName);
-		if (sameMenuItem)
-		{
+		let sameMenuItem = menuItems.find((menuItem) => menuItem.name === prevName);
+		if (sameMenuItem) {
 			let index = menuItems.indexOf(sameMenuItem);
-			if(index > -1)
-			{
-				menuItems.splice (index,1);
+			if (index > -1) {
+				menuItems.splice(index, 1);
 			}
 			let item = {
-				name:actualName,
-				priority:sameMenuItem.priority,
-				action:sameMenuItem.action,
+				name: actualName,
+				priority: sameMenuItem.priority,
+				action: sameMenuItem.action,
 				enabled: sameMenuItem.enabled,
 				visible: sameMenuItem.visible
 			};
-			menuItems.push (item);
-			menuItems = menuItems.sort ((menuItem1, menuItem2) => menuItem1.priority - menuItem2.priority);
-			this.store.dispatch ('workspace/menuItems', menuItems);
+			menuItems.push(item);
+			menuItems = menuItems.sort((menuItem1, menuItem2) => menuItem1.priority - menuItem2.priority);
+			this.store.dispatch('workspace/menuItems', menuItems);
 		}
-		else
-		{
-			this.warn ('Menu item '+prevName+' does not exists in the menu');
+		else {
+			this.warn('Menu item ' + prevName + ' does not exists in the menu');
 		}
 	},
 
@@ -462,16 +444,14 @@ let workspace = {
 	 * 		}
 	 * });
 	 */
-	registerToolbarButton (name, priority, action, iconURL, options = {})
-	{
+	registerToolbarButton(name, priority, action, iconURL, options = {}) {
 		// TODO verify name, priority and action to be the right value
-		options = _.merge ({
+		options = _.merge({
 			visible: () => true,
 			enabled: () => true
 		}, options);
-		let sameToolbarButton = toolbarButtons.find ((toolbarButton) => toolbarButton.name === name);
-		if (!sameToolbarButton)
-		{
+		let sameToolbarButton = toolbarButtons.find((toolbarButton) => toolbarButton.name === name);
+		if (!sameToolbarButton) {
 			let item = {
 				name,
 				priority,
@@ -480,13 +460,12 @@ let workspace = {
 				enabled: options.enabled,
 				visible: options.visible
 			};
-			toolbarButtons.push (item);
-			toolbarButtons = toolbarButtons.sort ((toolbarButton1, toolbarButton2) => toolbarButton1.priority - toolbarButton2.priority);
-			this.store.dispatch ('workspace/toolbarButtons', toolbarButtons);
+			toolbarButtons.push(item);
+			toolbarButtons = toolbarButtons.sort((toolbarButton1, toolbarButton2) => toolbarButton1.priority - toolbarButton2.priority);
+			this.store.dispatch('workspace/toolbarButtons', toolbarButtons);
 		}
-		else
-		{
-			this.warn ('Toolbar button '+name+' already exists in the toolbar');
+		else {
+			this.warn('Toolbar button ' + name + ' already exists in the toolbar');
 		}
 	},
 
@@ -534,16 +513,14 @@ let workspace = {
 	 * 		}
 	 * });
 	 */
-	registerDeviceToolButton (deviceType, name, priority, action, iconURL, options = {})
-	{
+	registerDeviceToolButton(deviceType, name, priority, action, iconURL, options = {}) {
 		// TODO verify name, priority, options.type and action to be the right value
-		options = _.merge ({
+		options = _.merge({
 			visible: () => true,
 			enabled: () => true
 		}, options);
-		let sameDeviceToolButton = deviceToolButtons.find ((toolbarButton) => toolbarButton.name === name);
-		if (!sameDeviceToolButton)
-		{
+		let sameDeviceToolButton = deviceToolButtons.find((toolbarButton) => toolbarButton.name === name);
+		if (!sameDeviceToolButton) {
 			let item = {
 				type: deviceType,
 				name,
@@ -554,13 +531,12 @@ let workspace = {
 				visible: options.visible,
 				buttonType: options.type
 			};
-			deviceToolButtons.push (item);
-			deviceToolButtons = deviceToolButtons.sort ((deviceToolButton1, deviceToolButton2) => deviceToolButton1.priority - deviceToolButton2.priority);
-			this.store.dispatch ('workspace/deviceToolButtons', deviceToolButtons);
+			deviceToolButtons.push(item);
+			deviceToolButtons = deviceToolButtons.sort((deviceToolButton1, deviceToolButton2) => deviceToolButton1.priority - deviceToolButton2.priority);
+			this.store.dispatch('workspace/deviceToolButtons', deviceToolButtons);
 		}
-		else
-		{
-			this.warn ('Toolbar button '+name+' already exists in the toolbar');
+		else {
+			this.warn('Toolbar button ' + name + ' already exists in the toolbar');
 		}
 	},
 
@@ -598,20 +574,18 @@ let workspace = {
 	 * 
 	 * registerStatusButton('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg');
 	 */
-	registerStatusButton (name, priority, component, iconURL, options = {})
-	{
+	registerStatusButton(name, priority, component, iconURL, options = {}) {
 		// TODO verify name, priority and action to be the right value
-		this.registerComponent (component);
-		options = _.merge ({
+		this.registerComponent(component);
+		options = _.merge({
 			visible: () => true,
 			enabled: () => true,
 			inset: () => false,
 			height: () => '200px',
 			overlay: () => false
 		}, options);
-		let sameStatusButton = statusButtons.find ((statusButton) => statusButton.name === name);
-		if (!sameStatusButton)
-		{
+		let sameStatusButton = statusButtons.find((statusButton) => statusButton.name === name);
+		if (!sameStatusButton) {
 			let item = {
 				name,
 				priority,
@@ -623,13 +597,12 @@ let workspace = {
 				height: options.height,
 				overlay: options.overlay
 			};
-			statusButtons.push (item);
-			statusButtons = statusButtons.sort ((statusButton1, statusButton2) => statusButton1.priority - statusButton2.priority);
-			this.store.dispatch ('workspace/statusButtons', statusButtons);
+			statusButtons.push(item);
+			statusButtons = statusButtons.sort((statusButton1, statusButton2) => statusButton1.priority - statusButton2.priority);
+			this.store.dispatch('workspace/statusButtons', statusButtons);
 		}
-		else
-		{
-			this.warn ('Toolbar button '+name+' already exists in the toolbar');
+		else {
+			this.warn('Toolbar button ' + name + ' already exists in the toolbar');
 		}
 	},
 
@@ -644,9 +617,8 @@ let workspace = {
 	 * 
 	 * openStatusButton('CONSOLE');
 	 */
-	openStatusButton (name)
-	{
-		this.dispatchToStore ('workspace', 'activeStatusButton', name);
+	openStatusButton(name) {
+		this.dispatchToStore('workspace', 'activeStatusButton', name);
 	},
 
 	/**
@@ -658,9 +630,8 @@ let workspace = {
 	 * 
 	 * closeStatusButton();
 	 */
-	closeStatusButton ()
-	{
-		this.dispatchToStore ('workspace', 'activeStatusButton', '');
+	closeStatusButton() {
+		this.dispatchToStore('workspace', 'activeStatusButton', '');
 	},
 
 	/**
@@ -680,16 +651,13 @@ let workspace = {
 	 * registerStore('projects', projectStore);
 	 * 
 	 */
-	registerStore (namespace, store)
-	{
-		if (this.store)
-		{
+	registerStore(namespace, store) {
+		if (this.store) {
 			// TODO check if it is already registered
-			this.store.registerModule (namespace, store);
+			this.store.registerModule(namespace, store);
 		}
-		else
-		{
-			this.error ('Unable to register store module '+namespace+', store has not been already started');
+		else {
+			this.error('Unable to register store module ' + namespace + ', store has not been already started');
 		}
 	},
 
@@ -703,9 +671,8 @@ let workspace = {
 	 * 
 	 * let project = getFromStore('projects', 'currentProject');
 	 */
-	getFromStore (namespace, variable)
-	{
-		return _.cloneDeep (this.store.getters [namespace+'/'+variable]);
+	getFromStore(namespace, variable) {
+		return _.cloneDeep(this.store.getters[namespace + '/' + variable]);
 	},
 
 	/**
@@ -719,9 +686,8 @@ let workspace = {
 	 * 
 	 * dispatchToStore('projects', 'currentProject', null);
 	 */
-	dispatchToStore (namespace, action, data)
-	{
-		return this.store.dispatch(namespace+'/'+action, _.cloneDeep (data));
+	dispatchToStore(namespace, action, data) {
+		return this.store.dispatch(namespace + '/' + action, _.cloneDeep(data));
 	},
 
 	/**
@@ -732,10 +698,9 @@ let workspace = {
 	 * 
 	 * registerComponent(MyComponent);
 	 */
-	registerComponent (component)
-	{
+	registerComponent(component) {
 		// TODO check if title is string
-		Vue.component(component.name,component);
+		Vue.component(component.name, component);
 	},
 
 	/**
@@ -757,34 +722,34 @@ let workspace = {
 	 * 
 	 *
 	 */
-	showNotification (text, values = {}, type = 'info', timeout = 6000)
-	{
-		if (this.vue)
-		{
-			if(type === 'info')
+	showNotification(text, values = {}, type = 'info', timeout = 6000) {
+		if (this.vue) {
+			if (type === 'info')
 				this.vue.$dialog.notify.info(this.vue.$t(text, values), {
+					extra: values.extra,
 					position: 'bottom-right',
-					width: '700',
+					width: 700,
 					timeout: timeout
 				});
 			else
-			if (type ==='success')
-				this.vue.$dialog.notify.success(this.vue.$t (text, values), {
+			if (type === 'success')
+				this.vue.$dialog.notify.success(this.vue.$t(text, values), {
+					extra: values.extra,
 					position: 'bottom-right',
-					width: '700',
+					width: 700,
 					timeout
 				});
 			else
-			if(type === 'warning')
-				this.vue.$dialog.notify.warning(this.vue.$t (text, values), {
+			if (type === 'warning')
+				this.vue.$dialog.notify.warning(this.vue.$t(text, values), {
+					extra: values.extra,
 					position: 'bottom-right',
-					width: '700',
+					width: 700,
 					timeout
 				});
 		}
-		else
-		{
-			this.error ('Notification is not available, please initialize Vue engine first.');
+		else {
+			this.error('Notification is not available, please initialize Vue engine first.');
 		}
 	},
 
@@ -807,18 +772,17 @@ let workspace = {
 	 * 
 	 * 
 	 */
-	showError(text, values = {}, timeout = 6000)
-	{
-		if(this.vue)
-		{
-			this.vue.$dialog.notify.error(this.vue.$t (text, values), {
+	showError(text, values = {}, timeout = 6000) {
+		if (this.vue) {
+			this.vue.$dialog.notify.error(this.vue.$t(text, values), {
+				extra: values.extra,
 				position: 'bottom-right',
-				width: '70%',
+				width: 700,
 				timeout
 			});
 		}
 	},
-	
+
 	/**
 	 * This function shows a customized prompt that waits for user input and collects data. 
 	 * 
@@ -837,8 +801,7 @@ let workspace = {
 	 * 		
 	 * showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','');
 	 */
-	showPrompt(title, question, original, action, values = {})
-	{
+	showPrompt(title, question, original, action, values = {}) {
 		return this.showDialog(PromptDialog, {
 			question,
 			title,
@@ -884,8 +847,7 @@ let workspace = {
 	 * 		
 	 * showConfirmationPrompt('EXIT', 'WORKSPACE_TOOLBAR_EXIT_QUESTION');
 	 */
-	showConfirmationPrompt(title, question, values = {})
-	{
+	showConfirmationPrompt(title, question, values = {}) {
 		return this.showDialog(QuestionDialog, {
 			question,
 			title,
@@ -908,37 +870,32 @@ let workspace = {
 	 * 
 	 * 
 	 */
-	showDialog (title, component, options, buttons, values = {})
-	{
-		return new Promise ((resolve, reject) => {
-			process.nextTick (() => {
+	showDialog(title, component, options, buttons, values = {}) {
+		return new Promise((resolve/*, reject*/) => {
+			process.nextTick(() => {
 				let value = undefined;
-				if (this.vue)
-				{
-					if (_.isObject (title))
-					{
+				if (this.vue) {
+					if (_.isObject(title)) {
 						values = buttons;
 						buttons = options;
 						options = component;
 						component = title;
-						value = this.vue.$dialog.showAndWait (component, options, {});
+						value = this.vue.$dialog.showAndWait(component, options, {});
 						// console.log (value);
 					}
-					else
-					{
-						value = this.vue.$dialog.showAndWait (Dialog, _.assign ({
-							title: this.vue.$t (title, values),
+					else {
+						value = this.vue.$dialog.showAndWait(Dialog, _.assign({
+							title: this.vue.$t(title, values),
 							component,
 							actions: buttons
 						}, options));
 						// console.log (value);
 					}
 				}
-				else
-				{
-					this.error ('Dialog is not available, please initialize Vue engine first.');
+				else {
+					this.error('Dialog is not available, please initialize Vue engine first.');
 				}
-				return resolve (value);
+				return resolve(value);
 			});
 		});
 	},
@@ -950,24 +907,19 @@ let workspace = {
 	 * 
 	 * @param {Device} device - device
 	 */
-	showDeviceSettingsDialog ()
-	{
-		let device = this.getDevice ();
-		let deviceDriver = deviceDrivers [device.type];
-		if (deviceDriver)
-		{
-			if (_.isFunction (deviceDriver.settings))
-			{
-				deviceDriver.settings (device);
+	showDeviceSettingsDialog() {
+		let device = this.getDevice();
+		let deviceDriver = deviceDrivers[device.type];
+		if (deviceDriver) {
+			if (_.isFunction(deviceDriver.settings)) {
+				deviceDriver.settings(device);
 			}
-			else
-			{
-				this.warn ('Device driver '+device.type+' has no registered settings function');
+			else {
+				this.warn('Device driver ' + device.type + ' has no registered settings function');
 			}
 		}
-		else
-		{
-			this.showError ('DEVICE_UNKNOWN_TYPE', {
+		else {
+			this.showError('DEVICE_UNKNOWN_TYPE', {
 				type: device.type
 			});
 		}
@@ -978,14 +930,12 @@ let workspace = {
 	 * 
 	 * It's called when the user clicks on the *‘Connect’* button and it shows a dialog containing a list with all the devices available for connection.
 	 */
-	showConnectionSelectionDialog ()
-	{
-		for (let type in deviceDrivers)
-		{
+	showConnectionSelectionDialog() {
+		for (let type in deviceDrivers) {
 			let deviceDriver = deviceDrivers[type];
-			if (_.isFunction (deviceDriver.listDevices)) deviceDriver.listDevices ();
+			if (_.isFunction(deviceDriver.listDevices)) deviceDriver.listDevices();
 		}
-		return this.showDialog (ConnectionSelectionDialog, {
+		return this.showDialog(ConnectionSelectionDialog, {
 			width: '800px'
 		});
 	},
@@ -999,10 +949,9 @@ let workspace = {
 	 * 
 	 * setWorkspaceTitle (project.name);
 	 */
-	setWorkspaceTitle (title)
-	{
+	setWorkspaceTitle(title) {
 		// TODO check if title is string
-		this.store.dispatch ('workspace/title', title);
+		this.store.dispatch('workspace/title', title);
 	},
 
 	/**
@@ -1018,10 +967,8 @@ let workspace = {
 	 * 		
 	 * registerDeviceDriver('my_device', deviceDriver);
 	 */
-	registerDeviceDriver (name, deviceDriver)
-	{
-		if (!deviceDrivers[name])
-		{
+	registerDeviceDriver(name, deviceDriver) {
+		if (!deviceDrivers[name]) {
 			/* TODO check that device driver has all the properties
 			DeviceDriver
 			{
@@ -1030,13 +977,12 @@ let workspace = {
 			*/
 			deviceDrivers[name] = deviceDriver;
 			return {
-				registerDeviceToolButton: this.registerDeviceToolButton.bind (this, name),
-				updateDevices: this.updateDevices.bind (this, name),
+				registerDeviceToolButton: this.registerDeviceToolButton.bind(this, name),
+				updateDevices: this.updateDevices.bind(this, name),
 			};
 		}
-		else
-		{
-			this.warn ('Device type '+name+' is already registered');
+		else {
+			this.warn('Device type ' + name + ' is already registered');
 		}
 		return null;
 	},
@@ -1053,27 +999,24 @@ let workspace = {
 	 * 
 	 * updateDevices (myDevices);
 	 */
-	updateDevices (type, dev)
-	{
-		if (deviceDrivers[type])
-		{
+	updateDevices(type, dev) {
+		if (deviceDrivers[type]) {
 			// console.log (data);
-			let devices = availableDevices.filter ((device) => {
+			let devices = availableDevices.filter((device) => {
 				return (device.type !== type);
 			});
 
-			dev.map ((device) => {
+			dev.map((device) => {
 				device.type = type;
-				if (!device.icon) this._defaultDeviceIcon (device);
+				if (!device.icon) this._defaultDeviceIcon(device);
 			});
 
-			devices.push (...dev);
-			availableDevices = sortDevices (devices);
-			this.dispatchToStore ('workspace', 'devices', availableDevices);
+			devices.push(...dev);
+			availableDevices = sortDevices(devices);
+			this.dispatchToStore('workspace', 'devices', availableDevices);
 		}
-		else
-		{
-			this.warn ('update devices: device type '+type+' is not registered');
+		else {
+			this.warn('update devices: device type ' + type + ' is not registered');
 		}
 	},
 
@@ -1081,16 +1024,13 @@ let workspace = {
 	 * Place the default device icon (if available)
 	 * @param {Device} device 
 	 */
-	_defaultDeviceIcon (device)
-	{
-		if (_.isFunction (deviceDrivers[device.type].defaultIcon))
-		{
-			device.icon = deviceDrivers[device.type].defaultIcon ();
+	_defaultDeviceIcon(device) {
+		if (_.isFunction(deviceDrivers[device.type].defaultIcon)) {
+			device.icon = deviceDrivers[device.type].defaultIcon();
 		}
-		else
-		{
+		else {
 			device.icon = 'plugins/workspace/data/img/icons/device-icon.png';
-			this.warn ('update devices: device type '+device.type+' has no default device icon');
+			this.warn('update devices: device type ' + device.type + ' has no default device icon');
 		}
 	},
 
@@ -1119,54 +1059,45 @@ let workspace = {
 	 * @param {Device} options - connect options
 	 * 
 	 */
-	async connect(device, options)
-	{
+	async connect(device, options) {
 		// TODO should check for connection?
-		if (this.getStatus () !== 'DISCONNECTED')
-		{
-			await this.disconnect (this.getDevice ());
+		if (this.getStatus() !== 'DISCONNECTED') {
+			await this.disconnect(this.getDevice());
 		}
 		// TODO check that device is an actual device type
 		let deviceDriver = deviceDrivers[device.type];
-		if (deviceDriver)
-		{
-			let update = await deviceDriver.connect (_.cloneDeep (device), options);
-			if (update) 
-			{
+		if (deviceDriver) {
+			let update = await deviceDriver.connect(_.cloneDeep(device), options);
+			if (update) {
 				// update = this.store.dispatch ('workspace/device', update);
 				// if (update.type === 'none')
 				// {
 				// 	await this.disconnect ();
 				// }
 				// register device
-				let unregister = deviceDriver.registerForUpdate (update, (device) => {
-					let dev = this.getDevice ();
-					if (device.id === dev.id && device.type === dev.type)
-					{
-						this.dispatchToStore ('workspace', 'status', device.status);
-						this.dispatchToStore ('workspace', 'device', device);
-						if (device.status === 'DISCONNECTED')
-						{
-							this.dispatchToStore ('workspace', 'device', undefined);
+				let unregister = deviceDriver.registerForUpdate(update, (device) => {
+					let dev = this.getDevice();
+					if (device.id === dev.id && device.type === dev.type) {
+						this.dispatchToStore('workspace', 'status', device.status);
+						this.dispatchToStore('workspace', 'device', device);
+						if (device.status === 'DISCONNECTED') {
+							this.dispatchToStore('workspace', 'device', undefined);
 						}
 					}
-					else
-					{
-						this.warn ('Trying to update status from device '+device.id+' ('+device.type+') while device is the selected one');
+					else {
+						this.warn('Trying to update status from device ' + device.id + ' (' + device.type + ') while device is the selected one');
 					}
-					if (device.status === 'DISCONNECTED')
-					{
-						unregister ();
+					if (device.status === 'DISCONNECTED') {
+						unregister();
 					}
 				});
-				this.dispatchToStore ('workspace', 'device', update);
+				this.dispatchToStore('workspace', 'device', update);
 			}
 			// if the device has no type, disconnect it
 			// TODO should this display an error?
 		}
-		else
-		{
-			this.showError ('DEVICE_UNKNOWN_TYPE', {
+		else {
+			this.showError('DEVICE_UNKNOWN_TYPE', {
 				type: device.type
 			});
 		}
@@ -1182,9 +1113,8 @@ let workspace = {
 	 * 
 	 * let device = getDevice ();
 	 */
-	getDevice ()
-	{
-		return this.getFromStore ('workspace', 'device');
+	getDevice() {
+		return this.getFromStore('workspace', 'device');
 	},
 
 	/**
@@ -1198,9 +1128,8 @@ let workspace = {
 	 * 
 	 * let status = getStatus();
 	 */
-	getStatus ()
-	{
-		return this.getFromStore ('workspace', 'status');
+	getStatus() {
+		return this.getFromStore('workspace', 'status');
 	},
 
 	/**
@@ -1215,42 +1144,35 @@ let workspace = {
 	 * *Turn Off* -
 	 *
 	 */
-	async disconnect ()
-	{
+	async disconnect() {
 		// TODO should check for existing connection?
 		let device = this.getDevice();
-		if (device)
-		{
+		if (device) {
 			let deviceDriver = deviceDrivers[device.type];
-			if (deviceDriver)
-			{
-				await deviceDriver.disconnect (device);
+			if (deviceDriver) {
+				await deviceDriver.disconnect(device);
 				// TODO wait some time and then disconnect anyway
 			}
-			else
-			{
-				this.error ('There is no driver for the current device ('+device.type+')');
+			else {
+				this.error('There is no driver for the current device (' + device.type + ')');
 			}
 		}
-		else
-		{
-			this.warn ('There is no connected device, nothing to disconnect from');
+		else {
+			this.warn('There is no connected device, nothing to disconnect from');
 		}
 	},
 
 	/**
 	 * Close
 	 */
-	async close ()
-	{
-		if (!closeAsking)
-		{
+	async close() {
+		if (!closeAsking) {
 			closeAsking = true;
 			let value = await workspace.showConfirmationPrompt('EXIT', 'WORKSPACE_TOOLBAR_EXIT_QUESTION');
-			
+
 			if (value) {
-				system.close ();
-			} 
+				system.close();
+			}
 
 			// eslint-disable-next-line require-atomic-updates
 			closeAsking = false;
@@ -1260,49 +1182,49 @@ let workspace = {
 	/**
 	 * Display warning
 	 */
-	warn ()
-	{
-		console.warn ('WARNING: ', ...arguments);
+	warn() {
+		console.warn('WARNING: ', ...arguments);
 	},
 
 	/**
 	 * Display error
 	 */
-	error ()
-	{
-		console.error ('ERROR: ', ...arguments);
+	error() {
+		console.error('ERROR: ', ...arguments);
 	},
 };
 
-export function setup (options, imports, register)
-{
+export function setup(options, imports, register) {
 	system = imports.system;
-	system.events.on ('close-ask', () => {
-		workspace.close ();
+	system.events.on('close-ask', () => {
+		workspace.close();
 	});
-	Vue.use (VueI18n);
+	Vue.use(VueI18n);
 	Vue.use(Vuetify, {
 		font: 'mdi',
-		iconfont:'mdi'
+		iconfont: 'mdi'
 	});
-	Vue.use (Vuex);
-	
+	Vue.use(Vuex);
+
 	/* Store */
-	workspace.store = new Vuex.Store ({
+	workspace.store = new Vuex.Store({
 		modules: {},
 		strict: process.env.NODE_ENV !== 'production'
 	});
 
 	/* Register the store */
-	workspace.registerStore ('workspace', studioStore);
+	workspace.registerStore('workspace', studioStore);
 
 	settings = imports.settings;
 	let mode = settings.loadValue('workspace', 'mode', 'simple');
 	console.log(mode);
 
-	workspace.dispatchToStore('workspace','mode', mode);
+	workspace.dispatchToStore('workspace', 'mode', mode);
 
-	register (null, {
+
+
+
+	register(null, {
 		workspace: workspace
 	});
 }

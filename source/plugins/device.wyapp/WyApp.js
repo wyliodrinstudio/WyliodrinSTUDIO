@@ -190,11 +190,19 @@ export default class WyApp extends EventEmitter
 				var arraydata = this.buffers[0];
 				this.buffers.splice (0, 1);
 				// console.console.log (arraydata);
-				this.stream.write (arraydata, (/*err*/) =>
+				try
 				{
+					this.stream.write (arraydata, (/*err*/) =>
+					{
+						this.isSending = false;
+						this._send ();
+					});
+				}
+				catch (e)
+				{
+					console.log ('Send data '+e.message);
 					this.isSending = false;
-					this._send ();
-				});
+				}
 			}
 			else
 			{

@@ -54,6 +54,7 @@ class SSHWyAppTransport extends EventEmitter
 				// console.log (stream);
 				if (error) 
 				{
+					// TODO translate
 					console.log ('error '+error);
 					if (error.reason === 'CONNECT_FAILED')
 					{
@@ -61,7 +62,7 @@ class SSHWyAppTransport extends EventEmitter
 					}
 					else
 					{
-						workspace.showError ('Device '+this.device.name+': '+error.message);
+						workspace.showError ('Device '+this.device.name, {extra: error.message});
 					}
 				}
 				else
@@ -91,7 +92,8 @@ class SSHWyAppTransport extends EventEmitter
 
 		this.ssh.on ('error', (err) => {
 			this.status = 'error';
-			workspace.showError ('Device '+this.device.name+': '+err.message);
+			// TODO translate
+			workspace.showError ('Device '+this.device.name,  {extra: err.message});
 			this.emit ('error');
 		});
 
