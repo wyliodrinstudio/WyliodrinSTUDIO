@@ -68,7 +68,11 @@ export function setup (options, imports, register)
 
 	studio.workspace.registerComponent (studio.xterm.Xterm);
 
-	studio.workspace.registerStatusButton ('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg');
+	studio.workspace.registerStatusButton ('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg', {
+		height () {
+			return '30%';
+		}
+	});
 
 	register (null, {
 		console: consoleObject

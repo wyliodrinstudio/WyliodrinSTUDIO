@@ -75,10 +75,16 @@ export function setup (options, imports, register)
 		description: 'GPIO access and interrupt detection with Node.js on Linux boards like the Raspberry Pi, C.H.I.P. or BeagleBone.'
 	});
 
-	studio.projects.registerLanguagePackage ('python', 'raspberrypi', {
-		name: 'gpiozero',
-		description: 'A simple interface to GPIO devices with Raspberry Pi.'
-	});
+	studio.projects.registerLanguagePackage ('python', 'raspberrypi', [
+		{
+			name: 'gpiozero',
+			description: 'A simple interface to GPIO devices with Raspberry Pi.'
+		},
+		{
+			name: 'pyFirmata',
+			description: 'pyFirmata is a Python interface for the Firmata protocol.'
+		},
+	]);
 
 	studio.editor_visual.registerBlocksDefinitions ('raspberrypi', [firmata_blocks, picamera_blocks], [firmata_code, picamera_code], toolbox, 
 		{
