@@ -7,7 +7,7 @@
     :type="type"
   >
     {{ text }}
-    <pre>ueryweuiyriuew fdskjf  feurheiwyriuewyi</pre>
+    <pre v-if="extra">{{ extra }}</pre>
     
   </v-alert>
 </template>
@@ -29,6 +29,10 @@ export default {
     dismissible: {
       type: Boolean,
       default: true
+    },
+    extra: {
+      type: String,
+      default: null
     }
   }
 }
