@@ -1,0 +1,22 @@
+{
+	"WELCOME_TEXT": {
+		"message": "Bun venit!",
+		"description": "Welcome text"
+	},
+	"WELCOME_START_WORK": {
+		"message": "Puteți începe să creați noi aplicații, să configurați și să conectați placi sau să importați propriile proiecte.",
+		"description": "Introduction message"
+	},
+	"WELCOME_CREATE_APP": {
+		"message": "Creați o aplicație nouă",
+		"description": "Button that will redirect the user to a popup where he can create new applicatons."
+	},
+	"WELCOME_CONNECT_BOARD": {
+		"message": "Conectare placă",
+		"description": "Button that will open a browser window with a documentation chapter regarding the setup of a Raspberry Pi board."
+	},
+	"WELCOME_IMPORT": {
+		"message": "Importare proiecte",
+		"description": "Button that will redirect the user to a popup where he can import his own projects."
+	}
+}
