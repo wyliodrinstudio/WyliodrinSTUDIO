@@ -19,6 +19,17 @@
 					</v-list-item>
 				</template>
 			</v-list>
+			<v-alert v-if="devicesWithoutPlaceholders === 0"
+				type="success"
+				class="mb-4"
+				>
+					<v-row align="center">
+						<v-col class="grow">{{$t('WORKSPACE_DEVICE_SETUP_TEXT')}}</v-col>
+						<v-col class="shrink">
+							<v-btn @click="setup">{{$t('WORKSPACE_DEVICE_SETUP')}}</v-btn>
+						</v-col>
+					</v-row>
+			</v-alert>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>
@@ -40,7 +51,15 @@ export default {
 	computed: {
 		...mapGetters ({
 			devices: 'workspace/devices'
-		})
+		}),
+		devicesWithoutPlaceholders ()
+		{
+			if (!this.devices) return 0;
+			else 
+			{
+				return this.devices.reduce ((nr, device) => { console.log (device); return nr + (device.placeholder?0:1); }, 0);
+			}
+		}
 	},
 	mounted () {
 		this.$refs.close.$el.focus ();
@@ -58,6 +77,10 @@ export default {
 		esc ()
 		{
 			this.close ();
+		},
+		setup ()
+		{
+			this.studio.system.openLink ('https://wyliodrinstudio.readthedocs.io/en/latest/boards.html');
 		}
 	}
 }
