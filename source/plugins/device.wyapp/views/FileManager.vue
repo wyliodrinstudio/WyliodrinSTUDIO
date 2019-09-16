@@ -22,11 +22,13 @@
 					:items="items"
 					:load-children="fetchContent"
             		:open.sync="open"
+					open-on-click
+          			transition
 					item-key="name"
 					>
 					
-					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+					<template v-slot:label="{item, open}"	>
+						<p style="width:100%;" @click="fileItem = item" v-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
 						<p v-else style="width:100%;" text  @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
@@ -155,7 +157,7 @@ export default {
 			folderMenu:false,
 			fileItem:null,
 			newData:null,
-			changed:false,
+			cwdArray:[],
 			cwd:'/',
 			x: 0,
 			y: 0,
@@ -177,12 +179,8 @@ export default {
 		},
 	},
 	watch: {
-		cwd(){
-			console.log('sent');
-			this.connection.send('fe', {
-			a: 'ls',
-			b:this.cwd
-		});
+		async newData(){
+			await this.updateFileTree(this.newData,this.fileItem);
 		},
 
 	},
@@ -204,14 +202,13 @@ export default {
 		},
 		update(data){
 			this.newData=data;
-			this.changed=true;
 			console.log(data);
 		},
 		updateFileTree(data, tree){
 			if(data) {
 				for(let item of data) {
 					if(item.isdir) {
-						tree.push({
+						tree.children.push({
 							name: item.name,
 							children:[],
 							path:this.cwd+item.name+'/',
@@ -219,7 +216,7 @@ export default {
 							key: item.name+item.size+'folder'
 						});
 					} else if(item.isfile) {
-						tree.push({
+						tree.children.push({
 							name:item.name,
 							file:path.extname(item.name),
 							path:this.cwd+item.name+'/',
@@ -227,7 +224,7 @@ export default {
 							key:item.name+item.size+'file'
 						});
 					} else if(item.islink) {
-						tree.push({
+						tree.children.push({
 							name:item.name,
 							link:true,
 							path:this.cwd+item.name+'/',
@@ -246,14 +243,20 @@ export default {
 		},
 		async fetchContent(item){
 			this.cwd=item.path;
-			let old = this.newData;
-			this.fileItem=item;
-			while(this.newData === old){
-				console.log('waiting');
+			console.log(this.cwdArray);
+			console.log(this.cwdArray.includes(this.cwd))
+			if(!this.cwdArray.includes(this.cwd)){
+				this.cwdArray.push(this.cwd);
+				this.fileItem=item;
+				await setTimeout( ()=> {
+					this.connection.send('fe', {
+						a: 'ls',
+						b:this.cwd
+					});
+				},1500);
 			}
-			if(await this.updateFileTree(this.newData,item.children)) {
-				this.changed=false;
-			}
+			return this.items;
+			
 		},
 		showFile(e) {
 			this.fileMenu = false;
