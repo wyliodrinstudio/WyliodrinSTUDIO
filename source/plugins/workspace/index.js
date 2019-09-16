@@ -764,21 +764,21 @@ let workspace = {
 			if(type === 'info')
 				this.vue.$dialog.notify.info(this.vue.$t(text, values), {
 					position: 'bottom-right',
-					width: '700',
+					width: 700,
 					timeout: timeout
 				});
 			else
 			if (type ==='success')
 				this.vue.$dialog.notify.success(this.vue.$t (text, values), {
 					position: 'bottom-right',
-					width: '700',
+					width: 700,
 					timeout
 				});
 			else
 			if(type === 'warning')
 				this.vue.$dialog.notify.warning(this.vue.$t (text, values), {
 					position: 'bottom-right',
-					width: '700',
+					width: 700,
 					timeout
 				});
 		}
@@ -813,7 +813,7 @@ let workspace = {
 		{
 			this.vue.$dialog.notify.error(this.vue.$t (text, values), {
 				position: 'bottom-right',
-				width: '70%',
+				width: 700,
 				timeout
 			});
 		}

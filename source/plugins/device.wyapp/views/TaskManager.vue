@@ -28,7 +28,10 @@
 							<span>{{task.TT}}</span>
 						</td>
 						<td class="w-20 text-right">
-							<v-btn text class="lib-app-btn">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
+							<div v-if="task.sentKill">
+								<v-progress-circular indeterminate></v-progress-circular>
+							</div>
+							<v-btn v-else text class="lib-app-btn" @click="kill(task)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
 						</td>
 					</tr>
 				</table>
@@ -90,6 +93,11 @@ export default {
 		hasTTY (task)
 		{
 			return task.TT !== '?';
+		},
+		kill (task)
+		{
+			this.connection.send ('tm', {a: 'exit', PID: task.PID});
+			task.sentKill = true;
 		},
 		esc() {
 			this.close();
