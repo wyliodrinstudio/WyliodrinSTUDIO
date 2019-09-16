@@ -192,7 +192,7 @@ export default {
 		},
 		install (data)
 		{
-			resetPackageLogs (data.languages+':'+data.packages.name);
+			resetPackageLogs (data.languages+':'+data.package.name);
 			this.connection.send ('pm', {
 				a: 'i',
 				l: data.language,
