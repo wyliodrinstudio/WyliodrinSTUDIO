@@ -18,69 +18,17 @@
 			<template>
 				<v-treeview
 					v-model="tree"
-					:open="open"
+					
 					:items="items"
+					:load-children="fetchContent"
+            		:open.sync="open"
+					open-on-click
+          			transition
 					item-key="name"
-					:open-on-click="true"
 					>
-					<template v-slot:prepend="{item, open}">
-						<p v-if="item.file !== undefined" class="file" @contextmenu="fileItem = item,showFile($event)">
-						</p>
-						<p v-else-if="open && item.name" class="folder-open" @click="fileItem = item, cwd=item.path" text @contextmenu="fileItem = item,showFolder($event)">
-							
-						</p>
-						<p v-else-if="item.name" class="folder-closed" text  @click="fileItem = item, cwd=item.path" @contextmenu="fileItem = item,showFolder($event)">
-
-						</p>
-
-						<v-menu
-							v-model="folderMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-							<v-menu
-							v-model="fileMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="exportFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-					</template>
-					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="item.file  === undefined" text  @click="fileItem = item, cwd=item.path" @contextmenu="fileItem = item,showFolder($event)"> 
+					
+					<template v-slot:label="{item, open}"	>
+						<p style="width:100%;" @click="fileItem = item" v-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
 						<p v-else style="width:100%;" text  @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
@@ -196,12 +144,20 @@ export default {
 		return {
 			open: ['public'],
 			tree: [],
-			items: [],
+			items: [{
+				name:'Raspberry',
+				children:[],
+				path:'/',
+				size:0,
+				key:'Raspberry'+0+'root'
+
+			}],
 			switch1:false,
 			fileMenu: false,
 			folderMenu:false,
 			fileItem:null,
-			pieData:null,
+			newData:null,
+			cwdArray:[],
 			cwd:'/',
 			x: 0,
 			y: 0,
@@ -223,25 +179,13 @@ export default {
 		},
 	},
 	watch: {
-		pieData(){
-			if(this.items.length < 1) {
-				this.updateFileTree(this.pieData,this.items);
-			} else {
-				this.updateChildren(this.cwd,this.items);
-			}
+		async newData(){
+			await this.updateFileTree(this.newData,this.fileItem);
 		},
-		cwd(){
-			this.connection.send('fe', {
-			a: 'ls',
-			b:this.cwd
-		});
-		}
+
 	},
 	created () {
-		this.connection.send('fe', {
-			a: 'ls',
-			b:'/'
-		});
+
 		this.connection.on('tag:fe1',this.update);
 	},
 	destroyed ()
@@ -257,13 +201,14 @@ export default {
 			})
 		},
 		update(data){
-			this.pieData=data
+			this.newData=data;
+			console.log(data);
 		},
 		updateFileTree(data, tree){
 			if(data) {
 				for(let item of data) {
 					if(item.isdir) {
-						tree.push({
+						tree.children.push({
 							name: item.name,
 							children:[],
 							path:this.cwd+item.name+'/',
@@ -271,7 +216,7 @@ export default {
 							key: item.name+item.size+'folder'
 						});
 					} else if(item.isfile) {
-						tree.push({
+						tree.children.push({
 							name:item.name,
 							file:path.extname(item.name),
 							path:this.cwd+item.name+'/',
@@ -279,7 +224,7 @@ export default {
 							key:item.name+item.size+'file'
 						});
 					} else if(item.islink) {
-						tree.push({
+						tree.children.push({
 							name:item.name,
 							link:true,
 							path:this.cwd+item.name+'/',
@@ -289,23 +234,29 @@ export default {
 					}
 				}
 			}
-		},
-		updateChildren(cwd, array) {
-			if(this.items) {
-				for(let item of array) {
-					if(item.path === this.cwd && item.children !== undefined) {
-						this.updateFileTree(this.pieData,item.children);
-						break;
-					} else if (item.children !== undefined && this.isChildOf(cwd,item.path)) {
-						this.updateChildren(item.path,array);
-					}
-				}
-			}
+			console.log(tree);
 		},
 		_isChildOf(child,parent) {
 			if (child === parent) return false;
 			const parentTokens = parent.split(path.sep).filter(i => i.length);
 			return parentTokens.every((t, i) => child.split(path.sep)[i] === t);
+		},
+		async fetchContent(item){
+			this.cwd=item.path;
+			console.log(this.cwdArray);
+			console.log(this.cwdArray.includes(this.cwd))
+			if(!this.cwdArray.includes(this.cwd)){
+				this.cwdArray.push(this.cwd);
+				this.fileItem=item;
+				await setTimeout( ()=> {
+					this.connection.send('fe', {
+						a: 'ls',
+						b:this.cwd
+					});
+				},1500);
+			}
+			return this.items;
+			
 		},
 		showFile(e) {
 			this.fileMenu = false;

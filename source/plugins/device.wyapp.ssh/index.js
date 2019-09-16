@@ -197,9 +197,10 @@ function updateSSHDevices (sshDevices)
 	devices.push ({
 		id: 'wyapp:ssh:ipaddress',
 		address: '',
-		name: 'IP Address',
+		name: workspace.vue.$t('DEVICE_WYAPP_SSH_IP_ADDRESS'),
 		board: 'any',
 		priority: NETWORK_PRIORITY_HIGH+10,
+		placeholder: true,
 		properties: {
 			// TODO update from device
 			port: 22

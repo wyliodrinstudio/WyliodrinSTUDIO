@@ -96,8 +96,9 @@ function updateDevices ()
 		websocketDevices.push ({
 			id: 'wyapp:websocket:newdevice',
 			address: '',
-			name: 'New Device',
+			name: workspace.vue.$t('WYAPP_WEBSOCKET_NEW_DEVICE_TITLE'),
 			board: 'any',
+			placeholder: true,
 			priority: NETWORK_PRIORITY_HIGH+10,
 			properties: {}
 		});
