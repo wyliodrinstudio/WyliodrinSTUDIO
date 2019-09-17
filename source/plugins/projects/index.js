@@ -822,6 +822,20 @@ let projects = {
 		}
 		
 	},
+	async downloadFile(name,data) {
+		try {
+			let savePath = await studio.filesystem.openExportDialog(data, {
+				filename:name,
+				filetypes:[path.extname(name)],
+				type:'data:application;base64,'
+			});
+			if(savePath !== null) {
+				await studio.filesystem.writeFile(savePath,data);
+			}
+		} catch (e) {
+			console.error(e);
+		}
+	},
 	/**
 	 * This function is used to rename a file or a folder included in the currently open project.
 	 * 

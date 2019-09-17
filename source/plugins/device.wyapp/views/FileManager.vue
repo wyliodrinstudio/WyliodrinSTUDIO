@@ -23,15 +23,15 @@
 					:load-children="fetchContent"
             		:open.sync="open"
 					open-on-click
-          			transition
+          			
 					item-key="name"
 					>
 					
 					<template v-slot:label="{item, open}"	>
-						<p style="width:100%;" @click="fileItem = item" v-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+						<p style="width:100%;" @click="menuItem = item" v-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
-						<p v-else style="width:100%;" text  @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
+						<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
 							{{item.name}} 
 						</p>
 
@@ -55,7 +55,7 @@
 									<v-list-item @click="newFile(fileItem)">
 										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
 									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
+									<v-list-item @click="upload()">
 										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
 									</v-list-item>
 								</v-list>
@@ -75,7 +75,7 @@
 									<v-list-item @click="renameObject(fileItem)">
 										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
 									</v-list-item>
-									<v-list-item @click="exportFile(fileItem)">
+									<v-list-item @click="download()">
 										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
 									</v-list-item>
 								</v-list>
@@ -87,14 +87,14 @@
 			</div>
 			<div :class="editorBox" class="hs-100">
 				<v-list>
-					<v-subheader v-if="fileItem !== null">{{fileItem.name}}</v-subheader>
+					<v-subheader v-if="menuItem !== null">{{menuItem.name}}</v-subheader>
 
-					<v-list-item-group v-if="fileItem !== null" v-model="item" color="primary">
-						<v-list-item v-for="item in fileItem.children" :key="item.key">
+					<v-list-item-group v-if="menuItem !== null && menuItem.children !== undefined" v-model="item" color="primary">
+						<v-list-item v-for="item in menuItem.children" :key="item.key">
 							<v-list-item-icon>
-								<p v-if="item.file !== undefined" class="file" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
+								<p v-if="item.file !== undefined" class="file" @click="fileItem = item" @contextmenu="cwd = path.dirname(item.path), fileItem = item,showFile($event)">
 								</p>
-								<p v-else-if="item.name" class="folder-open" @click="fileItem = item" text @contextmenu="fileItem = item,showFolder($event)">
+								<p v-else-if="item.name" class="folder-closed" @click="menuItem = item" text @contextmenu="fileItem = item,showFolder($event)">
 								</p>
 							</v-list-item-icon>
 							<v-list-item-content>
@@ -102,7 +102,6 @@
 							</v-list-item-content>
 						</v-list-item>
 					</v-list-item-group>
-					<p v-else>No folder selected</p>
 				</v-list>
 			</div>
 		</v-card-text>
@@ -156,6 +155,7 @@ export default {
 			fileMenu: false,
 			folderMenu:false,
 			fileItem:null,
+			menuItem:null,
 			newData:null,
 			cwdArray:[],
 			cwd:'/',
@@ -184,44 +184,179 @@ export default {
 		},
 
 	},
-	created () {
+	async created () {
 
 		this.connection.on('tag:fe1',this.update);
+		this.connection.on('tag:fe3',await this.saveFileDialog);
+		this.connection.on('tag:fe6',this.error);
+		this.connection.on('tag:fe7',this.updateFolder)
+		
 	},
-	destroyed ()
+	async destroyed ()
 	{
 		this.connection.removeListener('tag:fe1',this.update);
+		this.connection.removeListener('tag:fe3',await this.saveFileDialog);
+		this.connection.removeListener('tag:fe6',this.error);
+		this.connection.removeListener('tag:fe7',this.updateFolder);
 	},
 	methods: {
 		list(cwd){
-			this.connection.send('fe',
-			{
+			this.connection.send('fe', {
 				a: 'ls',
-				l:cwd
+				b:cwd
 			})
 		},
+		async saveFileDialog(data){
+			console.log('saveFileDialog')
+			let newData1 = Buffer.from(data.f);
+			await this.studio.projects.downloadFile(this.fileItem.name,newData1);
+		},
+		download() {
+			console.log('download');
+			console.log(this.fileItem);
+			//downlaod in fereastra glisanta
+			//max 3000 biti ~= 32kb MAXKPACKET
+			//
+			this.connection.send('fe', {
+				a:'down',
+				b:this.cwd,
+				c:this.fileItem.name,
+				z:0,
+				size:this.fileItem.size
+			})
+		},
+		async upload(){
+			console.log('upload');
+			let files = await this.studio.filesystem.openImportDialog({
+				title:'Import',
+				filetypes:[]
+			});
+			if (files.length > 0)
+			{
+				// use first file
+				let fileData = await this.studio.filesystem.readImportFile (files[0]);
+				let name = files[0].name;
+				console.log(this.cwd);
+				console.log(this.fileItem);
+				console.log(fileData);
+				console.log(name);
+				this.connection.send('fe',{
+					a:'up',
+					b:this.cwd,
+					c:path.basename(name),
+					d:fileData,
+					t:'w',
+					end:true
+				})
+			}
+			this.connection.send('fe', {
+				a: 'ls',
+				b:this.cwd
+			});
+			
+		},
+		async deleteFile(){
+			//SHOW YOU SURE POPUP
+			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_FILE', 'PROJECT_FILE_SURE');
+			if(allow){
+				this.connection.send('fe',{
+					a:'del',
+					b:this.cwd,
+					c:this.fileItem.name,
+				})
+			}
+			console.log(this.cwd);
+			this.items[0].children = [];
+			this.fileItem=this.items[0];
+			this.cwd='/';
+			this.cwdArray=[];
+			this.connection.send('fe', {
+				a: 'ls',
+				b:'/'
+			});	
+			
+		},
+		async rename(){
+			if (item.children)
+			{
+				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FOLDER', 'PROJECT_NEW_FOLDER_NAME', item.name, 'PROJECT_NEW_NAME');
+				if (newName)
+				{
+					this.connection.send('fe',{
+						a:'ren',
+						b:this.cwd,
+						c:this.fileItem.name,
+						d:newName
+					});
+				}
+			}
+			else
+			{
+
+				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FILE', 'PROJECT_NEW_FILE_NAME', item.name, 'PROJECT_NEW_NAME');
+				if (newName)
+				{
+					this.connection.send('fe',{
+						a:'ren',
+						b:this.cwd,
+						c:this.fileItem.name,
+						d:newName
+					});
+				}
+			}
+			console.log(this.cwd);
+			this.items[0].children = [];
+			this.fileItem=this.items[0];
+			this.cwd='/';
+			this.cwdArray=[];
+			this.connection.send('fe', {
+				a: 'ls',
+				b:'/'
+			});	
+		},
+		newFolder(){
+			this.connection.send('fe',{
+				a:'newf',
+				b:cwd,
+				c:newName,
+			})
+		},
+		newFile(){
+			//TODO	
+		},
 		update(data){
+			console.log('update');
+			console.log(data);
 			this.newData=data;
+			
+		},
+		error(data){
+			console.log(data);
+		},
+		updateFolder(data){
+			//TODO update folder after upload
 			console.log(data);
 		},
 		updateFileTree(data, tree){
+			tree.children = [];
+			console.log(tree);
 			if(data) {
 				for(let item of data) {
 					if(item.isdir) {
-						tree.children.push({
-							name: item.name,
-							children:[],
-							path:this.cwd+item.name+'/',
-							size:item.size,
-							key: item.name+item.size+'folder'
-						});
+					tree.children.push({
+						name: item.name,
+						children:[],
+						path:this.cwd+item.name+'/',
+						size:item.size,
+						key: item.name+item.size+'folder',
+					});
 					} else if(item.isfile) {
 						tree.children.push({
 							name:item.name,
 							file:path.extname(item.name),
 							path:this.cwd+item.name+'/',
 							size:item.size,
-							key:item.name+item.size+'file'
+							key:item.name+item.size+'file',
 						});
 					} else if(item.islink) {
 						tree.children.push({
@@ -229,12 +364,11 @@ export default {
 							link:true,
 							path:this.cwd+item.name+'/',
 							size:item.size,
-							key:item.name+item.size+'link'
+							key:item.name+item.size+'link',
 						})
-					}
+					}	
 				}
 			}
-			console.log(tree);
 		},
 		_isChildOf(child,parent) {
 			if (child === parent) return false;
@@ -259,6 +393,7 @@ export default {
 			
 		},
 		showFile(e) {
+			this.cwd = path.dirname(this.fileItem.path);
 			this.fileMenu = false;
 			this.folderMenu = false;
 			e.preventDefault();
