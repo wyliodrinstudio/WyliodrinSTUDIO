@@ -127,6 +127,8 @@ For **Pi Zero** and **Pi 1**, you will need the `ARMv6 <https://nodejs.org/dist/
 
 	sudo cp -R * /usr
 
+	sudo ln -s /usr/lib/node_modules /usr/lib/node
+
 	cd ..
 
 	rm -rf node-v10.16.3-linux-armv6l
@@ -278,6 +280,7 @@ After downloading and extracting the files, you should open the Device Manager, 
 
 .. image:: images/picodevice.png
 	:align: center
+
 
 |
 
