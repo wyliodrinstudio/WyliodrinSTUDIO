@@ -1,0 +1,22 @@
+{
+	"WELCOME_TEXT": {
+		"message": "Welcome to Wyliodrin STUDIO",
+		"description": "Welcome text"
+	},
+	"WELCOME_START_WORK": {
+		"message": "You can start creating new applications, set up boards or import your own projects.",
+		"description": "Introduction message"
+	},
+	"WELCOME_CREATE_APP": {
+		"message": "Create a new application",
+		"description": "Button that will redirect the user to a popup where he can create new applicatons."
+	},
+	"WELCOME_CONNECT_BOARD": {
+		"message": "Connect board",
+		"description": "Button that will open a browser window with a documentation chapter regarding the setup of a Raspberry Pi board."
+	},
+	"WELCOME_IMPORT": {
+		"message": "Import projects",
+		"description": "Button that will redirect the user to a popup where he can import his own projects."
+	}
+}
