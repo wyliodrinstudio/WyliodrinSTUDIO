@@ -1,7 +1,8 @@
 <template>
 	<v-card class="manager-box">
 		<v-card-title>
-			<span class="headline">/wyliodrin (aici vine calea)</span>
+			<span class="headline" v-if="menuItem===null">No directory selected</span>
+			<span class="headline" v-else>{{menuItem.path}}</span>
 			<v-spacer></v-spacer>
 			<v-tooltip bottom>
 				<template #activator="data">
@@ -43,17 +44,14 @@
 							offset-y
 							>
 								<v-list>
-									<v-list-item @click="deleteFolder(fileItem)">
+									<v-list-item @click="deleteObject()">
 										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
 									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
+									<v-list-item @click="rename()">
 										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
 									</v-list-item>
-									<v-list-item @click="newFolder(fileItem)">
+									<v-list-item @click="newFolder()">
 										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
 									</v-list-item>
 									<v-list-item @click="upload()">
 										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
@@ -69,10 +67,10 @@
 							offset-y
 							>
 								<v-list>
-									<v-list-item @click="deleteFile(fileItem)">
+									<v-list-item @click="deleteObject()">
 										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
 									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
+									<v-list-item @click="rename()">
 										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
 									</v-list-item>
 									<v-list-item @click="download()">
@@ -87,18 +85,19 @@
 			</div>
 			<div :class="editorBox" class="hs-100">
 				<v-list>
-					<v-subheader v-if="menuItem !== null">{{menuItem.name}}</v-subheader>
+					<v-subheader v-if="menuItem !== null" @click="changeUp()">{{menuItem.name}}</v-subheader>
 
 					<v-list-item-group v-if="menuItem !== null && menuItem.children !== undefined" v-model="item" color="primary">
 						<v-list-item v-for="item in menuItem.children" :key="item.key">
 							<v-list-item-icon>
-								<p v-if="item.file !== undefined" class="file" @click="fileItem = item" @contextmenu="cwd = path.dirname(item.path), fileItem = item,showFile($event)">
+								<p v-if="item.file !== undefined" class="file" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
 								</p>
 								<p v-else-if="item.name" class="folder-closed" @click="menuItem = item" text @contextmenu="fileItem = item,showFolder($event)">
 								</p>
 							</v-list-item-icon>
 							<v-list-item-content>
-								<v-list-item-title v-text="item.name"></v-list-item-title>
+								<v-list-item-title v-if="item.file !== undefined" v-text="item.name" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)"></v-list-item-title>
+								<v-list-item-title v-else-if="item.name" v-text="item.name" @click="menuItem = item, fetchContent(item)" text @contextmenu="fileItem = item,showFolder($event)"></v-list-item-title>
 							</v-list-item-content>
 						</v-list-item>
 					</v-list-item-group>
@@ -106,9 +105,9 @@
 			</div>
 		</v-card-text>
 		<v-card-actions>
-			<div class="onofftoggle">
+			<!-- <div class="onofftoggle">
 				<v-switch v-model="switch1"  label="Show Hidden"></v-switch>
-			</div>
+			</div> -->
 			<v-spacer></v-spacer>
 			<!-- <div class="file-manager-actions">
 				<v-tooltip top>
@@ -158,6 +157,7 @@ export default {
 			menuItem:null,
 			newData:null,
 			cwdArray:[],
+			resolve:null,
 			cwd:'/',
 			x: 0,
 			y: 0,
@@ -207,13 +207,10 @@ export default {
 			})
 		},
 		async saveFileDialog(data){
-			console.log('saveFileDialog')
 			let newData1 = Buffer.from(data.f);
 			await this.studio.projects.downloadFile(this.fileItem.name,newData1);
 		},
 		download() {
-			console.log('download');
-			console.log(this.fileItem);
 			//downlaod in fereastra glisanta
 			//max 3000 biti ~= 32kb MAXKPACKET
 			//
@@ -226,7 +223,6 @@ export default {
 			})
 		},
 		async upload(){
-			console.log('upload');
 			let files = await this.studio.filesystem.openImportDialog({
 				title:'Import',
 				filetypes:[]
@@ -236,10 +232,6 @@ export default {
 				// use first file
 				let fileData = await this.studio.filesystem.readImportFile (files[0]);
 				let name = files[0].name;
-				console.log(this.cwd);
-				console.log(this.fileItem);
-				console.log(fileData);
-				console.log(name);
 				this.connection.send('fe',{
 					a:'up',
 					b:this.cwd,
@@ -255,82 +247,89 @@ export default {
 			});
 			
 		},
-		async deleteFile(){
-			//SHOW YOU SURE POPUP
-			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_FILE', 'PROJECT_FILE_SURE');
-			if(allow){
-				this.connection.send('fe',{
-					a:'del',
-					b:this.cwd,
-					c:this.fileItem.name,
-				})
-			}
-			console.log(this.cwd);
+		refresh(){
+			//TODO optimize file changes
 			this.items[0].children = [];
 			this.fileItem=this.items[0];
 			this.cwd='/';
 			this.cwdArray=[];
+			this.menuItem = null;
 			this.connection.send('fe', {
 				a: 'ls',
 				b:'/'
 			});	
-			
+		},
+		async deleteObject(){
+			//SHOW YOU SURE POPUP
+			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_FILE', 'PROJECT_FILE_SURE');
+			let parent = path.dirname(this.fileItem.path);
+			if(allow){
+				this.connection.send('fe',{
+					a:'del',
+					b:parent,
+					c:this.fileItem.name,
+				});
+				this.refresh();
+			}			
 		},
 		async rename(){
-			if (item.children)
+			let parent = path.dirname(this.fileItem.path);
+			if (this.fileItem.children)
 			{
-				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FOLDER', 'PROJECT_NEW_FOLDER_NAME', item.name, 'PROJECT_NEW_NAME');
+				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FOLDER', 'PROJECT_NEW_FOLDER_NAME', this.fileItem.name, 'PROJECT_NEW_NAME');
+				
 				if (newName)
 				{
 					this.connection.send('fe',{
 						a:'ren',
-						b:this.cwd,
+						b:parent,
 						c:this.fileItem.name,
 						d:newName
 					});
+					this.refresh();
 				}
 			}
 			else
 			{
 
-				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FILE', 'PROJECT_NEW_FILE_NAME', item.name, 'PROJECT_NEW_NAME');
+				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FILE', 'PROJECT_NEW_FILE_NAME', this.fileItem.name, 'PROJECT_NEW_NAME');
 				if (newName)
 				{
 					this.connection.send('fe',{
 						a:'ren',
-						b:this.cwd,
+						b:parent,
 						c:this.fileItem.name,
 						d:newName
 					});
+					this.refresh();
 				}
 			}
-			console.log(this.cwd);
-			this.items[0].children = [];
-			this.fileItem=this.items[0];
-			this.cwd='/';
-			this.cwdArray=[];
-			this.connection.send('fe', {
-				a: 'ls',
-				b:'/'
-			});	
+			
+
 		},
-		newFolder(){
-			this.connection.send('fe',{
-				a:'newf',
-				b:cwd,
-				c:newName,
-			})
+		async newFolder(){
+			let folderName = await this.studio.workspace.showPrompt ('PROJECT_NEW_FOLDER', 'PROJECT_NEW_FOLDER_NAME', '', 'PROJECT_NEW_NAME');
+			if (folderName)
+			{
+				console.log(this.fileItem.path);
+				this.connection.send('fe',{
+					a:'newf',
+					b:this.fileItem.path,
+					c:folderName,
+				});
+				this.refresh();
+
+			}			
+
 		},
-		newFile(){
-			//TODO	
+		changeUp(){
+			//TODO
 		},
 		update(data){
-			console.log('update');
-			console.log(data);
-			this.newData=data;
-			
+			this.newData=data;			
 		},
 		error(data){
+			//TODO
 			console.log(data);
 		},
 		updateFolder(data){
@@ -368,6 +367,12 @@ export default {
 						})
 					}	
 				}
+				this.studio.projects.sort(tree.children);
+				if(this.resolve){
+					this.resolve();
+					this.resolve = null;
+				}
+				
 			}
 		},
 		_isChildOf(child,parent) {
@@ -382,14 +387,14 @@ export default {
 			if(!this.cwdArray.includes(this.cwd)){
 				this.cwdArray.push(this.cwd);
 				this.fileItem=item;
-				await setTimeout( ()=> {
-					this.connection.send('fe', {
-						a: 'ls',
-						b:this.cwd
-					});
-				},1500);
+				this.connection.send('fe', {
+					a: 'ls',
+					b:this.cwd
+				});
+				let p = new Promise((resolve) => {this.resolve = resolve});
+				return p;
 			}
-			return this.items;
+
 			
 		},
 		showFile(e) {

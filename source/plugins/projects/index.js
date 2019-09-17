@@ -641,6 +641,23 @@ let projects = {
 			console.error(e);
 		}  
 	},
+	sort(tree){
+		let strCompare = (a, b) => {
+			if (a<b) return -1;
+			else if (a>b) return 1;
+			else return 0;
+		};
+		tree = tree.sort((a, b) => {
+			if ((a.children !== undefined && b.children !== undefined) || (a.children === undefined && b.children === undefined))
+			{
+				return strCompare (a.name, b.name);
+			}
+			else
+			if (a.children !== undefined) return -10;
+			else if (b.children !== undefined) return 10;
+			return 0;
+		});
+	},
 	/**
 	 * Recursively generate a deep object with all the contents of a project
 	 * 
@@ -676,6 +693,7 @@ let projects = {
 						}
 					}
 					pathTo = fullPath.replace(project.folder, '');
+					this.sort(children);
 					fileInfo = {
 						name: file.file,
 						children: children,
