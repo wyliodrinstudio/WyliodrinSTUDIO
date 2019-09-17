@@ -257,7 +257,9 @@ export function setup (options, imports, register)
 		}
 	});
 
-	searchSSHDevices ();
+	imports.events.on ('ready', () => {
+		searchSSHDevices ();
+	});
 
 	register (null, {});
 }
