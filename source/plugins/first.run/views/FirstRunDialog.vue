@@ -13,10 +13,6 @@
 					<v-btn @click="openLibrary" class="welcome-btn">{{ $t('WELCOME_CREATE_APP') }}</v-btn>
 					<v-btn @click="setupBoard" class="welcome-btn">{{ $t('WELCOME_CONNECT_BOARD') }}</v-btn>
 				</p>
-
-				<span>
-					<v-btn @click="importProjects" class="import-btn">{{ $t('WELCOME_IMPORT') }}</v-btn>
-				</span>
 				
 			</div>
 		</v-card-text>
@@ -48,11 +44,6 @@ export default {
 		setupBoard()
 		{
 			this.studio.system.openLink('https://wyliodrinstudio.readthedocs.io/en/latest/boards.html');
-		},
-		importProjects()
-		{
-			console.log('import');
-			this.studio.projects.showProjectsLibrary();
 		},
 		exit()
 		{

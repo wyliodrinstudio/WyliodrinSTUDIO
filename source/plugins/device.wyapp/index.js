@@ -252,13 +252,19 @@ export function setup(options, imports, register)
 										{
 											if(packet.d.a === 'r')
 											{
-												if(packet.d.t === 'r')
+												if(packet.d.t === 's')
 												{
 													if (packet.d.s === 'o' )
 														studio.notebook.printCode(packet.d.l, packet.d.d);
 												}
 												else if(packet.d.t === 'e')
 													studio.notebook.printError(packet.d.l, packet.d.d.buf);
+												else if (packet.d.t === 'r')
+												{
+													console.log('result');
+													console.log(packet.d);
+													studio.notebook.printResult(packet.d.l, packet.d.d.buf);
+												}
 												else if (packet.d.t === 'd')
 												{
 													studio.notebook.setStatus (packet.d.l, 'READY');

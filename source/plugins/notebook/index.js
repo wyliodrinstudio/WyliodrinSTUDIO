@@ -20,7 +20,6 @@ let notebook = {
 			events.removeListener ('reset', reset);
 		};
 	},
-	
 	printCode(id, data)
 	{
 		let notebook = getNotebook();
@@ -30,7 +29,11 @@ let notebook = {
 	{
 		let notebook = getNotebook();
 		notebook.printPythonError(id, data);
-
+	},
+	printResult(id, data)
+	{
+		let notebook = getNotebook();
+		notebook.printPythonResult(id, data);
 	},
 	setStatus (id, status)
 	{
