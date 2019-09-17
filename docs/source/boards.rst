@@ -21,10 +21,10 @@ Download the pre-configured image
 The easiest way to set up a Raspberry Pi board so that it becomes available for Wyliodrin STUDIO is to download an image that is already configured.
 
 
-Download the image for `Raspberry Pi Zero and Raspberry Pi 1 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_2019_09_13.zip>`_.
+Download the image for `Raspberry Pi Zero and Raspberry Pi 1 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_2019_09_17.zip>`_.
 
 
-Download the image for `Raspberry Pi 2 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_13.zip>`_, `Raspberry Pi 3 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_13.zip>`_ and `Raspberry Pi 4 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_13.zip>`_.
+Download the image for `Raspberry Pi 2 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_17.zip>`_, `Raspberry Pi 3 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_17.zip>`_ and `Raspberry Pi 4 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_17.zip>`_.
 
 
 Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flash>` it. After that, you can simply insert the SD card into the Raspberry Pi and your board should be visible within Wyliodrin STUDIO.
@@ -107,6 +107,11 @@ The dependencies you will have to install are:
 	
 	sudo apt-get update
 	sudo apt-get install -y supervisor redis build-essential git python3-pip
+
+
+	# To enable the Notebook tab, you should also run
+	sudo pip3 install redis pygments
+
 
 |
 
@@ -254,7 +259,7 @@ Download the pre-configured image
 The easiest way to set up a Pico-Pi IMX8M board so that it becomes available for Wyliodrin STUDIO is to download an image that is already configured.
 
 
-Download the image for `PicoPi IMX8M <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_picopi_imx8m_2019_09_16.zip>`_.
+Download the image for `PicoPi IMX8M <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_picopi_imx8m_2019_09_17.zip>`_.
 
 
 Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flashubuntu>` it. After that, your Pico-Pi board should be visible within Wyliodrin STUDIO.
@@ -363,7 +368,7 @@ Install STUDIO Supervisor
 
 To be able to access the Studio network, the Pico-Pi needs to run the STUDIO Supervisor software. The following tutorial will explain how to install it.
 
-After writing the image on the device, you will have to connect the Pic-Pi to the network and use a SSH to connect to it.
+After writing the image on the device, you will have to connect the Pico-Pi to the network and use a SSH to connect to it.
 
 
 **Install Dependencies**
@@ -381,6 +386,10 @@ The dependencies you will have to install are:
 	
 	sudo apt-get update
 	sudo apt-get install -y supervisor redis build-essential git python3-pip
+
+
+	# To enable the Notebook tab, you should also run
+	sudo pip3 install redis pygments
 
 |
 
@@ -538,7 +547,7 @@ Download the pre-configured image
 The easiest way to set up a BeagleBone Black board so that it becomes available for Wyliodrin STUDIO is to download an image that is already configured.
 
 
-Download the image for `BeagleBone Black <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_beaglebone_black_2019_09_16.zip>`_.
+Download the image for `BeagleBone Black <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_beaglebone_black_2019_09_17.zip>`_.
 
 
 
@@ -640,6 +649,10 @@ The dependencies you will have to install are:
 	sudo apt-get update
 	sudo apt-get install -y supervisor redis-server build-essential git python3-pip
 
+
+	# To enable the Notebook tab, you should also run
+	sudo pip3 install redis pygments
+
 |
 
 **Install Node.js**
@@ -733,7 +746,7 @@ The final step is to refresh the board by running the command:
 |
 
 Connecting to web 
-"""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^
 
 The connection of a BeagelBone Black board to the web version of Wyliodrin STUDIO demands an Internet connection and the creation of a file, **wyliodrin.json**, that will be written and stored on the SD card. The purpose of this configuration file is to keep a series of particular informations about the device and the platform, so the both instances be able to recognize and communicate with each other.
 
@@ -765,16 +778,18 @@ To add this file, you will have to connect the device to Wyliodrin STUDIO, open 
 
 After creating the configuration file to the destination indicated, you can hit the *Connect* button of the web application. At this point, you should see your BeagleBone Black device into the list of available devices and by clicking on its name you will be able to connect it to the IDE.
 
-
+|
 
 =========================
+
+|
 
 Udoo Neo
 **********
 
 This tutorial will show you how to set up a Udoo Neo device.
 
-.. image:: images/beaglebone.png
+.. image:: images/udoo.png
 	:align: center
 
 
@@ -784,16 +799,13 @@ Download the pre-configured image
 The easiest way to set up a Udoo Neo board so that it becomes available for Wyliodrin STUDIO is to download an image that is already configured.
 
 
-Download the image for `Udoo Neo <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_beaglebone_black_2019_09_16.zip>`_.
+Download the image for `Udoo Neo <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_beaglebone_black_2019_09_17.zip>`_.
 
 
 
 Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flashUdoo>` it. After that, you can simply insert the SD card into the Udoo Neo and your board should be visible within Wyliodrin STUDIO.
 
 |
-
-=========================
-
 |
 
 Set up the board manually
@@ -813,11 +825,11 @@ You will need to:
 3. Setup a provisioning file
 
 
-Download the `Ubuntu 16 <https://debian.beagleboard.org/images/bone-debian-9.5-iot-armhf-2018-10-07-4gb.img.xz>`_ image from the Beagle Board foundation. This is the standard OS for the Udoo Neo provided by the manufacturer.
+Download the `Ubuntu 16 <https://drive.google.com/file/d/1BkJCJrtGcZWHHQtXeOLIWPspK3jqwiBZ/view>`_ image for Udoo Neo.
 
 |
 
-.. _flashBeagle:
+.. _flashUdoo:
 
 Flash the image
 """""""""""""""""
@@ -848,26 +860,9 @@ After writing the SD Card, insert it into the board and start the device. You wi
 
 If you are using SSH, you will have to input 192.168.7.2 as the host IP address and then login with the appropriate credentials:
 
-username: *debian*
+username: *udooer*
 
-password: *temppwd*
-
-
-**Stop additional services**
----------------------------------
-
-The Udoo Neo image has several servers started. These are used mainly for development. Run the commands to stop them:
-
-.. code-block:: bash
-
-	sudo systemctl disable bonescript.service
-	sudo systemctl disable bonescript-autorun.service
-	sudo systemctl disable bonescript.socket
-	sudo systemctl disable apache2
-	sudo systemctl disable cloud9.service
-	sudo systemctl disable cloud9.socket
-	sudo systemctl disable getty@tty1
-	sudo systemctl disable node-red.socket
+password: *udooer*
 
 
 **Install Dependencies**
@@ -885,6 +880,10 @@ The dependencies you will have to install are:
 	
 	sudo apt-get update
 	sudo apt-get install -y supervisor redis-server build-essential git python3-pip
+
+
+	# To enable the Notebook tab, you should also run
+	sudo pip3 install redis pygments
 
 |
 
@@ -924,8 +923,6 @@ Continue the configuration by running the following commands:
 
 	rm -rf node-v10.16.3-linux-armv7l
 
-
-
 |
 
 **Install studio-supervisor**
@@ -957,7 +954,7 @@ To start the editor, type
 	[program:studio-supervisor]
 	command=/usr/bin/studio-supervisor udooneo
 	home=/wyliodrin
-	user=ubuntu
+	user=udooer
 
 
 Press Ctrl+X to save and exit the editor. Press Y when whether to save the file.
@@ -966,8 +963,8 @@ After that, you have to make the **/wyliodrin** directory your home directory:
 
 .. code-block:: bash
 
-	sudo chown debian:debian /wyliodrin
-	cp /home/debian/.bashrc /wyliodrin/.bashrc
+	sudo chown udooer:udooer /wyliodrin
+	cp /home/udooer/.bashrc /wyliodrin/.bashrc
 
 The final step is to refresh the board by running the command:
 
@@ -979,9 +976,9 @@ The final step is to refresh the board by running the command:
 |
 
 Connecting to web 
-"""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^
 
-The connection of a BeagelBone Black board to the web version of Wyliodrin STUDIO demands an Internet connection and the creation of a file, **wyliodrin.json**, that will be written and stored on the SD card. The purpose of this configuration file is to keep a series of particular informations about the device and the platform, so the both instances be able to recognize and communicate with each other.
+The connection of a Udoo Neo board to the web version of Wyliodrin STUDIO demands an Internet connection and the creation of a file, **wyliodrin.json**, that will be written and stored on the SD card. The purpose of this configuration file is to keep a series of particular informations about the device and the platform, so the both instances be able to recognize and communicate with each other.
 
 Acquiring the **wyliodrin.json** file assumes that you will have to launch the web version of the application and to click on the *Connect* button. After selecting the *New Device* option from the popup, a new dialog box will be opened and will ask you for the name of your new device.
 
