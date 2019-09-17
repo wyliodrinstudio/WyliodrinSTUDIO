@@ -1,14 +1,14 @@
 <template>
 	<v-card class="manager-box">
 		<v-card-title>
-			<span class="headline" v-if="menuItem===null">No directory selected</span>
+			<span class="headline" v-if="menuItem===null">{{$t('DEVICE_WYAPP_NO_DIRECTORY')}}</span>
 			<span class="headline" v-else>{{menuItem.path}}</span>
 			<v-spacer></v-spacer>
 			<v-tooltip bottom>
 				<template #activator="data">
 					<v-btn text class="icon-btn" aria-label="Refresh">
 						<!-- <v-img contain src="plugins/device.wyapp/data/img/icons/refresh-icon.svg" aria-label="Refreshr" v-on="data.on"></v-img> -->
-						Refresh
+						{{$t('DEVICE_WYAPP_REFRESH')}}
 					</v-btn>
 				</template>
 				<span>{{$t('DEVICE_WYAPP_REFRESH')}}</span>
@@ -85,8 +85,6 @@
 			</div>
 			<div :class="editorBox" class="hs-100">
 				<v-list>
-					<v-subheader v-if="menuItem !== null" @click="changeUp()">{{menuItem.name}}</v-subheader>
-
 					<v-list-item-group v-if="menuItem !== null && menuItem.children !== undefined" v-model="item" color="primary">
 						<v-list-item v-for="item in menuItem.children" :key="item.key">
 							<v-list-item-icon>
@@ -189,7 +187,7 @@ export default {
 		this.connection.on('tag:fe1',this.update);
 		this.connection.on('tag:fe3',await this.saveFileDialog);
 		this.connection.on('tag:fe6',this.error);
-		this.connection.on('tag:fe7',this.updateFolder)
+		this.connection.on('tag:fe7',this.error);
 		
 	},
 	async destroyed ()
@@ -197,7 +195,7 @@ export default {
 		this.connection.removeListener('tag:fe1',this.update);
 		this.connection.removeListener('tag:fe3',await this.saveFileDialog);
 		this.connection.removeListener('tag:fe6',this.error);
-		this.connection.removeListener('tag:fe7',this.updateFolder);
+		this.connection.removeListener('tag:fe7',this.error);
 	},
 	methods: {
 		list(cwd){
@@ -322,18 +320,11 @@ export default {
 			}			
 
 		},
-		changeUp(){
-			//TODO
-		},
 		update(data){
 			this.newData=data;			
 		},
 		error(data){
 			//TODO
-			console.log(data);
-		},
-		updateFolder(data){
-			//TODO update folder after upload
 			console.log(data);
 		},
 		updateFileTree(data, tree){

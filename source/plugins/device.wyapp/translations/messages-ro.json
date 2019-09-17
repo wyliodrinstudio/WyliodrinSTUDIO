@@ -37,6 +37,10 @@
 	},
 	"DEVICE_WYAPP_FILE_MANAGER": {
 		"message": "Administrare fișiere",
-		"description": "The option to refresh the file tree"
+		"description": "The button for the file tree manager"
+	},
+	"DEVICE_WYAPP_NO_DIRECTORY": {
+		"message": "Nu este nici un director selectat",
+		"description": "The message shown where there is no directory selected in the file tree"
 	}
 }
