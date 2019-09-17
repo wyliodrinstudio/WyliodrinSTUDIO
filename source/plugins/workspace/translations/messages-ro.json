@@ -94,5 +94,41 @@
     "WORKSPACE_SET_MODE_SIMPLE": {
         "message": "Mod Simplu",
         "description": "The menu to set the editor in simple mode"
+    },
+    "ABOUT_DEVELOPED_BY": {
+        "message": "Dezvoltat de",
+        "description": "Text for authors of Wyliodrin Studio"
+    },
+    "ABOUT_MAINTAINER": {
+        "message": "",
+        "description": "Maintainer of Wyliodrin Studio"
+    },
+    "ABOUT_UI_UX": {
+        "message": "UI/UX",
+        "description": "User Interface for Wyliodrin Studio"
+    },
+    "ABOUT_DEVELOPMENT": {
+        "message": "Developer",
+        "description": "Contributor to Wylidron Studio Development"
+    },
+    "ABOUT_LICENSE": {
+        "message": "Licență",
+        "description": "Button to show the license"
+    },
+    "ABOUT_LICENSE_TITLE": {
+        "message": "Licență de utilizare",
+        "description": "Title of the license popup"
+    },
+    "ABOUT_PROVIDED_BY": {
+        "message": "Oferit de",
+        "description": "Provider of Wyliodrin STUDIO"
+    },
+    "WORKSPACE_DEVICE_SETUP_TEXT": {
+        "message": "Daca doriți să configurați anumite dispozitive, puteți accesa site-ul nostru web cu tutoriale pentru mai multe informații.",
+        "description": "The message the user gets if there are no devices available in the connection selection"
+    },
+    "WORKSPACE_DEVICE_SETUP": {
+        "message": "Configurare dispozitiv",
+        "description": "The devices setup button for the setup website"
     }
 }

@@ -121,5 +121,5 @@
 	"DEVICE_WYAPP_FILE_MANAGER": {
 		"message": "File manager",
 		"description": "The option to refresh the file tree"
-	}
+    }
 }
