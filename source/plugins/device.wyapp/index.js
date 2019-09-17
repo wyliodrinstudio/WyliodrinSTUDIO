@@ -35,7 +35,10 @@ function updateDevices ()
 	let devices = [];
 	for (let transportDriverName in transportDevices)
 	{
-		devices.push (...transportDevices[transportDriverName]);
+		devices.push (...transportDevices[transportDriverName], {
+			id: 'error',
+			name: 'error'
+		});
 	}
 	workspace.updateDevices (devices);
 }
@@ -133,8 +136,6 @@ export function setup(options, imports, register)
 {
 	studio = imports;
 
-	let packages = {};
-
 	let deviceDriver = {
 		defaultIcon()
 		{
@@ -145,6 +146,11 @@ export function setup(options, imports, register)
 		{
 			if (_.isObject (device))
 			{
+				if (device.id === 'error')
+				{
+					studio.workspace.showNotification ('Notification text', {extra: require ('raw-loader!../../../README.md').default});
+				}
+				else
 				if (!connections[device.id])
 				{
 					// temporary
@@ -246,13 +252,19 @@ export function setup(options, imports, register)
 										{
 											if(packet.d.a === 'r')
 											{
-												if(packet.d.t === 'r')
+												if(packet.d.t === 's')
 												{
 													if (packet.d.s === 'o' )
 														studio.notebook.printCode(packet.d.l, packet.d.d);
 												}
 												else if(packet.d.t === 'e')
 													studio.notebook.printError(packet.d.l, packet.d.d.buf);
+												else if (packet.d.t === 'r')
+												{
+													console.log('result');
+													console.log(packet.d);
+													studio.notebook.printResult(packet.d.l, packet.d.d.buf);
+												}
 												else if (packet.d.t === 'd')
 												{
 													studio.notebook.setStatus (packet.d.l, 'READY');
@@ -406,7 +418,6 @@ export function setup(options, imports, register)
 			if (project)
 			{
 				let filename = await studio.projects.getDefaultRunFileName(project);
-				let file = await studio.projects.loadFile (project, filename);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
 
@@ -515,7 +526,7 @@ export function setup(options, imports, register)
 		/* Register the File Manager button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_FILE_MANAGER', 20, () => {
 			let device = studio.workspace.getDevice ();
-			let value = studio.workspace.showDialog(FileManager, {
+			studio.workspace.showDialog(FileManager, {
 				width:550,
 				connection: connections[device.id]
 			});
@@ -529,7 +540,7 @@ export function setup(options, imports, register)
 		/* Register the Task Manager button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_TASK_MANAGER', 30, () => {
 			let device = studio.workspace.getDevice ();
-			let value = studio.workspace.showDialog(TaskManager, {
+			studio.workspace.showDialog(TaskManager, {
 				width:550,
 				connection: connections[device.id]
 			});
@@ -543,7 +554,7 @@ export function setup(options, imports, register)
 		/* Register the Package Manager button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_PACKAGE_MANAGER', 40, () => {
 			let device = studio.workspace.getDevice ();
-			let value = studio.workspace.showDialog(PackageManager, {
+			studio.workspace.showDialog(PackageManager, {
 				width:550,
 				connection: connections[device.id]
 			});
@@ -558,7 +569,7 @@ export function setup(options, imports, register)
 		/* Register the Network Manager button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_NETWORK_MANAGER', 50, () => {
 			let device = studio.workspace.getDevice ();
-			let value = studio.workspace.showDialog(NetworkManager, {
+			studio.workspace.showDialog(NetworkManager, {
 				width:550,
 				connection: connections[device.id]
 			});

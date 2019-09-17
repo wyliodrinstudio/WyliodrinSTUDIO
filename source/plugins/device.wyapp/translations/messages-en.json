@@ -94,5 +94,32 @@
     "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": {
         "message": "Failed to uninstall {language} package {packageName}.",
         "description": "The error the users sees when a packages failes to uninstall"
-    }
+    },
+    "DEVICE_WYAPP_SSID": 
+    {
+        "message": "Network Name",
+        "description": "The SSID of a wireless network"
+    },
+    "DEVICE_WYAPP_PSK": 
+    {
+        "message": "Network Passphrase",
+        "description": "The passphrase of a wireless network"
+    },
+    "DEVICE_WYAPP_CONNECT": 
+    {
+        "message": "Connect",
+        "description": "The  network connect button"
+    },
+    "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
+        "message": "Other Network",
+        "description": "The option to connect to a network that is not displayed"
+	},
+	"DEVICE_WYAPP_REFRESH": {
+		"message": "Refresh",
+		"description": "The option to refresh the file tree"
+	},
+	"DEVICE_WYAPP_FILE_MANAGER": {
+		"message": "File manager",
+		"description": "The option to refresh the file tree"
+	}
 }

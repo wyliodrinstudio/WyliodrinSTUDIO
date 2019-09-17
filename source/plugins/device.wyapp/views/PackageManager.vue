@@ -19,10 +19,10 @@
 			</v-tabs>
 			<v-tabs-items v-model="active">
 				<v-tab-item :key="'python'" fill-height>
-					<PackagesList language="python" :packages="pythonPackages" @install="install" @uninstall="uninstall"></PackagesList>
+					<PackagesList language="python" :packages="pythonPackages" @install="install" @uninstall="uninstall" :working="working.python"></PackagesList>
 				</v-tab-item>
 				<v-tab-item :key="'nodejs'" fill-height>
-					<PackagesList language="nodejs" :packages="nodejsPackages" @install="install" @uninstall="uninstall"></PackagesList>
+					<PackagesList language="nodejs" :packages="nodejsPackages" @install="install" @uninstall="uninstall" :working="working.nodejs"></PackagesList>
 				</v-tab-item>
 			</v-tabs-items>
 		</v-card-text>
@@ -34,6 +34,25 @@
 </template>
 
 <script>
+
+let packagesInstallLogs = {};
+
+function resetPackageLogs (packageName)
+{
+	delete packagesInstallLogs[packageName];
+}
+
+function addPackageLogs (packageName, log)
+{
+	if (!packagesInstallLogs[packageName]) packagesInstallLogs[packageName] = log;
+	else packagesInstallLogs[packageName] = packagesInstallLogs[packageName] + log;
+}
+
+function getPackageLogs (packageName)
+{
+	return packagesInstallLogs[packageName];
+}
+
 import _ from 'lodash';
 import PackagesList from './PackagesList.vue';
 import { mapGetters } from 'vuex';
@@ -51,7 +70,11 @@ export default {
 				python: null,
 				nodejs: null
 			},
-			search: ''
+			search: '',
+			working: {
+				python: {},
+				nodejs: {}
+			}
 		};
 	},
 	mounted() {
@@ -140,12 +163,29 @@ export default {
 				{
 					if (data.e !== 0)
 					{
-						this.studio.workspace.showError ('DEVICE_WYAPP_PACKAGE_INSTALL_ERROR', {language: data.l, packageName: data.p});
+						this.studio.workspace.showError ('DEVICE_WYAPP_PACKAGE_INSTALL_ERROR', {language: data.l, packageName: data.p, extra: getPackageLogs (data.l+':'+data.p)});
 					}
+					else
+					{
+						resetPackageLogs (data.l+':'+data.p);
+					}
+					delete this.working[data.l][data.p];
 					this.connection.send ('pm', {
 						a: 'p',
 						l: data.l
 					});
+					this.$forceUpdate ();
+				}
+				else
+				{
+					if (data.out)
+					{
+						addPackageLogs (data.l+':'+data.p, data.out);
+					}
+					else
+					{
+						addPackageLogs (data.l+':'+data.p, data.err);
+					}
 				}
 			}
 		},
@@ -158,12 +198,14 @@ export default {
 		},
 		install (data)
 		{
+			resetPackageLogs (data.languages+':'+data.package.name);
 			this.connection.send ('pm', {
 				a: 'i',
 				l: data.language,
 				p: data.package.name
 			});
-			this.working (data.language, data.package.name);
+			this.working[data.language][data.package.name]='install';
+			this.$forceUpdate ();
 		},
 		uninstall (data)
 		{
@@ -172,20 +214,8 @@ export default {
 				l: data.language,
 				p: data.package.name
 			});
-			this.working (data.language, data.package.name);
-		},
-		working (language, packageName)
-		{
-			this.packages[language] = this.packages[language].map ((p) => {
-				if (p.name === packageName)
-				{
-					return _.assign ({}, p, {working: true});
-				}
-				else
-				{
-					return p;
-				}
-			});
+			this.working[data.language][data.package.name]='uninstall';
+			this.$forceUpdate ();
 		}
 	}
 }

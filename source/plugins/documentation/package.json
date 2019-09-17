@@ -4,8 +4,8 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace"],
+        "consumes": ["workspace", "system"],
         "provides": ["documentation"],
-        "target": ["electron"]
+        "target": ["electron", "browser"]
     }
 }

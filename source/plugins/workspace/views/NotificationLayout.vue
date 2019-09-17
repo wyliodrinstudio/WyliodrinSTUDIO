@@ -8,7 +8,7 @@
       @mouseleave="startTimer"
       role="alert"
     >
-      <dialog-child v-bind="$options.propsData" ref="dialog" />
+      <Alert v-bind="$options.propsData" ref="dialog" />
       <div
         class="vuedl-notification__closeBtn"
         v-if="showClose"
@@ -21,8 +21,12 @@
 
 <script>
 import { Notifiable } from 'vuedl';
+import Alert from './Alert.vue';
 
 export default {
+  components: {
+    Alert
+  },
   mixins: [ Notifiable ],
   props: {
     width: {

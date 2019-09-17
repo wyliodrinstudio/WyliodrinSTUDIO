@@ -16,11 +16,11 @@
 				</td>
 				<td class="w-50 d-flex">{{packageData.description}}</td>
 				<td class="w-20 text-right">
-					<div v-show="!packageData.working">
+					<div v-show="!working[packageData.name]">
 						<v-btn text v-show="packageData.installed" class="lib-app-btn" @click="uninstall (packageData)">{{$t('DEVICE_WYAPP_UNINSTALL')}}</v-btn>
 						<v-btn text v-show="!packageData.installed" class="lib-app-btn" @click="install (packageData)">{{$t('DEVICE_WYAPP_INSTALL')}}</v-btn>
 					</div>
-					<div v-show="packageData.working">
+					<div v-show="working[packageData.name]">
 						<v-progress-circular indeterminate></v-progress-circular>
 					</div>
 				</td>
@@ -32,7 +32,7 @@
 <script>
 export default {
 	name: 'PackagesList',
-	props: ['language', 'packages'],
+	props: ['language', 'packages', 'working'],
 	methods: {
 		install (packageData)
 		{

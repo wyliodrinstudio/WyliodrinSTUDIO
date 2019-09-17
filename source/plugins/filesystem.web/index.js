@@ -123,7 +123,9 @@ let web_filesystem = {
 	},
 
 
-	async insertElementData(fileId, data, size) {
+
+	async insertElementData(fileId, data, size)
+	{
 		let obj = {
 			fileId: fileId,
 			data: data,
@@ -139,17 +141,18 @@ let web_filesystem = {
 		}
 	},
 
-	async getLastParentId(paths, create, debug = false) {
+	async getLastParentId(paths, create, throwable = true) {
 		let parentId = 0;
 		let current = paths[0];
-		for (let i = 0; i < paths.length - 1; i++) {
+		if (!current && throwable)
+			throw new Error('Name cannot be an empty string');
+		for (let i = 0; i < paths.length - 1; i++)
+		{
 			current = paths[i];
-			if (debug)
-				console.log(current);
+			if (!current && throwable)
+				throw new Error('Name cannot be an empty string');
 			try {
 				let currentFolder = (await db.files.where('[name+parent]').equals([current, parentId]).toArray())[0];
-				if (debug)
-					console.log(currentFolder);
 				if (!currentFolder) {
 					if (create) {
 						await this.insertElementFiles(current, 0, parentId);
@@ -181,7 +184,7 @@ let web_filesystem = {
 		if (path.startsWith('/'))
 			path = path.substring(1);
 		let paths = path.split('/');
-		let parentId = await this.getLastParentId(paths, 0);
+		let parentId = await this.getLastParentId(paths, 0, false);
 		if (parentId != -1) {
 			let file = await db.files.where(['name+parent']).equals([paths[paths.length - 1], parentId]).toArray();
 			if (file[0]) {
@@ -195,8 +198,9 @@ let web_filesystem = {
 		if (path.startsWith('/'))
 			path = path.substring(1);
 		let paths = path.split('/');
-		let parentId = await this.getLastParentId(paths, 0);
-		if (parentId != -1) {
+		let parentId = await this.getLastParentId(paths, 0, false);
+		if (parentId != -1)
+		{
 			let file = await db.files.where(['name+parent']).equals([paths[paths.length - 1], parentId]).toArray();
 			if (file[0]) {
 				return file[0].type == 0;
@@ -209,8 +213,9 @@ let web_filesystem = {
 		if (path.startsWith('/'))
 			path = path.substring(1);
 		let paths = path.split('/');
-		let parentId = await this.getLastParentId(paths, 0);
-		if (parentId != -1) {
+		let parentId = await this.getLastParentId(paths, 0, false);
+		if (parentId != -1)
+		{
 			let file = await db.files.where(['name+parent']).equals([paths[paths.length - 1], parentId]).toArray();
 			if (file[0] && file[0].type) {
 				return file[0].size;
@@ -225,7 +230,12 @@ let web_filesystem = {
 		let paths = path.trim().split('/');
 		if (path.endsWith('/'))
 			paths.pop();
-		let parentId = await this.getLastParentId(paths, 0);
+		let parentId;
+		try {
+			parentId = await this.getLastParentId(paths, 0, false);
+		} catch (e) {
+			console.error(e.message);
+		}
 		let children = [];
 		if (parentId != -1) {
 			let file = await db.files.where(['name+parent']).equals([paths[paths.length - 1], parentId]).toArray();
@@ -247,8 +257,14 @@ let web_filesystem = {
 			dest = dest.substring(1);
 		let pathsSrc = src.split('/');
 		let pathsDst = dest.split('/');
-		let parentSrc = await this.getLastParentId(pathsSrc, 0);
-		let parentDst = await this.getLastParentId(pathsDst, 1);
+		let parentSrc;
+		let parentDst;
+		try {
+			parentSrc = await this.getLastParentId(pathsSrc, 0);
+			parentDst = await this.getLastParentId(pathsDst, 1);
+		} catch (e) {
+			console.error(e.message);
+		}
 		let fileSrc = (await db.files.where(['name+parent']).equals([pathsSrc[pathsSrc.length - 1], parentSrc]).toArray())[0];
 		if (fileSrc) {
 			if (await this.isFile(src)) {
@@ -274,14 +290,24 @@ let web_filesystem = {
 					await this.mkdirp(pathUntilDest);
 					let children = await this.readdir(pathUntilSrc);
 					let parentSrc = fileSrc.id;
-					parentDest = await this.getLastParentId(pathUntilDest, 0);
+					try {
+						parentDest = await this.getLastParentId(pathUntilDest, 0);
+					} catch (e) {
+						console.error(e.message);
+					}
+		
+					// parentDest = await this.getLastParentId(pathUntilDest, 0);
 					let child = 0;
 					for (child = 0; child < children.length; child++) {
 						let currentName = pathUntilSrc + '/' + children[child];
 						let currentNameDest = pathUntilDest + '/' + children[child];
 						await this.mkdirp(pathUntilDest);
 						if (await this.isFile(currentName)) {
-							parentDest = await this.getLastParentId(currentNameDest.split('/'), 0, true);
+							try {
+								parentDest = await this.getLastParentId(currentNameDest.split('/'), 0);
+							} catch (e) {
+								console.error(e.message);
+							}
 							let fileToBeAdded = (await db.files.where(['name+parent']).equals([children[child], parentSrc]).toArray())[0];
 							let fileDataToBeAdded = (await db.data.where({ fileId: fileToBeAdded.id }).toArray())[0];
 							try {
@@ -312,7 +338,13 @@ let web_filesystem = {
 			path = path.substring(1);
 		let paths = path.split('/');
 		try {
-			let parentId = await this.getLastParentId(paths, 0);
+			
+			let parentId;
+			try {
+				parentId = await this.getLastParentId(paths, 0);
+			} catch (e) {
+				console.error(e.message);
+			}
 			let file = (await db.files.where(['name+parent']).equals([paths[paths.length - 1], parentId]).toArray())[0];
 			if (!file)
 				throw new Error('File not found');
@@ -329,7 +361,12 @@ let web_filesystem = {
 		if (path.startsWith('/'))
 			path = path.substring(1);
 		let paths = path.split('/');
-		let parent = await this.getLastParentId(paths, 0);
+		let parent;
+		try {
+			parent = await this.getLastParentId(paths, 0, false);
+		} catch (e) {
+			console.error(e.message);
+		}
 		let lastElement = (await db.files.where(['name+parent']).equals([paths[paths.length - 1], parent]).toArray())[0];
 		if (await this.isFile(path)) {
 			await db.files.delete(lastElement.id);
@@ -372,8 +409,15 @@ let web_filesystem = {
 			dest = dest.substring(1);
 		let pathSrc = src.split('/');
 		let pathDst = dest.split('/');
-		let srcParent = await this.getLastParentId(pathSrc, 0);
-		let dstParent = await this.getLastParentId(pathDst, 0);
+		let srcParent;
+		let dstParent;
+
+		try {
+			srcParent = await this.getLastParentId(pathSrc, 0);
+			dstParent = await this.getLastParentId(pathDst, 0);
+		} catch (e) {
+			console.error (e.message);
+		} 
 
 		let obj = await db.files.where(['name+parent']).equals([pathSrc[pathSrc.length - 1], srcParent]).toArray();
 		let destDir = await this.readdir(dest);
@@ -406,8 +450,17 @@ let web_filesystem = {
 		if (path.startsWith('/'))
 			path = path.substring(1);
 		let paths = path.split('/');
-		let parentId = await this.getLastParentId(paths, 1);
-
+		if (path.endsWith('/'))
+			paths.pop();
+		
+		let parentId;
+		try {
+			parentId = await this.getLastParentId(paths, 1);
+		} catch (e) {
+			console.error(e.message);
+			return null;
+		}
+		
 		await this.insertElementFiles(paths[paths.length - 1], 0, parentId);
 	},
 
@@ -416,8 +469,17 @@ let web_filesystem = {
 		if (typeof buffer !== 'object') buffer = Buffer.from(buffer);
 		if (path.startsWith('/'))
 			path = path.substring(1);
-		let paths = path.split('/');
-		let parentId = await this.getLastParentId(paths, 0);
+		let paths = path.split('/');	
+		if (path.endsWith('/'))
+			paths.pop();
+		
+		let parentId;
+		try {
+			parentId = await this.getLastParentId(paths, 1);
+		} catch (e) {
+			console.error(e.message);
+			return null;
+		}
 		if (parentId == -1)
 			throw new Error('No such file or folder ' + this.writeFileVar);
 		await this.insertElementFiles(paths[paths.length - 1], 1, parentId);

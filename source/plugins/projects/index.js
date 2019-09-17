@@ -489,24 +489,34 @@ let projects = {
 			pathing = this._isPathValid(workspacePath,pathing);
 			let zip = new JSZip;
 			await studio.filesystem.mkdirp(pathing);
-			if(await studio.filesystem.isDirectory(pathing)){
-				zip.loadAsync(data).then(function(contents) {
-					Object.keys(contents.files).forEach(async function(key) {
-						if (contents.files[key].dir){
-							var dest = path.join(pathing,key);
-							await studio.filesystem.mkdirp(dest);
-						} else {
-							zip.file(key).async('nodebuffer').then(async function(content) {
+			try{
+				if(await studio.filesystem.isDirectory(pathing)){
+					zip.loadAsync(data).then(function(contents) {
+						console.log(contents);
+						Object.keys(contents.files).forEach(async function(key) {
+							console.log(key);
+							if (contents.files[key].dir){
 								var dest = path.join(pathing,key);
-								await studio.filesystem.writeFile(dest, content);
-							});
-						}
+								await studio.filesystem.mkdirp(dest);
+								console.log('mk');
+							} else {
+								zip.file(key).async('nodebuffer').then(async function(content) {
+									var dest = path.join(pathing,key);
+									await studio.filesystem.writeFile(dest, content);
+									console.log('wf');
+								});
+							}
+						});
 					});
-				});
-				return true;
-			} else {
+					return true;
+				} else {
+					return false;
+				}
+			} catch(e) {
+				console.error(e);
 				return false;
 			}
+			
 		}
 		
 		
@@ -653,6 +663,7 @@ let projects = {
 					let children = [];
 					let child1;
 					if (infos) {
+						console.log(infos);
 						for (let child of infos) {
 							child1 = await this.recursiveGeneration(project,
 								{
@@ -668,14 +679,16 @@ let projects = {
 					fileInfo = {
 						name: file.file,
 						children: children,
-						path: pathTo
+						path: pathTo,
+						priority:0
 					};
 				} else {
 					pathTo = fullPath.replace(project.folder, '');
 					fileInfo = {
 						name: file.file,
 						file: path.extname(fullPath).slice(1),
-						path: pathTo
+						path: pathTo,
+						priority:1
 					};
 				}
 				return fileInfo;
@@ -1041,7 +1054,7 @@ let projects = {
 				//select file
 				if (project) {
 					studio.workspace.dispatchToStore('projects', 'currentProject', null);
-					await studio.settings.storeValue('projects', 'currentProject', null);
+					await studio.settings.storeValue('projects', 'currentFile', null);
 					studio.workspace.dispatchToStore('projects', 'currentFile', null);
 					await studio.settings.storeValue('projects', 'currentFile', null);
 
@@ -1052,7 +1065,7 @@ let projects = {
 					});
 
 					studio.workspace.dispatchToStore('projects', 'currentProject', project);
-					studio.workspace.setWorkspaceTitle (project.name);
+					// studio.workspace.setWorkspaceTitle (project.name);
 					// Close file in editor and make sure project is consistent
 					await studio.settings.storeValue('projects', 'currentProject', project);
 					let language = this.getLanguage(project.language);
@@ -1060,6 +1073,7 @@ let projects = {
 						// let content = await studio.filesystem.readdir(projectFolder);
 						// let pathing = '';
 						// let editors = studio.workspace.getFromStore('projects', 'editors');
+						console.log('dispatched');
 						let mainFile = await this.getDefaultFileName(project);
 						if (await studio.filesystem.pathExists(path.join(project.folder, mainFile))) {
 							studio.workspace.dispatchToStore('projects', 'currentFile', mainFile);
@@ -1199,7 +1213,7 @@ let projects = {
 
 		if(name !== null) {
 			if (path.basename(name) != 'project.json') {
-				await studio.workspace.setWorkspaceTitle(path.basename(name));
+				// await studio.workspace.setWorkspaceTitle(path.basename(name));
 				if (name !== '') {
 					await studio.settings.storeValue('projects', 'currentFile', name);
 					await studio.workspace.dispatchToStore('projects', 'currentFile', name);
@@ -1211,7 +1225,7 @@ let projects = {
 			}
 			return true;
 		} else if (project !== null) {
-			await studio.workspace.setWorkspaceTitle(project.name);
+			// await studio.workspace.setWorkspaceTitle(project.name);
 			studio.workspace.warn('Error selecting current file, file is null, dispatching null');
 			await studio.settings.storeValue('projects', 'currentFile', null);
 			await studio.workspace.dispatchToStore('projects', 'currentFile', null);
@@ -1516,6 +1530,10 @@ let projects = {
 		}
 		return p;
 	},
+	showProjectsLibrary()
+	{
+		studio.workspace.showDialog(ProjectsLibrary, {width: 1000});
+	}
 	//getDefaultFileName(Project)
 	//Daca nu e placa -> language normal al proiectului -> iau main de acolo
 	//Vezi daca ai placa -> verific daca am si type si board -> daca da, il iau pe asta
@@ -1531,9 +1549,7 @@ export default async function setup(options, imports, register) {
 
 	studio.workspace.registerTab('PROJECT_APPLICATION', 100, Application);
 
-	studio.workspace.registerToolbarButton('PROJECT_LIBRARY', 10, () => studio.workspace.showDialog(ProjectsLibrary, {
-		width: 1000
-	}), 'plugins/projects/data/img/icons/projects-icon.svg');
+	studio.workspace.registerToolbarButton('PROJECT_LIBRARY', 10, () => projects.showProjectsLibrary(), 'plugins/projects/data/img/icons/projects-icon.svg');
 	register(null, {
 		projects: projects
 	});

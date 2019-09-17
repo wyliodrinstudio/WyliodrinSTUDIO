@@ -113,6 +113,7 @@
 							<AceNotebook :syntax="'python'" :element="element" v-model="element.data" :readOnly="true"></AceNotebook>
 							<pre v-if="visibleRun" class="code">{{ element.code }}</pre>
 							<div v-if="visibleRun" v-html="element.error" class="error"></div>
+							<div v-if="visibleRun" v-html="element.result" class="result"></div>
 						</div>
 					</v-card>
 				</v-flex>
@@ -206,7 +207,7 @@ export default {
 		return {
 			elements: [
 			
-				{ id: uuid.v4(), type: 'markdown',editable: false,data: '# New Item', code: '', error: ''},
+				{ id: uuid.v4(), type: 'markdown',editable: false,data: '# New Item', code: '', error: '', result:''},
 			],
 			nextId : 0,
 			visibleId: '',
@@ -255,11 +256,11 @@ export default {
 						// TODO notebook is not present in this project
 					}
 					if (this.elements.length === 0) 
-						this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: ''}];
+						this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
 				}
 				else
 				{
-					this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: ''}];
+					this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
 				}
 				
 			},
@@ -299,7 +300,7 @@ export default {
 			console.log(value);
 			if (value === 'yes')
 			{
-				this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: ''}];
+				this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
 				if (this.currentProject)
 				{
 					this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
@@ -398,7 +399,8 @@ export default {
 					editable: false,
 					data: '# New Item',
 					code:'',
-					error: ''
+					error: '', 
+					result: ''
 				});
 			this.onlyOne = false;
 		},
@@ -435,6 +437,7 @@ export default {
 			let currentElement = this.elements[index];
 			currentElement.code='';
 			currentElement.error='';
+			currentElement.result = '';
 			events.emit('run', currentElement.id, currentElement.data);
 			// this.runningElementId = id;
 		},
@@ -445,15 +448,20 @@ export default {
 		printPythonCode(id, data)
 		{
 			let element = this.elements.find(e=>e.id === id);
-			element.error='';
 			element.code = data;
 			this.$forceUpdate();
 		},
 		printPythonError(id, data)
 		{
 			let element = this.elements.find(e=>e.id === id);
-			element.code='';
 			element.error = data;
+			this.$forceUpdate();
+		},
+		printPythonResult(id, data)
+		{
+			let element = this.elements.find(e=>e.id === id);
+			console.log('data' + data);
+			element.result = data;
 			this.$forceUpdate();
 		},
 		setStatus (id, status)

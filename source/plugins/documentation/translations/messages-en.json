@@ -1,6 +1,6 @@
 {
-    "WYLIODRIN_API": {
-        "message": "Wyliodrin API",
-        "description": "Option in the Help Menu, that redirects the user to the Wyliodrin API web page"
+    "DOCUMENTATION": {
+        "message": "Documentation",
+        "description": "Open a new window with the documentation of Wyliodrin STUDIO"
     }
 }

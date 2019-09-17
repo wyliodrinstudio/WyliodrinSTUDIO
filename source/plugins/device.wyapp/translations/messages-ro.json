@@ -30,5 +30,13 @@
     "DEVICE_WYAPP_TURNOFF": {
         "message": "Opriți și Deconectați",
         "description": "The power off and disconnect option in the disconnect menu"
-    }
+    },
+	"DEVICE_WYAPP_REFRESH": {
+		"message": "Reîncarcă",
+		"description": "The option to refresh the file tree"
+	},
+	"DEVICE_WYAPP_FILE_MANAGER": {
+		"message": "Administrare fișiere",
+		"description": "The option to refresh the file tree"
+	}
 }

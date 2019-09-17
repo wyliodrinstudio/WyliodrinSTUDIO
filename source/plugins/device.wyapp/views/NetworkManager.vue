@@ -17,7 +17,7 @@
 			<v-tabs-items v-model="active">
 				<v-tab-item v-for="network in networks" :key="network.i" fill-height>
 					<WiredNetwork v-if="network.t === 'e'" :network="network"></WiredNetwork>
-					<WirelessNetwork v-if="network.t === 'w'" :network="network" :wireless-networks="wirelessNetworks[network.i]"></WirelessNetwork>
+					<WirelessNetwork v-if="network.t === 'w'" :network="network" :wireless-networks="wirelessNetworks[network.i]" @link="link" @unlink="unlink"></WirelessNetwork>
 				</v-tab-item>
 			</v-tabs-items>
 		</v-card-text>
@@ -117,8 +117,6 @@ export default {
 						}
 					});
 					this.wirelessNetworks[data.i] = Object.values (wirelessNetworksMap).sort ((wirelessNetwork1, wirelessNetwork2) => {
-						console.log (wirelessNetwork1);
-						console.log (wirelessNetwork2);
 						let s1 = wirelessNetwork1.s.toLowerCase ();
 						let s2 = wirelessNetwork2.s.toLowerCase ();
 						if (s1 < s2) return -1;
@@ -129,12 +127,25 @@ export default {
 					if (this.wirelessNetworks[data.i])
 					{
 						// push the connect to other network
-						this.wirelessNetworks[data.i].push ({s: null, p:'wpa2'});
+						this.wirelessNetworks[data.i].push ({s: '', p:'wpa2'});
 					}
 				}
 			}
+		},
+		link (network)
+		{
+			this.connection.send ('net', {
+				a: 'c', 
+				...network
+			});
+		},
+		unlink (network)
+		{
+			this.connection.send ('net', {
+				a: 'd',
+				...network
+			});
 		}
-		
 	}
 }
 </script>

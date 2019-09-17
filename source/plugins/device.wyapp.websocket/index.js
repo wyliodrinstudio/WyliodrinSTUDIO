@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 import ReconnectingWebSocket from 'reconnectingwebsocket';
 import uuid from 'uuid';
 import DeviceSetup from './views/DeviceSetup.vue';
+import _ from 'lodash';
 
 const NETWORK_PRIORITY_HIGH = 99;
 // const NETWORK_PRIORITY_LOW = 0;
@@ -19,7 +20,6 @@ let socket = null;
 let socketMessages = new EventEmitter ();
 
 let authenticated = false;
-let connected = false;
 
 class WebSocketWyAppTransport extends EventEmitter
 {
@@ -96,8 +96,9 @@ function updateDevices ()
 		websocketDevices.push ({
 			id: 'wyapp:websocket:newdevice',
 			address: '',
-			name: 'New Device',
+			name: workspace.vue.$t('WYAPP_WEBSOCKET_NEW_DEVICE_TITLE'),
 			board: 'any',
+			placeholder: true,
 			priority: NETWORK_PRIORITY_HIGH+10,
 			properties: {}
 		});
@@ -125,7 +126,6 @@ export function setup (options, imports, register)
 
 	socket.onopen = function ()
 	{
-		connected = true;
 		errorAlreadyShown = false;
 		socket.send (JSON.stringify({t:'a', token: token}));
 		// console.log ('UI Socket sent authenticate');
@@ -165,7 +165,7 @@ export function setup (options, imports, register)
 			else
 			if (data.t === 's')
 			{
-				data.d.map ((device) => {if (!device.properties) device.properties = {}});
+				data.d.map ((device) => {if (!device.properties) device.properties = {};});
 				websocketDevices = data.d;
 				websocketDevices.map ((device) => {
 					if (device.id.indexOf ('wyapp:websocket:')!==0) device.id = 'wyapp:websocket:'+device.id;
@@ -195,7 +195,6 @@ export function setup (options, imports, register)
 	
 	socket.onclose = function ()
 	{
-		connected = false;
 		authenticated = false;
 		websocketDevices = [];
 		updateDevices ();
