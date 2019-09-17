@@ -126,5 +126,13 @@
     "ABOUT_PROVIDED_BY": {
         "message": "Provided by",
         "description": "Provider of Wyliodrin STUDIO"
+    },
+    "WORKSPACE_DEVICE_SETUP_TEXT": {
+        "message": "You might want to set up some devices. For more information, please go to our tutorials website.",
+        "description": "The message the user gets if there are no devices available in the connection selection"
+    },
+    "WORKSPACE_DEVICE_SETUP": {
+        "message": "Device Setup",
+        "description": "The devices setup button for the setup website"
     }
 }

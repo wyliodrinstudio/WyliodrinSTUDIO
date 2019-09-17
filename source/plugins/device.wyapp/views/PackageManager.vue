@@ -19,10 +19,10 @@
 			</v-tabs>
 			<v-tabs-items v-model="active">
 				<v-tab-item :key="'python'" fill-height>
-					<PackagesList language="python" :packages="pythonPackages" @install="install" @uninstall="uninstall"></PackagesList>
+					<PackagesList language="python" :packages="pythonPackages" @install="install" @uninstall="uninstall" :working="working.python"></PackagesList>
 				</v-tab-item>
 				<v-tab-item :key="'nodejs'" fill-height>
-					<PackagesList language="nodejs" :packages="nodejsPackages" @install="install" @uninstall="uninstall"></PackagesList>
+					<PackagesList language="nodejs" :packages="nodejsPackages" @install="install" @uninstall="uninstall" :working="working.nodejs"></PackagesList>
 				</v-tab-item>
 			</v-tabs-items>
 		</v-card-text>
@@ -70,7 +70,11 @@ export default {
 				python: null,
 				nodejs: null
 			},
-			search: ''
+			search: '',
+			working: {
+				python: {},
+				nodejs: {}
+			}
 		};
 	},
 	mounted() {
@@ -165,10 +169,12 @@ export default {
 					{
 						resetPackageLogs (data.l+':'+data.p);
 					}
+					delete this.working[data.l][data.p];
 					this.connection.send ('pm', {
 						a: 'p',
 						l: data.l
 					});
+					this.$forceUpdate ();
 				}
 				else
 				{
@@ -198,7 +204,8 @@ export default {
 				l: data.language,
 				p: data.package.name
 			});
-			this.working (data.language, data.package.name);
+			this.working[data.language][data.package.name]='install';
+			this.$forceUpdate ();
 		},
 		uninstall (data)
 		{
@@ -207,20 +214,8 @@ export default {
 				l: data.language,
 				p: data.package.name
 			});
-			this.working (data.language, data.package.name);
-		},
-		working (language, packageName)
-		{
-			this.packages[language] = this.packages[language].map ((p) => {
-				if (p.name === packageName)
-				{
-					return _.assign ({}, p, {working: true});
-				}
-				else
-				{
-					return p;
-				}
-			});
+			this.working[data.language][data.package.name]='uninstall';
+			this.$forceUpdate ();
 		}
 	}
 }

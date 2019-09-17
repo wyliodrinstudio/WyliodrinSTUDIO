@@ -35,7 +35,10 @@ function updateDevices ()
 	let devices = [];
 	for (let transportDriverName in transportDevices)
 	{
-		devices.push (...transportDevices[transportDriverName]);
+		devices.push (...transportDevices[transportDriverName], {
+			id: 'error',
+			name: 'error'
+		});
 	}
 	workspace.updateDevices (devices);
 }
@@ -143,6 +146,11 @@ export function setup(options, imports, register)
 		{
 			if (_.isObject (device))
 			{
+				if (device.id === 'error')
+				{
+					studio.workspace.showNotification ('Notification text', {extra: require ('raw-loader!../../../README.md').default});
+				}
+				else
 				if (!connections[device.id])
 				{
 					// temporary
