@@ -14,9 +14,5 @@
 	"WELCOME_CONNECT_BOARD": {
 		"message": "Connecter une carte",
 		"description": "Button that will open a browser window with a documentation chapter regarding the setup of a Raspberry Pi board."
-	},
-	"WELCOME_IMPORT": {
-		"message": "Importer des projets",
-		"description": "Button that will redirect the user to a popup where he can import his own projects."
 	}
 }
