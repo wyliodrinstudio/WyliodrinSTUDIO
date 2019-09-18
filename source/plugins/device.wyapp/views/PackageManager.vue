@@ -169,12 +169,14 @@ export default {
 					{
 						resetPackageLogs (data.l+':'+data.p);
 					}
-					delete this.working[data.l][data.p];
+					this.working[data.l] = {
+						...this.working[data.l],
+						[data.p]: undefined
+					};
 					this.connection.send ('pm', {
 						a: 'p',
 						l: data.l
 					});
-					this.$forceUpdate ();
 				}
 				else
 				{
@@ -204,8 +206,10 @@ export default {
 				l: data.language,
 				p: data.package.name
 			});
-			this.working[data.language][data.package.name]='install';
-			this.$forceUpdate ();
+			this.working[data.language]= {
+				...this.working[data.language],
+				[data.package.name]: 'install'
+			};
 		},
 		uninstall (data)
 		{
@@ -214,8 +218,10 @@ export default {
 				l: data.language,
 				p: data.package.name
 			});
-			this.working[data.language][data.package.name]='uninstall';
-			this.$forceUpdate ();
+			this.working[data.language] = {
+				...this.working[data.language],
+				[data.package.name]: 'uninstall'
+			};
 		}
 	}
 }
