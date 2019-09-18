@@ -279,5 +279,20 @@
     {
         "message": "If your browser didn't ask you if you allow persistence, there might be an issue with your browser. To prevent losing your projects, you should add this website to the bookmarks, use it more often and frequenlty export your projects. We also recommend you to use Firefox.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available."
+	},
+	"PROJECTS_NO_FILE": 
+    {
+        "message": "There is no file selected, please either import, create or select a file",
+        "description": "The message the user sees in the Application Tab when there is no file for the editor"
+    },
+	"PROJECTS_EXTENSION_URECOGNIZED": 
+    {
+        "message": "The file extension is not recognized",
+        "description": "The message the user sees in the Application Tab when the file extension is not valid"
+    },
+	"PROJECTS_INVALID_PROJECT": 
+    {
+        "message": "You have oppened an invalid project, please select another one",
+        "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
     }
 }

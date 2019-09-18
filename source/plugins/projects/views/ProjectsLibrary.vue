@@ -18,7 +18,7 @@
 					<template v-for="project in projectList"  >
 						<v-list-item :key="project.name" class="lib-app">
 							<v-list-item-avatar @click="selectProject(project)">
-								<img :src="'plugins/projects/data/img/languages/project/'+projectLanguage (project)+'.png'" avatar >
+								<v-img contain :src="'plugins/projects/data/img/languages/project/'+projectLanguage (project)+'.png'" avatar ></v-img>
 							</v-list-item-avatar>
 
 							<v-list-item-content>
@@ -183,8 +183,12 @@ export default {
 		projectLanguage (project)
 		{
 			// TODO check if language is known, not only that it exists
-			if (project.language) return project.language;
-			else return 'unknown';
+			if (project.language){
+				if(this.studio.projects.getLanguage(project.language)){
+					return project.language;
+				} else return 'unknown';
+			}
+			
 		},
 		async selectProject (project)
 		{

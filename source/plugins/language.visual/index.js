@@ -39,7 +39,7 @@ export default function setup(options, imports, register) {
 		getMakefile(project, filename) {
 			if (filename[0] === '/') filename = filename.substring (1);
 			// TODO add filename
-			return 'run:\n\tpython main.visual.py';
+			return 'run:\n\tpython3 main.visual.py';
 		},
 
 		/* language specific options */

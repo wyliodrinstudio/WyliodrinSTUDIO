@@ -78,7 +78,20 @@ export default {
 	methods: {
 		updateTasks (data)
 		{
-			this.tasks = data;
+			let str = (s1, s2) => 
+			{
+				if (s1 < s2) return -1;
+				else if (s1 === s2) return 0;
+				else return 1;
+			};
+			this.tasks = data.map ((task) => { task.sentKill = false; return task; }).sort ((task1, task2) => {
+				if ((task1.TT === '?' && task2.TT === '?') || (task1.TT !== '?' && task2.TT !== '?'))
+				{
+					return str (task1.COMMAND, task2.COMMAND);
+				}
+				else if (task1.TT === '?') return 10;
+				else return -10;
+			});
 		},
 		memoryFormat (VSZ)
 		{
