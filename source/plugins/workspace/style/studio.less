@@ -235,15 +235,17 @@ a:hover {text-decoration:underline;}
 
 .manager-box {
 	.v-card__text {padding: 0; overflow: hidden; color: @color-black; max-height: 55vh; padding: 0 !important; min-height: 100px; overflow: auto;}
-	.v-window {overflow-y: auto; overflow-x: hidden; height: calc(~"100% - 55vh") !important;}
+	.v-window {overflow-y: auto; overflow-x: hidden; height: 45vh !important;}
 	.d-flex {align-items: center;}
 	.v-window__container { background: @color-white; height: 100% !important;}
 	.v-tab .v-image {height: 24px; width: 24px; margin-right: 5px;}
+	.v-btn__content {text-transform: capitalize;}
 }
 
 .theme--light.v-card .v-card__text {color: @color-black;}
 
-
+.lib-app-btn {background:@color-white; border:@color-grey-2 1px solid; font-size:12px; line-height: 28px; min-height: 28px; padding:0 10px; margin:auto !important; height: 30px !important; min-width: 80px !important;}
+.lib-app-btn:hover {background:@color-highlight; color:@color-white;	border:@color-highlight 1px solid;}
 
 .manager-search {font-weight: 300; color: @color-black; padding: 5px 10px 0 0 !important;
 	input{padding:4px 0 0px 0 !important;}
@@ -286,7 +288,7 @@ input {caret-color:@color-highlight !important;  }
 .project-box-1 {width:calc(~"100% - 195px"); float: right;}
 .project-box-2 {width:100%;}
 
-.project-tree-on {width: 195px; display: inline-block; float: left; position: relative; background: @color-grey-1;}
+.project-tree-on {width: 195px; display: inline-block; float: left; position: relative; background: @color-grey-1; height: 100% !important; height: calc(100vh - 160px) !important;}
 .project-tree-off {width: 0px; display: none; position: relative;}
 
 .fileexplorer-actions {
