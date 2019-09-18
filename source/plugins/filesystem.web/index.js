@@ -515,7 +515,7 @@ let web_filesystem = {
 			setTimeout(() => {
 				// on change sghould fire first, so this should not fire if there is a file selected
 				events.emit('load', new Error('ENODATA'));
-			}, 1000);
+			}, 20000);
 			e.stopPropagation();
 		});
 		return new Promise((resolve/*, reject*/) => {
