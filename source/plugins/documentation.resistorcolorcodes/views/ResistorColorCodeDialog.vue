@@ -4,7 +4,7 @@
       <v-card-title>
         <span class="md-toolbar-tools">{{$t('TOOLBAR_RESISTOR_COLOR_CODE')}}</span>
       </v-card-title>
-      <v-tabs>
+      <v-tabs left class="tabs-box">
         <v-tab @click="CtN=true">
           <v-tab-label>{{ $t('RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER')}}</v-tab-label>
         </v-tab>
@@ -17,70 +17,76 @@
           <v-container>
             <v-row>
               <v-col>
-                <label>{{ $t('RESISTOR_COLORCODE_STRIPES')}}</label>
                 <v-select
+                  :label="$t('RESISTOR_COLORCODE_STRIPES')"
                   height="16"
                   v-model="number"
                   :items="numbers"
                   item-text="label"
                   item-value="value"
+                  hide-details
                 ></v-select>
               </v-col>
               <v-col>
-                <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} 1</label>
                 <v-select
+                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
                   height="16"
                   v-model="color1"
                   :items="colors"
                   item-text="color"
                   item-value="index"
+                  hide-details
                 ></v-select>
               </v-col>
               <v-col>
-                <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} 2</label>
                 <v-select
+                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
                   height="16"
                   v-model="color2"
                   :items="colors"
                   item-text="color"
                   item-value="index"
+                  hide-details
                 ></v-select>
               </v-col>
               <v-col v-show="number==5">
-                <label v-show="number==5">{{ $t('RESISTOR_COLORCODE_STRIPE')}} 3</label>
                 <v-select
+                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
                   height="16"
                   v-show="number==5"
                   v-model="color3"
                   :items="colors"
                   item-text="color"
                   item-value="index"
+                  hide-details
                 ></v-select>
               </v-col>
               <v-col>
-                <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} {{4-(5-number)}}</label>
                 <v-select
+                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
                   height="16"
                   v-model="color4"
                   :items="multiplier"
                   item-text="color"
                   item-value="value"
+                  hide-details
                 ></v-select>
               </v-col>
               <v-col>
-                <label>{{ $t('RESISTOR_COLORCODE_STRIPE')}} {{5-(5-number)}}</label>
                 <v-select
+                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
                   height="16"
                   v-model="color5"
                   :items="tolerance"
                   item-text="color"
                   item-value="value"
+                  hide-details
                 ></v-select>
               </v-col>
             </v-row>
           </v-container>
         </div>
-        <div align="center">
+        <div align="center" style="padding:50px 0">
           <img src="plugins/documentation.resistorcolorcodes/data/img/resistorcolorcode.png" />
         </div>
       </v-card-text>
@@ -89,51 +95,44 @@
           <v-container>
             <v-row>
               <v-col>
-                {{$t('RESISTOR_COLORCODE_RESISTANCE')}}
-                <b>&Omega;</b>
-                <v-text-field autofocus height="16" placeholder="Enter a number" v-model="Secondvaluenumber"></v-text-field>
+                <v-text-field autofocus hide-details :label="$t('RESISTOR_COLORCODE_RESISTANCE')" height="16" placeholder="Enter a number" v-model="Secondvaluenumber"></v-text-field>
               </v-col>
               <v-col>
-                {{$t('RESISTOR_COLORCODE_STRIPES')}}
                 <v-select
+                  :label="$t('RESISTOR_COLORCODE_STRIPES')"
                   height="16"
                   v-model="Secondvaluestripes"
                   :items="numbers"
                   item-text="label"
                   item-value="value"
+                  hide-details
                 ></v-select>
               </v-col>
               <v-col>
-                {{$t('VALUE_TOLERANCE')}}
                 <v-select
+                  :label="$t('VALUE_TOLERANCE')"
                   height="16"
                   v-model="Secondvaluetolerance"
                   :items="Secondtolerance"
                   item-text="value"
                   item-value="color"
+                  hide-details
                 ></v-select>
               </v-col>
             </v-row>
           </v-container>
         </div>
         <div style="text-align:center;">
-          <img src="plugins/documentation.resistorcolorcodes/data/img/left.png" />
-          <img :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe1 + '.png'" />
-          <img :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe2 + '.png'" />
-          <img :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe3 + '.png'" />
-          <img
+          <img src="plugins/documentation.resistorcolorcodes/data/img/left.png"><img :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe1 + '.png'"><img :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe2 + '.png'"><img :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe3 + '.png'"><img
             v-show="Secondvaluestripes==='5'"
             :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondstripe4 + '.png'"
-          />
-          <img src="plugins/documentation.resistorcolorcodes/data/img/none.png" />
-          <img
+          ><img src="plugins/documentation.resistorcolorcodes/data/img/none.png"><img
             :src="'plugins/documentation.resistorcolorcodes/data/img/' + Secondvaluetolerance + '.png'"
-          />
-          <img src="plugins/documentation.resistorcolorcodes/data/img/right.png" />
+          ><img src="plugins/documentation.resistorcolorcodes/data/img/right.png">
         </div>
       </v-card-text>
       <v-card-actions>
-        <div v-show="CtN">
+        <div v-show="CtN" style="font-size:16px; margin-left:10px;">
           <b>{{ $t('VALUE_VALUE')}}:</b>
           {{r}} {{u}}&Omega;
           <span style="padding-left:10px;">&plusmn;{{color5}}%</span>

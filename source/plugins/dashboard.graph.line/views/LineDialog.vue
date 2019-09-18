@@ -17,8 +17,8 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<span>{{$t('LINE_STYLE')}}</span>
 					<v-select class="drpdown"
+						:label="$t('LINE_STYLE')"
 						:items="newdata.items"
 						v-model="newdata.chartType"
 						item-text = "title"

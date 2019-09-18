@@ -73,3 +73,32 @@
 .compiledmkd {padding: 10px 15px !important;
 	::v-deep h1 {font-size: 18px !important; font-weight: bold;}
 }
+
+.server-status {
+	position:fixed;
+	display:block;
+	text-align:center;
+	bottom:20px;
+	left:0;
+	right:0;
+	width:100%;
+	padding:10px 0;
+	color:#fff;
+	z-index: 99;
+
+	.v-btn {
+		height:26px !important;
+		padding: 0 !important;
+		margin-left: 10px !important;
+		.v-image {filter: invert(100%) !important;}
+	}
+
+	.v-btn:hover {
+		background: transparent !important;
+		.v-image {filter: invert(0%) !important;}
+	}
+}
+
+.connected {background:#147b3e;}
+.disconnected {background:#971c19;}
+.stopped {background:#c67329;}

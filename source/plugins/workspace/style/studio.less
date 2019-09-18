@@ -209,8 +209,9 @@ a:hover {text-decoration:underline;}
 }
 
 .connected-menu {margin-left: 45px; float: left; position: relative;
+	.connected-device-box {min-width: 90px; position: relative;}
 	.device-title {font-size: 18px; font-weight: 500; letter-spacing: 0.005em; display: inline; padding: 4px 20px 0 0px; min-width:100px; color:@color-white; margin-left: -5px;}
-	.device-port {font-size: 10px; position: absolute; left: -5px; top: 25px; color: @color-grey-2;}
+	.device-port {font-size: 10px; position: absolute; left: -5px; top: 25px; color: @color-grey-2; width: 100%; white-space: nowrap; overflow: hidden;	text-overflow: ellipsis;}
 	.v-btn {padding: 0 13px !important; margin-left: 5px !important;; border-radius: 3px !important;}
 	.run-bt {color: @color-grey-4 !important; background-color: transparent !important; text-transform:none; color: @color-white !important; min-width: 50px; border:@color-dark-3 solid 2px !important;}
 	.run-bt:hover {background:@color-connected !important; color:@color-white !important; border:@color-connected solid 2px !important;}
@@ -527,3 +528,7 @@ outline:none;
 }
 
 .v-card pre {border-color: @color-grey-2; background: @color-grey-1; opacity: 1; border: 1px solid #ced4da; border-radius: .25rem; padding: 5px; overflow: auto;}
+
+.drpdown {margin-top: -8px;}
+
+.v-alert {max-height: 80vh; overflow-y:auto; }

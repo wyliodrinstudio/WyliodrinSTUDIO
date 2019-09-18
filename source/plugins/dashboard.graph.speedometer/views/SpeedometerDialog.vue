@@ -37,8 +37,7 @@
 				</div>
 				<v-text-field :label="$t('DASHBOARD_MIN_AXES_VALUE')" type="number" step=0.1 v-model="newdata.minAxesValue" class="col-md-6"></v-text-field>
 				<v-text-field :label="$t('DASHBOARD_MAX_AXES_VALUE')" type="number" step=0.1 v-model="newdata.maxAxesValue" class="col-md-6"></v-text-field>
-				<div class="col-md-12">
-					<span>Measurement system:</span>
+				<div class="col-md-6">
 					<v-select class="drpdown"
 						:items="newdata.items"
 						v-model="newdata.menuElement"
