@@ -52,7 +52,7 @@ async function tryPersistWithoutPromtingUser() {
 	if (!navigator.storage || !navigator.storage.persisted) {
 		return 'never';
 	}
-	let persisted = await navigator.storage.persisted();
+	let persisted = await isStoragePersisted();
 	if (persisted) {
 		return 'persisted';
 	}
@@ -566,7 +566,7 @@ let web_filesystem = {
 	 */
 	setPersistent ()
 	{
-		return navigator.storage.persist ();
+		return persist ();
 	}
 
 };
