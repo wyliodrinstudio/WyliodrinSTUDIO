@@ -18,44 +18,44 @@
 								</v-layout>
 								<v-tooltip bottom>
 									<template v-slot:activator="{ on }">
-									<v-btn text @click="moveUp(element.id)" class="ntbk-btn">
-										<v-img src="plugins/notebook/data/img/icons/up-icon.png"></v-img>
-									</v-btn>
+										<v-btn text @click="moveUp(element.id)" class="ntbk-btn">
+											<v-img src="plugins/notebook/data/img/icons/up-icon.png"></v-img>
+										</v-btn>
 									</template>
 									<span>Move up</span>
 								</v-tooltip>
 
 								<v-tooltip bottom>
 									<template v-slot:activator="{ on }">
-									<v-btn text @click="moveDown(element.id)" class="ntbk-btn">
-										<v-img src="plugins/notebook/data/img/icons/down-icon.png"></v-img>
-									</v-btn>
+										<v-btn text @click="moveDown(element.id)" class="ntbk-btn">
+											<v-img src="plugins/notebook/data/img/icons/down-icon.png"></v-img>
+										</v-btn>
 									</template>
 									<span>Move down</span>
 								</v-tooltip>
 
 								<v-tooltip bottom>
 									<template v-slot:activator="{ on }">
-									<v-btn text @click="deleteElement(element)" class="ntbk-btn">
-										<v-img src="plugins/notebook/data/img/icons/delete-icon.png"></v-img>
-									</v-btn>
+										<v-btn text @click="deleteElement(element)" class="ntbk-btn">
+											<v-img src="plugins/notebook/data/img/icons/delete-icon.png"></v-img>
+										</v-btn>
 									</template>
 									<span>Delete</span>
 								</v-tooltip>
 
 								<v-tooltip bottom>
 									<template v-slot:activator="{ on }">
-									<v-btn text @click="addElement" class="ntbk-btn">
-										<v-img src="plugins/notebook/data/img/icons/add-icon.png"></v-img>
-									</v-btn>
+										<v-btn text @click="addElement" class="ntbk-btn">
+											<v-img src="plugins/notebook/data/img/icons/add-icon.png"></v-img>
+										</v-btn>
 									</template>
 									<span>Add</span>
 								</v-tooltip>
 
 								<v-tooltip bottom>
 									<template v-slot:activator="{ on }">
-										<v-btn @click="resetNotebook" class="ntbk-btn">
-											<v-img src="plugins/notebook/data/img/icons/reset-icon.png" class="s24"></v-img>
+										<v-btn text @click="resetNotebook" class="ntbk-btn">
+											<v-img src="plugins/notebook/data/img/icons/reset-icon.png"></v-img>
 										</v-btn>
 									</template>
 									<span>Reset Notebook</span>
@@ -63,31 +63,34 @@
 
 								<v-tooltip bottom v-if="element.type==='markdown'">
 									<template v-slot:activator="{ on }">
-									<v-btn text @click="element.editable = !element.editable" class="ntbk-btn right">
-										<v-img src="plugins/notebook/data/img/icons/edit-icon.png"></v-img>
-									</v-btn>
+										<v-btn text @click="element.editable = !element.editable" class="ntbk-btn right">
+											<v-img src="plugins/notebook/data/img/icons/edit-icon.png"></v-img>
+										</v-btn>
 									</template>
 									<span>Edit</span>
 								</v-tooltip>
 
 								<v-tooltip bottom v-if="element.type==='python' && visibleRun && !runningId">
 									<template v-slot:activator="{ on }">
-									<v-btn text @click="runCode(element.id)" class="ntbk-btn right">
-										<v-img src="plugins/notebook/data/img/icons/run-icon.png"></v-img>
-									</v-btn>
+										<v-btn text @click="runCode(element.id)" class="ntbk-btn">
+											<v-img src="plugins/notebook/data/img/icons/run-icon.png"></v-img>
+										</v-btn>
 									</template>
 									<span>Run</span>
 								</v-tooltip>
 
-								<span v-if="runningId===element.id" class="ntbk-btn right">
+								<span v-if="runningId===element.id" class="ntbk-btn">
 									<v-img src="plugins/notebook/data/img/icons/running.gif"></v-img>
 								</span>
-								<span v-if="status==='RUNNING' || status==='STOPPED'">
-									<v-btn v-show="visibleRun" @click="stopCode(element.id)">
-										<img src="plugins/notebook/data/img/icons/stop-icon.png" class="s24">
-										<v-tooltip top>Stop</v-tooltip>
-									</v-btn>
-								</span>
+
+								<v-tooltip bottom v-if="status==='RUNNING' || status==='STOPPED'">
+									<template v-slot:activator="{ on }">
+										<v-btn text  v-show="visibleRun" @click="stopCode(element.id)" class="ntbk-btn">
+											<v-img src="plugins/notebook/data/img/icons/stop-icon.png"></v-img>
+										</v-btn>
+									</template>
+									<span>Stop</span>
+								</v-tooltip>
 
 							</v-card-actions>
 							<!-- MARKDOWN -->
@@ -123,14 +126,22 @@
 		<div class="bottom-space"></div>
 		<div class="server-status no-print" :class="{'connected':status === 'READY' || status === 'PROCESSING', 'stopped':status === 'STOPPED'}" v-if="visibleRun && currentProject.language === 'python'">
 			Python {{ status }}
-			<v-btn v-if="visibleRun" @click="resetCode(runningElementId)">
-				<img src="plugins/notebook/data/img/icons/reset-icon.png" class="s24">
-				<v-tooltip left>Reset</v-tooltip>
-			</v-btn>
-			<v-btn v-show="visibleRun && status !== 'STOPPED'" @click="stopInterpretor()">
-				<img src="plugins/notebook/data/img/icons/stop-icon.png" class="s24">
-				<v-tooltip top>Stop</v-tooltip>
-			</v-btn>
+			<v-tooltip top v-if="visibleRun">
+				<template v-slot:activator="{ on }">
+					<v-btn text @click="resetCode(runningElementId)" class="ntbk-btn">
+						<v-img src="plugins/notebook/data/img/icons/reset-icon.png"></v-img>
+					</v-btn>
+				</template>
+				<span>Reset</span>
+			</v-tooltip>
+			<v-tooltip top v-show="visibleRun && status !== 'STOPPED'">
+				<template v-slot:activator="{ on }">
+					<v-btn text @click="stopInterpretor()" class="ntbk-btn">
+						<v-img src="plugins/notebook/data/img/icons/stop-icon.png"></v-img>
+					</v-btn>
+				</template>
+				<span>Stop</span>
+			</v-tooltip>
 		</div>
 	</div>
 	<div v-else>

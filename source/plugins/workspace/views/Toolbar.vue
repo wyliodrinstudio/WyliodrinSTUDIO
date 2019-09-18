@@ -1,9 +1,6 @@
 <template>
 	<v-toolbar class="titlebar">
 		<!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-		<v-toolbar-items class="ml-2 titlebar-buttons">
-			<Menu></Menu>
-		</v-toolbar-items>
 		<v-toolbar-title>
 			<v-img src="plugins/workspace/data/img/logo/wyliodrin-small-logo.png" alt="Wyliodrin" title="Wyliodrin" class="logo"></v-img>
 		</v-toolbar-title>
@@ -18,6 +15,7 @@
 				</template>
 				<span>{{$t(toolbarButton.name)}}</span>
 			</v-tooltip>
+			<Menu></Menu>
 			<!-- <v-btn text slot="activator" @click.stop="/*studio.showProjectsLibrary*/">
 				<v-img src="img/icons/projects-icon.svg"></v-img>
 			</v-btn> -->
