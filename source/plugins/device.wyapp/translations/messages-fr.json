@@ -54,5 +54,72 @@
     "DEVICE_WYAPP_LANGUAGES": {
         "message": "Langages",
         "description": "Programming languages supported by the board"
+    },
+    "DEVICE_WYAPP_SSID": 
+    {
+        "message": "Nom de réseau",
+        "description": "The SSID of a wireless network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_IP": {
+        "message": "IP",
+        "description": "IP Address for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_MASK": {
+        "message": "Masque",
+        "description": "Mask for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
+        "message": "Broadcast", 
+        "description": "Broadcast for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
+        "message": "Adresse Matérielle",
+        "description": "Hardware Address for the wired network"
+    },
+    "DEVICE_WYAPP_UNINSTALL": {
+        "message": "Désinstaller",
+        "description": "Button to uninstall a package."
+    },
+    "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
+        "message": "Nom de l'appareil",
+        "description": "Name of the connected device"
+    },
+    "DEVICE_WYAPP_INSTALL": {
+        "message": "Installer",
+        "description": "Button to install a package."
+    },
+    "DEVICE_WYAPP_PACKAGE_INSTALL_ERROR": {
+        "message": "Impossible d'installer le paquet {packageName} pour {language}.",
+        "description": "The error the users sees when a packages failes to install"
+    },
+    "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": {
+        "message": "Impossible de désinstaller le paquet {packageName} pour {language}.",
+        "description": "The error the users sees when a packages failes to uninstall"
+    },
+    "DEVICE_WYAPP_PSK": 
+    {
+        "message": "Phrase de passe du réseau",
+        "description": "The passphrase of a wireless network"
+    },
+    "DEVICE_WYAPP_CONNECT": 
+    {
+        "message": "Connecter",
+        "description": "The  network connect button"
+    },
+    "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
+        "message": "Autre réseau",
+        "description": "The option to connect to a network that is not displayed"
+	},
+	"DEVICE_WYAPP_REFRESH": {
+		"message": "Actualiser",
+		"description": "The option to refresh the file tree"
+	},
+	"DEVICE_WYAPP_FILE_MANAGER": {
+		"message": "Gestionnaire de fichiers",
+		"description": "The option to refresh the file tree"
+	},
+    "DEVICE_WYAPP_LIBWYLIODRIN": {
+        "message": "Version de Wyliodrin Library",
+        "description": "The used version of the Wyliodrin Library."
     }
 }

@@ -74,5 +74,49 @@
     "WORKSPACE_DOCUMENTATION": {
         "message": "Documentation",
         "description": "Open a new window with the documentation of Wyliodrin STUDIO"
+    },
+    "WORKSPACE_SET_MODE_ADVANCED": {
+        "message": "Mode Avancé",
+        "description": "The menu to set the editor in advanced mode"
+    },
+    "WORKSPACE_SET_MODE_SIMPLE": {
+        "message": "Mode Simple",
+        "description": "The menu to set the editor in simple mode"
+    },
+    "ABOUT_DEVELOPED_BY": {
+        "message": "Développé par",
+        "description": "Text for authors of Wyliodrin Studio"
+    },
+    "ABOUT_MAINTAINER": {
+        "message": "Mainteneur",
+        "description": "Maintainer of Wyliodrin Studio"
+    },
+    "ABOUT_UI_UX": {
+        "message": "UI/UX",
+        "description": "User Interface for Wyliodrin Studio"
+    },
+    "ABOUT_DEVELOPMENT": {
+        "message": "Développeur",
+        "description": "Contributor to Wylidron Studio Development"
+    },
+    "ABOUT_LICENSE": {
+        "message": "License",
+        "description": "Button to show the license"
+    },
+    "ABOUT_LICENSE_TITLE": {
+        "message": "Licence d'utilisation",
+        "description": "Title of the license popup"
+    },
+    "ABOUT_PROVIDED_BY": {
+        "message": "Fourni par",
+        "description": "Provider of Wyliodrin STUDIO"
+    },
+    "WORKSPACE_DEVICE_SETUP_TEXT": {
+        "message": "Vous voudrez peut-être configurer certains appareils. Pour plus d'informations, consultez notre site Web de tutoriels.",
+        "description": "The message the user gets if there are no devices available in the connection selection"
+    },
+    "WORKSPACE_DEVICE_SETUP": {
+        "message": "Configuration du périphérique",
+        "description": "The devices setup button for the setup website"
     }
 }
