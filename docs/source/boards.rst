@@ -283,7 +283,7 @@ https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vc
 
 After downloading and extracting the files, you should open the Device Manager, right click on the Ports section and select the driver. By the end, you should be able to see the following devices:
 
-.. image:: images/picodevice.png
+.. image:: images/picodevice.PNG
 	:align: center
 
 
@@ -543,7 +543,7 @@ Beaglebone Black
 
 This tutorial will show you how to set up a Beaglebone Black device.
 
-.. image:: images/beaglebone.png
+.. image:: images/beaglebone.PNG
 	:align: center
 
 
@@ -801,7 +801,7 @@ Udoo Neo
 
 This tutorial will show you how to set up a Udoo Neo device.
 
-.. image:: images/udoo.png
+.. image:: images/udoo.PNG
 	:align: center
 
 
