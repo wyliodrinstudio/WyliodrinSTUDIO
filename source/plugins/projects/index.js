@@ -680,7 +680,6 @@ let projects = {
 					let children = [];
 					let child1;
 					if (infos) {
-						console.log(infos);
 						for (let child of infos) {
 							child1 = await this.recursiveGeneration(project,
 								{
@@ -698,7 +697,7 @@ let projects = {
 						name: file.file,
 						children: children,
 						path: pathTo,
-						priority:0
+						key:file.file+pathTo+'folder'
 					};
 				} else {
 					pathTo = fullPath.replace(project.folder, '');
@@ -706,7 +705,7 @@ let projects = {
 						name: file.file,
 						file: path.extname(fullPath).slice(1),
 						path: pathTo,
-						priority:1
+						key:file.file+pathTo+'file'
 					};
 				}
 				return fileInfo;

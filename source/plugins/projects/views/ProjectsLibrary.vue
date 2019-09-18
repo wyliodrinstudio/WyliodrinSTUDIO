@@ -29,10 +29,7 @@
 								<v-list-item-subtitle style="word-wrap: break-word">{{formatDate(project.date)}}</v-list-item-subtitle>
 
 								<v-list-item-subtitle>
-									<div id="export_button">
-										<v-btn text class="lib-app-btn" @click="exportProject(project)">{{$t('PROJECT_LIBRARY_EXPORT')}}</v-btn>
-
-									</div>
+									<v-btn text id="export_button" class="lib-app-btn" @click="exportProject(project)">{{$t('PROJECT_LIBRARY_EXPORT')}}</v-btn>
 									<v-menu offset-y>
 										<template v-slot:activator="{ on }">
 											<v-btn text class="lib-app-btn" v-on="on">{{$t('PROJECT_LIBRARY_OPTIONS')}}</v-btn>
@@ -87,9 +84,7 @@
 				<v-img src="plugins/projects/data/img/icons/projects-icon.svg"></v-img>
 			</v-btn> ce e asta? -->
 			<v-btn text @click ="addProjectDialog()" class="newapp">{{$t('PROJECT_WELCOME_CREATE_NEW_APP')}}</v-btn>
-			<div id="import_button">
-				<v-btn text @click="importDialogOpen()">{{$t('PROJECT_LIBRARY_IMPORT')}}</v-btn>
-			</div>
+			<v-btn text id="import_button" @click="importDialogOpen()">{{$t('PROJECT_LIBRARY_IMPORT')}}</v-btn>
 			<v-btn text @click="close" ref="button">{{$t('PROJECT_LIBRARY_CLOSE')}}</v-btn>
 		</v-card-actions>
 	</v-card>

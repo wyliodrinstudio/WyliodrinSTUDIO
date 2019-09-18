@@ -18,8 +18,15 @@
 					v-model="tree"
 					:open="open"
 					:items="items"
-					item-key="name"
+					item-key="key"
+					activatable
+					@update:active="consoleLogIt(item)"
+					active-class=""
+					color="rgba(0,0,0,0.87)"
+					return-object
+					:active.sync="item"
 					:open-on-click="true"
+					dense
 					>
 					<template v-slot:prepend="{item, open}">
 						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
@@ -185,7 +192,8 @@
 		</div>
 		<div :class="editorBox" class="hs-100">
 			<component v-if="currentEditor && currentFile" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
-			<p v-else-if="currentFile === null">The project has no files, create one</p>	
+			<p v-else-if="currentFile === null">There is no file selected, create/import/select a file </p>
+			<p v-else-if="currentEditor === null">The file extension is not recognized</p>	
 		</div>
 	</div>
 	<div v-else>
@@ -238,6 +246,7 @@ export default {
 			},
 			tree: [],
 			items:[],
+			item:null,
 			type:null,
 			fileMenu: false,
 			folderMenu:false,
@@ -286,9 +295,9 @@ export default {
 				let extension = path.extname (this.currentFile).substring (1);
 				for (let editor of this.editors) {
 					for (let lang of editor.languages) {
-						if( lang === 'js' ){
-							baseEditor = editor.component;
-						}
+						// if( lang === 'js' ){
+						// 	baseEditor = editor.component;
+						// }
 						if (lang === extension) {
 							return editor.component;
 						}
@@ -340,6 +349,10 @@ export default {
 		}
 	},
 	methods: {
+		consoleLogIt(item){
+			console.log('this ios the item');
+			console.log(item);
+		},
 		languageImage ()
 		{
 			// TODO check if language is known, not only that it exists
@@ -354,7 +367,13 @@ export default {
 				return addons['*:' + board].icon;
 			} else if (addons && type !== 'none' && addons[type + ':*'] && addons[type + ':*'].icon) {
 				return addons[type + ':*'].icon;
-			} else if (this.currentProject.language && type === 'none' && board === 'none' ){
+			} else if(type !== 'none' && board !== 'none' && addons[type + ':' + board] && !addons[type + ':' + board].icon) {
+				return language.icon;
+			} else if(addons && board !== 'none' && addons['*:' + board] && !addons['*:' + board].icon) {
+				return language.icon;
+			} else if(addons && type !== 'none' && addons[type + ':*'] && !addons[type + ':*'].icon) {
+				return language.icon;
+			} else if (this.currentProject.language){
 				return language.icon;
 			} else return 'unknown';
 		},
@@ -492,13 +511,13 @@ export default {
 				let root = [{
 					name:path.basename(filename),
 					children:files,
-					path:filename.replace(this.currentProject.folder, '')
+					path:filename.replace(this.currentProject.folder, ''),
+					key:path.basename(filename)+filename.replace(this.currentProject.folder, '')+'folder'
 				}];
 				
 				
 				this.items = root;
 				this.previous = this.items;
-				console.log(this.items);
 			}
 		},
 		async newFolder (item)
@@ -647,6 +666,29 @@ background: url('plugins/projects/data/img/icons/32px.png') no-repeat -32px 0px 
 	width: 32px;
 	height: 32x;
 }
-
+.v-treeview-node__content {
+	width:100% !important;
+	min-height:40px !important;
+	padding-left: 0px !important;
+	padding-right:0px !important;
+}
+.v-treeview-node__root {
+	width:100% !important;
+	min-height:40px !important;
+	padding-left: 0px !important;
+	padding-right:0px !important;
+}
+.v-treeview--dense .v-treeview-node__root {
+	width:100% !important;
+}
+.v-treeview-node--leaf>.v-treeview-node__root {
+	padding-left: 0px !important;
+	padding-right:0px !important;
+}
+.v-treeview-node__root .v-treeview-node--active .primary--text {
+	width:100% !important;
+	min-height:40px !important;
+	padding-left: 0px !important;
+	padding-right:0px !important;
+}
 </style>
-
