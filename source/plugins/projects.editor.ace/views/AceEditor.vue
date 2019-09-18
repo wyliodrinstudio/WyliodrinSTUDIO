@@ -9,7 +9,7 @@ import _ from 'lodash';
 
 export default {
 	name: 'AceEditor',
-	props: ['project', 'filename'],
+	props: ['project', 'filename','active'],
 	data () {
 		return {
 			source: '',
@@ -71,7 +71,7 @@ export default {
 						this.sourceLanguage = 'makefile';
 					}
 					else
-					switch (path.extname (this.filename))
+					switch (path.extname (this.filename).toLowerCase())
 					{
 						case '.py':
 						{
