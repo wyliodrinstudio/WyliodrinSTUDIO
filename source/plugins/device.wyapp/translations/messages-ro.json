@@ -38,5 +38,88 @@
 	"DEVICE_WYAPP_FILE_MANAGER": {
 		"message": "Administrare fișiere",
 		"description": "The option to refresh the file tree"
+	},
+    "DEVICE_WYAPP_SSID": 
+    {
+        "message": "Nume reţea",
+        "description": "The SSID of a wireless network"
+    },
+    "DEVICE_WYAPP_ANOTHER_USER": {
+        "message": "Dispozitivul este deja conectat la un alt utilizator.",
+        "description": "The notification message when another use is connected to the board and the board is busy"
+    },
+    "DEVICE_WYAPP_SETTINGS": {
+        "message": "Setări dispozitiv",
+        "description": "Title of popup that contains details about the connected board"
+    },
+    "DEVICE_WYAPP_NAME": {
+        "message": "Nume",
+        "description": "Name of connected board"
+    },
+    "DEVICE_WYAPP_VERSION": {
+        "message": "Versiune",
+        "description": "Supervisor verson"
+    },
+    "DEVICE_WYAPP_LIBWYLIODRIN": {
+        "message": "Versiune Wyliodrin Library",
+        "description": "The used version of the Wyliodrin Library."
+    },
+    "DEVICE_WYAPP_OS": {
+        "message": "Sistem de operare",
+        "description": "Operating system on the board"
+    },
+    "DEVICE_WYAPP_LANGUAGES": {
+        "message": "Limbaje",
+        "description": "Programming languages supported by the board"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_IP": {
+        "message": "IP",
+        "description": "IP Address for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_MASK": {
+        "message": "Mască",
+        "description": "Mask for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
+        "message": "Broadcast", 
+        "description": "Broadcast for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
+        "message": "Adresă Hardware",
+        "description": "Hardware Address for the wired network"
+    },
+    "DEVICE_WYAPP_UNINSTALL": {
+        "message": "Dezinstalare",
+        "description": "Button to uninstall a package."
+    },
+    "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
+        "message": "Nume dispozitiv",
+        "description": "Name of the connected device"
+    },
+    "DEVICE_WYAPP_INSTALL": {
+        "message": "Instalare",
+        "description": "Button to install a package."
+    },
+    "DEVICE_WYAPP_PACKAGE_INSTALL_ERROR": {
+        "message": "Pachetul {packageName} pentru {language} nu a putut fi instalat.",
+        "description": "The error the users sees when a packages failes to install"
+    },
+    "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": {
+        "message": "Pachetul {packageName} pentru {language} nu a putut fi dezinstalat.",
+        "description": "The error the users sees when a packages failes to uninstall"
+    },
+    "DEVICE_WYAPP_PSK": 
+    {
+        "message": "Parola pentru rețea",
+        "description": "The passphrase of a wireless network"
+    },
+    "DEVICE_WYAPP_CONNECT": 
+    {
+        "message": "Conectare",
+        "description": "The  network connect button"
+    },
+    "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
+        "message": "Alte rețele",
+        "description": "The option to connect to a network that is not displayed"
 	}
 }

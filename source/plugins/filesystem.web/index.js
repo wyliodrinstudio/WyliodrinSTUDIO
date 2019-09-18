@@ -52,7 +52,7 @@ async function tryPersistWithoutPromtingUser() {
 	if (!navigator.storage || !navigator.storage.persisted) {
 		return 'never';
 	}
-	let persisted = await navigator.storage.persisted();
+	let persisted = await isStoragePersisted();
 	if (persisted) {
 		return 'persisted';
 	}
@@ -515,7 +515,7 @@ let web_filesystem = {
 			setTimeout(() => {
 				// on change sghould fire first, so this should not fire if there is a file selected
 				events.emit('load', new Error('ENODATA'));
-			}, 1000);
+			}, 20000);
 			e.stopPropagation();
 		});
 		return new Promise((resolve/*, reject*/) => {
@@ -566,7 +566,7 @@ let web_filesystem = {
 	 */
 	setPersistent ()
 	{
-		return navigator.storage.persist ();
+		return persist ();
 	}
 
 };

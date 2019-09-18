@@ -83,5 +83,30 @@
     {
         "message": "Si votre navigateur ne vous demande pas d'autoriser la persistance, il s'agit d'un problème avec votre navigateur. Pour éviter de perdre vos projets, vous devez ajouter ce site Web aux bookmarks, l’utiliser souvent et exporter fréquemment vos projets. Nous vous recommandons également d'utiliser Firefox.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available."
+    },
+    "PROJECTS_DELETE_FOLDER":
+    {
+        "message": "Supprimer le dossier",
+        "description": "Delete a folder within a project"
+    },
+    "PROJECT_RENAME_FOLDER": {
+        "message": "Renommer le dossier",
+        "description": "Rename a folder within a project"
+    },
+	"PROJECT_IMPORT_FILE": {
+        "message": "Importer le fichier",
+        "description": "Import a file within a project"
+	},
+    "PROJECT_DELETE_FILE": {
+        "message": "Supprimer le ficher",
+        "description": "Delete a file within a project"
+    },
+    "PROJECT_RENAME_FILE": {
+        "message": "Renommer le fichier",
+        "description": "Rename a file within a project"
+    },
+	"PROJECT_EXPORT_FILE": {
+        "message": "Exporter le fichier",
+        "description": "Export a file from the project"
     }
 }

@@ -121,5 +121,9 @@
 	"DEVICE_WYAPP_FILE_MANAGER": {
 		"message": "File manager",
 		"description": "The option to refresh the file tree"
-	}
+    },
+    "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
+        "message": "Please open a project",
+        "description": "Notification text when there is no project selected"
+    }
 }

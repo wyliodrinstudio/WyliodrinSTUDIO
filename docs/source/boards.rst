@@ -283,7 +283,7 @@ https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vc
 
 After downloading and extracting the files, you should open the Device Manager, right click on the Ports section and select the driver. By the end, you should be able to see the following devices:
 
-.. image:: images/picodevice.png
+.. image:: images/devicemanager.png
 	:align: center
 
 
@@ -308,6 +308,10 @@ If you are using Windows, we recommend you to download and open `Putty <https://
 	  - 115200
 
 Once the session started, it will load U-boot and you will be able to see the text "Hit any key to stop autoboot:". Pressing on a key will stop the boot process and a open a boot prompt.
+
+.. note::
+
+	If the boot prompt doesn't appear, you should reboot the board by pressing the Restart button.
 
 |
 
@@ -528,16 +532,18 @@ You will have to add the following text content within the *fstab* file:
 
 After copying the configuration file to the destination indicated, you can reboot your board using the Restart button. At this step, if you hit the *Connect* button of the web application, you should see your Pico-Pi device into the list of available devices and by clicking on its name you will be able to connect it to the IDE.
 
-
+|
 
 ==================
+
+|
 
 Beaglebone Black
 *********************
 
 This tutorial will show you how to set up a Beaglebone Black device.
 
-.. image:: images/beaglebone.png
+.. image:: images/beagleboneblack.png
 	:align: center
 
 
@@ -554,9 +560,6 @@ Download the image for `BeagleBone Black <https://wyliodrin-studio.s3.us-east-2.
 Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flashBeagle>` it. After that, you can simply insert the SD card into the BeagleBone Black and your board should be visible within Wyliodrin STUDIO.
 
 |
-
-=========================
-
 |
 
 Set up the board manually
@@ -675,6 +678,7 @@ After installing and unziping Node, you should reboot the board and restart the 
 
 	sudo rm /usr/bin/npm
 	sudo rm /usr/bin/npx
+	sudo rm -f /usr/lib/node_modules
 
 
 Continue the configuration by running the following commands:
@@ -736,6 +740,14 @@ After that, you have to make the **/wyliodrin** directory your home directory:
 	sudo chown debian:debian /wyliodrin
 	cp /home/debian/.bashrc /wyliodrin/.bashrc
 
+.. note::
+
+	While using the Pico-Pi device, you will need to run some commands as root, meaning that each time you will use **sudo**, the system will ask you to input the passwork. In order to be able to run the sudo command without entering a password, you will have to configure a setting.
+
+	You will have to run the **sudo visudo** command, which will open the *etc/sudoers* file. You will have to modify the content by moving the next line at the end of the file:
+
+		*debian  ALL=(ALL) NOPASSWD: ALL*
+
 The final step is to refresh the board by running the command:
 
 .. code-block:: bash
@@ -789,7 +801,7 @@ Udoo Neo
 
 This tutorial will show you how to set up a Udoo Neo device.
 
-.. image:: images/udoo.png
+.. image:: images/udooneo.png
 	:align: center
 
 
@@ -907,6 +919,7 @@ After installing and unziping Node, you should reboot the board and restart the 
 
 	sudo rm /usr/bin/npm
 	sudo rm /usr/bin/npx
+	sudo rm /usr/lib/node_modules
 
 
 Continue the configuration by running the following commands:

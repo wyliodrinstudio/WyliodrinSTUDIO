@@ -464,6 +464,7 @@ export default {
 		{
 			await this.studio.projects.changeFile(this.currentProject,item.path);
 		},
+		
 		async dirTree() 
 		{
 			if (this.currentProject)
@@ -487,12 +488,14 @@ export default {
 					}
 					
 				}
+				this.studio.projects.sort(files);
 				let root = [{
 					name:path.basename(filename),
 					children:files,
 					path:filename.replace(this.currentProject.folder, '')
 				}];
-				// root.sort((a, b) => (a.priority >= b.priority) ? 1 : -1)
+				
+				
 				this.items = root;
 				this.previous = this.items;
 				console.log(this.items);
