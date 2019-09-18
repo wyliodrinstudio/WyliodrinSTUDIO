@@ -412,21 +412,9 @@ Pin Layout plugin
 
 |
 
-The **Pin Layout** tab becomes visible for a user only when a board is connected to Wyliodrin STUDIO, and it loads a "map" of the board and a legend of its pins. As we described in the :ref:`wyappBoard` section, when we register this type of device, we call the *registerPinLayout* function. This function is used to connect a type of device with the corresponding layout of the board pins.
+The **Pin Layout** tab becomes visible for a user only when a board is connected to Wyliodrin STUDIO, and it loads a "map" of the board and a legend of its pins. As we described in the :ref:`wyappBoard` section, when we register this type of device, we call the *registerPinLayout* function. 
 
-The function is defined inside the *pinlayout* plugin, and its parameters are:
-
-.. list-table::
-	:widths: 30 70
-
-	* - Parameter title
-	  - Description
-	* - *type*
-	  - the type of the device
-	* - *board*
-	  - the name of the board
-	* - *img*
-	  - the relative path to the pin layout image
+.. autofunction:: registerPinLayout
 
 For example, if you want to register a Raspberry Pi board, inside the corresponding plugin you will call this function:
 
