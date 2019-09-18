@@ -19,13 +19,13 @@
 			<template>
 				<v-treeview
 					v-model="tree"
-					
+					dense
 					:items="items"
 					:load-children="fetchContent"
             		:open.sync="open"
 					open-on-click
           			
-					item-key="name"
+					item-key="key"
 					>
 					
 					<template v-slot:label="{item, open}"	>

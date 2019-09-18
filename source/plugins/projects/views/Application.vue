@@ -18,8 +18,13 @@
 					v-model="tree"
 					:open="open"
 					:items="items"
-					item-key="name"
+					item-key="key"
+					activatable
+					@update:active="consoleLogIt(item)"
+					return-object
+					:active.sync="item"
 					:open-on-click="true"
+					dense
 					>
 					<template v-slot:prepend="{item, open}">
 						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
@@ -238,6 +243,7 @@ export default {
 			},
 			tree: [],
 			items:[],
+			item:null,
 			type:null,
 			fileMenu: false,
 			folderMenu:false,
@@ -340,6 +346,10 @@ export default {
 		}
 	},
 	methods: {
+		consoleLogIt(item){
+			console.log('this ios the item');
+			console.log(item);
+		},
 		languageImage ()
 		{
 			// TODO check if language is known, not only that it exists
@@ -354,7 +364,13 @@ export default {
 				return addons['*:' + board].icon;
 			} else if (addons && type !== 'none' && addons[type + ':*'] && addons[type + ':*'].icon) {
 				return addons[type + ':*'].icon;
-			} else if (this.currentProject.language && type === 'none' && board === 'none' ){
+			} else if(type !== 'none' && board !== 'none' && addons[type + ':' + board] && !addons[type + ':' + board].icon) {
+				return language.icon;
+			} else if(addons && board !== 'none' && addons['*:' + board] && !addons['*:' + board].icon) {
+				return language.icon;
+			} else if(addons && type !== 'none' && addons[type + ':*'] && !addons[type + ':*'].icon) {
+				return language.icon;
+			} else if (this.currentProject.language){
 				return language.icon;
 			} else return 'unknown';
 		},
@@ -492,13 +508,13 @@ export default {
 				let root = [{
 					name:path.basename(filename),
 					children:files,
-					path:filename.replace(this.currentProject.folder, '')
+					path:filename.replace(this.currentProject.folder, ''),
+					key:path.basename(filename)+filename.replace(this.currentProject.folder, '')+'folder'
 				}];
 				
 				
 				this.items = root;
 				this.previous = this.items;
-				console.log(this.items);
 			}
 		},
 		async newFolder (item)
@@ -649,4 +665,3 @@ background: url('plugins/projects/data/img/icons/32px.png') no-repeat -32px 0px 
 }
 
 </style>
-
