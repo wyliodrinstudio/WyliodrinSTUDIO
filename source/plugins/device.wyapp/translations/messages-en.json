@@ -124,6 +124,6 @@
     },
     "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
         "message": "Please open a project",
-        "description": "Notification text when there is no project selected".
+        "description": "Notification text when there is no project selected"
     }
 }
