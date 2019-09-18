@@ -169,7 +169,7 @@ export default {
 		}),
 		projectTree ()
 		{
-			return 'project-tree-on hs-100';
+			return 'project-tree-on';
 		},
 		editorBox ()
 		{
