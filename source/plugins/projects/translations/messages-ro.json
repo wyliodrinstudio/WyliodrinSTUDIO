@@ -274,5 +274,20 @@
     {
         "message": "Dacă browser-ul dvs. nu v-a întrebat dacă permiteți persistența, ar putea fi o problemă cu browserul. Pentru a preveni pierderea proiectelor, ar trebui să adăugați acest site web la marcaje, să-l utilizați mai des și să exportați frecvent proiectele. De asemenea, vă recomandăm să utilizați Firefox.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available."
+    },
+	"PROJECTS_NO_FILE": 
+    {
+        "message": "Nu este nici un fișier selectat, vă rugăm creați, importați sau selectați un fișier.",
+        "description": "The message the user sees in the Application Tab when there is no file for the editor"
+    },
+	"PROJECTS_EXTENSION_URECOGNIZED": 
+    {
+        "message": "Extensia fișierului nu este recunoscută.",
+        "description": "The message the user sees in the Application Tab when the file extension is not valid"
+    },
+	"PROJECTS_INVALID_PROJECT": 
+    {
+        "message": "Ați deschis un proiect invalid, vă rugăm selectați altul.",
+        "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
     }
 }
