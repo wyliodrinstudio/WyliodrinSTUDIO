@@ -34,7 +34,7 @@ async function loadPlugins (progress = () => {}) {
 	plugins.push ({name:'dashboard.graph.vumeter', consumes:["workspace","dashboard"], provides:[], setup: plugin.setup || plugin.default || plugin});
 	progress ('device.wyapp', 11, 39);
 	plugin = await import ('../plugins/device.wyapp/index.js');
-	plugins.push ({name:'device.wyapp', consumes:["workspace","events","console","projects","shell","notebook","dashboard"], provides:["device_wyapp"], setup: plugin.setup || plugin.default || plugin});
+	plugins.push ({name:'device.wyapp', consumes:["workspace","events","console","projects","shell","notebook","dashboard","filesystem"], provides:["device_wyapp"], setup: plugin.setup || plugin.default || plugin});
 	progress ('device.wyapp.beagleboneblack', 12, 39);
 	plugin = await import ('../plugins/device.wyapp.beagleboneblack/index.js');
 	plugins.push ({name:'device.wyapp.beagleboneblack', consumes:["device_wyapp","workspace","events","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});
