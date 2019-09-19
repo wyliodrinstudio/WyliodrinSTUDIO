@@ -198,12 +198,15 @@ export default {
 		},
 		async deleteProject (project, projects)
 		{
+			console.log(project);
+			console.log(projects);
+			let localProject = project;
 			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_PROJECT', 'PROJECT_PROJECT_SURE');
 			if(allow && await this.studio.projects.deleteProject(project))
 			{
 				let currentProject = this.studio.workspace.getFromStore('projects','currentProject');
 
-				if(project.name === currentProject.name)
+				if(currentProject && localProject.name === currentProject.name)
 				{
 					this.studio.workspace.dispatchToStore('projects', 'currentProject', null);
 					this.studio.workspace.dispatchToStore('projects', 'currentFile', null);
