@@ -12,7 +12,7 @@
 			</v-tooltip>
 			<v-bottom-sheet @keydown.esc="close(index)" :value="activeStatusButton === statusButton.name" persistent :hide-overlay="!statusButton.overlay()" :inset="statusButton.inset()" :retain-focus="false">
 				<v-sheet class="text-center" :height="statusButton.height()">
-					<component ref="statusButton" :is="statusButton.component"></component>
+					<component ref="statusButton" :is="statusButton.component" :active="activeStatusButton === statusButton.name"></component>
 				</v-sheet>
 			</v-bottom-sheet>
 		</span>

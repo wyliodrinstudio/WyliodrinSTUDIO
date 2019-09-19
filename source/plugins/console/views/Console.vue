@@ -10,7 +10,7 @@
 				<span>{{$t('CLOSE')}}</span>
 			</v-tooltip>
 		</div>
-		<Xterm no-shell='CONSOLE_NO_SHELL' ref="shell" @data="data" @update="update" @resize="resize"></Xterm>
+		<Xterm no-shell='CONSOLE_NO_SHELL' ref="shell" @data="data" @update="update" @resize="resize" :active="active"></Xterm>
 	</div>
 </template>
 
@@ -31,6 +31,7 @@ export function getConsole ()
 
 export default {
 	name: 'Console',
+	props: ['active'],
 	methods: {
 		close ()
 		{

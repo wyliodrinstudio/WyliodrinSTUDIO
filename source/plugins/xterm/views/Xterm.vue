@@ -25,7 +25,7 @@
 			<v-img src="plugins/xterm/data/img/icons/no-shell-icon.svg"></v-img>
 			<span>{{$t(noShell)}}</span>
 		</div>
-		<div ref="shell" class="fill-height"></div>
+		<div ref="shell" class="bottom-shell-box"></div>
 	</div>
 </template>
 
@@ -44,7 +44,8 @@ var xterm = require ('xterm');
 xterm.Terminal.prototype.proposeGeometry = function () {
     if (!this.element.parentElement) {
         return null;
-    }
+	}
+	console.log (this.element.parentElement);
     var parentElementStyle = window.getComputedStyle(this.element.parentElement);
     var parentElementHeight = parseInt(parentElementStyle.getPropertyValue('height'));
     var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')));
