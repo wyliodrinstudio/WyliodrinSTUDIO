@@ -289,5 +289,9 @@
     {
         "message": "Ați deschis un proiect invalid, vă rugăm selectați altul.",
         "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
+    },
+    "PROJECTS_JSON_DO_NOT": {
+        "message": "S-a încercat editarea fișierului project.json, NU FACEȚI ASTA",
+        "description": "The error message when the user is trying to edit the project.json file of a project."
     }
 }

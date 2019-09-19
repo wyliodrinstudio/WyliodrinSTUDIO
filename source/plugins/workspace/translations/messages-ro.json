@@ -130,5 +130,13 @@
     "WORKSPACE_DEVICE_SETUP": {
         "message": "Configurare dispozitiv",
         "description": "The devices setup button for the setup website"
+    },
+    "WORKSPACE_TOOLBAR_CLOSE": {
+        "message": "Ieșire",
+        "description": "Close button"
+    },
+    "WORKSPACE_DOCUMENTATION": {
+        "message": "Documentație",
+        "description": "Open a new window with the documentation of Wyliodrin STUDIO"
     }
 }

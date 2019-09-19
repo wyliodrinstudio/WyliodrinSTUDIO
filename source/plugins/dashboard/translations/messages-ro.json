@@ -98,5 +98,9 @@
     "DASHBOARD_NO_TITLE": {
         "message": "Alegeți un nume pentru semnal.",
         "description": "Notification text when the user didn't chose a name for the signal"
+    },
+    "DASHBOARD_AXIS_NAME": {
+        "message": "Numele axei",
+        "description": "Name of an axis"
     }
 }

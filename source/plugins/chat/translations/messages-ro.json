@@ -7,6 +7,10 @@
         "message": "Accesați canalul",
         "description": "Button uset to connect to a channel."
     },
+    "CHAT_CHANNEL": {
+        "message": "Canal",
+        "description": "A chat channel"
+    },
     "CHAT_NEW_CHANNEL": {
         "message": "Introduceți numele noului canal",
         "description": "The name of the new channel"
