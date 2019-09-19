@@ -22,5 +22,13 @@
     "NOTEBOOK_LOAD_DATA_ERROR": {
         "message": "Imposibil de încărcat notițele ({error})",
         "description": "This error shwos up when notebook.json can't be parsed."
+    },
+    "NOTEBOOK_RESET_NOTEBOOK_TITLE": {
+        "message": "Resetare Notebook",
+        "description": "Title of the reset confirmation prompt"
+    },
+    "NOTEBOOK_RESET_NOTEBOOK_QUESTION": {
+        "message": "Sigur doriți să resetați Notebook-ul? Veți pierde toate notițele pentru acest proiect.",
+        "description": "Confirmation prompt which ensures that the user really wants to reset the notebook"
     }
 }

@@ -134,5 +134,9 @@
     "WORKSPACE_DEVICE_SETUP": {
         "message": "Device Setup",
         "description": "The devices setup button for the setup website"
+    },
+    "WORKSPACE_DOCUMENTATION": {
+        "message": "Documentation",
+        "description": "Open a new window with the documentation of Wyliodrin STUDIO"
     }
 }

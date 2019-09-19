@@ -4,11 +4,11 @@
         "description": "The Schematics Tab, used to load a circuit diagram"
     },
     "ADD_SCHEMATIC": {
-        "message": "Adaugă schemă",
+        "message": "Adăugare schemă",
         "description": "Button used to add a schematics"
     },
     "DELETE_SCHEMATIC": {
-        "message": "Șterge schemă",
+        "message": "Ștergere schemă",
         "description": "Button used to delete a schematics"
     },
     "DELETE_MESSAGE": {
@@ -18,5 +18,9 @@
     "DELETE_CONFIRMATION": {
         "message": "Confirmarea ștergerii",
         "description": "Delete confirmation prompt title"
+    },
+    "SCHEMATICS_IMPORT": {
+        "message": "Importați scheme .svg din Fritzing",
+        "description": "The message that appears when there is no picture"
     }
 }

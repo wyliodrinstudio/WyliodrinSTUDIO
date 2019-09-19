@@ -30,5 +30,21 @@
     "DEVICE_RPK_TURNOFF": {
         "message": "Arrêter et Déconnecter",
         "description": "The power off and disconnect option in the disconnect menu"
+    },
+    "DEVICE_FLASH_JAVASCRIPT": {
+        "message": "Flash Javascript", 
+        "description": "The flash javascript button for an application"
+    },
+    "DEVICE_RPK_STANDBY": {
+        "message": "Stand-by", 
+        "description": "The stand-by option in the disconnect menu."
+    },
+    "DEVICE_RPK_ANOTHER_USER": {
+        "message": "L'appareil est déjà connecté à un autre utilisateur.",
+        "description": "The notification message when another use is connected to the board and the board is busy"
+    },
+    "DEVICE_RPK_ERROR_BLE": {
+        "message": "Impossible de lister les périphériques ({error}).",
+        "description": "The error shown when list devices for ble fails"
     }
 }

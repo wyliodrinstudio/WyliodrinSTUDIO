@@ -1,0 +1,6 @@
+{
+    "DATABASE": {
+        "message": "BASE DE DONNÉES",
+        "description": "Name of the Database tab."
+    }
+}

@@ -27,9 +27,9 @@
 							<span>{{memoryFormat(task.VSZ)}}</span>
 							<span>{{task.TT}}</span>
 						</td>
-						<td class="w-20 text-right">
-							<div v-if="task.sentKill">
-								<v-progress-circular indeterminate></v-progress-circular>
+						<td class="w-20 text-right lib-btn-box">
+							<div class="waiting-box" v-if="task.sentKill">
+								<v-progress-circular :size="20" indeterminate></v-progress-circular>
 							</div>
 							<v-btn v-else text class="lib-app-btn" @click="kill(task)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
 						</td>

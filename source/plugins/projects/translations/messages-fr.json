@@ -84,29 +84,215 @@
         "message": "Si votre navigateur ne vous demande pas d'autoriser la persistance, il s'agit d'un problème avec votre navigateur. Pour éviter de perdre vos projets, vous devez ajouter ce site Web aux bookmarks, l’utiliser souvent et exporter fréquemment vos projets. Nous vous recommandons également d'utiliser Firefox.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available."
     },
-    "PROJECTS_DELETE_FOLDER":
-    {
+    "PROJECT_DELETE_FOLDER": {
         "message": "Supprimer le dossier",
         "description": "Delete a folder within a project"
     },
     "PROJECT_RENAME_FOLDER": {
-        "message": "Renommer le dossier",
+        "message": "Rename folder",
         "description": "Rename a folder within a project"
     },
-	"PROJECT_IMPORT_FILE": {
-        "message": "Importer le fichier",
-        "description": "Import a file within a project"
-	},
+    "PROJECT_NEW_FOLDER_NAME": {
+        "message": "Nom du nouveau dossier",
+        "description": "Label for the new name of the folder"
+    },
+    "PROJECT_FOLDER_SURE": {
+        "message": "Êtes-vous sûr de vouloir supprimer ce dossier?",
+        "description": "Prompt asking for assurance on deleting a folder"
+    },
     "PROJECT_DELETE_FILE": {
-        "message": "Supprimer le ficher",
+        "message": "Supprimer le fichier",
         "description": "Delete a file within a project"
     },
     "PROJECT_RENAME_FILE": {
         "message": "Renommer le fichier",
         "description": "Rename a file within a project"
     },
+	"PROJECT_IMPORT_FILE": {
+        "message": "Importer le fichier",
+        "description": "Import a file within a project"
+	},
 	"PROJECT_EXPORT_FILE": {
         "message": "Exporter le fichier",
         "description": "Export a file from the project"
+    },
+    "PROJECT_NEW_FILE_NAME": {
+        "message": "Nouveau nom du fichier",
+        "description": "Label for the new name of the file"
+    },
+    "PROJECT_FILE_SURE": {
+        "message": "Êtes-vous sûr de vouloir supprimer ce fichier?",
+        "description": "Prompt asking for assurance on deleting a file"
+    },
+    "PROJECT_NEW_NAME": {
+        "message": "Nouveau Nom",
+        "description": "Label for the new name of the object"
+    },
+    "PROJECT_DELETE_PROJECT": {
+        "message": "Supprimer le projet",
+        "description": "Label for the dialog to delete a project within the workspace"
+    },
+    "PROJECT_LOAD_PROJECT": {
+        "message": "Charger un projet",
+        "description": "Text meaning that there is no project loaded"
+    },
+    "PROJECT_PROJECT_SURE": {
+        "message": "Êtes-vous sûr de vouloir supprimer ce projet?",
+        "description": "Prompt asking for assuruance on deleting a project"
+    },
+    "PROJECT_LIBRARY_NAME": {
+        "message": "Nom du projet",
+        "description": "Label for the name of the project"
+    },
+    "PROJECT_LIBRARY_NEW_PROJECT": {
+        "message": "Créer un projet",
+        "description": "Create a project within the workspace"
+    },
+    "PROJECT_LIBRARY_CLONE": {
+        "message": "Cloner",
+        "description": "Clone a project within the workspace"
+    },
+    "PROJECT_ERROR_LANGUAGE_ADDON": {
+        "message": "Impossible d'enregister l'addon pour le {language}",
+        "description": "The error message shown when a language addon fails to register"
+    },
+    "PROJECT_ERROR_REGISTER_EDITOR": {
+        "message": "Impossible d'enregistrer l'éditeur {name}. L'éditeur a déjà été enregistré",
+        "description": "The error message shown when an edtitor fails to register"
+    },
+    "PROJECT_ERROR_LOAD_PROJECTS": {
+        "message": "Erreur lors du chargement des projets ({error})",
+        "description": "The error message shown when the projects fail to load"
+    },
+    "PROJECT_ERROR_SELECT_PROJECT": {
+        "message": "Erreur lors de la sélection du projet {project} ({error})",
+        "description": " The error message shown when a project fails to be selected"
+    },
+    "PROJECT_ERROR_CREATE_PROJECT": {
+        "message": "Erreur lors de la création du projet {project} ({error})",
+        "description": "The error message shown when a project fails to be created"
+    },
+    "PROJECT_ERROR_RENAME_PROJECT": {
+        "message": "Erreur lors du changement de nom du projet {project} en {name} ({error})",
+        "description": "The error message shown when a project fails to be renamed"
+    },
+    "PROJECT_ERROR_CLONE_PROJECT": {
+        "message": "Erreur lors du clonage du projet {project} ({error})",
+        "description": "The error message shown when a project fails to be cloned"
+    },
+    "PROJECT_ERROR_DELETE_PROJECT": {
+        "message": "Erreur lors de la supression du projet {project} ({error})",
+        "description": "The error message shown when a project fails to be deleted"
+    },
+    "PROJECT_ERROR_IMPORT_PROJECT": {
+        "message": "Erreur lors de l'importation du projet {project} ({error})",
+        "description": "The error message shown when a project fails to be imported"
+    },
+    "PROJECT_ERROR_EXPORT_PROJECT": {
+        "message": "Erreur lors de l'exportation du projet {project} ({error})",
+        "description": "The error message shown when a project fails to be exported"
+    },
+    "PROJECT_ERROR_NEW_FOLDER": {
+        "message": "Erreur lors de la création d'un nouveau dossier {folder} ({error})",
+        "description": "The error message shown when a folder fails to be created"
+    },
+    "PROJECT_ERROR_NEW_FILE": {
+        "message": "Erreur lors de la création d'un nouveau fichier {file} ({error})",
+        "description": "The error message shown when a file fails to be created"
+    },
+    "PROJECT_ERROR_RENAME_OBJECT": {
+        "message": "Erreur lors du changement de nom de l'objet {object} ({error})",
+        "description": "The error message shown when an object fails to be renamed"
+    },
+    "PROJECT_ERROR_DELETE_FOLDER": {
+        "message": "Erreur lors de la supression du dossier {folder} ({error})",
+        "description": "The error message shown when a folder fails to be deleted"
+    },
+    "PROJECT_ERROR_DELETE_FILE": {
+        "message": "Erreur lors de la supression du fichier {file} ({error})",
+        "description": "The error message shown when a file fails to be deleted"
+    },
+    "PROJECTS_JSON_DO_NOT": {
+        "message": "Vous avez essayé de modifier le fichier project.json, NE FAITES PAS CELA",
+        "description": "The error message when the user is trying to edit the project.json file of a project."
+    },
+    "PROJECT_ERROR_SAVE_FILE": {
+        "message": "Erreur lors de l'enregistrement du fichier {file} ({error})",
+        "description": "The error message shown when a file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_FILE": {
+        "message": "Erreur lors du chargement du fichier {file} ({error})",
+        "description": "The error message shown when file fails to be loaded"
+    },
+    "PROJECT_ERROR_READ_DATA": {
+        "message": "Erreur lors de la lecture des données pour le projet {project} ({error})",
+        "description": "The error message shown when there is an error reading the data for the project"
+    },
+    "PROJECT_ERROR_NOT_FOLDER": {
+        "message": "Le dossier du projet {project} n'est pas un dossier valide.",
+        "description": "The error message shown when there is no folder"
+    },
+    "PROJECT_ERROR_SAVE_SPECIAL_FILE": {
+        "message": "Erreur lors de l'enregistrement du fichier spécial {file} avec des données ({error})",
+        "description": "The error message shown when a special settings file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_SPECIAL_FILE": {
+        "message": "Erreur lors du chargement du fichier spécial {file} avec des données ({error})",
+        "description": "The error message shown when a special settings file fails to be loaded"
+    },
+    "PROJECT_ERROR_SEND_CODE": {
+        "message": "Erreur lors de l'envoi du code de fichier {file} ({error})",
+        "description": "The error message shown when there is an error while sending the file code to the device"
+    },
+    "PROJECT_ERROR_PATH_INVALID": {
+        "message": "Erreur, le chemin n'est pas dans le dossier workspace",
+        "description": "The error message shown when the specified path is not in the workspace folder"
+	},
+	"PROJECT_ERROR_CHANGE_DATE": {
+		"message": "Erreur, impossible d'écrire la date {project} ({error})",
+		"description": "The error message shown when a date for a file fails to be written"
+	},
+    "PROJECT_JSON_DO_NOT": {
+        "message": "Vous avez essayé de modifier le fichier project.json, NE FAITES PAS CELA",
+        "description": "The error message shown when there is an attempt at editing the project settings file"
+    },
+    "PROJECT_CLONE_PROJECT": {
+        "message": "Cloner le projet",
+        "description": "Label for the clone project dialog"
+    },
+    "PROJECT_RENAME_PROJECT": {
+        "message": "Renommer le projet",
+        "description": "Label for the rename project dialog"
+    },
+    "PROJECT_NAME_PROMPT": {
+        "message": "Veuillez saisir le nom du projet.",
+        "description": "Label for the new name to be given to the project"
+	},
+	"PROJECT_LIBRARY_SEARCH":{
+		"message":"Chercher",
+		"description":"Label to search for projects"
+	},
+    "PROJECT_NULL": {
+        "message": "Un ou plusieurs paramètres sont nuls",
+        "description": "One or more of the funciton's parameters are null"
+    },
+    "PATH_NULL": {
+        "message": "Un chemin est nul",
+        "description": "The given path turned out null"
+    },
+	"PROJECTS_NO_FILE": 
+    {
+        "message": "Aucun fichier n'est sélectionné, veuillez importer, créer ou sélectionner un fichier.",
+        "description": "The message the user sees in the Application Tab when there is no file for the editor"
+    },
+	"PROJECTS_EXTENSION_URECOGNIZED": 
+    {
+        "message": "L'extension de fichier n'est pas reconnue",
+        "description": "The message the user sees in the Application Tab when the file extension is not valid"
+    },
+	"PROJECTS_INVALID_PROJECT": 
+    {
+        "message": "Vous avez ouvert un projet invalide, veuillez en sélectionner un autre.",
+        "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
     }
 }
