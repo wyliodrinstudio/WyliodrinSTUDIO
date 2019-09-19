@@ -1,42 +1,34 @@
 {
-	"DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED":
-	{
-		"message": "Autentificat la serverul de dispozitive",
-		"description": "The notification the user sees when authetnicated with the devices server"
-	},
-	"DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR":
-	{
-		"message": "Eroare la server: {error}",
-		"description": "The error notification the user sees with the error for the websocket server"
-	},
-	"DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED":
-	{
-		"message": "Deconectat de la serverul de dispozitive",
-		"description": "The notification the user sees when disconnected from the devices server"
-	},
-	"DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE":
-	{
-		"message": "Folositi Studio aici?",
-		"description": "The title of the question dialog the user sees when there is another connection with his id"
-	},
-	"DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET":
-	{
-		"message": "Mai exista o instanta de Studio activa si puteti folosi doar o instanta la un moment dat. Dotiti sa folositi Studio aici?",
-		"description": "The question dialog text the user sees when there is another instance connected with his id"
-	},
-	"WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID":
-	{
-		"message": "Va rog dati un nume pentru dispozitivul nou",
-		"description": "The message the user receives when he did not eneter a valid name for a new device"
-	},
-	"WYAPP_WEBSOCKET_NEW_DEVICE_TITLE":
-	{
-		"message": "Adaugare dispozitiv",
-		"description": "The title of the dialog with instructions on how to add a new device"
-	},
-	"WYAPP_WEBSOCKET_NEW_DEVICE_NAME":
-	{
-		"message": "Nume Dispozitiv",
-		"description": "The name of the device with instructions on how to add a new device"
-	}
+    "DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED": {
+        "message": "Autentificat la serverul de dispozitive",
+        "description": "The notification the user sees when authetnicated with the devices server"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR": {
+        "message": "Eroare la server: {error}",
+        "description": "The error notification the user sees with the error for the websocket server"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED": {
+        "message": "Deconectat de la serverul de dispozitive",
+        "description": "The notification the user sees when disconnected from the devices server"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE": {
+        "message": "Folositi Studio aici?",
+        "description": "The title of the question dialog the user sees when there is another connection with his id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET": {
+        "message": "Mai exista o instanta de Studio activa si puteti folosi doar o instanta la un moment dat. Dotiti sa folositi Studio aici?",
+        "description": "The question dialog text the user sees when there is another instance connected with his id"
+    },
+    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
+        "message": "Va rog dati un nume pentru dispozitivul nou",
+        "description": "The message the user receives when he did not eneter a valid name for a new device"
+    },
+    "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
+        "message": "Adaugare dispozitiv",
+        "description": "The title of the dialog with instructions on how to add a new device"
+    },
+    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
+        "message": "Nume Dispozitiv",
+        "description": "The name of the device with instructions on how to add a new device"
+    }
 }

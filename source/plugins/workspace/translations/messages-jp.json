@@ -51,10 +51,6 @@
         "message": "ディスコネクト",
         "description": "The Disconnect button"
     },
-    "WORKSPACE_DISCONNECTED": {
-        "message": "ディスコネクトでした",
-        "description": "Status of a device that is not connected."
-    },
     "WORKSPACE_TOOLBAR_EXIT_QUESTION": {
         "message": "これをエグジットしてもよろしいですか？",
         "description": "Select if you are sure you want to exit"
@@ -74,5 +70,69 @@
     "WORKSPACE_TOOLBAR_CLOSE": {
         "message": "クローズ",
         "description": "Close button"
+    },
+    "WORKSPACE_STATUS_DISCONNECTED": {
+        "message": "ディスコネクトでした",
+        "description": "Status of a device that is not connected."
+    },
+    "WORKSPACE_STATUS_CONNECTED": {
+        "message": "コネクトでした",
+        "description": "Status of a device that is connected."
+    },
+    "WORKSPACE_STATUS_SYNCHRONIZING": {
+        "message": "垂直同期信号 ",
+        "description": "Status of a device that is synchronizing."
+    },
+    "WORKSPACE_STATUS_CONNECTING": {
+        "message": "接続中",
+        "description": "Status of a device that is connecting."
+    },
+    "WORKSPACE_STATUS_ERROR": {
+        "message": " エラー ",
+        "description": "Status of a device that has an error."
+    },
+    "WORKSPACE_SET_MODE_ADVANCED": {
+        "message": "アドバンストモードを使います",
+        "description": "The menu to set the editor in advanced mode"
+    },
+    "WORKSPACE_SET_MODE_SIMPLE": {
+        "message": "シンプルモードを使います",
+        "description": "The menu to set the editor in simple mode"
+    },
+    "ABOUT_DEVELOPED_BY": {
+        "message": "によって開発された",
+        "description": "Text for authors of Wyliodrin Studio"
+    },
+    "ABOUT_MAINTAINER": {
+        "message": "メンテナー",
+        "description": "Maintainer of Wyliodrin Studio"
+    },
+    "ABOUT_UI_UX": {
+        "message": "ＵＩ／ＵＸ",
+        "description": "User Interface for Wyliodrin Studio"
+    },
+    "ABOUT_DEVELOPMENT": {
+        "message": " デベロッパー ",
+        "description": "Contributor to Wylidron Studio Development"
+    },
+    "ABOUT_LICENSE": {
+        "message": "ライセンス",
+        "description": "Button to show the license"
+    },
+    "ABOUT_LICENSE_TITLE": {
+        "message": "ライセンスの使用方法 ",
+        "description": "Title of the license popup"
+    },
+    "ABOUT_PROVIDED_BY": {
+        "message": "によって提供された",
+        "description": "Provider of Wyliodrin STUDIO"
+    },
+    "WORKSPACE_DEVICE_SETUP_TEXT": {
+        "message": "デバイスをセットアップすることもできます。詳細については、チュートリアルWebサイトにアクセスしてください。",
+        "description": "The message the user gets if there are no devices available in the connection selection"
+    },
+    "WORKSPACE_DEVICE_SETUP": {
+        "message": "デバイスのセットアップ",
+        "description": "The devices setup button for the setup website"
     }
 }

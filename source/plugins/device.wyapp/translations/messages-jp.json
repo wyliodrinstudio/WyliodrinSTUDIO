@@ -1,126 +1,126 @@
 {
     "DEVICE_WYAPP_RUN": {
-        "message": "Rulați",
+        "message": "実行します",
         "description": "The run button for an application"
     },
     "DEVICE_WYAPP_STOP": {
-        "message": "Oprire",
+        "message": "止まります",
         "description": "The stop button for an application"
     },
     "DEVICE_WYAPP_TASK_MANAGER": {
-        "message": "Administrare procese",
+        "message": "タスクマネージャ",
         "description": "The button for the task manager "
     },
     "DEVICE_WYAPP_PACKAGE_MANAGER": {
-        "message": "Administrare pachete",
+        "message": "パッケージマネージャー",
         "description": "The button for the package manager "
     },
     "DEVICE_WYAPP_NETWORK_MANAGER": {
-        "message": "Setări rețea",
+        "message": "ネットワークマネージャ",
         "description": "The button for the network manager "
     },
     "DEVICE_WYAPP_DISCONNECT": {
-        "message": "Deconectați",
+        "message": "ディスコネクト",
         "description": "The disconnect option in the disconnect menu"
     },
     "DEVICE_WYAPP_RESTART": {
-        "message": "Reporniți și Deconectați",
+        "message": "リブートとディスコネクト",
         "description": "The reboot and disconnect option in the disconnect menu"
     },
     "DEVICE_WYAPP_TURNOFF": {
-        "message": "Opriți și Deconectați",
+        "message": "パワーオフとディスコネクト",
         "description": "The power off and disconnect option in the disconnect menu"
     },
-    "DEVICE_WYAPP_REFRESH": {
-        "message": "Reîncarcă",
-        "description": "The option to refresh the file tree"
-    },
-    "DEVICE_WYAPP_FILE_MANAGER": {
-        "message": "Administrare fișiere",
-        "description": "The option to refresh the file tree"
-    },
-    "DEVICE_WYAPP_SSID": {
-        "message": "Nume reţea",
-        "description": "The SSID of a wireless network"
-    },
     "DEVICE_WYAPP_ANOTHER_USER": {
-        "message": "Dispozitivul este deja conectat la un alt utilizator.",
+        "message": "デバイスはすでに別のユーザーに接続されています。",
         "description": "The notification message when another use is connected to the board and the board is busy"
     },
     "DEVICE_WYAPP_SETTINGS": {
-        "message": "Setări dispozitiv",
+        "message": "デバイスの設定",
         "description": "Title of popup that contains details about the connected board"
     },
     "DEVICE_WYAPP_NAME": {
-        "message": "Nume",
+        "message": "名前",
         "description": "Name of connected board"
     },
     "DEVICE_WYAPP_VERSION": {
-        "message": "Versiune",
+        "message": "バージョン",
         "description": "Supervisor verson"
     },
     "DEVICE_WYAPP_LIBWYLIODRIN": {
-        "message": "Versiune Wyliodrin Library",
+        "message": "Ｗｙｌｉｏｄｒｉｎライブラリーのバージョン",
         "description": "The used version of the Wyliodrin Library."
     },
     "DEVICE_WYAPP_OS": {
-        "message": "Sistem de operare",
+        "message": "オペレーティング・システム",
         "description": "Operating system on the board"
     },
     "DEVICE_WYAPP_LANGUAGES": {
-        "message": "Limbaje",
+        "message": "言語",
         "description": "Programming languages supported by the board"
     },
     "DEVICE_WYAPP_WIREDNETWORK_IP": {
-        "message": "IP",
+        "message": "ＩＰ",
         "description": "IP Address for the wired network"
     },
     "DEVICE_WYAPP_WIREDNETWORK_MASK": {
-        "message": "Mască",
+        "message": "マスク",
         "description": "Mask for the wired network"
     },
     "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
-        "message": "Broadcast",
+        "message": "ブロードキャスト",
         "description": "Broadcast for the wired network"
     },
     "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
-        "message": "Adresă Hardware",
+        "message": "ハードウェアアドレス",
         "description": "Hardware Address for the wired network"
     },
     "DEVICE_WYAPP_UNINSTALL": {
-        "message": "Dezinstalare",
+        "message": "アンインストール",
         "description": "Button to uninstall a package."
     },
     "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
-        "message": "Nume dispozitiv",
+        "message": "装置名",
         "description": "Name of the connected device"
     },
     "DEVICE_WYAPP_INSTALL": {
-        "message": "Instalare",
+        "message": "インストール",
         "description": "Button to install a package."
     },
     "DEVICE_WYAPP_PACKAGE_INSTALL_ERROR": {
-        "message": "Pachetul {packageName} pentru {language} nu a putut fi instalat.",
+        "message": "{language}パッケージ{packageName}のインストールに失敗しました。",
         "description": "The error the users sees when a packages failes to install"
     },
     "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": {
-        "message": "Pachetul {packageName} pentru {language} nu a putut fi dezinstalat.",
+        "message": "{language}パッケージ{packageName}のアンインストールに失敗しました。",
         "description": "The error the users sees when a packages failes to uninstall"
     },
     "DEVICE_WYAPP_PSK": {
-        "message": "Parola pentru rețea",
+        "message": "ネットワークパスワード",
         "description": "The passphrase of a wireless network"
     },
     "DEVICE_WYAPP_CONNECT": {
-        "message": "Conectare",
+        "message": "コネクト",
         "description": "The  network connect button"
     },
     "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
-        "message": "Alte rețele",
+        "message": "その他のネットワーク",
         "description": "The option to connect to a network that is not displayed"
     },
+    "DEVICE_WYAPP_REFRESH": {
+        "message": "リフレッシュ",
+        "description": "The option to refresh the file tree"
+    },
+    "DEVICE_WYAPP_FILE_MANAGER": {
+        "message": "ファイルマネージャ",
+        "description": "The option to refresh the file tree"
+    },
+    "DEVICE_WYAPP_SSID": {
+        "message": "ネットワーク名",
+        "description": "The SSID of a wireless network"
+    },
     "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
-        "message": "Vă rugăm să deschideți un proiect nou",
+        "message": "プロジェクトを開いてください",
         "description": "Notification text when there is no project selected"
     }
 }

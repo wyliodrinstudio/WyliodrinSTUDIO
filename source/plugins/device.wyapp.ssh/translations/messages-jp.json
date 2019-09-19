@@ -1,42 +1,42 @@
 {
     "NETWORK_AUTHENTICATE_IP": {
-        "message": "IP",
+        "message": "ＩＰ",
         "description": "Internet Protocol (IP)"
     },
     "NETWORK_PORT": {
-        "message": "Port",
+        "message": "ポート",
         "description": "Number of port for the network connection"
     },
     "NETWORK_USERNAME": {
-        "message": "Username",
+        "message": "ユーザー名",
         "description": "Input text area for the name of the user on the raspberry pi"
     },
     "NETWORK_PASSWORD": {
-        "message": "Password",
+        "message": "パスワード",
         "description": "Input text area for the password of the user on the raspberry pi"
     },
     "NETWORK_SHOWPASSWORD": {
-        "message": "Show Password",
+        "message": "パスワードを表示します",
         "description": "Switch use to make the password visible"
     },
     "DEVICE_CONNECT": {
-        "message": "Connect",
+        "message": "コネクト",
         "description": "Button used to connect to a device"
     },
     "DEVICE_SERIAL_OPTIONS": {
-        "message": "Serial Connection",
+        "message": "シリアル接続",
         "description": "The title of the serial device options dialog"
     },
     "DEVICE_BAUDRATE": {
-        "message": "Baud Rate",
+        "message": "ボーレート",
         "description": "The baud rate input of the serial port options dialog"
     },
     "NETWORK_CONNECTION": {
-        "message": "Network Connection",
+        "message": "ネットワーク接続",
         "description": "Title of the popup used to connect to a device"
     },
     "DEVICE_WYAPP_SSH_IP_ADDRESS": {
-        "message": "IP Address",
+        "message": "ＩＰアドレス",
         "description": "The name of the pseudo device that allows the user the connect to any IP address"
     }
 }

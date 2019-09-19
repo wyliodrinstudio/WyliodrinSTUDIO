@@ -62,30 +62,24 @@
     "PROJECTS_CREATE_APPLICATION": {
         "message": "Cliquez sur le bouton \"Créer une nouvelle application\" ci-dessous",
         "description": "Message displayed in the Projects Library when the list of projects is empty."
-
     },
-    "PROJECTS_STORAGE_NOT_PERSISTENT": 
-    {
+    "PROJECTS_STORAGE_NOT_PERSISTENT": {
         "message": "Le système de stockage n'est pas persistant. Cela signifie que vos projets peuvent être supprimés à tout moment sans préavis. Pour éviter cela, exportez fréquemment vos projets.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available. We recommend you to use Firefox."
     },
-    "PROJECTS_STORAGE_ASK_PERSISTENT": 
-    {
+    "PROJECTS_STORAGE_ASK_PERSISTENT": {
         "message": "Le système de stockage n'est pas persistant. Veuillez autoriser rendre le stockage persistant.",
         "description": "The message the user sees in the Projects Library when persistent storage is available but not permitted."
     },
-    "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": 
-    {
+    "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": {
         "message": "Autoriser la persistance",
         "description": "The button the user clicks to ask persistance."
     },
-    "PROJECTS_STORAGE_BROWSER_ERROR": 
-    {
+    "PROJECTS_STORAGE_BROWSER_ERROR": {
         "message": "Si votre navigateur ne vous demande pas d'autoriser la persistance, il s'agit d'un problème avec votre navigateur. Pour éviter de perdre vos projets, vous devez ajouter ce site Web aux bookmarks, l’utiliser souvent et exporter fréquemment vos projets. Nous vous recommandons également d'utiliser Firefox.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available."
     },
-    "PROJECTS_DELETE_FOLDER":
-    {
+    "PROJECTS_DELETE_FOLDER": {
         "message": "Supprimer le dossier",
         "description": "Delete a folder within a project"
     },
@@ -93,10 +87,10 @@
         "message": "Renommer le dossier",
         "description": "Rename a folder within a project"
     },
-	"PROJECT_IMPORT_FILE": {
+    "PROJECT_IMPORT_FILE": {
         "message": "Importer le fichier",
         "description": "Import a file within a project"
-	},
+    },
     "PROJECT_DELETE_FILE": {
         "message": "Supprimer le ficher",
         "description": "Delete a file within a project"
@@ -105,7 +99,7 @@
         "message": "Renommer le fichier",
         "description": "Rename a file within a project"
     },
-	"PROJECT_EXPORT_FILE": {
+    "PROJECT_EXPORT_FILE": {
         "message": "Exporter le fichier",
         "description": "Export a file from the project"
     }

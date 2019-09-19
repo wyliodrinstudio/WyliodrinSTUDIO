@@ -34,12 +34,12 @@
     "PROJECT_NEW_FILE": {
         "message": "Fișier nou",
         "description": "Creează un fișier nou într-un proiect"
-	},
-	"PROJECT_IMPORT_FILE": {
+    },
+    "PROJECT_IMPORT_FILE": {
         "message": "Importă fișier",
         "description": "Import a file within a project"
-	},
-	"PROJECT_EXPORT_FILE": {
+    },
+    "PROJECT_EXPORT_FILE": {
         "message": "Exportă fișier",
         "description": "Export a file from the project"
     },
@@ -214,11 +214,11 @@
     "PROJECT_ERROR_PATH_INVALID": {
         "message": "Eroare, calea nu se află în dosarul spațiului de lucuru",
         "description": "Mesajul de eroare afișat atunci când calea specificată nu se află în dosarul spațiului de lucuru"
-	},
-	"PROJECT_ERROR_CHANGE_DATE": {
-		"message": "Eroare, nu se poate scrie data pentru proiect {project} ({error})",
-		"description": "The error message shown when a date for a file fails to be written"
-	},
+    },
+    "PROJECT_ERROR_CHANGE_DATE": {
+        "message": "Eroare, nu se poate scrie data pentru proiect {project} ({error})",
+        "description": "The error message shown when a date for a file fails to be written"
+    },
     "PROJECT_JSON_DO_NOT": {
         "message": "S-a încercat editarea fișierului project.json, NU FACEȚI ASTA",
         "description": "Mesajul de eroare afișat atunci când există o încercare de editare a fișierului de setări a proiectului"
@@ -234,11 +234,11 @@
     "PROJECT_NAME_PROMPT": {
         "message": "Introduceți numele proiectului",
         "description": "Etichetă pentru noul nume ce va fi dat proiectului"
-	},
-	"PROJECT_LIBRARY_SEARCH":{
-		"message":"Caută",
-		"description":"Label to search for projects"
-	},
+    },
+    "PROJECT_LIBRARY_SEARCH": {
+        "message": "Caută",
+        "description": "Label to search for projects"
+    },
     "PROJECT_NULL": {
         "message": "Un parametru este null",
         "description": "One or more of the funciton's parameters are null"
@@ -255,23 +255,19 @@
         "message": "Apăsați butonul \"Creează o aplicație nouă\" de mai jos",
         "description": "Message displayed in the Projects Library when the list of projects is empty."
     },
-    "PROJECTS_STORAGE_NOT_PERSISTENT": 
-    {
+    "PROJECTS_STORAGE_NOT_PERSISTENT": {
         "message": "Sistemul de stocare nu este persistent, ceea ce înseamnă că proiectele dvs. ar putea fi șterse oricând, fără notificare prealabilă. Pentru a evita acest lucru, vă rugăm să exportați proiectele frecvent.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available. We recommend you to use Firefox."
     },
-    "PROJECTS_STORAGE_ASK_PERSISTENT": 
-    {
+    "PROJECTS_STORAGE_ASK_PERSISTENT": {
         "message": "Sistemul de stocare nu este persistent. Vă rugăm să permiteți stocarea persistentă.",
         "description": "The message the user sees in the Projects Library when persistent storage is available but not permitted."
     },
-    "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": 
-    {
+    "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": {
         "message": "Permiteți Persistența",
         "description": "The button the user clicks to ask persistance."
     },
-    "PROJECTS_STORAGE_BROWSER_ERROR": 
-    {
+    "PROJECTS_STORAGE_BROWSER_ERROR": {
         "message": "Dacă browser-ul dvs. nu v-a întrebat dacă permiteți persistența, ar putea fi o problemă cu browserul. Pentru a preveni pierderea proiectelor, ar trebui să adăugați acest site web la marcaje, să-l utilizați mai des și să exportați frecvent proiectele. De asemenea, vă recomandăm să utilizați Firefox.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available."
     }

@@ -167,6 +167,76 @@
     "message": "Mod Simplu",
     "description": "The menu to set the editor in simple mode"
   },
+  "ABOUT_DEVELOPED_BY": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Dezvoltat de",
+    "description": "Text for authors of Wyliodrin Studio"
+  },
+  "ABOUT_MAINTAINER": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "",
+    "description": "Maintainer of Wyliodrin Studio"
+  },
+  "ABOUT_UI_UX": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "UI/UX",
+    "description": "User Interface for Wyliodrin Studio"
+  },
+  "ABOUT_DEVELOPMENT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Developer",
+    "description": "Contributor to Wylidron Studio Development"
+  },
+  "ABOUT_LICENSE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Licență",
+    "description": "Button to show the license"
+  },
+  "ABOUT_LICENSE_TITLE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Licență de utilizare",
+    "description": "Title of the license popup"
+  },
+  "ABOUT_PROVIDED_BY": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Oferit de",
+    "description": "Provider of Wyliodrin STUDIO"
+  },
+  "WORKSPACE_DEVICE_SETUP_TEXT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Daca doriți să configurați anumite dispozitive, puteți accesa site-ul nostru web cu tutoriale pentru mai multe informații.",
+    "description": "The message the user gets if there are no devices available in the connection selection"
+  },
+  "WORKSPACE_DEVICE_SETUP": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Configurare dispozitiv",
+    "description": "The devices setup button for the setup website"
+  },
+  "WORKSPACE_TOOLBAR_CLOSE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Închideți",
+    "description": "Close button"
+  },
   "CHAT": {
     "plugins": [
       "chat"
@@ -474,6 +544,27 @@
     ],
     "message": "Valoare maximă",
     "description": "Input text area foar the maximum value of an axis"
+  },
+  "DASHBOARD_DELETE_TITLE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Ștergere semnal",
+    "description": "Title of confirmation prompt when the user tries to delete a signal"
+  },
+  "DASHBOARD_DELETE_QUESTION": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Sigur doriți să ștergeți acest semnal?",
+    "description": "Delete signal confirmation "
+  },
+  "DASHBOARD_NO_TITLE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Alegeți un nume pentru semnal.",
+    "description": "Notification text when the user didn't chose a name for the signal"
   },
   "EXTRA_GRAPH": {
     "plugins": [
@@ -804,6 +895,195 @@
     "message": "Opriți și Deconectați",
     "description": "The power off and disconnect option in the disconnect menu"
   },
+  "DEVICE_WYAPP_REFRESH": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Reîncarcă",
+    "description": "The option to refresh the file tree"
+  },
+  "DEVICE_WYAPP_FILE_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Administrare fișiere",
+    "description": "The option to refresh the file tree"
+  },
+  "DEVICE_WYAPP_SSID": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Nume reţea",
+    "description": "The SSID of a wireless network"
+  },
+  "DEVICE_WYAPP_ANOTHER_USER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Dispozitivul este deja conectat la un alt utilizator.",
+    "description": "The notification message when another use is connected to the board and the board is busy"
+  },
+  "DEVICE_WYAPP_SETTINGS": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Setări dispozitiv",
+    "description": "Title of popup that contains details about the connected board"
+  },
+  "DEVICE_WYAPP_NAME": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Nume",
+    "description": "Name of connected board"
+  },
+  "DEVICE_WYAPP_VERSION": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Versiune",
+    "description": "Supervisor verson"
+  },
+  "DEVICE_WYAPP_LIBWYLIODRIN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Versiune Wyliodrin Library",
+    "description": "The used version of the Wyliodrin Library."
+  },
+  "DEVICE_WYAPP_OS": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Sistem de operare",
+    "description": "Operating system on the board"
+  },
+  "DEVICE_WYAPP_LANGUAGES": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Limbaje",
+    "description": "Programming languages supported by the board"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_IP": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "IP",
+    "description": "IP Address for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_MASK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Mască",
+    "description": "Mask for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Broadcast",
+    "description": "Broadcast for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Adresă Hardware",
+    "description": "Hardware Address for the wired network"
+  },
+  "DEVICE_WYAPP_UNINSTALL": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Dezinstalare",
+    "description": "Button to uninstall a package."
+  },
+  "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Nume dispozitiv",
+    "description": "Name of the connected device"
+  },
+  "DEVICE_WYAPP_INSTALL": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Instalare",
+    "description": "Button to install a package."
+  },
+  "DEVICE_WYAPP_PACKAGE_INSTALL_ERROR": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Pachetul {packageName} pentru {language} nu a putut fi instalat.",
+    "description": "The error the users sees when a packages failes to install"
+  },
+  "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Pachetul {packageName} pentru {language} nu a putut fi dezinstalat.",
+    "description": "The error the users sees when a packages failes to uninstall"
+  },
+  "DEVICE_WYAPP_PSK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Parola pentru rețea",
+    "description": "The passphrase of a wireless network"
+  },
+  "DEVICE_WYAPP_CONNECT": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Conectare",
+    "description": "The  network connect button"
+  },
+  "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Alte rețele",
+    "description": "The option to connect to a network that is not displayed"
+  },
+  "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Vă rugăm să deschideți un proiect nou",
+    "description": "Notification text when there is no project selected"
+  },
+  "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Imposibil de încărcat SerialPort WyApp Transport, dispozitivele seriale wyapp nu vor fi disponibile (error: {{error}})",
+    "description": "The error message shown when the serial port library has an error while being loaded"
+  },
+  "DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Imposibil de listat porturile seriale (error: {error})",
+    "description": "The error message shown when there is an werror while listing the serial ports"
+  },
+  "DEVICE_SERIAL_PORT": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Port Serial",
+    "description": "Input text area for the port number of a serial device"
+  },
+  "DEVICE_SERIAL_BAUDRATE": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "",
+    "description": "Input text area for the baud rate of a serial device"
+  },
   "NETWORK_AUTHENTICATE_IP": {
     "plugins": [
       "device.wyapp.ssh"
@@ -887,6 +1167,34 @@
     ],
     "message": "Mai exista o instanta de Studio activa si puteti folosi doar o instanta la un moment dat. Dotiti sa folositi Studio aici?",
     "description": "The question dialog text the user sees when there is another instance connected with his id"
+  },
+  "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Va rog dati un nume pentru dispozitivul nou",
+    "description": "The message the user receives when he did not eneter a valid name for a new device"
+  },
+  "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Adaugare dispozitiv",
+    "description": "The title of the dialog with instructions on how to add a new device"
+  },
+  "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Nume Dispozitiv",
+    "description": "The name of the device with instructions on how to add a new device"
+  },
+  "DOCUMENTATION": {
+    "plugins": [
+      "documentation"
+    ],
+    "message": "Documentație",
+    "description": "Open a new window with the documentation of Wyliodrin STUDIO"
   },
   "TOOLBAR_RESISTOR_COLOR_CODE": {
     "plugins": [
@@ -993,6 +1301,55 @@
     "message": "Anulare",
     "description": "Button to close the feedback dialog"
   },
+  "REAL_FS_DO_NOT_EXIST_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "Sistemul de fișiere dat nu a putut fi găsit! Vă rugăm să utilizați un sistem de fișiere valid",
+    "description": "This is the text of an error that shows up when the chosen filesystem is not valid."
+  },
+  "REAL_FS_ALREADY_REGISTERED_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "Sistemul de fișiere dat este deja înregistrat!",
+    "description": "This is the text of a warning when the chosen filesystem was registered before."
+  },
+  "REAL_FS_NO_DEF_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "Nu există un sistem de fișiere implicit, este înregistrat vreun sistem de fișiere?",
+    "description": "This is the text of an error displayed when there is no default filesystem registered."
+  },
+  "WELCOME_TEXT": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "Bun venit!",
+    "description": "Welcome text"
+  },
+  "WELCOME_START_WORK": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "Puteți începe să creați noi aplicații, să configurați și să conectați placi sau să importați propriile proiecte.",
+    "description": "Introduction message"
+  },
+  "WELCOME_CREATE_APP": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "Creați o aplicație nouă",
+    "description": "Button that will redirect the user to a popup where he can create new applicatons."
+  },
+  "WELCOME_CONNECT_BOARD": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "Conectare placă",
+    "description": "Button that will open a browser window with a documentation chapter regarding the setup of a Raspberry Pi board."
+  },
   "PROJECT_NOTEBOOK": {
     "plugins": [
       "notebook"
@@ -1068,7 +1425,7 @@
       "projects"
     ],
     "message": "Dosar nou",
-    "description": "Crează un dosar nou într-un proiect"
+    "description": "Creează un dosar nou într-un proiect"
   },
   "PROJECT_NEW_FOLDER_NAME": {
     "plugins": [
@@ -1103,7 +1460,21 @@
       "projects"
     ],
     "message": "Fișier nou",
-    "description": "Crează un fișier nou într-un proiect"
+    "description": "Creează un fișier nou într-un proiect"
+  },
+  "PROJECT_IMPORT_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Importă fișier",
+    "description": "Import a file within a project"
+  },
+  "PROJECT_EXPORT_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Exportă fișier",
+    "description": "Export a file from the project"
   },
   "PROJECT_NEW_FILE_NAME": {
     "plugins": [
@@ -1158,7 +1529,7 @@
     "plugins": [
       "projects"
     ],
-    "message": "Crează o nouă aplicație",
+    "message": "Creează o nouă aplicație",
     "description": "Buton pentru crearea unui nou proiect în spațiul de lucuru"
   },
   "PROJECT_LIBRARY": {
@@ -1179,8 +1550,8 @@
     "plugins": [
       "projects"
     ],
-    "message": "Crează un proiect",
-    "description": "Crează un proiect în interiorul spațiului de lucuru"
+    "message": "Creează un proiect",
+    "description": "Creează un proiect în interiorul spațiului de lucuru"
   },
   "PROJECT_LIBRARY_RENAME": {
     "plugins": [
@@ -1461,6 +1832,48 @@
     ],
     "message": "O cale este nulă",
     "description": "The given path turned out null"
+  },
+  "PROJECTS_NO_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Încă nu aveți niciun proiect",
+    "description": "Message displayed in the Projects Library when the list of projects is empty."
+  },
+  "PROJECTS_CREATE_APPLICATION": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Apăsați butonul \"Creează o aplicație nouă\" de mai jos",
+    "description": "Message displayed in the Projects Library when the list of projects is empty."
+  },
+  "PROJECTS_STORAGE_NOT_PERSISTENT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Sistemul de stocare nu este persistent, ceea ce înseamnă că proiectele dvs. ar putea fi șterse oricând, fără notificare prealabilă. Pentru a evita acest lucru, vă rugăm să exportați proiectele frecvent.",
+    "description": "The message the user sees in the Projects Library when persistent storage is not available. We recommend you to use Firefox."
+  },
+  "PROJECTS_STORAGE_ASK_PERSISTENT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Sistemul de stocare nu este persistent. Vă rugăm să permiteți stocarea persistentă.",
+    "description": "The message the user sees in the Projects Library when persistent storage is available but not permitted."
+  },
+  "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Permiteți Persistența",
+    "description": "The button the user clicks to ask persistance."
+  },
+  "PROJECTS_STORAGE_BROWSER_ERROR": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Dacă browser-ul dvs. nu v-a întrebat dacă permiteți persistența, ar putea fi o problemă cu browserul. Pentru a preveni pierderea proiectelor, ar trebui să adăugați acest site web la marcaje, să-l utilizați mai des și să exportați frecvent proiectele. De asemenea, vă recomandăm să utilizați Firefox.",
+    "description": "The message the user sees in the Projects Library when persistent storage is not available."
   },
   "EDITOR_VISUAL_SHOW_CODE": {
     "plugins": [

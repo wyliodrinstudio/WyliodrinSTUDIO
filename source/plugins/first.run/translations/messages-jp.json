@@ -1,18 +1,18 @@
 {
     "WELCOME_TEXT": {
-        "message": "Bienvenu à Wyliodrin STUDIO",
+        "message": "ＷｙｌｉｏｄｒｉｎSTUDIOへようこそ",
         "description": "Welcome text"
     },
     "WELCOME_START_WORK": {
-        "message": "Vous pouvez commencer à créer de nouvelles applications, à configurer et à connecter des cartes ou à importer vos propres projets..",
+        "message": "新しいアプリケーションの作成を開始したり、ボードをセットアップしたり、独自のプロジェクトをインポートしたりできます。",
         "description": "Introduction message"
     },
     "WELCOME_CREATE_APP": {
-        "message": "Créer une nouvelle application",
+        "message": "新しいアプリケーションを作成します",
         "description": "Button that will redirect the user to a popup where he can create new applicatons."
     },
     "WELCOME_CONNECT_BOARD": {
-        "message": "Connecter une carte",
+        "message": "ボードを接続",
         "description": "Button that will open a browser window with a documentation chapter regarding the setup of a Raspberry Pi board."
     }
 }

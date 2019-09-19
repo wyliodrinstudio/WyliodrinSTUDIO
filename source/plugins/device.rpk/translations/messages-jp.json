@@ -1,50 +1,50 @@
 {
     "DEVICE_RPK_RUN": {
-        "message": "Run",
+        "message": "実行します",
         "description": "The run button for an application"
     },
     "DEVICE_FLASH_JAVASCRIPT": {
-        "message": "Flash Javascript",
+        "message": "ジャバスクリプトをフラッシュします",
         "description": "The flash javascript button for an application"
     },
     "DEVICE_RPK_STOP": {
-        "message": "Stop",
+        "message": "止まります",
         "description": "The stop button for an application"
     },
     "DEVICE_RPK_TASK_MANAGER": {
-        "message": "Task Manager",
+        "message": "タスクマネージャ",
         "description": "The button for the task manager "
     },
     "DEVICE_RPK_PACKAGE_MANAGER": {
-        "message": "Package Manager",
+        "message": "パッケージマネージャー",
         "description": "The button for the package manager "
     },
     "DEVICE_RPK_NETWORK_MANAGER": {
-        "message": "Network Manager",
+        "message": "ネットワークマネージャ",
         "description": "The button for the network manager "
     },
     "DEVICE_RPK_STANDBY": {
-        "message": "Stand-by",
+        "message": "スタンバイ",
         "description": "The stand-by option in the disconnect menu."
     },
     "DEVICE_RPK_DISCONNECT": {
-        "message": "Disconnect",
+        "message": "ディスコネクト",
         "description": "The disconnect option in the disconnect menu"
     },
     "DEVICE_RPK_RESTART": {
-        "message": "Reboot and Disconnect",
+        "message": "リブートとディスコネクト",
         "description": "The reboot and disconnect option in the disconnect menu"
     },
     "DEVICE_RPK_TURNOFF": {
-        "message": "Power Off and Disconnect",
+        "message": "パワーオフとディスコネクト",
         "description": "The power off and disconnect option in the disconnect menu"
     },
     "DEVICE_RPK_ANOTHER_USER": {
-        "message": "The device is already connected to another user.",
+        "message": "デバイスはすでに別のユーザーに接続されています。",
         "description": "The notification message when another use is connected to the board and the board is busy"
     },
     "DEVICE_RPK_ERROR_BLE": {
-        "message": "List devices failed ({error}).",
+        "message": "失敗したデバイスを一覧表示する ({error}).",
         "description": "The error shown when list devices for ble fails"
     }
 }

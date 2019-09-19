@@ -90,13 +90,6 @@
     "message": "ディスコネクト",
     "description": "The Disconnect button"
   },
-  "WORKSPACE_DISCONNECTED": {
-    "plugins": [
-      "workspace"
-    ],
-    "message": "ディスコネクトでした",
-    "description": "Status of a device that is not connected."
-  },
   "WORKSPACE_TOOLBAR_EXIT_QUESTION": {
     "plugins": [
       "workspace"
@@ -131,6 +124,118 @@
     ],
     "message": "クローズ",
     "description": "Close button"
+  },
+  "WORKSPACE_STATUS_DISCONNECTED": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "ディスコネクトでした",
+    "description": "Status of a device that is not connected."
+  },
+  "WORKSPACE_STATUS_CONNECTED": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "コネクトでした",
+    "description": "Status of a device that is connected."
+  },
+  "WORKSPACE_STATUS_SYNCHRONIZING": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "垂直同期信号 ",
+    "description": "Status of a device that is synchronizing."
+  },
+  "WORKSPACE_STATUS_CONNECTING": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "接続中",
+    "description": "Status of a device that is connecting."
+  },
+  "WORKSPACE_STATUS_ERROR": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": " エラー ",
+    "description": "Status of a device that has an error."
+  },
+  "WORKSPACE_SET_MODE_ADVANCED": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "アドバンストモードを使います",
+    "description": "The menu to set the editor in advanced mode"
+  },
+  "WORKSPACE_SET_MODE_SIMPLE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "シンプルモードを使います",
+    "description": "The menu to set the editor in simple mode"
+  },
+  "ABOUT_DEVELOPED_BY": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "によって開発された",
+    "description": "Text for authors of Wyliodrin Studio"
+  },
+  "ABOUT_MAINTAINER": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "メンテナー",
+    "description": "Maintainer of Wyliodrin Studio"
+  },
+  "ABOUT_UI_UX": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "ＵＩ／ＵＸ",
+    "description": "User Interface for Wyliodrin Studio"
+  },
+  "ABOUT_DEVELOPMENT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": " デベロッパー ",
+    "description": "Contributor to Wylidron Studio Development"
+  },
+  "ABOUT_LICENSE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "ライセンス",
+    "description": "Button to show the license"
+  },
+  "ABOUT_LICENSE_TITLE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "ライセンスの使用方法 ",
+    "description": "Title of the license popup"
+  },
+  "ABOUT_PROVIDED_BY": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "によって提供された",
+    "description": "Provider of Wyliodrin STUDIO"
+  },
+  "WORKSPACE_DEVICE_SETUP_TEXT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "デバイスをセットアップすることもできます。詳細については、チュートリアルWebサイトにアクセスしてください。",
+    "description": "The message the user gets if there are no devices available in the connection selection"
+  },
+  "WORKSPACE_DEVICE_SETUP": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "デバイスのセットアップ",
+    "description": "The devices setup button for the setup website"
   },
   "CHAT": {
     "plugins": [
@@ -178,14 +283,14 @@
     "plugins": [
       "chat"
     ],
-    "message": "ワーニング",
+    "message": "チャンネルをでます",
     "description": "Title of prompt that show up when the user wants to leave a channel."
   },
   "CHAT_TEXT_PART_CHANNEL": {
     "plugins": [
       "chat"
     ],
-    "message": "Are you sure you want to part this channel?",
+    "message": "このチャンネルをでましてもよろしいですか？",
     "description": "Text of prompt that show up when the user wants to leave a channel."
   },
   "CHAT_INSERT_CHANNEL_NAME": {
@@ -230,6 +335,69 @@
     "message": "This channel could not be joined! Please pick another one!",
     "description": "Text of notification that shows up when the user can not connect to a certain channel"
   },
+  "CHAT_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "チャンネル",
+    "description": "A chat channel"
+  },
+  "CHAT_CANCEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": " キャンセル",
+    "description": "The Cancel button"
+  },
+  "CHAT_DISCONNECT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "ディスコネクト",
+    "description": "The Disconnect button"
+  },
+  "CHAT_TITLE_DISCONNECT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "サーバーからディスコネクトする",
+    "description": "Title of the prompt that show up when the user wants to disconnect from the server"
+  },
+  "CHAT_TEXT_DISCONNECT": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "サーバーからディスコネクトしてもよろしいですか？",
+    "description": "Text of the prompt that show up when the user wants to disconnect from the server"
+  },
+  "CHAT_AVAILABLE_CHANNELS": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "入手可能なチャンネル",
+    "description": "List of the available channels"
+  },
+  "CHAT_USERS": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "ユーザーズ",
+    "description": "List with chat users."
+  },
+  "CONSOLE": {
+    "plugins": [
+      "console"
+    ],
+    "message": " コンソール",
+    "description": "The console name that is displayed in the status button"
+  },
+  "CONSOLE_NO_SHELL": {
+    "plugins": [
+      "console"
+    ],
+    "message": "プロジェクトを実行してコンソールをイネーブルにします",
+    "description": "The text that is displayed when the console is not enabled"
+  },
   "PROJECT_DASHBOARD": {
     "plugins": [
       "dashboard"
@@ -241,7 +409,7 @@
     "plugins": [
       "dashboard"
     ],
-    "message": "Signal name invalid",
+    "message": "無効な信号名",
     "description": "Warning that shows up when the signal name entered by the user is not correct."
   },
   "DASHBOARD_VIEWER_MOVE_LEFT": {
@@ -271,6 +439,825 @@
     ],
     "message": "グラフを消します",
     "description": "Button used to delete a graph"
+  },
+  "DASHBOARD_SIGNAL_NAME": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "信号名 *",
+    "description": "Input text area for the name of the signal"
+  },
+  "DASHBOARD_SIGNAL_DESCRIPTION": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "説明",
+    "description": "Input text area for additional description of the signal"
+  },
+  "DASHBOARD_SIGNAL_COLOR": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "色",
+    "description": "Button used to pick the color of the signal"
+  },
+  "NAME": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "名前",
+    "description": "Signal's name"
+  },
+  "DASHBOARD_ADD_SIGNAL": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "加えます",
+    "description": "Button used to add a signal graph"
+  },
+  "DASHBOARD_LOW_COLOR": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "ロー色 ???? color",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_LOW_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "ロー値",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_MID_COLOR": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "ミディアム色(pot sa pun medium in loc de mid?)",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_MID_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "ミディアム値 (same)",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_HIGH_COLOR": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "ハイ色",
+    "description": "Button used to pick the color of the signal"
+  },
+  "DASHBOARD_MIN_AXES_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "最小値",
+    "description": "Input text area foar the minimum value of an axis"
+  },
+  "DASHBOARD_MAX_AXES_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "最大値",
+    "description": "Input text area foar the maximum value of an axis"
+  },
+  "DASHBOARD_KILOMETERS": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "キロメートル",
+    "description": "Unit of measure for speedometer and gauge"
+  },
+  "DASHBOARD_MILES": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "マイル",
+    "description": "Unit of measure for speedometer and gauge"
+  },
+  "DASHBOARD_MIN_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "最小軸値",
+    "description": "Input text area foar the minimum value of an axis"
+  },
+  "DASHBOARD_MAX_VALUE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "最大軸値",
+    "description": "Input text area foar the maximum value of an axis"
+  },
+  "DASHBOARD_AXIS_NAME": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "軸名",
+    "description": "Name of an axis"
+  },
+  "DASHBOARD_DELETE_TITLE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "信号を消します",
+    "description": "Title of confirmation prompt when the user tries to delete a signal"
+  },
+  "DASHBOARD_DELETE_QUESTION": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "この信号を消してもよろしいですか？",
+    "description": "Delete signal confirmation "
+  },
+  "DASHBOARD_NO_TITLE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "信号名をえらんでください。",
+    "description": "Notification text when the user didn't chose a name for the signal"
+  },
+  "EXTRA_GRAPH": {
+    "plugins": [
+      "dashboard.graph.extra"
+    ],
+    "message": "エキストラ",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDEXTRA": {
+    "plugins": [
+      "dashboard.graph.extra"
+    ],
+    "message": "エキストラ - 信号を足します",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "GAUGE_GRAPH": {
+    "plugins": [
+      "dashboard.graph.gauge"
+    ],
+    "message": "ゲージ",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDGAUGE": {
+    "plugins": [
+      "dashboard.graph.gauge"
+    ],
+    "message": "ゲージ - 信号を足します",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "LINE_GRAPH": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "ライン",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDLINE": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "ライン - 信号を足します",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "LINE_STYLE": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "様式",
+    "description": "The style of a line signal"
+  },
+  "LINE_HIDE_LEGEND": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "凡例を隠す",
+    "description": "Checkbox option to hide the legend of a graph"
+  },
+  "LINE_FIX_AXES_VALUES": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "軸の値を治します",
+    "description": "Checkbox option to fix the axis values for the line graph"
+  },
+  "LINE_LOGARITHMIC_AXES": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "対数軸",
+    "description": "Checkbox option to show logarithmic for the line graph"
+  },
+  "LINE_TIME_SERIES": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "時系列",
+    "description": "Checkbox option to show the time series for the line graph"
+  },
+  "LINE_SHOW_POINTS": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "ポイントを表示",
+    "description": "Checkbox option to show the points for the line graph"
+  },
+  "LINE_MAX_POINTS": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "表示する最大ポイント (0　はすべてを表示することを意味します)",
+    "description": "Input text area for the maximum points to show in a line graph"
+  },
+  "LINE_AXIS_NAME": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "軸名",
+    "description": "Name of the axis"
+  },
+  "LINE_OVERVIEW": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "概要を表示",
+    "description": "Checkbox option to show an overview for the line graph"
+  },
+  "LINE_SCROLLBAR": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "スクロール・バーを表示",
+    "description": "Checkbox option to show the scrollbar for the line graph"
+  },
+  "LINE_STEP": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "段",
+    "description": "Type of line graph"
+  },
+  "LINE_STRAIGHT": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "直線",
+    "description": "Type of line graph"
+  },
+  "LINE_SPLINE": {
+    "plugins": [
+      "dashboard.graph.line"
+    ],
+    "message": "スプライン",
+    "description": "Type of line graph"
+  },
+  "DASHBOARD_ADDSLIDER": {
+    "plugins": [
+      "dashboard.graph.slider"
+    ],
+    "message": "スライダー - 信号を足します",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "SLIDER_STEP": {
+    "plugins": [
+      "dashboard.graph.slider"
+    ],
+    "message": "段",
+    "description": "Type of slider"
+  },
+  "SLIDER_GRAPH": {
+    "plugins": [
+      "dashboard.graph.slider"
+    ],
+    "message": "スライダ",
+    "description": "Signal name"
+  },
+  "SPEEDOMETER_GRAPH": {
+    "plugins": [
+      "dashboard.graph.speedometer"
+    ],
+    "message": "スピードメーター",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDSPEEDOMETER": {
+    "plugins": [
+      "dashboard.graph.speedometer"
+    ],
+    "message": "スピードメーター - 信号を足します",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "SWITCH_GRAPH": {
+    "plugins": [
+      "dashboard.graph.switch"
+    ],
+    "message": "スイッチ",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDSWITCH": {
+    "plugins": [
+      "dashboard.graph.switch"
+    ],
+    "message": "スイッチ - 信号を足します",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "SWITCH_PUSH": {
+    "plugins": [
+      "dashboard.graph.switch"
+    ],
+    "message": "押す",
+    "description": "Checkbox used to push values"
+  },
+  "THERMOMETER_GRAPH": {
+    "plugins": [
+      "dashboard.graph.thermometer"
+    ],
+    "message": "温度計",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDTHERMOMETER": {
+    "plugins": [
+      "dashboard.graph.thermometer"
+    ],
+    "message": "温度計 - 信号を足します",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "VUMETER_GRAPH": {
+    "plugins": [
+      "dashboard.graph.vumeter"
+    ],
+    "message": "ヴューメーター",
+    "description": "Signal name"
+  },
+  "DASHBOARD_ADDVUMETER": {
+    "plugins": [
+      "dashboard.graph.vumeter"
+    ],
+    "message": "ヴューメーター - 信号を足します",
+    "description": "Title of the prompt used to add a new signal"
+  },
+  "DEVICE_RPK_RUN": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "実行します",
+    "description": "The run button for an application"
+  },
+  "DEVICE_FLASH_JAVASCRIPT": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "ジャバスクリプトをフラッシュします",
+    "description": "The flash javascript button for an application"
+  },
+  "DEVICE_RPK_STOP": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "止まります",
+    "description": "The stop button for an application"
+  },
+  "DEVICE_RPK_TASK_MANAGER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "タスクマネージャ",
+    "description": "The button for the task manager "
+  },
+  "DEVICE_RPK_PACKAGE_MANAGER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "パッケージマネージャー",
+    "description": "The button for the package manager "
+  },
+  "DEVICE_RPK_NETWORK_MANAGER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "ネットワークマネージャ",
+    "description": "The button for the network manager "
+  },
+  "DEVICE_RPK_STANDBY": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "スタンバイ",
+    "description": "The stand-by option in the disconnect menu."
+  },
+  "DEVICE_RPK_DISCONNECT": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "ディスコネクト",
+    "description": "The disconnect option in the disconnect menu"
+  },
+  "DEVICE_RPK_RESTART": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "リブートとディスコネクト",
+    "description": "The reboot and disconnect option in the disconnect menu"
+  },
+  "DEVICE_RPK_TURNOFF": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "パワーオフとディスコネクト",
+    "description": "The power off and disconnect option in the disconnect menu"
+  },
+  "DEVICE_RPK_ANOTHER_USER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "デバイスはすでに別のユーザーに接続されています。",
+    "description": "The notification message when another use is connected to the board and the board is busy"
+  },
+  "DEVICE_RPK_ERROR_BLE": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "失敗したデバイスを一覧表示する ({error}).",
+    "description": "The error shown when list devices for ble fails"
+  },
+  "DEVICE_WYAPP_RUN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "実行します",
+    "description": "The run button for an application"
+  },
+  "DEVICE_WYAPP_STOP": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "止まります",
+    "description": "The stop button for an application"
+  },
+  "DEVICE_WYAPP_TASK_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "タスクマネージャ",
+    "description": "The button for the task manager "
+  },
+  "DEVICE_WYAPP_PACKAGE_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "パッケージマネージャー",
+    "description": "The button for the package manager "
+  },
+  "DEVICE_WYAPP_NETWORK_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "ネットワークマネージャ",
+    "description": "The button for the network manager "
+  },
+  "DEVICE_WYAPP_DISCONNECT": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "ディスコネクト",
+    "description": "The disconnect option in the disconnect menu"
+  },
+  "DEVICE_WYAPP_RESTART": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "リブートとディスコネクト",
+    "description": "The reboot and disconnect option in the disconnect menu"
+  },
+  "DEVICE_WYAPP_TURNOFF": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "パワーオフとディスコネクト",
+    "description": "The power off and disconnect option in the disconnect menu"
+  },
+  "DEVICE_WYAPP_ANOTHER_USER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "デバイスはすでに別のユーザーに接続されています。",
+    "description": "The notification message when another use is connected to the board and the board is busy"
+  },
+  "DEVICE_WYAPP_SETTINGS": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "デバイスの設定",
+    "description": "Title of popup that contains details about the connected board"
+  },
+  "DEVICE_WYAPP_NAME": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "名前",
+    "description": "Name of connected board"
+  },
+  "DEVICE_WYAPP_VERSION": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "バージョン",
+    "description": "Supervisor verson"
+  },
+  "DEVICE_WYAPP_LIBWYLIODRIN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Ｗｙｌｉｏｄｒｉｎライブラリーのバージョン",
+    "description": "The used version of the Wyliodrin Library."
+  },
+  "DEVICE_WYAPP_OS": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "オペレーティング・システム",
+    "description": "Operating system on the board"
+  },
+  "DEVICE_WYAPP_LANGUAGES": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "言語",
+    "description": "Programming languages supported by the board"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_IP": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "ＩＰ",
+    "description": "IP Address for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_MASK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "マスク",
+    "description": "Mask for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "ブロードキャスト",
+    "description": "Broadcast for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "ハードウェアアドレス",
+    "description": "Hardware Address for the wired network"
+  },
+  "DEVICE_WYAPP_UNINSTALL": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "アンインストール",
+    "description": "Button to uninstall a package."
+  },
+  "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "装置名",
+    "description": "Name of the connected device"
+  },
+  "DEVICE_WYAPP_INSTALL": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "インストール",
+    "description": "Button to install a package."
+  },
+  "DEVICE_WYAPP_PACKAGE_INSTALL_ERROR": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "{language}パッケージ{packageName}のインストールに失敗しました。",
+    "description": "The error the users sees when a packages failes to install"
+  },
+  "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "{language}パッケージ{packageName}のアンインストールに失敗しました。",
+    "description": "The error the users sees when a packages failes to uninstall"
+  },
+  "DEVICE_WYAPP_PSK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "ネットワークパスワード",
+    "description": "The passphrase of a wireless network"
+  },
+  "DEVICE_WYAPP_CONNECT": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "コネクト",
+    "description": "The  network connect button"
+  },
+  "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "その他のネットワーク",
+    "description": "The option to connect to a network that is not displayed"
+  },
+  "DEVICE_WYAPP_REFRESH": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "リフレッシュ",
+    "description": "The option to refresh the file tree"
+  },
+  "DEVICE_WYAPP_FILE_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "ファイルマネージャ",
+    "description": "The option to refresh the file tree"
+  },
+  "DEVICE_WYAPP_SSID": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "ネットワーク名",
+    "description": "The SSID of a wireless network"
+  },
+  "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "プロジェクトを開いてください",
+    "description": "Notification text when there is no project selected"
+  },
+  "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "シリアルポートＷｙＡｐｐトランスポートをロードできません、 wyappを介したシリアルデバイスは使用できません (エラー: {{error}})",
+    "description": "The error message shown when the serial port library has an error while being loaded"
+  },
+  "DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "シリアルポートをリストできません (エラー: {error})",
+    "description": "The error message shown when there is an werror while listing the serial ports"
+  },
+  "DEVICE_SERIAL_PORT": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "シリアルポート",
+    "description": "Input text area for the port number of a serial device"
+  },
+  "DEVICE_SERIAL_BAUDRATE": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "ボーレート",
+    "description": "Input text area for the baud rate of a serial device"
+  },
+  "NETWORK_AUTHENTICATE_IP": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "ＩＰ",
+    "description": "Internet Protocol (IP)"
+  },
+  "NETWORK_PORT": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "ポート",
+    "description": "Number of port for the network connection"
+  },
+  "NETWORK_USERNAME": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "ユーザー名",
+    "description": "Input text area for the name of the user on the raspberry pi"
+  },
+  "NETWORK_PASSWORD": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "パスワード",
+    "description": "Input text area for the password of the user on the raspberry pi"
+  },
+  "NETWORK_SHOWPASSWORD": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "パスワードを表示します",
+    "description": "Switch use to make the password visible"
+  },
+  "DEVICE_CONNECT": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "コネクト",
+    "description": "Button used to connect to a device"
+  },
+  "DEVICE_SERIAL_OPTIONS": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "シリアル接続",
+    "description": "The title of the serial device options dialog"
+  },
+  "DEVICE_BAUDRATE": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "ボーレート",
+    "description": "The baud rate input of the serial port options dialog"
+  },
+  "NETWORK_CONNECTION": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "ネットワーク接続",
+    "description": "Title of the popup used to connect to a device"
+  },
+  "DEVICE_WYAPP_SSH_IP_ADDRESS": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "ＩＰアドレス",
+    "description": "The name of the pseudo device that allows the user the connect to any IP address"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "ウェブソケットデバイスサーバーに対して認証済み",
+    "description": "The notification the user sees when authetnicated with the devices server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "サーバーエラー: {error}",
+    "description": "The error notification the user sees with the error for the websocket server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "ウェブソケットデバイスサーバーからディスコネクトしました",
+    "description": "The notification the user sees when disconnected from the devices server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "ここでＳｔｕｄｉｏを使用します？",
+    "description": "The title of the question dialog the user sees when there is another connection with his id"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "ＩＤでサーバーに接続された別のＳｔｕｄｉｏインスタンスがあります。複数の接続を使用することはできません。ここでＳｔｕｄｉｏを使用しますか？",
+    "description": "The question dialog text the user sees when there is another instance connected with his id"
+  },
+  "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "デバイスを足します",
+    "description": "The title of the dialog with instructions on how to add a new device"
+  },
+  "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "装置名",
+    "description": "The name of the device with instructions on how to add a new device"
+  },
+  "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "有効なデバイス名を入力してください",
+    "description": "The message the user receives when he did not enter a valid name for a new device"
+  },
+  "DOCUMENTATION": {
+    "plugins": [
+      "documentation"
+    ],
+    "message": "文書化",
+    "description": "Open a new window with the documentation of Wyliodrin STUDIO"
   },
   "TOOLBAR_RESISTOR_COLOR_CODE": {
     "plugins": [
@@ -342,6 +1329,97 @@
     "message": "トレランス",
     "description": "Tolerance of the resistor"
   },
+  "SEND_FEEDBACK_TITLE": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "フィードバックを送ります",
+    "description": "Option in the Help Menu to send a feedback"
+  },
+  "SEND_FEEDBACK_MESSAGE": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "フィドバクを書きます",
+    "description": "Label of the input text area of the feedback"
+  },
+  "SEND_FEEDBACK_SEND": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "フィドバクを送ります",
+    "description": "Button used to send the feecback"
+  },
+  "FEEDBACK_SCREENSHOT_ERROR": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "ページのキャプチャ中にエラーが発生しました！ もう一度やり直してください。",
+    "description": "Notification that shows up when  the system can't take a screenshot"
+  },
+  "SEND_FEEDBACK_CANCEL": {
+    "plugins": [
+      "documentation.sendfeedback"
+    ],
+    "message": "キャンセル",
+    "description": "Button to close the feedback dialog"
+  },
+  "REAL_FS_DO_NOT_EXIST_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "指定されたファイルシステムが見つかりませんでした！ 有効なファイルシステムを使用してください",
+    "description": "This is the text of an error that shows up when the chosen filesystem is not valid."
+  },
+  "REAL_FS_ALREADY_REGISTERED_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "指定されたファイルシステムはすでに登録されています！",
+    "description": "This is the text of a warning when the chosen filesystem was registered before."
+  },
+  "REAL_FS_NO_DEF_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "デフォルトのファイルシステムはありません。ファイルシステムは登録されていますか？",
+    "description": "This is the text of an error displayed when there is no default filesystem registered."
+  },
+  "DATABASE": {
+    "plugins": [
+      "filesystem.web"
+    ],
+    "message": "データベース",
+    "description": "Name of the Database tab."
+  },
+  "WELCOME_TEXT": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "ＷｙｌｉｏｄｒｉｎSTUDIOへようこそ",
+    "description": "Welcome text"
+  },
+  "WELCOME_START_WORK": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "新しいアプリケーションの作成を開始したり、ボードをセットアップしたり、独自のプロジェクトをインポートしたりできます。",
+    "description": "Introduction message"
+  },
+  "WELCOME_CREATE_APP": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "新しいアプリケーションを作成します",
+    "description": "Button that will redirect the user to a popup where he can create new applicatons."
+  },
+  "WELCOME_CONNECT_BOARD": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "ボードを接続",
+    "description": "Button that will open a browser window with a documentation chapter regarding the setup of a Raspberry Pi board."
+  },
   "PROJECT_NOTEBOOK": {
     "plugins": [
       "notebook"
@@ -362,6 +1440,41 @@
     ],
     "message": "有効な画像を選んでください。",
     "description": "Notification error that shows up when the user didn't choose a file to load"
+  },
+  "NOTEBOOK_DELETE_ITEM_QUESTION": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "この要素を削除してもよろしいですか？",
+    "description": "Confirmation prompt which ensures that the user really wants to delete the current notebook element"
+  },
+  "NOTEBOOK_DELETE_ITEM_TITLE": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "要素を削除します",
+    "description": "Title of the delete confirmation prompt"
+  },
+  "NOTEBOOK_LOAD_DATA_ERROR": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "ノートブックのデータを読み込めません ({error})",
+    "description": "This error shwos up when notebook.json can't be parsed."
+  },
+  "NOTEBOOK_RESET_NOTEBOOK_TITLE": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "ノートブックをリセット",
+    "description": "Title of the reset confirmation prompt"
+  },
+  "NOTEBOOK_RESET_NOTEBOOK_QUESTION": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "ノートブックをリセットしてもよろしいですか？\nこのプロジェクトのすべてのメモが失われます。",
+    "description": "Confirmation prompt which ensures that the user really wants to reset the notebook"
   },
   "PIN_LAYOUT": {
     "plugins": [
@@ -440,13 +1553,6 @@
     "message": "",
     "description": "新しい名前"
   },
-  "PROJECT_SHOW_CODE": {
-    "plugins": [
-      "projects"
-    ],
-    "message": "コードを見せます",
-    "description": "Button designed to show the code behind a blockly"
-  },
   "PROJECT_HIDE_CONSOLE": {
     "plugins": [
       "projects"
@@ -524,6 +1630,356 @@
     "message": "例を載せ込みます",
     "description": "Load a project Example"
   },
+  "PROJECT_FOLDER_SURE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "このフォルダーを削除してもよろしいですか？",
+    "description": "Prompt asking for assurance on deleting a folder"
+  },
+  "PROJECT_IMPORT_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "インポートファイル",
+    "description": "Import a file within a project"
+  },
+  "PROJECT_EXPORT_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "エクスポートファイル",
+    "description": "Export a file from the project"
+  },
+  "PROJECT_FILE_SURE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "このファイルを削除してもよろしいですか？",
+    "description": "Prompt asking for assurance on deleting a file"
+  },
+  "PROJECT_DELETE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクトを削除します",
+    "description": "Label for the dialog to delete a project within the workspace"
+  },
+  "PROJECT_LOAD_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "ライブラリからプロジェクトをロードします",
+    "description": "Text meaning that there is no project loaded"
+  },
+  "PROJECT_PROJECT_SURE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "このプロジェクトを削除してもよろしいですか？",
+    "description": "Prompt asking for assuruance on deleting a project"
+  },
+  "PROJECT_LIBRARY": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクトライブラリ",
+    "description": "Opens the projects library"
+  },
+  "PROJECT_LIBRARY_NAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクト名",
+    "description": "Label for the name of the project"
+  },
+  "PROJECT_LIBRARY_NEW_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクトを作成します",
+    "description": "Create a project within the workspace"
+  },
+  "PROJECT_ERROR_LANGUAGE_ADDON": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "言語{language}のアドオンの登録に失敗しました",
+    "description": "The error message shown when a language addon fails to register"
+  },
+  "PROJECT_ERROR_REGISTER_EDITOR": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "名前{name}のエディターの登録エディターが既に登録されていません",
+    "description": "The error message shown when an edtitor fails to register"
+  },
+  "PROJECT_ERROR_LOAD_PROJECTS": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクトの読み込み中にエラーが発生しました ({error})",
+    "description": "The error message shown when the projects fail to load"
+  },
+  "PROJECT_ERROR_SELECT_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクト{project}の選択中にエラーが発生しました ({error})",
+    "description": " The error message shown when a project fails to be selected"
+  },
+  "PROJECT_ERROR_CREATE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクト{project}の作成中にエラーが発生しました ({error})",
+    "description": "The error message shown when a project fails to be created"
+  },
+  "PROJECT_ERROR_RENAME_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクト{project}の名前を{name}に変更中にエラーが発生しました ({error})",
+    "description": "The error message shown when a project fails to be renamed"
+  },
+  "PROJECT_ERROR_CLONE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクト{project}のクローン中にエラーが発生しました ({error})",
+    "description": "The error message shown when a project fails to be cloned"
+  },
+  "PROJECT_ERROR_DELETE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクト{project}の削除中にエラーが発生しました ({error})",
+    "description": "The error message shown when a project fails to be deleted"
+  },
+  "PROJECT_ERROR_IMPORT_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクト{project}のインポート中にエラーが発生しました ({error})",
+    "description": "The error message shown when a project fails to be imported"
+  },
+  "PROJECT_ERROR_EXPORT_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクト{project}のエクスポート中にエラーが発生しました ({error})",
+    "description": "The error message shown when a project fails to be exported"
+  },
+  "PROJECT_ERROR_NEW_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "新しいフォルダー{folder}の作成中にエラーが発生しました ({error})",
+    "description": "The error message shown when a folder fails to be created"
+  },
+  "PROJECT_ERROR_NEW_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "新しいファイル{file}の作成中にエラーが発生しました ({error})",
+    "description": "The error message shown when a file fails to be created"
+  },
+  "PROJECT_ERROR_RENAME_OBJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "オブジェクト{object}の名前を変更中にエラーが発生しました ({error})",
+    "description": "The error message shown when an object fails to be renamed"
+  },
+  "PROJECT_ERROR_DELETE_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "フォルダー{folder}の削除中にエラーが発生しました ({error})",
+    "description": "The error message shown when a folder fails to be deleted"
+  },
+  "PROJECT_ERROR_DELETE_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "ファイル{file}の削除中にエラーが発生しました ({error})",
+    "description": "The error message shown when a file fails to be deleted"
+  },
+  "PROJECTS_JSON_DO_NOT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "project．jsonを編集しようとしました。 これをしないでください。",
+    "description": "The error message when the user is trying to edit the project.json file of a project."
+  },
+  "PROJECT_ERROR_SAVE_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "ファイル{file}の保存中にエラーが発生しました　({error})",
+    "description": "The error message shown when a file fails to be saved"
+  },
+  "PROJECT_ERROR_LOAD_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "ファイル{file}の読み込み中にエラーが発生しました ({error})",
+    "description": "The error message shown when file fails to be loaded"
+  },
+  "PROJECT_ERROR_READ_DATA": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクト{project}のデータの読み取り中にエラーが発生しました ({error})",
+    "description": "The error message shown when there is an error reading the data for the project"
+  },
+  "PROJECT_ERROR_NOT_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクトフォルダー{project}はフォルダーではありません",
+    "description": "The error message shown when there is no folder"
+  },
+  "PROJECT_ERROR_SAVE_SPECIAL_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "データ付きの特殊ファイル{file}の保存中にエラーが発生しました ({error})",
+    "description": "The error message shown when a special settings file fails to be saved"
+  },
+  "PROJECT_ERROR_LOAD_SPECIAL_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "特殊ファイル{file}の読み込み中にエラーが発生しました ({error})",
+    "description": "The error message shown when a special settings file fails to be loaded"
+  },
+  "PROJECT_ERROR_SEND_CODE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "ファイルコード{file}の送信中にエラーが発生しました ({error})",
+    "description": "The error message shown when there is an error while sending the file code to the device"
+  },
+  "PROJECT_ERROR_PATH_INVALID": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "エラー、パスがワークスペースフォルダー内にありません",
+    "description": "The error message shown when the specified path is not in the workspace folder"
+  },
+  "PROJECT_ERROR_CHANGE_DATE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "エラー、日付{project}を書き込めません ({error})",
+    "description": "The error message shown when a date for a file fails to be written"
+  },
+  "PROJECT_JSON_DO_NOT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "project．jsonを編集しようとしました。 これをしないでください。",
+    "description": "The error message shown when there is an attempt at editing the project settings file"
+  },
+  "PROJECT_CLONE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクトをクローンします",
+    "description": "Label for the clone project dialog"
+  },
+  "PROJECT_RENAME_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクトの名前を変更します",
+    "description": "Label for the rename project dialog"
+  },
+  "PROJECT_NAME_PROMPT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "プロジェクトの名前を入力してください",
+    "description": "Label for the new name to be given to the project"
+  },
+  "PROJECT_LIBRARY_SEARCH": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "サーチ",
+    "description": "Label to search for projects"
+  },
+  "PROJECT_NULL": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "1つ以上のパラメーターがヌルです",
+    "description": "One or more of the funciton's parameters are null"
+  },
+  "PATH_NULL": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "パスがヌルです",
+    "description": "The given path turned out null"
+  },
+  "PROJECTS_NO_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "まだプロジェクトがありません",
+    "description": "Message displayed in the Projects Library when the list of projects is empty."
+  },
+  "PROJECTS_CREATE_APPLICATION": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "下の[新しいアプリケーションを作成]ボタンをクリックします ???",
+    "description": "Message displayed in the Projects Library when the list of projects is empty."
+  },
+  "PROJECTS_STORAGE_NOT_PERSISTENT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "ストレージシステムは永続的ではありません。これは、予告なしにプロジェクトがいつでも削除される可能性があることを意味します。これを回避するには、プロジェクトを頻繁にエクスポートしてください。",
+    "description": "The message the user sees in the Projects Library when persistent storage is not available. We recommend you to use Firefox."
+  },
+  "PROJECTS_STORAGE_ASK_PERSISTENT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "ストレージシステムは永続的ではありません。ストレージを永続化する許可を許可してください。",
+    "description": "The message the user sees in the Projects Library when persistent storage is available but not permitted."
+  },
+  "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "永続性を許可する",
+    "description": "The button the user clicks to ask persistance."
+  },
+  "PROJECTS_STORAGE_BROWSER_ERROR": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "持続性を許可するかどうかをブラウザが尋ねなかった場合、ブラウザに問題がある可能性があります。プロジェクトが失われないようにするには、このWebサイトをブックマークに追加し、より頻繁に使用して、プロジェクトを頻繁にエクスポートする必要があります。Firefoxを使用することもお勧めします。",
+    "description": "The message the user sees in the Projects Library when persistent storage is not available."
+  },
+  "EDITOR_VISUAL_SHOW_CODE": {
+    "plugins": [
+      "projects.editor.visual"
+    ],
+    "message": "コードを表示します",
+    "description": "Button designed to show the code behind a blockly"
+  },
+  "EDITOR_VISUAL_HIDE_CODE": {
+    "plugins": [
+      "projects.editor.visual"
+    ],
+    "message": "コードを非表示します",
+    "description": "Button designed to show the code behind a blockly"
+  },
   "SCHEMATICS": {
     "plugins": [
       "schematics"
@@ -558,5 +2014,26 @@
     ],
     "message": "消すの確認",
     "description": "The message that appears when there is no picture"
+  },
+  "SCHEMATICS_IMPORT": {
+    "plugins": [
+      "schematics"
+    ],
+    "message": "Fritzingから.svg回路図をインポートします",
+    "description": "The message that appears when there is no picture"
+  },
+  "PROJECT_SHELL": {
+    "plugins": [
+      "shell"
+    ],
+    "message": "シェル",
+    "description": "The Shell tab, opens a terminal"
+  },
+  "SHELL_NO_SHELL": {
+    "plugins": [
+      "shell"
+    ],
+    "message": "デバイスに接続してシェルを有効にします",
+    "description": "The text that is displayed when the shell is not enabled"
   }
 }
