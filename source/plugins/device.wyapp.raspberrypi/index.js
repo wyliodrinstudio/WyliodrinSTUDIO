@@ -20,7 +20,16 @@ export function setup (options, imports, register)
 		/* Register Pin Layout */
 		if (studio.pin_layout)
 		{
-			studio.pin_layout.registerPinLayout ('wyapp', 'raspberrypi', 'plugins/device.wyapp.raspberrypi/data/img/pins-raspberrypi.png');
+			studio.pin_layout.registerPinLayout ('wyapp', 'raspberrypi', (device) => {
+				if (device.properties.wyliolab)
+				{
+					return 'plugins/device.wyapp.raspberrypi/data/img/pins-wyliozero.png';
+				}
+				else
+				{
+					return 'plugins/device.wyapp.raspberrypi/data/img/pins-raspberrypi.png';
+				}
+			});
 		}
 		else
 		{

@@ -818,12 +818,13 @@ This tutorial will show you how to set up a Udoo Neo device.
 .. Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flashUdoo>` it. After that, you can simply insert the SD card into the Udoo Neo and your board should be visible within Wyliodrin STUDIO.
 
 .. |
+
 |
 
 Set up the board manually
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-However, you can also choose to configure the required image by yourself.
+You can choose to configure the required image by yourself.
 
 This will imply flashing an image with the OS (Ubuntu), installing the STUDIO Supervisor container and setting up some configuration files.
 

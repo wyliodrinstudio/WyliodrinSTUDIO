@@ -213,8 +213,8 @@ let projects = {
 	 * This function registers a new type of editor.
 	 * 
 	 * The editor has a *name*, which is a translatable string that will be dispayed as the 
-	 * title of the editor, *languages*, which represent the array with all the supported programming languages id's, 
-	 * and a Vue *component*, representing the actual content and design of the editor tab. 
+	 * title of the editor, *languages*, which represent the array with all the supported programming languages id's 
+	 * or file extensions, and a Vue *component*, representing the actual content and design of the editor tab. 
 	 * 
 	 * @param {string} name - the name/id of the editor
 	 * @param {string[]} languages - the editor languages
