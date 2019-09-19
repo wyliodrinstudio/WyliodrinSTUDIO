@@ -89,7 +89,7 @@ a:hover {text-decoration:underline;}
 
 .label {display: inline; font-size: 75%; font-weight: bold; line-height: 1; color: @color-white; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: .25em;}
 
-.c-status{position: fixed; left: 250px; top: 32px; font-size: 11px;}
+.c-status{position: fixed; left: 200px; top: 32px; font-size: 11px;}
 
 .window-control {
     display: block;
@@ -209,8 +209,9 @@ a:hover {text-decoration:underline;}
 }
 
 .connected-menu {margin-left: 45px; float: left; position: relative;
+	.connected-device-box {min-width: 90px; position: relative;}
 	.device-title {font-size: 18px; font-weight: 500; letter-spacing: 0.005em; display: inline; padding: 4px 20px 0 0px; min-width:100px; color:@color-white; margin-left: -5px;}
-	.device-port {font-size: 10px; position: absolute; left: -5px; top: 25px; color: @color-grey-2;}
+	.device-port {font-size: 10px; position: absolute; left: -5px; top: 25px; color: @color-grey-2; width: 100%; white-space: nowrap; overflow: hidden;	text-overflow: ellipsis;}
 	.v-btn {padding: 0 13px !important; margin-left: 5px !important;; border-radius: 3px !important;}
 	.run-bt {color: @color-grey-4 !important; background-color: transparent !important; text-transform:none; color: @color-white !important; min-width: 50px; border:@color-dark-3 solid 2px !important;}
 	.run-bt:hover {background:@color-connected !important; color:@color-white !important; border:@color-connected solid 2px !important;}
@@ -233,16 +234,18 @@ a:hover {text-decoration:underline;}
 .shell-box {-webkit-box-flex: 1; -webkit-flex: 1 0 100%; flex: 1 0 100%; min-width: 0;}
 
 .manager-box {
-	.v-card__text {padding: 0; overflow: hidden; color: @color-black; max-height: 55%; padding: 0 !important; min-height: 100px; overflow: auto;}
-	.v-window {overflow-y: auto; overflow-x: hidden; height: calc(~"100% - 55%") !important;}
+	.v-card__text {padding: 0; overflow: hidden; color: @color-black; max-height: 55vh; padding: 0 !important; min-height: 100px; overflow: auto;}
+	.v-window {overflow-y: auto; overflow-x: hidden; height: 45vh !important;}
 	.d-flex {align-items: center;}
 	.v-window__container { background: @color-white; height: 100% !important;}
 	.v-tab .v-image {height: 24px; width: 24px; margin-right: 5px;}
+	.v-btn__content {text-transform: capitalize;}
 }
 
 .theme--light.v-card .v-card__text {color: @color-black;}
 
-
+.lib-app-btn {background:@color-white; border:@color-grey-2 1px solid; font-size:12px; line-height: 28px; min-height: 28px; padding:0 10px; margin:auto !important; height: 30px !important; min-width: 80px !important;}
+.lib-app-btn:hover {background:@color-highlight; color:@color-white;	border:@color-highlight 1px solid;}
 
 .manager-search {font-weight: 300; color: @color-black; padding: 5px 10px 0 0 !important;
 	input{padding:4px 0 0px 0 !important;}
@@ -272,6 +275,10 @@ input {caret-color:@color-highlight !important;  }
 // 			   box-sizing: border-box; /* Opera/IE 8+ */
 // }
 
+.bottom-shell-box {height: calc(~"100% - 44px");
+	.xterm {height: 100% !important;}
+}
+
 .scroll-box {height:100%; overflow-y: scroll;}
 
 .input-container {justify-content: space-between;
@@ -285,7 +292,7 @@ input {caret-color:@color-highlight !important;  }
 .project-box-1 {width:calc(~"100% - 195px"); float: right;}
 .project-box-2 {width:100%;}
 
-.project-tree-on {width: 195px; display: inline-block; float: left; position: relative; background: @color-grey-1;}
+.project-tree-on {width: 195px; display: inline-block; float: left; position: relative; background: @color-white; height: 100% !important; height: calc(100vh - 160px) !important;}
 .project-tree-off {width: 0px; display: none; position: relative;}
 
 .fileexplorer-actions {
@@ -494,6 +501,10 @@ outline:none;
 
 }
 
+.lib-btn-box { position: relative;
+	.waiting-box {position: relative !important; height: 100%; width: 100%;}
+}
+
 /* Spinning circle */
 .v-progress-circular {position: absolute; margin: auto; left: 0; right: 0; top: 0; bottom: 0; color:@color-highlight;}
 
@@ -526,4 +537,8 @@ outline:none;
 	.newapp:hover {border: @color-highlight 2px solid; background: @color-highlight; color: @color-white; padding-left: 10px; padding-right: 10px;}
 }
 
-.v-card pre {border-color: @color-grey-2; background: @color-grey-1; opacity: 1; border: 1px solid #ced4da; border-radius: .25rem; padding: 5px;}
+.v-card pre {border-color: @color-grey-2; background: @color-grey-1; opacity: 1; border: 1px solid #ced4da; border-radius: .25rem; padding: 5px; overflow: auto;}
+
+.drpdown {margin-top: -8px;}
+
+.v-alert {max-height: 80vh; overflow-y:auto; }

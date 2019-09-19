@@ -18,8 +18,15 @@
 					v-model="tree"
 					:open="open"
 					:items="items"
-					item-key="name"
+					item-key="key"
+					activatable
+					@update:active="consoleLogIt(item)"
+					active-class=""
+					color="rgba(0,0,0,0.87)"
+					return-object
+					:active.sync="item"
 					:open-on-click="true"
+					dense
 					>
 					<template v-slot:prepend="{item, open}">
 						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
@@ -184,11 +191,20 @@
 			<!--  -->
 		</div>
 		<div :class="editorBox" class="hs-100">
-			<component v-if="currentEditor && currentFile" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
-			<p v-else-if="currentFile === null">The project has no files, create one</p>	
+			<component v-if="currentEditor && currentFile && verifyLanguage(currentProject)" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
+			<div v-else-if="!verifyLanguage(currentProject)" class="projects-msg">
+				{{$t('PROJECTS_INVALID_PROJECT')}}
+			</div>
+			<div v-else-if="currentFile === null" class="projects-msg">
+				{{$t('PROJECTS_NO_FILE')}}
+			</div>
+			<div v-else-if="currentEditor === null" class="projects-msg">
+				{{$t('PROJECTS_EXTENSION_URECOGNIZED')}}
+			</div>
+			
 		</div>
 	</div>
-	<div v-else>
+	<div v-else-if="currentProject === null">
 		<div class="projects-msg">
 			<v-btn @click="projectLibrary()">{{$t('PROJECT_LOAD_PROJECT')}}</v-btn>
 		</div>
@@ -225,19 +241,9 @@ export default {
 			showTree: this.advanced,
 
 			open: ['public'],
-			files: {
-				html: 'mdi_language_html5',
-				js: 'mdi_nodejs',
-				json: 'mdi_json',
-				md: 'mdi_markdown',
-				pdf: 'mdi_file_pdf',
-				png: 'mdi_file_image',
-				txt: 'mdi_file_document_outline',
-				xls: 'mdi_file_excel',
-				visual: 'mdi_file_visual'
-			},
 			tree: [],
 			items:[],
+			item:null,
 			type:null,
 			fileMenu: false,
 			folderMenu:false,
@@ -246,6 +252,7 @@ export default {
 			y: 0,
 			showConsole: false,
 			baseFileIcon:'plugins/projects/data/img/icons/file.png',
+			baseFolderIcon:'plugins/projects/data/img/icons/folder.png',
 		};
 	},
 	computed: {
@@ -286,9 +293,9 @@ export default {
 				let extension = path.extname (this.currentFile).substring (1);
 				for (let editor of this.editors) {
 					for (let lang of editor.languages) {
-						if( lang === 'js' ){
-							baseEditor = editor.component;
-						}
+						// if( lang === 'js' ){
+						// 	baseEditor = editor.component;
+						// }
 						if (lang === extension) {
 							return editor.component;
 						}
@@ -340,81 +347,125 @@ export default {
 		}
 	},
 	methods: {
+		consoleLogIt(item){
+			console.log('this ios the item');
+			console.log(item);
+		},
+		verifyLanguage(project) {
+			let language = this.studio.projects.getLanguage(this.currentProject.language);
+			if(language){
+				return true;
+			} else return false;
+		},
 		languageImage ()
 		{
 			// TODO check if language is known, not only that it exists
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
-			let addons = language.addons;
+			let addons = null;
+			if(language){
+				addons = language.addons;
+			}	
 			let device = this.studio.workspace.getDevice ();
 			let type = device.type;
 			let board = device.board;
-			if(type !== 'none' && board !== 'none' && addons[type + ':' + board] && addons[type + ':' + board].icon) {
-				return addons[type + ':' + board].icon;
-			} else if (addons && board !== 'none' && addons['*:' + board] && addons['*:' + board].icon) {
-				return addons['*:' + board].icon;
-			} else if (addons && type !== 'none' && addons[type + ':*'] && addons[type + ':*'].icon) {
-				return addons[type + ':*'].icon;
-			} else if (this.currentProject.language && type === 'none' && board === 'none' ){
-				return language.icon;
-			} else return 'unknown';
+			let icon = null;
+			if(addons) {
+				if(type !== 'none' && board !== 'none' && addons[type + ':' + board]) {
+					icon = addons[type + ':' + board].icon;
+				}
+				if (!icon && addons && board !== 'none' && addons['*:' + board]) {
+					icon = addons['*:' + board].icon;
+				}
+				if (!icon && addons && type !== 'none' && addons[type + ':*']) {
+					icon = addons[type + ':*'].icon;
+				}
+				if(!icon && type !== 'none' && board !== 'none' && addons[type + ':' + board]) {
+					icon = language.icon;
+				}
+				if(!icon && addons && board !== 'none' && addons['*:' + board]) {
+					icon = language.icon;
+				}
+				if(!icon && addons && type !== 'none' && addons[type + ':*']) {
+					icon = language.icon;
+				}
+			}	
+			if (!icon && language){
+				icon = language.icon;
+			}
+			if(!icon) {
+				icon = this.baseFolderIcon;
+			}
+			return icon;
 		},
 		getPictogram(filename)
 		{
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
-			let addons = language.addons;
-			let pictograms = language.pictograms;
+			let addons = null;
+			let pictograms = [];
+			if(language){
+				addons = language.addons;
+			} 
 			
 			let ext = path.extname(filename).toLowerCase();
 			let device = this.studio.workspace.getDevice ();
 			let type = device.type;
 			let board = device.board;
-			if(type !== 'none' && board !== 'none' && addons[type + ':' + board]) {
-				let addonPictograms = addons[type + ':' + board].pictograms;
-				if(addonPictograms && addonPictograms.length > 0) {
-					for( let pict of addonPictograms) {
-						if(pict.extension && ext === pict.extension) {
-							return pict.icon;
-						} else if(pict.filename && filename.match(pict.filename)) {
-							return pict.icon;
+			let pictogram = null;
+			if(language) {
+				pictograms = language.pictograms;
+				if(type !== 'none' && board !== 'none' && addons[type + ':' + board] !== undefined) {
+					let addonPictograms = addons[type + ':' + board].pictograms;
+					if(!pictogram && addonPictograms && addonPictograms.length > 0) {
+						for(let pict of addonPictograms) {
+							if(pict.extension && ext === pict.extension) {
+								pictogram = pict.icon;
+							} else if(pict.filename && filename.match(pict.filename)) {
+								pictogram = pict.icon;
+							}
 						}
 					}
-				}
-				
-			} else if (addons && board !== 'none' && addons['*:' + board]) {
-				let addonPictograms = addons['*:' + board].pictograms;
-				if(addonPictograms && addonPictograms.length > 0) {
-					for( let pict of addonPictograms) {
-						if(pict.extension && ext === pict.extension) {
-							return pict.icon;
-						} else if(pict.filename && filename.match(pict.filename)) {
-							
-							return pict.icon;
-						}
-					}
-				}
-			} else if (addons && type !== 'none' && addons[type + ':*']) {
-				let addonPictograms = addons[type + ':*'].pictograms;
-				if(addonPictograms && addonPictograms.length > 0) {
-					for( let pict of addonPictograms) {
-						if(pict.extension && ext === pict.extension) {
-							return pict.icon;
-						} else if(pict.filename && filename.match(pict.filename)) {
 					
-							return pict.icon;
+				}
+				if (!pictogram && board !== 'none' && addons['*:' + board] !== undefined) {
+					let addonPictograms = addons['*:' + board].pictograms;
+					if(addonPictograms && addonPictograms.length > 0) {
+						for( let pict of addonPictograms) {
+							if(pict.extension && ext === pict.extension) {
+								pictogram = pict.icon;
+							} else if(pict.filename && filename.match(pict.filename)) {
+								pictogram = pict.icon;
+							}
 						}
 					}
 				}
-			} else if(type === 'none' && board === 'none') {
-				if(pictograms && pictograms.length > 0) {
-					for( let pict of pictograms) {
-						if(pict.extension && ext === pict.extension) {
-							return pict.icon;
-						} else if(pict.filename && filename.match(pict.filename)) {
-							return pict.icon;
+				if (!pictogram && type !== 'none' && addons[type + ':*'] !== undefined) {
+					let addonPictograms = addons[type + ':*'].pictograms;
+					if(addonPictograms && addonPictograms.length > 0) {
+						for( let pict of addonPictograms) {
+							if(pict.extension && ext === pict.extension) {
+								pictogram = pict.icon;
+							} else if(pict.filename && filename.match(pict.filename)) {
+						
+								pictogram = pict.icon;
+							}
 						}
 					}
 				}
-			}
+				if(!pictogram || (type === 'none' && board === 'none' && !pictogram)) {
+					if(pictograms && pictograms.length > 0) {
+						for( let pict of pictograms) {
+							if(pict.extension && ext === pict.extension) {
+								pictogram = pict.icon;
+							} else if(pict.filename && filename.match(pict.filename)) {
+								pictogram = pict.icon;
+							}
+						}
+					}
+				}
+				if(pictogram) {
+					return pictogram;
+				}
+			} 
 			return this.baseFileIcon;
 			
 		},
@@ -492,13 +543,13 @@ export default {
 				let root = [{
 					name:path.basename(filename),
 					children:files,
-					path:filename.replace(this.currentProject.folder, '')
+					path:filename.replace(this.currentProject.folder, ''),
+					key:path.basename(filename)+filename.replace(this.currentProject.folder, '')+'folder'
 				}];
 				
 				
 				this.items = root;
 				this.previous = this.items;
-				console.log(this.items);
 			}
 		},
 		async newFolder (item)
@@ -647,6 +698,29 @@ background: url('plugins/projects/data/img/icons/32px.png') no-repeat -32px 0px 
 	width: 32px;
 	height: 32x;
 }
-
+.v-treeview-node__content {
+	width:100% !important;
+	min-height:40px !important;
+	padding-left: 0px !important;
+	padding-right:0px !important;
+}
+.v-treeview-node__root {
+	width:100% !important;
+	min-height:40px !important;
+	padding-left: 0px !important;
+	padding-right:0px !important;
+}
+.v-treeview--dense .v-treeview-node__root {
+	width:100% !important;
+}
+.v-treeview-node--leaf>.v-treeview-node__root {
+	padding-left: 0px !important;
+	padding-right:0px !important;
+}
+.v-treeview-node__root .v-treeview-node--active .primary--text {
+	width:100% !important;
+	min-height:40px !important;
+	padding-left: 0px !important;
+	padding-right:0px !important;
+}
 </style>
-

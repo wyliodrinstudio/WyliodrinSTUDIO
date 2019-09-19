@@ -9,7 +9,7 @@ import _ from 'lodash';
 
 export default {
 	name: 'AceEditor',
-	props: ['project', 'filename'],
+	props: ['project', 'filename','active'],
 	data () {
 		return {
 			source: '',
@@ -32,6 +32,8 @@ export default {
 
 			require('brace/worker/javascript');
 
+			require('brace/mode/markdown');
+			require('brace/mode/text');
 			require('brace/mode/sh');                
 			require('brace/mode/python');    //language
 			require('brace/mode/javascript');    //language
@@ -44,6 +46,7 @@ export default {
 			require('brace/theme/chrome');
 			require('brace/theme/monokai');
 			
+			require('brace/snippets/markdown');
 			require('brace/snippets/python'); //snippet
 			require('brace/snippets/javascript'); //snippet
 			require('brace/snippets/makefile'); //snippet
@@ -71,8 +74,18 @@ export default {
 						this.sourceLanguage = 'makefile';
 					}
 					else
-					switch (path.extname (this.filename))
+					switch (path.extname (this.filename).toLowerCase())
 					{
+						case '.md':
+						{
+							this.sourceLanguage = 'markdown';
+							break;
+						}
+						case '.txt':
+						{
+							this.sourceLanguage = 'text';
+							break;
+						}
 						case '.py':
 						{
 							this.sourceLanguage = 'python';

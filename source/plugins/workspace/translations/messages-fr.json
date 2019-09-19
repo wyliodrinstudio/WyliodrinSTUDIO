@@ -118,5 +118,25 @@
     "WORKSPACE_DEVICE_SETUP": {
         "message": "Configuration du périphérique",
         "description": "The devices setup button for the setup website"
+    },
+    "WORKSPACE_STATUS_CONNECTED": {
+        "message": "CONNECTÉ",
+        "description": "Status of a device that is connected."
+    },
+    "WORKSPACE_STATUS_SYNCHRONIZING": {
+        "message": "SYNCHRONISATION",
+        "description": "Status of a device that is synchronizing."
+    },
+    "WORKSPACE_STATUS_CONNECTING": {
+        "message": "EN COURS DE CONNEXION",
+        "description": "Status of a device that is connecting."
+    },
+    "WORKSPACE_STATUS_ERROR": {
+        "message": "ERREUR",
+        "description": "Status of a device that has an error."
+    },
+    "WORKSPACE_TOOLBAR_CLOSE": {
+        "message": "Fermer",
+        "description": "Close button"
     }
 }

@@ -1,7 +1,7 @@
 <template>
 	<div v-if="!offline">
 		<div class="connected-menu">
-			<div class="left" @click.stop="settings">
+			<div class="left connected-device-box" @click.stop="settings">
 				<span class="device-title">{{device.name}}</span>
 				<span class="device-port">{{device.address}}</span>
 				<div class="device">

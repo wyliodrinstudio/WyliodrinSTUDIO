@@ -620,11 +620,103 @@ For example, if you want to register a *raspberry pi* board, you should use this
 How to write an editor plugin
 ********************************
 
-The purpose of an editor plugin is to create a code editor, which is correlated to our *"projects"* plugin.
+The purpose of an editor plugin is to create a code editor, correlated to our *"projects"* plugin. The editor will allow the user to open different type of files created or imported within the tree structure of a project.
 
-The name of the editor plugins should be **projects.editor.**, followed by the name of the editor. 
+If you are creating an editor plugin, we recommend you to name the folder **"projects.editor."**, followed by the name of your editor.
 
-First, you need to create the **views** folder, where your **.vue** files will be included. Inside the *EditorAce.vue* file, you will have to create an **editor** tag, which is actually an imported module, installed as *'vue2-ace-editor'*. The editor will be dynamically updated according to the changes that are made in the code. An *initEditor* function is required here at initialization, to import the modes, themes and snippets supported by your editor. The mode will be updated according to the programming language, marked by the type/extension of the file.
+For example, in this tutorial we will create an *awesome* editor, that will display the content of the files having the *.aws* extension.
+
+The first step is to create the **package.json** file, which will have the classic structure:
+
+.. code-block:: json
+
+	{
+	    "name": "projects.editor.awesome",
+	    "version": "0.0.1",
+	    "main": "index.js",
+	    "private": true,
+	    "plugin": {
+	        "consumes": ["workspace","projects"],
+	        "provides": [],
+	        "target": ["electron", "browser"]
+	    }
+	}
+
+In this example, the editor will use functions only from the "workspace" and "projects" plugins, but you are free to "consume" any other plugin required by your editor.
+
+After that, wi will add the **views** folder, where you will design the Vue components for your editor, in this example **AwesomeEditor.vue**.
+In the *template* section, you will actually add the tags required by the code editor, while in the *script* part you will handle the functions that your editor will perform in order to display the content of the supported files.
+
+::
+
+	<template>
+		<!-- Here goes the design of your editor -->
+	</template>
+
+.. code-block:: javascript
+
+	/* <script> */
+	
+	import path from 'path';
+
+	export default {
+		name: 'AwesomeEditor',
+
+		/* We pass the 'project' (path to the current project) and 'filename' (name of the opened file, including extension)
+		  in order to read the content of the file and handle it depending on the type of extension
+		*/
+		props: ['project', 'filename'], 
+		data() {
+			return {
+				/* All the variables you will use in the template section */
+			}
+		},
+		methods: {
+			/* Code of all the function you will use in the template section */
+		},
+		watch:
+		{
+			filename:
+			{
+				immediate: true,
+				async handler()
+				{
+					/* Full path to the current file */
+					let filePath = path.join(this.project.folder, this.filename);
+
+					/*Extension of the current file */
+					let extension = this.filename.substring(this.filename.lastIndexOf('.')).substring(1);
+
+					/* Get the content of the current file */
+
+					let content = await this.studio.filesystem.readFile(filePath);
+
+					/* Here goes the code for your file editor */
+					
+				}
+			}
+		}
+
+	}
+	/* </script> */
+
+The final step is to create the **index.js** file, where you will register your editor. The structure of this file should look like this:
+
+.. code-block:: javascript
+
+	import AwesomeEditor from './views/AwesomeEditor.vue';
+
+	export default function setup (options, imports, register)
+	{
+		const studio = imports;
+		studio.projects.registerEditor('EDITOR_AWESOME',['aws'], AwesomeEditor);
+		
+		register (null, {});
+	}
+
+The *AwesomeEditor* is registered using the **registerEditor** function:
+
+.. autofunction:: registerEditor
 
 |
 

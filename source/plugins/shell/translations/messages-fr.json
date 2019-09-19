@@ -2,5 +2,9 @@
     "PROJECT_SHELL": {
         "message": "Shell",
         "description": "The Shell tab, opens a terminal"
+    },
+    "SHELL_NO_SHELL": {
+        "message": "Connectez un périphérique pour activer le shell",
+        "description": "The text that is displayed when the shell is not enabled"
     }
 }

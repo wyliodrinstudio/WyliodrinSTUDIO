@@ -213,8 +213,8 @@ let projects = {
 	 * This function registers a new type of editor.
 	 * 
 	 * The editor has a *name*, which is a translatable string that will be dispayed as the 
-	 * title of the editor, *languages*, which represent the array with all the supported programming languages id's, 
-	 * and a Vue *component*, representing the actual content and design of the editor tab. 
+	 * title of the editor, *languages*, which represent the array with all the supported programming languages id's 
+	 * or file extensions, and a Vue *component*, representing the actual content and design of the editor tab. 
 	 * 
 	 * @param {string} name - the name/id of the editor
 	 * @param {string[]} languages - the editor languages
@@ -680,7 +680,6 @@ let projects = {
 					let children = [];
 					let child1;
 					if (infos) {
-						console.log(infos);
 						for (let child of infos) {
 							child1 = await this.recursiveGeneration(project,
 								{
@@ -698,7 +697,7 @@ let projects = {
 						name: file.file,
 						children: children,
 						path: pathTo,
-						priority:0
+						key:file.file+pathTo+'folder'
 					};
 				} else {
 					pathTo = fullPath.replace(project.folder, '');
@@ -706,7 +705,7 @@ let projects = {
 						name: file.file,
 						file: path.extname(fullPath).slice(1),
 						path: pathTo,
-						priority:1
+						key:file.file+pathTo+'file'
 					};
 				}
 				return fileInfo;

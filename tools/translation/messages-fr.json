@@ -125,12 +125,138 @@
     "message": "Sortie",
     "description": "A button with the text exit"
   },
+  "WORKSPACE_DOCUMENTATION": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Documentation",
+    "description": "Open a new window with the documentation of Wyliodrin STUDIO"
+  },
+  "WORKSPACE_SET_MODE_ADVANCED": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Mode Avancé",
+    "description": "The menu to set the editor in advanced mode"
+  },
+  "WORKSPACE_SET_MODE_SIMPLE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Mode Simple",
+    "description": "The menu to set the editor in simple mode"
+  },
+  "ABOUT_DEVELOPED_BY": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Développé par",
+    "description": "Text for authors of Wyliodrin Studio"
+  },
+  "ABOUT_MAINTAINER": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Mainteneur",
+    "description": "Maintainer of Wyliodrin Studio"
+  },
+  "ABOUT_UI_UX": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "UI/UX",
+    "description": "User Interface for Wyliodrin Studio"
+  },
+  "ABOUT_DEVELOPMENT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Développeur",
+    "description": "Contributor to Wylidron Studio Development"
+  },
+  "ABOUT_LICENSE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "License",
+    "description": "Button to show the license"
+  },
+  "ABOUT_LICENSE_TITLE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Licence d'utilisation",
+    "description": "Title of the license popup"
+  },
+  "ABOUT_PROVIDED_BY": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Fourni par",
+    "description": "Provider of Wyliodrin STUDIO"
+  },
+  "WORKSPACE_DEVICE_SETUP_TEXT": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Vous voudrez peut-être configurer certains appareils. Pour plus d'informations, consultez notre site Web de tutoriels.",
+    "description": "The message the user gets if there are no devices available in the connection selection"
+  },
+  "WORKSPACE_DEVICE_SETUP": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Configuration du périphérique",
+    "description": "The devices setup button for the setup website"
+  },
+  "WORKSPACE_STATUS_CONNECTED": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "CONNECTÉ",
+    "description": "Status of a device that is connected."
+  },
+  "WORKSPACE_STATUS_SYNCHRONIZING": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "SYNCHRONISATION",
+    "description": "Status of a device that is synchronizing."
+  },
+  "WORKSPACE_STATUS_CONNECTING": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "EN COURS DE CONNEXION",
+    "description": "Status of a device that is connecting."
+  },
+  "WORKSPACE_STATUS_ERROR": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "ERREUR",
+    "description": "Status of a device that has an error."
+  },
+  "WORKSPACE_TOOLBAR_CLOSE": {
+    "plugins": [
+      "workspace"
+    ],
+    "message": "Fermer",
+    "description": "Close button"
+  },
   "CHAT": {
     "plugins": [
       "chat"
     ],
     "message": "CHAT",
     "description": "The Chat tab"
+  },
+  "CHAT_CHANNEL": {
+    "plugins": [
+      "chat"
+    ],
+    "message": "Channel",
+    "description": "A chat channel"
   },
   "CHAT_JOIN_CHANNEL": {
     "plugins": [
@@ -264,6 +390,20 @@
     ],
     "message": "Entrer",
     "description": "The login button"
+  },
+  "CONSOLE": {
+    "plugins": [
+      "console"
+    ],
+    "message": "Console",
+    "description": "The console name that is displayed in the status button"
+  },
+  "CONSOLE_NO_SHELL": {
+    "plugins": [
+      "console"
+    ],
+    "message": "Exécuter un projet pour activer la console",
+    "description": "The text that is displayed when the console is not enabled"
   },
   "PROJECT_DASHBOARD": {
     "plugins": [
@@ -418,6 +558,34 @@
     ],
     "message": "Valeur maximale",
     "description": "Input text area foar the maximum value of an axis"
+  },
+  "DASHBOARD_DELETE_TITLE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Supprimer un signal",
+    "description": "Title of confirmation prompt when the user tries to delete a signal"
+  },
+  "DASHBOARD_DELETE_QUESTION": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Êtes-vous sûr de vouloir supprimer ce signal?",
+    "description": "Delete signal confirmation "
+  },
+  "DASHBOARD_NO_TITLE": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Veuillez choisir un nom pour le signal.",
+    "description": "Notification text when the user didn't chose a name for the signal"
+  },
+  "DASHBOARD_AXIS_NAME": {
+    "plugins": [
+      "dashboard"
+    ],
+    "message": "Nom de l'axe",
+    "description": "Name of an axis"
   },
   "EXTRA_GRAPH": {
     "plugins": [
@@ -692,6 +860,34 @@
     "message": "Arrêter et Déconnecter",
     "description": "The power off and disconnect option in the disconnect menu"
   },
+  "DEVICE_FLASH_JAVASCRIPT": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Flash Javascript",
+    "description": "The flash javascript button for an application"
+  },
+  "DEVICE_RPK_STANDBY": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Stand-by",
+    "description": "The stand-by option in the disconnect menu."
+  },
+  "DEVICE_RPK_ANOTHER_USER": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "L'appareil est déjà connecté à un autre utilisateur.",
+    "description": "The notification message when another use is connected to the board and the board is busy"
+  },
+  "DEVICE_RPK_ERROR_BLE": {
+    "plugins": [
+      "device.rpk"
+    ],
+    "message": "Impossible de lister les périphériques ({error}).",
+    "description": "The error shown when list devices for ble fails"
+  },
   "DEVICE_WYAPP_RUN": {
     "plugins": [
       "device.wyapp"
@@ -790,6 +986,153 @@
     "message": "Langages",
     "description": "Programming languages supported by the board"
   },
+  "DEVICE_WYAPP_SSID": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Nom de réseau",
+    "description": "The SSID of a wireless network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_IP": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "IP",
+    "description": "IP Address for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_MASK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Masque",
+    "description": "Mask for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Broadcast",
+    "description": "Broadcast for the wired network"
+  },
+  "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Adresse Matérielle",
+    "description": "Hardware Address for the wired network"
+  },
+  "DEVICE_WYAPP_UNINSTALL": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Désinstaller",
+    "description": "Button to uninstall a package."
+  },
+  "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Nom de l'appareil",
+    "description": "Name of the connected device"
+  },
+  "DEVICE_WYAPP_INSTALL": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Installer",
+    "description": "Button to install a package."
+  },
+  "DEVICE_WYAPP_PACKAGE_INSTALL_ERROR": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Impossible d'installer le paquet {packageName} pour {language}.",
+    "description": "The error the users sees when a packages failes to install"
+  },
+  "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Impossible de désinstaller le paquet {packageName} pour {language}.",
+    "description": "The error the users sees when a packages failes to uninstall"
+  },
+  "DEVICE_WYAPP_PSK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Phrase de passe du réseau",
+    "description": "The passphrase of a wireless network"
+  },
+  "DEVICE_WYAPP_CONNECT": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Connecter",
+    "description": "The  network connect button"
+  },
+  "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Autre réseau",
+    "description": "The option to connect to a network that is not displayed"
+  },
+  "DEVICE_WYAPP_REFRESH": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Actualiser",
+    "description": "The option to refresh the file tree"
+  },
+  "DEVICE_WYAPP_FILE_MANAGER": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Gestionnaire de fichiers",
+    "description": "The option to refresh the file tree"
+  },
+  "DEVICE_WYAPP_LIBWYLIODRIN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Version de Wyliodrin Library",
+    "description": "The used version of the Wyliodrin Library."
+  },
+  "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
+    "plugins": [
+      "device.wyapp"
+    ],
+    "message": "Veuillez ouvrir un projet.",
+    "description": "Notification text when there is no project selected"
+  },
+  "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Impossible de charger SerialPort WyApp Transport, les périphériques série sur wyapp ne seront pas disponibles (error: {{error}})",
+    "description": "The error message shown when the serial port library has an error while being loaded"
+  },
+  "DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Impossible de lister les ports série (error: {error})",
+    "description": "The error message shown when there is an werror while listing the serial ports"
+  },
+  "DEVICE_SERIAL_PORT": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Port Série",
+    "description": "Input text area for the port number of a serial device"
+  },
+  "DEVICE_SERIAL_BAUDRATE": {
+    "plugins": [
+      "device.wyapp.serial"
+    ],
+    "message": "Débit en bauds",
+    "description": "Input text area for the baud rate of a serial device"
+  },
   "NETWORK_AUTHENTICATE_IP": {
     "plugins": [
       "device.wyapp.ssh"
@@ -852,6 +1195,76 @@
     ],
     "message": "Connection à l'adresse",
     "description": "Title of the popup used to connect to a device"
+  },
+  "DEVICE_WYAPP_SSH_IP_ADDRESS": {
+    "plugins": [
+      "device.wyapp.ssh"
+    ],
+    "message": "Adresse IP",
+    "description": "The name of the pseudo device that allows the user the connect to any IP address"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Authentifié auprès du serveur de périphériques",
+    "description": "The notification the user sees when authetnicated with the devices server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Erreur du serveur: {error}",
+    "description": "The error notification the user sees with the error for the websocket server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Déconnecté du serveur de périphériques ",
+    "description": "The notification the user sees when disconnected from the devices server"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Utiliser Studio ici?",
+    "description": "The title of the question dialog the user sees when there is another connection with his id"
+  },
+  "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Une autre instance de Studio est connectée au serveur avec votre identifiant. Vous ne pouvez pas utiliser plusieurs connexions. Voulez-vous utiliser Studio ici?",
+    "description": "The question dialog text the user sees when there is another instance connected with his id"
+  },
+  "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Ajouter un périphérique",
+    "description": "The title of the dialog with instructions on how to add a new device"
+  },
+  "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Nom du périphérique",
+    "description": "The name of the device with instructions on how to add a new device"
+  },
+  "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
+    "plugins": [
+      "device.wyapp.websocket"
+    ],
+    "message": "Veuillez entrer un nom de périphérique valide",
+    "description": "The message the user receives when he did not enter a valid name for a new device"
+  },
+  "DOCUMENTATION": {
+    "plugins": [
+      "documentation"
+    ],
+    "message": "Documentation",
+    "description": "Open a new window with the documentation of Wyliodrin STUDIO"
   },
   "TOOLBAR_RESISTOR_COLOR_CODE": {
     "plugins": [
@@ -958,6 +1371,62 @@
     "message": "Annuler",
     "description": "Button to close the feedback dialog"
   },
+  "REAL_FS_DO_NOT_EXIST_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "Le système de fichiers donné est introuvable! Veuillez utiliser un système de fichiers valide.",
+    "description": "This is the text of an error that shows up when the chosen filesystem is not valid."
+  },
+  "REAL_FS_ALREADY_REGISTERED_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "Le système de fichiers donné est déjà enregistré!",
+    "description": "This is the text of a warning when the chosen filesystem was registered before."
+  },
+  "REAL_FS_NO_DEF_FS": {
+    "plugins": [
+      "filesystem"
+    ],
+    "message": "Aucun système de fichiers par défaut, y a-t-il un système de fichiers enregistré?",
+    "description": "This is the text of an error displayed when there is no default filesystem registered."
+  },
+  "DATABASE": {
+    "plugins": [
+      "filesystem.web"
+    ],
+    "message": "BASE DE DONNÉES",
+    "description": "Name of the Database tab."
+  },
+  "WELCOME_TEXT": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "Bienvenu à Wyliodrin STUDIO",
+    "description": "Welcome text"
+  },
+  "WELCOME_START_WORK": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "Vous pouvez commencer à créer de nouvelles applications, à configurer et à connecter des cartes ou à importer vos propres projets..",
+    "description": "Introduction message"
+  },
+  "WELCOME_CREATE_APP": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "Créer une nouvelle application",
+    "description": "Button that will redirect the user to a popup where he can create new applicatons."
+  },
+  "WELCOME_CONNECT_BOARD": {
+    "plugins": [
+      "first.run"
+    ],
+    "message": "Connecter une carte",
+    "description": "Button that will open a browser window with a documentation chapter regarding the setup of a Raspberry Pi board."
+  },
   "PROJECT_NOTEBOOK": {
     "plugins": [
       "notebook"
@@ -999,6 +1468,20 @@
     ],
     "message": "Impossible de charger les notes.",
     "description": "This error shwos up when notebook.json can't be parsed."
+  },
+  "NOTEBOOK_RESET_NOTEBOOK_TITLE": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "Réinitialiser le Notebook",
+    "description": "Title of the reset confirmation prompt"
+  },
+  "NOTEBOOK_RESET_NOTEBOOK_QUESTION": {
+    "plugins": [
+      "notebook"
+    ],
+    "message": "Voulez-vous vraiment réinitialiser le Notebook? Vous allez perdre toutes les notes pour ce projet.",
+    "description": "Confirmation prompt which ensures that the user really wants to reset the notebook"
   },
   "PIN_LAYOUT": {
     "plugins": [
@@ -1105,6 +1588,426 @@
     "message": "Bibliothèque de projets",
     "description": "Opens the projects library"
   },
+  "PROJECTS_NO_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Vous n'avez pas encore de projets.",
+    "description": "Message displayed in the Projects Library when the list of projects is empty."
+  },
+  "PROJECTS_CREATE_APPLICATION": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Cliquez sur le bouton \"Créer une nouvelle application\" ci-dessous",
+    "description": "Message displayed in the Projects Library when the list of projects is empty."
+  },
+  "PROJECTS_STORAGE_NOT_PERSISTENT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Le système de stockage n'est pas persistant. Cela signifie que vos projets peuvent être supprimés à tout moment sans préavis. Pour éviter cela, exportez fréquemment vos projets.",
+    "description": "The message the user sees in the Projects Library when persistent storage is not available. We recommend you to use Firefox."
+  },
+  "PROJECTS_STORAGE_ASK_PERSISTENT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Le système de stockage n'est pas persistant. Veuillez autoriser rendre le stockage persistant.",
+    "description": "The message the user sees in the Projects Library when persistent storage is available but not permitted."
+  },
+  "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Autoriser la persistance",
+    "description": "The button the user clicks to ask persistance."
+  },
+  "PROJECTS_STORAGE_BROWSER_ERROR": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Si votre navigateur ne vous demande pas d'autoriser la persistance, il s'agit d'un problème avec votre navigateur. Pour éviter de perdre vos projets, vous devez ajouter ce site Web aux bookmarks, l’utiliser souvent et exporter fréquemment vos projets. Nous vous recommandons également d'utiliser Firefox.",
+    "description": "The message the user sees in the Projects Library when persistent storage is not available."
+  },
+  "PROJECT_DELETE_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Supprimer le dossier",
+    "description": "Delete a folder within a project"
+  },
+  "PROJECT_RENAME_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Rename folder",
+    "description": "Rename a folder within a project"
+  },
+  "PROJECT_NEW_FOLDER_NAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Nom du nouveau dossier",
+    "description": "Label for the new name of the folder"
+  },
+  "PROJECT_FOLDER_SURE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Êtes-vous sûr de vouloir supprimer ce dossier?",
+    "description": "Prompt asking for assurance on deleting a folder"
+  },
+  "PROJECT_DELETE_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Supprimer le fichier",
+    "description": "Delete a file within a project"
+  },
+  "PROJECT_RENAME_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Renommer le fichier",
+    "description": "Rename a file within a project"
+  },
+  "PROJECT_IMPORT_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Importer le fichier",
+    "description": "Import a file within a project"
+  },
+  "PROJECT_EXPORT_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Exporter le fichier",
+    "description": "Export a file from the project"
+  },
+  "PROJECT_NEW_FILE_NAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Nouveau nom du fichier",
+    "description": "Label for the new name of the file"
+  },
+  "PROJECT_FILE_SURE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Êtes-vous sûr de vouloir supprimer ce fichier?",
+    "description": "Prompt asking for assurance on deleting a file"
+  },
+  "PROJECT_NEW_NAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Nouveau Nom",
+    "description": "Label for the new name of the object"
+  },
+  "PROJECT_DELETE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Supprimer le projet",
+    "description": "Label for the dialog to delete a project within the workspace"
+  },
+  "PROJECT_LOAD_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Charger un projet",
+    "description": "Text meaning that there is no project loaded"
+  },
+  "PROJECT_PROJECT_SURE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Êtes-vous sûr de vouloir supprimer ce projet?",
+    "description": "Prompt asking for assuruance on deleting a project"
+  },
+  "PROJECT_LIBRARY_NAME": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Nom du projet",
+    "description": "Label for the name of the project"
+  },
+  "PROJECT_LIBRARY_NEW_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Créer un projet",
+    "description": "Create a project within the workspace"
+  },
+  "PROJECT_LIBRARY_CLONE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Cloner",
+    "description": "Clone a project within the workspace"
+  },
+  "PROJECT_ERROR_LANGUAGE_ADDON": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Impossible d'enregister l'addon pour le {language}",
+    "description": "The error message shown when a language addon fails to register"
+  },
+  "PROJECT_ERROR_REGISTER_EDITOR": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Impossible d'enregistrer l'éditeur {name}. L'éditeur a déjà été enregistré",
+    "description": "The error message shown when an edtitor fails to register"
+  },
+  "PROJECT_ERROR_LOAD_PROJECTS": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors du chargement des projets ({error})",
+    "description": "The error message shown when the projects fail to load"
+  },
+  "PROJECT_ERROR_SELECT_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de la sélection du projet {project} ({error})",
+    "description": " The error message shown when a project fails to be selected"
+  },
+  "PROJECT_ERROR_CREATE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de la création du projet {project} ({error})",
+    "description": "The error message shown when a project fails to be created"
+  },
+  "PROJECT_ERROR_RENAME_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors du changement de nom du projet {project} en {name} ({error})",
+    "description": "The error message shown when a project fails to be renamed"
+  },
+  "PROJECT_ERROR_CLONE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors du clonage du projet {project} ({error})",
+    "description": "The error message shown when a project fails to be cloned"
+  },
+  "PROJECT_ERROR_DELETE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de la supression du projet {project} ({error})",
+    "description": "The error message shown when a project fails to be deleted"
+  },
+  "PROJECT_ERROR_IMPORT_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de l'importation du projet {project} ({error})",
+    "description": "The error message shown when a project fails to be imported"
+  },
+  "PROJECT_ERROR_EXPORT_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de l'exportation du projet {project} ({error})",
+    "description": "The error message shown when a project fails to be exported"
+  },
+  "PROJECT_ERROR_NEW_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de la création d'un nouveau dossier {folder} ({error})",
+    "description": "The error message shown when a folder fails to be created"
+  },
+  "PROJECT_ERROR_NEW_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de la création d'un nouveau fichier {file} ({error})",
+    "description": "The error message shown when a file fails to be created"
+  },
+  "PROJECT_ERROR_RENAME_OBJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors du changement de nom de l'objet {object} ({error})",
+    "description": "The error message shown when an object fails to be renamed"
+  },
+  "PROJECT_ERROR_DELETE_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de la supression du dossier {folder} ({error})",
+    "description": "The error message shown when a folder fails to be deleted"
+  },
+  "PROJECT_ERROR_DELETE_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de la supression du fichier {file} ({error})",
+    "description": "The error message shown when a file fails to be deleted"
+  },
+  "PROJECTS_JSON_DO_NOT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Vous avez essayé de modifier le fichier project.json, NE FAITES PAS CELA",
+    "description": "The error message when the user is trying to edit the project.json file of a project."
+  },
+  "PROJECT_ERROR_SAVE_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de l'enregistrement du fichier {file} ({error})",
+    "description": "The error message shown when a file fails to be saved"
+  },
+  "PROJECT_ERROR_LOAD_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors du chargement du fichier {file} ({error})",
+    "description": "The error message shown when file fails to be loaded"
+  },
+  "PROJECT_ERROR_READ_DATA": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de la lecture des données pour le projet {project} ({error})",
+    "description": "The error message shown when there is an error reading the data for the project"
+  },
+  "PROJECT_ERROR_NOT_FOLDER": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Le dossier du projet {project} n'est pas un dossier valide.",
+    "description": "The error message shown when there is no folder"
+  },
+  "PROJECT_ERROR_SAVE_SPECIAL_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de l'enregistrement du fichier spécial {file} avec des données ({error})",
+    "description": "The error message shown when a special settings file fails to be saved"
+  },
+  "PROJECT_ERROR_LOAD_SPECIAL_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors du chargement du fichier spécial {file} avec des données ({error})",
+    "description": "The error message shown when a special settings file fails to be loaded"
+  },
+  "PROJECT_ERROR_SEND_CODE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur lors de l'envoi du code de fichier {file} ({error})",
+    "description": "The error message shown when there is an error while sending the file code to the device"
+  },
+  "PROJECT_ERROR_PATH_INVALID": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur, le chemin n'est pas dans le dossier workspace",
+    "description": "The error message shown when the specified path is not in the workspace folder"
+  },
+  "PROJECT_ERROR_CHANGE_DATE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Erreur, impossible d'écrire la date {project} ({error})",
+    "description": "The error message shown when a date for a file fails to be written"
+  },
+  "PROJECT_JSON_DO_NOT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Vous avez essayé de modifier le fichier project.json, NE FAITES PAS CELA",
+    "description": "The error message shown when there is an attempt at editing the project settings file"
+  },
+  "PROJECT_CLONE_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Cloner le projet",
+    "description": "Label for the clone project dialog"
+  },
+  "PROJECT_RENAME_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Renommer le projet",
+    "description": "Label for the rename project dialog"
+  },
+  "PROJECT_NAME_PROMPT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Veuillez saisir le nom du projet.",
+    "description": "Label for the new name to be given to the project"
+  },
+  "PROJECT_LIBRARY_SEARCH": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Chercher",
+    "description": "Label to search for projects"
+  },
+  "PROJECT_NULL": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Un ou plusieurs paramètres sont nuls",
+    "description": "One or more of the funciton's parameters are null"
+  },
+  "PATH_NULL": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Un chemin est nul",
+    "description": "The given path turned out null"
+  },
+  "PROJECTS_NO_FILE": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Aucun fichier n'est sélectionné, veuillez importer, créer ou sélectionner un fichier.",
+    "description": "The message the user sees in the Application Tab when there is no file for the editor"
+  },
+  "PROJECTS_EXTENSION_URECOGNIZED": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "L'extension de fichier n'est pas reconnue",
+    "description": "The message the user sees in the Application Tab when the file extension is not valid"
+  },
+  "PROJECTS_INVALID_PROJECT": {
+    "plugins": [
+      "projects"
+    ],
+    "message": "Vous avez ouvert un projet invalide, veuillez en sélectionner un autre.",
+    "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
+  },
+  "EDITOR_VISUAL_SHOW_CODE": {
+    "plugins": [
+      "projects.editor.visual"
+    ],
+    "message": "Afficher le code",
+    "description": "Button designed to show the code behind a blockly"
+  },
+  "EDITOR_VISUAL_HIDE_CODE": {
+    "plugins": [
+      "projects.editor.visual"
+    ],
+    "message": "Masquer le code",
+    "description": "Button designed to show the code behind a blockly"
+  },
   "SCHEMATICS": {
     "plugins": [
       "schematics"
@@ -1140,11 +2043,25 @@
     "message": "Confirmation de suppression",
     "description": "Delete confirmation prompt title"
   },
+  "SCHEMATICS_IMPORT": {
+    "plugins": [
+      "schematics"
+    ],
+    "message": "Importer le schémas .svg depuis Fritzing",
+    "description": "The message that appears when there is no picture"
+  },
   "PROJECT_SHELL": {
     "plugins": [
       "shell"
     ],
     "message": "Shell",
     "description": "The Shell tab, opens a terminal"
+  },
+  "SHELL_NO_SHELL": {
+    "plugins": [
+      "shell"
+    ],
+    "message": "Connectez un périphérique pour activer le shell",
+    "description": "The text that is displayed when the shell is not enabled"
   }
 }

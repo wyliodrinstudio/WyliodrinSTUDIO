@@ -1,0 +1,10 @@
+{
+    "CONSOLE": {
+        "message": "Console",
+        "description": "The console name that is displayed in the status button"
+    },
+    "CONSOLE_NO_SHELL": {
+        "message": "Exécuter un projet pour activer la console",
+        "description": "The text that is displayed when the console is not enabled"
+    }
+}
