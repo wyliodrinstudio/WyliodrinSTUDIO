@@ -147,14 +147,19 @@ export default {
 						installed: true,
 						working: false
 					});
+					delete this.working[data.l][packageInformation.n];
 				}
 				let packagesData = [];
 				for (let name in packages)
 				{
 					packagesData.push (packages[name]);
+					delete this.working[data.l][name];
 				}
 				console.log (packages);
 				this.packages[data.l] = packagesData;
+				this.working[data.l] = {
+					...this.working[data.l]
+				};
 			}
 			else 
 			if (data.a === 'i')
@@ -171,7 +176,7 @@ export default {
 					}
 					this.working[data.l] = {
 						...this.working[data.l],
-						[data.p]: undefined
+						[data.p]: 'reset'
 					};
 					this.connection.send ('pm', {
 						a: 'p',
