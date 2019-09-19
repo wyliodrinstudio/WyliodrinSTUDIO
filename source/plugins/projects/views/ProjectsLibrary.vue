@@ -250,11 +250,18 @@ export default {
 					} else {
 						type = 'archive';
 					}
-					if(await this.importProject(files[0].name,fileData,type))
-					{
-						this.projects=await this.studio.projects.loadProjects(false);
-						return true;
+					let name = path.basename(files[0].name).split('.').slice(0, -1).join('.');
+					if(this.projects.find(x => x.name === name) === undefined) {
+						if(await this.importProject(files[0].name,fileData,type))
+						{
+							this.projects=await this.studio.projects.loadProjects(false);
+							return true;
+						}
+					} else {
+						await this.studio.workspace.showNotification ('PROJECT_EXISTS_PROMPT');
+						return false;
 					}
+					
 				}
 				
 			}

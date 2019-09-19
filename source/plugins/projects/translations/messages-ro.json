@@ -293,5 +293,10 @@
     "PROJECTS_JSON_DO_NOT": {
         "message": "S-a încercat editarea fișierului project.json, NU FACEȚI ASTA",
         "description": "The error message when the user is trying to edit the project.json file of a project."
+    },
+	"PROJECT_EXISTS_PROMPT": 
+    {
+        "message": "Un proiect cu acest nume există deja",
+        "description": "The message the user sees in the Projects Library when a project with an already existing name is created or imported"
     }
 }

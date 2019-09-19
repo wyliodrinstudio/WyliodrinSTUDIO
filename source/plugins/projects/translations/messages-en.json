@@ -294,5 +294,10 @@
     {
         "message": "You have oppened an invalid project, please select another one",
         "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
+	},
+	"PROJECT_EXISTS_PROMPT": 
+    {
+        "message": "A project with that name already exists",
+        "description": "The message the user sees in the Projects Library when a project with an already existing name is created or imported"
     }
 }

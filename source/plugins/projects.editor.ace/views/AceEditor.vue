@@ -46,6 +46,7 @@ export default {
 			require('brace/theme/chrome');
 			require('brace/theme/monokai');
 			
+			require('brace/snippets/markdown');
 			require('brace/snippets/python'); //snippet
 			require('brace/snippets/javascript'); //snippet
 			require('brace/snippets/makefile'); //snippet
