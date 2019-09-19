@@ -70,7 +70,7 @@ export function setup (options, imports, register)
 
 	studio.workspace.registerStatusButton ('CONSOLE', 1, Console, 'plugins/console/data/img/icons/terminal-icon.svg', {
 		height () {
-			return '30%';
+			return '30vh';
 		}
 	});
 
