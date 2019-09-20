@@ -686,7 +686,7 @@ let projects = {
 									file: child,
 									dir: fullPath
 								});
-							if (child1.file !== 'json') {
+							if (child1.name !== 'project.json') {
 								children.push(child1);
 							}
 						}
@@ -1106,15 +1106,15 @@ let projects = {
 						// let editors = studio.workspace.getFromStore('projects', 'editors');
 						console.log('dispatched');
 						let mainFile = await this.getDefaultFileName(project);
-						if (await studio.filesystem.pathExists(path.join(project.folder, mainFile))) {
+						let file = path.join(project.folder, mainFile);
+						if (await studio.filesystem.pathExists(file)) {
 							studio.workspace.dispatchToStore('projects', 'currentFile', mainFile);
-						}
-						else {
+							await studio.settings.storeValue('projects', 'currentFile', mainFile);
+							console.log('dispatched main file');
+						} else {
 							studio.workspace.dispatchToStore('projects', 'currentFile', null);
+							await studio.settings.storeValue('projects', 'currentFile', null);
 						}
-
-						await studio.settings.storeValue('projects', 'currentFile', mainFile);
-
 					}
 				}
 				// return true if the project is selected or false otherwise
@@ -1241,8 +1241,10 @@ let projects = {
 	 * 
 	 */
 	async changeFile(project, name) {
+		console.log(await this._isPathValid(project.folder,name));
+		let aux = await this._isPathValid(project.folder,name);
 
-		if(name !== null) {
+		if(name !== null && await studio.filesystem.pathExists(aux)) {
 			if (path.basename(name) != 'project.json') {
 				// await studio.workspace.setWorkspaceTitle(path.basename(name));
 				if (name !== '') {

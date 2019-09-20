@@ -41,6 +41,7 @@ export default {
 		{
 			this.$i18n.locale = languageId;
 			// Trigger resize to make sure UI elements get updated
+			this.studio.settings.storeValue('workspace','language',languageId);
 			$(window).trigger ('resize');
 		}
 	}

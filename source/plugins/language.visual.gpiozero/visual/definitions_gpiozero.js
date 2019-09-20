@@ -4,442 +4,50 @@ module.exports = function (blockly) {
 	var Blockly = blockly.Blockly;
 	// var goog = blockly.goog;
 
-	Blockly.Blocks['wyliozero_get_message'] = {
-		init: function() {
-			this.appendValueInput('board')
-				.setCheck(null)
-				.appendField('message sent by board');
-			this.appendValueInput('topic')
-				.setCheck(null)
-				.appendField('on topic');
-			this.setInputsInline(true);
-			this.setOutput(true, null);
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_get_message_from_all'] = {
-		init: function() {
-			this.appendValueInput('topic')
-				.setCheck(null)
-				.appendField('message sent on topic');
-			this.setInputsInline(true);
-			this.setOutput(true, null);
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-
-	Blockly.Blocks['wyliozero_got_values'] = {
-		init: function() {
-			this.appendValueInput('var')
-				.setCheck(null)
-				.appendField(' variable');
-			this.appendDummyInput()
-				.appendField('has available message.');
-			this.setOutput(true, 'Boolean');
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_input.html#gpiozero.Button.is_pressed');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_got_broadcast'] = {
-		init: function() {
-			this.appendValueInput('var')
-				.setCheck(null)
-				.appendField(' variable');
-			this.appendDummyInput()
-				.appendField('has broadcast message.');
-			this.setOutput(true, 'Boolean');
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_input.html#gpiozero.Button.is_pressed');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_get_value'] = {
-		init: function() {
-			this.appendValueInput('var')
-				.setCheck(null)
-				.appendField('message stored in');
-			this.appendDummyInput()
-				.appendField('.');
-			this.setOutput(true);
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_input.html#gpiozero.Button.is_pressed');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_get_broadcast'] = {
-		init: function() {
-			
-			this.appendDummyInput()
-				.appendField('message broadcasted.');
-			this.setOutput(true);
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_input.html#gpiozero.Button.is_pressed');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_link'] = {
-		init: function() {
-			this.appendValueInput('var')
-				.setCheck(null)
-				.appendField('link to message in');
-			this.appendDummyInput()
-				.appendField('.');
-			this.setOutput(true);
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_input.html#gpiozero.Button.is_pressed');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_lab_network_send_all'] = {
-		init: function() {
-			this.appendValueInput('message')
-				.setCheck(['Number', 'String'])
-				.appendField('Broadcast message');
-			this.appendDummyInput()
-				.appendField('.');
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('https://github.com/Wyliodrin/wyliozero');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_lab_network_send_one'] = {
-		init: function() {
-			
-			this.appendValueInput('message')
-				.setCheck(['Number', 'String'])
-				.appendField('Send message');
-			this.appendValueInput('board')
-				.appendField('to board');
-			this.appendValueInput('topic')
-				.setCheck('String')
-				.appendField('on topic');
-			this.appendDummyInput()
-				.appendField('.');
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('https://github.com/Wyliodrin/wyliozero');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_lab_network_get_all'] = {
-		init: function() {
-		
-			this.appendValueInput('varname')
-				.setCheck(['Number', 'String'])
-				.appendField('Make variable');
-			this.appendValueInput('topic')
-				.setCheck('String')
-				.appendField('listen to messages sent to me on topic');
-			this.appendDummyInput()
-				.appendField('.');
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('https://github.com/Wyliodrin/wyliozero');
-		}
-	};
-
-	// Blockly.Blocks['wyliozero_lab_network_get_one'] = {
-	//   init: function() {
-		
-	//     this.appendValueInput('varname')
-	//         .setCheck(['Number', 'String'])
-	//         .appendField('Make variable');
-	//     this.appendValueInput('board')
-	//         .setCheck(['Number', 'String'])
-	//         .appendField('listen to ALL messages sent by board');
-	//     this.appendValueInput('topic')
-	//         .setCheck('String')
-	//         .appendField('on topic');
-	//     this.appendDummyInput()
-	//         .appendField('.');
-	//     this.setPreviousStatement(true, null);
-	//     this.setNextStatement(true, null);
-	//     this.setColour(230);
-	//  this.setTooltip('');
-	//  this.setHelpUrl('https://github.com/Wyliodrin/wyliozero');
-	//   }
-	// };
-
-	// Blockly.Blocks['wyliozero_lab_network_recieve_all'] = {
-	//   init: function() {
-	//     this.appendValueInput('var')
-	//         .setCheck(null)
-	//         .appendField('Make variable');
-	//     this.appendValueInput('topic')
-	//         .setCheck('String')
-	//         .appendField('listen to messages on topic');
-	//     this.appendDummyInput()
-	//         .appendField('from all lab.');
-	//     this.setPreviousStatement(true, null);
-	//     this.setNextStatement(true, null);
-	//     this.setColour(230);
-	//  this.setTooltip('');
-	//  this.setHelpUrl('');
-	//   }
-	// };
-
-	Blockly.Blocks['wyliozero_lab_network_when_changed'] = {
-		init: function() {
-			this.appendValueInput('msg')
-				.setCheck(null)
-				.appendField('When');
-			this.appendValueInput('variable')
-				.setCheck(null)
-				.appendField(' received by');
-			this.appendDummyInput()
-				.appendField('changes, do:');
-			this.appendStatementInput('function')
-				.setCheck(null);
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(200);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-
-
-	Blockly.Blocks['wyliozero_analogread'] = {
-		init: function() {
-			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber_analog'])
-				.appendField('analogRead');
-			this.setOutput(true, 'Number');
-			this.setColour(320);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_digitalread'] = {
-		init: function() {
-			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber_digital'])
-				.appendField('digitalRead');
-			this.setOutput(true, 'Number');
-			this.setColour(320);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_analogwrite'] = {
-		init: function() {
-			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber_analog'])
-				.setAlign(Blockly.ALIGN_RIGHT)
-				.appendField('analogWrite');
-			this.appendValueInput('value')
-				.setCheck('Number')
-				.setAlign(Blockly.ALIGN_RIGHT)
-				.appendField('value');
-			this.setInputsInline(true);
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(320);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_digitalwrite'] = {
-		init: function() {
-			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber_digital'])
-				.setAlign(Blockly.ALIGN_RIGHT)
-				.appendField('digitalWrite');
-			this.appendValueInput('value')
-				.setCheck('Boolean', 'Number')
-				.setAlign(Blockly.ALIGN_RIGHT)
-				.appendField('value');
-			this.setInputsInline(true);
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(320);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_pinmode'] = {
-		init: function() {
-			this.appendValueInput('NAME')
-				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital'])
-				.appendField('pinMode');
-			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([
-					['INPUT', 'INPUT'],
-					['OUTPUT', 'OUTPUT']
-				]), 'mode');
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(320);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_pin'] = {
+	Blockly.Blocks['gpiozero_pin'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField(new Blockly.FieldDropdown([
-					['A0', 'A0'],
-					['A1', 'A1'],
-					['A2', 'A2'],
-					['A3', 'A3'],
-					['A4', 'A4'],
-					['A5', 'A5'],
-					['D2', 'D2'],
-					['D3', 'D3'],
-					['D4', 'D4'],
-					['D5', 'D5'],
-					['D6', 'D6'],
-					['D7', 'D7'],
-					['D8', 'D8'],
-					['D9', 'D9'],
-					['D10', 'D10'],
-					['D11', 'D11'],
-					['D12', 'D12'],
-					['D13', 'D13'],
-					['R4', 'R4'],
-					['R17', 'R17'],
-					['R27', 'R27'],
-					['R22', 'R22'],
-					['R10', 'R10'],
-					['R9', 'R9'],
-					['R11', 'R11'],
-					['R18', 'R18'],
-					['R23', 'R23'],
-					['R8', 'R8'],
-					['R7', 'R7'],
-					['R13', 'R13'],
-					['R19', 'R19'],
-					['R20', 'R20'],
-					['R21', 'R21']
-
+					['GPIO0', '0'],
+					['GPIO1', '1'],
+					['GPIO2', '2'],
+					['GPIO3', '3'],
+					['GPIO4', '4'],
+					['GPIO5', '5'],
+					['GPIO6', '6'],
+					['GPIO7', '7'],
+					['GPIO8', '8'],
+					['GPIO9', '9'],
+					['GPIO10', '10'],
+					['GPIO11', '11'],
+					['GPIO12', '12'],
+					['GPIO13', '13'],
+					['GPI14', '14'],
+					['GPIO15', '15'],
+					['GPIO16', '16'],
+					['GPIO17', '17'],
+					['GPIO18', '18'],
+					['GPIO19', '19'],
+					['GPIO20', '20'],
+					['GPIO21', '21'],
+					['GPIO22', '22'],
+					['GPIO23', '23'],
+					['GPIO24', '24'],
+					['GPIO25', '25'],
+					['GPIO26', '26'],
+					['GPIO27', '27'],
 				]), 'pin');
-			this.setOutput(true, 'wyliozero_pinNumber');
+			this.setOutput(true, 'gpiozero_pinNumber');
 			this.setColour(230);
 			this.setTooltip('');
 			this.setHelpUrl('');
 		}
 	};
 
-	Blockly.Blocks['wyliozero_pin_analog'] = {
-		init: function() {
-			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([
-					['A0', 'A0'],
-					['A1', 'A1'],
-					['A2', 'A2'],
-					['A3', 'A3'],
-					['A4', 'A4'],
-					['A5', 'A5']
-
-				]), 'pin')
-				.appendField('(analog)');
-			this.setOutput(true, 'wyliozero_pinNumber_analog');
-			this.setColour(230);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_pin_digital'] = {
-		init: function() {
-			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([
-					['D2', 'D2'],
-					['D3', 'D3'],
-					['D4', 'D4'],
-					['D5', 'D5'],
-					['D6', 'D6'],
-					['D7', 'D7'],
-					['D8', 'D8'],
-					['D9', 'D9'],
-					['D10', 'D10'],
-					['D11', 'D11'],
-					['D12', 'D12'],
-					['D13', 'D13'],
-					['R4', 'R4'],
-					['R17', 'R17'],
-					['R27', 'R27'],
-					['R22', 'R22'],
-					['R10', 'R10'],
-					['R9', 'R9'],
-					['R11', 'R11'],
-					['R18', 'R18'],
-					['R23', 'R23'],
-					['R8', 'R8'],
-					['R7', 'R7'],
-					['R13', 'R13'],
-					['R19', 'R19'],
-					['R20', 'R20'],
-					['R21', 'R21']
-
-				]), 'pin')
-				.appendField('(digital)');
-			this.setOutput(true, 'wyliozero_pinNumber_digital');
-			this.setColour(230);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_pin_raspberry'] = {
-		init: function() {
-			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([
-					['R4', 'R4'],
-					['R17', 'R17'],
-					['R27', 'R27'],
-					['R22', 'R22'],
-					['R10', 'R10'],
-					['R9', 'R9'],
-					['R11', 'R11'],
-					['R18', 'R18'],
-					['R23', 'R23'],
-					['R8', 'R8'],
-					['R7', 'R7'],
-					['R13', 'R13'],
-					['R19', 'R19'],
-					['R20', 'R20'],
-					['R21', 'R21']
-
-				]), 'pin')
-				.appendField('(digital)');
-			this.setOutput(true, 'wyliozero_pinNumber_raspberry');
-			this.setColour(230);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-
-	Blockly.Blocks['wyliozero_led'] = {
+	Blockly.Blocks['gpiozero_led'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital'])
+				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('LED');
 			this.setOutput(true, 'LED');
 			this.setColour(200);
@@ -448,10 +56,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_servo'] = {
+	Blockly.Blocks['gpiozero_servo'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber_digital'])
+				.setCheck(['String', 'gpiozero_pinNumber'])
 				.setAlign(Blockly.ALIGN_RIGHT)
 				.appendField('Servo Motor');
 			this.setInputsInline(true);
@@ -462,10 +70,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	// Blockly.Blocks['wyliozero_angular_servo'] = {
+	// Blockly.Blocks['angular_servo'] = {
 	//   init: function() {
 	//     this.appendValueInput('pin')
-	//         .setCheck(['String', 'wyliozero_pinNumber_digital'])
+	//         .setCheck(['String', 'gpiozero_pinNumber'])
 	//         .setAlign(Blockly.ALIGN_RIGHT)
 	//         .appendField('Angular Servo Motor');
 	//     this.setInputsInline(true);
@@ -476,10 +84,10 @@ module.exports = function (blockly) {
 	//   }
 	// };
 
-	Blockly.Blocks['wyliozero_pwm_led'] = {
+	Blockly.Blocks['gpiozero_pwm_led'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber_digital'])
+				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('PWM LED');
 			this.setOutput(true, 'PWM_LED');
 			this.setColour(200);
@@ -488,10 +96,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_button'] = {
+	Blockly.Blocks['gpiozero_button'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
-				.setCheck(['String', 'wyliozero_pinNumber_digital'])
+				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('Button');
 			this.setOutput(true, 'button');
 			this.setColour(0);
@@ -500,7 +108,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_button_when_held'] = {
+	Blockly.Blocks['gpiozero_button_when_held'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('button')
@@ -518,7 +126,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_button_when_pressed'] = {
+	Blockly.Blocks['gpiozero_button_when_pressed'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('button')
@@ -536,7 +144,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_button_when_released'] = {
+	Blockly.Blocks['gpiozero_button_when_released'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('button')
@@ -555,7 +163,7 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Blocks['wyliozero_button_is_pressed'] = {
+	Blockly.Blocks['gpiozero_button_is_pressed'] = {
 		init: function() {
 			this.appendValueInput('button')
 				.setCheck('button')
@@ -569,7 +177,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_servo_detach'] = {
+	Blockly.Blocks['gpiozero_servo_detach'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -586,7 +194,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_servo_max'] = {
+	Blockly.Blocks['gpiozero_servo_max'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -603,7 +211,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_servo_mid'] = {
+	Blockly.Blocks['gpiozero_servo_mid'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -620,7 +228,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_servo_min'] = {
+	Blockly.Blocks['gpiozero_servo_min'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -637,7 +245,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_servo_value'] = {
+	Blockly.Blocks['gpiozero_servo_value'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -657,7 +265,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_button_wait_for_release'] = {
+	Blockly.Blocks['gpiozero_button_wait_for_release'] = {
 		init: function() {
 			this.appendValueInput('button')
 				.setCheck('button')
@@ -672,7 +280,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_button_held_time'] = {
+	Blockly.Blocks['gpiozero_button_held_time'] = {
 		init: function() {
 			this.appendValueInput('button')
 				.setCheck('button')
@@ -685,7 +293,7 @@ module.exports = function (blockly) {
 			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_input.html#gpiozero.Button.held_time');
 		}
 	};
-	Blockly.Blocks['wyliozero_led_blink'] = {
+	Blockly.Blocks['gpiozero_led_blink'] = {
 		init: function() {
 			this.appendValueInput('led')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
@@ -700,7 +308,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_pwm_on'] = {
+	Blockly.Blocks['gpiozero_pwm_on'] = {
 		init: function() {
 			this.appendValueInput('pwm_led')
 				.setCheck('PWM_LED')
@@ -719,7 +327,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_button_wait_for_press'] = {
+	Blockly.Blocks['gpiozero_button_wait_for_press'] = {
 		init: function() {
 			this.appendValueInput('button')
 				.setCheck('button')
@@ -734,7 +342,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_pause'] = {
+	Blockly.Blocks['gpiozero_pause'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField('Pause');
@@ -745,15 +353,15 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_trafficlight'] = {
+	Blockly.Blocks['gpiozero_trafficlight'] = {
 		init: function() {
 			this.appendValueInput('red')
-				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital'])
+				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('Traffic Lights');
 			this.appendValueInput('yellow')
-				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital']);
+				.setCheck(['String', 'gpiozero_pinNumber']);
 			this.appendValueInput('green')
-				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital']);
+				.setCheck(['String', 'gpiozero_pinNumber']);
 			this.setOutput(true, 'traffic');
 			this.setColour(240);
 			this.setTooltip('');
@@ -761,7 +369,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_led_turn_on'] = {
+	Blockly.Blocks['gpiozero_led_turn_on'] = {
 		init: function() {
 			this.appendValueInput('NAME')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
@@ -775,7 +383,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_led_turn_off'] = {
+	Blockly.Blocks['gpiozero_led_turn_off'] = {
 		init: function() {
 			this.appendValueInput('NAME')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
@@ -789,7 +397,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_led_toggle'] = {
+	Blockly.Blocks['gpiozero_led_toggle'] = {
 		init: function() {
 			this.appendValueInput('NAME')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
@@ -803,7 +411,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_led_is_lit'] = {
+	Blockly.Blocks['gpiozero_led_is_lit'] = {
 		init: function() {
 			this.appendValueInput('led')
 				.setCheck(['PWM_LED', 'LED'])
@@ -817,7 +425,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_traffic_light_on'] = {
+	Blockly.Blocks['gpiozero_traffic_light_on'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField('Turn on')
@@ -838,7 +446,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_traffic_blink'] = {
+	Blockly.Blocks['gpiozero_traffic_blink'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('traffic')
@@ -853,7 +461,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_traffic_close'] = {
+	Blockly.Blocks['gpiozero_traffic_close'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('traffic')
@@ -868,7 +476,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_pwm_pulse'] = {
+	Blockly.Blocks['gpiozero_pwm_pulse'] = {
 		init: function() {
 			this.appendValueInput('pwm_led')
 				.setCheck('PWM_LED', 'traffic')
@@ -882,7 +490,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_traffic_light_off'] = {
+	Blockly.Blocks['gpiozero_traffic_light_off'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField('Turn off')
@@ -903,44 +511,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_start_labnetwork'] = {
-		init: function() {
-			this.appendDummyInput()
-				.appendField('Start LabNetwork');
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(180);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_lcd_write'] = {
-		init: function() {
-			this.appendValueInput('str')
-				.setCheck('String')
-				.appendField('LCD write');
-			this.appendDummyInput()
-				.appendField('on line');
-			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([
-					['1', '1'],
-					['2', '2']
-				]), 'line');
-			this.setInputsInline(true);
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(280);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-
-	Blockly.Blocks['wyliozero_light_sensor'] = {
+	Blockly.Blocks['gpiozero_light_sensor'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
-				.setCheck(['String', 'wyliozero_pinNumber_raspberry'])
+				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('Light Sensor');
 			this.setOutput(true, 'light_sensor');
 			this.setColour(40);
@@ -949,7 +523,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_light_when_dark'] = {
+	Blockly.Blocks['gpiozero_light_when_dark'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('light_sensor')
@@ -967,7 +541,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_light_when_light'] = {
+	Blockly.Blocks['gpiozero_light_when_light'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('light_sensor')
@@ -985,7 +559,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_light_wait_for_dark'] = {
+	Blockly.Blocks['gpiozero_light_wait_for_dark'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
 				.setCheck('light_sensor')
@@ -1000,7 +574,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_light_wait_for_light'] = {
+	Blockly.Blocks['gpiozero_light_wait_for_light'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
 				.setCheck('light_sensor')
@@ -1015,7 +589,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_light_detected'] = {
+	Blockly.Blocks['gpiozero_light_detected'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
 				.setCheck('light_sensor')
@@ -1029,10 +603,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_buzzer'] = {
+	Blockly.Blocks['gpiozero_buzzer'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital'])
+				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('buzzer');
 			this.setOutput(true, 'buzzer');
 			this.setColour(320);
@@ -1041,7 +615,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_buzzer_beep'] = {
+	Blockly.Blocks['gpiozero_buzzer_beep'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1054,7 +628,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_buzzer_on'] = {
+	Blockly.Blocks['gpiozero_buzzer_on'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1067,7 +641,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_buzzer_off'] = {
+	Blockly.Blocks['gpiozero_buzzer_off'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1080,7 +654,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_buzzer_toggle'] = {
+	Blockly.Blocks['gpiozero_buzzer_toggle'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1093,7 +667,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_buzzer_is_active'] = {
+	Blockly.Blocks['gpiozero_buzzer_is_active'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1104,46 +678,6 @@ module.exports = function (blockly) {
 			this.setColour(320);
 			this.setTooltip('');
 			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_output.html#gpiozero.Buzzer.toggle');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_dht_sensor'] = {
-		init: function() {
-			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber_analog'])
-				.appendField('DHT sensor on pin');
-			this.setOutput(true, 'dht_sensor');
-			this.setColour(100);
-			this.setTooltip('');
-			this.setHelpUrl('https://github.com/adafruit/Adafruit_Python_DHT/tree/master/Adafruit_DHT');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_dht_temperature'] = {
-		init: function() {
-			this.appendValueInput('dht')
-				.setCheck('dht_sensor')
-				.appendField('temperature read from sensor');
-			this.appendDummyInput()
-				.appendField('.');
-			this.setOutput(true, 'Boolean');
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
-	Blockly.Blocks['wyliozero_dht_humidity'] = {
-		init: function() {
-			this.appendValueInput('dht')
-				.setCheck('dht_sensor')
-				.appendField('humidity read from sensor');
-			this.appendDummyInput()
-				.appendField('.');
-			this.setOutput(true, 'Boolean');
-			this.setColour(120);
-			this.setTooltip('');
-			this.setHelpUrl('');
 		}
 	};
 };
