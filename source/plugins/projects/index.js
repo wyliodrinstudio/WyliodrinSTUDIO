@@ -994,9 +994,14 @@ let projects = {
 					let projectFolder = project.folder;
 					let pathToDelete = path.join(projectFolder, pathTo);
 					pathToDelete = this._isPathValid(projectFolder,pathToDelete);
+					let currentFile = studio.workspace.getFromStore('projects','currentFile');
+					let currentPath = this._isPathValid(project.folder,currentFile);
 					if (pathToDelete !== null) {
 						if (await studio.filesystem.pathExists(pathToDelete)) {
 							await studio.filesystem.remove(pathToDelete);
+							if(currentPath.startsWith(pathToDelete)){
+								await this.changeFile(project,null);
+							}
 							return true;
 						}
 					} else {
@@ -1096,10 +1101,12 @@ let projects = {
 
 				//select file
 				if (project) {
-					studio.workspace.dispatchToStore('projects', 'currentProject', null);
-					await studio.settings.storeValue('projects', 'currentFile', null);
-					studio.workspace.dispatchToStore('projects', 'currentFile', null);
-					await studio.settings.storeValue('projects', 'currentFile', null);
+					// studio.workspace.dispatchToStore('projects', 'currentProject', null);
+					// await studio.settings.storeValue('projects', 'currentFile', null);
+					// studio.workspace.dispatchToStore('projects', 'currentFile', null);
+					// await studio.settings.storeValue('projects', 'currentFile', null);
+
+					await this.changeFile(project,null);
 
 					await new Promise((resolve) => {
 						process.nextTick(() => {
@@ -1120,12 +1127,10 @@ let projects = {
 						let mainFile = await this.getDefaultFileName(project);
 						let file = path.join(project.folder, mainFile);
 						if (await studio.filesystem.pathExists(file)) {
-							studio.workspace.dispatchToStore('projects', 'currentFile', mainFile);
-							await studio.settings.storeValue('projects', 'currentFile', mainFile);
+							await this.changeFile(project,mainFile);
 							console.log('dispatched main file');
 						} else {
-							studio.workspace.dispatchToStore('projects', 'currentFile', null);
-							await studio.settings.storeValue('projects', 'currentFile', null);
+							await this.changeFile(project,null);
 						}
 					}
 				}

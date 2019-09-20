@@ -313,6 +313,7 @@ export default {
 		},
 		currentFile ()
 		{
+			this.updateTitle ();
 			console.log('changed currentFile');
 			this.dirTree();
 		},
