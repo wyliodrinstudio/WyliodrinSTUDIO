@@ -542,7 +542,9 @@ outline:none;
 
 .drpdown {margin-top: -8px;}
 
-.v-alert {max-height: 80vh; overflow-y:auto; }
+.v-alert {overflow:hidden; 
+	pre {overflow-y: auto; max-width: 600px; max-height: 200px;}
+}
 
 .about-box {background: url('plugins/workspace/data/img/about-bg.jpg') #000 no-repeat top center; color:@color-white !important;
 	.v-card__title {background: transparent;}
