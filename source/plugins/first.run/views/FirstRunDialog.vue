@@ -3,7 +3,7 @@
 		<v-card-title>
 			<div class="about-logo">
 				<v-img src="plugins/first.run/data/img/logo/wyliodrin-studio-about-logo.png"></v-img>
-				<span>{{ $t('ABOUT_Version') }} {{ '2.0.3-beta' }}</span>
+				<span>{{ $t('ABOUT_VERSION') }} {{ studio.workspace.version }}</span>
 			</div>
 		</v-card-title>
 		<v-card-text>

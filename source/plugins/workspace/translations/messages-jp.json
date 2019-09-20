@@ -127,6 +127,10 @@
         "message": "によって提供された",
         "description": "Provider of Wyliodrin STUDIO"
     },
+    "ABOUT_VERSION": {
+        "message": "バージョン",
+        "description":" The text version that appears in the Welcome and About dialogs"
+    },
     "WORKSPACE_DEVICE_SETUP_TEXT": {
         "message": "デバイスをセットアップすることもできます。詳細については、チュートリアルWebサイトにアクセスしてください。",
         "description": "The message the user gets if there are no devices available in the connection selection"

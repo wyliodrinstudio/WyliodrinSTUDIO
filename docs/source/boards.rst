@@ -24,7 +24,7 @@ The easiest way to set up a Raspberry Pi board so that it becomes available for 
 Download the image for `Raspberry Pi Zero and Raspberry Pi 1 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_2019_09_17.zip>`_.
 
 
-Download the image for `Raspberry Pi 2 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_17.zip>`_, `Raspberry Pi 3 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_17.zip>`_ and `Raspberry Pi 4 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_17.zip>`_.
+Download the image for `Raspberry Pi 2 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_20.zip>`_, `Raspberry Pi 3 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_17.zip>`_ and `Raspberry Pi 4 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_09_17.zip>`_.
 
 
 Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flash>` it. After that, you can simply insert the SD card into the Raspberry Pi and your board should be visible within Wyliodrin STUDIO.
@@ -100,7 +100,7 @@ The dependencies you will have to install are:
 - *supervisor*: allows you to monitor processes related to a project
 - *redis*: database management system
 - *build-essential*: reference package for all the packages required for compilation
-- *git*: required for the **npm install** command to download w git included package
+- *git*: required for the **npm install** command to download git included package
 - *python3-pip*: python 3 programming language
 
 .. code-block:: bash
@@ -168,7 +168,9 @@ In order to install studio-supervisor, the following commands are required:
 .. code-block:: bash
 
 	sudo su -
-	sudo npm install -g --unsafe-perm studio-supervisor
+	npm install -g --unsafe-perm studio-supervisor
+
+	exit
 	sudo mkdir /wyliodrin
 
 |
@@ -238,6 +240,45 @@ After copying the configuration file to the destination indicated, you can inser
 
 
 |
+
+Wyliolab Board
+"""""""""""""""""""""
+
+.. image:: images/wyliolab.png
+	:align: center
+
+If you are using the Wyliolab boards, you can download the pre-configured image for `Pi Zero and Pi 1 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_wyliolab_2019_09_20.zip>`_, or the image for `Pi 2 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_wyliolab_2019_09_20.zip>`_, `Pi 3 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_wyliolab_2019_09_20.zip>`_ and `Pi 4 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_wyliolab_2019_09_20.zip>`_.
+
+|
+
+If you choose to continue the manual setup for the Raspberry Pi of the Wyliolab board, you should run the following commands:
+
+.. code-block:: bash
+
+	sudo pip3 install wyliozero
+
+	sudo su -
+	npm install -g --unsafe-perm studio-supervisor
+
+	exit
+	sudo nano /etc/supervisor/conf.d/studio-supervisor.conf
+
+.. code-block:: ini
+
+	[program:studio-supervisor]
+	command=/usr/bin/studio-supervisor raspberrypi wyliolab
+	home=/wyliodrin
+	user=pi
+
+After modifying the content of the *studio-supervisor.conf* file, you will have to run:
+
+.. code-block:: bash
+
+	sudo raspi-config
+
+In the prompt that will be opened, you will have to select the fifth option(Interfacing Options), then in the Configuration Tool section you will have to pick *P6 Serial* in order to disable the shell and enable the serial port.
+
+The final step before using the Wyliolab board is to reboot it.
 
 =========================
 
@@ -383,7 +424,7 @@ The dependencies you will have to install are:
 - *supervisor*: allows you to monitor processes related to a project
 - *redis*: database management system
 - *build-essential*: reference package for all the packages required for compilation
-- *git*: required for the **npm install** command to download w git included package
+- *git*: required for the **npm install** command to download git included package
 - *python3-pip*: python 3 programming language
 
 .. code-block:: bash
@@ -431,7 +472,7 @@ In order to install studio-supervisor, the following commands are required:
 .. code-block:: bash
 
 	sudo su -
-	sudo npm install -g --unsafe-perm studio-supervisor
+	npm install -g --unsafe-perm studio-supervisor
 
 	exit
 	sudo mkdir /wyliodrin
@@ -553,7 +594,7 @@ Download the pre-configured image
 The easiest way to set up a BeagleBone Black board so that it becomes available for Wyliodrin STUDIO is to download an image that is already configured.
 
 
-Download the image for `BeagleBone Black <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_beaglebone_black_2019_09_17.zip>`_.
+Download the image for `BeagleBone Black <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_beagleboneblack_2019_09_17.zip>`_.
 
 
 
@@ -644,7 +685,7 @@ The dependencies you will have to install are:
 - *supervisor*: allows you to monitor processes related to a project
 - *redis*: database management system
 - *build-essential*: reference package for all the packages required for compilation
-- *git*: required for the **npm install** command to download w git included package
+- *git*: required for the **npm install** command to download git included package
 - *python3-pip*: python 3 programming language
 
 .. code-block:: bash
@@ -707,7 +748,9 @@ In order to install studio-supervisor, the following commands are required:
 .. code-block:: bash
 
 	sudo su -
-	sudo npm install -g --unsafe-perm studio-supervisor
+	npm install -g --unsafe-perm studio-supervisor
+
+	exit
 	sudo mkdir /wyliodrin
 
 |
@@ -886,7 +929,7 @@ The dependencies you will have to install are:
 - *supervisor*: allows you to monitor processes related to a project
 - *redis*: database management system
 - *build-essential*: reference package for all the packages required for compilation
-- *git*: required for the **npm install** command to download w git included package
+- *git*: required for the **npm install** command to download git included package
 - *python3-pip*: python 3 programming language
 
 .. code-block:: bash
@@ -947,7 +990,9 @@ In order to install studio-supervisor, the following commands are required:
 .. code-block:: bash
 
 	sudo su -
-	sudo npm install -g --unsafe-perm studio-supervisor
+	npm install -g --unsafe-perm studio-supervisor
+
+	exit
 	sudo mkdir /wyliodrin
 
 |

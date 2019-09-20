@@ -3,7 +3,7 @@
 		<v-card-title>
 			<div class="about-logo">
 				<v-img src="plugins/workspace/data/img/logo/wyliodrin-studio-about-logo.png"></v-img>
-				<span>{{ $t('ABOUT_Version') }} {{ '2.0.3-beta' }}</span>
+				<span>{{ $t('ABOUT_VERSION') }} {{ studio.workspace.version }}</span>
 			</div>
 		</v-card-title>
 		
@@ -19,6 +19,7 @@
 				<p><strong>Diana Ghindaoanu</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 				<p><strong>Teona Severin</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 				<p><strong>Liviu-Nicolae Moraru</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
+				<p><strong>Ana Marinescu</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 			</div>
 		</v-card-text>
 

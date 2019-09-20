@@ -37,10 +37,6 @@ function updateDevices ()
 	{
 		devices.push (...transportDevices[transportDriverName]);
 	}
-	devices.push ({
-		id: 'error',
-		name: 'error'
-	});
 	workspace.updateDevices (devices);
 }
 
