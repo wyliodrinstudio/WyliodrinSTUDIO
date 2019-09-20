@@ -1,0 +1,38 @@
+<category name="Lab Network" colour="120">
+        <block type="lab_network_send_one">
+            <value name="board">
+                <block type="text">
+                    <field name="TEXT">board</field>
+                </block>
+            </value>
+            <value name="message">
+                <block type="text">
+                    <field name="TEXT">message</field>
+                </block>
+            </value>
+            <value name="topic">
+                <block type="text">
+                    <field name="TEXT">default</field>
+                </block>
+            </value>
+        </block>
+        <block type = "get_message">
+            <value name="topic">
+                <block type="text">
+                    <field name="TEXT">default</field>
+                </block>
+            </value>
+            <value name="board">
+                <block type="text">
+                    <field name="TEXT">boardId</field>
+                </block>
+            </value>
+        </block>
+        <block type = "get_message_from_all">
+            <value name="topic">
+                <block type="text">
+                    <field name="TEXT">default</field>
+                </block>
+            </value>
+        </block>
+    </category>
