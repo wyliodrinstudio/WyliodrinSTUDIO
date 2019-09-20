@@ -320,6 +320,89 @@ export function setup(options, imports, register)
 			return connections;
 		},
 
+		/**
+		 * Run the current project
+		 */
+		async runProject()
+		{
+			let device = studio.workspace.getDevice ();
+			console.log ('run');
+
+			let characteristic = savedCharacteristics [device.id];
+
+			if (characteristic)
+			{
+				let project = await studio.projects.getCurrentProject ();
+				if (project)
+				{
+					let filename;
+					let jsSource;
+					console.log(project.language);
+					if (project.language === 'visual')
+					{
+						filename = await studio.projects.getDefaultRunFileName (project);
+						jsSource = await studio.projects.loadFile (project, filename);
+					}
+					else if (project.language === 'javascript')
+					{
+						jsSource = await studio.projects.getCurrentFileCode();
+						console.log(jsSource);
+					}
+					device.sending = true;
+					// notificationMessagesReset();
+					updateDevice (device);
+					try
+					{
+						if (studio.console)
+						{
+							studio.console.show ();
+							studio.console.reset ();
+						}
+						console.log('started sending');
+						console.log(jsSource.toString());
+						await stop(characteristic);
+						await sleep(1000);
+						await sendString(characteristic, jsSource);
+						console.log('finished sending');
+					}
+					catch (e)
+					{
+						studio.workspace.showError ('DEVICE_RPK_SENDING_ERROR', {error: e.message});
+					}
+					device.sending = false;
+					updateDevice (device);
+				}
+			}
+		},
+
+		/**
+		 * Stop the current project
+		 */
+		async stopProject()
+		{
+			let device = studio.workspace.getDevice ();
+			console.log ('stop');
+
+			let characteristic = savedCharacteristics [device.id];
+			
+			if (characteristic)
+			{	
+				try
+				{
+					device.sending = true;
+					// notificationMessagesReset();
+					updateDevice (device);
+					await stop(characteristic);
+				}
+				catch (e)
+				{
+					studio.workspace.showError ('DEVICE_RPK_SENDING_ERROR', {error: e.message});
+				}
+				device.sending = false;
+				updateDevice (device);
+			}
+		},
+
 		async connect (device/*, options*/)
 		{
 			console.log('check object');
@@ -690,55 +773,8 @@ export function setup(options, imports, register)
 			},
 			type: 'run'
 		});
-		workspace.registerDeviceToolButton ('DEVICE_RPK_RUN', 10, async () => {
-			let device = studio.workspace.getDevice ();
-			console.log ('run');
-
-			let characteristic = savedCharacteristics [device.id];
-
-			if (characteristic)
-			{
-				let project = await studio.projects.getCurrentProject ();
-				if (project)
-				{
-					let filename;
-					let jsSource;
-					console.log(project.language);
-					if (project.language === 'visual')
-					{
-						filename = await studio.projects.getDefaultRunFileName (project);
-						jsSource = await studio.projects.loadFile (project, filename);
-					}
-					else if (project.language === 'javascript')
-					{
-						jsSource = await studio.projects.getCurrentFileCode();
-						console.log(jsSource);
-					}
-					device.sending = true;
-					// notificationMessagesReset();
-					updateDevice (device);
-					try
-					{
-						if (studio.console)
-						{
-							studio.console.show ();
-							studio.console.reset ();
-						}
-						console.log('started sending');
-						console.log(jsSource.toString());
-						await stop(characteristic);
-						await sleep(1000);
-						await sendString(characteristic, jsSource);
-						console.log('finished sending');
-					}
-					catch (e)
-					{
-						studio.workspace.showError ('DEVICE_RPK_SENDING_ERROR', {error: e.message});
-					}
-					device.sending = false;
-					updateDevice (device);
-				}
-			}
+		workspace.registerDeviceToolButton ('DEVICE_RPK_RUN', 10, () => {
+			device_rpk.runProject();
 		}, 'plugins/device.rpk/data/img/icons/run-icon.svg', 
 		{
 			visible () {
@@ -751,28 +787,8 @@ export function setup(options, imports, register)
 			},
 			type: 'run'
 		});  
-		workspace.registerDeviceToolButton ('DEVICE_RPK_STOP', 10, async () => {
-			let device = studio.workspace.getDevice ();
-			console.log ('stop');
-
-			let characteristic = savedCharacteristics [device.id];
-			
-			if (characteristic)
-			{	
-				try
-				{
-					device.sending = true;
-					// notificationMessagesReset();
-					updateDevice (device);
-					await stop(characteristic);
-				}
-				catch (e)
-				{
-					studio.workspace.showError ('DEVICE_RPK_SENDING_ERROR', {error: e.message});
-				}
-				device.sending = false;
-				updateDevice (device);
-			}
+		workspace.registerDeviceToolButton ('DEVICE_RPK_STOP', 10, () => {
+			device_rpk.stopProject();
 		}, 'plugins/device.wyapp/data/img/icons/stop-icon.svg', 
 		{
 			visible () {

@@ -411,86 +411,9 @@ export function setup(options, imports, register)
 	if (workspace)
 	{
 		/* Register the Run button */
-		workspace.registerDeviceToolButton ('DEVICE_WYAPP_RUN', 10, async () => {
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_RUN', 10, () => {
 
-
-			let project = await studio.projects.getCurrentProject ();
-
-			if (project)
-			{
-				let filename = await studio.projects.getDefaultRunFileName(project);
-				let makefile = await studio.projects.loadFile (project, '/makefile');
-				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
-
-				let device = studio.workspace.getDevice ();
-				if (device)
-				{
-					studio.console.show ();
-					studio.console.reset ();
-					let structure = await studio.projects.generateStructure (project);
-
-					console.log (structure);
-
-					let tp = {
-						name: project.name,
-						isroot: true,
-						isdir: true,
-						children: [
-							{
-								name: project.name,
-								isdir: true,
-								issoftware: true,
-								children: [],
-								m: makefile
-							}
-						]
-					};
-
-					let setFiles = async (projectChildren, tpChildren, filenamePath) =>
-					{
-						for (let file of projectChildren)
-						{
-							if (file.children)
-							{
-								let folder = {
-									name: file.name,
-									isdir: true,
-									children: []
-								};
-								tpChildren.push (folder);
-								await setFiles (file.children, folder.children, path.join (filenamePath, file.name));
-							}
-							else
-							{
-								tpChildren.push ({
-									name: file.name,
-									isdir: false,
-									content: await studio.projects.loadFile (project, path.join (filenamePath, file.name))
-								});
-							}
-						}
-					};
-
-					await setFiles (structure.children, tp.children[0].children, '/');
-
-					console.log (tp);
-
-					let xtrem = studio.console.getSize ();
-
-					sendToDevice (device, 'tp', {
-						a: 'start',
-						t: tp,
-						l: project.language,
-						onlysoft: true,
-						c: xtrem.cols,
-						r: xtrem.rows
-					});
-				}
-			}
-			else
-			{
-				studio.workspace.showNotification ('DEVICE_WYAPP_ERROR_PROJECT_RUN');
-			}
+			device_wyapp.runProject ();
 
 		}, 'plugins/device.wyapp/data/img/icons/run-icon.svg', 
 		{
@@ -506,15 +429,7 @@ export function setup(options, imports, register)
 		/* Register the Stop button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_STOP', 10, () => {
 			// console.log ('stop');
-			let device = studio.workspace.getDevice ();
-			if (device)
-			{
-				// studio.console.show ();
-				// studio.console.reset ();
-				sendToDevice (device, 'tp', {
-					a: 'stop'
-				});
-			}
+			device_wyapp.stopProject();
 
 		}, 'plugins/device.wyapp/data/img/icons/stop-icon.svg', {
 			visible () {
@@ -534,7 +449,7 @@ export function setup(options, imports, register)
 		}, 'plugins/device.wyapp/data/img/icons/fileexplorer-icon.svg', {
 			visible () {
 				let device = studio.workspace.getDevice ();
-				return (device.status === 'CONNECTED');
+				return (device.status === 'CONNECTED' && device.properties.fileManager === true);
 			}
 		});
 		
@@ -650,6 +565,106 @@ export function setup(options, imports, register)
 		getBoardDriver (name)
 		{
 			return boards[name];
+		},
+
+		/**
+		 * Stop the current project
+		 */
+		stopProject()
+		{
+			let device = studio.workspace.getDevice ();
+			if (device)
+			{
+				// studio.console.show ();
+				// studio.console.reset ();
+				sendToDevice (device, 'tp', {
+					a: 'stop'
+				});
+			}
+		},
+
+		/**
+		 * Run the current project
+		 */
+		async runProject ()
+		{
+			let project = await studio.projects.getCurrentProject ();
+
+			if (project)
+			{
+				let filename = await studio.projects.getDefaultRunFileName(project);
+				let makefile = await studio.projects.loadFile (project, '/makefile');
+				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
+
+				let device = studio.workspace.getDevice ();
+				if (device)
+				{
+					studio.console.show ();
+					studio.console.reset ();
+					let structure = await studio.projects.generateStructure (project);
+
+					console.log (structure);
+
+					let tp = {
+						name: project.name,
+						isroot: true,
+						isdir: true,
+						children: [
+							{
+								name: project.name,
+								isdir: true,
+								issoftware: true,
+								children: [],
+								m: makefile
+							}
+						]
+					};
+
+					let setFiles = async (projectChildren, tpChildren, filenamePath) =>
+					{
+						for (let file of projectChildren)
+						{
+							if (file.children)
+							{
+								let folder = {
+									name: file.name,
+									isdir: true,
+									children: []
+								};
+								tpChildren.push (folder);
+								await setFiles (file.children, folder.children, path.join (filenamePath, file.name));
+							}
+							else
+							{
+								tpChildren.push ({
+									name: file.name,
+									isdir: false,
+									content: await studio.projects.loadFile (project, path.join (filenamePath, file.name))
+								});
+							}
+						}
+					};
+
+					await setFiles (structure.children, tp.children[0].children, '/');
+
+					console.log (tp);
+
+					let xtrem = studio.console.getSize ();
+
+					sendToDevice (device, 'tp', {
+						a: 'start',
+						t: tp,
+						l: project.language,
+						onlysoft: true,
+						c: xtrem.cols,
+						r: xtrem.rows
+					});
+				}
+			}
+			else
+			{
+				studio.workspace.showNotification ('DEVICE_WYAPP_ERROR_PROJECT_RUN');
+			}
 		}
 	};
 

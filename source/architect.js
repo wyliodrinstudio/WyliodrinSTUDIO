@@ -228,7 +228,15 @@ function Architect(config) {
 				}
 				// PROXY
 				provided[name].__name = name;
-				services[name] = new Proxy (provided[name], handler);
+				for (let prop of Object.keys (provided[name]))
+				{
+					if (_.isFunction (provided[name][prop]))
+					{
+						provided[name]['__'+prop] = provided[name][prop];
+						provided[name][prop] = hookFunction.bind (app, provided[name], prop);
+					}
+				}
+				services[name] = provided[name];
 				app.pluginToPackage[name] = {
 					path: plugin.packagePath,
 					package: packageName,
@@ -250,7 +258,9 @@ function Architect(config) {
 	}
 	
 	function hookFunction(target, prop, ...args) 
-	{
+	{ 
+		// console.log('[hookFunction]');
+		// console.log('\t' + target.__name + '.' + prop);
 		let preResult = null;
 		let result = {};
 		let postResult = {};
@@ -261,6 +271,8 @@ function Architect(config) {
 		// run preHook function if exists
 		if (_.isFunction (preHook))
 		{
+			// console.log('\t[hookFunction]');
+			// console.log(target.__name + '.' + prop);
 			preResult = preHook (...args);
 		}
 
@@ -271,9 +283,9 @@ function Architect(config) {
 
 		// check if the original function is to be called
 		// set the result
-		if (_.isFunction(target[prop]) && preResult.abort !== true)
+		if (_.isFunction(target['__'+prop]) && preResult.abort !== true)
 		{
-			result = target[prop] (...preResult.args);
+			result = target['__'+prop] (...preResult.args);
 		}
 		else 
 		{
@@ -294,17 +306,19 @@ function Architect(config) {
 		return result;
 	}
 
-	var handler = {
-		get: function(target, prop/*, receiver*/) {
-			if (_.isFunction(target[prop])) {
-				return hookFunction.bind(this, target, prop);
-			} 
-			else
-			{
-				return Reflect.get(...arguments);	
-			}
-		}
-	};
+	// var handler = {
+	// 	get: function(target, prop, receiver) {
+	// 		if (_.isFunction(target[prop])) {
+	// 			console.log('[in handler]');
+	// 			console.log(target.__name + '.' + prop);
+	// 			return hookFunction.bind(this, target, prop);
+	// 		} 
+	// 		else
+	// 		{
+	// 			return Reflect.get(...arguments);	
+	// 		}
+	// 	}
+	// };
 	// Give createApp some time to subscribe to our 'ready' event
 	(typeof process === 'object' ? process.nextTick : setTimeout)(startPlugins);
 

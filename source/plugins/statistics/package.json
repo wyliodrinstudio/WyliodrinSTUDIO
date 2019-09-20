@@ -4,7 +4,7 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["hooks"],
+        "consumes": ["workspace", "hooks", "events"],
         "provides": [],
         "target": ["electron", "browser"]
     }
