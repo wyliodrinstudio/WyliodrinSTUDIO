@@ -394,7 +394,8 @@
          "ABOUT_PROVIDED_BY": "Provided by",
          "WORKSPACE_DEVICE_SETUP_TEXT": "You might want to set up some devices. For more information, please go to our tutorials website.",
          "WORKSPACE_DEVICE_SETUP": "Device Setup",
-         "WORKSPACE_DOCUMENTATION": "Documentation"
+         "WORKSPACE_DOCUMENTATION": "Documentation",
+         "ABOUT_VERSION": "Version"
       },
       "es": {
          "CHAT": "CHAT",
@@ -1119,6 +1120,7 @@
          "ABOUT_LICENSE": "ライセンス",
          "ABOUT_LICENSE_TITLE": "ライセンスの使用方法 ",
          "ABOUT_PROVIDED_BY": "によって提供された",
+         "ABOUT_VERSION": "バージョン",
          "WORKSPACE_DEVICE_SETUP_TEXT": "デバイスをセットアップすることもできます。詳細については、チュートリアルWebサイトにアクセスしてください。",
          "WORKSPACE_DEVICE_SETUP": "デバイスのセットアップ"
       },
