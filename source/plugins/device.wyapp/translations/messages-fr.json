@@ -121,5 +121,9 @@
     "DEVICE_WYAPP_LIBWYLIODRIN": {
         "message": "Version de Wyliodrin Library",
         "description": "The used version of the Wyliodrin Library."
+    },
+    "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
+        "message": "Veuillez ouvrir un projet.",
+        "description": "Notification text when there is no project selected"
     }
 }

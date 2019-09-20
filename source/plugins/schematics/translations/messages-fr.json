@@ -18,5 +18,9 @@
     "DELETE_CONFIRMATION": {
         "message": "Confirmation de suppression",
         "description": "Delete confirmation prompt title"
+    },
+    "SCHEMATICS_IMPORT": {
+        "message": "Importer le schémas .svg depuis Fritzing",
+        "description": "The message that appears when there is no picture"
     }
 }

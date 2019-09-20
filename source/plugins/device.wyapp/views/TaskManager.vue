@@ -27,9 +27,9 @@
 							<span>{{memoryFormat(task.VSZ)}}</span>
 							<span>{{task.TT}}</span>
 						</td>
-						<td class="w-20 text-right">
-							<div v-if="task.sentKill">
-								<v-progress-circular indeterminate></v-progress-circular>
+						<td class="w-20 text-right lib-btn-box">
+							<div class="waiting-box" v-if="task.sentKill">
+								<v-progress-circular :size="20" indeterminate></v-progress-circular>
 							</div>
 							<v-btn v-else text class="lib-app-btn" @click="kill(task)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
 						</td>
@@ -78,7 +78,20 @@ export default {
 	methods: {
 		updateTasks (data)
 		{
-			this.tasks = data;
+			let str = (s1, s2) => 
+			{
+				if (s1 < s2) return -1;
+				else if (s1 === s2) return 0;
+				else return 1;
+			};
+			this.tasks = data.map ((task) => { task.sentKill = false; return task; }).sort ((task1, task2) => {
+				if ((task1.TT === '?' && task2.TT === '?') || (task1.TT !== '?' && task2.TT !== '?'))
+				{
+					return str (task1.COMMAND, task2.COMMAND);
+				}
+				else if (task1.TT === '?') return 10;
+				else return -10;
+			});
 		},
 		memoryFormat (VSZ)
 		{

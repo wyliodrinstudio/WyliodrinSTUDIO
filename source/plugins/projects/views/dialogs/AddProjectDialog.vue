@@ -37,6 +37,7 @@ export default {
 			projectName: '',
 			ProgLanguages:[],
 			languageID:'',
+			projects:[]
 		};
 	},
 	methods: {
@@ -47,10 +48,12 @@ export default {
 		{
 			if(this.projectName === '') {
 				await this.studio.workspace.showNotification ('PROJECT_NAME_PROMPT');
+			} else if(this.projects.find(x => x.name === this.projectName) !== undefined) {
+				await this.studio.workspace.showNotification ('PROJECT_EXISTS_PROMPT');
 			} else {
 				let type = this.studio.projects.getLanguage(this.languageID);
 				let project = await this.studio.projects.createEmptyProject(this.projectName,this.languageID);
-				if(_.isFunction(type.options.createProject)){
+				if(project && _.isFunction(type.options.createProject)){
 					if(await type.options.createProject(project))
 					{
 						this.languageID='';
@@ -71,8 +74,9 @@ export default {
 			this.$root.$emit ('submit', undefined);
 		}
 	},
-	created()
+	async created()
 	{
+		this.projects = await this.studio.projects.loadProjects(false);
 		this.ProgLanguages = this.studio.projects.languages;
 		this.languageID = this.ProgLanguages[0].id;
 	},

@@ -3,6 +3,10 @@
         "message": "CHAT",
         "description": "The Chat tab"
     },
+    "CHAT_CHANNEL": {
+        "message": "Channel",
+        "description": "A chat channel"
+    },
     "CHAT_JOIN_CHANNEL": {
         "message": "Joindre un channel",
         "description": "Button used to connect to a channel."

@@ -1,0 +1,10 @@
+{
+	"EDITOR_VISUAL_SHOW_CODE": {
+        "message": "Afficher le code",
+        "description": "Button designed to show the code behind a blockly"
+    },
+    "EDITOR_VISUAL_HIDE_CODE": {
+        "message": "Masquer le code",
+        "description": "Button designed to show the code behind a blockly"
+    }
+}
