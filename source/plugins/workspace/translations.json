@@ -1370,7 +1370,6 @@
          "PROJECTS_EXTENSION_URECOGNIZED": "Extensia fișierului nu este recunoscută.",
          "PROJECTS_INVALID_PROJECT": "Ați deschis un proiect invalid, vă rugăm selectați altul.",
          "PROJECTS_JSON_DO_NOT": "S-a încercat editarea fișierului project.json, NU FACEȚI ASTA",
-         "PROJECT_EXISTS_PROMPT": "Un proiect cu acest nume există deja",
          "EDITOR_VISUAL_SHOW_CODE": "Afisați Sursa",
          "EDITOR_VISUAL_HIDE_CODE": "Ascundeți Sursa",
          "SCHEMATICS": "Scheme",
