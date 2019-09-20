@@ -676,7 +676,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 .folder-open {
 background: url('plugins/projects/data/img/icons/32px.png') no-repeat 0px -32px !important;
 	width: 32px;

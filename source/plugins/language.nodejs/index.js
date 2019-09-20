@@ -30,7 +30,7 @@ export default function setup(options, imports, register) {
 	let pictograms = [
 		{
 			extension: '.js',
-			icon:'plugins/language.nodejs/data/img/javascriptIcon.png'
+			icon:'mdi-language-javascript'
 		}
 	];
 	let javaScript = {

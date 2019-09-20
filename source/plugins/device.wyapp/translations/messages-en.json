@@ -125,5 +125,9 @@
     "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
         "message": "Please open a project",
         "description": "Notification text when there is no project selected"
-    }
+    },
+	"DEVICE_WYAPP_NO_DIRECTORY": {
+		"message": "There is no directory selected",
+		"description": "The message shown in the file tree manager when there is no directory currently selected"
+	}
 }
