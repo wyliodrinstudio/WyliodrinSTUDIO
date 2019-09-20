@@ -246,7 +246,7 @@ module.exports = function (blockly) {
 	Blockly.Blocks['wyliozero_analogwrite'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber_analog'])
+				.setCheck(['String', 'wyliozero_pinNumber_pwm'])
 				.setAlign(Blockly.ALIGN_RIGHT)
 				.appendField('analogWrite');
 			this.appendValueInput('value')
@@ -359,6 +359,26 @@ module.exports = function (blockly) {
 				]), 'pin')
 				.appendField('(analog)');
 			this.setOutput(true, 'wyliozero_pinNumber_analog');
+			this.setColour(230);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['wyliozero_pin_pwm'] = {
+		init: function() {
+			this.appendDummyInput()
+				.appendField(new Blockly.FieldDropdown([
+					['D3', 'D3'],
+					['D5', 'D5'],
+					['D6', 'D6'],
+					['D9', 'D9'],
+					['D10', 'D10'],
+					['D11', 'D11']
+
+				]), 'pin')
+				.appendField('(pwm)');
+			this.setOutput(true, 'wyliozero_pinNumber_pwm');
 			this.setColour(230);
 			this.setTooltip('');
 			this.setHelpUrl('');
@@ -645,7 +665,7 @@ module.exports = function (blockly) {
 				.appendField('For Servo Motor');
 			this.appendValueInput('value')
 				.setCheck('Number')
-				.appendField('with value');
+				.appendField('set value');
 			this.appendDummyInput()
 				.appendField('(between -1 and 1).');
 			this.setInputsInline(true);
@@ -656,7 +676,6 @@ module.exports = function (blockly) {
 			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_output.html#gpiozero.Servo.value');
 		}
 	};
-
 	Blockly.Blocks['wyliozero_button_wait_for_release'] = {
 		init: function() {
 			this.appendValueInput('button')
@@ -1107,25 +1126,11 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliozero_dht_sensor'] = {
-		init: function() {
-			this.appendValueInput('pin')
-				.setCheck(['String', 'wyliozero_pinNumber_analog'])
-				.appendField('DHT sensor on pin');
-			this.setOutput(true, 'dht_sensor');
-			this.setColour(100);
-			this.setTooltip('');
-			this.setHelpUrl('https://github.com/adafruit/Adafruit_Python_DHT/tree/master/Adafruit_DHT');
-		}
-	};
-
 	Blockly.Blocks['wyliozero_dht_temperature'] = {
 		init: function() {
-			this.appendValueInput('dht')
-				.setCheck('dht_sensor')
-				.appendField('temperature read from sensor');
-			this.appendDummyInput()
-				.appendField('.');
+			this.appendValueInput('pin_number')
+				.setCheck(['String', 'wyliozero_pinNumber_raspberry'])
+				.appendField('Temperature sensor');
 			this.setOutput(true, 'Boolean');
 			this.setColour(120);
 			this.setTooltip('');
@@ -1135,11 +1140,9 @@ module.exports = function (blockly) {
 
 	Blockly.Blocks['wyliozero_dht_humidity'] = {
 		init: function() {
-			this.appendValueInput('dht')
-				.setCheck('dht_sensor')
-				.appendField('humidity read from sensor');
-			this.appendDummyInput()
-				.appendField('.');
+			this.appendValueInput('pin_number')
+				.setCheck(['String', 'wyliozero_pinNumber_raspberry'])
+				.appendField('Humidity sensor');
 			this.setOutput(true, 'Boolean');
 			this.setColour(120);
 			this.setTooltip('');

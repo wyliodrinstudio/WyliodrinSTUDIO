@@ -22,7 +22,7 @@ module.exports = function (blockly) {
 					['GPIO11', '11'],
 					['GPIO12', '12'],
 					['GPIO13', '13'],
-					['GPI14', '14'],
+					['GPIO14', '14'],
 					['GPIO15', '15'],
 					['GPIO16', '16'],
 					['GPIO17', '17'],
@@ -253,7 +253,7 @@ module.exports = function (blockly) {
 				.appendField('For Servo Motor');
 			this.appendValueInput('value')
 				.setCheck('Number')
-				.appendField('with value');
+				.appendField('set value');
 			this.appendDummyInput()
 				.appendField('(between -1 and 1).');
 			this.setInputsInline(true);
