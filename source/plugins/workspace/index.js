@@ -175,7 +175,7 @@ let workspace = {
 		Vue.translation = translations;
 
 		const i18n = new VueI18n({
-			locale: getLanguage(),
+			locale: studio.settings.loadValue ('workspace', 'language', getLanguage()),
 			fallbackLocale: 'en',
 			messages: translations.TRANSLATION
 		});
