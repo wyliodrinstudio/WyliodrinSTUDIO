@@ -686,7 +686,7 @@ let projects = {
 									file: child,
 									dir: fullPath
 								});
-							if (child1.file !== 'json') {
+							if (child1.name !== 'project.json') {
 								children.push(child1);
 							}
 						}

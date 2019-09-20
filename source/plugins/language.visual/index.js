@@ -24,7 +24,15 @@ export default function setup(options, imports, register) {
 		{
 			extension: '.py',
 			icon:'mdi-language-python'
-		}
+		},
+		{
+			extension: '.json',
+			icon:'mdi-json'
+		},
+		{
+			extension: '.md',
+			icon:'mdi-markdown'
+		},
 	];
 	let visual = {
 		async createProject(project) {
