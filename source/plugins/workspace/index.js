@@ -1221,25 +1221,6 @@ export function setup(options, imports, register) {
 
 	workspace.dispatchToStore('workspace', 'mode', mode);
 
-	imports.hooks.addPreHook('projects', 'createEmptyProject', (...args) => {
-	
-		var da = true;
-		if (da) {
-			let r = {
-				abort: true,
-				args: ['Teona is here', 'nodejs'],
-				ret: null
-			};
-			return r;
-		} else return null;
-	});
-
-	imports.hooks.addPostHook('projects', 'createEmptyProject', async(res) => {
-		let res2 = await res;
-		console.log(res);
-		return res2;
-	});
-
 	register(null, {
 		workspace: workspace
 	});
