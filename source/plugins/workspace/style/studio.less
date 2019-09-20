@@ -287,7 +287,8 @@ input {caret-color:@color-highlight !important;  }
 
 .signal img {height: auto;}
 
-.networkinfo {font-size: 14px;}
+.networkinfo {font-size: 14px; position: relative;}
+.net-dis-btn {position:absolute; top:0; right:5px;}
 
 .project-box-1 {width:calc(~"100% - 195px"); float: right;}
 .project-box-2 {width:100%;}
@@ -542,3 +543,46 @@ outline:none;
 .drpdown {margin-top: -8px;}
 
 .v-alert {max-height: 80vh; overflow-y:auto; }
+
+.about-box {background: url('plugins/workspace/data/img/about-bg.jpg') #000 no-repeat top center; color:@color-white !important;
+	.v-card__title {background: transparent;}
+	.v-card__text {color:@color-white !important}
+	.pre-box{height:100%;}
+	.v-card__actions{border-top:0px; padding: 18px;
+		.v-btn {color: @color-white;}
+	}
+}
+.about-logo{position:relative; margin:auto; text-align:center; padding: 30px 0 40px;
+	.v-image {max-width: 368px; margin:auto;}
+	span{position:absolute; right: 10px; top: 90px; font-size:14px;}
+}
+
+.developers {margin:auto; text-align:center; overflow: auto; display: block; max-height: 400px;
+	h3{font-weight:bold; width:100%; font-size:18px; margin-bottom: 20px;}
+	p{width:100%; font-size:14px; margin-bottom: 10px;}
+}
+
+.provided {font-size:12px; position:absolute; left: 25px; bottom: 10px;}
+
+.license-box {margin: 15px;}
+
+.welcome {margin:auto; text-align:center;
+	h3{font-weight:bold; width:100%; font-size:20px;}
+	p{width:100%; font-size:14px;}
+	span{width:100%; font-size:14px; text-align:center;}
+	.welcome-text {padding:15px 10% 0;}
+}
+
+.welcome-btn {
+	background:transparent !important;
+	border:@color-white 2px solid;
+	color:@color-white !important;
+	padding-left:10px;
+	padding-right:10px;
+    margin-top: 40px;
+}
+.welcome-btn:hover { 
+	background:@color-highlight !important;
+	color:@color-white !important;
+	border:@color-highlight 2px solid;
+}

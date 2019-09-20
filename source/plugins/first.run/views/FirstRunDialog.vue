@@ -1,13 +1,15 @@
 <template>
-	<v-card aria-label="Wyliodrin App" class="about-box" style="width: 550px; height:550px;">
-		<v-card-text class="pre-box">
+	<v-card class="about-box">
+		<v-card-title>
 			<div class="about-logo">
-				<v-img src="plugins/first.run/data/img/wyliodrin-studio-about-logo.png" />
+				<v-img src="plugins/first.run/data/img/logo/wyliodrin-studio-about-logo.png"></v-img>
 				<span>{{ $t('ABOUT_Version') }} {{ '2.0.3-beta' }}</span>
 			</div>
+		</v-card-title>
+		<v-card-text>
 			<div class="welcome">
 				<h3>{{ $t('WELCOME_TEXT') }}</h3>
-				<p>{{ $t('WELCOME_START_WORK') }}</p>
+				<p class="welcome-text">{{ $t('WELCOME_START_WORK') }}</p>
 				
 				<p>
 					<v-btn @click="openLibrary" class="welcome-btn">{{ $t('WELCOME_CREATE_APP') }}</v-btn>
@@ -17,11 +19,12 @@
 			</div>
 		</v-card-text>
 
-		<v-card-actions layout="row">
+		<v-card-actions>
 			<div class="provided">
 				<p>{{$t('ABOUT_PROVIDED_BY')}} <a target="_blank" @click="openLink">Wyliodrin SRL</a></p>
 			</div>
-			<v-btn @click="exit">{{ $t('EXIT') }}</v-btn>
+			<v-spacer></v-spacer>
+			<v-btn text @click="exit">{{ $t('EXIT') }}</v-btn>
 		</v-card-actions>
 
 	</v-card>

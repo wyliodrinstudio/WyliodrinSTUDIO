@@ -209,7 +209,7 @@ let workspace = {
 		});
 
 		this.registerMenuItem('WORKSPACE_TOOLBAR_ABOUT', 100, () => {
-			this.showDialog(AboutDialog);
+			this.showDialog(AboutDialog,{width:550});
 		});
 
 		// this.registerTab('Application', 20, () => {

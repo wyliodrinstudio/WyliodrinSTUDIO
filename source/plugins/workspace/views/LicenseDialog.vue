@@ -1,12 +1,13 @@
 <template>
-	<v-card>
+	<v-card class="manager-box">
 		<v-card-title>
 			{{$t('ABOUT_LICENSE_TITLE')}}
 		</v-card-title>
 		<v-card-text>
-			<pre> {{ license }} </pre>
+			<pre class="license-box"> {{ license }} </pre>
 		</v-card-text>
 		<v-card-actions>
+			<v-spacer></v-spacer>
 			<v-btn text @click="exit">{{$t('EXIT')}}</v-btn>
 		</v-card-actions>
 	</v-card>
