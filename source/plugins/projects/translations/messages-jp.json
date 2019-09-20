@@ -39,10 +39,6 @@
         "message": "",
         "description": "新しい名前"
     },
-    "PROJECT_SHOW_CODE": {
-        "message": "コードを見せます",
-        "description": "Button designed to show the code behind a blockly"
-    },
     "PROJECT_HIDE_CONSOLE": {
         "message": "コンソールを隠します",
         "description": "Button designed to hide the console"
@@ -86,5 +82,197 @@
     "PROJECT_LIBRARY_LOAD_EXAMPLE": {
         "message": "例を載せ込みます",
         "description": "Load a project Example"
+    },
+    "PROJECT_FOLDER_SURE": {
+        "message": "このフォルダーを削除してもよろしいですか？",
+        "description": "Prompt asking for assurance on deleting a folder"
+    },
+    "PROJECT_IMPORT_FILE": {
+        "message": "インポートファイル",
+        "description": "Import a file within a project"
+    },
+    "PROJECT_EXPORT_FILE": {
+        "message": "エクスポートファイル",
+        "description": "Export a file from the project"
+    },
+    "PROJECT_FILE_SURE": {
+        "message": "このファイルを削除してもよろしいですか？",
+        "description": "Prompt asking for assurance on deleting a file"
+    },
+    "PROJECT_DELETE_PROJECT": {
+        "message": "プロジェクトを削除します",
+        "description": "Label for the dialog to delete a project within the workspace"
+    },
+    "PROJECT_LOAD_PROJECT": {
+        "message": "ライブラリからプロジェクトをロードします",
+        "description": "Text meaning that there is no project loaded"
+    },
+    "PROJECT_PROJECT_SURE": {
+        "message": "このプロジェクトを削除してもよろしいですか？",
+        "description": "Prompt asking for assuruance on deleting a project"
+    },
+    "PROJECT_LIBRARY": {
+        "message": "プロジェクトライブラリ",
+        "description": "Opens the projects library"
+    },
+    "PROJECT_LIBRARY_NAME": {
+        "message": "プロジェクト名",
+        "description": "Label for the name of the project"
+    },
+    "PROJECT_LIBRARY_NEW_PROJECT": {
+        "message": "プロジェクトを作成します",
+        "description": "Create a project within the workspace"
+    },
+    "PROJECT_ERROR_LANGUAGE_ADDON": {
+        "message": "言語{language}のアドオンの登録に失敗しました",
+        "description": "The error message shown when a language addon fails to register"
+    },
+    "PROJECT_ERROR_REGISTER_EDITOR": {
+        "message": "名前{name}のエディターの登録エディターが既に登録されていません",
+        "description": "The error message shown when an edtitor fails to register"
+    },
+    "PROJECT_ERROR_LOAD_PROJECTS": {
+        "message": "プロジェクトの読み込み中にエラーが発生しました ({error})",
+        "description": "The error message shown when the projects fail to load"
+    },
+    "PROJECT_ERROR_SELECT_PROJECT": {
+        "message": "プロジェクト{project}の選択中にエラーが発生しました ({error})",
+        "description": " The error message shown when a project fails to be selected"
+    },
+    "PROJECT_ERROR_CREATE_PROJECT": {
+        "message": "プロジェクト{project}の作成中にエラーが発生しました ({error})",
+        "description": "The error message shown when a project fails to be created"
+    },
+    "PROJECT_ERROR_RENAME_PROJECT": {
+        "message": "プロジェクト{project}の名前を{name}に変更中にエラーが発生しました ({error})",
+        "description": "The error message shown when a project fails to be renamed"
+    },
+    "PROJECT_ERROR_CLONE_PROJECT": {
+        "message": "プロジェクト{project}のクローン中にエラーが発生しました ({error})",
+        "description": "The error message shown when a project fails to be cloned"
+    },
+    "PROJECT_ERROR_DELETE_PROJECT": {
+        "message": "プロジェクト{project}の削除中にエラーが発生しました ({error})",
+        "description": "The error message shown when a project fails to be deleted"
+    },
+    "PROJECT_ERROR_IMPORT_PROJECT": {
+        "message": "プロジェクト{project}のインポート中にエラーが発生しました ({error})",
+        "description": "The error message shown when a project fails to be imported"
+    },
+    "PROJECT_ERROR_EXPORT_PROJECT": {
+        "message": "プロジェクト{project}のエクスポート中にエラーが発生しました ({error})",
+        "description": "The error message shown when a project fails to be exported"
+    },
+    "PROJECT_ERROR_NEW_FOLDER": {
+        "message": "新しいフォルダー{folder}の作成中にエラーが発生しました ({error})",
+        "description": "The error message shown when a folder fails to be created"
+    },
+    "PROJECT_ERROR_NEW_FILE": {
+        "message": "新しいファイル{file}の作成中にエラーが発生しました ({error})",
+        "description": "The error message shown when a file fails to be created"
+    },
+    "PROJECT_ERROR_RENAME_OBJECT": {
+        "message": "オブジェクト{object}の名前を変更中にエラーが発生しました ({error})",
+        "description": "The error message shown when an object fails to be renamed"
+    },
+    "PROJECT_ERROR_DELETE_FOLDER": {
+        "message": "フォルダー{folder}の削除中にエラーが発生しました ({error})",
+        "description": "The error message shown when a folder fails to be deleted"
+    },
+    "PROJECT_ERROR_DELETE_FILE": {
+        "message": "ファイル{file}の削除中にエラーが発生しました ({error})",
+        "description": "The error message shown when a file fails to be deleted"
+    },
+    "PROJECTS_JSON_DO_NOT": {
+        "message": "project．jsonを編集しようとしました。 これをしないでください。",
+        "description": "The error message when the user is trying to edit the project.json file of a project."
+    },
+    "PROJECT_ERROR_SAVE_FILE": {
+        "message": "ファイル{file}の保存中にエラーが発生しました　({error})",
+        "description": "The error message shown when a file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_FILE": {
+        "message": "ファイル{file}の読み込み中にエラーが発生しました ({error})",
+        "description": "The error message shown when file fails to be loaded"
+    },
+    "PROJECT_ERROR_READ_DATA": {
+        "message": "プロジェクト{project}のデータの読み取り中にエラーが発生しました ({error})",
+        "description": "The error message shown when there is an error reading the data for the project"
+    },
+    "PROJECT_ERROR_NOT_FOLDER": {
+        "message": "プロジェクトフォルダー{project}はフォルダーではありません",
+        "description": "The error message shown when there is no folder"
+    },
+    "PROJECT_ERROR_SAVE_SPECIAL_FILE": {
+        "message": "データ付きの特殊ファイル{file}の保存中にエラーが発生しました ({error})",
+        "description": "The error message shown when a special settings file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_SPECIAL_FILE": {
+        "message": "特殊ファイル{file}の読み込み中にエラーが発生しました ({error})",
+        "description": "The error message shown when a special settings file fails to be loaded"
+    },
+    "PROJECT_ERROR_SEND_CODE": {
+        "message": "ファイルコード{file}の送信中にエラーが発生しました ({error})",
+        "description": "The error message shown when there is an error while sending the file code to the device"
+    },
+    "PROJECT_ERROR_PATH_INVALID": {
+        "message": "エラー、パスがワークスペースフォルダー内にありません",
+        "description": "The error message shown when the specified path is not in the workspace folder"
+    },
+    "PROJECT_ERROR_CHANGE_DATE": {
+        "message": "エラー、日付{project}を書き込めません ({error})",
+        "description": "The error message shown when a date for a file fails to be written"
+    },
+    "PROJECT_JSON_DO_NOT": {
+        "message": "project．jsonを編集しようとしました。 これをしないでください。",
+        "description": "The error message shown when there is an attempt at editing the project settings file"
+    },
+    "PROJECT_CLONE_PROJECT": {
+        "message": "プロジェクトをクローンします",
+        "description": "Label for the clone project dialog"
+    },
+    "PROJECT_RENAME_PROJECT": {
+        "message": "プロジェクトの名前を変更します",
+        "description": "Label for the rename project dialog"
+    },
+    "PROJECT_NAME_PROMPT": {
+        "message": "プロジェクトの名前を入力してください",
+        "description": "Label for the new name to be given to the project"
+    },
+    "PROJECT_LIBRARY_SEARCH": {
+        "message": "サーチ",
+        "description": "Label to search for projects"
+    },
+    "PROJECT_NULL": {
+        "message": "1つ以上のパラメーターがヌルです",
+        "description": "One or more of the funciton's parameters are null"
+    },
+    "PATH_NULL": {
+        "message": "パスがヌルです",
+        "description": "The given path turned out null"
+    },
+    "PROJECTS_NO_PROJECT": {
+        "message": "まだプロジェクトがありません",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
+    },
+    "PROJECTS_CREATE_APPLICATION": {
+        "message": "下の[新しいアプリケーションを作成]ボタンをクリックします ???",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
+    },
+    "PROJECTS_STORAGE_NOT_PERSISTENT": {
+        "message": "ストレージシステムは永続的ではありません。これは、予告なしにプロジェクトがいつでも削除される可能性があることを意味します。これを回避するには、プロジェクトを頻繁にエクスポートしてください。",
+        "description": "The message the user sees in the Projects Library when persistent storage is not available. We recommend you to use Firefox."
+    },
+    "PROJECTS_STORAGE_ASK_PERSISTENT": {
+        "message": "ストレージシステムは永続的ではありません。ストレージを永続化する許可を許可してください。",
+        "description": "The message the user sees in the Projects Library when persistent storage is available but not permitted."
+    },
+    "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": {
+        "message": "永続性を許可する",
+        "description": "The button the user clicks to ask persistance."
+    },
+    "PROJECTS_STORAGE_BROWSER_ERROR": {
+        "message": "持続性を許可するかどうかをブラウザが尋ねなかった場合、ブラウザに問題がある可能性があります。プロジェクトが失われないようにするには、このWebサイトをブックマークに追加し、より頻繁に使用して、プロジェクトを頻繁にエクスポートする必要があります。Firefoxを使用することもお勧めします。",
+        "description": "The message the user sees in the Projects Library when persistent storage is not available."
     }
 }

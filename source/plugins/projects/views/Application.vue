@@ -30,16 +30,19 @@
 					>
 					<template v-slot:prepend="{item, open}">
 						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
-							<v-img contain :src="languageImage()" avatar ></v-img>
+							<v-img v-if="languageImage().type" contain :src="languageImage().img" avatar ></v-img>
+							<v-icon v-else>{{languageImage().img}}</v-icon>
 						</p>
 						<p v-else-if="item.file !== undefined" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
-							<v-img contain :src="getPictogram(item.path)" avatar ></v-img>
-						</p>
-						<p v-else-if="open && item.name !== currentProject.name" class="folder-open" text @contextmenu="fileItem = item,showFolder($event)">
-							
-						</p>
-						<p v-else-if="item.name !== currentProject.name" class="folder-closed" text @contextmenu="fileItem = item,showFolder($event)">
+							<v-img v-if="getPictogram(item.path).type" contain :src="getPictogram(item.path).img" avatar ></v-img>
+							<v-icon v-else>{{getPictogram(item.path).img}}</v-icon>
 
+						</p>
+						<p v-else-if="open && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)">
+							<v-icon>mdi-folder-open</v-icon>
+						</p>
+						<p v-else-if="item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)">
+							<v-icon>mdi-folder</v-icon>
 						</p>
 						<v-menu
 							v-model="projectMenu"
@@ -251,8 +254,8 @@ export default {
 			x: 0,
 			y: 0,
 			showConsole: false,
-			baseFileIcon:'plugins/projects/data/img/icons/file.png',
-			baseFolderIcon:'plugins/projects/data/img/icons/folder.png',
+			baseFileIcon:'mdi-file',
+			baseFolderIcon:'mdi-folder-account',
 		};
 	},
 	computed: {
@@ -395,7 +398,19 @@ export default {
 			if(!icon) {
 				icon = this.baseFolderIcon;
 			}
-			return icon;
+			let imgType = false;
+			if(icon){
+				let array = icon.split('-');
+				if(array[0] === 'mdi') {
+					imgType = false;
+				} else {
+					imgType = true;
+				}
+			}
+			return {
+				img:icon,
+				type:imgType
+			};
 		},
 		getPictogram(filename)
 		{
@@ -463,10 +478,23 @@ export default {
 					}
 				}
 				if(pictogram) {
-					return pictogram;
+					let array = pictogram.split('-');
+					let imgType = true;
+					if(array[0] === 'mdi') {
+						imgType = false;
+					} else {
+						imgType = true;
+					}
+					return {
+						img:pictogram,
+						type:imgType
+					};
 				}
 			} 
-			return this.baseFileIcon;
+			return {
+				img:this.baseFileIcon,
+				type:false
+			};
 			
 		},
 		showFile(e) {

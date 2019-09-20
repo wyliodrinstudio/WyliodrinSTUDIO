@@ -406,6 +406,35 @@ module.exports = function (blockly) {
 		}
 	};
 
+	Blockly.Blocks['pin_raspberry'] = {
+		init: function() {
+			this.appendDummyInput()
+				.appendField(new Blockly.FieldDropdown([
+					['R4', 'R4'],
+					['R17', 'R17'],
+					['R27', 'R27'],
+					['R22', 'R22'],
+					['R10', 'R10'],
+					['R9', 'R9'],
+					['R11', 'R11'],
+					['R18', 'R18'],
+					['R23', 'R23'],
+					['R8', 'R8'],
+					['R7', 'R7'],
+					['R13', 'R13'],
+					['R19', 'R19'],
+					['R20', 'R20'],
+					['R21', 'R21']
+
+				]), 'pin')
+				.appendField('(digital)');
+			this.setOutput(true, 'pinNumber_raspberry');
+			this.setColour(230);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
 
 	Blockly.Blocks['led'] = {
 		init: function() {
@@ -911,7 +940,7 @@ module.exports = function (blockly) {
 	Blockly.Blocks['light_sensor'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
-				.setCheck(['String', 'pinNumber_analog'])
+				.setCheck(['String', 'pinNumber_raspberry'])
 				.appendField('Light Sensor');
 			this.setOutput(true, 'light_sensor');
 			this.setColour(40);

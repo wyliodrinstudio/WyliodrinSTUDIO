@@ -1,0 +1,10 @@
+{
+    "EDITOR_VISUAL_SHOW_CODE": {
+        "message": "コードを表示します",
+        "description": "Button designed to show the code behind a blockly"
+    },
+    "EDITOR_VISUAL_HIDE_CODE": {
+        "message": "コードを非表示します",
+        "description": "Button designed to show the code behind a blockly"
+    }
+}

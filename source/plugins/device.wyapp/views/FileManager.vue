@@ -28,6 +28,60 @@
 					item-key="key"
 					>
 					
+					<template v-slot:prepend="{item, open}"	>
+						<p style="width:100%;" @click="menuItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
+							<v-icon>mdi-folder-open</v-icon>{{item.name}}          
+						</p>
+						<p style="width:100%;" @click="menuItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+							<v-icon>mdi-folder</v-icon>{{item.name}}
+						</p>
+						<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
+							<v-icon>mdi-file</v-icon>{{item.name}}
+						</p>
+<!-- 
+						<v-menu
+							v-model="folderMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="deleteObject()">
+										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="rename()">
+										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="newFolder()">
+										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="upload()">
+										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+
+							<v-menu
+							v-model="fileMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="deleteObject()">
+										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="rename()">
+										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="download()">
+										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu> -->
+					</template>
 					<template v-slot:label="{item, open}"	>
 						<p style="width:100%;" @click="menuItem = item" v-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
@@ -79,7 +133,6 @@
 								</v-list>
 							</v-menu>
 					</template>
-					
 					</v-treeview>
 			</template>
 			</div>
@@ -88,9 +141,11 @@
 					<v-list-item-group v-if="menuItem !== null && menuItem.children !== undefined" v-model="item" color="primary">
 						<v-list-item v-for="item in menuItem.children" :key="item.key">
 							<v-list-item-icon>
-								<p v-if="item.file !== undefined" class="file" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
+								<p v-if="item.file !== undefined" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
+									<v-icon>mdi-file</v-icon>
 								</p>
-								<p v-else-if="item.name" class="folder-closed" @click="menuItem = item" text @contextmenu="fileItem = item,showFolder($event)">
+								<p v-else-if="item.name" @click="menuItem = item" text @contextmenu="fileItem = item,showFolder($event)">
+									<v-icon>mdi-folder</v-icon>
 								</p>
 							</v-list-item-icon>
 							<v-list-item-content>

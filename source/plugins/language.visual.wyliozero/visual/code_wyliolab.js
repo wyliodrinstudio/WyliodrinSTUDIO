@@ -6,7 +6,7 @@ module.exports = function (blockly) {
 
 	Blockly.Python.setUp = function() {
 		if (!Blockly.Python.definitions_['setUp']) {
-			Blockly.Python.definitions_['setUp'] = 'from wyliozero import * \nimport os \nos.environ["BROKER_ADDRESS"] = "192.168.1.50"\n';
+			Blockly.Python.definitions_['setUp'] = 'from wyliozero import * \n';
 		}
 	};
 
@@ -252,6 +252,15 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['pin_digital'] = function(block) {
+		Blockly.Python.setUp();
+		var dropdown_pin = block.getFieldValue('pin');
+		// TODO: Assemble Python into code variable.
+		var code = dropdown_pin.toString();
+		// TODO: Change ORDER_NONE to the correct strength.
+		return [code, Blockly.Python.ORDER_NONE];
+	};
+
+	Blockly.Python['pin_raspberry'] = function(block) {
 		Blockly.Python.setUp();
 		var dropdown_pin = block.getFieldValue('pin');
 		// TODO: Assemble Python into code variable.

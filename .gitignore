@@ -90,3 +90,5 @@ Temporary Items
 
 build
 dist
+
+tools/translation/*.json

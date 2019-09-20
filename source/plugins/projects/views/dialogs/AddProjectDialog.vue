@@ -53,7 +53,7 @@ export default {
 			} else {
 				let type = this.studio.projects.getLanguage(this.languageID);
 				let project = await this.studio.projects.createEmptyProject(this.projectName,this.languageID);
-				if(_.isFunction(type.options.createProject)){
+				if(project && _.isFunction(type.options.createProject)){
 					if(await type.options.createProject(project))
 					{
 						this.languageID='';

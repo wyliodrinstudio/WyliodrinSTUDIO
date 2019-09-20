@@ -1,0 +1,10 @@
+{
+    "PROJECT_SHELL": {
+        "message": "シェル",
+        "description": "The Shell tab, opens a terminal"
+    },
+    "SHELL_NO_SHELL": {
+        "message": "デバイスに接続してシェルを有効にします",
+        "description": "The text that is displayed when the shell is not enabled"
+    }
+}

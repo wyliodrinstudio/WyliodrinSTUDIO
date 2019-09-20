@@ -1,5 +1,5 @@
 const path = require ('path');
-const architect = require ('architect');
+const architect = require ('./architect');
 const fs = require ('fs-extra');
 const ipcRenderer = require ('electron').ipcRenderer;
 

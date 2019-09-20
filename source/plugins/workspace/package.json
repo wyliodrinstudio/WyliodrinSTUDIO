@@ -4,7 +4,7 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["system", "settings"],
+        "consumes": ["system", "settings", "hooks"],
         "provides": [
             "workspace"
         ],

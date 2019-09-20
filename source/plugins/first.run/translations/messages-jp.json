@@ -1,0 +1,18 @@
+{
+    "WELCOME_TEXT": {
+        "message": "ＷｙｌｉｏｄｒｉｎSTUDIOへようこそ",
+        "description": "Welcome text"
+    },
+    "WELCOME_START_WORK": {
+        "message": "新しいアプリケーションの作成を開始したり、ボードをセットアップしたり、独自のプロジェクトをインポートしたりできます。",
+        "description": "Introduction message"
+    },
+    "WELCOME_CREATE_APP": {
+        "message": "新しいアプリケーションを作成します",
+        "description": "Button that will redirect the user to a popup where he can create new applicatons."
+    },
+    "WELCOME_CONNECT_BOARD": {
+        "message": "ボードを接続",
+        "description": "Button that will open a browser window with a documentation chapter regarding the setup of a Raspberry Pi board."
+    }
+}
