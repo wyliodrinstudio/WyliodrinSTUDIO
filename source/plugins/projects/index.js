@@ -470,6 +470,7 @@ let projects = {
 			//TODO
 			let projectImport = JSON.parse(data.toString());
 			let projectFolder = path.join(workspacePath, projectImport.title);
+			projectFolder = this._isPathValid(workspacePath,projectFolder);
 			let json = path.join(projectFolder, 'project.json');
 			for (let item of projectImport.tree) {
 				await this.recursiveCreating({
@@ -547,6 +548,7 @@ let projects = {
 				let curentFolder = path.join(necesarry.folder, necesarry.item.name);
 				curentFolder = this._isPathValid(necesarry.folder, curentFolder);
 				if (curentFolder !== null) {
+					console.log(curentFolder);
 					await studio.filesystem.mkdirp(curentFolder);
 					for (let child of necesarry.item.children) {
 						return await this.recursiveCreating({
@@ -625,12 +627,22 @@ let projects = {
 				for (let file of list) {
 					file = path.resolve(dir, file);
 					if (await studio.filesystem.isDirectory(file)) {
-						zip.folder(path.relative(root, file));
+						let x = path.relative(root, file);
+						console.log(x);
+						if(path.sep == '\\'){
+							x = x.replace(/\\/g, '/');
+						}
+						zip.folder(x);
 						await this._buildZipFromDirectory(file, zip, root);
 					} else {
 						const filedata = await studio.filesystem.readFile(file);
 						if(filedata) {
-							zip.file(path.relative(root, file), filedata);
+							let x = path.relative(root, file);
+							console.log(x);
+							if(path.sep == '\\'){
+								x = x.replace(/\\/g, '/');
+							}
+							zip.file(x, filedata);
 						}
 						
 					}
