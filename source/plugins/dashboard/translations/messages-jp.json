@@ -4,7 +4,7 @@
         "description": "The Dashboard tab, used to send signals from a board."
     },
     "DASHBOARD_VIEWER_INVALID_SIGNAL": {
-        "message": "Signal name invalid",
+        "message": "無効な信号名",
         "description": "Warning that shows up when the signal name entered by the user is not correct."
     },
     "DASHBOARD_VIEWER_MOVE_LEFT": {
@@ -22,5 +22,85 @@
     "DASHBOARD_VIEWER_ERASE_GRAPH": {
         "message": "グラフを消します",
         "description": "Button used to delete a graph"
+    },
+    "DASHBOARD_SIGNAL_NAME": {
+        "message": "信号名 *",
+        "description": "Input text area for the name of the signal"
+    },
+    "DASHBOARD_SIGNAL_DESCRIPTION": {
+        "message": "説明",
+        "description": "Input text area for additional description of the signal"
+    },
+    "DASHBOARD_SIGNAL_COLOR": {
+        "message": "色",
+        "description": "Button used to pick the color of the signal"
+    },
+    "NAME": {
+        "message": "名前",
+        "description": "Signal's name"
+    },
+    "DASHBOARD_ADD_SIGNAL": {
+        "message": "加えます",
+        "description": "Button used to add a signal graph"
+    },
+    "DASHBOARD_LOW_COLOR": {
+        "message": "ロー色 ???? color",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_LOW_VALUE": {
+        "message": "ロー値",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_MID_COLOR": {
+        "message": "ミディアム色(pot sa pun medium in loc de mid?)",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_MID_VALUE": {
+        "message": "ミディアム値 (same)",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_HIGH_COLOR": {
+        "message": "ハイ色",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_MIN_AXES_VALUE": {
+        "message": "最小値",
+        "description": "Input text area foar the minimum value of an axis"
+    },
+    "DASHBOARD_MAX_AXES_VALUE": {
+        "message": "最大値",
+        "description": "Input text area foar the maximum value of an axis"
+    },
+    "DASHBOARD_KILOMETERS": {
+        "message": "キロメートル",
+        "description": "Unit of measure for speedometer and gauge"
+    },
+    "DASHBOARD_MILES": {
+        "message": "マイル",
+        "description": "Unit of measure for speedometer and gauge"
+    },
+    "DASHBOARD_MIN_VALUE": {
+        "message": "最小軸値",
+        "description": "Input text area foar the minimum value of an axis"
+    },
+    "DASHBOARD_MAX_VALUE": {
+        "message": "最大軸値",
+        "description": "Input text area foar the maximum value of an axis"
+    },
+    "DASHBOARD_AXIS_NAME": {
+        "message": "軸名",
+        "description": "Name of an axis"
+    },
+    "DASHBOARD_DELETE_TITLE": {
+        "message": "信号を消します",
+        "description": "Title of confirmation prompt when the user tries to delete a signal"
+    },
+    "DASHBOARD_DELETE_QUESTION": {
+        "message": "この信号を消してもよろしいですか？",
+        "description": "Delete signal confirmation "
+    },
+    "DASHBOARD_NO_TITLE": {
+        "message": "信号名をえらんでください。",
+        "description": "Notification text when the user didn't chose a name for the signal"
     }
 }

@@ -1,0 +1,10 @@
+{
+    "GAUGE_GRAPH": {
+        "message": "ゲージ",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDGAUGE": {
+        "message": "ゲージ - 信号を足します",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

@@ -198,12 +198,15 @@ export default {
 		},
 		async deleteProject (project, projects)
 		{
+			console.log(project);
+			console.log(projects);
+			let localProject = project;
 			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_PROJECT', 'PROJECT_PROJECT_SURE');
 			if(allow && await this.studio.projects.deleteProject(project))
 			{
 				let currentProject = this.studio.workspace.getFromStore('projects','currentProject');
 
-				if(project.name === currentProject.name)
+				if(currentProject && localProject.name === currentProject.name)
 				{
 					this.studio.workspace.dispatchToStore('projects', 'currentProject', null);
 					this.studio.workspace.dispatchToStore('projects', 'currentFile', null);
@@ -247,11 +250,18 @@ export default {
 					} else {
 						type = 'archive';
 					}
-					if(await this.importProject(files[0].name,fileData,type))
-					{
-						this.projects=await this.studio.projects.loadProjects(false);
-						return true;
+					let name = path.basename(files[0].name).split('.').slice(0, -1).join('.');
+					if(this.projects.find(x => x.name === name) === undefined) {
+						if(await this.importProject(files[0].name,fileData,type))
+						{
+							this.projects=await this.studio.projects.loadProjects(false);
+							return true;
+						}
+					} else {
+						await this.studio.workspace.showNotification ('PROJECT_EXISTS_PROMPT');
+						return false;
 					}
+					
 				}
 				
 			}

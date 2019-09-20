@@ -10,5 +10,25 @@
     "NOTEBOOK_SELECT_FILE_ERROR": {
         "message": "有効な画像を選んでください。",
         "description": "Notification error that shows up when the user didn't choose a file to load"
+    },
+    "NOTEBOOK_DELETE_ITEM_QUESTION": {
+        "message": "この要素を削除してもよろしいですか？",
+        "description": "Confirmation prompt which ensures that the user really wants to delete the current notebook element"
+    },
+    "NOTEBOOK_DELETE_ITEM_TITLE": {
+        "message": "要素を削除します",
+        "description": "Title of the delete confirmation prompt"
+    },
+    "NOTEBOOK_LOAD_DATA_ERROR": {
+        "message": "ノートブックのデータを読み込めません ({error})",
+        "description": "This error shwos up when notebook.json can't be parsed."
+    },
+    "NOTEBOOK_RESET_NOTEBOOK_TITLE": {
+        "message": "ノートブックをリセット",
+        "description": "Title of the reset confirmation prompt"
+    },
+    "NOTEBOOK_RESET_NOTEBOOK_QUESTION": {
+        "message": "ノートブックをリセットしてもよろしいですか？\nこのプロジェクトのすべてのメモが失われます。",
+        "description": "Confirmation prompt which ensures that the user really wants to reset the notebook"
     }
 }

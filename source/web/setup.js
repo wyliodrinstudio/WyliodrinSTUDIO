@@ -1,4 +1,4 @@
-let architect = require ('./architect.js');
+let architect = require ('./../architect.js');
 let plugins = require ('./plugins.js');
 
 function progress (name, index, all)

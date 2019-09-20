@@ -410,56 +410,62 @@ export default {
 			let device = this.studio.workspace.getDevice ();
 			let type = device.type;
 			let board = device.board;
+			let pictogram = null;
 			if(language) {
 				pictograms = language.pictograms;
-				if(type !== 'none' && board !== 'none' && addons[type + ':' + board]) {
+				if(type !== 'none' && board !== 'none' && addons[type + ':' + board] !== undefined) {
 					let addonPictograms = addons[type + ':' + board].pictograms;
-					if(addonPictograms && addonPictograms.length > 0) {
-						for( let pict of addonPictograms) {
+					if(!pictogram && addonPictograms && addonPictograms.length > 0) {
+						for(let pict of addonPictograms) {
 							if(pict.extension && ext === pict.extension) {
-								return pict.icon;
+								pictogram = pict.icon;
 							} else if(pict.filename && filename.match(pict.filename)) {
-								return pict.icon;
+								pictogram = pict.icon;
 							}
 						}
 					}
 					
-				} else if (addons && board !== 'none' && addons['*:' + board]) {
+				}
+				if (!pictogram && board !== 'none' && addons['*:' + board] !== undefined) {
 					let addonPictograms = addons['*:' + board].pictograms;
 					if(addonPictograms && addonPictograms.length > 0) {
 						for( let pict of addonPictograms) {
 							if(pict.extension && ext === pict.extension) {
-								return pict.icon;
+								pictogram = pict.icon;
 							} else if(pict.filename && filename.match(pict.filename)) {
-								
-								return pict.icon;
-							}
-						}
-					}
-				} else if (addons && type !== 'none' && addons[type + ':*']) {
-					let addonPictograms = addons[type + ':*'].pictograms;
-					if(addonPictograms && addonPictograms.length > 0) {
-						for( let pict of addonPictograms) {
-							if(pict.extension && ext === pict.extension) {
-								return pict.icon;
-							} else if(pict.filename && filename.match(pict.filename)) {
-						
-								return pict.icon;
-							}
-						}
-					}
-				} else if(type === 'none' && board === 'none') {
-					if(pictograms && pictograms.length > 0) {
-						for( let pict of pictograms) {
-							if(pict.extension && ext === pict.extension) {
-								return pict.icon;
-							} else if(pict.filename && filename.match(pict.filename)) {
-								return pict.icon;
+								pictogram = pict.icon;
 							}
 						}
 					}
 				}
-			}
+				if (!pictogram && type !== 'none' && addons[type + ':*'] !== undefined) {
+					let addonPictograms = addons[type + ':*'].pictograms;
+					if(addonPictograms && addonPictograms.length > 0) {
+						for( let pict of addonPictograms) {
+							if(pict.extension && ext === pict.extension) {
+								pictogram = pict.icon;
+							} else if(pict.filename && filename.match(pict.filename)) {
+						
+								pictogram = pict.icon;
+							}
+						}
+					}
+				}
+				if(!pictogram || (type === 'none' && board === 'none' && !pictogram)) {
+					if(pictograms && pictograms.length > 0) {
+						for( let pict of pictograms) {
+							if(pict.extension && ext === pict.extension) {
+								pictogram = pict.icon;
+							} else if(pict.filename && filename.match(pict.filename)) {
+								pictogram = pict.icon;
+							}
+						}
+					}
+				}
+				if(pictogram) {
+					return pictogram;
+				}
+			} 
 			return this.baseFileIcon;
 			
 		},

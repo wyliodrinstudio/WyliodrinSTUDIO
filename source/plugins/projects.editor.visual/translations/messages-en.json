@@ -1,5 +1,5 @@
 {
-	"EDITOR_VISUAL_SHOW_CODE": {
+    "EDITOR_VISUAL_SHOW_CODE": {
         "message": "Show Code",
         "description": "Button designed to show the code behind a blockly"
     },

@@ -10,7 +10,7 @@
 			</div>
 			<v-tabs v-model="active" left class="tabs-box">
 				<v-tab v-for="network in networks" :key="network.i" ripple>
-					<v-img src="plugins/device.wyapp/data/img/icons/wifi-icon.svg" aria-label="WiFi" ></v-img>
+					<v-img :src="'plugins/device.wyapp/data/img/icons/'+networkIcon (network)+'-icon.svg'" aria-label="WiFi" ></v-img>
 					{{network.i}}
 				</v-tab>
 			</v-tabs>
@@ -78,6 +78,12 @@ export default {
 		close ()
 		{
 			this.$root.$emit ('submit');
+		},
+		networkIcon (network)
+		{
+			if (network.t === 'e') return 'eth';
+			else if (network.t === 'w') return 'wifi';
+			else return 'eth';
 		},
 		updateNetworks (data)
 		{

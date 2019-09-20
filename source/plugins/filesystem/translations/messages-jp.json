@@ -1,0 +1,14 @@
+{
+    "REAL_FS_DO_NOT_EXIST_FS": {
+        "message": "指定されたファイルシステムが見つかりませんでした！ 有効なファイルシステムを使用してください",
+        "description": "This is the text of an error that shows up when the chosen filesystem is not valid."
+    },
+    "REAL_FS_ALREADY_REGISTERED_FS": {
+        "message": "指定されたファイルシステムはすでに登録されています！",
+        "description": "This is the text of a warning when the chosen filesystem was registered before."
+    },
+    "REAL_FS_NO_DEF_FS": {
+        "message": "デフォルトのファイルシステムはありません。ファイルシステムは登録されていますか？",
+        "description": "This is the text of an error displayed when there is no default filesystem registered."
+    }
+}

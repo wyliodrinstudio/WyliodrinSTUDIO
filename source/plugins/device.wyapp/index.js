@@ -35,11 +35,12 @@ function updateDevices ()
 	let devices = [];
 	for (let transportDriverName in transportDevices)
 	{
-		devices.push (...transportDevices[transportDriverName], {
-			id: 'error',
-			name: 'error'
-		});
+		devices.push (...transportDevices[transportDriverName]);
 	}
+	devices.push ({
+		id: 'error',
+		name: 'error'
+	});
 	workspace.updateDevices (devices);
 }
 

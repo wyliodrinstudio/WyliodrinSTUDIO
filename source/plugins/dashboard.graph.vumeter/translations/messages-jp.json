@@ -1,0 +1,10 @@
+{
+    "VUMETER_GRAPH": {
+        "message": "ヴューメーター",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDVUMETER": {
+        "message": "ヴューメーター - 信号を足します",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

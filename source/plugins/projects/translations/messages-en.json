@@ -34,12 +34,12 @@
     "PROJECT_NEW_FILE": {
         "message": "New File",
         "description": "Create a file within a project"
-	},
-	"PROJECT_IMPORT_FILE": {
+    },
+    "PROJECT_IMPORT_FILE": {
         "message": "Import File",
         "description": "Import a file within a project"
-	},
-	"PROJECT_EXPORT_FILE": {
+    },
+    "PROJECT_EXPORT_FILE": {
         "message": "Export File",
         "description": "Export a file from the project"
     },
@@ -218,11 +218,11 @@
     "PROJECT_ERROR_PATH_INVALID": {
         "message": "Error, path is not inside the workspace folder",
         "description": "The error message shown when the specified path is not in the workspace folder"
-	},
-	"PROJECT_ERROR_CHANGE_DATE": {
-		"message": "Error, cannot write date {project} ({error})",
-		"description": "The error message shown when a date for a file fails to be written"
-	},
+    },
+    "PROJECT_ERROR_CHANGE_DATE": {
+        "message": "Error, cannot write date {project} ({error})",
+        "description": "The error message shown when a date for a file fails to be written"
+    },
     "PROJECT_JSON_DO_NOT": {
         "message": "Tried to edit project.json, DO NOT DO THIS",
         "description": "The error message shown when there is an attempt at editing the project settings file"
@@ -238,11 +238,11 @@
     "PROJECT_NAME_PROMPT": {
         "message": "Please input the name of the project",
         "description": "Label for the new name to be given to the project"
-	},
-	"PROJECT_LIBRARY_SEARCH":{
-		"message":"Search",
-		"description":"Label to search for projects"
-	},
+    },
+    "PROJECT_LIBRARY_SEARCH": {
+        "message": "Search",
+        "description": "Label to search for projects"
+    },
     "PROJECT_NULL": {
         "message": "One or more parameters are null",
         "description": "One or more of the funciton's parameters are null"
@@ -258,25 +258,20 @@
     "PROJECTS_CREATE_APPLICATION": {
         "message": "Click the \"Create new Application\" button below",
         "description": "Message displayed in the Projects Library when the list of projects is empty."
-
     },
-    "PROJECTS_STORAGE_NOT_PERSISTENT": 
-    {
+    "PROJECTS_STORAGE_NOT_PERSISTENT": {
         "message": "The storage system is not persistent. This means your projects might be deleted any time without notice. To avoid this, please export your projects frequently.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available. We recommend you to use Firefox."
     },
-    "PROJECTS_STORAGE_ASK_PERSISTENT": 
-    {
+    "PROJECTS_STORAGE_ASK_PERSISTENT": {
         "message": "The storage system is not persistent. Please allow permission to make the storage peristent.",
         "description": "The message the user sees in the Projects Library when persistent storage is available but not permitted."
     },
-    "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": 
-    {
+    "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": {
         "message": "Allow Persistance",
         "description": "The button the user clicks to ask persistance."
     },
-    "PROJECTS_STORAGE_BROWSER_ERROR": 
-    {
+    "PROJECTS_STORAGE_BROWSER_ERROR": {
         "message": "If your browser didn't ask you if you allow persistence, there might be an issue with your browser. To prevent losing your projects, you should add this website to the bookmarks, use it more often and frequenlty export your projects. We also recommend you to use Firefox.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available."
 	},
@@ -294,5 +289,10 @@
     {
         "message": "You have oppened an invalid project, please select another one",
         "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
+	},
+	"PROJECT_EXISTS_PROMPT": 
+    {
+        "message": "A project with that name already exists",
+        "description": "The message the user sees in the Projects Library when a project with an already existing name is created or imported"
     }
 }
