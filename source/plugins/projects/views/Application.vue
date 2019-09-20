@@ -293,12 +293,9 @@ export default {
 			let baseEditor = null;
 			if (this.currentFile)
 			{
-				let extension = path.extname (this.currentFile).substring (1);
+				let extension = path.extname (this.currentFile).substring (1).toLowerCase();
 				for (let editor of this.editors) {
 					for (let lang of editor.languages) {
-						// if( lang === 'js' ){
-						// 	baseEditor = editor.component;
-						// }
 						if (lang === extension) {
 							return editor.component;
 						}
@@ -312,12 +309,13 @@ export default {
 		currentProject ()
 		{
 			this.updateTitle ();
+			this.dirTree();
 		},
 		currentFile ()
 		{
+			this.updateTitle ();
+			console.log('changed currentFile');
 			this.dirTree();
-			console.log(this.items);
-
 		},
 		async source ()
 		{
@@ -351,7 +349,6 @@ export default {
 	},
 	methods: {
 		consoleLogIt(item){
-			console.log('this ios the item');
 			console.log(item);
 		},
 		verifyLanguage(project) {
@@ -553,7 +550,6 @@ export default {
 					this.items = [];
 				}
 				let components = await this.studio.filesystem.readdir(filename);
-				console.log(components);
 				let files = [];
 				for(let item of components){
 					let file = await this.studio.projects.recursiveGeneration(this.currentProject,
@@ -575,7 +571,7 @@ export default {
 					key:path.basename(filename)+filename.replace(this.currentProject.folder, '')+'folder'
 				}];
 				
-				
+				console.log(this.items);
 				this.items = root;
 				this.previous = this.items;
 			}
@@ -617,7 +613,6 @@ export default {
 				let fileData = await this.studio.filesystem.readImportFile (files[0]);
 				if(files) {
 					let filePath = path.join(item.path,path.basename(files[0].name));
-					console.log(files[0].name);
 					if(await this.studio.projects.newFile(this.currentProject,filePath,fileData))
 					{
 						await this.refresh();
@@ -680,7 +675,6 @@ export default {
 		},
 		updateTitle ()
 		{
-			console.log ('title');
 			if (this.currentProject)
 			{
 				if (this.advanced && this.currentFile) this.studio.workspace.setWorkspaceTitle (this.currentFile);

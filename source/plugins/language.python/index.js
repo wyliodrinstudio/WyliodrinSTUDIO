@@ -21,6 +21,14 @@ export default function setup (options, imports, register)
 		{
 			extension: '.py',
 			icon:'mdi-language-python'
+		},
+		{
+			extension: '.md',
+			icon:'mdi-markdown'
+		},
+		{
+			extension: '.json',
+			icon:'mdi-json'
 		}
 	];
 	let python = {

@@ -10,7 +10,7 @@ export function setup(options, imports, register)
 
 		if(studio.settings.loadValue('firstrun', 'firstRun', true))
 		{
-			studio.workspace.showDialog(FirstRunDialog);
+			studio.workspace.showDialog(FirstRunDialog,{width:550});
 			studio.settings.storeValue('firstrun', 'firstRun', false);
 		}
 			

@@ -21,7 +21,15 @@ export default function setup (options, imports, register)
 		{
 			extension: '.sh',
 			icon:'mdi-bash'
-		}
+		},
+		{
+			extension: '.json',
+			icon:'mdi-json'
+		},
+		{
+			extension: '.md',
+			icon:'mdi-markdown'
+		},
 	];
 	let shell = {
 		async createProject(name){

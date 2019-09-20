@@ -120,6 +120,8 @@ let workspace = {
 	 */
 	vue: null,
 
+	version: require ('../../../package.json').version,
+
 	/* Start the application */
 	start(studio) {
 		Vue.prototype.studio = studio;
@@ -175,7 +177,7 @@ let workspace = {
 		Vue.translation = translations;
 
 		const i18n = new VueI18n({
-			locale: getLanguage(),
+			locale: studio.settings.loadValue ('workspace', 'language', getLanguage()),
 			fallbackLocale: 'en',
 			messages: translations.TRANSLATION
 		});
@@ -209,7 +211,7 @@ let workspace = {
 		});
 
 		this.registerMenuItem('WORKSPACE_TOOLBAR_ABOUT', 100, () => {
-			this.showDialog(AboutDialog);
+			this.showDialog(AboutDialog,{width:550});
 		});
 
 		// this.registerTab('Application', 20, () => {
