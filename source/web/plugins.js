@@ -118,7 +118,7 @@ async function loadPlugins (progress = () => {}) {
 	plugins.push ({name:'system.browser', consumes:[], provides:["system"], setup: plugin.setup || plugin.default || plugin});
 	progress ('workspace', 39, 40);
 	plugin = await import ('../plugins/workspace/index.js');
-	plugins.push ({name:'workspace', consumes:["system","settings"], provides:["workspace"], setup: plugin.setup || plugin.default || plugin});
+	plugins.push ({name:'workspace', consumes:["system","settings","hooks"], provides:["workspace"], setup: plugin.setup || plugin.default || plugin});
 	progress ('xterm', 40, 40);
 	plugin = await import ('../plugins/xterm/index.js');
 	plugins.push ({name:'xterm', consumes:["workspace"], provides:["xterm"], setup: plugin.setup || plugin.default || plugin});
