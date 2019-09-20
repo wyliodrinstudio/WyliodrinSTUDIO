@@ -8,20 +8,22 @@
 			<br>
 			<strong>RSS:</strong> <img src="img/icons/wifi-strength-100.png" aria-label="Signal strenght"> {{signalStrength(wirelessNetwork)}}
 		</div>-->
-		<div class="networkinfo" v-if="network.ip">
-			<strong>{{$t('DEVICE_WYAPP_SSID')}}:</strong> {{network.s}}
-			<br>
-			<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_IP')}}:</strong> {{network.ip}}
-			<br>
-			<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_MASK')}}:</strong> {{network.m}}
-			<br>
-			<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_BROADCAST')}}:</strong> {{network.b}}
-			<br>
-			<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_HARDWARE')}}:</strong> {{network.h}}
-			<v-btn text class="lib-app-btn" @click="unlink ()">{{$t('DEVICE_WYAPP_DISCONNECT')}}</v-btn>
+		<div class="p-20" v-if="network.ip">
+			<div class="networkinfo">
+				<strong>{{$t('DEVICE_WYAPP_SSID')}}:</strong> {{network.s}}
+				<br>
+				<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_IP')}}:</strong> {{network.ip}}
+				<br>
+				<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_MASK')}}:</strong> {{network.m}}
+				<br>
+				<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_BROADCAST')}}:</strong> {{network.b}}
+				<br>
+				<strong>{{$t('DEVICE_WYAPP_WIREDNETWORK_HARDWARE')}}:</strong> {{network.h}}
+				<v-btn text class="lib-app-btn net-dis-btn" @click="unlink ()">{{$t('DEVICE_WYAPP_DISCONNECT')}}</v-btn>
+			</div>
 		</div>
-		<div v-else>
-			<div v-if="!wirelessNetworks">
+		<div class="networkinfo" v-else>
+			<div v-if="!wirelessNetworks" class="h-100">
 				<v-progress-circular indeterminate></v-progress-circular>
 			</div>
 			<table v-else class="w-100">
@@ -31,6 +33,8 @@
 						<div v-if="wirelessNetwork.s === SSID">
 							<v-text-field v-if="wirelessNetwork.s === ''" :label="$t('DEVICE_WYAPP_SSID')" v-model="linkSSID"></v-text-field>
 							<v-text-field type="password" :label="$t('DEVICE_WYAPP_PSK')" v-model="linkPSK"></v-text-field>
+						</div>
+						<div>
 							<v-btn v-if="network.s !== wirelessNetwork.s" text class="lib-app-btn" @click="link(wirelessNetwork)">{{$t('DEVICE_WYAPP_CONNECT')}}</v-btn>
 						</div>
 					</td>

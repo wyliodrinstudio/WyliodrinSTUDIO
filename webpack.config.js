@@ -134,6 +134,8 @@ module.exports = {
 			{ from: 'index.html', context: 'source' },
 			{ from: 'img/**', context: 'source' },
 			{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
+			//{ from: 'iconfont/**', context: 'node_modules/material-design-icons/' },
+			{ from: 'fonts/**', context: 'node_modules/@mdi/font/' },
 			{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
 		], {logLevel: ''}),
 		// new DtsBundleWebpack({
