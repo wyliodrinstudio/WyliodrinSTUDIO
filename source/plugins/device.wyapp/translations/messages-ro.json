@@ -31,16 +31,15 @@
         "message": "Opriți și Deconectați",
         "description": "The power off and disconnect option in the disconnect menu"
     },
-	"DEVICE_WYAPP_REFRESH": {
-		"message": "Reîncarcă",
-		"description": "The option to refresh the file tree"
-	},
-	"DEVICE_WYAPP_FILE_MANAGER": {
-		"message": "Administrare fișiere",
-		"description": "The option to refresh the file tree"
-	},
-    "DEVICE_WYAPP_SSID": 
-    {
+    "DEVICE_WYAPP_REFRESH": {
+        "message": "Reîncarcă",
+        "description": "The option to refresh the file tree"
+    },
+    "DEVICE_WYAPP_FILE_MANAGER": {
+        "message": "Administrare fișiere",
+        "description": "The option to refresh the file tree"
+    },
+    "DEVICE_WYAPP_SSID": {
         "message": "Nume reţea",
         "description": "The SSID of a wireless network"
     },
@@ -81,7 +80,7 @@
         "description": "Mask for the wired network"
     },
     "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
-        "message": "Broadcast", 
+        "message": "Broadcast",
         "description": "Broadcast for the wired network"
     },
     "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
@@ -108,18 +107,24 @@
         "message": "Pachetul {packageName} pentru {language} nu a putut fi dezinstalat.",
         "description": "The error the users sees when a packages failes to uninstall"
     },
-    "DEVICE_WYAPP_PSK": 
-    {
+    "DEVICE_WYAPP_PSK": {
         "message": "Parola pentru rețea",
         "description": "The passphrase of a wireless network"
     },
-    "DEVICE_WYAPP_CONNECT": 
-    {
+    "DEVICE_WYAPP_CONNECT": {
         "message": "Conectare",
         "description": "The  network connect button"
     },
     "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
         "message": "Alte rețele",
         "description": "The option to connect to a network that is not displayed"
-	}
+	},
+	"DEVICE_WYAPP_NO_DIRECTORY": {
+		"message": "Nu există nici un director selectat",
+		"description": "The message shown in the file tree manager when there is no directory currently selected"
+    },
+    "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
+        "message": "Vă rugăm să deschideți un proiect nou",
+        "description": "Notification text when there is no project selected"
+    }
 }

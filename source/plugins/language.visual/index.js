@@ -19,11 +19,11 @@ export default function setup(options, imports, register) {
 	let pictograms = [
 		{
 			extension: '.visual',
-			icon:'plugins/language.visual/data/img/visualLittle.png'
+			icon:'mdi-puzzle'
 		},
 		{
 			extension: '.py',
-			icon:'plugins/language.visual/data/img/pythonLittle.png'
+			icon:'mdi-language-python'
 		}
 	];
 	let visual = {

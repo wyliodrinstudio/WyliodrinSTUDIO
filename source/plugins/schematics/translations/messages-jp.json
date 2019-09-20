@@ -18,5 +18,9 @@
     "DELETE_CONFIRMATION": {
         "message": "消すの確認",
         "description": "The message that appears when there is no picture"
+    },
+    "SCHEMATICS_IMPORT": {
+        "message": "Fritzingから.svg回路図をインポートします",
+        "description": "The message that appears when there is no picture"
     }
 }

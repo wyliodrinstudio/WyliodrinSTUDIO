@@ -11,6 +11,13 @@ export function setup (options, imports, register)
 {
 	studio = imports;
 
+	studio.projects.registerLanguagePackage ('python', null, [
+		{
+			name: 'wyliozero',
+			description: 'WyliodrinLab'
+		}
+	]);
+
 	let toolbox = xml.xml2js (toolboxStr);
 	studio.editor_visual.registerBlocksDefinitions ('wyliozero', blocks, code, toolbox, {
 		type: 'wyapp', 

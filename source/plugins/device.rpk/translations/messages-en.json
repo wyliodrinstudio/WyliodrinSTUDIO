@@ -4,7 +4,7 @@
         "description": "The run button for an application"
     },
     "DEVICE_FLASH_JAVASCRIPT": {
-        "message": "Flash Javascript", 
+        "message": "Flash Javascript",
         "description": "The flash javascript button for an application"
     },
     "DEVICE_RPK_STOP": {
@@ -24,7 +24,7 @@
         "description": "The button for the network manager "
     },
     "DEVICE_RPK_STANDBY": {
-        "message": "Stand-by", 
+        "message": "Stand-by",
         "description": "The stand-by option in the disconnect menu."
     },
     "DEVICE_RPK_DISCONNECT": {

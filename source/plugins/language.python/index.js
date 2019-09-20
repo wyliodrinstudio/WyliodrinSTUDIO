@@ -20,7 +20,7 @@ export default function setup (options, imports, register)
 	let pictograms = [
 		{
 			extension: '.py',
-			icon:'plugins/language.python/data/img/pythonLittle.png'
+			icon:'mdi-language-python'
 		}
 	];
 	let python = {

@@ -24,11 +24,11 @@
         "description": "Text used when the user wants to add a new channel"
     },
     "CHAT_TITLE_WARNING": {
-        "message": "ワーニング",
+        "message": "チャンネルをでます",
         "description": "Title of prompt that show up when the user wants to leave a channel."
     },
     "CHAT_TEXT_PART_CHANNEL": {
-        "message": "Are you sure you want to part this channel?",
+        "message": "このチャンネルをでましてもよろしいですか？",
         "description": "Text of prompt that show up when the user wants to leave a channel."
     },
     "CHAT_INSERT_CHANNEL_NAME": {
@@ -54,5 +54,33 @@
     "CHAT_COULD_NOT_JOIN_CHANNEL": {
         "message": "This channel could not be joined! Please pick another one!",
         "description": "Text of notification that shows up when the user can not connect to a certain channel"
+    },
+    "CHAT_CHANNEL": {
+        "message": "チャンネル",
+        "description": "A chat channel"
+    },
+    "CHAT_CANCEL": {
+        "message": " キャンセル",
+        "description": "The Cancel button"
+    },
+    "CHAT_DISCONNECT": {
+        "message": "ディスコネクト",
+        "description": "The Disconnect button"
+    },
+    "CHAT_TITLE_DISCONNECT": {
+        "message": "サーバーからディスコネクトする",
+        "description": "Title of the prompt that show up when the user wants to disconnect from the server"
+    },
+    "CHAT_TEXT_DISCONNECT": {
+        "message": "サーバーからディスコネクトしてもよろしいですか？",
+        "description": "Text of the prompt that show up when the user wants to disconnect from the server"
+    },
+    "CHAT_AVAILABLE_CHANNELS": {
+        "message": "入手可能なチャンネル",
+        "description": "List of the available channels"
+    },
+    "CHAT_USERS": {
+        "message": "ユーザーズ",
+        "description": "List with chat users."
     }
 }

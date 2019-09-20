@@ -3,56 +3,56 @@
         <block type="variables_set">
             <field name="VAR">button</field>
             <value name="VALUE">
-                <block type="button">
+                <block type="wyliozero_button">
                     <value name="pin_number">
-                        <block type="pin_digital"/>
+                        <block type="wyliozero_pin_digital"/>
                     </value>
                 </block>
             </value>
         </block>
         <block type="button_is_pressed">
+            <value name="wyliozero_button">
+                <block type="variables_get">
+                    <field name="VAR">button</field>
+                </block>
+            </value>
+        </block>
+        <block type="wyliozero_button_wait_for_press">
             <value name="button">
                 <block type="variables_get">
                     <field name="VAR">button</field>
                 </block>
             </value>
         </block>
-        <block type="button_wait_for_press">
+        <block type = "wyliozero_button_wait_for_release">
             <value name="button">
                 <block type="variables_get">
                     <field name="VAR">button</field>
                 </block>
             </value>
         </block>
-        <block type = "button_wait_for_release">
+        <block type = "wyliozero_button_held_time">
             <value name="button">
                 <block type="variables_get">
                     <field name="VAR">button</field>
                 </block>
             </value>
         </block>
-        <block type = "button_held_time">
-            <value name="button">
-                <block type="variables_get">
-                    <field name="VAR">button</field>
-                </block>
-            </value>
-        </block>
-        <block type = "button_when_held">
+        <block type = "wyliozero_button_when_held">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">button</field>
                 </block>
             </value>
         </block>
-        <block type = "button_when_pressed">
+        <block type = "wyliozero_button_when_pressed">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">button</field>
                 </block>
             </value>
         </block>
-        <block type = "button_when_released">
+        <block type = "wyliozero_button_when_released">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">button</field>
@@ -64,42 +64,42 @@
         <block type="variables_set">
             <field name="VAR">lightSensor</field>
             <value name="VALUE">
-                <block type="light_sensor">
+                <block type="wyliozero_light_sensor">
                     <value name="pin_number">
-                        <block type="pin_analog"/>
+                        <block type="wyliozero_pin_raspberry"/>
                     </value>
                 </block>
             </value>
         </block>
-        <block type="light_wait_for_dark">
+        <block type="wyliozero_light_wait_for_dark">
             <value name="pin_number">
                 <block type="variables_get">
                     <field name="VAR">lightSensor</field>
                 </block>
             </value>
         </block>
-        <block type="light_wait_for_light">
+        <block type="wyliozero_light_wait_for_light">
             <value name="pin_number">
                 <block type="variables_get">
                     <field name="VAR">lightSensor</field>
                 </block>
             </value>
         </block>
-        <block type="light_detected">
+        <block type="wyliozero_light_detected">
             <value name="pin_number">
                 <block type="variables_get">
                     <field name="VAR">lightSensor</field>
                 </block>
             </value>
         </block>
-        <block type="light_when_dark">
+        <block type="wyliozero_light_when_dark">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">lightSensor</field>
                 </block>
             </value>
         </block>
-        <block type="light_when_light">
+        <block type="wyliozero_light_when_light">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">lightSensor</field>
@@ -111,14 +111,14 @@
         <block type="variables_set">
             <field name="VAR">DHTsensor</field>
             <value name="VALUE">
-                <block type="dht_sensor">
+                <block type="wyliozero_dht_sensor">
                     <value name="pin">
-                        <block type="pin_analog"/>
+                        <block type="wyliozero_pin_analog"/>
                     </value>
                 </block>
             </value>
         </block>
-        <block type = "dht_temperature">
+        <block type = "wyliozero_dht_temperature">
             <value name = "dht">
                 <block type="variables_get">
                     <field name="VAR">DHTsensor</field>
@@ -127,17 +127,17 @@
         </block>
     </category>
     <category name="Humidity" colour="120">
-        <block type="variables_set">
+        <block type="wyliozero_variables_set">
             <field name="VAR">DHTsensor</field>
             <value name="VALUE">
-                <block type="dht_sensor">
+                <block type="wyliozero_dht_sensor">
                     <value name="pin">
-                        <block type="pin_analog"/>
+                        <block type="wyliozero_pin_analog"/>
                     </value>
                 </block>
             </value>
         </block>
-        <block type = "dht_humidity">
+        <block type = "wyliozero_dht_humidity">
             <value name = "dht">
                 <block type="variables_get">
                     <field name="VAR">DHTsensor</field>
@@ -152,44 +152,44 @@
         <block type="variables_set">
             <field name="VAR">ledName</field>
             <value name="VALUE">
-                <block type="led">
+                <block type="wyliozero_led">
                     <value name="pin">
-                        <block type="pin">
+                        <block type="wyliozero_pin">
                             <field name="pin">R4</field>
                         </block>
                     </value>
                 </block>
             </value>
         </block>
-        <block type="led_turn_on">
+        <block type="wyliozero_led_turn_on">
             <value name="NAME">
                 <block type="variables_get">
                     <field name="VAR">ledName</field>
                 </block>
             </value>
         </block>
-        <block type="led_turn_off">
+        <block type="wyliozero_led_turn_off">
             <value name="NAME">
                 <block type="variables_get">
                     <field name="VAR">ledName</field>
                 </block>
             </value>
         </block>
-        <block type="led_toggle">
+        <block type="wyliozero_led_toggle">
             <value name="NAME">
                 <block type="variables_get">
                     <field name="VAR">ledName</field>
                 </block>
             </value>
         </block>
-        <block type="led_blink">
+        <block type="wyliozero_led_blink">
             <value name="led">
                 <block type="variables_get">
                     <field name="VAR">ledName</field>
                 </block>
             </value>
         </block>
-        <block type="led_is_lit">
+        <block type="wyliozero_led_is_lit">
             <value name="led">
                 <block type="variables_get">
                     <field name="VAR">ledName</field>
@@ -199,14 +199,14 @@
         <block type="variables_set">
             <field name="VAR">pwmLedName</field>
             <value name="VALUE">
-                <block type="pwm_led">
+                <block type="wyliozero_pwm_led">
                     <value name="pin">
-                        <block type="pin_digital"/>
+                        <block type="wyliozero_pin_digital"/>
                     </value>
                 </block>
             </value>
         </block>
-        <block type="pwm_on">
+        <block type="wyliozero_pwm_on">
             <value name="pwm_led">
                 <block type="variables_get">
                     <field name="VAR">pwmLedName</field>
@@ -216,7 +216,7 @@
                 <block type="math_number"/>
             </value>
         </block>
-        <block type="pwm_pulse">
+        <block type="wyliozero_pwm_pulse">
             <value name="pwm_led">
                 <block type="variables_get">
                     <field name="VAR">pwmLedName</field>
@@ -228,55 +228,55 @@
         <block type="variables_set">
             <field name="VAR">trafficLight</field>
             <value name="VALUE">
-                <block type="trafficlight">
+                <block type="wyliozero_trafficlight">
                     <value name="red">
-                        <block type="pin"/>
+                        <block type="wyliozero_pin"/>
                     </value>
                     <value name="yellow">
-                        <block type="pin"/>
+                        <block type="wyliozero_pin"/>
                     </value>
                     <value name="green">
-                        <block type="pin"/>
+                        <block type="wyliozero_pin"/>
                     </value>
                 </block>
             </value>
         </block>
-        <block type="traffic_light_on">
+        <block type="wyliozero_traffic_light_on">
             <value name="NAME">
                 <block type="variables_get">
                     <field name="VAR">trafficLight</field>
                 </block>
             </value>
         </block>
-        <block type="traffic_blink">
+        <block type="wyliozero_traffic_blink">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">trafficLight</field>
                 </block>
             </value>
         </block>
-        <block type="traffic_close">
+        <block type="wyliozero_traffic_close">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">trafficLight</field>
                 </block>
             </value>
         </block>
-        <block type="traffic_light_off">
+        <block type="wyliozero_traffic_light_off">
             <value name="NAME">
                 <block type="variables_get">
                     <field name="VAR">trafficLight</field>
                 </block>
             </value>
         </block>
-        <block type="pwm_pulse">
+        <block type="wyliozero_pwm_pulse">
             <value name="pwm_led">
                 <block type="variables_get">
                     <field name="VAR">trafficLight</field>
                 </block>
             </value>
         </block>
-        <block type="led_toggle">
+        <block type="wyliozero_led_toggle">
             <value name="NAME">
                 <block type="variables_get">
                     <field name="VAR">trafficLight</field>
@@ -285,7 +285,7 @@
         </block>
     </category>
     <category name="LCD" colour="280">
-        <block type="lcd_write">
+        <block type="wyliozero_lcd_write">
             <value name="str">
                 <block type="text">
                     <field name="TEXT">Hello World!</field>
@@ -297,44 +297,44 @@
         <block type="variables_set">
             <field name="VAR">buzzerName</field>
             <value name="VALUE">
-                <block type="buzzer">
+                <block type="wyliozero_buzzer">
                     <value name="pin">
-                        <block type="pin">
+                        <block type="wyliozero_pin">
                             <field name="pin">R4</field>
                         </block>
                     </value>
                 </block>
             </value>
         </block>
-        <block type="buzzer_beep">
+        <block type="wyliozero_buzzer_beep">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">buzzerName</field>
                 </block>
             </value>
         </block>
-        <block type="buzzer_on">
+        <block type="wyliozero_buzzer_on">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">buzzerName</field>
                 </block>
             </value>
         </block>
-        <block type="buzzer_off">
+        <block type="wyliozero_buzzer_off">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">buzzerName</field>
                 </block>
             </value>
         </block>
-        <block type="buzzer_toggle">
+        <block type="wyliozero_buzzer_toggle">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">buzzerName</field>
                 </block>
             </value>
         </block>
-        <block type="buzzer_is_active">
+        <block type="wyliozero_buzzer_is_active">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">buzzerName</field>
@@ -346,42 +346,42 @@
         <block type="variables_set">
             <field name="VAR">servoMotor</field>
             <value name="VALUE">
-                <block type="servo">
+                <block type="wyliozero_servo">
                     <value name="pin">
-                        <block type="pin_digital"/>
+                        <block type="wyliozero_pin_digital"/>
                     </value>
                 </block>
             </value>
         </block>
-        <block type="servo_detach">
+        <block type="wyliozero_servo_detach">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">servoMotor</field>
                 </block>
             </value>
         </block>
-        <block type="servo_max">
+        <block type="wyliozero_servo_max">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">servoMotor</field>
                 </block>
             </value>
         </block>
-        <block type="servo_mid">
+        <block type="wyliozero_servo_mid">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">servoMotor</field>
                 </block>
             </value>
         </block>
-        <block type="servo_min">
+        <block type="wyliozero_servo_min">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">servoMotor</field>
                 </block>
             </value>
         </block>
-        <block type="servo_value">
+        <block type="wyliozero_servo_value">
             <value name="pin">
                 <block type="variables_get">
                     <field name="VAR">servoMotor</field>
@@ -394,17 +394,17 @@
     </category>
     <sep />
     <category name="Advanced" colour="80">
-        <block type="wyliolab_analogread">
+        <block type="wyliozero_analogread">
             <value name="pin">
                 <block type="pin_analog"/>
             </value>
         </block>
-        <block type="wyliolab_digitalread">
+        <block type="wyliozero_digitalread">
             <value name="pin">
                 <block type="pin_digital"/>
             </value>
         </block>
-        <block type="wyliolab_analogwrite">
+        <block type="wyliozero_analogwrite">
             <value name="pin">
                 <block type="pin_analog"/>
             </value>
@@ -412,7 +412,7 @@
                 <block type="math_number"/>
             </value>
         </block>
-        <block type="wyliolab_digitalwrite" >
+        <block type="wyliozero_digitalwrite" >
             <value name="pin">
                 <block type="pin_digital"/>
             </value>
@@ -420,55 +420,17 @@
                 <block type="logic_boolean"/>
             </value>
         </block>
-        <block type="wyliolab_pinmode">
+        <block type="wyliozero_pinmode">
             <value name="NAME">
                 <block type="pin_analog"/>
             </value>
         </block>
-        <block type="wyliolab_pinmode">
+        <block type="wyliozero_pinmode">
             <value name="NAME">
                 <block type="pin_digital"/>
             </value>
         </block>
         <block type="pause" />
-    </category>
-    <category name="Lab Network" colour="120">
-        <block type="lab_network_send_one">
-            <value name="board">
-                <block type="text">
-                    <field name="TEXT">board</field>
-                </block>
-            </value>
-            <value name="message">
-                <block type="text">
-                    <field name="TEXT">message</field>
-                </block>
-            </value>
-            <value name="topic">
-                <block type="text">
-                    <field name="TEXT">default</field>
-                </block>
-            </value>
-        </block>
-        <block type = "get_message">
-            <value name="topic">
-                <block type="text">
-                    <field name="TEXT">default</field>
-                </block>
-            </value>
-            <value name="board">
-                <block type="text">
-                    <field name="TEXT">boardId</field>
-                </block>
-            </value>
-        </block>
-        <block type = "get_message_from_all">
-            <value name="topic">
-                <block type="text">
-                    <field name="TEXT">default</field>
-                </block>
-            </value>
-        </block>
     </category>
     <sep />
 </toolbox>

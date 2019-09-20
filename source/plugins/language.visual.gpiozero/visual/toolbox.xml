@@ -1,0 +1,347 @@
+<toolbox>
+    <category name="Button" colour="0">
+        <block type="variables_set">
+            <field name="VAR">button</field>
+            <value name="VALUE">
+                <block type="gpiozero_button">
+                    <value name="pin_number">
+                        <block type="gpiozero_pin"/>
+                    </value>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_button_is_pressed">
+            <value name="button">
+                <block type="variables_get">
+                    <field name="VAR">button</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_button_wait_for_press">
+            <value name="button">
+                <block type="variables_get">
+                    <field name="VAR">button</field>
+                </block>
+            </value>
+        </block>
+        <block type = "gpiozero_button_wait_for_release">
+            <value name="button">
+                <block type="variables_get">
+                    <field name="VAR">button</field>
+                </block>
+            </value>
+        </block>
+        <block type = "gpiozero_button_held_time">
+            <value name="button">
+                <block type="variables_get">
+                    <field name="VAR">button</field>
+                </block>
+            </value>
+        </block>
+        <block type = "gpiozero_button_when_held">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">button</field>
+                </block>
+            </value>
+        </block>
+        <block type = "gpiozero_button_when_pressed">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">button</field>
+                </block>
+            </value>
+        </block>
+        <block type = "gpiozero_button_when_released">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">button</field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <category name="Light" colour="40">
+        <block type="variables_set">
+            <field name="VAR">lightSensor</field>
+            <value name="VALUE">
+                <block type="gpiozero_light_sensor">
+                    <value name="gpiozero_pin">
+                        <block type="gpiozero_pin"/>
+                    </value>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_light_wait_for_dark">
+            <value name="pin_number">
+                <block type="variables_get">
+                    <field name="VAR">lightSensor</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_light_wait_for_light">
+            <value name="pin_number">
+                <block type="variables_get">
+                    <field name="VAR">lightSensor</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_light_detected">
+            <value name="pin_number">
+                <block type="variables_get">
+                    <field name="VAR">lightSensor</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_light_when_dark">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">lightSensor</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_light_when_light">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">lightSensor</field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <sep />
+    <category name="LED" colour="200">
+        <block type="variables_set">
+            <field name="VAR">ledName</field>
+            <value name="VALUE">
+                <block type="gpiozero_led">
+                    <value name="pin">
+                        <block type="pin">
+                            <field name="gpiozero_pin">GPIO0</field>
+                        </block>
+                    </value>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_led_turn_on">
+            <value name="NAME">
+                <block type="variables_get">
+                    <field name="VAR">ledName</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_led_turn_off">
+            <value name="NAME">
+                <block type="variables_get">
+                    <field name="VAR">ledName</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_led_toggle">
+            <value name="NAME">
+                <block type="variables_get">
+                    <field name="VAR">ledName</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_led_blink">
+            <value name="led">
+                <block type="variables_get">
+                    <field name="VAR">ledName</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_led_is_lit">
+            <value name="led">
+                <block type="variables_get">
+                    <field name="VAR">ledName</field>
+                </block>
+            </value>
+        </block>
+        <block type="variables_set">
+            <field name="VAR">pwmLedName</field>
+            <value name="VALUE">
+                <block type="gpiozero_pwm_led">
+                    <value name="pin">
+                        <block type="gpiozero_pin"/>
+                    </value>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_pwm_on">
+            <value name="pwm_led">
+                <block type="variables_get">
+                    <field name="VAR">pwmLedName</field>
+                </block>
+            </value>
+            <value name="value">
+                <block type="math_number"/>
+            </value>
+        </block>
+        <block type="gpiozero_pwm_pulse">
+            <value name="pwm_led">
+                <block type="variables_get">
+                    <field name="VAR">pwmLedName</field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <category name="Traffic Light" colour="240">
+        <block type="variables_set">
+            <field name="VAR">trafficLight</field>
+            <value name="VALUE">
+                <block type="gpiozero_trafficlight">
+                    <value name="red">
+                        <block type="gpiozero_pin"/>
+                    </value>
+                    <value name="yellow">
+                        <block type="gpiozero_pin"/>
+                    </value>
+                    <value name="green">
+                        <block type="gpiozero_pin"/>
+                    </value>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_traffic_light_on">
+            <value name="NAME">
+                <block type="variables_get">
+                    <field name="VAR">trafficLight</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_traffic_blink">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">trafficLight</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_traffic_close">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">trafficLight</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_traffic_light_off">
+            <value name="NAME">
+                <block type="variables_get">
+                    <field name="VAR">trafficLight</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_pwm_pulse">
+            <value name="pwm_led">
+                <block type="variables_get">
+                    <field name="VAR">trafficLight</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_led_toggle">
+            <value name="NAME">
+                <block type="variables_get">
+                    <field name="VAR">trafficLight</field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <category name="Buzzer" colour = "320">
+        <block type="variables_set">
+            <field name="VAR">buzzerName</field>
+            <value name="VALUE">
+                <block type="gpiozero_buzzer">
+                    <value name="pin">
+                        <block type="pin">
+                            <field name="gpiozero_pin">GPIO0</field>
+                        </block>
+                    </value>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_buzzer_beep">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">buzzerName</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_buzzer_on">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">buzzerName</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_buzzer_off">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">buzzerName</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_buzzer_toggle">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">buzzerName</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_buzzer_is_active">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">buzzerName</field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <category name="Motors" colour = "40">
+        <block type="variables_set">
+            <field name="VAR">servoMotor</field>
+            <value name="VALUE">
+                <block type="gpiozero_servo">
+                    <value name="pin">
+                        <block type="gpiozero_pin"/>
+                    </value>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_servo_detach">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">servoMotor</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_servo_max">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">servoMotor</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_servo_mid">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">servoMotor</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_servo_min">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">servoMotor</field>
+                </block>
+            </value>
+        </block>
+        <block type="gpiozero_servo_value">
+            <value name="pin">
+                <block type="variables_get">
+                    <field name="VAR">servoMotor</field>
+                </block>
+            </value>
+            <value name="value">
+                <block type="math_number"/>
+            </value>
+        </block>
+    </category>
+    <sep />
+</toolbox>

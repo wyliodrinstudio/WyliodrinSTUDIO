@@ -1,0 +1,62 @@
+{
+    "LINE_GRAPH": {
+        "message": "ライン",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDLINE": {
+        "message": "ライン - 信号を足します",
+        "description": "Title of the prompt used to add a new signal"
+    },
+    "LINE_STYLE": {
+        "message": "様式",
+        "description": "The style of a line signal"
+    },
+    "LINE_HIDE_LEGEND": {
+        "message": "凡例を隠す",
+        "description": "Checkbox option to hide the legend of a graph"
+    },
+    "LINE_FIX_AXES_VALUES": {
+        "message": "軸の値を治します",
+        "description": "Checkbox option to fix the axis values for the line graph"
+    },
+    "LINE_LOGARITHMIC_AXES": {
+        "message": "対数軸",
+        "description": "Checkbox option to show logarithmic for the line graph"
+    },
+    "LINE_TIME_SERIES": {
+        "message": "時系列",
+        "description": "Checkbox option to show the time series for the line graph"
+    },
+    "LINE_SHOW_POINTS": {
+        "message": "ポイントを表示",
+        "description": "Checkbox option to show the points for the line graph"
+    },
+    "LINE_MAX_POINTS": {
+        "message": "表示する最大ポイント (0　はすべてを表示することを意味します)",
+        "description": "Input text area for the maximum points to show in a line graph"
+    },
+    "LINE_AXIS_NAME": {
+        "message": "軸名",
+        "description": "Name of the axis"
+    },
+    "LINE_OVERVIEW": {
+        "message": "概要を表示",
+        "description": "Checkbox option to show an overview for the line graph"
+    },
+    "LINE_SCROLLBAR": {
+        "message": "スクロール・バーを表示",
+        "description": "Checkbox option to show the scrollbar for the line graph"
+    },
+    "LINE_STEP": {
+        "message": "段",
+        "description": "Type of line graph"
+    },
+    "LINE_STRAIGHT": {
+        "message": "直線",
+        "description": "Type of line graph"
+    },
+    "LINE_SPLINE": {
+        "message": "スプライン",
+        "description": "Type of line graph"
+    }
+}

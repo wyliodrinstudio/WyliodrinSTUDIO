@@ -4,7 +4,7 @@ module.exports = function (blockly) {
 	var Blockly = blockly.Blockly;
 	// var goog = blockly.goog;
 
-	Blockly.Blocks['get_message'] = {
+	Blockly.Blocks['wyliozero_get_message'] = {
 		init: function() {
 			this.appendValueInput('board')
 				.setCheck(null)
@@ -20,7 +20,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['get_message_from_all'] = {
+	Blockly.Blocks['wyliozero_get_message_from_all'] = {
 		init: function() {
 			this.appendValueInput('topic')
 				.setCheck(null)
@@ -34,7 +34,7 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Blocks['got_values'] = {
+	Blockly.Blocks['wyliozero_got_values'] = {
 		init: function() {
 			this.appendValueInput('var')
 				.setCheck(null)
@@ -48,7 +48,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['got_broadcast'] = {
+	Blockly.Blocks['wyliozero_got_broadcast'] = {
 		init: function() {
 			this.appendValueInput('var')
 				.setCheck(null)
@@ -62,7 +62,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['get_value'] = {
+	Blockly.Blocks['wyliozero_get_value'] = {
 		init: function() {
 			this.appendValueInput('var')
 				.setCheck(null)
@@ -76,7 +76,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['get_broadcast'] = {
+	Blockly.Blocks['wyliozero_get_broadcast'] = {
 		init: function() {
 			
 			this.appendDummyInput()
@@ -88,7 +88,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['link'] = {
+	Blockly.Blocks['wyliozero_link'] = {
 		init: function() {
 			this.appendValueInput('var')
 				.setCheck(null)
@@ -102,7 +102,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['lab_network_send_all'] = {
+	Blockly.Blocks['wyliozero_lab_network_send_all'] = {
 		init: function() {
 			this.appendValueInput('message')
 				.setCheck(['Number', 'String'])
@@ -117,7 +117,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['lab_network_send_one'] = {
+	Blockly.Blocks['wyliozero_lab_network_send_one'] = {
 		init: function() {
 			
 			this.appendValueInput('message')
@@ -138,7 +138,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['lab_network_get_all'] = {
+	Blockly.Blocks['wyliozero_lab_network_get_all'] = {
 		init: function() {
 		
 			this.appendValueInput('varname')
@@ -157,7 +157,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	// Blockly.Blocks['lab_network_get_one'] = {
+	// Blockly.Blocks['wyliozero_lab_network_get_one'] = {
 	//   init: function() {
 		
 	//     this.appendValueInput('varname')
@@ -179,7 +179,7 @@ module.exports = function (blockly) {
 	//   }
 	// };
 
-	// Blockly.Blocks['lab_network_recieve_all'] = {
+	// Blockly.Blocks['wyliozero_lab_network_recieve_all'] = {
 	//   init: function() {
 	//     this.appendValueInput('var')
 	//         .setCheck(null)
@@ -197,7 +197,7 @@ module.exports = function (blockly) {
 	//   }
 	// };
 
-	Blockly.Blocks['lab_network_when_changed'] = {
+	Blockly.Blocks['wyliozero_lab_network_when_changed'] = {
 		init: function() {
 			this.appendValueInput('msg')
 				.setCheck(null)
@@ -219,10 +219,10 @@ module.exports = function (blockly) {
 
 
 
-	Blockly.Blocks['wyliolab_analogread'] = {
+	Blockly.Blocks['wyliozero_analogread'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'pinNumber_analog'])
+				.setCheck(['String', 'wyliozero_pinNumber_analog'])
 				.appendField('analogRead');
 			this.setOutput(true, 'Number');
 			this.setColour(320);
@@ -231,10 +231,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliolab_digitalread'] = {
+	Blockly.Blocks['wyliozero_digitalread'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'pinNumber_digital'])
+				.setCheck(['String', 'wyliozero_pinNumber_digital'])
 				.appendField('digitalRead');
 			this.setOutput(true, 'Number');
 			this.setColour(320);
@@ -243,10 +243,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliolab_analogwrite'] = {
+	Blockly.Blocks['wyliozero_analogwrite'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'pinNumber_analog'])
+				.setCheck(['String', 'wyliozero_pinNumber_analog'])
 				.setAlign(Blockly.ALIGN_RIGHT)
 				.appendField('analogWrite');
 			this.appendValueInput('value')
@@ -262,10 +262,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliolab_digitalwrite'] = {
+	Blockly.Blocks['wyliozero_digitalwrite'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'pinNumber_digital'])
+				.setCheck(['String', 'wyliozero_pinNumber_digital'])
 				.setAlign(Blockly.ALIGN_RIGHT)
 				.appendField('digitalWrite');
 			this.appendValueInput('value')
@@ -281,10 +281,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['wyliolab_pinmode'] = {
+	Blockly.Blocks['wyliozero_pinmode'] = {
 		init: function() {
 			this.appendValueInput('NAME')
-				.setCheck(['String', 'pinNumber', 'pinNumber_analog', 'pinNumber_digital'])
+				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital'])
 				.appendField('pinMode');
 			this.appendDummyInput()
 				.appendField(new Blockly.FieldDropdown([
@@ -299,7 +299,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['pin'] = {
+	Blockly.Blocks['wyliozero_pin'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField(new Blockly.FieldDropdown([
@@ -338,14 +338,14 @@ module.exports = function (blockly) {
 					['R21', 'R21']
 
 				]), 'pin');
-			this.setOutput(true, 'pinNumber');
+			this.setOutput(true, 'wyliozero_pinNumber');
 			this.setColour(230);
 			this.setTooltip('');
 			this.setHelpUrl('');
 		}
 	};
 
-	Blockly.Blocks['pin_analog'] = {
+	Blockly.Blocks['wyliozero_pin_analog'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField(new Blockly.FieldDropdown([
@@ -358,14 +358,14 @@ module.exports = function (blockly) {
 
 				]), 'pin')
 				.appendField('(analog)');
-			this.setOutput(true, 'pinNumber_analog');
+			this.setOutput(true, 'wyliozero_pinNumber_analog');
 			this.setColour(230);
 			this.setTooltip('');
 			this.setHelpUrl('');
 		}
 	};
 
-	Blockly.Blocks['pin_digital'] = {
+	Blockly.Blocks['wyliozero_pin_digital'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField(new Blockly.FieldDropdown([
@@ -399,7 +399,36 @@ module.exports = function (blockly) {
 
 				]), 'pin')
 				.appendField('(digital)');
-			this.setOutput(true, 'pinNumber_digital');
+			this.setOutput(true, 'wyliozero_pinNumber_digital');
+			this.setColour(230);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['wyliozero_pin_raspberry'] = {
+		init: function() {
+			this.appendDummyInput()
+				.appendField(new Blockly.FieldDropdown([
+					['R4', 'R4'],
+					['R17', 'R17'],
+					['R27', 'R27'],
+					['R22', 'R22'],
+					['R10', 'R10'],
+					['R9', 'R9'],
+					['R11', 'R11'],
+					['R18', 'R18'],
+					['R23', 'R23'],
+					['R8', 'R8'],
+					['R7', 'R7'],
+					['R13', 'R13'],
+					['R19', 'R19'],
+					['R20', 'R20'],
+					['R21', 'R21']
+
+				]), 'pin')
+				.appendField('(digital)');
+			this.setOutput(true, 'wyliozero_pinNumber_raspberry');
 			this.setColour(230);
 			this.setTooltip('');
 			this.setHelpUrl('');
@@ -407,10 +436,10 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Blocks['led'] = {
+	Blockly.Blocks['wyliozero_led'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'pinNumber', 'pinNumber_analog', 'pinNumber_digital'])
+				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital'])
 				.appendField('LED');
 			this.setOutput(true, 'LED');
 			this.setColour(200);
@@ -419,10 +448,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['servo'] = {
+	Blockly.Blocks['wyliozero_servo'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'pinNumber_digital'])
+				.setCheck(['String', 'wyliozero_pinNumber_digital'])
 				.setAlign(Blockly.ALIGN_RIGHT)
 				.appendField('Servo Motor');
 			this.setInputsInline(true);
@@ -433,10 +462,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	// Blockly.Blocks['angular_servo'] = {
+	// Blockly.Blocks['wyliozero_angular_servo'] = {
 	//   init: function() {
 	//     this.appendValueInput('pin')
-	//         .setCheck(['String', 'pinNumber_digital'])
+	//         .setCheck(['String', 'wyliozero_pinNumber_digital'])
 	//         .setAlign(Blockly.ALIGN_RIGHT)
 	//         .appendField('Angular Servo Motor');
 	//     this.setInputsInline(true);
@@ -447,10 +476,10 @@ module.exports = function (blockly) {
 	//   }
 	// };
 
-	Blockly.Blocks['pwm_led'] = {
+	Blockly.Blocks['wyliozero_pwm_led'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'pinNumber_digital'])
+				.setCheck(['String', 'wyliozero_pinNumber_digital'])
 				.appendField('PWM LED');
 			this.setOutput(true, 'PWM_LED');
 			this.setColour(200);
@@ -459,10 +488,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['button'] = {
+	Blockly.Blocks['wyliozero_button'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
-				.setCheck(['String', 'pinNumber_digital'])
+				.setCheck(['String', 'wyliozero_pinNumber_digital'])
 				.appendField('Button');
 			this.setOutput(true, 'button');
 			this.setColour(0);
@@ -471,7 +500,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['button_when_held'] = {
+	Blockly.Blocks['wyliozero_button_when_held'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('button')
@@ -489,7 +518,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['button_when_pressed'] = {
+	Blockly.Blocks['wyliozero_button_when_pressed'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('button')
@@ -507,7 +536,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['button_when_released'] = {
+	Blockly.Blocks['wyliozero_button_when_released'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('button')
@@ -526,7 +555,7 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Blocks['button_is_pressed'] = {
+	Blockly.Blocks['wyliozero_button_is_pressed'] = {
 		init: function() {
 			this.appendValueInput('button')
 				.setCheck('button')
@@ -540,7 +569,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['servo_detach'] = {
+	Blockly.Blocks['wyliozero_servo_detach'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -557,7 +586,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['servo_max'] = {
+	Blockly.Blocks['wyliozero_servo_max'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -574,7 +603,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['servo_mid'] = {
+	Blockly.Blocks['wyliozero_servo_mid'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -591,7 +620,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['servo_min'] = {
+	Blockly.Blocks['wyliozero_servo_min'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -608,7 +637,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['servo_value'] = {
+	Blockly.Blocks['wyliozero_servo_value'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('servo')
@@ -628,7 +657,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['button_wait_for_release'] = {
+	Blockly.Blocks['wyliozero_button_wait_for_release'] = {
 		init: function() {
 			this.appendValueInput('button')
 				.setCheck('button')
@@ -643,7 +672,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['button_held_time'] = {
+	Blockly.Blocks['wyliozero_button_held_time'] = {
 		init: function() {
 			this.appendValueInput('button')
 				.setCheck('button')
@@ -656,7 +685,7 @@ module.exports = function (blockly) {
 			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_input.html#gpiozero.Button.held_time');
 		}
 	};
-	Blockly.Blocks['led_blink'] = {
+	Blockly.Blocks['wyliozero_led_blink'] = {
 		init: function() {
 			this.appendValueInput('led')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
@@ -671,7 +700,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['pwm_on'] = {
+	Blockly.Blocks['wyliozero_pwm_on'] = {
 		init: function() {
 			this.appendValueInput('pwm_led')
 				.setCheck('PWM_LED')
@@ -690,7 +719,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['button_wait_for_press'] = {
+	Blockly.Blocks['wyliozero_button_wait_for_press'] = {
 		init: function() {
 			this.appendValueInput('button')
 				.setCheck('button')
@@ -705,7 +734,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['pause'] = {
+	Blockly.Blocks['wyliozero_pause'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField('Pause');
@@ -716,15 +745,15 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['trafficlight'] = {
+	Blockly.Blocks['wyliozero_trafficlight'] = {
 		init: function() {
 			this.appendValueInput('red')
-				.setCheck(['String', 'pinNumber', 'pinNumber_analog', 'pinNumber_digital'])
+				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital'])
 				.appendField('Traffic Lights');
 			this.appendValueInput('yellow')
-				.setCheck(['String', 'pinNumber', 'pinNumber_analog', 'pinNumber_digital']);
+				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital']);
 			this.appendValueInput('green')
-				.setCheck(['String', 'pinNumber', 'pinNumber_analog', 'pinNumber_digital']);
+				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital']);
 			this.setOutput(true, 'traffic');
 			this.setColour(240);
 			this.setTooltip('');
@@ -732,7 +761,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['led_turn_on'] = {
+	Blockly.Blocks['wyliozero_led_turn_on'] = {
 		init: function() {
 			this.appendValueInput('NAME')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
@@ -746,7 +775,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['led_turn_off'] = {
+	Blockly.Blocks['wyliozero_led_turn_off'] = {
 		init: function() {
 			this.appendValueInput('NAME')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
@@ -760,7 +789,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['led_toggle'] = {
+	Blockly.Blocks['wyliozero_led_toggle'] = {
 		init: function() {
 			this.appendValueInput('NAME')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
@@ -774,7 +803,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['led_is_lit'] = {
+	Blockly.Blocks['wyliozero_led_is_lit'] = {
 		init: function() {
 			this.appendValueInput('led')
 				.setCheck(['PWM_LED', 'LED'])
@@ -788,7 +817,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['traffic_light_on'] = {
+	Blockly.Blocks['wyliozero_traffic_light_on'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField('Turn on')
@@ -809,7 +838,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['traffic_blink'] = {
+	Blockly.Blocks['wyliozero_traffic_blink'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('traffic')
@@ -824,7 +853,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['traffic_close'] = {
+	Blockly.Blocks['wyliozero_traffic_close'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('traffic')
@@ -839,7 +868,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['pwm_pulse'] = {
+	Blockly.Blocks['wyliozero_pwm_pulse'] = {
 		init: function() {
 			this.appendValueInput('pwm_led')
 				.setCheck('PWM_LED', 'traffic')
@@ -853,7 +882,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['traffic_light_off'] = {
+	Blockly.Blocks['wyliozero_traffic_light_off'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField('Turn off')
@@ -874,7 +903,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['start_labnetwork'] = {
+	Blockly.Blocks['wyliozero_start_labnetwork'] = {
 		init: function() {
 			this.appendDummyInput()
 				.appendField('Start LabNetwork');
@@ -886,7 +915,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['lcd_write'] = {
+	Blockly.Blocks['wyliozero_lcd_write'] = {
 		init: function() {
 			this.appendValueInput('str')
 				.setCheck('String')
@@ -908,10 +937,10 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Blocks['light_sensor'] = {
+	Blockly.Blocks['wyliozero_light_sensor'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
-				.setCheck(['String', 'pinNumber_analog'])
+				.setCheck(['String', 'wyliozero_pinNumber_raspberry'])
 				.appendField('Light Sensor');
 			this.setOutput(true, 'light_sensor');
 			this.setColour(40);
@@ -920,7 +949,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['light_when_dark'] = {
+	Blockly.Blocks['wyliozero_light_when_dark'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('light_sensor')
@@ -938,7 +967,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['light_when_light'] = {
+	Blockly.Blocks['wyliozero_light_when_light'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('light_sensor')
@@ -956,7 +985,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['light_wait_for_dark'] = {
+	Blockly.Blocks['wyliozero_light_wait_for_dark'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
 				.setCheck('light_sensor')
@@ -971,7 +1000,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['light_wait_for_light'] = {
+	Blockly.Blocks['wyliozero_light_wait_for_light'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
 				.setCheck('light_sensor')
@@ -986,7 +1015,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['light_detected'] = {
+	Blockly.Blocks['wyliozero_light_detected'] = {
 		init: function() {
 			this.appendValueInput('pin_number')
 				.setCheck('light_sensor')
@@ -1000,10 +1029,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['buzzer'] = {
+	Blockly.Blocks['wyliozero_buzzer'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'pinNumber', 'pinNumber_analog', 'pinNumber_digital'])
+				.setCheck(['String', 'wyliozero_pinNumber', 'wyliozero_pinNumber_analog', 'wyliozero_pinNumber_digital'])
 				.appendField('buzzer');
 			this.setOutput(true, 'buzzer');
 			this.setColour(320);
@@ -1012,7 +1041,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['buzzer_beep'] = {
+	Blockly.Blocks['wyliozero_buzzer_beep'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1025,7 +1054,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['buzzer_on'] = {
+	Blockly.Blocks['wyliozero_buzzer_on'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1038,7 +1067,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['buzzer_off'] = {
+	Blockly.Blocks['wyliozero_buzzer_off'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1051,7 +1080,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['buzzer_toggle'] = {
+	Blockly.Blocks['wyliozero_buzzer_toggle'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1064,7 +1093,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['buzzer_is_active'] = {
+	Blockly.Blocks['wyliozero_buzzer_is_active'] = {
 		init: function() {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
@@ -1078,10 +1107,10 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['dht_sensor'] = {
+	Blockly.Blocks['wyliozero_dht_sensor'] = {
 		init: function() {
 			this.appendValueInput('pin')
-				.setCheck(['String', 'pinNumber_analog'])
+				.setCheck(['String', 'wyliozero_pinNumber_analog'])
 				.appendField('DHT sensor on pin');
 			this.setOutput(true, 'dht_sensor');
 			this.setColour(100);
@@ -1090,7 +1119,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['dht_temperature'] = {
+	Blockly.Blocks['wyliozero_dht_temperature'] = {
 		init: function() {
 			this.appendValueInput('dht')
 				.setCheck('dht_sensor')
@@ -1104,7 +1133,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['dht_humidity'] = {
+	Blockly.Blocks['wyliozero_dht_humidity'] = {
 		init: function() {
 			this.appendValueInput('dht')
 				.setCheck('dht_sensor')

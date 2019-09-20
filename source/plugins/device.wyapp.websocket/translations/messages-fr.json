@@ -1,42 +1,34 @@
 {
-	"DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED":
-	{
-		"message": "Authentifié auprès du serveur de périphériques",
-		"description": "The notification the user sees when authetnicated with the devices server"
-	},
-	"DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR":
-	{
-		"message": "Erreur du serveur: {error}",
-		"description": "The error notification the user sees with the error for the websocket server"
-	},
-	"DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED":
-	{
-		"message": "Déconnecté du serveur de périphériques ",
-		"description": "The notification the user sees when disconnected from the devices server"
-	},
-	"DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE":
-	{
-		"message": "Utiliser Studio ici?",
-		"description": "The title of the question dialog the user sees when there is another connection with his id"
-	},
-	"DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET":
-	{
-		"message": "Une autre instance de Studio est connectée au serveur avec votre identifiant. Vous ne pouvez pas utiliser plusieurs connexions. Voulez-vous utiliser Studio ici?",
-		"description": "The question dialog text the user sees when there is another instance connected with his id"
-	},
-	"WYAPP_WEBSOCKET_NEW_DEVICE_TITLE":
-	{
-		"message": "Ajouter un périphérique",
-		"description": "The title of the dialog with instructions on how to add a new device"
-	},
-	"WYAPP_WEBSOCKET_NEW_DEVICE_NAME":
-	{
-		"message": "Nom du périphérique",
-		"description": "The name of the device with instructions on how to add a new device"
-	},
-	"WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID":
-	{
-		"message": "Veuillez entrer un nom de périphérique valide",
-		"description": "The message the user receives when he did not enter a valid name for a new device"
-	}
+    "DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED": {
+        "message": "Authentifié auprès du serveur de périphériques",
+        "description": "The notification the user sees when authetnicated with the devices server"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR": {
+        "message": "Erreur du serveur: {error}",
+        "description": "The error notification the user sees with the error for the websocket server"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED": {
+        "message": "Déconnecté du serveur de périphériques ",
+        "description": "The notification the user sees when disconnected from the devices server"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE": {
+        "message": "Utiliser Studio ici?",
+        "description": "The title of the question dialog the user sees when there is another connection with his id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET": {
+        "message": "Une autre instance de Studio est connectée au serveur avec votre identifiant. Vous ne pouvez pas utiliser plusieurs connexions. Voulez-vous utiliser Studio ici?",
+        "description": "The question dialog text the user sees when there is another instance connected with his id"
+    },
+    "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
+        "message": "Ajouter un périphérique",
+        "description": "The title of the dialog with instructions on how to add a new device"
+    },
+    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
+        "message": "Nom du périphérique",
+        "description": "The name of the device with instructions on how to add a new device"
+    },
+    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
+        "message": "Veuillez entrer un nom de périphérique valide",
+        "description": "The message the user receives when he did not enter a valid name for a new device"
+    }
 }

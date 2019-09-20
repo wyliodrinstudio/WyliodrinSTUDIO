@@ -295,7 +295,7 @@ function Architect(config) {
 	}
 
 	var handler = {
-		get: function(target, prop, receiver) {
+		get: function(target, prop/*, receiver*/) {
 			if (_.isFunction(target[prop])) {
 				return hookFunction.bind(this, target, prop);
 			} 

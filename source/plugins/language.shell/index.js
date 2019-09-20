@@ -20,7 +20,7 @@ export default function setup (options, imports, register)
 	let pictograms = [
 		{
 			extension: '.sh',
-			icon:'plugins/language.shell/data/img/shellLittle.png'
+			icon:'mdi-bash'
 		}
 	];
 	let shell = {

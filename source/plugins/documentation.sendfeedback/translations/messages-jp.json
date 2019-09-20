@@ -1,0 +1,22 @@
+{
+    "SEND_FEEDBACK_TITLE": {
+        "message": "フィードバックを送ります",
+        "description": "Option in the Help Menu to send a feedback"
+    },
+    "SEND_FEEDBACK_MESSAGE": {
+        "message": "フィドバクを書きます",
+        "description": "Label of the input text area of the feedback"
+    },
+    "SEND_FEEDBACK_SEND": {
+        "message": "フィドバクを送ります",
+        "description": "Button used to send the feecback"
+    },
+    "FEEDBACK_SCREENSHOT_ERROR": {
+        "message": "ページのキャプチャ中にエラーが発生しました！ もう一度やり直してください。",
+        "description": "Notification that shows up when  the system can't take a screenshot"
+    },
+    "SEND_FEEDBACK_CANCEL": {
+        "message": "キャンセル",
+        "description": "Button to close the feedback dialog"
+    }
+}
