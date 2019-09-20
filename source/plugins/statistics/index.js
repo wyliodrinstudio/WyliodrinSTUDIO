@@ -10,6 +10,7 @@ export function setup(options, imports, register) {
 	let currentDevices = {};
 	let runPressedCount = {};
 	let stopPressedCount = {};
+	let openProjects = {};
 
 	function getTime() {
 		let today = new Date();
@@ -78,6 +79,19 @@ export function setup(options, imports, register) {
 	imports.events.on ('ready', ()=>
 	{
 		currentSession.start = getTime();
+	});
+
+	imports.hooks.addPreHook('projects', 'changeFile', (...args) => {
+		if (args[1]) {
+			let projectInfo = args[0];
+
+			if (!openProjects[projectInfo.language])
+				openProjects[projectInfo.language] = 0;
+			openProjects[projectInfo.language] += 1;
+
+			// console.log(openProjects);
+		}
+
 	});
 
 	imports.hooks.addPreHook('workspace', 'updateDevices', (...args) => {
