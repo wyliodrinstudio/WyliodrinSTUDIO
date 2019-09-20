@@ -138,5 +138,9 @@
     "WORKSPACE_DOCUMENTATION": {
         "message": "Documentation",
         "description": "Open a new window with the documentation of Wyliodrin STUDIO"
+    },
+    "ABOUT_VERSION": {
+        "message": "Version",
+        "description":" The text version that appears in the Welcome and About dialogs"
     }
 }

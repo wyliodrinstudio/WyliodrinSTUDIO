@@ -38,5 +38,8 @@
     "DEVICE_WYAPP_SSH_IP_ADDRESS": {
         "message": "IP Address",
         "description": "The name of the pseudo device that allows the user the connect to any IP address"
+    },
+    "DEVICE_WYAPP_CHANGE_CREDENTIALS": {
+        "message": "You tried to login using the default credentials for this device. Please cha"
     }
 }

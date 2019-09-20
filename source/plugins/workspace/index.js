@@ -120,6 +120,8 @@ let workspace = {
 	 */
 	vue: null,
 
+	version: require ('../../../package.json').version,
+
 	/* Start the application */
 	start(studio) {
 		Vue.prototype.studio = studio;
