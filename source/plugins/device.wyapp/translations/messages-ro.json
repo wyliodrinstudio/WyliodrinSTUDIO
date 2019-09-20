@@ -118,6 +118,10 @@
     "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
         "message": "Alte rețele",
         "description": "The option to connect to a network that is not displayed"
+	},
+	"DEVICE_WYAPP_NO_DIRECTORY": {
+		"message": "Nu există nici un director selectat",
+		"description": "The message shown in the file tree manager when there is no directory currently selected"
     },
     "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
         "message": "Vă rugăm să deschideți un proiect nou",

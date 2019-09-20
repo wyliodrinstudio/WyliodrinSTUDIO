@@ -4,15 +4,15 @@ module.exports = function (blockly) {
 	var Blockly = blockly.Blockly;
 	// var goog = blockly.goog;
 
-	Blockly.Python.setUp = function() {
-		if (!Blockly.Python.definitions_['setUp']) {
-			Blockly.Python.definitions_['setUp'] = 'from wyliozero import * \n';
+	Blockly.Python.wyliozero_setUp = function() {
+		if (!Blockly.Python.definitions_['wyliozero_setUp']) {
+			Blockly.Python.definitions_['wyliozero_setUp'] = 'from wyliozero import * \n';
 		}
 	};
 
-	Blockly.Python.importtime = function() {
-		if (!Blockly.Python.definitions_['time']) {
-			Blockly.Python.definitions_['time'] = 'from time import * \n';
+	Blockly.Python.wyliozero_importtime = function() {
+		if (!Blockly.Python.definitions_['wyliozero_time']) {
+			Blockly.Python.definitions_['wyliozero_time'] = 'from time import * \n';
 		}
 	};
 
@@ -37,8 +37,8 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Python['get_message'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_get_message'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		Blockly.Python.wylioLab();
 		var name = Blockly.Python.uniqueName('message');
 		var value_topic = Blockly.Python.valueToCode(block, 'topic', Blockly.Python.ORDER_ATOMIC);
@@ -51,8 +51,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['get_message_from_all'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_get_message_from_all'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		Blockly.Python.wylioLab();
 		var name = Blockly.Python.uniqueName('message');
 		var value_topic = Blockly.Python.valueToCode(block, 'topic', Blockly.Python.ORDER_ATOMIC);
@@ -65,8 +65,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['got_values'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_got_values'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_var.toString() + '.isAvailable()';
@@ -74,8 +74,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['got_broadcast'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_got_broadcast'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_var.toString() + '.isBroadcastAvailable()';
@@ -83,8 +83,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['get_value'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_get_value'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_var.toString() + '.getAvailable()';
@@ -94,8 +94,8 @@ module.exports = function (blockly) {
 
 
 
-	Blockly.Python['get_broadcast'] = function(/* block */) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_get_broadcast'] = function(/* block */) {
+		Blockly.Python.wyliozero_setUp();
 		Blockly.Python.initBroadcast();
 		// var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -104,8 +104,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['link'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_link'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_var.toString() + '.values';
@@ -114,8 +114,8 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Python['lab_network_send_all'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_lab_network_send_all'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		Blockly.Python.wylioLab();
 		var value_message = Blockly.Python.valueToCode(block, 'message', Blockly.Python.ORDER_ATOMIC);
 		//var value_topic = Blockly.Python.valueToCode(block, 'topic', Blockly.Python.ORDER_ATOMIC);
@@ -124,8 +124,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['lab_network_send_one'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_lab_network_send_one'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		Blockly.Python.wylioLab();
 		var value_message = Blockly.Python.valueToCode(block, 'message', Blockly.Python.ORDER_ATOMIC);
 		var value_topic = Blockly.Python.valueToCode(block, 'topic', Blockly.Python.ORDER_ATOMIC);
@@ -135,8 +135,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['lab_network_get_all'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_lab_network_get_all'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		Blockly.Python.wylioLab();
 		var value_topic = Blockly.Python.valueToCode(block, 'topic', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -145,8 +145,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	// Blockly.Python['lab_network_get_one'] = function(block) {
-	//   Blockly.Python.setUp();
+	// Blockly.Python['wyliozero_lab_network_get_one'] = function(block) {
+	//   Blockly.Python.wyliozero_setUp();
 	//   Blockly.Python.wylioLab();
 	//   var value_topic = Blockly.Python.valueToCode(block, 'topic', Blockly.Python.ORDER_ATOMIC);
 	//   var value_board = Blockly.Python.valueToCode(block, 'board', Blockly.Python.ORDER_ATOMIC);
@@ -158,8 +158,8 @@ module.exports = function (blockly) {
 
 
 	//(self, broadcast = False, public = False, private = False, who = None, topic = 'default' )
-	// Blockly.Python['lab_network_recieve_all'] = function(block) {
-	//   Blockly.Python.setUp();
+	// Blockly.Python['wyliozero_lab_network_recieve_all'] = function(block) {
+	//   Blockly.Python.wyliozero_setUp();
 	//   var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
 	//   var value_topic = Blockly.Python.valueToCode(block, 'topic', Blockly.Python.ORDER_ATOMIC);
 	//   // TODO: Assemble Python into code variable.
@@ -169,8 +169,8 @@ module.exports = function (blockly) {
 	// };
 
 
-	Blockly.Python['lab_network_when_changed'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_lab_network_when_changed'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_variable = Blockly.Python.valueToCode(block, 'variable', Blockly.Python.ORDER_ATOMIC);
 		var value_msg = Blockly.Python.valueToCode(block, 'msg', Blockly.Python.ORDER_ATOMIC);
 		var statements_function = Blockly.Python.statementToCode(block, 'function');
@@ -182,8 +182,8 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Python['wyliolab_analogread'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_wyliolab_analogread'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'analogRead(' + value_pin.toString() + ')\n';
@@ -191,8 +191,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['wyliolab_digitalread'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_wyliolab_digitalread'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'digitalRead(' + value_pin.toString() + ')\n';
@@ -200,8 +200,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['wyliolab_analogwrite'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_wyliolab_analogwrite'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -209,8 +209,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['wyliolab_digitalwrite'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_wyliolab_digitalwrite'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		let valueToWrite = null;
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
@@ -224,8 +224,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['wyliolab_pinmode'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_wyliolab_pinmode'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
 		var dropdown_mode = block.getFieldValue('mode');
 		// TODO: Assemble Python into code variable.
@@ -233,8 +233,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['pin_analog'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_pin_analog'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var dropdown_pin = block.getFieldValue('pin');
 		// TODO: Assemble Python into code variable.
 		var code = dropdown_pin.toString();
@@ -242,8 +242,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['pin'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_pin'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var dropdown_pin = block.getFieldValue('pin');
 		// TODO: Assemble Python into code variable.
 		var code = dropdown_pin.toString();
@@ -251,8 +251,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['pin_digital'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_pin_digital'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var dropdown_pin = block.getFieldValue('pin');
 		// TODO: Assemble Python into code variable.
 		var code = dropdown_pin.toString();
@@ -260,8 +260,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['pin_raspberry'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_pin_raspberry'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var dropdown_pin = block.getFieldValue('pin');
 		// TODO: Assemble Python into code variable.
 		var code = dropdown_pin.toString();
@@ -269,8 +269,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['led'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_led'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_NEW);
 		// TODO: Assemble Python into code variable.
 		var code = 'LED(' + value_pin.toString() + ')';
@@ -278,7 +278,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NEW];
 	};
 
-	Blockly.Python['servo'] = function(block) {
+	Blockly.Python['wyliozero_servo'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'Servo(' + value_pin.toString() + ')';
@@ -286,28 +286,28 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['servo_detach'] = function(block) {
+	Blockly.Python['wyliozero_servo_detach'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.detach() \n';
 		return code;
 	};
 
-	Blockly.Python['servo_max'] = function(block) {
+	Blockly.Python['wyliozero_servo_max'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.max() \n';
 		return code;
 	};
 
-	Blockly.Python['servo_mid'] = function(block) {
+	Blockly.Python['wyliozero_servo_mid'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.mid() \n';
 		return code;
 	};
 
-	Blockly.Python['servo_min'] = function(block) {
+	Blockly.Python['wyliozero_servo_min'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.min() \n';
@@ -315,14 +315,14 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Python['servo_value'] = function(block) {
+	Blockly.Python['wyliozero_servo_value'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var number_name = block.getFieldValue('value');
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.value = ' + number_name.toString() + '\n';
 		return code;
 	};
-	// Blockly.Python['angular_servo'] = function(block) {
+	// Blockly.Python['wyliozero_angular_servo'] = function(block) {
 	//   var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 	//   // TODO: Assemble Python into code variable.
 	//   var code = 'Servo(' + value_pin.toString() + ')';
@@ -330,8 +330,8 @@ module.exports = function (blockly) {
 	//   return [code, Blockly.Python.ORDER_NONE];
 	// };
 
-	Blockly.Python['pwm_led'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_pwm_led'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_led = Blockly.Python.valueToCode(block, 'led', Blockly.Python.ORDER_NEW);
 		// TODO: Assemble Python into code variable.
 		var code = 'PWMLED(' + value_led.toString() + ')\n';
@@ -339,8 +339,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NEW];
 	};
 
-	Blockly.Python['button'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_button'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'Button(' + value_pin_number.toString() + ', pull_up = False) \n';
@@ -348,7 +348,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	// Blockly.Python['button_when_held'] = function(block) {
+	// Blockly.Python['wyliozero_button_when_held'] = function(block) {
 	//     var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 	//     var value_function = Blockly.Python.valueToCode(block, 'function', Blockly.Python.ORDER_ATOMIC);
 	//     // TODO: Assemble Python into code variable.
@@ -356,8 +356,8 @@ module.exports = function (blockly) {
 	//     return code;
 	// };
 
-	Blockly.Python['button_is_pressed'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_button_is_pressed'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_button = Blockly.Python.valueToCode(block, 'button', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_button.toString() + '.is_pressed';
@@ -367,7 +367,7 @@ module.exports = function (blockly) {
 
 
 
-	Blockly.Python['button_wait_for_release'] = function(block) {
+	Blockly.Python['wyliozero_button_wait_for_release'] = function(block) {
 		var value_button = Blockly.Python.valueToCode(block, 'button', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_button.toString() + '.wait_for_release() \n';
@@ -375,16 +375,16 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Python['led_blink'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_led_blink'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_led = Blockly.Python.valueToCode(block, 'led', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_led.toString() + '.blink() \n';
 		return code;
 	};
 
-	Blockly.Python['button_when_held'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_button_when_held'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var statements_function = Blockly.Python.statementToCode(block, 'function');
 		var functionName = Blockly.Python.uniqueName('function');
@@ -394,8 +394,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['button_when_pressed'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_button_when_pressed'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var statements_function = Blockly.Python.statementToCode(block, 'function');
 		var functionName = Blockly.Python.uniqueName('function');
@@ -405,8 +405,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['button_when_released'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_button_when_released'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var statements_function = Blockly.Python.statementToCode(block, 'function');
 		var functionName = Blockly.Python.uniqueName('function');
@@ -416,8 +416,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['pwm_on'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_pwm_on'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pwm_led = Blockly.Python.valueToCode(block, 'pwm_led', Blockly.Python.ORDER_ATOMIC);
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -425,15 +425,15 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['button_wait_for_press'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_button_wait_for_press'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_button = Blockly.Python.valueToCode(block, 'button', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_button.toString() + '.wait_for_press() \n';
 		return code;
 	};
 
-	Blockly.Python['button_held_time'] = function(block) {
+	Blockly.Python['wyliozero_button_held_time'] = function(block) {
 		var value_button = Blockly.Python.valueToCode(block, 'button', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_button.toString() + '.held_time';
@@ -441,15 +441,15 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['pause'] = function(/* block */) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_pause'] = function(/* block */) {
+		Blockly.Python.wyliozero_setUp();
 		// TODO: Assemble Python into code variable.
 		var code = 'pause() \n';
 		return code;
 	};
 
-	Blockly.Python['trafficlight'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_trafficlight'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_red = Blockly.Python.valueToCode(block, 'red', Blockly.Python.ORDER_ATOMIC);
 		var value_yellow = Blockly.Python.valueToCode(block, 'yellow', Blockly.Python.ORDER_ATOMIC);
 		var value_green = Blockly.Python.valueToCode(block, 'green', Blockly.Python.ORDER_ATOMIC);
@@ -459,31 +459,31 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['led_turn_on'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_led_turn_on'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_FUNCTION_CALL);
 		// TODO: Assemble Python into code variable.
 		var code = value_name.toString() + '.on()\n';
 		return code;
 	};
 
-	Blockly.Python['led_turn_off'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_led_turn_off'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_FUNCTION_CALL);
 		// TODO: Assemble Python into code variable.
 		var code = value_name.toString() + '.off()\n';
 		return code;
 	};
 
-	Blockly.Python['led_toggle'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_led_toggle'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_FUNCTION_CALL);
 		// TODO: Assemble Python into code variable.
 		var code = value_name.toString() + '.toggle()\n';
 		return code;
 	};
 
-	Blockly.Python['led_is_lit'] = function(block) {
+	Blockly.Python['wyliozero_led_is_lit'] = function(block) {
 		var value_led = Blockly.Python.valueToCode(block, 'led', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_led.toString() + 'is_lit';
@@ -491,8 +491,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['traffic_light_on'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_traffic_light_on'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var dropdown_light = block.getFieldValue('light');
 		var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -501,14 +501,14 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Python['traffic_blink'] = function(block) {
+	Blockly.Python['wyliozero_traffic_blink'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.blink() \n';
 		return code;
 	};
 
-	Blockly.Python['traffic_close'] = function(block) {
+	Blockly.Python['wyliozero_traffic_close'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.close() \n';
@@ -516,16 +516,16 @@ module.exports = function (blockly) {
 	};
 
 
-	Blockly.Python['pwm_pulse'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_pwm_pulse'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pwm_led = Blockly.Python.valueToCode(block, 'pwm_led', Blockly.Python.ORDER_FUNCTION_CALL);
 		// TODO: Assemble Python into code variable.
 		var code = value_pwm_led.toString() + '.pulse() \n';
 		return code;
 	};
 
-	Blockly.Python['traffic_light_off'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_traffic_light_off'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var dropdown_light = block.getFieldValue('light');
 		var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -533,15 +533,15 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['start_labnetwork'] = function(/* block */) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_start_labnetwork'] = function(/* block */) {
+		Blockly.Python.wyliozero_setUp();
 		// TODO: Assemble Python into code variable.
 		var code = '...\n';
 		return code;
 	};
 
-	Blockly.Python['lcd_write'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_lcd_write'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_lcd = 'LabLCD()';
 		var value_str = Blockly.Python.valueToCode(block, 'str', Blockly.Python.ORDER_ATOMIC);
 		var dropdown_line = block.getFieldValue('line');
@@ -556,8 +556,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['light_sensor'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_light_sensor'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'LightSensor(' + value_pin_number.toString() + ')';
@@ -565,8 +565,8 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['light_when_dark'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_light_when_dark'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var statements_function = Blockly.Python.statementToCode(block, 'function');
 		var functionName = Blockly.Python.uniqueName('function');
@@ -576,8 +576,8 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['light_when_light'] = function(block) {
-		Blockly.Python.setUp();
+	Blockly.Python['wyliozero_light_when_light'] = function(block) {
+		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var statements_function = Blockly.Python.statementToCode(block, 'function');
 		var functionName = Blockly.Python.uniqueName('function');
@@ -587,21 +587,21 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['light_wait_for_dark'] = function(block) {
+	Blockly.Python['wyliozero_light_wait_for_dark'] = function(block) {
 		var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin_number.toString() + '.wait_for_dark() \n';
 		return code;
 	};
 
-	Blockly.Python['light_wait_for_light'] = function(block) {
+	Blockly.Python['wyliozero_light_wait_for_light'] = function(block) {
 		var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin_number.toString() + '.wait_for_light() \n';
 		return code;
 	};
 
-	Blockly.Python['light_detected'] = function(block) {
+	Blockly.Python['wyliozero_light_detected'] = function(block) {
 		var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin_number.toString() + '.light_detected';
@@ -609,7 +609,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['buzzer'] = function(block) {
+	Blockly.Python['wyliozero_buzzer'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'Buzzer(' + value_pin.toString() + ')';
@@ -617,35 +617,35 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['buzzer_beep'] = function(block) {
+	Blockly.Python['wyliozero_buzzer_beep'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.beep() \n';
 		return code;
 	};
 
-	Blockly.Python['buzzer_on'] = function(block) {
+	Blockly.Python['wyliozero_buzzer_on'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.on() \n';
 		return code;
 	};
 
-	Blockly.Python['buzzer_off'] = function(block) {
+	Blockly.Python['wyliozero_buzzer_off'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.off() \n';
 		return code;
 	};
 
-	Blockly.Python['buzzer_toggle'] = function(block) {
+	Blockly.Python['wyliozero_buzzer_toggle'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.toggle() \n';
 		return code;
 	};
 
-	Blockly.Python['buzzer_is_active'] = function(block) {
+	Blockly.Python['wyliozero_buzzer_is_active'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.is_active';
@@ -653,7 +653,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	// Blockly.Python['dht_sensor'] = function(block) {
+	// Blockly.Python['wyliozero_dht_sensor'] = function(block) {
 	//   var dropdown_dropdown = block.getFieldValue('dropdown');
 	//   var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 	//   var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
@@ -664,7 +664,7 @@ module.exports = function (blockly) {
 
 
 	// //TODO CHANGE TEMP
-	// Blockly.Python['dht_sensor_temperature'] = function(block) {
+	// Blockly.Python['wyliozero_dht_sensor_temperature'] = function(block) {
 	//   var dropdown_dropdown = block.getFieldValue('dropdown');
 	//   var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 	//   var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
@@ -674,7 +674,7 @@ module.exports = function (blockly) {
 	// };
 
 
-	Blockly.Python['dht_sensor'] = function(block) {
+	Blockly.Python['wyliozero_dht_sensor'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'w.DHTsensor(' + value_pin.toString() + ')\n';
@@ -682,7 +682,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['dht_temperature'] = function(block) {
+	Blockly.Python['wyliozero_dht_temperature'] = function(block) {
 		var value_dht = Blockly.Python.valueToCode(block, 'dht', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_dht.toString() + '.temperatureRead()\n';
@@ -690,7 +690,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['dht_humidity'] = function(block) {
+	Blockly.Python['wyliozero_dht_humidity'] = function(block) {
 		var value_dht = Blockly.Python.valueToCode(block, 'dht', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_dht.toString() + '.humidityRead()\n';

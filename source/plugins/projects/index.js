@@ -470,6 +470,7 @@ let projects = {
 			//TODO
 			let projectImport = JSON.parse(data.toString());
 			let projectFolder = path.join(workspacePath, projectImport.title);
+			projectFolder = this._isPathValid(workspacePath,projectFolder);
 			let json = path.join(projectFolder, 'project.json');
 			for (let item of projectImport.tree) {
 				await this.recursiveCreating({
@@ -547,6 +548,7 @@ let projects = {
 				let curentFolder = path.join(necesarry.folder, necesarry.item.name);
 				curentFolder = this._isPathValid(necesarry.folder, curentFolder);
 				if (curentFolder !== null) {
+					console.log(curentFolder);
 					await studio.filesystem.mkdirp(curentFolder);
 					for (let child of necesarry.item.children) {
 						return await this.recursiveCreating({
@@ -625,12 +627,22 @@ let projects = {
 				for (let file of list) {
 					file = path.resolve(dir, file);
 					if (await studio.filesystem.isDirectory(file)) {
-						zip.folder(path.relative(root, file));
+						let x = path.relative(root, file);
+						console.log(x);
+						if(path.sep == '\\'){
+							x = x.replace(/\\/g, '/');
+						}
+						zip.folder(x);
 						await this._buildZipFromDirectory(file, zip, root);
 					} else {
 						const filedata = await studio.filesystem.readFile(file);
 						if(filedata) {
-							zip.file(path.relative(root, file), filedata);
+							let x = path.relative(root, file);
+							console.log(x);
+							if(path.sep == '\\'){
+								x = x.replace(/\\/g, '/');
+							}
+							zip.file(x, filedata);
 						}
 						
 					}
@@ -686,7 +698,7 @@ let projects = {
 									file: child,
 									dir: fullPath
 								});
-							if (child1.file !== 'json') {
+							if (child1.name !== 'project.json') {
 								children.push(child1);
 							}
 						}
@@ -1106,15 +1118,15 @@ let projects = {
 						// let editors = studio.workspace.getFromStore('projects', 'editors');
 						console.log('dispatched');
 						let mainFile = await this.getDefaultFileName(project);
-						if (await studio.filesystem.pathExists(path.join(project.folder, mainFile))) {
+						let file = path.join(project.folder, mainFile);
+						if (await studio.filesystem.pathExists(file)) {
 							studio.workspace.dispatchToStore('projects', 'currentFile', mainFile);
-						}
-						else {
+							await studio.settings.storeValue('projects', 'currentFile', mainFile);
+							console.log('dispatched main file');
+						} else {
 							studio.workspace.dispatchToStore('projects', 'currentFile', null);
+							await studio.settings.storeValue('projects', 'currentFile', null);
 						}
-
-						await studio.settings.storeValue('projects', 'currentFile', mainFile);
-
 					}
 				}
 				// return true if the project is selected or false otherwise
@@ -1241,8 +1253,10 @@ let projects = {
 	 * 
 	 */
 	async changeFile(project, name) {
+		console.log(await this._isPathValid(project.folder,name));
+		let aux = await this._isPathValid(project.folder,name);
 
-		if(name !== null) {
+		if(name !== null && await studio.filesystem.pathExists(aux)) {
 			if (path.basename(name) != 'project.json') {
 				// await studio.workspace.setWorkspaceTitle(path.basename(name));
 				if (name !== '') {

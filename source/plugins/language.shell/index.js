@@ -20,8 +20,16 @@ export default function setup (options, imports, register)
 	let pictograms = [
 		{
 			extension: '.sh',
-			icon:'plugins/language.shell/data/img/shellLittle.png'
-		}
+			icon:'mdi-bash'
+		},
+		{
+			extension: '.json',
+			icon:'mdi-json'
+		},
+		{
+			extension: '.md',
+			icon:'mdi-markdown'
+		},
 	];
 	let shell = {
 		async createProject(name){
