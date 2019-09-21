@@ -32,7 +32,6 @@ export default {
 	name: 'DisconnectDialog',
 	mounted ()
 	{
-		console.log (this.$refs.fn);
 		this.$nextTick (() => {
 			this.$refs.fn.$el.focus ();
 		});

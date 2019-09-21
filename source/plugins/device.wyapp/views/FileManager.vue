@@ -364,7 +364,6 @@ export default {
 			let folderName = await this.studio.workspace.showPrompt ('PROJECT_NEW_FOLDER', 'PROJECT_NEW_FOLDER_NAME', '', 'PROJECT_NEW_NAME');
 			if (folderName)
 			{
-				console.log(this.fileItem.path);
 				this.connection.send('fe',{
 					a:'newf',
 					b:this.fileItem.path,
@@ -384,7 +383,6 @@ export default {
 		},
 		updateFileTree(data, tree){
 			tree.children = [];
-			console.log(tree);
 			if(data) {
 				for(let item of data) {
 					if(item.isdir) {
@@ -428,8 +426,6 @@ export default {
 		},
 		async fetchContent(item){
 			this.cwd=item.path;
-			console.log(this.cwdArray);
-			console.log(this.cwdArray.includes(this.cwd))
 			if(!this.cwdArray.includes(this.cwd)){
 				this.cwdArray.push(this.cwd);
 				this.fileItem=item;

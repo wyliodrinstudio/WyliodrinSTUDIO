@@ -314,7 +314,6 @@ export default {
 		currentFile ()
 		{
 			this.updateTitle ();
-			console.log('changed currentFile');
 			this.dirTree();
 		},
 		async source ()
@@ -349,7 +348,7 @@ export default {
 	},
 	methods: {
 		consoleLogIt(item){
-			console.log(item);
+			// TODO why is this function here?
 		},
 		verifyLanguage(project) {
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
@@ -571,7 +570,6 @@ export default {
 					key:path.basename(filename)+filename.replace(this.currentProject.folder, '')+'folder'
 				}];
 				
-				console.log(this.items);
 				this.items = root;
 				this.previous = this.items;
 			}

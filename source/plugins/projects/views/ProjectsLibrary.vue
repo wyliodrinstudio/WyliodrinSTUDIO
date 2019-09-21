@@ -6,7 +6,10 @@
 			<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_SEARCH')" v-model="search" single-line dark class="projsearch" append-icon="search"></v-text-field>
 		</v-card-title>
 		<v-card-text v-if="!projects || projects.length === 0" class="projects-container">
-			<div class="noprojmsg">
+			<div v-if="!prijects">
+				<v-progress-circular indeterminate></v-progress-circular>
+			</div>
+			<div v-else class="noprojmsg">
 				<strong>{{$t('PROJECTS_NO_PROJECT')}}</strong>
 				<br>
 				<span>{{$t('PROJECTS_CREATE_APPLICATION')}}</span>
@@ -78,7 +81,7 @@
 			</v-alert>
 		</v-card-text>
 		<v-card-actions>
-			<v-btn text>{{$t('PROJECT_LIBRARY_LOAD_EXAMPLE')}}</v-btn>
+			<!-- <v-btn text>{{$t('PROJECT_LIBRARY_LOAD_EXAMPLE')}}</v-btn> -->
 			<v-spacer></v-spacer>
 			<!--<v-btn text slot="activator" @click.stop="console.log('this')">
 				<v-img src="plugins/projects/data/img/icons/projects-icon.svg"></v-img>
@@ -110,7 +113,7 @@ export default {
 			importDialog:false,
 			rename:'',
 			filePath:'',
-			projects:[],
+			projects:null,
 			search:'',
 			notPersistent: false
 		};
@@ -119,6 +122,8 @@ export default {
 	},
 	computed:{
 		projectList(){
+			if (!this.projects) return this.projects;
+			else
 			return this.projects.filter(project => {
 				return project.name.toLowerCase().includes(this.search.toLowerCase());
 			})
@@ -134,9 +139,6 @@ export default {
 	{
 		this.projects = await this.studio.projects.loadProjects(false);
 	},
-	mounted() {
-		this.$refs.button.$el.focus();
-	}, 
 	methods: {
 		esc() {
 			this.close();

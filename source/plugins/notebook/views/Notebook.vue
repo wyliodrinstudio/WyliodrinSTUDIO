@@ -308,7 +308,6 @@ export default {
 					}
 				}
 			);
-			console.log(value);
 			if (value === 'yes')
 			{
 				this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
@@ -328,8 +327,6 @@ export default {
 			try
 			{
 				let index = this.elements.findIndex(e=>e.id === id);
-				console.log(index);
-				console.log(this.elements);
 				if(index >= 1)
 				{
 					let aux = this.elements[index];
@@ -337,23 +334,18 @@ export default {
 					this.elements[index-1] = aux;
 					this.$forceUpdate();
 				}
-				else
-				console.log('Can\'t move up this element');
-				
 			}
 			catch(e)
 			{
 				console.log(e.message);
 			}
-			console.log(this.elements);
 		},
 		moveDown(id)
 		{
 			try
 			{
 				let index = this.elements.findIndex(e=>e.id === id);
-				console.log(index);
-				console.log(this.elements);
+
 				if(index < this.elements.length-1)
 				{
 					let aux = this.elements[index];
@@ -361,19 +353,14 @@ export default {
 					this.elements[index+1] = aux;
 					this.$forceUpdate();
 				}
-				else
-				console.log('Can\'t move down this element');
-				
 			}
 			catch(e)
 			{
 				console.log(e.message);
 			}
-			console.log(this.elements);
 		},
 		async deleteElement(element)
 		{
-			console.log(this.elements);
 			let value = await this.studio.workspace.showCustomConfirmationPrompt(
 				'NOTEBOOK_DELETE_ITEM_TITLE',
 				'NOTEBOOK_DELETE_ITEM_QUESTION',
@@ -390,16 +377,9 @@ export default {
 					}
 				}
 			);
-			console.log(value);
 			if (value === 'yes' && this.elements.length > 1) {
 				this.elements = this.elements.filter(e=>e.id !== element.id);
-			} 
-			else
-			{
-				console.log('Can\'t delete this element');
-			}
-			console.log(this.elements);
-				
+			} 	
 		},
 		addElement()
 		{
@@ -471,7 +451,6 @@ export default {
 		printPythonResult(id, data)
 		{
 			let element = this.elements.find(e=>e.id === id);
-			console.log('data' + data);
 			element.result = data;
 			this.$forceUpdate();
 		},

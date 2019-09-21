@@ -1219,7 +1219,6 @@ export function setup(options, imports, register) {
 
 	settings = imports.settings;
 	let mode = settings.loadValue('workspace', 'mode', 'simple');
-	console.log(mode);
 
 	workspace.dispatchToStore('workspace', 'mode', mode);
 

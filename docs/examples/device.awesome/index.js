@@ -130,7 +130,6 @@ export function setup(options, imports, register)
 			let device = studio.workspace.getDevice ();
 
 			/* Here goes the actual code that will make your device run the code */
-			console.log('Run');
 		}, 'plugins/device.awesome/data/img/icons/run-icon.svg',
 
 		/* The aditional options that make the Run Button visible and enabled only if there is a connected device 

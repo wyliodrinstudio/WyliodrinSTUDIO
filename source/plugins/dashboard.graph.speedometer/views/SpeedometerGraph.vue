@@ -120,7 +120,6 @@ export default {
 	},
 	mounted() {
 		this.unregister = this.studio.dashboard.registerForSignal ('SpeedometerGraph',(data)=>{
-			console.log (data);
 			const chart = this.$refs.chart.getChart();
 			if (!chart.renderer.forExport) {
 				timer = setInterval(function() {

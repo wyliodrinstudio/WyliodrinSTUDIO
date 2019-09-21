@@ -55,7 +55,6 @@ class SSHWyAppTransport extends EventEmitter
 				if (error) 
 				{
 					// TODO translate
-					console.log ('error '+error);
 					if (error.reason === 'CONNECT_FAILED')
 					{
 						workspace.showNotification ('Device '+this.device+': has no Studio supervisor installed. Only console will be available');

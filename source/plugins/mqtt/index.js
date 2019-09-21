@@ -26,7 +26,6 @@ export function setup(options, imports, register) {
 				server.listen({ port, host: '0.0.0.0' }, (error) => {
 					if (!error) {
 						studio.workspace.dispatchToStore('mqtt', 'status', 'running');
-						console.log('server started');
 					}
 					else {
 						server = null;
@@ -34,7 +33,7 @@ export function setup(options, imports, register) {
 					}
 				});
 				mqttServer.on('client', (client) => {
-					console.log(client);
+
 				});
 
 				mqttServer.authenticate = function (client, usr, passwd, callback) {
@@ -70,7 +69,6 @@ export function setup(options, imports, register) {
 				mqttServer = null;
 				server = null;
 				studio.workspace.dispatchToStore('mqtt', 'status', 'stopped');
-				console.log('server stopped');
 			}
 			else {
 				studio.workspace.warn('Server is already stopped');
@@ -83,7 +81,7 @@ export function setup(options, imports, register) {
 						console.log(error);
 					}
 					else {
-						console.log('message published');
+						
 					}
 				});
 			}

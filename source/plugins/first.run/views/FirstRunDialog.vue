@@ -41,7 +41,6 @@ export default {
 	methods: {
 		openLibrary() 
 		{
-			console.log('open library');
 			this.studio.projects.showProjectsLibrary();
 		},
 		setupBoard()
