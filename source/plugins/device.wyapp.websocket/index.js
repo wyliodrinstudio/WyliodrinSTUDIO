@@ -181,11 +181,11 @@ export function setup (options, imports, register)
 		}
 	};
 
-	socket.onerror = function (err)
+	socket.onerror = function ()
 	{
 		if (!errorAlreadyShown)
 		{
-			workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR', {error: err.message});
+			workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR');
 			errorAlreadyShown = true;
 		}
 	};
