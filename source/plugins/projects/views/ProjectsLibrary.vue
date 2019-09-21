@@ -6,7 +6,7 @@
 			<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_SEARCH')" v-model="search" single-line dark class="projsearch" append-icon="search"></v-text-field>
 		</v-card-title>
 		<v-card-text v-if="!projects || projects.length === 0" class="projects-container">
-			<div v-if="!prijects">
+			<div v-if="!projects">
 				<v-progress-circular indeterminate></v-progress-circular>
 			</div>
 			<div v-else class="noprojmsg">
@@ -153,10 +153,9 @@ export default {
 		},
 		async addProjectDialog ()
 		{
-			let value = await this.studio.workspace.showDialog(AddProjectDialog,{width:512});
-			if(value === undefined){
-				this.projects=await this.studio.projects.loadProjects(false);
-			}
+			this.close ();
+			await this.studio.workspace.showDialog(AddProjectDialog,{width:512});
+			this.studio.projects.showProjectsLibrary ();
 			
 		},
 		async cloneDialog(project)

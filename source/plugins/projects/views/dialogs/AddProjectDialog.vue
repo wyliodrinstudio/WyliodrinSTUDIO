@@ -19,7 +19,6 @@
 			<br><br>
 		</v-card-text>
 		<v-card-actions>
-			<small>*indicates required field</small>
 			<v-spacer></v-spacer>
 			<v-btn text class="newapp" @click="newProject()">{{$t('PROJECT_LIBRARY_NEW_PROJECT')}}</v-btn>
 			<v-btn text @click="close">{{$t('PROJECT_LIBRARY_CLOSE')}}</v-btn>
