@@ -277,6 +277,7 @@
          "NOTEBOOK_LOAD_DATA_ERROR": "Unable to load the notebook data ({error})",
          "NOTEBOOK_RESET_NOTEBOOK_TITLE": "Reset Notebook",
          "NOTEBOOK_RESET_NOTEBOOK_QUESTION": "Are you sure you want to reset the notebook?\nYou will lose all the notes for this project.",
+         "NOTEBOOK_LOAD_PROJECT": "Load a project to display the botebook",
          "PIN_LAYOUT": "Pin Layout",
          "PROJECT_APPLICATION": "Application",
          "PROJECT_DELETE_FOLDER": "Delete Folder",
@@ -396,7 +397,9 @@
          "WORKSPACE_DEVICE_SETUP_TEXT": "You might want to set up some devices. For more information, please go to our tutorials website.",
          "WORKSPACE_DEVICE_SETUP": "Device Setup",
          "WORKSPACE_DOCUMENTATION": "Documentation",
-         "ABOUT_VERSION": "Version"
+         "ABOUT_VERSION": "Version",
+         "OK": "OK",
+         "BACK": "BACK"
       },
       "es": {
          "CHAT": "CHAT",
@@ -1292,7 +1295,7 @@
          "WELCOME_START_WORK": "Puteți începe să creați noi aplicații, să configurați și să conectați placi sau să importați propriile proiecte.",
          "WELCOME_CREATE_APP": "Creați o aplicație nouă",
          "WELCOME_CONNECT_BOARD": "Conectare placă",
-         "PROJECT_NOTEBOOK": "Notebook",
+         "PROJECT_NOTEBOOK": "Note",
          "NOTEBOOK_SELECT_IMAGE_ERROR": "Selectați o imagine.",
          "NOTEBOOK_SELECT_FILE_ERROR": "Selectați un fișier valid.",
          "NOTEBOOK_DELETE_ITEM_QUESTION": "Sigur doriți să ștergeți acest articol?",
@@ -1300,6 +1303,7 @@
          "NOTEBOOK_LOAD_DATA_ERROR": "Imposibil de încărcat notițele ({error})",
          "NOTEBOOK_RESET_NOTEBOOK_TITLE": "Resetare Notebook",
          "NOTEBOOK_RESET_NOTEBOOK_QUESTION": "Sigur doriți să resetați Notebook-ul? Veți pierde toate notițele pentru acest proiect.",
+         "NOTEBOOK_LOAD_PROJECT": "Incarcati un proiect pentru a avea access la note",
          "PIN_LAYOUT": "Așezarea pinilor",
          "PROJECT_APPLICATION": "Aplicație",
          "PROJECT_DELETE_FOLDER": "Șterge dosarul",
@@ -1418,7 +1422,9 @@
          "WORKSPACE_DEVICE_SETUP_TEXT": "Daca doriți să configurați anumite dispozitive, puteți accesa site-ul nostru web cu tutoriale pentru mai multe informații.",
          "WORKSPACE_DEVICE_SETUP": "Configurare dispozitiv",
          "WORKSPACE_TOOLBAR_CLOSE": "Ieșire",
-         "WORKSPACE_DOCUMENTATION": "Documentație"
+         "WORKSPACE_DOCUMENTATION": "Documentație",
+         "OK": "OK",
+         "BACK": "Înapoi"
       },
       "sk": {
          "CHAT": "CHAT",

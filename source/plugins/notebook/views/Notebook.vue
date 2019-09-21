@@ -145,7 +145,7 @@
 		</div>
 	</div>
 	<div v-else>
-		{{$t('PROJECT_PROJECT_LOAD')}}
+		{{$t('NOTEBOOK_PROJECT_LOAD')}}
 	</div>
 </template>
 
