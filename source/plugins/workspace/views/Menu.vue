@@ -8,7 +8,7 @@
 					</v-btn>
 				</template>
 				<v-list>
-					<v-list-item v-for="menuItem in menuItems" :key="menuItem.name" v-show="menuItem.visible()" :disabled="!menuItem.enabled()" @click.stop="runMenuItem (menuItem)">
+					<v-list-item v-for="menuItem in menuItems" :key="menuItem.name" v-show="menuItem.visible()" :disabled="!menuItem.enabled()" @click="runMenuItem (menuItem)">
 						<v-list-item-title>{{$t(menuItem.name)}}</v-list-item-title>
 					</v-list-item>
 				</v-list>
