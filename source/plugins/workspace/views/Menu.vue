@@ -1,7 +1,7 @@
 <template>
 	<v-tooltip bottom>
 		<template v-slot:activator="{ on: menu }">
-			<v-menu offset-y close-on-click>
+			<v-menu offset-y close-on-content-click close-on-click>
 				<template v-slot:activator="{ on: tooltip }">
 					<v-btn slot="activator" v-on="{ ...tooltip, ...menu }" class="cucu">
 						<v-img src="plugins/workspace/data/img/icons/menu-icon.svg" aria-label="Menu" ></v-img>
