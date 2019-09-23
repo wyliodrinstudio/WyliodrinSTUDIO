@@ -29,7 +29,7 @@
 					dense
 					>
 					<template v-slot:prepend="{item, open}">
-						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
+						<p v-if="item.name === currentProject.name" @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)">
 							<v-img v-if="languageImage().type" contain :src="languageImage().img" avatar ></v-img>
 							<v-icon v-else>{{languageImage().img}}</v-icon>
 						</p>
@@ -38,10 +38,10 @@
 							<v-icon v-else>{{getPictogram(item.path).img}}</v-icon>
 
 						</p>
-						<p v-else-if="open && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="open && item.name !== currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)">
 							<v-icon>mdi-folder-open</v-icon>
 						</p>
-						<p v-else-if="item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="item.name !== currentProject.name" text @click="menuItem = item" @contextmenu="fileItem = item,showFolder($event)">
 							<v-icon>mdi-folder</v-icon>
 						</p>
 						<v-menu
@@ -111,10 +111,10 @@
 							</v-menu>
 					</template>
 					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @contextmenu="fileItem = item,showProject($event)"> 
+						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)"> 
 							{{item.name}}                  
 						</p>
-						<p style="width:100%;" v-else-if="item.file  === undefined && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)"> 
+						<p style="width:100%;" v-else-if="item.file  === undefined && item.name !== currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
 						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
@@ -236,6 +236,7 @@ export default {
 			folder:'',
 
 			fileItem:'',
+			menuItem:null,
 			tabs:[],
 			tabItem:null,
 
@@ -310,6 +311,7 @@ export default {
 		{
 			this.updateTitle ();
 			this.dirTree();
+			this.menuItem=this.items;
 		},
 		currentFile ()
 		{

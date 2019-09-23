@@ -236,6 +236,7 @@
          "DEVICE_BAUDRATE": "Baud Rate",
          "NETWORK_CONNECTION": "Network Connection",
          "DEVICE_WYAPP_SSH_IP_ADDRESS": "IP Address",
+         "DEVICE_WYAPP_CHANGE_CREDENTIALS": "You tried to login using the default credentials for this device. Please cha",
          "DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED": "Authenticated to websocket device server",
          "DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR": "Server error: {error}",
          "DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED": "Disconnected from the websocket devices server",
