@@ -58,5 +58,9 @@
     "DEVICE_RPK_FLASH_DONE": {
         "message": "Flash done. The device will reboot and it will disconnect automatically. Put the device in DFU mode to flash it again.",
         "description": "Notification shown when flashing is done."
+    },
+    "RPK_NEW_DEVICE_TITLE": {
+        "message": "New RPK Device",
+        "description": "How to add new RPK device."
     }
 }

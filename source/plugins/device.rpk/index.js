@@ -7,7 +7,9 @@ import path from 'path';
 
 import fs from 'fs-extra';
 
-import RPKDisconnectDialog from './views/RPKDisconnectDialog.vue';
+//import DeviceSetup from './views/DeviceSetup.vue';
+
+import RPKDeviceSetup from './views/DeviceSetup.vue';
 
 import { EventEmitter } from 'events';
 
@@ -46,6 +48,15 @@ async function listRPKs() {
 }
 
 function updateDevices() {
+	if (devices.length === 0) {
+		devices.push({
+			id: 'rpk:newdevice',
+			address: '',
+			name: studio.workspace.vue.$t('RPK_NEW_DEVICE_TITLE'),
+			board: 'any',
+			placeholder: true
+		});
+	}
 	workspace.updateDevices([...devices]);
 }
 
@@ -112,29 +123,37 @@ export function setup(options, imports, register) {
 		async connect(device/*, options*/) {
 			console.log('check object');
 			if (_.isObject(device)) {
-				console.log('check connection');
-				if (!connections[device.id]) {
-					console.log('check type');
-					connections[device.id] = {};
-					if (device.connection === 'usb') {
-						console.log('check path');
-						let exists = false;
-						exists = await fs.pathExists(device.address);
-						if (exists) {
-							process.nextTick(() => {
-								device.status = 'CONNECTED';
-								updateDevice(device);
-							});
-							return device;
-						}
-						else {
-							delete connections[device.id];
-							return null;
+				if (device.id === 'rpk:newdevice')
+				{
+					studio.workspace.showDialog (RPKDeviceSetup);
+					return null;
+				}
+				else
+				{
+					console.log('check connection');
+					if (!connections[device.id]) {
+						console.log('check type');
+						connections[device.id] = {};
+						if (device.connection === 'usb') {
+							console.log('check path');
+							let exists = false;
+							exists = await fs.pathExists(device.address);
+							if (exists) {
+								process.nextTick(() => {
+									device.status = 'CONNECTED';
+									updateDevice(device);
+								});
+								return device;
+							}
+							else {
+								delete connections[device.id];
+								return null;
+							}
 						}
 					}
-				}
-				else {
-					studio.workspace.showNotification('RPK_DEVICE_ALREADY_CONNECTED', { device: device.name });
+					else {
+						studio.workspace.showNotification('RPK_DEVICE_ALREADY_CONNECTED', { device: device.name });
+					}
 				}
 			}
 			return null;
@@ -201,7 +220,7 @@ export function setup(options, imports, register) {
 					}
 					device.sending = false;
 					updateDevice(device);
-					studio.workspace.showNotification('DEVICE_RPK_FLASH_DONE');
+					studio.workspace.showNotification('DEVICE_RPK_FLASH_DONE', {}, 'success');
 					delete connections[device.id];
 					device.status = 'DISCONNECTED';
 					updateDevice(device);

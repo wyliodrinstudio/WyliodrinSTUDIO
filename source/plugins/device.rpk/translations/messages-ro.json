@@ -42,5 +42,9 @@
     "DEVICE_RPK_FLASH_DONE": {
         "message": "Scrierea programului finalizata. Dispozitivul se va restarta si se va deconecta automat. Puneti dispozitivul in modul DFU pentru a rescrie programul.",
         "description": "Notification shown when flashing is done."
+    },
+    "RPK_NEW_DEVICE_TITLE": {
+        "message": "Dispozitiv RPK nou",
+        "description": "How to add new RPK device."
     }
 }

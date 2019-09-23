@@ -58,5 +58,9 @@
     "DEVICE_RPK_FLASH_DONE": {
         "message": "Écriture finalisée. L'appareil redémarre et se déconnecte automatiquement. Mettez l'appareil en mode DFU pour écrire le programme de nouveau.",
         "description": "Notification shown when flashing is done."
+    },
+    "RPK_NEW_DEVICE_TITLE": {
+        "message": "Nouvel appareil RPK",
+        "description": "How to add new RPK device."
     }
 }
