@@ -19,6 +19,10 @@
         "message": "Package Manager",
         "description": "The button for the package manager "
     },
+    "DEVICE_RPK_FLASH": {
+        "message": "Flash",
+        "description": "The flash button for an application"
+    },
     "DEVICE_RPK_NETWORK_MANAGER": {
         "message": "Network Manager",
         "description": "The button for the network manager "
@@ -46,5 +50,25 @@
     "DEVICE_RPK_ERROR_BLE": {
         "message": "List devices failed ({error}).",
         "description": "The error shown when list devices for ble fails"
+    },
+    "DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT": {
+        "message": "Flashing in progress, please wait.",
+        "description": "Notification text while the binary is written on the RPK."
+    },
+    "DEVICE_RPK_TOO_LONG_SOURCE_CODE": {
+        "message": "The source code characters number must be lesser than 30000.",
+        "description": "Error shown when source code is bigger than the RPK supports."
+    },
+    "DEVICE_RPK_FLASH_DONE": {
+        "message": "Flash done. The device will reboot and it will disconnect automatically. Put the device in DFU mode to flash it again.",
+        "description": "Notification shown when flashing is done."
+    },
+    "RPK_NEW_DEVICE_TITLE": {
+        "message": "New RPK Device",
+        "description": "How to add new RPK device."
+    },
+    "RPK_NEW_DEVICE_INSTRUCTIONS": {
+        "message": "Connect the RPK device to a USB port, press Switch 3 and reboot the device using the pin",
+        "description": "How to add new RPK device description."
     }
 }
