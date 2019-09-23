@@ -15,6 +15,26 @@
         "message": "Bandes",
         "description": "Number of stripes in the resistor"
     },
+    "RESISTOR_COLORCODE_STRIPE_ONE": {
+        "message": "Bande 1",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_TWO": {
+        "message": "Bande 2",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_THREE": {
+        "message": "Bande 3",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_FOUR": {
+        "message": "Bande 4",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_FIVE": {
+        "message": "Bande 5",
+        "description": ""
+    },
     "VALUE_FOUR": {
         "message": "Quatre",
         "description": "Number 4"

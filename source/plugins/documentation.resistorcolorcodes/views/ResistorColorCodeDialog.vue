@@ -29,7 +29,7 @@
               </v-col>
               <v-col>
                 <v-select
-                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
+                  :label="$t('RESISTOR_COLORCODE_STRIPE_ONE')"
                   height="16"
                   v-model="color1"
                   :items="colors"
@@ -40,7 +40,7 @@
               </v-col>
               <v-col>
                 <v-select
-                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
+                  :label="$t('RESISTOR_COLORCODE_STRIPE_TWO')"
                   height="16"
                   v-model="color2"
                   :items="colors"
@@ -51,7 +51,7 @@
               </v-col>
               <v-col v-show="number==5">
                 <v-select
-                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
+                  :label="$t('RESISTOR_COLORCODE_STRIPE_THREE')"
                   height="16"
                   v-show="number==5"
                   v-model="color3"
@@ -63,7 +63,7 @@
               </v-col>
               <v-col>
                 <v-select
-                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
+                  :label="$t('RESISTOR_COLORCODE_STRIPE_' + stripeNumber(4 - (5 - number)))"
                   height="16"
                   v-model="color4"
                   :items="multiplier"
@@ -74,7 +74,7 @@
               </v-col>
               <v-col>
                 <v-select
-                  :label="$t('RESISTOR_COLORCODE_STRIPE')"
+                  :label="$t('RESISTOR_COLORCODE_STRIPE_' + stripeNumber(5 - (5 - number)))"
                   height="16"
                   v-model="color5"
                   :items="tolerance"
@@ -137,7 +137,7 @@
           {{r}} {{u}}&Omega;
           <span style="padding-left:10px;">&plusmn;{{color5}}%</span>
         </div>
-        <div v-show="!CtN">
+        <div v-show="!CtN" style="font-size:16px; margin-left:10px;">
           <b>{{ $t('VALUE_VALUE') }}:</b>
           {{Secondr}} {{Secondu}}&Omega;
         </div>
@@ -339,7 +339,7 @@ module.exports = {
         this.Secondvaluenumber,
         Date.now()
       );
-    }
+    },
   },
   watch: {
     FirstValueWatchable() {
@@ -453,6 +453,15 @@ module.exports = {
     },
     close() {
       this.$root.$emit("submit");
+    },
+    stripeNumber(number) {
+      if (number == 3) {
+        return "THREE"; 
+      } else if (number == 4) {
+        return "FOUR";
+      } else {
+        return "FIVE";
+      }
     }
   }
 };

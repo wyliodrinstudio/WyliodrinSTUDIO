@@ -1,4 +1,4 @@
-{
+    {
     "TOOLBAR_RESISTOR_COLOR_CODE": {
         "message": "Resistor color code",
         "description": "Option in the Help Menu which opens a dialog that makes a connection between the color of a resistor and it's value"
@@ -23,9 +23,25 @@
         "message": "Five",
         "description": "Number 5"
     },
-    "RESISTOR_COLORCODE_STRIPE": {
-        "message": "Stripe",
-        "description": "Stripe option"
+    "RESISTOR_COLORCODE_STRIPE_ONE": {
+        "message": "Stripe 1",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_TWO": {
+        "message": "Stripe 2",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_THREE": {
+        "message": "Stripe 3",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_FOUR": {
+        "message": "Stripe 4",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_FIVE": {
+        "message": "Stripe 5",
+        "description": ""
     },
     "VALUE_VALUE": {
         "message": "Value",

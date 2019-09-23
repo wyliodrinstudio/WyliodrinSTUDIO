@@ -27,6 +27,26 @@
         "message": "Linie",
         "description": "Stripe option"
     },
+    "RESISTOR_COLORCODE_STRIPE_ONE": {
+        "message": "Banda 1",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_TWO": {
+        "message": "Banda 2",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_THREE": {
+        "message": "Banda 3",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_FOUR": {
+        "message": "Banda 4",
+        "description": ""
+    },
+    "RESISTOR_COLORCODE_STRIPE_FIVE": {
+        "message": "Banda 5",
+        "description": ""
+    },
     "VALUE_VALUE": {
         "message": "Valoare",
         "description": "Value of the resistance"
