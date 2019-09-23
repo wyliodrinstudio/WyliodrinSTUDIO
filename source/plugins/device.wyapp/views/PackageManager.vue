@@ -155,7 +155,6 @@ export default {
 					packagesData.push (packages[name]);
 					delete this.working[data.l][name];
 				}
-				console.log (packages);
 				this.packages[data.l] = packagesData;
 				this.working[data.l] = {
 					...this.working[data.l]

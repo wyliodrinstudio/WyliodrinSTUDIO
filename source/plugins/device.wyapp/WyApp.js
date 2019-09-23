@@ -51,7 +51,6 @@ export default class WyApp extends EventEmitter
 
 	information (packet)
 	{
-		console.log (packet);
 		if (packet.t === 'i')
 		{
 			this.device.name = packet.d.n;

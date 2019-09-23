@@ -6,10 +6,10 @@
       </v-card-title>
       <v-tabs left class="tabs-box">
         <v-tab @click="CtN=true">
-          <v-tab-label>{{ $t('RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER')}}</v-tab-label>
+          {{ $t('RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER')}}
         </v-tab>
         <v-tab @click="CtN=false">
-          <v-tab-label>{{ $t('RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR')}}</v-tab-label>
+          {{ $t('RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR')}}
         </v-tab>
       </v-tabs>
       <v-card-text v-if="CtN">
@@ -343,10 +343,8 @@ module.exports = {
   },
   watch: {
     FirstValueWatchable() {
-      console.log("FirstWatchable");
       var value = parseInt(this.color1) * 10 + parseInt(this.color2);
       if (this.number === "5") {
-        console.log("5stripes");
         value = value * 10 + parseInt(this.color3);
       }
       value = value * parseFloat(this.color4);
@@ -362,7 +360,6 @@ module.exports = {
       this.r = value;
     },
     SecondValueWatchable() {
-      console.log("SecondR s-a schimbat");
       var value = parseFloat(this.Secondvaluenumber);
       if (
         isNaN(value) ||
@@ -376,9 +373,7 @@ module.exports = {
         this.Secondstripe2 = 0;
         this.Secondstripe3 = 0;
         this.Secondstripe4 = 0;
-        console.log("if");
       } else {
-        console.log("else");
         value *= 10000; //workaround for float
         var digit1 = 0;
         var digit2 = 0;

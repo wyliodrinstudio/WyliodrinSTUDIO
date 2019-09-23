@@ -142,5 +142,13 @@
     "ABOUT_VERSION": {
         "message": "Version",
         "description":" The text version that appears in the Welcome and About dialogs"
+    },
+    "OK": {
+        "message": "OK",
+        "description": "Any button that has the OK text"
+    },
+    "BACK": {
+        "message": "BACK",
+        "description": "Any button that has the BACK text"
     }
 }

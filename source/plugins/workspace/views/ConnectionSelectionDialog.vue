@@ -57,7 +57,7 @@ export default {
 			if (!this.devices) return 0;
 			else 
 			{
-				return this.devices.reduce ((nr, device) => { console.log (device); return nr + (device.placeholder?0:1); }, 0);
+				return this.devices.reduce ((nr, device) => { return nr + (device.placeholder?0:1); }, 0);
 			}
 		}
 	},

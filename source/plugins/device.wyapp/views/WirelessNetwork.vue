@@ -33,8 +33,6 @@
 						<div v-if="wirelessNetwork.s === SSID">
 							<v-text-field v-if="wirelessNetwork.s === ''" :label="$t('DEVICE_WYAPP_SSID')" v-model="linkSSID"></v-text-field>
 							<v-text-field type="password" :label="$t('DEVICE_WYAPP_PSK')" v-model="linkPSK"></v-text-field>
-						</div>
-						<div>
 							<v-btn v-if="network.s !== wirelessNetwork.s" text class="lib-app-btn" @click="link(wirelessNetwork)">{{$t('DEVICE_WYAPP_CONNECT')}}</v-btn>
 						</div>
 					</td>

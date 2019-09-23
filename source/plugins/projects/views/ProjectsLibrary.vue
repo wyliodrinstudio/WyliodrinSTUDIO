@@ -6,7 +6,10 @@
 			<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_SEARCH')" v-model="search" single-line dark class="projsearch" append-icon="search"></v-text-field>
 		</v-card-title>
 		<v-card-text v-if="!projects || projects.length === 0" class="projects-container">
-			<div class="noprojmsg">
+			<div v-if="!projects">
+				<v-progress-circular indeterminate></v-progress-circular>
+			</div>
+			<div v-else class="noprojmsg">
 				<strong>{{$t('PROJECTS_NO_PROJECT')}}</strong>
 				<br>
 				<span>{{$t('PROJECTS_CREATE_APPLICATION')}}</span>
@@ -16,8 +19,8 @@
 			<v-layout>
 				<v-list class="itemlist">
 					<template v-for="project in projectList"  >
-						<v-list-item :key="project.name" class="lib-app">
-							<v-list-item-avatar @click="selectProject(project)">
+						<v-list-item :key="project.name" class="lib-app" @click="selectProject(project)">
+							<v-list-item-avatar>
 								<v-img contain :src="'plugins/projects/data/img/languages/project/'+projectLanguage (project)+'.png'" avatar ></v-img>
 							</v-list-item-avatar>
 
@@ -29,10 +32,10 @@
 								<v-list-item-subtitle style="word-wrap: break-word">{{formatDate(project.date)}}</v-list-item-subtitle>
 
 								<v-list-item-subtitle>
-									<v-btn text id="export_button" class="lib-app-btn" @click="exportProject(project)">{{$t('PROJECT_LIBRARY_EXPORT')}}</v-btn>
-									<v-menu offset-y>
+									<v-btn text id="export_button" class="lib-app-btn" @click.stop="exportProject(project)">{{$t('PROJECT_LIBRARY_EXPORT')}}</v-btn>
+									<v-menu offset-y close-on-content-click close-on-click>
 										<template v-slot:activator="{ on }">
-											<v-btn text class="lib-app-btn" v-on="on">{{$t('PROJECT_LIBRARY_OPTIONS')}}</v-btn>
+											<v-btn text class="lib-app-btn" v-on="on" @click.stop="">{{$t('PROJECT_LIBRARY_OPTIONS')}}</v-btn>
 										</template>
 										<v-list>
 											<v-list-item @click="renameDialog(project)">
@@ -78,7 +81,7 @@
 			</v-alert>
 		</v-card-text>
 		<v-card-actions>
-			<v-btn text>{{$t('PROJECT_LIBRARY_LOAD_EXAMPLE')}}</v-btn>
+			<!-- <v-btn text>{{$t('PROJECT_LIBRARY_LOAD_EXAMPLE')}}</v-btn> -->
 			<v-spacer></v-spacer>
 			<!--<v-btn text slot="activator" @click.stop="console.log('this')">
 				<v-img src="plugins/projects/data/img/icons/projects-icon.svg"></v-img>
@@ -108,9 +111,8 @@ export default {
 			dialog: false,
 			exportDialog:false,
 			importDialog:false,
-			rename:'',
 			filePath:'',
-			projects:[],
+			projects:null,
 			search:'',
 			notPersistent: false
 		};
@@ -119,6 +121,8 @@ export default {
 	},
 	computed:{
 		projectList(){
+			if (!this.projects) return this.projects;
+			else
 			return this.projects.filter(project => {
 				return project.name.toLowerCase().includes(this.search.toLowerCase());
 			})
@@ -134,9 +138,6 @@ export default {
 	{
 		this.projects = await this.studio.projects.loadProjects(false);
 	},
-	mounted() {
-		this.$refs.button.$el.focus();
-	}, 
 	methods: {
 		esc() {
 			this.close();
@@ -151,34 +152,30 @@ export default {
 		},
 		async addProjectDialog ()
 		{
-			let value = await this.studio.workspace.showDialog(AddProjectDialog,{width:512});
-			if(value === undefined){
-				this.projects=await this.studio.projects.loadProjects(false);
-			}
+			this.close ();
+			await this.studio.workspace.showDialog(AddProjectDialog,{width:512});
+			this.studio.projects.showProjectsLibrary ();
 			
 		},
 		async cloneDialog(project)
 		{
-			this.rename = await this.studio.workspace.showPrompt('PROJECT_CLONE_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
-			console.log(this.rename);
-			if(this.rename === undefined)
+			this.close ();
+			let clone = await this.studio.workspace.showPrompt('PROJECT_CLONE_PROJECT', 'PROJECT_NAME_PROMPT', project.name, 'PROJECT_NEW_NAME');
+			if (clone)
 			{
-				this.rename = '';
+				await this.studio.projects.cloneProject(project,clone)
 			}
-			if(await this.cloneProject(project,this.rename))
-			{
-				this.projects=await this.studio.projects.loadProjects(false);
-			}
-			this.rename = '';
+			this.studio.projects.showProjectsLibrary ();
 		},
 		async renameDialog(project)
 		{
-			this.rename = await this.studio.workspace.showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT','', 'PROJECT_NEW_NAME');
-			if(await this.renameProject(project,this.rename))
+			this.close ();
+			let rename = await this.studio.workspace.showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT',project.name, 'PROJECT_NEW_NAME');
+			if (rename)
 			{
-				this.projects=await this.studio.projects.loadProjects(false);
+				await this.studio.projects.renameProject(project, rename)
 			}
-			this.rename = '';
+			this.studio.projects.showProjectsLibrary ();
 		},
 		projectLanguage (project)
 		{
@@ -188,7 +185,7 @@ export default {
 					return project.language;
 				} else return 'unknown';
 			}
-			
+			this.studio.projects.showProjectsLibrary ();
 		},
 		async selectProject (project)
 		{
@@ -198,8 +195,7 @@ export default {
 		},
 		async deleteProject (project, projects)
 		{
-			console.log(project);
-			console.log(projects);
+			this.close ();
 			let localProject = project;
 			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_PROJECT', 'PROJECT_PROJECT_SURE');
 			if(allow && await this.studio.projects.deleteProject(project))
@@ -219,11 +215,8 @@ export default {
 						});
 						
 				}
-				let index = projects.indexOf(project);
-				projects.splice(index, 1);
-				this.projects=await this.studio.projects.loadProjects(false);
 			}
-			return true;
+			this.studio.projects.showProjectsLibrary ();
 		},
 		async exportProject (project)
 		{
@@ -275,29 +268,7 @@ export default {
 			}
 			return false;
 		},
-		async renameProject (project)
-		{
-			if(this.rename==''){
-				return false;
-			}
-			if (await this.studio.projects.renameProject(project,this.rename))
-			{
-				this.rename=='';
-				this.projects=await this.studio.projects.loadProjects(false);
-				return true;
-			}
-			this.rename=='';
-		},
-		async cloneProject (project)
-		{
-			if (await this.studio.projects.cloneProject(project,this.rename))
-			{
-				this.rename=='';
-				this.projects=await this.studio.projects.loadProjects(false);
-				return true;
-			}
-			this.rename=='';
-		},
+		
 		async askPersistent ()
 		{
 			await this.studio.filesystem.isPersistent ();

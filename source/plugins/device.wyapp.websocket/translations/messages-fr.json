@@ -4,7 +4,7 @@
         "description": "The notification the user sees when authetnicated with the devices server"
     },
     "DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR": {
-        "message": "Erreur du serveur: {error}",
+        "message": "Erreur du serveur",
         "description": "The error notification the user sees with the error for the websocket server"
     },
     "DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED": {

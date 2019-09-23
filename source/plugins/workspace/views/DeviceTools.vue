@@ -90,7 +90,6 @@ export default {
 		async showConnectionSelectionDialog ()
 		{
 			let device = await this.studio.workspace.showConnectionSelectionDialog ();
-			console.log ('device');
 			if (device)
 			{
 				this.studio.workspace.connect (device);

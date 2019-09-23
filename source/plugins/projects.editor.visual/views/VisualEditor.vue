@@ -118,10 +118,11 @@ export default {
 		{
 			let toolbox = '<xml>';
 			let toolboxes = this.studio.editor_visual.getToolboxes ();
+			console.log (toolboxes);
 			for (let blocks of toolboxes)
 			{
-				if (((blocks.type === undefined && blocks.board === undefined) 
-						|| (blocks.type === this.device.type && (blocks.board === undefined || blocks.board === this.device.board)))
+				if (((blocks.type === null && blocks.board === null) 
+						|| (blocks.type === this.device.type && (blocks.board === null || blocks.board === this.device.board)))
 						&& blocks.visible())
 				{
 					for (let element of blocks.toolbox.elements)

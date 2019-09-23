@@ -10,8 +10,8 @@
                 </block>
             </value>
         </block>
-        <block type="button_is_pressed">
-            <value name="wyliozero_button">
+        <block type="wyliozero_button_is_pressed">
+            <value name="button">
                 <block type="variables_get">
                     <field name="VAR">button</field>
                 </block>
@@ -107,47 +107,31 @@
             </value>
         </block>
     </category>
-    <category name="Temperature" colour="80">
+    <category name="DHT Sensor" colour="80">
         <block type="variables_set">
-            <field name="VAR">DHTsensor</field>
+            <field name="VAR">Temp</field>
             <value name="VALUE">
-                <block type="wyliozero_dht_sensor">
-                    <value name="pin">
-                        <block type="wyliozero_pin_analog"/>
+                <block type="wyliozero_dht_temperature">
+                    <value name="pin_number">
+                        <block type="wyliozero_pin_raspberry"/>
                     </value>
                 </block>
             </value>
-        </block>
-        <block type = "wyliozero_dht_temperature">
-            <value name = "dht">
-                <block type="variables_get">
-                    <field name="VAR">DHTsensor</field>
-                </block>
-            </value>
-        </block>
-    </category>
-    <category name="Humidity" colour="120">
-        <block type="wyliozero_variables_set">
-            <field name="VAR">DHTsensor</field>
+        </block> 
+        <block type="variables_set">
+            <field name="VAR">Hum</field>
             <value name="VALUE">
-                <block type="wyliozero_dht_sensor">
-                    <value name="pin">
-                        <block type="wyliozero_pin_analog"/>
+                <block type="wyliozero_dht_humidity">
+                    <value name="pin_number">
+                        <block type="wyliozero_pin_raspberry"/>
                     </value>
                 </block>
             </value>
-        </block>
-        <block type = "wyliozero_dht_humidity">
-            <value name = "dht">
-                <block type="variables_get">
-                    <field name="VAR">DHTsensor</field>
-                </block>
-            </value>
-        </block>
+        </block> 
     </category>
-    <category name="Power Meter" colour="160"></category>
-    <!-- <category name="Pin Output" colour="100"></category> -->
-    <sep />
+    <!-- <category name="Power Meter" colour="160"></category>
+    <category name="Pin Output" colour="100"></category>
+    <sep /> -->
     <category name="LED" colour="200">
         <block type="variables_set">
             <field name="VAR">ledName</field>
@@ -396,17 +380,17 @@
     <category name="Advanced" colour="80">
         <block type="wyliozero_analogread">
             <value name="pin">
-                <block type="pin_analog"/>
+                <block type="wyliozero_pin_analog"/>
             </value>
         </block>
         <block type="wyliozero_digitalread">
             <value name="pin">
-                <block type="pin_digital"/>
+                <block type="wyliozero_pin_digital"/>
             </value>
         </block>
         <block type="wyliozero_analogwrite">
             <value name="pin">
-                <block type="pin_analog"/>
+                <block type="wyliozero_pin_pwm"/>
             </value>
             <value name="value">
                 <block type="math_number"/>
@@ -414,7 +398,7 @@
         </block>
         <block type="wyliozero_digitalwrite" >
             <value name="pin">
-                <block type="pin_digital"/>
+                <block type="wyliozero_pin_digital"/>
             </value>
             <value name="value">
                 <block type="logic_boolean"/>
@@ -422,12 +406,12 @@
         </block>
         <block type="wyliozero_pinmode">
             <value name="NAME">
-                <block type="pin_analog"/>
+                <block type="wyliozero_pin_analog"/>
             </value>
         </block>
         <block type="wyliozero_pinmode">
             <value name="NAME">
-                <block type="pin_digital"/>
+                <block type="wyliozero_pin_digital"/>
             </value>
         </block>
         <block type="pause" />

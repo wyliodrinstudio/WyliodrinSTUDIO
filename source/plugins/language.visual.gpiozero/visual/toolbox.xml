@@ -65,7 +65,7 @@
             <field name="VAR">lightSensor</field>
             <value name="VALUE">
                 <block type="gpiozero_light_sensor">
-                    <value name="gpiozero_pin">
+                    <value name="pin_number">
                         <block type="gpiozero_pin"/>
                     </value>
                 </block>
@@ -114,8 +114,8 @@
             <value name="VALUE">
                 <block type="gpiozero_led">
                     <value name="pin">
-                        <block type="pin">
-                            <field name="gpiozero_pin">GPIO0</field>
+                        <block type="gpiozero_pin">
+                            <field name="pin">0</field>
                         </block>
                     </value>
                 </block>
@@ -250,8 +250,8 @@
             <value name="VALUE">
                 <block type="gpiozero_buzzer">
                     <value name="pin">
-                        <block type="pin">
-                            <field name="gpiozero_pin">GPIO0</field>
+                        <block type="gpiozero_pin">
+                            <field name="pin">0</field>
                         </block>
                     </value>
                 </block>

@@ -91,7 +91,6 @@ export default {
 		this.unregister = this.studio.dashboard.registerForSignal ('GaugeGraph',(data)=>{
 			const chart = this.$refs.chart.getChart();
 			
-			console.log(chart);
 			var point = chart.series[0].points[0],
 				newVal,
 

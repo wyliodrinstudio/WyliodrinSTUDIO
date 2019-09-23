@@ -45,7 +45,6 @@ export function setup (options, imports, register)
 		 */
 		select(id) {
 			let shell = getConsole ();
-			// console.log ('select console '+id+' '+shell);
 			if (shell) shell.select (id);
 		},
 

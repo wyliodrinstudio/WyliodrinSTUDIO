@@ -61,13 +61,12 @@ export default {
 	mounted () {
 		this.unregister = this.studio.dashboard.registerForSignal ('LineGraph',(data)=>{
 			const chart = this.$refs.chart.getChart();
-			console.log(chart);
-					var point = chart.series[0].points[0],
-						newVal,
+			var point = chart.series[0].points[0],
+				newVal,
 
-					newVal = data.v;
+			newVal = data.v;
 
-					point.update(newVal, false);
+			point.update(newVal, false);
 			chart.redraw();
 		});
 

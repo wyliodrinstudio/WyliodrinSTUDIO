@@ -2,6 +2,11 @@ const path = require ('path');
 const architect = require ('./architect');
 const fs = require ('fs-extra');
 const ipcRenderer = require ('electron').ipcRenderer;
+const oneLinerJoke = require('one-liner-joke');
+
+let itstuff = oneLinerJoke.getRandomJokeWithTag('IT', {
+	'exclude_tags': ['dirty', 'racist', 'marriage', 'sex', 'women']
+});
 
 async function loadPlugins (pluginsFolder)
 {
@@ -23,7 +28,7 @@ async function loadPlugins (pluginsFolder)
 						let package_json = require (path.join (pluginsFolder, l, 'package.json'));
 						if (!package_json.plugin.disabled)
 						{
-							document.querySelector('#loading').innerHTML = 'Loading plugin '+l;
+							document.querySelector('#loading').innerHTML = 'Loading plugin '+l+'<br><br><i>'+itstuff.body+'</i>';
 							document.querySelector('#loading-progress-bar').setAttribute ('style', 'width: '+Math.round((pluginNumber/(list.length)*100))+'%');
 							console.log ('Loading '+l);
 							let plugin = require (path.join (pluginsFolder, l));

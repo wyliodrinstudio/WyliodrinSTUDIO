@@ -258,8 +258,6 @@ export function setup(options, imports, register)
 													studio.notebook.printError(packet.d.l, packet.d.d.buf);
 												else if (packet.d.t === 'r')
 												{
-													console.log('result');
-													console.log(packet.d);
 													studio.notebook.printResult(packet.d.l, packet.d.d.buf);
 												}
 												else if (packet.d.t === 'd')
@@ -425,8 +423,6 @@ export function setup(options, imports, register)
 					studio.console.reset ();
 					let structure = await studio.projects.generateStructure (project);
 
-					console.log (structure);
-
 					let tp = {
 						name: project.name,
 						isroot: true,
@@ -468,8 +464,6 @@ export function setup(options, imports, register)
 					};
 
 					await setFiles (structure.children, tp.children[0].children, '/');
-
-					console.log (tp);
 
 					let xtrem = studio.console.getSize ();
 

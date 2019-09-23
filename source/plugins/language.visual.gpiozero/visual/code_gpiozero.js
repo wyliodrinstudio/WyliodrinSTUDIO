@@ -31,11 +31,11 @@ module.exports = function (blockly) {
 
 	Blockly.Python['gpiozero_led'] = function(block) {
 		Blockly.Python.gpiozero_setUp();
-		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_NEW);
+		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'LED(' + value_pin.toString() + ')';
 		// TODO: Change ORDER_NONE to the correct strength.
-		return [code, Blockly.Python.ORDER_NEW];
+		return [code, Blockly.Python.ORDER_NONE];
 	};
 
 	Blockly.Python['gpiozero_servo'] = function(block) {
@@ -47,6 +47,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_servo_detach'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.detach() \n';
@@ -54,6 +55,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_servo_max'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.max() \n';
@@ -61,6 +63,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_servo_mid'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.mid() \n';
@@ -68,6 +71,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_servo_min'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.min() \n';
@@ -76,8 +80,9 @@ module.exports = function (blockly) {
 
 
 	Blockly.Python['gpiozero_servo_value'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-		var number_name = block.getFieldValue('value');
+		var number_name = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.value = ' + number_name.toString() + '\n';
 		return code;
@@ -92,11 +97,11 @@ module.exports = function (blockly) {
 
 	Blockly.Python['gpiozero_pwm_led'] = function(block) {
 		Blockly.Python.gpiozero_setUp();
-		var value_led = Blockly.Python.valueToCode(block, 'led', Blockly.Python.ORDER_NEW);
+		var value_led = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'PWMLED(' + value_led.toString() + ')\n';
 		// TODO: Change ORDER_NONE to the correct strength.
-		return [code, Blockly.Python.ORDER_NEW];
+		return [code, Blockly.Python.ORDER_NONE];
 	};
 
 	Blockly.Python['gpiozero_button'] = function(block) {
@@ -128,6 +133,7 @@ module.exports = function (blockly) {
 
 
 	Blockly.Python['gpiozero_button_wait_for_release'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_button = Blockly.Python.valueToCode(block, 'button', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_button.toString() + '.wait_for_release() \n';
@@ -194,6 +200,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_button_held_time'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_button = Blockly.Python.valueToCode(block, 'button', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_button.toString() + '.held_time';
@@ -244,6 +251,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_led_is_lit'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_led = Blockly.Python.valueToCode(block, 'led', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_led.toString() + 'is_lit';
@@ -262,6 +270,7 @@ module.exports = function (blockly) {
 
 
 	Blockly.Python['gpiozero_traffic_blink'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.blink() \n';
@@ -269,6 +278,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_traffic_close'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.close() \n';
@@ -348,6 +358,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_light_wait_for_dark'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin_number.toString() + '.wait_for_dark() \n';
@@ -355,6 +366,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_light_wait_for_light'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin_number.toString() + '.wait_for_light() \n';
@@ -362,6 +374,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_light_detected'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin_number.toString() + '.light_detected';
@@ -378,6 +391,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_buzzer_beep'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.beep() \n';
@@ -385,6 +399,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_buzzer_on'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.on() \n';
@@ -392,6 +407,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_buzzer_off'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.off() \n';
@@ -399,6 +415,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_buzzer_toggle'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.toggle() \n';
@@ -406,6 +423,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['gpiozero_buzzer_is_active'] = function(block) {
+		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = value_pin.toString() + '.is_active';

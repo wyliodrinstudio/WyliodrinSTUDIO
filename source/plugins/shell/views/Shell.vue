@@ -25,7 +25,6 @@ export default {
 	},
 	mounted ()
 	{
-		console.log ('shell');
 		shell = this.$refs.shell;
 	},
 	methods: {

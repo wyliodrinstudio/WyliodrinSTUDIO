@@ -121,9 +121,13 @@ export default function setup(options, imports, register) {
 			name: 'node-opcua',
 			description: 'an implementation of a OPC UA stack fully written in javascript and nodejs'
 		},
-		{
+		{           
 			name: 'opcua-commander',
 			description: 'a opcua client with blessed (ncurses)'
+		},
+		{
+			name: 'vue',
+			description: 'Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.'
 		},
 	]);
 	register(null, {});

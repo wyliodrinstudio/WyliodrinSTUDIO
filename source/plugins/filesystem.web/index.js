@@ -544,10 +544,8 @@ let web_filesystem = {
 		$('#importFile').off().remove();
 		$('body').append('<input type="file" id="importFile" name="importFile" style="display: none;" accept="' + accept + '">');
 		$('#importFile').on('change', e => {
-			console.log($(e.target).val());
 			let list = [];
 			for (let f of e.target.files) {
-				console.log(f);
 				list.push(f);
 			}
 			events.emit('load', null, list);

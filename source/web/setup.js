@@ -1,9 +1,14 @@
 let architect = require ('./../architect.js');
 let plugins = require ('./plugins.js');
+const oneLinerJoke = require('one-liner-joke');
+
+let itstuff = oneLinerJoke.getRandomJokeWithTag('IT', {
+	'exclude_tags': ['dirty', 'racist', 'marriage', 'sex', 'women']
+});
 
 function progress (name, index, all)
 {
-	document.querySelector('#loading').innerHTML = 'Loading plugin '+name;
+	document.querySelector('#loading').innerHTML = 'Loading plugin '+name+'<br><br><i>'+itstuff.body+'</i>';
 	document.querySelector('#loading-progress-bar').setAttribute ('style', 'width: '+Math.round((index/all*100))+'%');
 	console.log ('Loading '+name);
 }
