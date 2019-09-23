@@ -30,5 +30,17 @@
     "DEVICE_RPK_TURNOFF": {
         "message": "Opriți și Deconectați",
         "description": "The power off and disconnect option in the disconnect menu"
+    },
+    "DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT": {
+        "message": "Programul este in curs de scriere pe dispozitiv, va rugam asteptati.",
+        "description": "Notification text while the binary is written on the RPK."
+    },
+    "DEVICE_RPK_TOO_LONG_SOURCE_CODE": {
+        "message": "Codul sursa trebuie sa contina mai putin de 30000 caractere.",
+        "description": "Error shown when source code is bigger than the RPK supports."
+    },
+    "DEVICE_RPK_FLASH_DONE": {
+        "message": "Scrierea programului finalizata. Dispozitivul se va restarta si se va deconecta automat. Puneti dispozitivul in modul DFU pentru a rescrie programul.",
+        "description": "Notification shown when flashing is done."
     }
 }

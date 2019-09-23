@@ -24,12 +24,12 @@
 					active-class=""
 					color="rgba(0,0,0,0.87)"
 					return-object
-					:active.sync="item"
 					:open-on-click="true"
 					dense
 					>
+					
 					<template v-slot:prepend="{item, open}">
-						<p v-if="item.name === currentProject.name" @contextmenu="fileItem = item,showProject($event)">
+						<p v-if="item.name === currentProject.name" @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)">
 							<v-img v-if="languageImage().type" contain :src="languageImage().img" avatar ></v-img>
 							<v-icon v-else>{{languageImage().img}}</v-icon>
 						</p>
@@ -38,10 +38,10 @@
 							<v-icon v-else>{{getPictogram(item.path).img}}</v-icon>
 
 						</p>
-						<p v-else-if="open && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="open && item.name !== currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)">
 							<v-icon>mdi-folder-open</v-icon>
 						</p>
-						<p v-else-if="item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="item.name !== currentProject.name" text @click="menuItem = item" @contextmenu="fileItem = item,showFolder($event)">
 							<v-icon>mdi-folder</v-icon>
 						</p>
 						<v-menu
@@ -111,10 +111,10 @@
 							</v-menu>
 					</template>
 					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @contextmenu="fileItem = item,showProject($event)"> 
+						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)"> 
 							{{item.name}}                  
 						</p>
-						<p style="width:100%;" v-else-if="item.file  === undefined && item.name !== currentProject.name" text @contextmenu="fileItem = item,showFolder($event)"> 
+						<p style="width:100%;" v-else-if="item.file  === undefined && item.name !== currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
 						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
@@ -188,7 +188,11 @@
 					</template>
 					
 					</v-treeview>
-						
+					<v-card-actions class="justify-center">
+						<v-icon @click="newFile(menuItem)">mdi-file-plus</v-icon>
+						<v-icon @click="newFolder(menuItem)">mdi-folder-plus</v-icon>
+						<v-icon @click="dirTree()">mdi-refresh</v-icon>
+					</v-card-actions>		
 				</div> 
 			</div>
 			<!--  -->
@@ -236,6 +240,7 @@ export default {
 			folder:'',
 
 			fileItem:'',
+			menuItem:null,
 			tabs:[],
 			tabItem:null,
 
@@ -243,7 +248,7 @@ export default {
 
 			showTree: this.advanced,
 
-			open: ['public'],
+			open: [],
 			tree: [],
 			items:[],
 			item:null,
@@ -306,15 +311,15 @@ export default {
 		}
 	},
 	watch: {
-		currentProject ()
+		async currentProject ()
 		{
 			this.updateTitle ();
-			this.dirTree();
+			await this.dirTree();
 		},
-		currentFile ()
+		async currentFile ()
 		{
 			this.updateTitle ();
-			this.dirTree();
+			await this.dirTree();
 		},
 		async source ()
 		{
@@ -542,6 +547,7 @@ export default {
 		
 		async dirTree() 
 		{
+			
 			if (this.currentProject)
 			{
 				let filename = this.currentProject.folder;
@@ -576,6 +582,9 @@ export default {
 		},
 		async newFolder (item)
 		{
+			if(item === undefined || item === null) {
+				item = this.items[0];
+			}
 			let folderName = await this.studio.workspace.showPrompt ('PROJECT_NEW_FOLDER', 'PROJECT_NEW_FOLDER_NAME', '', 'PROJECT_NEW_NAME');
 			if (folderName)
 			{
@@ -585,6 +594,9 @@ export default {
 		},
 		async newFile (item)
 		{
+			if(item === undefined || item === null) {
+				item = this.items[0];
+			}
 			let fileName = await this.studio.workspace.showPrompt ('PROJECT_NEW_FILE', 'PROJECT_NEW_FILE_NAME', '', 'PROJECT_NEW_NAME');
 			if (fileName)
 			{
