@@ -28,6 +28,10 @@
 					:open-on-click="true"
 					dense
 					>
+					<v-btn @click="newFile(menuItem)">New File</v-btn>
+					<v-btn @click="newFoldeR(menuItem)">New Folder</v-btn>
+					<v-btn @click="dirTree()">Refresh</v-btn>
+					<v-btn @click="changeTree()">Expand/Colapse All</v-btn>
 					<template v-slot:prepend="{item, open}">
 						<p v-if="item.name === currentProject.name" @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)">
 							<v-img v-if="languageImage().type" contain :src="languageImage().img" avatar ></v-img>
@@ -252,6 +256,7 @@ export default {
 			fileMenu: false,
 			folderMenu:false,
 			projectMenu:false,
+			expandAll:false,
 			x: 0,
 			y: 0,
 			showConsole: false,
@@ -350,6 +355,9 @@ export default {
 		}
 	},
 	methods: {
+		changeTree(){
+			this.expandAll = !this.expandAll;
+		},
 		consoleLogIt(item){
 			console.log(item);
 		},
