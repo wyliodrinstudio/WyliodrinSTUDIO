@@ -69,8 +69,8 @@
 			<source src="plugins/device.simulator.rpk/data/audio/beep.ogg" type="audio/ogg">
 		</audio>
 
-		Motion<input type="checkbox" v-model="motion">
-		Freefall<input type="checkbox" v-model="freefall">
+		<v-checkbox v-model="motion" class="mx-2" label="Motion"></v-checkbox>
+		<v-checkbox v-model="freefall" class="mx-2" label="Freefall"></v-checkbox>
 
 		<v-flex xs12>
 			Gyroscope<br>
