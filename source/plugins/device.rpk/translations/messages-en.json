@@ -46,5 +46,17 @@
     "DEVICE_RPK_ERROR_BLE": {
         "message": "List devices failed ({error}).",
         "description": "The error shown when list devices for ble fails"
+    },
+    "DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT": {
+        "message": "Flashing in progress, please wait.",
+        "description": "Notification text while the binary is written on the RPK."
+    },
+    "DEVICE_RPK_TOO_LONG_SOURCE_CODE": {
+        "message": "The source code characters number must be lesser than X.",
+        "description": "Error shown when source code is bigger than the RPK supports."
+    },
+    "DEVICE_RPK_FLASH_DONE": {
+        "message": "Flash done. The device will reboot and it will disconnect automatically. Put the device in DFU mode to flash it again.",
+        "description": "Notification shown when flashing is done."
     }
 }

@@ -8,6 +8,6 @@
         "optional": ["console", "mqtt"],
         "provides": [],
         "target": ["electron"],
-        "disabled": true
+        "disabled": false
     }
 }
