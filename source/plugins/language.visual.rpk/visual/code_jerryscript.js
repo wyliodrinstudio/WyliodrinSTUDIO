@@ -505,13 +505,13 @@ module.exports = function (blockly) {
 		var code;
 
 		if (dropdown_measure_unit === '1') {
-			code = 'sleep(' + value_time + '* 1000);\n';
+			code = 'sleep(' + value_time + ' * 1000);\n';
 		}
 		else if (dropdown_measure_unit === '2') {
 			code = 'sleep(' + value_time + ');\n';
 		}
 		else if (dropdown_measure_unit === '3') {
-			code = 'sleep(' + value_time + '/ 1000);\n';
+			code = 'sleep(' + value_time + ' / 1000);\n';
 		}
 
 		return code;
