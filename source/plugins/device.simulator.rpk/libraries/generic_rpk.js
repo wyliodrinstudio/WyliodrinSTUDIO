@@ -7,20 +7,32 @@ let generic_rpk = {
 	line: 1,
 	textColor: 'GUI_WHITE',
 
-	rgbBrightness: 'OFF',
-	rgbColor: 'BLACK',
+	rgbBrightness: 0,
+	rgbColor: 7,
 
-	light: null,
-	airQuality: null,
-	pressure: null,
-	temperature: null,
-	buzzer: null,
+	light: 0,
+	airQuality: 400,
+	pressure: 50,
+	temperature: -40,
+	motion: false,
+	frefall: false,
+	gyroscope: {
+		x: 0,
+		y: 0,
+		z: 0
+	},
+	accelometer: {
+		x: 0,
+		y: 0,
+		z: 0
+	},
+	buzzer: 0,
 
 	guiBacklightDictionary: {
-        'OFF': '1',
-        'LOW': '0.6',
-        'MEDIUM': '0.3',
-        'HIGH': '0'
+        0: '1',
+        1: '0.6',
+        2: '0.3',
+        3: '0'
 	},
 	
 	guiColorDictionary: {
@@ -51,21 +63,21 @@ let generic_rpk = {
 	},
 
 	rgbBrightnessDictionary: {
-        'OFF': '1',
-        'LOW': '0.6',
-        'MEDIUM': '0.3',
-        'HIGH': '0'
+        0: '1',
+        1: '0.6',
+        2: '0.3',
+        3: '0'
     },
 	
 	rgbColorDictionary: {
-        'RED': '0',
-        'GREEN': '120',
-        'BLUE': '210',
-        'YELLOW': '60',
-        'CYAN': '180',
-		'PURPLE': '280',
-		'BLACK': 'black',
-		'WHITE': 'white'
+        0: '0',
+        1: '120',
+		2: '210',
+		3: 'white',
+        4: '60',
+        5: '180',
+		6: '280',
+		7: 'black'
 	},
 
 	switchesDictionary: {
@@ -83,8 +95,8 @@ let generic_rpk = {
 	},
 
 	buzzerDictionary: {
-		'ON': true,
-		'OFF': false
+		1: true,
+		0: false
 	},
 
 	setToDefault: function() {
@@ -92,10 +104,10 @@ let generic_rpk = {
 		this.line = 1;
 		this.textColor = 'GUI_WHITE';
 
-		this.rgbBrightness = 'OFF';
-		this.rgbColor = 'BLACK';
+		this.rgbBrightness = 0;
+		this.rgbColor = 7;
 
-		this.buzzer = 'OFF';
+		this.buzzer = 0;
 
 		this.switches = {
 			'1': false,
@@ -111,17 +123,17 @@ let generic_rpk = {
 			'4': false
 		}
 
-		let canvas1 = document.getElementById('rpk_display');
-		let ctx1 = canvas1.getContext('2d');
-		ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-		ctx1.canvas.width  = 100;
-		ctx1.canvas.height = 100;
-		ctx1.beginPath();
-		ctx1.fillStyle = 'black';
-		ctx1.fillRect(0, 0, 100, 100);
-		ctx1.stroke();
+		let canvas = document.getElementById('rpk_display');
+		let ctx = canvas.getContext('2d');
+		ctx.canvas.width  = 100;
+		ctx.canvas.height = 100;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.beginPath();
+		ctx.fillStyle = 'black';
+		ctx.fillRect(0, 0, 100, 100);
+		ctx.stroke();
 
-		$('#LED').attr('fill', this.rgbColorDictionary[this.rgbColor]);
+		$('#led_color').attr('fill', this.rgbColorDictionary[this.rgbColor]);
 
 		switches.generateSwitches();
 		touches.generateTouches();
