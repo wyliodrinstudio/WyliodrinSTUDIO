@@ -64,14 +64,8 @@ export default {
 
 			let boardDriver = this.studio.device_wyapp.getBoardDriver (this.device.board);
 
-			console.log(this.device);
-
 			if (boardDriver) username = this.device.defaultUsername;
 			if (boardDriver) password = this.device.defaultPassword;
-
-			console.log(username + ' ' + this.user);
-			console.log(password + ' ' + this.password);
-
 
 			if(username && password && ( this.password === password && this.user === username))
 				this.studio.workspace.showNotification('DEVICE_WYAPP_CHANGE_CREDENTIALS', {}, 'warning');
