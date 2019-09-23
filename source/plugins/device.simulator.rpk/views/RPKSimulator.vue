@@ -96,9 +96,7 @@
 					<v-text-field v-model="light" class="mt-0" :max="lightMax" :min="lightMin" hide-details single-line type="number"></v-text-field>
 				</v-flex>
 			</v-layout>
-		</v-card-text>
 
-		<v-card-text>
 			<v-layout row>
 				<v-flex class="pr-3">
 					Air Quality<v-slider v-model="airQuality" :max="airQualityMax" :min="airQualityMin"></v-slider>
@@ -108,9 +106,7 @@
 					<v-text-field v-model="airQuality" class="mt-0" :max="airQualityMax" :min="airQualityMin" hide-details single-line type="number"></v-text-field>
 				</v-flex>
 			</v-layout>
-		</v-card-text>
 
-		<v-card-text>
 			<v-layout row>
 				<v-flex class="pr-3">
 					Pressure<v-slider v-model="pressure" :max="pressureMax" :min="pressureMin"></v-slider>
@@ -120,9 +116,7 @@
 					<v-text-field v-model="pressure" class="mt-0" :max="pressureMax" :min="pressureMin" hide-details single-line type="number"></v-text-field>
 				</v-flex>
 			</v-layout>
-		</v-card-text>
 
-		<v-card-text>
 			<v-layout row>
 				<v-flex class="pr-3">
 					Temperature<v-slider v-model="temperature" :max="temperatureMax" :min="temperatureMin"></v-slider>

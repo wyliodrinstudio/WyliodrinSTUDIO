@@ -98,7 +98,7 @@ export default function setup(options, imports, register) {
 						setTimeout(runToCompletion, 1000);
 						simulator.opperationsCounter = 0;
 					} else {
-						setTimeout(runToCompletion, 10);
+						setTimeout(runToCompletion, 5);
 					}
 				} else {
 					simulator.isRunning = false;
