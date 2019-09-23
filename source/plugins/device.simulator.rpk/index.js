@@ -62,6 +62,7 @@ export default function setup(options, imports, register) {
 			priority: 1000,
 			address: 'rpk_simulator',
 			board: 'rpk_simulator',
+			placeholder: true,
 			properties: {
 				isRunning: false
 			}
