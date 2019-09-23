@@ -93,14 +93,28 @@ export default function setup (options, imports, register)
 				{
 					studio.workspace.error ('projects.editor.visual: register blocks for '+id+' failed with '+e.message);
 				}
-				this._toolboxes.push ({
-					id,
-					toolbox:_.isString(toolbox)?xml.xml2js(toolbox):toolbox,
-					type: options.type,
-					board: options.board,
-					visible: _.isFunction(options.visible)?options.visible:() => true,
-					language: options.language
-				});
+				if (!options.type) options.type = [null];
+				else if (!_.isArray (options.type)) options.type = [options.type];
+				if (!options.board) options.board = [null];
+				else if (!_.isArray (options.board)) options.board = [options.board];
+				console.log (options.type);
+				console.log (options.board);
+				for (let type of options.type)
+				{
+					for (let board of options.board)
+					{
+						console.log ('type '+type);
+						console.log ('board '+board);
+						this._toolboxes.push ({
+							id,
+							toolbox:_.isString(toolbox)?xml.xml2js(toolbox):toolbox,
+							type: type,
+							board: board,
+							visible: _.isFunction(options.visible)?options.visible:() => true,
+							language: options.language
+						});
+					}
+				}
 			}
 			else
 			{
