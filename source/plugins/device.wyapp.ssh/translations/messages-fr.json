@@ -39,5 +39,9 @@
     {
         "message": "Adresse IP",
         "description": "The name of the pseudo device that allows the user the connect to any IP address"
+    },
+    "DEVICE_WYAPP_CHANGE_CREDENTIALS": {
+        "message": "Vous avez essayé de vous connecter en utilisant les informations d'identification par défaut pour ce périphérique. Nous vous recommandons de changer le mot de passe en utilisant la commande passwd.",
+        "description": "Warning message when the user tries to login to a board with the default credentials."
     }
 }

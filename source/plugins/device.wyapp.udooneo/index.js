@@ -28,7 +28,6 @@ export function setup (options, imports, register)
 		{
 			return 'plugins/device.wyapp.udooneo/data/img/icon-udooneo.png';
 		},
-
 		/**
 		 * Found a device, modify stuff (like icon)
 		 * @param {Device} device 
@@ -37,6 +36,8 @@ export function setup (options, imports, register)
 		{
 			device.icon = this.iconURL ();
 			if (!device.description) device.description = 'UDOONeo';
+			device.defaultUsername = 'udooer';
+			device.defaultPassword = 'udooer';
 		},
 
 		/**
@@ -47,6 +48,8 @@ export function setup (options, imports, register)
 		{
 			device.icon = this.iconURL ();
 			if (!device.description) device.description = 'UDOONeo';
+			device.defaultUsername = 'udooer';
+			device.defaultPassword = 'udooer';
 		},
 
 		/**
