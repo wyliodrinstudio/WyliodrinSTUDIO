@@ -14,6 +14,7 @@ let generic_rpk = {
 	airQuality: null,
 	pressure: null,
 	temperature: null,
+	buzzer: null,
 
 	guiBacklightDictionary: {
         'OFF': '1',
@@ -93,6 +94,8 @@ let generic_rpk = {
 
 		this.rgbBrightness = 'OFF';
 		this.rgbColor = 'BLACK';
+
+		this.buzzer = 'OFF';
 
 		this.switches = {
 			'1': false,

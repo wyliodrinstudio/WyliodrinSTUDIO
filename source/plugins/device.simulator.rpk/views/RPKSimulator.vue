@@ -69,10 +69,53 @@
 			<source src="plugins/device.simulator.rpk/data/audio/beep.ogg" type="audio/ogg">
 		</audio>
 
-		Light:<input placeholder="light" type="text" v-model="light">
-		Air Quality:<input placeholder="airQuality" type="text" v-model="airQuality">
-		Pressure:<input placeholder="pressure" type="text" v-model="pressure">
-		Temperature:<input placeholder="temperature" type="text" v-model="temperature">
+		<v-card-text>
+			<v-layout row>
+				<v-flex class="pr-3">
+					Light<v-slider v-model="light" :max="lightMax" :min="lightMin"></v-slider>
+				</v-flex>
+
+				<v-flex shrink style="width: 60px">
+					<v-text-field v-model="light" class="mt-0" :max="lightMax" :min="lightMin" hide-details single-line type="number"></v-text-field>
+				</v-flex>
+			</v-layout>
+		</v-card-text>
+
+		<v-card-text>
+			<v-layout row>
+				<v-flex class="pr-3">
+					Air Quality<v-slider v-model="airQuality" :max="airQualityMax" :min="airQualityMin"></v-slider>
+				</v-flex>
+
+				<v-flex shrink style="width: 60px">
+					<v-text-field v-model="airQuality" class="mt-0" :max="airQualityMax" :min="airQualityMin" hide-details single-line type="number"></v-text-field>
+				</v-flex>
+			</v-layout>
+		</v-card-text>
+
+		<v-card-text>
+			<v-layout row>
+				<v-flex class="pr-3">
+					Pressure<v-slider v-model="pressure" :max="pressureMax" :min="pressureMin"></v-slider>
+				</v-flex>
+
+				<v-flex shrink style="width: 60px">
+					<v-text-field v-model="pressure" class="mt-0" :max="pressureMax" :min="pressureMin" hide-details single-line type="number"></v-text-field>
+				</v-flex>
+			</v-layout>
+		</v-card-text>
+
+		<v-card-text>
+			<v-layout row>
+				<v-flex class="pr-3">
+					Temperature<v-slider v-model="temperature" :max="temperatureMax" :min="temperatureMin"></v-slider>
+				</v-flex>
+
+				<v-flex shrink style="width: 60px">
+					<v-text-field v-model="temperature" class="mt-0" :max="temperatureMax" :min="temperatureMin" hide-details single-line type="number"></v-text-field>
+				</v-flex>
+			</v-layout>
+		</v-card-text>
 	</div>
 </template>
 
@@ -85,10 +128,19 @@ export default {
 
 	data() {
 		return {
-			light: null,
-			airQuality: null,
-			pressure: null,
-			temperature: null
+			light: 0,
+			airQuality: 0,
+			pressure: 0,
+			temperature: 0,
+
+			lightMax: 1024,
+			lightMin: 0,
+			airQualityMax: 8192,
+			airQualityMin: 400,
+			pressureMax: 110,
+			pressureMin: 50,
+			temperatureMax: 85,
+			temperatureMin: -40,
 		}
 	},
 

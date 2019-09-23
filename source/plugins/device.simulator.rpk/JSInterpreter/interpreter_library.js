@@ -305,6 +305,10 @@ export default function interpreter_library (studio, device, generic_rpk) {
 			audio.play();
 		};
 
+		let buzzerGetState = function() {
+			return generic_rpk.buzzer;
+		};
+
 		let require = function(name) {
 			if (name === 'GUI') {
 				let GUI = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
@@ -416,6 +420,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				let buzzer = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
 				interpreter.setProperty(scope, 'buzzer', buzzer);
 				interpreter.setProperty(buzzer, 'setState', interpreter.createNativeFunction(buzzerSetState));
+				interpreter.setProperty(buzzer, 'getState', interpreter.createNativeFunction(buzzerGetState));
 
 				return buzzer;
 			}
