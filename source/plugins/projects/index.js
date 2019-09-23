@@ -1336,9 +1336,6 @@ let projects = {
 	 */
 	async loadSpecialFile(project, name) {
 		if(project !== null && name !== null) {
-			console.log(project.folder);
-			console.log(path.join(project.folder,'.project'));
-			console.log(name);
 			let projectFolder = project.folder;
 			let specialFolder = path.join(projectFolder, '.project');
 			try {

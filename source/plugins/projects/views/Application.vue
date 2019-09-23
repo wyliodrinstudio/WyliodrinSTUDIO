@@ -523,7 +523,6 @@ export default {
 			});
 		},
 		showProject(e) {
-			console.log(this.open);
 			this.fileMenu = false;
 			this.folderMenu = false;
 			this.projectMenu = false;
@@ -590,13 +589,11 @@ export default {
 			if (folderName)
 			{
 				await this.studio.projects.newFolder(this.currentProject,path.join(item.path,folderName));
-				console.log(this.open);
 				await this.refresh();
 			}
 		},
 		async newFile (item)
 		{
-			console.log(item);
 			if(item === undefined || item === null) {
 				item = this.items[0];
 			}
