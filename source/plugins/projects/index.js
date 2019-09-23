@@ -156,19 +156,27 @@ let projects = {
 	 * will be set, the *type* of the actual addon, and the additional functioning options of the feature.
 	 * 
 	 * @param {Object} language - language id
-	 * @param {string} board - addon board
-	 * @param {string} type - addon type
+	 * @param {string|string[]} types - addon type
+	 * @param {string|string[]} boards - addon board
 	 * @param {Object} options - addon options
 	 * 
 	 * @returns {boolean} - true if successful, false otherwise
 	 * 
 	 */
-	registerLanguageAddon(language, board, type, addon = {}) {
-		if (!board) board = '*';
-		if (!type) type = '*';
+	registerLanguageAddon(language, types, boards, addon = {}) {
+		if (!boards) boards = '*';
+		if (!types) types = '*';
+		if (!_.isArray (types)) types = [types];
+		if (!_.isArray (boards)) boards = [boards];
 		let lang = this.getLanguage(language);
 		if (lang !== null) {
-			lang.addons[type + ':' + board] = addon;
+			for (let type of types)
+			{
+				for (let board of boards)
+				{
+					lang.addons[type + ':' + board] = addon;
+				}
+			}
 			return true;
 		} else {
 			studio.workspace.warn('PROJECT_ERROR_LANGUAGE_ADDON', {language: language});
