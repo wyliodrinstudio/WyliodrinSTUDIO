@@ -33,7 +33,6 @@ export function setup (options, imports, register)
 		{
 			return 'plugins/device.wyapp.picopi/data/img/icon-picopi.png';
 		},
-
 		/**
 		 * Found a device, modify stuff (like icon)
 		 * @param {Device} device 
@@ -42,6 +41,8 @@ export function setup (options, imports, register)
 		{
 			device.icon = this.iconURL ();
 			if (!device.description) device.description = 'Pico-Pi';
+			device.defaultUsername = 'ubuntu';
+			device.defaultPassword = 'ubuntu';
 		},
 
 		/**
@@ -52,6 +53,8 @@ export function setup (options, imports, register)
 		{
 			device.icon = this.iconURL ();
 			if (!device.description) device.description = 'Pico-Pi';
+			device.defaultUsername = 'ubuntu';
+			device.defaultPassword = 'ubuntu';
 		},
 
 		/**

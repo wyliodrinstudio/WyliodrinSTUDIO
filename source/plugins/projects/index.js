@@ -1302,6 +1302,7 @@ let projects = {
 			let specialFile = path.join(specialFolder, (name));
 			try {
 				await studio.filesystem.writeFile(specialFile, content);
+				return specialFile;
 			} catch (e) {
 				studio.workspace.showError('PROJECT_ERROR_SAVE_SPECIAL_FILE', {file: specialFile, data:content, error: e.message});
 				return false;
