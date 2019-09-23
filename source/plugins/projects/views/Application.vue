@@ -14,12 +14,6 @@
 				</div>
 				
 				<div :class="projectTree" class="project-tree-on" v-if="advanced">
-					<v-card-actions class="justify-center">
-						<v-icon @click="newFile(menuItem)">mdi-file-plus</v-icon>
-						<v-icon @click="newFolder(menuItem)">mdi-folder-plus</v-icon>
-						<v-icon @click="dirTree()">mdi-refresh</v-icon>
-					</v-card-actions>
-
 					<v-treeview
 					v-model="tree"
 					:open="open"
@@ -30,7 +24,6 @@
 					active-class=""
 					color="rgba(0,0,0,0.87)"
 					return-object
-					:active.sync="item"
 					:open-on-click="true"
 					dense
 					>
@@ -195,7 +188,11 @@
 					</template>
 					
 					</v-treeview>
-						
+					<v-card-actions class="justify-center">
+						<v-icon @click="newFile(menuItem)">mdi-file-plus</v-icon>
+						<v-icon @click="newFolder(menuItem)">mdi-folder-plus</v-icon>
+						<v-icon @click="dirTree()">mdi-refresh</v-icon>
+					</v-card-actions>		
 				</div> 
 			</div>
 			<!--  -->
@@ -251,7 +248,7 @@ export default {
 
 			showTree: this.advanced,
 
-			open: ['public'],
+			open: [],
 			tree: [],
 			items:[],
 			item:null,
@@ -592,13 +589,11 @@ export default {
 			if (folderName)
 			{
 				await this.studio.projects.newFolder(this.currentProject,path.join(item.path,folderName));
-				console.log(this.open);
 				await this.refresh();
 			}
 		},
 		async newFile (item)
 		{
-			console.log(item);
 			if(item === undefined || item === null) {
 				item = this.items[0];
 			}
