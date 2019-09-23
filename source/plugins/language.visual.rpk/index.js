@@ -11,7 +11,7 @@ export function setup (options, imports, register)
 {
 	studio = imports;
 
-	studio.projects.registerLanguageAddon ('visual', 'rpk', 'rpk', {
+	studio.projects.registerLanguageAddon ('visual', ['rpk', 'rpk_simulator'], 'rpk', {
 		getDefaultRunFileName ()
 		{
 			return '/main.visual.js';
@@ -24,20 +24,13 @@ export function setup (options, imports, register)
 		},
 		icon:'plugins/language.visual.rpk/data/img/testIcon.png',
 		pictograms:[
-			{
-				extension:'.rpk',
-				icon:'plugins/language.visual.rpk/data/img/test1.png'
-			},
-			{
-				filename:/rpk.*/,
-				icon:'plugins/language.visual.rpk/data/img/test2.png',
-			}
+			
 		]
 	});
 
 
 	let toolbox = xml.xml2js (toolboxStr);
-	studio.editor_visual.registerBlocksDefinitions ('rpk', blocks, code, toolbox, {type: 'rpk', board: 'rpk'});
+	studio.editor_visual.registerBlocksDefinitions ('rpk', blocks, code, toolbox, {type: ['rpk', 'rpk_simulator'], board: 'rpk'});
 
 	register (null, {});
 }

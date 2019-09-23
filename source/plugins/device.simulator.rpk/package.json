@@ -1,0 +1,12 @@
+{
+    "name": "device.simulator.rpk",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace","console","projects"],
+		"provides": ["device_simulator_rpk"],
+        "disabled": false,
+        "target": ["electron", "browser"]
+    }
+}

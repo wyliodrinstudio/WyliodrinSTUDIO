@@ -40,6 +40,7 @@
         "description": "The name of the pseudo device that allows the user the connect to any IP address"
     },
     "DEVICE_WYAPP_CHANGE_CREDENTIALS": {
-        "message": "You tried to login using the default credentials for this device. Please cha"
+        "message": "You are trying to login using the default credentials for this device. We recommend you to change the default password using the passwd command in the Shell.",
+        "description": "Warning message when the user tries to login to a board with the default credentials."
     }
 }
