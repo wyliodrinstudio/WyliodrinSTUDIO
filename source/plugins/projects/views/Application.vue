@@ -14,9 +14,12 @@
 				</div>
 				
 				<div :class="projectTree" class="project-tree-on" v-if="advanced">
-					<v-icon @click="newFile(menuItem)">mdi-file-plus</v-icon>
-					<v-icon @click="newFolder(menuItem)">mdi-folder-plus</v-icon>
-					<v-icon @click="dirTree()">mdi-refresh</v-icon>
+					<v-card-actions class="justify-center">
+						<v-icon @click="newFile(menuItem)">mdi-file-plus</v-icon>
+						<v-icon @click="newFolder(menuItem)">mdi-folder-plus</v-icon>
+						<v-icon @click="dirTree()">mdi-refresh</v-icon>
+					</v-card-actions>
+
 					<v-treeview
 					v-model="tree"
 					:open="open"
