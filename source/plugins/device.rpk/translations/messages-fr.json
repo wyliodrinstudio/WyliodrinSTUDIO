@@ -52,7 +52,7 @@
         "description": "Notification text while the binary is written on the RPK."
     },
     "DEVICE_RPK_TOO_LONG_SOURCE_CODE": {
-        "message": "Le nombre de caractères du code source doit être inférieur à X.",
+        "message": "Le nombre de caractères du code source doit être inférieur à 30000.",
         "description": "Error shown when source code is bigger than the RPK supports."
     },
     "DEVICE_RPK_FLASH_DONE": {

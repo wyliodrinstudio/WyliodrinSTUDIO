@@ -185,9 +185,9 @@ export function setup(options, imports, register) {
 
 						let data = await readBinary();
 						jsSource += '\0';
-						if (jsSource.length < 10000)
+						if (jsSource.length < 30000)
 						{
-							data.write(jsSource, 391770 + 4);
+							data.write(jsSource, 397342);
 							studio.workspace.showNotification('DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT');
 							await writeBinary(device, data);
 						}
