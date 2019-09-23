@@ -9,7 +9,7 @@ import fs from 'fs-extra';
 
 //import DeviceSetup from './views/DeviceSetup.vue';
 
-import RPKDeviceSetup from './views/DeviceSetup.vue';
+import RPKDeviceSetup from './views/RPKDeviceSetup.vue';
 
 import { EventEmitter } from 'events';
 
@@ -123,13 +123,11 @@ export function setup(options, imports, register) {
 		async connect(device/*, options*/) {
 			console.log('check object');
 			if (_.isObject(device)) {
-				if (device.id === 'rpk:newdevice')
-				{
-					studio.workspace.showDialog (RPKDeviceSetup);
+				if (device.id === 'rpk:newdevice') {
+					studio.workspace.showDialog(RPKDeviceSetup);
 					return null;
 				}
-				else
-				{
+				else {
 					console.log('check connection');
 					if (!connections[device.id]) {
 						console.log('check type');
@@ -204,14 +202,12 @@ export function setup(options, imports, register) {
 
 						let data = await readBinary();
 						jsSource += '\0';
-						if (jsSource.length < 30000)
-						{
-							data.write(jsSource, 397342);
+						if (jsSource.length < 30000) {
+							data.write(jsSource, 397494);
 							studio.workspace.showNotification('DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT');
 							await writeBinary(device, data);
 						}
-						else
-						{
+						else {
 							studio.workspace.showNotification('DEVICE_RPK_TOO_LONG_SOURCE_CODE');
 						}
 					}
@@ -227,17 +223,17 @@ export function setup(options, imports, register) {
 				}
 			}
 		}, 'plugins/device.wyapp/data/img/icons/run-icon.svg',
-			{
-				visible() {
-					let device = studio.workspace.getDevice();
-					return (device.status === 'CONNECTED' && device.connection === 'usb');
-				},
-				enabled() {
-					let device = studio.workspace.getDevice();
-					return (device.status === 'CONNECTED' && device.connection === 'usb' && !device.sending);
-				},
-				type: 'run'
-			});
+		{
+			visible() {
+				let device = studio.workspace.getDevice();
+				return (device.status === 'CONNECTED' && device.connection === 'usb');
+			},
+			enabled() {
+				let device = studio.workspace.getDevice();
+				return (device.status === 'CONNECTED' && device.connection === 'usb' && !device.sending);
+			},
+			type: 'run'
+		});
 	}
 	else {
 		studio.workspace.error('Failed to register device driver rpk');
@@ -253,7 +249,7 @@ async function readBinary() {
 		let data = await fs.readFile(path.join(__dirname, 'data', 'binaries', 'jerryscript.bin'));
 		return data;
 	} catch (err) {
-		console.error(err)
+		console.error(err);
 	}
 }
 
@@ -261,6 +257,6 @@ async function writeBinary(device, data) {
 	try {
 		await fs.writeFile(path.join(device.address, 'jerryscript.bin'), data);
 	} catch (err) {
-		console.error(err)
+		console.error(err);
 	}
 }

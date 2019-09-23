@@ -19,6 +19,10 @@
         "message": "Package Manager",
         "description": "The button for the package manager "
     },
+    "DEVICE_RPK_FLASH": {
+        "message": "Flash",
+        "description": "The flash button for an application"
+    },
     "DEVICE_RPK_NETWORK_MANAGER": {
         "message": "Network Manager",
         "description": "The button for the network manager "
@@ -62,5 +66,9 @@
     "RPK_NEW_DEVICE_TITLE": {
         "message": "New RPK Device",
         "description": "How to add new RPK device."
+    },
+    "RPK_NEW_DEVICE_INSTRUCTIONS": {
+        "message": "Connect the RPK device to a USB port, press Switch 3 and reboot the device using the pin",
+        "description": "How to add new RPK device description."
     }
 }
