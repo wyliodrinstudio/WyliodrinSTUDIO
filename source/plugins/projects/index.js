@@ -286,7 +286,6 @@ let projects = {
 		// name = name.replace(/\.\./g, '_').replace(/\\|\//g, '_');
 		let projectFolder = path.join(workspacePath, name);
 		projectFolder = this._isPathValid(workspacePath,projectFolder);
-		console.log(projectFolder);
 		if(projectFolder !== null && language !== null && name !== null){
 			try {
 				if (!await studio.filesystem.pathExists(projectFolder)) {
@@ -466,7 +465,6 @@ let projects = {
 	async importProject(fileName, data, type) 
 	{
 		if(type === 'wylioapp'){
-			console.log('wylioapp');
 			//TODO
 			let projectImport = JSON.parse(data.toString());
 			let projectFolder = path.join(workspacePath, projectImport.title);
@@ -493,18 +491,14 @@ let projects = {
 			try{
 				if(await studio.filesystem.isDirectory(pathing)){
 					zip.loadAsync(data).then(function(contents) {
-						console.log(contents);
 						Object.keys(contents.files).forEach(async function(key) {
-							console.log(key);
 							if (contents.files[key].dir){
 								var dest = path.join(pathing,key);
 								await studio.filesystem.mkdirp(dest);
-								console.log('mk');
 							} else {
 								zip.file(key).async('nodebuffer').then(async function(content) {
 									var dest = path.join(pathing,key);
 									await studio.filesystem.writeFile(dest, content);
-									console.log('wf');
 								});
 							}
 						});
@@ -548,7 +542,6 @@ let projects = {
 				let curentFolder = path.join(necesarry.folder, necesarry.item.name);
 				curentFolder = this._isPathValid(necesarry.folder, curentFolder);
 				if (curentFolder !== null) {
-					console.log(curentFolder);
 					await studio.filesystem.mkdirp(curentFolder);
 					for (let child of necesarry.item.children) {
 						return await this.recursiveCreating({
@@ -628,7 +621,6 @@ let projects = {
 					file = path.resolve(dir, file);
 					if (await studio.filesystem.isDirectory(file)) {
 						let x = path.relative(root, file);
-						console.log(x);
 						if(path.sep == '\\'){
 							x = x.replace(/\\/g, '/');
 						}
@@ -638,7 +630,6 @@ let projects = {
 						const filedata = await studio.filesystem.readFile(file);
 						if(filedata) {
 							let x = path.relative(root, file);
-							console.log(x);
 							if(path.sep == '\\'){
 								x = x.replace(/\\/g, '/');
 							}
@@ -836,7 +827,6 @@ let projects = {
 	async exportFile(project, filePath) {
 		try {
 			filePath = path.join(project.folder,filePath);
-			console.log(path.basename(filePath));
 			let content = await studio.filesystem.readFile(filePath);
 			let savePath = await studio.filesystem.openExportDialog(content, {
 				filename: path.basename(filePath),
@@ -1123,12 +1113,10 @@ let projects = {
 						// let content = await studio.filesystem.readdir(projectFolder);
 						// let pathing = '';
 						// let editors = studio.workspace.getFromStore('projects', 'editors');
-						console.log('dispatched');
 						let mainFile = await this.getDefaultFileName(project);
 						let file = path.join(project.folder, mainFile);
 						if (await studio.filesystem.pathExists(file)) {
 							await this.changeFile(project,mainFile);
-							console.log('dispatched main file');
 						} else {
 							await this.changeFile(project,null);
 						}
@@ -1161,8 +1149,6 @@ let projects = {
 		if (project !== {} && project !== null) { 
 			if(await this.selectCurrentProject(project, false)) {
 				if (file !== {} && file !== null) {
-					console.log('changed file');
-					console.log(file);
 					await this.changeFile(project,file);
 				}
 			}
@@ -1258,7 +1244,6 @@ let projects = {
 	 * 
 	 */
 	async changeFile(project, name) {
-		console.log(await this._isPathValid(project.folder,name));
 		let aux = await this._isPathValid(project.folder,name);
 
 		if(name !== null && await studio.filesystem.pathExists(aux)) {

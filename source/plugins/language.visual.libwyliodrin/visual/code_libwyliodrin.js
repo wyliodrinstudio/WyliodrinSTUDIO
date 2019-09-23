@@ -276,7 +276,6 @@ module.exports = function (blockly) {
 	Blockly.Python['print'] = function (block) {
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		console.log()
 		var code = 'print (' + value_value + ')\n';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return code;
@@ -800,7 +799,6 @@ module.exports = function (blockly) {
 		Blockly.Python.rapiro();
 		var motor = block.getFieldValue('motor');
 		var angle = Blockly.Python.valueToCode(block, 'degrees', Blockly.Python.ORDER_ATOMIC);
-		console.log('angle: ' + angle);
 		var time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC) * 10;
 		if (time < 0) time = 0;
 		if (time > 255) time = 255;

@@ -53,8 +53,6 @@ class WebSocketWyAppTransport extends EventEmitter
 		let exists = false;
 		for (let device of websocketDevices)
 		{
-			console.log (device);
-			console.log (this.device);
 			if (device.id === this.device.id) exists = true;
 		}
 		if (!exists) this.disconnect ();
@@ -151,7 +149,6 @@ export function setup (options, imports, register)
 				if (data.e === 'unique')
 				{
 					let reset = await workspace.showConfirmationPrompt ('DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE', 'DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET');
-					console.log (reset);
 					if (reset)
 					{
 						socket.send (JSON.stringify ({t: 'a', token: token, reset: true}));
@@ -184,11 +181,11 @@ export function setup (options, imports, register)
 		}
 	};
 
-	socket.onerror = function (err)
+	socket.onerror = function ()
 	{
 		if (!errorAlreadyShown)
 		{
-			workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR', {error: err.message});
+			workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR');
 			errorAlreadyShown = true;
 		}
 	};

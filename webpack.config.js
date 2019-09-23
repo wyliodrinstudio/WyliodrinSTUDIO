@@ -1,50 +1,47 @@
-const path = require ('path');
+const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const nodeExternals = require('webpack-node-externals');
 const CopyPlugin = require('copy-webpack-plugin');
-const TranslationPlugin = require ('./webpack.translation.js');
-const webpack = require ('webpack');
-const plugins = require ('./webpack.plugins.js');
+const TranslationPlugin = require('./webpack.translation.js');
+const webpack = require('webpack');
+const plugins = require('./webpack.plugins.js');
 const license = './LICENSE';
 
-const package_json = require ('./package.json');
+const package_json = require('./package.json');
 
-const fs = require ('fs-extra');
-const _ = require ('lodash');
+const fs = require('fs-extra');
+const _ = require('lodash');
 
-let electronPlugins = plugins.loadPlugins ('electron');
+let electronPlugins = plugins.loadPlugins('electron');
 let items = [];
 
-for (let plugin of electronPlugins)
-{
-	items.push ({ from: 'plugins/'+plugin.name+'/package*.json', context: 'source' }, { from: 'plugins/'+plugin.name+'/data/**', context: 'source' });
+for (let plugin of electronPlugins) {
+	items.push({ from: 'plugins/' + plugin.name + '/package*.json', context: 'source' }, { from: 'plugins/' + plugin.name + '/data/**', context: 'source' });
 }
 
 class StudioPluginsElectron {
 	apply(compiler) {
 		compiler.hooks.environment.tap('Studio Plugins Electron', () => {
-			if (compiler.options.target === 'electron-renderer')
-			{
+			if (compiler.options.target === 'electron-renderer') {
 				console.log('Loading studio plugins for electron');
-				
+
 				compiler.options.entry = {};
 
-				for(let plugin of electronPlugins)
-				{
-					compiler.options.entry[plugin.name] = './source/plugins/'+plugin.name+'/'+plugin.main;
+				for (let plugin of electronPlugins) {
+					compiler.options.entry[plugin.name] = './source/plugins/' + plugin.name + '/' + plugin.main;
 				}
 			}
-			let build_package_json = _.assign ({}, package_json);
+			let build_package_json = _.assign({}, package_json);
 			delete build_package_json.build;
 			delete build_package_json.scripts;
 			delete build_package_json.devDependencies;
-			fs.mkdirpSync ('./build');
-			fs.writeFileSync ('./build/package.json', JSON.stringify (build_package_json, null, 4));
+			fs.mkdirpSync('./build');
+			fs.writeFileSync('./build/package.json', JSON.stringify(build_package_json, null, 4));
 
-			let build_license = _.assign ({}, license);
-			fs.writeFileSync ('./build/LICENSE', build_license);
+			let build_license = _.assign({}, license);
+			fs.writeFileSync('./build/LICENSE', build_license);
 		});
-	
+
 	}
 }
 
@@ -137,7 +134,7 @@ module.exports = {
 			//{ from: 'iconfont/**', context: 'node_modules/material-design-icons/' },
 			{ from: 'fonts/**', context: 'node_modules/@mdi/font/' },
 			{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
-		], {logLevel: ''}),
+		], { logLevel: '' }),
 		// new DtsBundleWebpack({
 		// 	name: 'plugins',
 		// 	main: 'source/plugins/**/*.d.ts',
@@ -152,8 +149,8 @@ module.exports = {
 		// 		return false;
 		// 	},
 		// })
-		new TranslationPlugin ({}),
-		new StudioPluginsElectron (),
+		new TranslationPlugin({}),
+		new StudioPluginsElectron(),
 		new webpack.DefinePlugin({
 			TARGET: 'electron'
 		})

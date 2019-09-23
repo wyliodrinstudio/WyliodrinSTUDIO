@@ -45,7 +45,6 @@ xterm.Terminal.prototype.proposeGeometry = function () {
     if (!this.element.parentElement) {
         return null;
 	}
-	console.log (this.element.parentElement);
     var parentElementStyle = window.getComputedStyle(this.element.parentElement);
     var parentElementHeight = parseInt(parentElementStyle.getPropertyValue('height'));
     var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')));
@@ -181,7 +180,6 @@ export default {
 		{
 			if (this.active && this.shouldResize)
 			{
-				console.log ('resize');
 				this.shouldResize = false;
 				if (this.shell)
 				{
@@ -211,15 +209,12 @@ export default {
 		},
 		active ()
 		{
-			console.log ('active');
-			console.log (this.active);
 			setTimeout (() => this.update(), 10);
 		}
 	},
 	
 	destroyed ()
 	{
-		console.log ('exit');
 		$(window).off('resize', this.resize);
 		this.exit ();
 	}

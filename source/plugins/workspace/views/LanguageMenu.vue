@@ -31,7 +31,6 @@ import $ from 'jquery';
 export default {
 	name: 'LanguageMenu',
 	data () {
-		console.log (Vue.translation);
 		return {
 			LANGUAGES: Vue.translation.LANGUAGES
 		};

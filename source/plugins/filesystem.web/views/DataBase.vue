@@ -81,7 +81,6 @@ export default {
 				let file = await db.files.get({name: paths[paths.length - 1]});
 				if (file)
 				{
-					console.log(file.type);
 					return file.type == 1;
 				}
 			}
@@ -96,7 +95,6 @@ export default {
 				let file = await db.files.get({name: paths[paths.length - 1]});
 				if (file)
 				{
-					console.log(file.type);
 					return file.type == 0;
 				}
 			}
@@ -163,15 +161,12 @@ export default {
 				let current = paths[i];
 				let obj = await db.files.get({name: current});
 				if (!obj) {
-					console.log("pa");
 					return false;
 				} else if (obj && obj.parent != lastId) {
-					console.log("pa");
 					return false;
 				}
 				lastId = obj.id;
 			}
-			console.log("nu pa");
 			return true;
 		},
 		// path
@@ -181,7 +176,6 @@ export default {
 				let paths = this.readFileVar.split('/');
 				let parentId = this.getLastParentId(paths, 0);
 				let file = await db.files.get({name: paths[paths.length - 1]});
-				console.log(file);
 				if (!file)
 					throw new Error("File not found");
 

@@ -24,9 +24,6 @@ export default {
 			immediate: true,
 			async handler()
 			{
-				console.log('file');
-				console.log(this.filename);
-				console.log('project');
 				let filePath = path.join(this.project.folder, this.filename);
 				let extension = this.filename.substring(this.filename.lastIndexOf('.')).substring(1);
 

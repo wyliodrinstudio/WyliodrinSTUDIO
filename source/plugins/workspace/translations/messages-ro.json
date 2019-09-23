@@ -138,5 +138,13 @@
     "WORKSPACE_DOCUMENTATION": {
         "message": "Documentație",
         "description": "Open a new window with the documentation of Wyliodrin STUDIO"
+    },
+    "OK": {
+        "message": "OK",
+        "description": "Any button that has the OK text"
+    },
+    "BACK": {
+        "message": "Înapoi",
+        "description": "Any button that has the BACK text"
     }
 }

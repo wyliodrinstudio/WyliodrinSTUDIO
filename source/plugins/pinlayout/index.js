@@ -79,12 +79,7 @@ export default function setup (options, imports, register)
 				else
 					return image;
 			}
-			else
-			{
-				console.log('default');
-			}			
-
-			// return null;
+			return image;
 		}
 	};
 	
