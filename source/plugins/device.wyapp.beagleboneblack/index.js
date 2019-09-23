@@ -28,7 +28,6 @@ export function setup (options, imports, register)
 		{
 			return 'plugins/device.wyapp.beagleboneblack/data/img/icon-beagleboneblack.png';
 		},
-
 		/**
 		 * Found a device, modify stuff (like icon)
 		 * @param {Device} device 
@@ -37,17 +36,21 @@ export function setup (options, imports, register)
 		{
 			device.icon = this.iconURL ();
 			if (!device.description) device.description = 'BeagleBone Black';
+			device.defaultUsername = 'debian';
+			device.defaultPassword = 'temppwd';
 		},
 
 		/**
 		 * Update a device, modify stuff
 		 * @param {Device} device 
 		 */
-		// update (device)
-		// {
-			
-		// },
-
+		update (device)
+		{
+			device.icon = this.iconURL ();
+			if (!device.description) device.description = 'BeagleBone Black';
+			device.defaultUsername = 'debian';
+			device.defaultPassword = 'temppwd';
+		},
 		/**
 		 * Modidify the project before run
 		 * @param {Project} project - the project

@@ -3,55 +3,55 @@ import generic_rpk from './generic_rpk.js';
 
 let touches = {
 	'generateTouches': function() {
-		$('#UP').on ('mousedown', () => {
+		$('#up_touch').on ('mousedown', () => {
 			console.log('up');
 			generic_rpk.touchesDictionary['1'] = true;
 		});
 
-		$('#UP').on ('mouseup', () => {
+		$('#up_touch').on ('mouseup', () => {
 			generic_rpk.touchesDictionary['1'] = false;
 		});
 
-		$('#UP').on ('mouseout', () => {
+		$('#up_touch').on ('mouseout', () => {
 			generic_rpk.touchesDictionary['1'] = false;
 		});
 
-		$('#DOWN').on ('mousedown', () => {
+		$('#down_touch').on ('mousedown', () => {
 			console.log('down');
 			generic_rpk.touchesDictionary['2'] = true;
 		});
 
-		$('#DOWN').on ('mouseup', () => {
+		$('#down_touch').on ('mouseup', () => {
 			generic_rpk.touchesDictionary['2'] = false;
 		});
 
-		$('#DOWN').on ('mouseout', () => {
+		$('#down_touch').on ('mouseout', () => {
 			generic_rpk.touchesDictionary['2'] = false;
 		});
 
-		$('#LEFT').on ('mousedown', () => {
+		$('#left_touch').on ('mousedown', () => {
 			console.log('left');
 			generic_rpk.touchesDictionary['3'] = true;
 		});
 
-		$('#LEFT').on ('mouseup', () => {
+		$('#left_touch').on ('mouseup', () => {
 			generic_rpk.touchesDictionary['3'] = false;
 		});
 
-		$('#LEFT').on ('mouseout', () => {
+		$('#left_touch').on ('mouseout', () => {
 			generic_rpk.touchesDictionary['3'] = false;
 		});
 
-		$('#RIGHT').on ('mousedown', () => {
+		$('#right_touch').on ('mousedown', () => {
 			console.log('right');
 			generic_rpk.touchesDictionary['4'] = true;
 		});
 
-		$('#RIGHT').on ('mouseup', () => {
+		$('#right_touch').on ('mouseup', () => {
 			generic_rpk.touchesDictionary['4'] = false;
 		});
 
-		$('#RIGHT').on ('mouseout', () => {
+		$('#right_touch').on ('mouseout', () => {
 			generic_rpk.touchesDictionary['4'] = false;
 		});
 	}

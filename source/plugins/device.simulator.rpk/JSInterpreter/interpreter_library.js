@@ -1,10 +1,15 @@
 import $ from 'jquery';
+import _ from 'lodash';
 
 export default function interpreter_library (studio, device, generic_rpk) {
 	return function simulator (interpreter, scope) {
 		let log = function (text) {
 			try {
-				studio.console.write(device.id, text.toString() + '\r\n');
+				if (_.isObject(text)) {
+					text = JSON.stringify (text);
+				}
+
+				studio.console.write(device.id, text + '\r\n');
 			} catch(e) {
 				console.log(e);
 			}
@@ -201,7 +206,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 		let rgbSetBrightness = function(brightness) {
 			try {
 				generic_rpk.rgbBrightness = brightness;
-				$('#BRIGHTNESS').attr('fill', 'rgba(0, 0, 0,  ' + generic_rpk.rgbBrightnessDictionary[generic_rpk.rgbBrightness]);
+				$('#led_brightness').attr('fill', 'rgba(0, 0, 0,  ' + generic_rpk.rgbBrightnessDictionary[generic_rpk.rgbBrightness]);
 			} catch(e) {
 				console.log(e);
 			}
@@ -210,12 +215,12 @@ export default function interpreter_library (studio, device, generic_rpk) {
 		let rgbSetColor = function(color) {
 			try {
 				generic_rpk.rgbColor = color;
-				if (color === 'WHITE') {
-					$('#LED').attr('fill', 'white');
-				} else if (color  ===  'BLACK') {
-					$('#LED').attr('fill', 'black');
+				if (color === 3) {
+					$('#led_color').attr('fill', 'white');
+				} else if (color  ===  7) {
+					$('#led_color').attr('fill', 'black');
 				} else {
-					$('#LED').attr('fill', 'hsl('+ generic_rpk.rgbColorDictionary[generic_rpk.rgbColor] + ', 50%, 50%)');
+					$('#led_color').attr('fill', 'hsl('+ generic_rpk.rgbColorDictionary[generic_rpk.rgbColor] + ', 50%, 50%)');
 				}
 			} catch(e) {
 				console.log(e);
@@ -284,25 +289,30 @@ export default function interpreter_library (studio, device, generic_rpk) {
 		};
 		
 		let motionGetValue = function() {
-			return 'MOVES LIKE JAGGER';
+			return generic_rpk.motion;
 		};
 
 		let freefallGetValue = function() {
-			return 'DOWN DOWN DOWN DOWN';
+			return generic_rpk.freefall;
 		};
 
 		let gyroscopeGetValue = function() {
-			return 'ROUND AND ROUND AND ROUND';
+			return generic_rpk.gyroscope;
 		};
 
 		let accelometerGetValue = function() {
-			return 'I AM SPEED';
+			return generic_rpk.accelometer;
 		};
 
 		let buzzerSetState = function(state) {
+			generic_rpk.buzzer = state;
 			let audio = document.getElementById('beep');
 			audio.loop = generic_rpk.buzzerDictionary[state];
 			audio.play();
+		};
+
+		let buzzerGetState = function() {
+			return generic_rpk.buzzer;
 		};
 
 		let require = function(name) {
@@ -327,6 +337,11 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				interpreter.setProperty(GUI, 'setColor', interpreter.createNativeFunction(guiSetColor));
 				interpreter.setProperty(GUI, 'setBacklight', interpreter.createNativeFunction(guiSetBacklight));
 
+				interpreter.setProperty(GUI, 'OFF', 0);
+				interpreter.setProperty(GUI, 'LOW', 1);
+				interpreter.setProperty(GUI, 'MEDIUM', 2);
+				interpreter.setProperty(GUI, 'HIGH', 3);
+
 				return GUI;
 			} else if (name === 'RGB') {
 				let RGB = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
@@ -337,11 +352,26 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				interpreter.setProperty(RGB, 'getBrightness', interpreter.createNativeFunction(rgbGetBrightness));
 				interpreter.setProperty(RGB, 'getColor', interpreter.createNativeFunction(rgbGetColor));
 
+				interpreter.setProperty(RGB, 'OFF', 0);
+				interpreter.setProperty(RGB, 'LOW', 1);
+				interpreter.setProperty(RGB, 'MEDIUM', 2);
+				interpreter.setProperty(RGB, 'HIGH', 3);
+
+				interpreter.setProperty(RGB, 'RED', 0);
+				interpreter.setProperty(RGB, 'GREEN', 1);
+				interpreter.setProperty(RGB, 'BLUE', 2);
+				interpreter.setProperty(RGB, 'WHITE', 3);
+				interpreter.setProperty(RGB, 'YELLOW', 4);
+				interpreter.setProperty(RGB, 'CYAN', 5);
+				interpreter.setProperty(RGB, 'PURPLE', 6);
+				interpreter.setProperty(RGB, 'BLACK', 7);
+
 				return RGB;
 			} else if (name === 'switches') {
 				let switches = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
 				interpreter.setProperty(scope, 'switches', switches);
 				interpreter.setProperty(switches, 'getValue', interpreter.createNativeFunction(switchesGetValue));
+
 				interpreter.setProperty(switches, 'SW1', 1);
 				interpreter.setProperty(switches, 'SW2', 2);
 				interpreter.setProperty(switches, 'SW3', 3);
@@ -352,6 +382,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				let touch = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
 				interpreter.setProperty(scope, 'touch', touch);
 				interpreter.setProperty(switches, 'getValue', interpreter.createNativeFunction(touchGetValue));
+
 				interpreter.setProperty(switches, 'UP', 1);
 				interpreter.setProperty(switches, 'DOWN', 2);
 				interpreter.setProperty(switches, 'LEFT', 3);
@@ -416,6 +447,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				let buzzer = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
 				interpreter.setProperty(scope, 'buzzer', buzzer);
 				interpreter.setProperty(buzzer, 'setState', interpreter.createNativeFunction(buzzerSetState));
+				interpreter.setProperty(buzzer, 'getState', interpreter.createNativeFunction(buzzerGetState));
 
 				return buzzer;
 			}

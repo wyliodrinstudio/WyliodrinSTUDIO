@@ -123,15 +123,6 @@ let projects = {
 	 * registerLanguage('python', 'Python', 'plugins/language.python/data/img/python.png', python);
 	 */
 	registerLanguage(id, title, icon, pictograms, options) {
-		/**
-		 * Options = {
-		 * 		mode
-		 * 		snippets
-		 * 		board
-		 * 		callbackfunctions
-		 * 		vezi exemplu in index device.wyapp si index device.wyapp.raspberrypi
-		 * }
-		 */
 		if(!pictograms) pictograms = [];
 		if (!options) options = {};
 		if(id !== null && title !== null && icon !== null)
@@ -156,19 +147,27 @@ let projects = {
 	 * will be set, the *type* of the actual addon, and the additional functioning options of the feature.
 	 * 
 	 * @param {Object} language - language id
-	 * @param {string} board - addon board
-	 * @param {string} type - addon type
+	 * @param {string|string[]} types - addon type
+	 * @param {string|string[]} boards - addon board
 	 * @param {Object} options - addon options
 	 * 
 	 * @returns {boolean} - true if successful, false otherwise
 	 * 
 	 */
-	registerLanguageAddon(language, board, type, addon = {}) {
-		if (!board) board = '*';
-		if (!type) type = '*';
+	registerLanguageAddon(language, types, boards, addon = {}) {
+		if (!boards) boards = '*';
+		if (!types) types = '*';
+		if (!_.isArray (types)) types = [types];
+		if (!_.isArray (boards)) boards = [boards];
 		let lang = this.getLanguage(language);
 		if (lang !== null) {
-			lang.addons[type + ':' + board] = addon;
+			for (let type of types)
+			{
+				for (let board of boards)
+				{
+					lang.addons[type + ':' + board] = addon;
+				}
+			}
 			return true;
 		} else {
 			studio.workspace.warn('PROJECT_ERROR_LANGUAGE_ADDON', {language: language});
@@ -252,6 +251,11 @@ let projects = {
 		}
 	},
 
+	/**
+	 * Change the date of access of a project
+	 * 
+	 * @param {Project} project 
+	 */
 	async _changeDate(project){
 		let projectFolder = project.folder;
 		try {
@@ -283,7 +287,6 @@ let projects = {
 	 * project = createEmptyProject('MyProject', 'py')
 	 */
 	async createEmptyProject(name, language) {
-		// name = name.replace(/\.\./g, '_').replace(/\\|\//g, '_');
 		let projectFolder = path.join(workspacePath, name);
 		projectFolder = this._isPathValid(workspacePath,projectFolder);
 		if(projectFolder !== null && language !== null && name !== null){
@@ -336,7 +339,6 @@ let projects = {
 	async deleteProject(project) {
 		if(project !== null) {
 			let projectFolder = project.folder;
-			// TODO if this is the current project, close it
 			try {
 				if (await studio.filesystem.pathExists(projectFolder)) {
 					await studio.filesystem.remove(projectFolder);
@@ -373,29 +375,34 @@ let projects = {
 		// ERROR - project trebuie verificat la null si dat warning in consola (asta un e tradus)
 		// newName trebuie verificat sa aiba minim un caracter dupa trim()
 		// asta e eroare pentru user
-		if(project !== null && newName !== null){
-			let projectFolder = project.folder;
-			let newProjectFolder = path.join(workspacePath, newName);
+		if(project !== null) {
+			if(newName !== null) {
+				if(newName.trim().length() >= 1) {
+					let projectFolder = project.folder;
+					let newProjectFolder = path.join(workspacePath, newName);
 
-			newProjectFolder = this._isPathValid(workspacePath, newProjectFolder);
-			// TODO if this is the current project, close it, timeout, rename and open again
-			if (newProjectFolder !== null) {
-				try {
-					if (await studio.filesystem.pathExists(projectFolder)) {
-						await studio.filesystem.rename(projectFolder, newProjectFolder);
-						await this.loadProjects(false);
-						return true;
+					newProjectFolder = this._isPathValid(workspacePath, newProjectFolder);
+					// TODO if this is the current project, close it, timeout, rename and open again
+					if (newProjectFolder !== null && path.basename(newProjectFolder) !== '') {
+						try {
+							if (await studio.filesystem.pathExists(projectFolder)) {
+								await studio.filesystem.rename(projectFolder, newProjectFolder);
+								await this.loadProjects(false);
+								return true;
+							}
+						} catch (e) {
+							studio.workspace.showError('PROJECT_ERROR_RENAME_PROJECT', {project: projectFolder, error: e.message});
+						}
+					} else {
+						studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
 					}
-				} catch (e) {
-					studio.workspace.showError('PROJECT_ERROR_RENAME_PROJECT', {project: projectFolder, error: e.message});
+					return false;
 				}
-			} else {
-				studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
 			}
-			return false;
+			
 		} else {
 			// ERROR projectFolder nu exisat aici, project e null - eslint si da eroare aici
-			studio.workspace.warn('PROJECT_ERROR_RENAME_PROJECT', {project: projectFolder, error:'NULL'});
+			studio.workspace.warn('PROJECT_ERROR_RENAME_PROJECT', {project: project.projectFolder, error:'NULL'});
 			return false;
 		}
 		
@@ -420,28 +427,31 @@ let projects = {
 		}
 		// ERROR verificat project separat de newName
 		// newName.trim() trebuie sa aiba minim un caracter
-		if(project !== null && newName !== null)
-		{
-			let newProjectFolder = path.join(workspacePath, newName);
-			let projectFolder = project.folder;
-			newProjectFolder = this._isPathValid(workspacePath, newProjectFolder);
-			if (newProjectFolder !== null) {
-				try {
-					if (await studio.filesystem.pathExists(projectFolder)) {
-						await studio.filesystem.copy(projectFolder, newProjectFolder);
-						await this.loadProjects(false);
-						return true;
+		if(project !== null) {
+			if(newName !== null) {
+				if(newName.trim().length >= 1) {
+					let newProjectFolder = path.join(workspacePath, newName);
+					let projectFolder = project.folder;
+					newProjectFolder = this._isPathValid(workspacePath, newProjectFolder);
+					if (newProjectFolder !== null) {
+						try {
+							if (await studio.filesystem.pathExists(projectFolder)) {
+								await studio.filesystem.copy(projectFolder, newProjectFolder);
+								await this.loadProjects(false);
+								return true;
+							}
+						} catch (e) {
+							studio.workspace.showError('PROJECT_ERROR_CLONE_PROJECT', {project: projectFolder, error: e.message});
+						}
+					} else {
+						studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
 					}
-				} catch (e) {
-					studio.workspace.showError('PROJECT_ERROR_CLONE_PROJECT', {project: projectFolder, error: e.message});
+					return false;
 				}
-			} else {
-				studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
 			}
-			return false;
-		} else {
-			// ERROR project folder nu e definit aici
-			studio.workspace.warn('PROJECT_ERROR_CLONE_PROJECT', {project: projectFolder, error: 'NULL'});
+			
+		} else {			
+			studio.workspace.warn('PROJECT_ERROR_CLONE_PROJECT', {project: project.projectFolder, error: 'NULL'});
 			return false;
 		}
 		
@@ -465,7 +475,7 @@ let projects = {
 	async importProject(fileName, data, type) 
 	{
 		if(type === 'wylioapp'){
-			//TODO
+			
 			let projectImport = JSON.parse(data.toString());
 			let projectFolder = path.join(workspacePath, projectImport.title);
 			projectFolder = this._isPathValid(workspacePath,projectFolder);
@@ -513,9 +523,6 @@ let projects = {
 			}
 			
 		}
-		
-		
-		
 	},
 	/**
 	 * Recursively generate the project tree structure with paths and names
@@ -578,12 +585,11 @@ let projects = {
 	 * the *.zip* extension.
 	 * 
 	 * @param {Project} project - project object
-	 * @param {string} savePath - path to export to
 	 * 
 	 * 
 	 * @example
 	 * 
-	 * exportProject('MyNewProject', 'C:\Users\User\Desktop');
+	 * exportProject('MyNewProject');
 	 * 
 	 */
 	async exportProject(project) {
@@ -605,7 +611,6 @@ let projects = {
 				filetypes:['zip','tar'],
 				type:'data:application/zip;base64,'
 			});
-			/** create zip file */
 			if(savePath !== null){
 				await studio.filesystem.writeFile(savePath, zipContent);
 			}
@@ -613,6 +618,12 @@ let projects = {
 		}
 		
 	},
+	/**
+	 * Create a zip archive starting with a directory found in the fileSystem
+	 * @param {string} dir
+	 * @param {object} zip
+	 * @param {string} root
+	 */
 	async _buildZipFromDirectory(dir, zip, root) {
 		try {
 			const list = await studio.filesystem.readdir(dir);
@@ -644,6 +655,12 @@ let projects = {
 			console.error(e);
 		}  
 	},
+	/**
+	 * Sort a file type object by comparing every element if it's a folder or a file.
+	 * The resulting tree consists of all the folder and files aranged in alphabetical order, with the files preceding the folders.
+	 * 
+	 * @param {file} tree
+	 */
 	sort(tree){
 		let strCompare = (a, b) => {
 			if (a<b) return -1;
@@ -841,6 +858,11 @@ let projects = {
 		}
 		
 	},
+	/**
+	 * Download a file from the file tree inside the raspberry pi
+	 * @param {string} name 
+	 * @param {string} data 
+	 */
 	async downloadFile(name,data) {
 		try {
 			let savePath = await studio.filesystem.openExportDialog(data, {
@@ -1091,11 +1113,7 @@ let projects = {
 
 				//select file
 				if (project) {
-					// studio.workspace.dispatchToStore('projects', 'currentProject', null);
-					// await studio.settings.storeValue('projects', 'currentFile', null);
-					// studio.workspace.dispatchToStore('projects', 'currentFile', null);
-					// await studio.settings.storeValue('projects', 'currentFile', null);
-
+					
 					await this.changeFile(project,null);
 
 					await new Promise((resolve) => {
@@ -1110,9 +1128,6 @@ let projects = {
 					await studio.settings.storeValue('projects', 'currentProject', project);
 					let language = this.getLanguage(project.language);
 					if (language && firstLoad) {
-						// let content = await studio.filesystem.readdir(projectFolder);
-						// let pathing = '';
-						// let editors = studio.workspace.getFromStore('projects', 'editors');
 						let mainFile = await this.getDefaultFileName(project);
 						let file = path.join(project.folder, mainFile);
 						if (await studio.filesystem.pathExists(file)) {
@@ -1240,6 +1255,7 @@ let projects = {
 	/**
 	 * Changes the current file to another one.
 	 * 
+	 * @param {Project} project - project object
 	 * @param {string} name - path to file
 	 * 
 	 */
@@ -1294,6 +1310,7 @@ let projects = {
 			let specialFile = path.join(specialFolder, (name));
 			try {
 				await studio.filesystem.writeFile(specialFile, content);
+				return specialFile;
 			} catch (e) {
 				studio.workspace.showError('PROJECT_ERROR_SAVE_SPECIAL_FILE', {file: specialFile, data:content, error: e.message});
 				return false;
@@ -1394,6 +1411,13 @@ let projects = {
 		let project = studio.workspace.getFromStore('projects', 'currentProject');
 		return project;
 	},
+	/**
+	 * 
+	 * The **loadProjectStructure** function returns the file tree hierarchy of the given project
+	 * 
+	 * @param {Project} project project object
+	 * @return {file} file type structure
+	 */
 	async loadProjectStructure(project){
 		if(project !== null) {
 			let retproject = project;
@@ -1565,17 +1589,13 @@ let projects = {
 		}
 		return p;
 	},
+	/**
+	 * Shows the Projects Library Dialog when there is no project loaded.
+	 */
 	showProjectsLibrary()
 	{
 		studio.workspace.showDialog(ProjectsLibrary, {width: 1000});
 	}
-	//getDefaultFileName(Project)
-	//Daca nu e placa -> language normal al proiectului -> iau main de acolo
-	//Vezi daca ai placa -> verific daca am si type si board -> daca da, il iau pe asta
-	//Vezi daca e numai pentru board -> iau pt asta
-	// Vezi daca e type
-	//readFile(p,f)
-	//getCurrentProject()
 };
 export default async function setup(options, imports, register) {
 	studio = imports;

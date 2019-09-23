@@ -39,5 +39,9 @@
     {
         "message": "Adresă IP",
         "description": "The name of the pseudo device that allows the user the connect to any IP address"
+    },
+    "DEVICE_WYAPP_CHANGE_CREDENTIALS": {
+        "message": "Încercați să vă autentificați folosind datele implicite pentru acest dispozitiv. Vă recomandăm să schimbați parola folosind comanda passwd in Shell.",
+        "description": "Warning message when the user tries to login to a board with the default credentials."
     }
 }
