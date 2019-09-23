@@ -83,7 +83,6 @@ export default function setup(options, imports, register) {
 			// Set parameters to default
 			generic_rpk.setToDefault();
 
-
 			// Create interpreter
 			let interpreter = new JSInterpreter(code.toString(), JSInterpreterLibrary(studio, device, generic_rpk));
 			simulator.opperationsCounter = 0;
@@ -91,6 +90,7 @@ export default function setup(options, imports, register) {
 			simulator.isRunning = true;
 			device.properties.isRunning = true;
 			updateDevice(device);
+			
 			let runToCompletion = function () {
 				if (simulator.isRunning && interpreter.step()) {
 					simulator.opperationsCounter++;
@@ -98,7 +98,7 @@ export default function setup(options, imports, register) {
 						setTimeout(runToCompletion, 1000);
 						simulator.opperationsCounter = 0;
 					} else {
-						setTimeout(runToCompletion, 10);
+						setTimeout(runToCompletion, 5);
 					}
 				} else {
 					simulator.isRunning = false;
