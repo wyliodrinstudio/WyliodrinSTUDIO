@@ -14,6 +14,9 @@
 				</div>
 				
 				<div :class="projectTree" class="project-tree-on" v-if="advanced">
+					<v-icon @click="newFile(menuItem)">mdi-file-plus</v-icon>
+					<v-icon @click="newFolder(menuItem)">mdi-folder-plus</v-icon>
+					<v-icon @click="dirTree()">mdi-refresh</v-icon>
 					<v-treeview
 					v-model="tree"
 					:open="open"
@@ -28,10 +31,7 @@
 					:open-on-click="true"
 					dense
 					>
-					<v-btn @click="newFile(menuItem)">New File</v-btn>
-					<v-btn @click="newFoldeR(menuItem)">New Folder</v-btn>
-					<v-btn @click="dirTree()">Refresh</v-btn>
-					<v-btn @click="changeTree()">Expand/Colapse All</v-btn>
+					
 					<template v-slot:prepend="{item, open}">
 						<p v-if="item.name === currentProject.name" @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)">
 							<v-img v-if="languageImage().type" contain :src="languageImage().img" avatar ></v-img>
@@ -256,7 +256,6 @@ export default {
 			fileMenu: false,
 			folderMenu:false,
 			projectMenu:false,
-			expandAll:false,
 			x: 0,
 			y: 0,
 			showConsole: false,
@@ -312,16 +311,15 @@ export default {
 		}
 	},
 	watch: {
-		currentProject ()
+		async currentProject ()
 		{
 			this.updateTitle ();
-			this.dirTree();
-			this.menuItem=this.items;
+			await this.dirTree();
 		},
-		currentFile ()
+		async currentFile ()
 		{
 			this.updateTitle ();
-			this.dirTree();
+			await this.dirTree();
 		},
 		async source ()
 		{
@@ -354,9 +352,6 @@ export default {
 		}
 	},
 	methods: {
-		changeTree(){
-			this.expandAll = !this.expandAll;
-		},
 		consoleLogIt(item){
 			// TODO why is this function here?
 		},
@@ -552,6 +547,7 @@ export default {
 		
 		async dirTree() 
 		{
+			
 			if (this.currentProject)
 			{
 				let filename = this.currentProject.folder;
@@ -586,15 +582,23 @@ export default {
 		},
 		async newFolder (item)
 		{
+			if(item === undefined || item === null) {
+				item = this.items[0];
+			}
 			let folderName = await this.studio.workspace.showPrompt ('PROJECT_NEW_FOLDER', 'PROJECT_NEW_FOLDER_NAME', '', 'PROJECT_NEW_NAME');
 			if (folderName)
 			{
 				await this.studio.projects.newFolder(this.currentProject,path.join(item.path,folderName));
+				console.log(this.open);
 				await this.refresh();
 			}
 		},
 		async newFile (item)
 		{
+			console.log(item);
+			if(item === undefined || item === null) {
+				item = this.items[0];
+			}
 			let fileName = await this.studio.workspace.showPrompt ('PROJECT_NEW_FILE', 'PROJECT_NEW_FILE_NAME', '', 'PROJECT_NEW_NAME');
 			if (fileName)
 			{
