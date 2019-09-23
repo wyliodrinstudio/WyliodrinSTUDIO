@@ -93,8 +93,8 @@ export default {
 			return this.address.trim() !== '';
 		},
 		hasUser(){
-
-			return this.device.defaultUsername.trim() !== '';
+			if(this.device.defaultUsername)
+				return this.device.defaultUsername.trim() !== '';
 		}
 	}
 };
