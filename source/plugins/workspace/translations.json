@@ -196,6 +196,7 @@
          "DEVICE_RPK_FLASH_DONE": "Flash done. The device will reboot and it will disconnect automatically. Put the device in DFU mode to flash it again.",
          "RPK_NEW_DEVICE_TITLE": "New RPK Device",
          "RPK_NEW_DEVICE_INSTRUCTIONS": "Connect the RPK device to a USB port, press Switch 3 and reboot the device using the pin",
+         "RPK_SERIAL_CONNECTON_ERROR": "Error while connecting to the RPK device.",
          "DEVICE_SIMULATOR_RPK": "RPK Simulator",
          "DEVICE_SIMULATOR_RPK_RUN": "Run",
          "DEVICE_SIMULATOR_RPK_STOP": "Stop",
