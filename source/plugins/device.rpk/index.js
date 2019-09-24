@@ -8,6 +8,7 @@ import path from 'path';
 import fs from 'fs-extra';
 
 //import DeviceSetup from './views/DeviceSetup.vue';
+const allDevices = require ('./serial_devices.json');
 
 import RPKDeviceSetup from './views/RPKDeviceSetup.vue';
 
@@ -15,11 +16,141 @@ import { EventEmitter } from 'events';
 
 let deviceEvents = new EventEmitter();
 
+let deviceDriver = null;
+let SerialPort = null;
+let discoverSerialDevicesTimer = null;
+
+const SERIAL_PRIORITY_LOW = 299;
+const SERIAL_PRIORITY_HIGH = 200;
+
 let studio = null;
 let workspace = null;
 let devices = [];
-
+let wyapp = null;
 let connections = {};
+
+let serialDevices = [];
+
+class SerialWyAppTransport extends EventEmitter
+{
+
+}
+
+function loadSerialPort ()
+{
+	try
+	{
+		return require ('serialport');
+	}
+	catch (e)
+	{
+		workspace.showError ('DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR', e.message);
+		return {
+			list: function ()
+			{
+				return [
+				];
+			}
+		};
+	}
+}
+
+async function listSerialPorts ()
+{
+	let ports = [];
+	try 
+	{
+		ports = await SerialPort.list ();
+		console.log(ports);
+	}
+	catch (e)
+	{
+		workspace.showError ('DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR', e.message);
+	}
+	return ports;
+}
+
+function searchSerialDevices ()
+{
+	if (!discoverSerialDevicesTimer)
+	{
+		let listDevices = async () => {
+			let serialPorts = await listSerialPorts ();
+			let devices = [];
+			for (let serialDevice of serialPorts)
+			{
+				if (serialDevice.vendorId === '1fc9' && serialDevice.productId === '0094')
+				{
+					let name = 'NXP RPK';
+					let description = '';
+					let priority = SERIAL_PRIORITY_HIGH;
+					if (serialDevice.vendorId)
+					{
+						let id = serialDevice.vendorId.toString().toLowerCase();
+						// if(allDevices[id])
+						// {
+						// 	// name = allDevices[id].name;
+						// 	if(allDevices[id].products)
+						// 	{
+						// 		if(allDevices[id].products[serialDevice.productId])
+						// 			name = allDevices[id].products[serialDevice.productId];
+						// 		else
+						// 			name = allDevices[id].name;
+						// 		description = allDevices[id].name;
+						// 	}
+						// 	else
+						// 		name = allDevices[id].name;
+						// }
+					}
+					// Show nice names in macOS
+					else
+					{
+						// Show nice names in Linux and macOS
+						if (name.startsWith('/dev/')) name = name.substring (5);
+
+						if (name.startsWith('cu.')) name = name.substring (3);
+						else
+						if (name.startsWith('tty.')) name = name.substring (4);
+						
+						// Push macOS Bluetooth down as this will not have (usually) devices
+						if (name.startsWith ('Bluetooth-'))
+						{
+							priority = SERIAL_PRIORITY_LOW;
+						}
+						// Is it a message?
+						if (serialDevice.message)
+						{
+							name = serialDevice.message;
+						}
+						description = 'unknown';
+					}
+					devices.push ({
+						id: 'wyapp:serial:'+serialDevice.comName,
+						address: serialDevice.comName,
+						description,
+						name,
+						connection: 'serial',
+						icon: 'plugins/device.rpk/data/img/icons/rpk-bluetooth-on.png',
+						board: 'any',
+						priority,
+						status: '',
+						properties: {
+							productId: serialDevice.productId,
+							vendorId: serialDevice.vendorId,
+							locationId: serialDevice.locationId,
+							serialNumber: serialDevice.serialNumber,
+							pnpId: serialDevice.pnpId,
+						}
+					});
+				}
+			}
+			serialDevices = devices;
+			updateDevices ();
+		};
+		discoverSerialDevicesTimer = setInterval (listDevices, 5000);
+		// listDevices ();
+	}
+}
 
 // Search for RPK devices
 function loadRPK() {
@@ -57,7 +188,7 @@ function updateDevices() {
 			placeholder: true
 		});
 	}
-	workspace.updateDevices([...devices]);
+	workspace.updateDevices([...devices, ...serialDevices]);
 }
 
 let discoverRPKsDevicesTimer = null;
@@ -93,9 +224,15 @@ function updateDevice(device) {
 
 export function setup(options, imports, register) {
 	studio = imports;
-
+	wyapp = imports.device_wyapp;
 	drivelist = loadRPK();
+	SerialPort = loadSerialPort ();
 	search();
+
+	if (SerialPort)
+	{
+		searchSerialDevices ();
+	}
 
 	let device_rpk = {
 		defaultIcon() {
@@ -148,6 +285,24 @@ export function setup(options, imports, register) {
 								return null;
 							}
 						}
+						else if (device.connection === 'serial')
+						{
+							// console.log(studio.console);
+							// if (studio.console)
+							// {
+							// 	console.log('here');
+							// 	studio.console.select(device.id);
+								process.nextTick(() => {
+									device.status = 'CONNECTED';
+									updateDevice(device);
+								});
+								return device;
+							// }
+							// else {
+							// 	delete connections[device.id];
+							// 	return null;
+							// }
+						}
 					}
 					else {
 						studio.workspace.showNotification('RPK_DEVICE_ALREADY_CONNECTED', { device: device.name });
@@ -158,7 +313,7 @@ export function setup(options, imports, register) {
 		},
 		disconnect(device, options) {
 			if (_.isObject(device)) {
-				if (device.connection === 'usb') {
+				if (device) {
 					delete connections[device.id];
 					device.status = 'DISCONNECTED';
 					updateDevice(device);
@@ -231,6 +386,31 @@ export function setup(options, imports, register) {
 			enabled() {
 				let device = studio.workspace.getDevice();
 				return (device.status === 'CONNECTED' && device.connection === 'usb' && !device.sending);
+			},
+			type: 'run'
+		});
+		workspace.registerDeviceToolButton('DEVICE_RPK_RUN', 10, async () => {
+			let device = studio.workspace.getDevice();
+			// console.log('run');
+			if (device) {
+				console.log(studio.console);
+				if (studio.console)
+				{
+					console.log('here');
+					studio.console.select(device.id);
+					studio.console.show();
+					studio.console.reset();
+				}
+			}
+		}, 'plugins/device.wyapp/data/img/icons/run-icon.svg',
+		{
+			// visible() {
+			// 	let device = studio.workspace.getDevice();
+			// 	return (device.status === 'CONNECTED' && device.connection === 'serial');
+			// },
+			enabled() {
+				let device = studio.workspace.getDevice();
+				return (device.status === 'CONNECTED' && device.connection === 'serial');
 			},
 			type: 'run'
 		});

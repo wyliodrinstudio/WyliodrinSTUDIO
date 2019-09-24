@@ -4,8 +4,7 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace", "projects", "events"],
-        "optional": ["console", "mqtt"],
+        "consumes": ["workspace", "projects", "events", "device_wyapp", "console"],
         "provides": [],
         "target": ["electron"],
         "disabled": false
