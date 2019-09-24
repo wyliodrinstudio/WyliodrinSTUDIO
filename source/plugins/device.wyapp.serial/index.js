@@ -42,6 +42,7 @@ async function listSerialPorts ()
 	try 
 	{
 		ports = await SerialPort.list ();
+		// console.log(ports);
 	}
 	catch (e)
 	{
@@ -69,7 +70,7 @@ function searchSerialDevices ()
 			let devices = [];
 			for (let serialDevice of serialPorts)
 			{
-				if (serialDevice.comName)
+				if (serialDevice.comName && serialDevice.vendorId !== '1fc9' && serialDevice.productId !== '0094')
 				{
 					let name = serialDevice.comName;
 					let description = '';
@@ -146,6 +147,7 @@ export function setup (options, imports, register)
 	workspace = imports.workspace;
 
 	SerialPort = loadSerialPort ();
+	// console.log(SerialPort);
 
 	if (SerialPort)
 	{
