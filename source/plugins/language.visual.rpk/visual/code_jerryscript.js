@@ -81,11 +81,6 @@ module.exports = function (blockly) {
 			Blockly.JavaScript.definitions_['setupSWITCHES'] = 'var switches = require(\'switches\');';
 		}
 	};
-	Blockly.JavaScript.setupCONSOLE = function () {
-		if (!Blockly.JavaScript.definitions_['setupCONSOLE']) {
-			Blockly.JavaScript.definitions_['setupCONSOLE'] = 'var console = require(\'console\');';
-		}
-	};
 	Blockly.JavaScript.setupBLE = function () {
 		if (!Blockly.JavaScript.definitions_['setupBLE']) {
 			Blockly.JavaScript.definitions_['setupBLE'] = 'var BLE = require(\'BLE\');';
@@ -517,7 +512,6 @@ module.exports = function (blockly) {
 		return code;
 	};
 	Blockly.JavaScript['rpk_console_log'] = function (block) {
-		Blockly.JavaScript.setupCONSOLE();
 		var value_str = Blockly.JavaScript.valueToCode(block, 'str', Blockly.JavaScript.ORDER_ATOMIC);
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'console.log(' + value_str + ');\n';
@@ -525,7 +519,6 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.JavaScript['rpk_console_read'] = function (block) {
-		Blockly.JavaScript.setupCONSOLE();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'console.read()';
 		// TODO: Change ORDER_NONE to the correct strength.
