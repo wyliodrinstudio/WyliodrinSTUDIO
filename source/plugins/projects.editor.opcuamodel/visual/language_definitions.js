@@ -57,7 +57,7 @@ module.exports = function (blockly) {
 			this.appendDummyInput()
 				.appendField('OPC/UA Folder')
 				.appendField(new Blockly.FieldTextInput('folder_name'), 'folder_name');
-			this.appendStatementInput('NAME')
+			this.appendStatementInput('folder_objects_properties')
 				.setCheck(['opcuamodel_property', 'opcuamodel_object', 'opcuamodel_folder']);
 			this.setPreviousStatement(true, ['opcuamodel_object', 'opcuamodel_folder']);
 			this.setNextStatement(true, ['opcuamodel_object', 'opcuamodel_folder']);

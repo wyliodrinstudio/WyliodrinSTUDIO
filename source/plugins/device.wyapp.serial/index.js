@@ -6,8 +6,8 @@ import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
 
 let SerialPort = null;
 
-const SERIAL_PRIORITY_LOW = 299;
-const SERIAL_PRIORITY_HIGH = 200;
+// const SERIAL_PRIORITY_LOW = 299;
+// const SERIAL_PRIORITY_HIGH = 200;
 
 let wyapp = null;
 let workspace = null;
@@ -68,13 +68,14 @@ function searchSerialDevices ()
 		let listDevices = async () => {
 			let serialPorts = await listSerialPorts ();
 			let devices = [];
+			let workspaceDevices = workspace.getDevices ().filter ((device) => device.type !== 'wyapp');
 			for (let serialDevice of serialPorts)
 			{
-				if (serialDevice.comName && serialDevice.vendorId !== '1fc9' && serialDevice.productId !== '0094')
+				if (serialDevice.comName && !workspaceDevices.find((device) => device.address === serialDevice.comName))
 				{
 					let name = serialDevice.comName;
 					let description = '';
-					let priority = SERIAL_PRIORITY_HIGH;
+					let priority = workspace.DEVICE_PRIORITY_LOW;
 					if (serialDevice.vendorId)
 					{
 						let id = serialDevice.vendorId.toString().toLowerCase();
@@ -84,7 +85,10 @@ function searchSerialDevices ()
 							if(allDevices[id].products)
 							{
 								if(allDevices[id].products[serialDevice.productId])
+								{
 									name = allDevices[id].products[serialDevice.productId];
+									priority = workspace.DEVICE_PRIORITY_LOW;
+								}
 								else
 									name = allDevices[id].name;
 								description = allDevices[id].name;
@@ -106,7 +110,7 @@ function searchSerialDevices ()
 						// Push macOS Bluetooth down as this will not have (usually) devices
 						if (name.startsWith ('Bluetooth-'))
 						{
-							priority = SERIAL_PRIORITY_LOW;
+							priority = workspace.DEVICE_PRIORITY_LOW;
 						}
 						// Is it a message?
 						if (serialDevice.message)
