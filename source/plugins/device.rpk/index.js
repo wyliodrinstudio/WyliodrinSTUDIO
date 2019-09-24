@@ -120,8 +120,9 @@ async function listRPKs() {
 }
 
 function updateDevices() {
+	let add = [];
 	if (serialDevices.length === 0 && devices.length === 0) {
-		devices.push({
+		add.push({
 			id: 'rpk:newdevice',
 			address: '',
 			name: studio.workspace.vue.$t('RPK_NEW_DEVICE_TITLE'),
@@ -130,7 +131,7 @@ function updateDevices() {
 			placeholder: true
 		});
 	}
-	workspace.updateDevices([...devices, ...serialDevices]);
+	workspace.updateDevices([...devices, ...serialDevices, ...add]);
 }
 
 let discoverRPKsDevicesTimer = null;
@@ -370,6 +371,25 @@ export function setup(options, imports, register) {
 	}
 	else {
 		studio.workspace.error('Failed to register device driver rpk');
+	}
+
+	if (studio.console)
+	{
+		studio.console.register ((event, id, ...data) =>
+		{
+			if (ports[id])
+			{
+				if (event === 'data')
+				{	
+					ports[id].write (data[0]);
+				}
+				else
+				if (event === 'resize')
+				{
+					// Serial Port has no resize
+				}
+			}
+		});
 	}
 
 	register(null, {
