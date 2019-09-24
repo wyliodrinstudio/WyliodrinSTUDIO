@@ -72,7 +72,7 @@ function searchSerialDevices() {
 					description,
 					name,
 					connection: 'serial',
-					icon: 'plugins/device.rpk/data/img/icons/rpk-bluetooth-on.png',
+					icon: 'plugins/device.rpk/data/img/icons/running-rpk.png',
 					board: 'any',
 					priority,
 					status: '',
