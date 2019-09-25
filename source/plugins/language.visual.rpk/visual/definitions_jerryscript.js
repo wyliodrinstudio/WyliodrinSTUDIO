@@ -341,7 +341,7 @@ module.exports = function (blockly) {
 		init: function () {
 			this.appendDummyInput()
 				.appendField("Set State Brightness")
-				.appendField(new Blockly.FieldDropdown([["OFF", "0"], ["LOW", "1"], ["MEDIUM", "2"], ["HIGH", "3"]]), "NAME")
+				.appendField(new Blockly.FieldDropdown([["OFF", "0"], ["LOW", "1"], ["MEDIUM", "2"], ["HIGH", "3"]]), "Brightness")
 				.appendField("Color")
 				.appendField(new Blockly.FieldDropdown([["RED", "0"], ["GREEN", "1"], ["BLUE", "2"], ["WHITE", "3"], ["YELLOW", "4"], ["CYAN", "5"], ["PURPLE", "6"], ["BLACK", "7"]]), "Color");
 			this.setPreviousStatement(true, null);
