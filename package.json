@@ -1,12 +1,11 @@
 {
 	"name": "wyliodrinstudio",
-	"version": "2.0.3-beta",
+	"version": "2.0.5-beta",
 	"description": "Wyliodrin STUDIO 2",
 	"main": "main.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "electron build/",
-		"postinstall": "mkdirp build && webpack && electron-builder install-app-deps",
 		"pack": "webpack --mode=production && electron-builder --dir",
 		"dist": "webpack --mode=production && electron-builder"
 	},
@@ -47,6 +46,7 @@
 	"homepage": "https://github.com/wyliodrinstudio/WyliodrinSTUDIO#readme",
 	"devDependencies": {
 		"@mdi/font": "^4.4.95",
+		"axios": "^0.19.0",
 		"brace": "^0.11.1",
 		"copy-webpack-plugin": "^5.0.3",
 		"css-loader": "^3.0.0",

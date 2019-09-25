@@ -127,6 +127,16 @@ let filesystem = {
 		}
 	},
 
+	/**
+	 * Import a file from the data folder
+	 * @param {string} pluginName 
+	 * @param {string} filename 
+	 */
+	loadDataFile (pluginName, filename)
+	{
+		return this._runFileSystemFn('loadDataFile',null,pluginName, filename);
+	},
+
 	selectDefaultFileSystem (id)
 	{
 		if (filesystems[id])
