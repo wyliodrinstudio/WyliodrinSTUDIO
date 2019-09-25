@@ -250,6 +250,7 @@ export function setup(options, imports, register) {
 									if (studio.console)
 									{
 										studio.console.select (device.id);
+										studio.console.reset();
 										studio.console.show ();
 									}
 								}
