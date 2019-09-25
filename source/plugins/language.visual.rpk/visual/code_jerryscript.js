@@ -311,16 +311,16 @@ module.exports = function (blockly) {
 		var code;
 
 		if (dropdown_measurement_unit === '1') {
-			code = 'pressure.getValue() * 0.00131578947';
+			code = 'pressure.getValue() * 0.00098692316931427';
 		}
 		else if (dropdown_measurement_unit === '2') {
-			code = 'pressure.getValue() * 133.322368';
+			code = 'pressure.getValue() * 100';
 		}
 		else if (dropdown_measurement_unit === '3') {
 			code = 'pressure.getValue()';
 		}
 		else if (dropdown_measurement_unit === '4') {
-			code = 'pressure.getValue() * 0.001333';
+			code = 'pressure.getValue() * 0.001';
 		}
 
 		return [code, Blockly.JavaScript.ORDER_NONE];
