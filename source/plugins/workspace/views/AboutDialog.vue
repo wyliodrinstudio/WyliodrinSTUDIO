@@ -12,15 +12,27 @@
 				<h3>{{$t('ABOUT_DEVELOPED_BY')}}</h3>
 
 				<p><strong>Alexandru Radovici</strong> - {{$t('ABOUT_MAINTAINER')}}</p>
-				<p><strong>Marius-Andrei Aluculesei</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 				<p><strong>Ovidiu Stoica</strong> - {{$t('ABOUT_UI_UX')}}</p>
-				<p><strong>Ioana Culic</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
-				<p><strong>Cosmin-Daniel Radu</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
-				<p><strong>Calin Dumitru</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
-				<p><strong>Diana Ghindaoanu</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
-				<p><strong>Teona Severin</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
-				<p><strong>Liviu-Nicolae Moraru</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
-				<p><strong>Ana Marinescu</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
+				<p><strong>Ioana Culic</strong> - Development Manager</p>
+				<p><strong>Marius-Andrei Aluculesei</strong> - Projects, Application</p>
+				<p><strong>Cosmin-Daniel Radu</strong> - RPK</p>
+				<p><strong>Liviu-Nicolae Moraru</strong> - RPK</p>
+				<p><strong>Calin Dumitru</strong> - Simulators</p>
+				<p><strong>Diana Ghindaoanu</strong> - Notebook, Dashboard, Documentation</p>
+				<p><strong>Teona Severin</strong> - Web File System</p>
+				<p><strong>Ana Marinescu</strong> - Pin Layout</p>
+				<p><strong>Andrei Deatcu</strong> - Resistor Color Code, Schematics</p>
+
+				<br>
+			
+				<h3>{{$t('ABOUT_TRANSLATE')}}</h3>
+				<p><strong>Diana Ghindaoanu</strong> - French</p>
+				<p><strong>Simao Gomes Viana</strong> - German</p>
+				<p><strong>Csongor Hegedüs</strong> - Hungarian</p>
+				<p><strong>Ana Marinescu</strong> - Japaneese</p>
+				<p><strong>Diana Ghindaoanu</strong> - Romanian</p>
+				<p><strong>Veronika Uhrinová</strong> - Slovak</p>
+				<p><strong>Sorina Goran</strong> - Spanish</p>
 			</div>
 		</v-card-text>
 
