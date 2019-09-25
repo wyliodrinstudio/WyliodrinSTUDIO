@@ -5,7 +5,8 @@
 	 width="459px" height="459px" viewBox="0 0 459 459" enable-background="new 0 0 459 459" xml:space="preserve">
 <g>
 	<g id="menu">
-		<path fill="#FFFFFF" d="M0,382.5h459v-51H0V382.5z M0,255h459v-51H0V255z M0,76.5v51h459v-51H0z"/>
+		<path fill="#FFFFFF" d="M54.231,346.345H404.77v-38.948H54.231V346.345z M54.231,248.974H404.77v-38.949H54.231V248.974z
+			 M54.231,112.654v38.949H404.77v-38.949H54.231z"/>
 	</g>
 </g>
 </svg>

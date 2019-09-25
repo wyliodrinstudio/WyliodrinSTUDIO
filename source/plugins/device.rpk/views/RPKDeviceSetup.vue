@@ -4,7 +4,7 @@
 			<span class="headline">{{$t('RPK_NEW_DEVICE_TITLE')}}</span>
 		</v-card-title>
 		<v-card-text>
-			<img src=""></img>
+			<img src="plugins/device.rpk/data/img/rpk-connect-info.png" style="width:100%;"></img>
 			<div>
 				{{$t('RPK_NEW_DEVICE_INSTRUCTIONS')}}
 			</div>

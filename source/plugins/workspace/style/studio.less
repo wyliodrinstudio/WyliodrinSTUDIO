@@ -275,7 +275,11 @@ input {caret-color:@color-highlight !important;  }
 // 			   box-sizing: border-box; /* Opera/IE 8+ */
 // }
 
-.bottom-shell-box {height: calc(~"100% - 44px");
+.bottom-shell-box {height: calc(~"100vh - 202px");
+	.xterm {height: 100% !important;}
+}
+
+.v-bottom-sheet .bottom-shell-box {height: calc(~"100% - 44px");
 	.xterm {height: 100% !important;}
 }
 
@@ -293,7 +297,12 @@ input {caret-color:@color-highlight !important;  }
 .project-box-1 {width:calc(~"100% - 195px"); float: right;}
 .project-box-2 {width:100%;}
 
-.project-tree-on {width: 195px; display: inline-block; float: left; position: relative; background: @color-white; height: 100% !important; height: calc(100vh - 160px) !important;}
+.project-tree-on {width: 195px; display: inline-block; float: left; position: relative; background: @color-white; height: 100% !important; height: calc(100vh - 160px) !important;
+	.v-treeview {height: calc(~"100vh - 220px"); overflow: auto;
+	> .v-treeview-node {height: 100%;}
+	}
+	
+}
 .project-tree-off {width: 0px; display: none; position: relative;}
 
 .fileexplorer-actions {
@@ -503,7 +512,7 @@ outline:none;
 }
 
 .lib-btn-box { position: relative;
-	.waiting-box {position: relative !important; height: 100%; width: 100%;}
+	.waiting-box {position: relative !important; height: 100%; width: 100%; display: contents;}
 }
 
 /* Spinning circle */

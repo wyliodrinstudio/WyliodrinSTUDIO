@@ -201,7 +201,7 @@ export function setup(options, imports, register) {
 			console.log('check object');
 			if (_.isObject(device)) {
 				if (device.id === 'rpk:newdevice') {
-					studio.workspace.showDialog(RPKDeviceSetup);
+					studio.workspace.showDialog(RPKDeviceSetup,{width: '500px'});
 					return null;
 				}
 				else {

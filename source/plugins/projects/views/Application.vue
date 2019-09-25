@@ -188,10 +188,16 @@
 					</template>
 					
 					</v-treeview>
-					<v-card-actions class="justify-center">
-						<v-icon @click="newFile(menuItem)">mdi-file-plus</v-icon>
-						<v-icon @click="newFolder(menuItem)">mdi-folder-plus</v-icon>
-						<v-icon @click="dirTree()">mdi-refresh</v-icon>
+					<v-card-actions class="fm-actions">
+						<v-btn @click="newFile(menuItem)" text icon>
+							<v-icon>mdi-file-plus</v-icon>
+						</v-btn>
+						<v-btn @click="newFolder(menuItem)" text icon>
+							<v-icon>mdi-folder-plus</v-icon>
+						</v-btn>
+						<v-btn @click="dirTree(menuItem)" text icon>
+							<v-icon>mdi-refresh</v-icon>
+						</v-btn>						
 					</v-card-actions>		
 				</div> 
 			</div>
