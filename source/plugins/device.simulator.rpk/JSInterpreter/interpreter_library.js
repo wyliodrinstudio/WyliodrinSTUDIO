@@ -25,12 +25,12 @@ export default function interpreter_library (studio, device, generic_rpk) {
 			let canvas = document.getElementById('rpk_display');
 			let ctx = canvas.getContext('2d');
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.canvas.width  = 100;
-			ctx.canvas.height = 100;
 			ctx.beginPath();
 			ctx.fillStyle = 'black';
-			ctx.fillRect(0, 0, 100, 100);
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			ctx.stroke();
+			generic_rpk.line = 1;
+			generic_rpk.text = '';
 		};
 
 		let guiDisplayNewLine = function() {
@@ -318,7 +318,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 		let require = function(name) {
 			if (name === 'GUI') {
 				let GUI = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'GUI', GUI);
+				// interpreter.setProperty(scope, 'GUI', GUI);
 				interpreter.setProperty(GUI, 'displayClear', interpreter.createNativeFunction(guiDisplayClear));
 				interpreter.setProperty(GUI, 'displayNewLine', interpreter.createNativeFunction(guiDisplayNewLine));
 				interpreter.setProperty(GUI, 'displayString', interpreter.createNativeFunction(guiDisplayString));
@@ -345,7 +345,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				return GUI;
 			} else if (name === 'RGB') {
 				let RGB = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'RGB', RGB);
+				// interpreter.setProperty(scope, 'RGB', RGB);
 				interpreter.setProperty(RGB, 'setBrightness', interpreter.createNativeFunction(rgbSetBrightness));
 				interpreter.setProperty(RGB, 'setColor', interpreter.createNativeFunction(rgbSetColor));
 				interpreter.setProperty(RGB, 'setState', interpreter.createNativeFunction(rgbSetState));
@@ -369,7 +369,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				return RGB;
 			} else if (name === 'switches') {
 				let switches = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'switches', switches);
+				// interpreter.setProperty(scope, 'switches', switches);
 				interpreter.setProperty(switches, 'getValue', interpreter.createNativeFunction(switchesGetValue));
 
 				interpreter.setProperty(switches, 'SW1', 1);
@@ -378,74 +378,74 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				interpreter.setProperty(switches, 'SW4', 4);
 
 				return switches;
-			} else if (name === 'touch') {
+			} else if (name === 'touchscreen') {
 				let touch = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'touch', touch);
-				interpreter.setProperty(switches, 'getValue', interpreter.createNativeFunction(touchGetValue));
+				// interpreter.setProperty(scope, 'touch', touch);
+				interpreter.setProperty(touch, 'getValue', interpreter.createNativeFunction(touchGetValue));
 
-				interpreter.setProperty(switches, 'UP', 1);
-				interpreter.setProperty(switches, 'DOWN', 2);
-				interpreter.setProperty(switches, 'LEFT', 3);
-				interpreter.setProperty(switches, 'RIGHT', 4);
+				interpreter.setProperty(touch, 'UP', 1);
+				interpreter.setProperty(touch, 'DOWN', 2);
+				interpreter.setProperty(touch, 'LEFT', 3);
+				interpreter.setProperty(touch, 'RIGHT', 4);
 
 				return touch;
-			} else if (name === 'light') {
+			} else if (name === 'ambientLight') {
 				let light = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'light', light);
+				// interpreter.setProperty(scope, 'light', light);
 				interpreter.setProperty(light, 'getValue', interpreter.createNativeFunction(lightGetValue));
 
 				return light;
 			} else if (name === 'airQuality') {
 				let airQuality = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'airQuality', airQuality);
+				// interpreter.setProperty(scope, 'airQuality', airQuality);
 				interpreter.setProperty(airQuality, 'getValue', interpreter.createNativeFunction(airQualityGetValue));
 
 				return airQuality;
 			} else if (name == 'pressure') {
 				let pressure = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'pressure', pressure);
+				// interpreter.setProperty(scope, 'pressure', pressure);
 				interpreter.setProperty(pressure, 'getValue', interpreter.createNativeFunction(pressureGetValue));
 
 				return pressure;
 			} else if (name == 'temperature') {
 				let temperature = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'temperature', temperature);
+				// interpreter.setProperty(scope, 'temperature', temperature);
 				interpreter.setProperty(temperature, 'getValue', interpreter.createNativeFunction(temperatureGetValue));
 
 				return temperature;
 			} else if (name == 'battery') {
 				let battery = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'battery', battery);
+				// interpreter.setProperty(scope, 'battery', battery);
 				interpreter.setProperty(battery, 'getValue', interpreter.createNativeFunction(batteryGetValue));
 
 				return battery;
 			} else if (name == 'motion') {
 				let motion = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'motion', motion);
+				// interpreter.setProperty(scope, 'motion', motion);
 				interpreter.setProperty(motion, 'getValue', interpreter.createNativeFunction(motionGetValue));
 
 				return motion;
 			} else if (name == 'freefall') {
 				let freefall = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'freefall', freefall);
+				// interpreter.setProperty(scope, 'freefall', freefall);
 				interpreter.setProperty(freefall, 'getValue', interpreter.createNativeFunction(freefallGetValue));
 
 				return freefall;
 			} else if (name == 'gyroscope') {
 				let gyroscope = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'gyroscope', gyroscope);
+				// interpreter.setProperty(scope, 'gyroscope', gyroscope);
 				interpreter.setProperty(gyroscope, 'getValue', interpreter.createNativeFunction(gyroscopeGetValue));
 
 				return gyroscope;
-			} else if (name == 'accelometer') {
+			} else if (name == 'accelerometer') {
 				let accelometer = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'accelometer', accelometer);
+				// interpreter.setProperty(scope, 'accelometer', accelometer);
 				interpreter.setProperty(accelometer, 'getValue', interpreter.createNativeFunction(accelometerGetValue));
 
 				return accelometer;
 			} else if (name == 'buzzer') {
 				let buzzer = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
-				interpreter.setProperty(scope, 'buzzer', buzzer);
+				// interpreter.setProperty(scope, 'buzzer', buzzer);
 				interpreter.setProperty(buzzer, 'setState', interpreter.createNativeFunction(buzzerSetState));
 				interpreter.setProperty(buzzer, 'getState', interpreter.createNativeFunction(buzzerGetState));
 
