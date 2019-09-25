@@ -103,6 +103,16 @@ let filesystem_real = {
 		}
 		return list;
 	},
+	/**
+	 * Import a file from the data folder
+	 * @param {string} pluginName
+	 * @param {string} filename 
+	 */
+	loadDataFile (pluginName, filename)
+	{
+		console.log (path.join (__dirname, '..', pluginName, 'data', filename));
+		return fs.readFile (path.join (__dirname, '..', pluginName, 'data', filename));
+	},
 	
 	/**
 	 * Is the filesystem persistent?

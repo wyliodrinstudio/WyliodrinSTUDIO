@@ -6,7 +6,7 @@ import SSHConnectionDialog from './views/SSHConnectionDialog.vue';
 import _ from 'lodash';
 import qs from 'querystring';
 
-const NETWORK_PRIORITY_HIGH = 99;
+// const NETWORK_PRIORITY_HIGH = 99;
 // const NETWORK_PRIORITY_LOW = 0;
 
 let wyapp = null;
@@ -172,7 +172,7 @@ function updateSSHDevices (sshDevices)
 		}
 		let icon = 'plugins/device.wyapp/data/img/icons/network.png';
 
-		let priority = NETWORK_PRIORITY_HIGH;
+		let priority = workspace.DEVICE_PRIORITY_HIGH;
 
 		let device = {
 			id: 'wyapp:ssh:'+address,
@@ -198,7 +198,7 @@ function updateSSHDevices (sshDevices)
 		address: '',
 		name: workspace.vue.$t('DEVICE_WYAPP_SSH_IP_ADDRESS'),
 		board: 'any',
-		priority: NETWORK_PRIORITY_HIGH+10,
+		priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 		placeholder: true,
 		properties: {
 			// TODO update from device

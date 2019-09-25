@@ -122,6 +122,12 @@ let workspace = {
 
 	version: require ('../../../package.json').version,
 
+	DEVICE_PRIORITY_HIGH: 0,
+	DEVICE_PRIORITY_NORMAL: 100,
+	DEVICE_PRIORITY_PLACEHOLDER: 200,
+	DEVICE_PRIORITY_SIMULATOR: 300,
+	DEVICE_PRIORITY_LOW: 900,
+
 	/* Start the application */
 	start(studio) {
 		Vue.prototype.studio = studio;
@@ -979,6 +985,11 @@ let workspace = {
 			*/
 			deviceDrivers[name] = deviceDriver;
 			return {
+				DEVICE_PRIORITY_HIGH: workspace.DEVICE_PRIORITY_HIGH,
+				DEVICE_PRIORITY_NORMAL: workspace.DEVICE_PRIORITY_NORMAL,
+				DEVICE_PRIORITY_PLACEHOLDER: workspace.DEVICE_PRIORITY_PLACEHOLDER,
+				DEVICE_PRIORITY_SIMULATOR: workspace.DEVICE_PRIORITY_SIMULATOR,
+				DEVICE_PRIORITY_LOW: workspace.DEVICE_PRIORITY_LOW,
 				registerDeviceToolButton: this.registerDeviceToolButton.bind(this, name),
 				updateDevices: this.updateDevices.bind(this, name),
 			};
@@ -1132,6 +1143,21 @@ let workspace = {
 	 */
 	getStatus() {
 		return this.getFromStore('workspace', 'status');
+	},
+
+	/**
+	 * Returns a devices from the store. 
+	 * 
+	 * This function has no parameters and it's using the **getFromStore** function, 
+	 * which returns a **device[]** object, with all its properties. It's useful to work with it each 
+	 * time you want to manipulate the currently connected device and you need to know its type.
+	 *
+	 * @example
+	 * 
+	 * let devices = getDevices ();
+	 */
+	getDevices () {
+		return this.getFromStore('workspace', 'devices');
 	},
 
 	/**

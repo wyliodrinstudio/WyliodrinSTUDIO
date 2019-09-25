@@ -1,11 +1,15 @@
 <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-  <block type="opcua_object">
+  <block type="opcuamodel_folder">
+    <field name="folder_name">folder_name</field>
+  </block>
+  <block type="opcuamodel_object">
     <field name="object_name">object_name</field>
     <field name="object_id">object_id</field>
     <field name="object_type">Integer</field>
     <field name="object_history">FALSE</field>
   </block>
-  <block type="opcua_folder">
-    <field name="folder_name">folder_name</field>
+  <block type="opcuamodel_property">
+    <field name="property_name">property_name</field>
+    <field name="property_datatype">Boolean</field>
   </block>
 </xml>

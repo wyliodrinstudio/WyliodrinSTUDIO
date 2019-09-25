@@ -125,12 +125,12 @@ let generic_rpk = {
 
 		let canvas = document.getElementById('rpk_display');
 		let ctx = canvas.getContext('2d');
-		ctx.canvas.width  = 100;
-		ctx.canvas.height = 100;
+		ctx.canvas.width  = 115;
+		ctx.canvas.height = 120;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
-		ctx.fillStyle = 'black';
-		ctx.fillRect(0, 0, 100, 100);
+		//ctx.fillStyle = 'black';
+		ctx.fillRect(0, 0, 115, 120);
 		ctx.stroke();
 
 		$('#led_color').attr('fill', this.rgbColorDictionary[this.rgbColor]);

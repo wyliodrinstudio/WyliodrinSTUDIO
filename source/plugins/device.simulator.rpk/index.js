@@ -59,9 +59,10 @@ export default function setup(options, imports, register) {
 	workspace.updateDevices([{
 		id: 'rpk_simulator',
 		name: 'RPK Simulator',
-		priority: 1000,
+		priority: workspace.DEVICE_PRIORITY_SIMULATOR,
 		address: 'rpk_simulator',
 		board: 'rpk',
+		icon: 'plugins/device.simulator.rpk/data/img/icons/rpk-sim.png',
 		placeholder: true,
 		properties: {
 			isRunning: false

@@ -1,11 +1,11 @@
 let drivelist = null;
-const RPK_PRIORITY_HIGH = 20;
+// const RPK_PRIORITY_HIGH = 20;
 
 import _ from 'lodash';
 
 import path from 'path';
 
-import fs from 'fs-extra';
+let fs = null;
 
 //import DeviceSetup from './views/DeviceSetup.vue';
 
@@ -15,16 +15,88 @@ import { EventEmitter } from 'events';
 
 let deviceEvents = new EventEmitter();
 
+let SerialPort = null;
+// let discoverSerialDevicesTimer = null;
+
+// const SERIAL_PRIORITY_LOW = 299;
+// const SERIAL_PRIORITY_HIGH = 200;
+
 let studio = null;
 let workspace = null;
 let devices = [];
-
 let connections = {};
+
+let serialDevices = [];
+
+let ports = {};
+
+function loadSerialPort() {
+	try {
+		return eval ('require(\'serialport\')');
+	}
+	catch (e) {
+		console.error (e);
+		return {
+			list: function () {
+				return [
+				];
+			}
+		};
+	}
+}
+
+async function listSerialPorts() {
+	let ports = [];
+	try {
+		ports = await SerialPort.list();
+	}
+	catch (e) {
+		studio.workspace.showError('DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR', e.message);
+	}
+	return ports;
+}
+
+function searchSerialDevices() {
+	let listDevices = async () => {
+		let serialPorts = await listSerialPorts();
+		let devices = [];
+		for (let serialDevice of serialPorts) {
+			if (serialDevice.vendorId === '1fc9' && serialDevice.productId === '0094') {
+				let name = 'Running NXP RPK';
+				let description = '';
+				let id = serialDevice.vendorId.toString().toLowerCase();
+				let priority = workspace.DEVICE_PRIORITY_NORMAL;
+				devices.push({
+					id: id,//'wyapp:serial:'+serialDevice.comName,
+					address: serialDevice.comName,
+					description,
+					name,
+					connection: 'serial',
+					icon: 'plugins/device.rpk/data/img/icons/running-rpk.png',
+					board: 'any',
+					priority,
+					status: '',
+					properties: {
+						productId: serialDevice.productId,
+						vendorId: serialDevice.vendorId,
+						locationId: serialDevice.locationId,
+						serialNumber: serialDevice.serialNumber,
+						pnpId: serialDevice.pnpId,
+					}
+				});
+			}
+		}
+		serialDevices = devices;
+		updateDevices();
+		setTimeout (listDevices, 5000);
+	};
+	listDevices ();
+}
 
 // Search for RPK devices
 function loadRPK() {
 	try {
-		return require('drivelist');
+		return eval ('require(\'drivelist\')');
 	}
 	catch (e) {
 		studio.workspace.error('device_rpk: RPK is not available ' + e.message);
@@ -42,22 +114,24 @@ async function listRPKs() {
 		ports = await drivelist.list();
 	}
 	catch (e) {
-		studio.workspace.error('device_rpk: failed to list rpk ' + e.message);
+		console.error (e);
 	}
 	return ports;
 }
 
 function updateDevices() {
-	if (devices.length === 0) {
-		devices.push({
+	let add = [];
+	if (serialDevices.length === 0 && devices.length === 0) {
+		add.push({
 			id: 'rpk:newdevice',
 			address: '',
 			name: studio.workspace.vue.$t('RPK_NEW_DEVICE_TITLE'),
 			board: 'any',
+			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			placeholder: true
 		});
 	}
-	workspace.updateDevices([...devices]);
+	workspace.updateDevices([...devices, ...serialDevices, ...add]);
 }
 
 let discoverRPKsDevicesTimer = null;
@@ -75,7 +149,7 @@ function search() {
 							id: 'rpk:' + rpkDevice.mountpoints[0].path,
 							name: 'RPK',
 							address: rpkDevice.mountpoints[0].path,
-							priority: RPK_PRIORITY_HIGH,
+							priority: workspace.DEVICE_PRIORITY_NORMAL,
 							board: 'rpk',
 							connection: 'usb',
 							status: ''
@@ -93,9 +167,13 @@ function updateDevice(device) {
 
 export function setup(options, imports, register) {
 	studio = imports;
-
 	drivelist = loadRPK();
-	search();
+	SerialPort = loadSerialPort();
+
+	if (studio.system.platform () === 'electron')
+	{
+		fs = eval ('require (\'fs-extra\')');
+	}
 
 	let device_rpk = {
 		defaultIcon() {
@@ -148,6 +226,64 @@ export function setup(options, imports, register) {
 								return null;
 							}
 						}
+						else if (device.connection === 'serial') {
+							// console.log(studio.console);
+							// if (studio.console)
+							// {
+							// 	console.log('here');
+							// 	studio.console.select(device.id);
+							// process.nextTick(() => {
+								
+							// });
+							ports[device.id] = new SerialPort(device.address, (err) => {
+								if (err) {
+									device.status = 'DISCONNECTED';
+									updateDevice(device);
+									studio.workspace.showError ('RPK_SERIAL_CONNECTON_ERROR', {extra: err.message});
+									delete connections[device.id];
+									delete ports[device.id];
+								}
+								else
+								{
+									device.status = 'CONNECTED';
+									updateDevice(device);
+									if (studio.console)
+									{
+										studio.console.select (device.id);
+										studio.console.reset();
+										studio.console.show ();
+									}
+								}
+							});
+							ports[device.id].on('data', (data) => {
+								console.log(data.toString());
+								studio.console.write(device.id, data.toString());
+							});
+							ports[device.id].on('error', (err) => {
+								// console.log(data.toString());
+								studio.workspace.showError ('RPK_SERIAL_CONNECTON_ERROR', {extra: err.message});
+							});
+							ports[device.id].on('close', () => {
+								// console.log(data.toString());
+								device.status = 'DISCONNECTED';
+								updateDevice(device);
+								delete connections[device.id];
+								delete ports[device.id];
+							});
+							return device;
+							// }
+							// else {
+							// 	delete connections[device.id];
+							// 	return null;
+							// }
+						}
+						else if (device.connection === 'web-usb') {
+							process.nextTick(() => {
+								device.status = 'CONNECTED';
+								updateDevice(device);
+							});
+							return device;
+						}
 					}
 					else {
 						studio.workspace.showNotification('RPK_DEVICE_ALREADY_CONNECTED', { device: device.name });
@@ -156,12 +292,16 @@ export function setup(options, imports, register) {
 			}
 			return null;
 		},
-		disconnect(device, options) {
+		disconnect(device/*, options*/) {
 			if (_.isObject(device)) {
-				if (device.connection === 'usb') {
-					delete connections[device.id];
+				if (device) {
+					if (ports[device.id])
+					{
+						ports[device.id].close ();
+					}
 					device.status = 'DISCONNECTED';
 					updateDevice(device);
+					delete connections[device.id];
 				}
 				return true;
 			}
@@ -177,66 +317,136 @@ export function setup(options, imports, register) {
 	if (workspace) {
 		workspace.registerDeviceToolButton('DEVICE_RPK_FLASH', 10, async () => {
 			let device = studio.workspace.getDevice();
-			console.log('run');
 			if (device) {
-				let project = await studio.projects.getCurrentProject();
-				if (project) {
-					let filename;
-					let jsSource;
-					console.log(project.language);
-					if (project.language === 'visual') {
-						filename = await studio.projects.getDefaultRunFileName(project);
-						jsSource = await studio.projects.loadFile(project, filename);
-					}
-					else if (project.language === 'javascript') {
-						jsSource = await studio.projects.getCurrentFileCode();
-						console.log(jsSource);
-					}
-					device.sending = true;
-					updateDevice(device);
-					try {
-						if (studio.console) {
-							studio.console.show();
-							studio.console.reset();
+				if (device.connection === 'usb' || device.connection === 'web-usb')
+				{
+					let project = await studio.projects.getCurrentProject();
+					if (project) {
+						let filename;
+						let jsSource;
+						console.log(project.language);
+						if (project.language === 'visual') {
+							filename = await studio.projects.getDefaultRunFileName(project);
+							jsSource = await studio.projects.loadFile(project, filename);
+						}
+						else if (project.language === 'nodejs') {
+							jsSource = await studio.projects.getCurrentFileCode();
+							console.log(jsSource);
 						}
 
-						let data = await readBinary();
-						jsSource += '\0';
-						if (jsSource.length < 30000) {
-							data.write(jsSource, 397494);
-							studio.workspace.showNotification('DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT');
-							await writeBinary(device, data);
+						let flashError = true;
+
+						let data = null;
+						try
+						{
+							data = await readBinary();
+							console.log (data);
+							jsSource += '\0';
+							if (jsSource.length < 30000) {
+								data.write(jsSource, 397642);
+								flashError = false;
+							}
+							else {
+								studio.workspace.showNotification('DEVICE_RPK_TOO_LONG_SOURCE_CODE');
+							}
 						}
-						else {
-							studio.workspace.showNotification('DEVICE_RPK_TOO_LONG_SOURCE_CODE');
+						catch (e)
+						{
+							studio.workspace.showError('DEVICE_RPK_FLASH_ERROR', { extra: e.message });
+						}
+
+						if (!flashError)
+						{
+							if (device.connection === 'usb')
+							{
+								device.sending = true;
+								updateDevice(device);
+								try {
+									studio.workspace.showNotification('DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT');
+									await writeBinary(device, data);
+								}
+								catch (e) {
+									studio.workspace.showError('DEVICE_RPK_FLASH_ERROR', { extra: e.message });
+								}
+								device.sending = false;
+								updateDevice(device);
+								studio.workspace.showNotification('DEVICE_RPK_FLASH_DONE', {}, 'success');
+								delete connections[device.id];
+								device.status = 'DISCONNECTED';
+								updateDevice(device);
+							}
+							else
+							{
+								studio.filesystem.openExportDialog (data, {filename: project.name+'.bin', type:'application/binary'});
+							}
 						}
 					}
-					catch (e) {
-						studio.workspace.showError('DEVICE_RPK_FLASH_ERROR', { error: e.message });
-					}
-					device.sending = false;
-					updateDevice(device);
-					studio.workspace.showNotification('DEVICE_RPK_FLASH_DONE', {}, 'success');
-					delete connections[device.id];
-					device.status = 'DISCONNECTED';
-					updateDevice(device);
+				}
+				else
+				if (device.connection === 'serial')
+				{
+					studio.workspace.showDialog (RPKDeviceSetup);
 				}
 			}
 		}, 'plugins/device.wyapp/data/img/icons/run-icon.svg',
 		{
 			visible() {
 				let device = studio.workspace.getDevice();
-				return (device.status === 'CONNECTED' && device.connection === 'usb');
+				return (device.status === 'CONNECTED');
 			},
 			enabled() {
 				let device = studio.workspace.getDevice();
-				return (device.status === 'CONNECTED' && device.connection === 'usb' && !device.sending);
+				return (device.status === 'CONNECTED' && !device.sending);
 			},
 			type: 'run'
 		});
 	}
 	else {
 		studio.workspace.error('Failed to register device driver rpk');
+	}
+
+	if (studio.system.platform() === 'electron')
+	{
+		search();
+
+		if (SerialPort) {
+			searchSerialDevices();
+		}
+	}
+	else 
+	{
+		devices = [
+			{
+				id: 'rpk:web',
+				address: '',
+				name: 'NXP RPK',
+				board: 'any',
+				connection: 'web-usb',
+				priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
+				placeholder: true
+			}
+		];
+		updateDevices ();
+	}
+
+
+	if (studio.console)
+	{
+		studio.console.register ((event, id, ...data) =>
+		{
+			if (ports[id])
+			{
+				if (event === 'data')
+				{	
+					ports[id].write (data[0]);
+				}
+				else
+				if (event === 'resize')
+				{
+					// Serial Port has no resize
+				}
+			}
+		});
 	}
 
 	register(null, {
@@ -246,7 +456,7 @@ export function setup(options, imports, register) {
 
 async function readBinary() {
 	try {
-		let data = await fs.readFile(path.join(__dirname, 'data', 'binaries', 'jerryscript.bin'));
+		let data = await studio.filesystem.loadDataFile('device.rpk', 'binaries/jerryscript.bin');
 		return data;
 	} catch (err) {
 		console.error(err);

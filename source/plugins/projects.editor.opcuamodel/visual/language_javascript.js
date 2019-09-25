@@ -9,26 +9,26 @@ module.exports = function (blockly) {
 		var text_property_name = block.getFieldValue('property_name');
 		var dropdown_property_datatype = block.getFieldValue('property_datatype');
 		// TODO: Assemble JavaScript into code variable.
-		var code = '...;\n';
+		var code = 'namespace.addVariable({\n\t\tcomponentOf: folder,\n\t\tbrowseName: \''+text_property_name+'\'\n\t\t,nodeId: \'ns=1;s=state/status\',\n\t\tdataType: \''+dropdown_property_datatype+'\',\n\t});\n';
 		return code;
 	};
 
-	Blockly.JavaScript['opcuamodel_object'] = function (block) {
-		var text_object_name = block.getFieldValue('object_name');
-		var text_object_id = block.getFieldValue('object_id');
-		var dropdown_object_type = block.getFieldValue('object_type');
-		var checkbox_object_history = block.getFieldValue('object_history') == 'TRUE';
-		var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
-		// TODO: Assemble JavaScript into code variable.
-		var code = '...;\n';
-		return code;
-	};
+	// Blockly.JavaScript['opcuamodel_object'] = function (block) {
+	// 	var text_object_name = block.getFieldValue('object_name');
+	// 	var text_object_id = block.getFieldValue('object_id');
+	// 	var dropdown_object_type = block.getFieldValue('object_type');
+	// 	var checkbox_object_history = block.getFieldValue('object_history') == 'TRUE';
+	// 	var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
+	// 	// TODO: Assemble JavaScript into code variable.
+	// 	var code = '...;\n';
+	// 	return code;
+	// };
 
 	Blockly.JavaScript['opcuamodel_folder'] = function (block) {
 		var text_folder_name = block.getFieldValue('folder_name');
-		var statements_name = Blockly.JavaScript.statementToCode(block, 'NAME');
+		var statements_objects_properties = Blockly.JavaScript.statementToCode(block, 'folder_objects_properties');
 		// TODO: Assemble JavaScript into code variable.
-		var code = '...;\n';
+		var code = 'let folder = namespace.addFolder(parentFolder,{ browseName: \''+text_folder_name+'\'});\n\t(function (parentFolder) {\n\t'+statements_objects_properties+';\n\t})(folder);\n';
 		return code;
 	};
 

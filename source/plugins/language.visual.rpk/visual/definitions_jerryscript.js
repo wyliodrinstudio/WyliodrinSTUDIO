@@ -400,7 +400,7 @@ module.exports = function (blockly) {
 		init: function () {
 			this.appendDummyInput()
 				.appendField("Get Pressure")
-				.appendField(new Blockly.FieldDropdown([["atm", "1"], ["Pa", "2"], ["mmHg", "3"], ["bar", "4"]]), "Measurement unit");
+				.appendField(new Blockly.FieldDropdown([["atm", "1"], ["Pa", "2"], ["hPa", "3"], ["bar", "4"]]), "Measurement unit");
 			this.setOutput(true, "Number");
 			this.setColour(90);
 			this.setTooltip("Get Pressure");

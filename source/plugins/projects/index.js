@@ -377,7 +377,7 @@ let projects = {
 		// asta e eroare pentru user
 		if(project !== null) {
 			if(newName !== null) {
-				if(newName.trim().length() >= 1) {
+				if(newName.trim().length >= 1) {
 					let projectFolder = project.folder;
 					let newProjectFolder = path.join(workspacePath, newName);
 
@@ -609,7 +609,7 @@ let projects = {
 			let savePath = await studio.filesystem.openExportDialog(zipContent, {
 				filename: project.name +'.zip',
 				filetypes:['zip','tar'],
-				type:'data:application/zip;base64,'
+				type:'application/zip'
 			});
 			if(savePath !== null){
 				await studio.filesystem.writeFile(savePath, zipContent);
@@ -848,7 +848,7 @@ let projects = {
 			let savePath = await studio.filesystem.openExportDialog(content, {
 				filename: path.basename(filePath),
 				filetypes:[path.extname(filePath)],
-				type:'data:application;base64,'
+				type:'application'
 			});
 			if(savePath !== null){
 				await studio.filesystem.writeFile(savePath, content);
@@ -868,7 +868,7 @@ let projects = {
 			let savePath = await studio.filesystem.openExportDialog(data, {
 				filename:name,
 				filetypes:[path.extname(name)],
-				type:'data:application;base64,'
+				type:'application'
 			});
 			if(savePath !== null) {
 				await studio.filesystem.writeFile(savePath,data);
