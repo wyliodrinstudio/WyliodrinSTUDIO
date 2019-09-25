@@ -31,6 +31,10 @@ let system = {
 	openLink (url)
 	{
 		window.open(url);
+	},
+	platform ()
+	{
+		return 'browser';
 	}
 };
 

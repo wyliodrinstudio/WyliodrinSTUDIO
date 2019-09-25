@@ -40,6 +40,10 @@ let system = {
 	openLink (url)
 	{
 		shell.openExternal(url);
+	},
+	platform ()
+	{
+		return 'electron';
 	}
 };
 

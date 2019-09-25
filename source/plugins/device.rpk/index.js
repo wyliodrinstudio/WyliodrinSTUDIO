@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 import path from 'path';
 
-import fs from 'fs-extra';
+let fs = null;
 
 //import DeviceSetup from './views/DeviceSetup.vue';
 
@@ -32,7 +32,7 @@ let ports = {};
 
 function loadSerialPort() {
 	try {
-		return require('serialport');
+		return eval ('require(\'serialport\')');
 	}
 	catch (e) {
 		console.error (e);
@@ -96,7 +96,7 @@ function searchSerialDevices() {
 // Search for RPK devices
 function loadRPK() {
 	try {
-		return require('drivelist');
+		return eval ('require(\'drivelist\')');
 	}
 	catch (e) {
 		studio.workspace.error('device_rpk: RPK is not available ' + e.message);
@@ -120,8 +120,9 @@ async function listRPKs() {
 }
 
 function updateDevices() {
+	let add = [];
 	if (serialDevices.length === 0 && devices.length === 0) {
-		devices.push({
+		add.push({
 			id: 'rpk:newdevice',
 			address: '',
 			name: studio.workspace.vue.$t('RPK_NEW_DEVICE_TITLE'),
@@ -130,7 +131,7 @@ function updateDevices() {
 			placeholder: true
 		});
 	}
-	workspace.updateDevices([...devices, ...serialDevices]);
+	workspace.updateDevices([...devices, ...serialDevices, ...add]);
 }
 
 let discoverRPKsDevicesTimer = null;
@@ -168,10 +169,10 @@ export function setup(options, imports, register) {
 	studio = imports;
 	drivelist = loadRPK();
 	SerialPort = loadSerialPort();
-	search();
 
-	if (SerialPort) {
-		searchSerialDevices();
+	if (studio.system.platform () === 'electron')
+	{
+		fs = eval ('require (\'fs-extra\')');
 	}
 
 	let device_rpk = {
@@ -249,6 +250,7 @@ export function setup(options, imports, register) {
 									if (studio.console)
 									{
 										studio.console.select (device.id);
+										studio.console.reset();
 										studio.console.show ();
 									}
 								}
@@ -274,6 +276,13 @@ export function setup(options, imports, register) {
 							// 	delete connections[device.id];
 							// 	return null;
 							// }
+						}
+						else if (device.connection === 'web-usb') {
+							process.nextTick(() => {
+								device.status = 'CONNECTED';
+								updateDevice(device);
+							});
+							return device;
 						}
 					}
 					else {
@@ -309,7 +318,7 @@ export function setup(options, imports, register) {
 		workspace.registerDeviceToolButton('DEVICE_RPK_FLASH', 10, async () => {
 			let device = studio.workspace.getDevice();
 			if (device) {
-				if (device.connection === 'usb')
+				if (device.connection === 'usb' || device.connection === 'web-usb')
 				{
 					let project = await studio.projects.getCurrentProject();
 					if (project) {
@@ -320,33 +329,57 @@ export function setup(options, imports, register) {
 							filename = await studio.projects.getDefaultRunFileName(project);
 							jsSource = await studio.projects.loadFile(project, filename);
 						}
-						else if (project.language === 'javascript') {
+						else if (project.language === 'nodejs') {
 							jsSource = await studio.projects.getCurrentFileCode();
 							console.log(jsSource);
 						}
-						device.sending = true;
-						updateDevice(device);
-						try {
-							let data = await readBinary();
+
+						let flashError = true;
+
+						let data = null;
+						try
+						{
+							data = await readBinary();
+							console.log (data);
 							jsSource += '\0';
 							if (jsSource.length < 30000) {
 								data.write(jsSource, 397642);
-								studio.workspace.showNotification('DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT');
-								await writeBinary(device, data);
+								flashError = false;
 							}
 							else {
 								studio.workspace.showNotification('DEVICE_RPK_TOO_LONG_SOURCE_CODE');
 							}
 						}
-						catch (e) {
-							studio.workspace.showError('DEVICE_RPK_FLASH_ERROR', { error: e.message });
+						catch (e)
+						{
+							studio.workspace.showError('DEVICE_RPK_FLASH_ERROR', { extra: e.message });
 						}
-						device.sending = false;
-						updateDevice(device);
-						studio.workspace.showNotification('DEVICE_RPK_FLASH_DONE', {}, 'success');
-						delete connections[device.id];
-						device.status = 'DISCONNECTED';
-						updateDevice(device);
+
+						if (!flashError)
+						{
+							if (device.connection === 'usb')
+							{
+								device.sending = true;
+								updateDevice(device);
+								try {
+									studio.workspace.showNotification('DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT');
+									await writeBinary(device, data);
+								}
+								catch (e) {
+									studio.workspace.showError('DEVICE_RPK_FLASH_ERROR', { extra: e.message });
+								}
+								device.sending = false;
+								updateDevice(device);
+								studio.workspace.showNotification('DEVICE_RPK_FLASH_DONE', {}, 'success');
+								delete connections[device.id];
+								device.status = 'DISCONNECTED';
+								updateDevice(device);
+							}
+							else
+							{
+								studio.filesystem.openExportDialog (data, {filename: project.name+'.bin', type:'application/binary'});
+							}
+						}
 					}
 				}
 				else
@@ -372,6 +405,50 @@ export function setup(options, imports, register) {
 		studio.workspace.error('Failed to register device driver rpk');
 	}
 
+	if (studio.system.platform() === 'electron')
+	{
+		search();
+
+		if (SerialPort) {
+			searchSerialDevices();
+		}
+	}
+	else 
+	{
+		devices = [
+			{
+				id: 'rpk:web',
+				address: '',
+				name: 'NXP RPK',
+				board: 'any',
+				connection: 'web-usb',
+				priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
+				placeholder: true
+			}
+		];
+		updateDevices ();
+	}
+
+
+	if (studio.console)
+	{
+		studio.console.register ((event, id, ...data) =>
+		{
+			if (ports[id])
+			{
+				if (event === 'data')
+				{	
+					ports[id].write (data[0]);
+				}
+				else
+				if (event === 'resize')
+				{
+					// Serial Port has no resize
+				}
+			}
+		});
+	}
+
 	register(null, {
 		deviceRpk: {}
 	});
@@ -379,7 +456,7 @@ export function setup(options, imports, register) {
 
 async function readBinary() {
 	try {
-		let data = await fs.readFile(path.join(__dirname, 'data', 'binaries', 'jerryscript.bin'));
+		let data = await studio.filesystem.loadDataFile('device.rpk', 'binaries/jerryscript.bin');
 		return data;
 	} catch (err) {
 		console.error(err);

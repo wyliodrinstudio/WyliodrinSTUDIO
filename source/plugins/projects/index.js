@@ -377,10 +377,9 @@ let projects = {
 		// asta e eroare pentru user
 		if(project !== null) {
 			if(newName !== null) {
-				if(newName.trim().length() >= 1) {
+				if(newName.trim().length >= 1) {
 					let projectFolder = project.folder;
 					let newProjectFolder = path.join(workspacePath, newName);
-
 					newProjectFolder = this._isPathValid(workspacePath, newProjectFolder);
 					// TODO if this is the current project, close it, timeout, rename and open again
 					if (newProjectFolder !== null && path.basename(newProjectFolder) !== '') {
@@ -388,11 +387,20 @@ let projects = {
 							if (await studio.filesystem.pathExists(projectFolder)) {
 								await studio.filesystem.rename(projectFolder, newProjectFolder);
 								await this.loadProjects(false);
-								return true;
+								
 							}
 						} catch (e) {
 							studio.workspace.showError('PROJECT_ERROR_RENAME_PROJECT', {project: projectFolder, error: e.message});
+							return false;
 						}
+						if(project.name === await studio.workspace.getFromStore('projects', 'currentProject').name){
+							let newProject = project;
+							newProject.folder = newProjectFolder;
+							newProject.name = newName;
+							await this.selectCurrentProject(newProject,true);
+						}
+						return true;
+						
 					} else {
 						studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
 					}
@@ -609,7 +617,7 @@ let projects = {
 			let savePath = await studio.filesystem.openExportDialog(zipContent, {
 				filename: project.name +'.zip',
 				filetypes:['zip','tar'],
-				type:'data:application/zip;base64,'
+				type:'application/zip'
 			});
 			if(savePath !== null){
 				await studio.filesystem.writeFile(savePath, zipContent);
@@ -848,7 +856,7 @@ let projects = {
 			let savePath = await studio.filesystem.openExportDialog(content, {
 				filename: path.basename(filePath),
 				filetypes:[path.extname(filePath)],
-				type:'data:application;base64,'
+				type:'application'
 			});
 			if(savePath !== null){
 				await studio.filesystem.writeFile(savePath, content);
@@ -868,7 +876,7 @@ let projects = {
 			let savePath = await studio.filesystem.openExportDialog(data, {
 				filename:name,
 				filetypes:[path.extname(name)],
-				type:'data:application;base64,'
+				type:'application'
 			});
 			if(savePath !== null) {
 				await studio.filesystem.writeFile(savePath,data);

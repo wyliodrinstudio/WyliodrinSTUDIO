@@ -1,5 +1,6 @@
 import Dexie from 'dexie';
 import EventEmitter from 'events';
+import axios from 'axios';
 
 let events = new EventEmitter();
 
@@ -494,7 +495,7 @@ let web_filesystem = {
 	openExportDialog(data, options = {}) {
 		//data to take from options - type
 		let element = document.createElement('a');
-		element.setAttribute('href', options.type + data.toString('base64'));
+		element.setAttribute('href', 'data:'+options.type+';base64,' + data.toString('base64'));
 		element.setAttribute('download', options.filename);
 
 		element.style.display = 'none';
@@ -551,6 +552,17 @@ let web_filesystem = {
 			events.emit('load', null, list);
 		});
 	},
+
+	/**
+	 * Import a file from the data folder
+	 * @param {string} pluginName 
+	 * @param {string} filename 
+	 */
+	async loadDataFile (pluginName, filename)
+	{
+		return Buffer.from ((await axios.request ({url: 'plugins/'+pluginName+'/data/'+filename, responseType: 'arraybuffer', method: 'get'})).data);
+	},
+
 	/**
 	 * Is the filesystem persistent?
 	 */
