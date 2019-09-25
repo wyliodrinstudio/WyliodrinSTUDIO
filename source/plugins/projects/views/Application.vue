@@ -578,6 +578,7 @@ export default {
 				
 				this.items = root;
 				this.previous = this.items;
+				console.log(this.items);
 			}
 		},
 		async newFolder (item)
