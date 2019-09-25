@@ -16,6 +16,7 @@
 				<p><strong>Ovidiu Stoica</strong> - {{$t('ABOUT_UI_UX')}}</p>
 				<p><strong>Ioana Culic</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 				<p><strong>Cosmin-Daniel Radu</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
+				<p><strong>Calin Dumitru</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 				<p><strong>Diana Ghindaoanu</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 				<p><strong>Teona Severin</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 				<p><strong>Liviu-Nicolae Moraru</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
