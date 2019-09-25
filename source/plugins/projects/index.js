@@ -380,7 +380,6 @@ let projects = {
 				if(newName.trim().length >= 1) {
 					let projectFolder = project.folder;
 					let newProjectFolder = path.join(workspacePath, newName);
-
 					newProjectFolder = this._isPathValid(workspacePath, newProjectFolder);
 					// TODO if this is the current project, close it, timeout, rename and open again
 					if (newProjectFolder !== null && path.basename(newProjectFolder) !== '') {
@@ -388,11 +387,20 @@ let projects = {
 							if (await studio.filesystem.pathExists(projectFolder)) {
 								await studio.filesystem.rename(projectFolder, newProjectFolder);
 								await this.loadProjects(false);
-								return true;
+								
 							}
 						} catch (e) {
 							studio.workspace.showError('PROJECT_ERROR_RENAME_PROJECT', {project: projectFolder, error: e.message});
+							return false;
 						}
+						if(project.name === await studio.workspace.getFromStore('projects', 'currentProject').name){
+							let newProject = project;
+							newProject.folder = newProjectFolder;
+							newProject.name = newName;
+							await this.selectCurrentProject(newProject,true);
+						}
+						return true;
+						
 					} else {
 						studio.workspace.showError('PROJECT_ERROR_PATH_INVALID');
 					}
