@@ -101,7 +101,7 @@ export default {
 				{
 					try
 					{
-						let xml = Blockly.Xml.textToDom(this.source);
+						let xml = Blockly.Xml.textToDom(this.source.toString());
 						Blockly.Xml.domToWorkspace(xml, this.workspace);  
 					}
 					catch (e)
