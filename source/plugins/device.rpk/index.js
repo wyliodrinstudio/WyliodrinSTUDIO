@@ -377,7 +377,10 @@ export function setup(options, imports, register) {
 							}
 							else
 							{
-								studio.filesystem.openExportDialog (data, {filename: project.name+'.bin', type:'application/binary'});
+								studio.workspace.showDialog (RPKDeviceSetup, {
+									filename: project.name,
+									binary: data
+								});
 							}
 						}
 					}

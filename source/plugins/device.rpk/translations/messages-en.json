@@ -71,6 +71,10 @@
         "message": "Connect the RPK device to a USB port, press Switch 3 and reboot the device using the pin",
         "description": "How to add new RPK device description."
     },
+    "RPK_NEW_DEVICE_FLASH_INSTRUCTIONS": {
+        "message": "Save the file you download here to the drive that shows up when you connect the NXP RPK device.",
+        "description": "How to flash a RPK device manually."
+    },
     "RPK_SERIAL_CONNECTON_ERROR": {
         "message": "Error while connecting to the RPK device.",
         "description": "The error shown to the user when the serial connection fails"
