@@ -29,8 +29,22 @@
 				position: absolute; 
 				margin: auto; 
 				width: 100%;
-				top: 58%;
+				top: 54%;
 				background: #ffffff;
+			}
+			pre.loading {
+				font-size:18px; 
+				font-family: 'Courier New', Courier, monospace; 
+				color:#000; 
+				text-align:left; 
+				padding: 10px 15px; 
+				position: absolute; 
+				margin: auto; 
+				/* width: 100%; */
+				top: 60%;
+				background: #ffffff;
+				display: flex;
+  				justify-content: center;
 			}
 			.loading-progress {
 				font-size:18px; 
@@ -39,7 +53,7 @@
 				padding: 0px;
 				position: absolute; 
 				margin: auto; 
-				top: 55%;
+				top: 50%;
 				display: none;
 				left: 0;
 				right: 0;
@@ -56,11 +70,12 @@
 				padding: 0px;
 				position: absolute; 
 				margin: auto; 
-				top: 55%;
+				top: 50%;
 				height: 12px;
 				background: #d3431f;
 			}
 		</style>
+		<title>Wyliodrin STUDIO</title>
 		<script src="http://localhost:8098"></script>
 	</head>
 	<body class="wyliodrin-loading">
@@ -79,6 +94,10 @@
 		<div class="loading-progress" id="loading-progress">
 			<div class="loading-progress-bar" id="loading-progress-bar" style="width:0%"></div>
 		  </div> 
+
+		<pre id="jokes" class="loading">
+			
+		  </pre>
 
 		<script>
 			require ('./vendor/index.js');
