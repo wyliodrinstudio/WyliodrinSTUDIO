@@ -21,6 +21,7 @@
 				<p><strong>Teona Severin</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 				<p><strong>Liviu-Nicolae Moraru</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 				<p><strong>Ana Marinescu</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
+				<p><strong>Andrei Deatcu</strong> - {{$t('ABOUT_DEVELOPMENT')}}</p>
 			</div>
 		</v-card-text>
 

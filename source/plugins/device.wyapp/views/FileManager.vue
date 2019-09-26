@@ -6,13 +6,13 @@
 			<v-spacer></v-spacer>
 			<v-tooltip bottom>
 				<template #activator="data">
-					<v-btn text class="icon-btn" aria-label="Refresh">
-						<!-- <v-img contain src="plugins/device.wyapp/data/img/icons/refresh-icon.svg" aria-label="Refreshr" v-on="data.on"></v-img> -->
-						{{$t('DEVICE_WYAPP_REFRESH')}}
+					<v-btn text class="title-icon-btn" aria-label="Refresh" v-on="on">
+						<v-img contain src="plugins/device.wyapp/data/img/icons/refresh-icon.svg"></v-img>
 					</v-btn>
 				</template>
 				<span>{{$t('DEVICE_WYAPP_REFRESH')}}</span>
 			</v-tooltip>
+
 		</v-card-title>
 		<v-card-text>
 			<div :class="projectTree" class="project-tree-on">

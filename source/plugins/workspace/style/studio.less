@@ -189,12 +189,20 @@ a:hover {text-decoration:underline;}
 }
 
 .v-card__title {
-	button, button:hover {background: transparent !important; text-decoration: @color-highlight !important; margin: 0 !important; height: initial !important; font-weight: 300;
+	button, button:hover {background: transparent !important; text-decoration: @color-highlight !important; margin: 0 !important; height: initial !important; font-weight: 300; max-height: 36px !important; min-width: initial !important;
 		> div {padding: 0 !important;}
 	}
 	.v-btn:hover:before {
 		background-color: transparent;
 	}
+
+	button .v-image__image {height: 24px; width: 24px; margin: auto; position: absolute; left: 0; right: 0;	top: 0;	bottom: 0;}
+
+	.title-icon-btn {padding: 0px !important; border-radius: 3px !important;
+		.v-btn__content {width: 36px !important; height: 36px !important;}
+	}
+
+	.title-icon-btn:hover {padding: 0px !important; background: @color-highlight !important;	}
 }
 
 .v-menu__content {margin-top: -42px !important;
@@ -240,6 +248,17 @@ a:hover {text-decoration:underline;}
 	.v-window__container { background: @color-white; height: 100% !important;}
 	.v-tab .v-image {height: 24px; width: 24px; margin-right: 5px;}
 	.v-btn__content {text-transform: capitalize;}
+
+	.v-treeview {background: @color-grey-1;
+		i {margin-right:5px;}
+	}
+	.project-box-1 {
+		.v-list-item__icon {margin:0 10px 0 0 !important;}
+		.v-list-item__content {padding: 0 !important;}
+		.v-list-item__title {font-size: 14px !important;}
+		.v-application p {margin-bottom: 0 !important;}
+		.v-list-item {min-height: initial !important; height: 46px !important; padding: 10px 16px !important;}
+	}
 }
 
 .theme--light.v-card .v-card__text {color: @color-black;}

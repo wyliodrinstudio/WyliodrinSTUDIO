@@ -518,7 +518,7 @@ export function setup(options, imports, register)
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_FILE_MANAGER', 20, () => {
 			let device = studio.workspace.getDevice ();
 			studio.workspace.showDialog(FileManager, {
-				width:550,
+				width:800,
 				connection: connections[device.id]
 			});
 		}, 'plugins/device.wyapp/data/img/icons/fileexplorer-icon.svg', {
