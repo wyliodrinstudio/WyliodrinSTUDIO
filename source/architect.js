@@ -259,8 +259,8 @@ function Architect(config) {
 	
 	function hookFunction(target, prop, ...args) 
 	{ 
-		// console.log('[hookFunction]');
-		// console.log('\t' + target.__name + '.' + prop);
+		console.log('[hookFunction]');
+		console.log('\t' + target.__name + '.' + prop);
 		let preResult = null;
 		let result = {};
 		let postResult = {};

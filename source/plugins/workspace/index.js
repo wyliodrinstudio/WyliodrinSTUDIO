@@ -5,6 +5,7 @@ import VueI18n from 'vue-i18n';
 import Vuex from 'vuex';
 import VuetifyDialog from 'vuetify-dialog';
 import Dialog from './views/Dialog.vue';
+import uuid from 'uuid';
 import _ from 'lodash';
 import ConnectionSelectionDialog from './views/ConnectionSelectionDialog.vue';
 import DialogLayout from './views/DialogLayout.vue';
@@ -16,6 +17,7 @@ import AboutDialog from './views/AboutDialog.vue';
 import AsyncComputed from 'vue-async-computed';
 
 let settings = null;
+let studio = null;
 
 /**
  * a function that is called when the item may be deleted
@@ -250,6 +252,7 @@ let workspace = {
 				return render(Studio);
 			}
 		});
+
 	},
 
 	/**
@@ -1194,9 +1197,21 @@ let workspace = {
 	error() {
 		console.error('ERROR: ', ...arguments);
 	},
+
+	getToken ()
+	{
+		return studio.settings.loadValue('workspace', 'userid', null);
+	}
 };
 
 export function setup(options, imports, register) {
+
+	studio = imports;
+	
+	let newToken = uuid.v4 ();
+	let token = imports.settings.loadValue('workspace', 'userid', newToken);
+	if (token == newToken) imports.settings.storeValue('workspace', 'userid', token);
+
 	system = imports.system;
 	system.events.on('close-ask', () => {
 		workspace.close();

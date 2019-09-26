@@ -1,6 +1,46 @@
 
-
 export function setup(options, imports, register) {
+
+	var Countly = require('countly-sdk-nodejs');
+
+	Countly.init({
+		app_key: '5ceac775edc0f7c07a68284a24c4c4b27825c06b',
+		url: '192.168.72.185',
+		// debug: true,
+		app_version: 2.0
+	});
+
+	let token = imports.workspace.getToken();
+
+	if (!token)
+	{
+		// TODO 
+	}
+
+	function getTime() {
+		let today = new Date();
+		return {
+			date: today.getDate()+'.'+(today.getMonth()+1)+'.'+today.getFullYear(),
+			time: today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+		}
+	}
+
+	console.log(typeof(token));
+	Countly.user_details({
+		'name': token,
+		'username': token + '.' + getTime().date + '-' + getTime().time,
+		// 'email': 'test@test.com',
+		// 'organization': 'Countly',
+		// 'phone': '+37112345678',
+		//Web URL to picture
+		// 'picture': 'https://pbs.twimg.com/profile_images/1442562237/012_n_400x400.jpg', 
+		// 'gender': 'M',
+		// 'byear': 1987, //birth year
+		'custom':{
+			'date': getTime().date
+		}
+	});
+
 
 	let currentSession = {
 		start: {},
@@ -11,16 +51,6 @@ export function setup(options, imports, register) {
 	let runPressedCount = {};
 	let stopPressedCount = {};
 	let openProjects = {};
-
-	function getTime() {
-		let today = new Date();
-		let dateStart = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-		let timeStart = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-		return {
-			date: dateStart,
-			time: timeStart
-		};
-	}
 
 	function addStop() {
 		let device = imports.workspace.getDevice();
@@ -34,6 +64,15 @@ export function setup(options, imports, register) {
 			stopPressedCount[device.board].count += 1;
 			stopPressedCount[device.board].times.push(getTime());
 		}
+
+		let newTime = getTime();
+		Countly.add_event({
+			'key': 'pressedStopButton',
+			'count': 1,
+			'segmentation': {
+				'time': newTime.date + '//' + newTime.time
+			}
+		});
 	}
 
 	function addRun() {
@@ -48,10 +87,30 @@ export function setup(options, imports, register) {
 			runPressedCount[device.board].count += 1;
 			runPressedCount[device.board].times.push(getTime());
 		}
+
+		let newTime = getTime();
+		Countly.add_event({
+			'key': 'pressedRunButton',
+			'count': 1,
+			'segmentation': {
+				'time': newTime.date + '//' + newTime.time
+			}
+		});
 	}
 
 	imports.hooks.addPreHook('system', 'close', () => {
 		currentSession.stop = getTime();
+
+		Countly.add_event({
+			'key': 'currentSession',
+			'count': 1,
+			'segmentation': {
+				'stop': currentSession.stop
+			}
+		});
+
+		// Countly.end_event('currentSession');
+		// Countly.end_event('updateDevices');
 		/** trimite catre ceva info inainte de inchidere */
 		return {
 			abort: false,
@@ -79,6 +138,22 @@ export function setup(options, imports, register) {
 	imports.events.on ('ready', ()=>
 	{
 		currentSession.start = getTime();
+
+		// Countly.add_event({
+		// 	'key': 'currentSession'+'.',
+		// 	'count': 1,
+		// 	'segmentation': {
+		// 		'start': currentSession.start,
+		// 		'stop': currentSession.stop
+		// 	}
+		// });
+
+		Countly.add_event({
+			'key': 'currentSession',
+			'segmentation': {
+				'start': currentSession.start
+			}
+		});
 	});
 
 	imports.hooks.addPreHook('projects', 'changeFile', (...args) => {
@@ -88,6 +163,13 @@ export function setup(options, imports, register) {
 			if (!openProjects[projectInfo.language])
 				openProjects[projectInfo.language] = 0;
 			openProjects[projectInfo.language] += 1;
+			Countly.add_event({
+				'key': 'projectsOpened' + '.' + projectInfo.language,
+				'count': 1,
+				'segmentation': {
+					'time': getTime().date + '//' + getTime().time
+				}
+			});
 
 			// console.log(openProjects);
 		}
@@ -95,37 +177,29 @@ export function setup(options, imports, register) {
 	});
 
 	imports.hooks.addPreHook('workspace', 'updateDevices', (...args) => {
+		// console.log(Countly.events.list());
 		let type = args[0];
 		let devices = args[1];
 		currentDevices[type] = {};
 		for (let device of devices) {
-			if (!device.placeholder && device.id !== 'error') {
+			if (!device.placeholder) {
 				if (!currentDevices[type][device.board])
 					currentDevices[type][device.board] = 0;
 				currentDevices[type][device.board] += 1;
+				// console.log(currentDevices[type][device.board]);
+				console.log(device.board+':'+currentDevices[type][device.board]);
+				Countly.add_event({
+					'key': 'updateDevices.'+type+'.'+device.board,
+					'count': 1,
+					'segmentation': {
+						'number': currentDevices[type][device.board]
+					}
+				});
+				
 			}
 		}
 		return null;
 	});
 	
-	// imports.hooks.addPreHook('projects', 'createEmptyProject', (...args) => {
-	
-	// 	let da = true;
-	// 	if (da) {
-	// 		let r = {
-	// 			abort: false,
-	// 			args: ['Teona is here', 'nodejs'],
-	// 			ret: null
-	// 		};
-	// 		return r;
-	// 	} else return null;
-	// });
-
-	// imports.hooks.addPostHook('projects', 'createEmptyProject', async(res) => {
-	// 	let res2 = await res;
-	// 	console.log(res);
-	// 	return res2;
-	// });
-
 	register(null, {});
 }
