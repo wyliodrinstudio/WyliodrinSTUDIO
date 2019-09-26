@@ -26,11 +26,10 @@
 				<br>
 			
 				<h3>{{$t('ABOUT_TRANSLATE')}}</h3>
-				<p><strong>Diana Ghindaoanu</strong> - French</p>
+				<p><strong>Diana Ghindaoanu</strong> - Romanian, French</p>
 				<p><strong>Simao Gomes Viana</strong> - German</p>
 				<p><strong>Csongor Hegedüs</strong> - Hungarian</p>
 				<p><strong>Ana Marinescu</strong> - Japaneese</p>
-				<p><strong>Diana Ghindaoanu</strong> - Romanian</p>
 				<p><strong>Veronika Uhrinová</strong> - Slovak</p>
 				<p><strong>Sorina Goran</strong> - Spanish</p>
 			</div>
