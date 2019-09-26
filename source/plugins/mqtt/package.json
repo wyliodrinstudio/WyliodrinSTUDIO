@@ -6,6 +6,7 @@
     "plugin": {
         "consumes": ["workspace"],
         "provides": ["mqtt"],
-        "target": ["electron"]
+        "target": ["electron"],
+        "disabled": true
     }
 }

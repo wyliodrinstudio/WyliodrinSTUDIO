@@ -234,7 +234,7 @@
       <field name="Color">0</field>
     </block>
     <block type="rpk_rgb_set_state">
-      <field name="NAME">0</field>
+      <field name="Brightness">0</field>
       <field name="Color">0</field>
     </block>
     <block type="rpk_rgb_get_brightness"/>

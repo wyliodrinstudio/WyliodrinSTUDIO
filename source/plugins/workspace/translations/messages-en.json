@@ -103,6 +103,10 @@
         "message": "Developed by",
         "description": "Text for authors of Wyliodrin Studio"
     },
+    "ABOUT_TRANSLATE": {
+        "message": "Translations",
+        "description": "Text for translators of Wyliodrin Studio"
+    },
     "ABOUT_MAINTAINER": {
         "message": "Maintainer",
         "description": "Maintainer of Wyliodrin Studio"

@@ -235,6 +235,7 @@
 import { mapGetters } from 'vuex';
 import path from 'path';
 import ProjectsLibrary from './ProjectsLibrary.vue';
+import $ from 'jquery';
 
 export default {
 	name: 'Application',
@@ -272,8 +273,7 @@ export default {
 	computed: {
 
 		treeShow ()
-		{
-			
+		{	
 			return this.showTree?'d-block':'d-none';
 		},
 		treeHide ()
@@ -346,6 +346,12 @@ export default {
 				this.updateTitle ();
 				this.showTree = this.advanced;
 			}
+		},
+		showTree ()
+		{
+			process.nextTick (() => {
+				window.dispatchEvent(new Event('resize'));
+			});
 		},
 		type()
 		{
