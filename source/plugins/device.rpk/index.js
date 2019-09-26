@@ -331,7 +331,6 @@ export function setup(options, imports, register) {
 						}
 						else if (project.language === 'nodejs') {
 							jsSource = await studio.projects.getCurrentFileCode();
-							console.log(jsSource);
 						}
 
 						let flashError = true;
@@ -340,8 +339,7 @@ export function setup(options, imports, register) {
 						try
 						{
 							data = await readBinary();
-							console.log (data);
-							jsSource += '\0';
+							jsSource += '\n\0';
 							if (jsSource.length < 30000) {
 								data.write(jsSource, 397642);
 								flashError = false;
