@@ -292,7 +292,7 @@
          "NOTEBOOK_LOAD_DATA_ERROR": "Unable to load the notebook data ({error})",
          "NOTEBOOK_RESET_NOTEBOOK_TITLE": "Reset Notebook",
          "NOTEBOOK_RESET_NOTEBOOK_QUESTION": "Are you sure you want to reset the notebook?\nYou will lose all the notes for this project.",
-         "NOTEBOOK_LOAD_PROJECT": "Load a project to display the botebook",
+         "NOTEBOOK_LOAD_PROJECT": "Load a project to display the notebook",
          "PIN_LAYOUT": "Pin Layout",
          "PROJECT_APPLICATION": "Application",
          "PROJECT_DELETE_FOLDER": "Delete Folder",

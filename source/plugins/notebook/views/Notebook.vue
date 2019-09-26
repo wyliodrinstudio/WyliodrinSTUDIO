@@ -145,7 +145,7 @@
 		</div>
 	</div>
 	<div v-else>
-		{{$t('NOTEBOOK_PROJECT_LOAD')}}
+		{{$t('NOTEBOOK_LOAD_PROJECT')}}
 	</div>
 </template>
 
@@ -264,7 +264,7 @@ export default {
 					} 
 					else
 					{
-						// TODO notebook is not present in this project
+						this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
 					}
 					if (this.elements.length === 0) 
 						this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
@@ -272,16 +272,15 @@ export default {
 				else
 				{
 					this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
-				}
-				
+				}				
 			},
 		},
 		elements: { 
 			deep:true,
-			handler: function (val, oldVal){
+			handler: async function (val, oldVal){
 				if (this.currentProject)
 				{
-					this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
+					let file = await this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
 				}
 			}		
 		}
