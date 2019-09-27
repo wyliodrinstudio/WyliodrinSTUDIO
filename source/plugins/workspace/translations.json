@@ -367,6 +367,7 @@
          "PROJECTS_EXTENSION_URECOGNIZED": "The file extension is not recognized",
          "PROJECTS_INVALID_PROJECT": "You have oppened an invalid project, please select another one",
          "PROJECT_EXISTS_PROMPT": "A project with that name already exists",
+         "PROJECTS_READ_ONLY_FILE_SYSTEM": "The stoarge space is READ ONLY, projects can only be opened.",
          "EDITOR_VISUAL_SHOW_CODE": "Show Code",
          "EDITOR_VISUAL_HIDE_CODE": "Hide Code",
          "SCHEMATICS": "Schematics",
