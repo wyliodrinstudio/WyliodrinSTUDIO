@@ -22,10 +22,10 @@ module.exports = function (blockly) {
 		Blockly.JavaScript.opcuamodel_add_variable ();
 		var text_variable_name = block.getFieldValue('variable_name');
 		var text_variable_id = text_variable_name.replace (/[^A-Za-z0-9]/g, '_');
-		var dropdown_variable_datatype = block.getFieldValue('variable_type');
+		var dropdown_variable_type = block.getFieldValue('variable_type');
 		var text_variable_history = block.getFieldValue('variable_history');
 		// TODO: Assemble JavaScript into code variable.
-		var code = 'let variable_'+text_variable_id+' = opcuamodelAddVariable (\'ns=1;s=\'+folderId+\'/'+text_variable_id+'\', \''+text_variable_name+'\', folder, namespace, \''+dropdown_variable_datatype+'\');\n';
+		var code = 'let variable_'+text_variable_id+' = opcuamodelAddVariable (\'ns=1;s=\'+folderId+\'/'+text_variable_id+'\', \''+text_variable_name+'\', folder, namespace, \''+dropdown_variable_type+'\');\n';
 		if (text_variable_history === 'TRUE') code = code + 'server.engine.addressSpace.installHistoricalData (variable_'+text_variable_id+');\n';
 		return code;
 	};
