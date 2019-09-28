@@ -1,5 +1,4 @@
 import OPCUAModelEditor from './views/OPCUAModelEditor.vue';
-import _ from 'lodash';
 
 // import blockly from './blockly/blockly_compressed_studio.js';
 // require ('./blockly/msg/js/en_studio.js')(blockly);
