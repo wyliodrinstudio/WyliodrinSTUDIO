@@ -628,7 +628,7 @@ export default {
 		{
 			let files = await this.studio.filesystem.openImportDialog({
 				title:'Import',
-				filetypes:[]
+				filetypes:['*']
 			});
 			if (files.length > 0)
 			{
