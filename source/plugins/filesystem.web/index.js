@@ -68,7 +68,7 @@ async function tryPersistWithoutPromtingUser() {
 		if (persisted) {
 			return 'persisted';
 		} else {
-			throw new Error('Failed to persist');
+			return 'notavailable';
 		}
 	}
 	if (permission.state === 'prompt') {

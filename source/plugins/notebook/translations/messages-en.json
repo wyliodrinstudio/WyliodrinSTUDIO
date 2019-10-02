@@ -32,7 +32,7 @@
         "description": "Confirmation prompt which ensures that the user really wants to reset the notebook"
     },
     "NOTEBOOK_LOAD_PROJECT": {
-        "message": "Load a project to display the botebook",
+        "message": "Load a project to display the notebook",
         "description": "The message when there is no project loaded"
     }
 }

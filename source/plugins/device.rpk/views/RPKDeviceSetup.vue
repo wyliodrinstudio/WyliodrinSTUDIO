@@ -8,9 +8,13 @@
 			<div>
 				{{$t('RPK_NEW_DEVICE_INSTRUCTIONS')}}
 			</div>
+			<div v-show="binary">
+				{{$t('RPK_NEW_DEVICE_FLASH_INSTRUCTIONS')}}
+			</div>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>
+			<v-btn text @click="flash" v-show="binary">{{$t('DEVICE_RPK_FLASH')}}</v-btn>
 			<v-btn text @click="close">{{$t('CLOSE')}}</v-btn>
 		</v-card-actions>
 	</v-card>
@@ -19,7 +23,7 @@
 <script>
 export default {
 	name: 'RPKDeviceSetup',
-	props: ['token'],
+	props: ['token', 'binary', 'filename'],
 	data () {
 		return {
 			value: ''
@@ -36,6 +40,10 @@ export default {
 		}
 	},
 	methods: {
+		flash ()
+		{
+			this.studio.filesystem.openExportDialog (this.binary, {filename: this.filename+'.bin', type:'application/binary'});
+		},
 		close ()
 		{
 			this.$root.$emit ('submit');

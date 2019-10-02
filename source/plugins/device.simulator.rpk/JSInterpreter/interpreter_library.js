@@ -297,11 +297,19 @@ export default function interpreter_library (studio, device, generic_rpk) {
 		};
 
 		let gyroscopeGetValue = function() {
-			return generic_rpk.gyroscope;
+			let gyro = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
+			interpreter.setProperty(gyro, 'x', generic_rpk.gyroscope.x);
+			interpreter.setProperty(gyro, 'y', generic_rpk.gyroscope.y);
+			interpreter.setProperty(gyro, 'z', generic_rpk.gyroscope.z);
+			return gyro;
 		};
 
 		let accelometerGetValue = function() {
-			return generic_rpk.accelometer;
+			let accel = interpreter.createObjectProto(interpreter.OBJECT_PROTO);
+			interpreter.setProperty(accel, 'x', generic_rpk.accelometer.x);
+			interpreter.setProperty(accel, 'y', generic_rpk.accelometer.y);
+			interpreter.setProperty(accel, 'z', generic_rpk.accelometer.z);
+			return accel;
 		};
 
 		let buzzerSetState = function(state) {

@@ -72,7 +72,6 @@
 		"moment-timezone": "^0.5.26",
 		"msgpack5": "^4.2.1",
 		"node-blockly": "https://github.com/wyliodrinstudio/node-blockly.git",
-		"one-liner-joke": "^1.2.0",
 		"raw-loader": "^3.1.0",
 		"reconnectingwebsocket": "^1.0.0",
 		"uuid": "^3.3.2",
@@ -98,7 +97,8 @@
 		"webpack-cli": "^3.3.9",
 		"webpack-node-externals": "^1.7.2",
 		"xml-js": "^1.6.11",
-		"xterm": "^3.14.5"
+		"xterm": "^3.14.5",
+		"yodasay": "^1.1.9"
 	},
 	"eslintConfig": {
 		"env": {
@@ -158,6 +158,7 @@
 		"architect": "^0.1.13",
 		"archiver": "^3.0.0",
 		"bonjour-hap": "^3.5.4",
+		"cowsay": "^1.4.0",
 		"desktop-screenshot": "^0.1.1",
 		"electron-is-dev": "^1.1.0",
 		"fs-extra": "^7.0.1",

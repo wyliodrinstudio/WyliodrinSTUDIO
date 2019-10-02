@@ -61,6 +61,7 @@ class SSHWyAppTransport extends EventEmitter
 					}
 					else
 					{
+						// TODO translate
 						workspace.showError ('Device '+this.device.name, {extra: error.message});
 					}
 				}

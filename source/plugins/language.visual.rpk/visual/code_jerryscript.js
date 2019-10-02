@@ -433,7 +433,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.JavaScript['rpk_sensors_get_gyroscope'] = function (block) {
-		Blockly.JavaScript.setup.setupGYROSCOPE();
+		Blockly.JavaScript.setupGYROSCOPE();
 		var dropdown_axis = block.getFieldValue('Axis');
 		// TODO: Assemble JavaScript into code variable.
 		var code;

@@ -294,5 +294,10 @@
     {
         "message": "A project with that name already exists",
         "description": "The message the user sees in the Projects Library when a project with an already existing name is created or imported"
+    },
+    "PROJECTS_READ_ONLY_FILE_SYSTEM": 
+    {
+        "message": "The stoarge space is READ ONLY, projects can only be opened.",
+        "description": "The message the user sees when the storage space is read only and no projects can be created"
     }
 }

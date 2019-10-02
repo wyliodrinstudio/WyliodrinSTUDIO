@@ -6,6 +6,9 @@
 			<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_SEARCH')" v-model="search" single-line dark class="projsearch" append-icon="search"></v-text-field>
 		</v-card-title>
 		<v-card-text v-if="!projects || projects.length === 0" class="projects-container">
+			<v-alert v-if="readonly" type="warning" class="mb-4">
+				{{$t('PROJECTS_READ_ONLY_FILE_SYSTEM')}}
+			</v-alert>
 			<div v-if="!projects">
 				<v-progress-circular indeterminate></v-progress-circular>
 			</div>
@@ -55,16 +58,13 @@
 					</template>
 				</v-list>
 			</v-layout>
-			<v-alert v-if="persistent === 'never'"
-				type="error"
-				class="mb-4"
-				>
+			<v-alert v-if="readonly" type="warning" class="mb-4">
+				{{$t('PROJECTS_READ_ONLY_FILE_SYSTEM')}}
+			</v-alert>
+			<v-alert v-if="persistent === 'never'" type="error" class="mb-4">
 					{{$t('PROJECTS_STORAGE_NOT_PERSISTENT')}}
 			</v-alert>
-			<v-alert v-if="persistent === 'prompt'"
-				type="warning"
-				class="mb-4"
-				>
+			<v-alert v-if="persistent === 'prompt'" type="warning" class="mb-4">
 				<div v-if="notPersistent === false">
 					<v-row align="center">
 						<v-col class="grow">{{$t('PROJECTS_STORAGE_ASK_PERSISTENT')}}</v-col>
@@ -86,8 +86,8 @@
 			<!--<v-btn text slot="activator" @click.stop="console.log('this')">
 				<v-img src="plugins/projects/data/img/icons/projects-icon.svg"></v-img>
 			</v-btn> ce e asta? -->
-			<v-btn text @click ="addProjectDialog()" class="newapp">{{$t('PROJECT_WELCOME_CREATE_NEW_APP')}}</v-btn>
-			<v-btn text id="import_button" @click="importDialogOpen()">{{$t('PROJECT_LIBRARY_IMPORT')}}</v-btn>
+			<v-btn :disabled="readonly" text @click ="addProjectDialog()" class="newapp">{{$t('PROJECT_WELCOME_CREATE_NEW_APP')}}</v-btn>
+			<v-btn :disabled="readonly" text id="import_button" @click="importDialogOpen()">{{$t('PROJECT_LIBRARY_IMPORT')}}</v-btn>
 			<v-btn text @click="close" ref="button">{{$t('PROJECT_LIBRARY_CLOSE')}}</v-btn>
 		</v-card-actions>
 	</v-card>
@@ -126,6 +126,11 @@ export default {
 			return this.projects.filter(project => {
 				return project.name.toLowerCase().includes(this.search.toLowerCase());
 			})
+		},
+		readonly ()
+		{
+			console.log (this.persistent);
+			return this.persistent === 'notavailable';
 		}
 	},
 	asyncComputed: {
