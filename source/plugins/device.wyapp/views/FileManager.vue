@@ -29,15 +29,29 @@
 					>
 					
 					<template v-slot:prepend="{item, open}"	>
-						<p style="width:100%;" @click="menuItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
-							<v-icon>mdi-folder-open</v-icon>{{item.name}}          
-						</p>
-						<p style="width:100%;" @click="menuItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
-							<v-icon>mdi-folder</v-icon>{{item.name}}
-						</p>
-						<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
-							<v-icon>mdi-file</v-icon>{{item.name}}
-						</p>
+						<div v-if="item.name === 'DEVICE_WYAPP_FILESYSTEM'">
+							<p style="width:100%;" @click="menuItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
+								<v-icon>mdi-folder-open</v-icon>{{$t(item.name)}}          
+							</p>
+							<p style="width:100%;" @click="menuItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+								<v-icon>mdi-folder</v-icon>{{$t(item.name)}}
+							</p>
+							<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
+								<v-icon>mdi-file</v-icon>{{item.name}}
+							</p>
+						</div>
+						<div v-else>
+							<p style="width:100%;" @click="menuItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
+								<v-icon>mdi-folder-open</v-icon>{{item.name}}          
+							</p>
+							<p style="width:100%;" @click="menuItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+								<v-icon>mdi-folder</v-icon>{{item.name}}
+							</p>
+							<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
+								<v-icon>mdi-file</v-icon>{{item.name}}
+							</p>
+						</div>
+						
 <!-- 
 						<v-menu
 							v-model="folderMenu"
@@ -82,57 +96,7 @@
 								</v-list>
 							</v-menu> -->
 					</template>
-					<template v-slot:label="{item, open}"	>
-						<p style="width:100%;" @click="menuItem = item" v-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
-							{{item.name}}                  
-						</p>
-						<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
-							{{item.name}} 
-						</p>
-
-						<v-menu
-							v-model="folderMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteObject()">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="rename()">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFolder()">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="upload()">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-							<v-menu
-							v-model="fileMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteObject()">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="rename()">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="download()">
-										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-					</template>
+					
 					</v-treeview>
 			</template>
 			</div>
@@ -196,11 +160,11 @@ export default {
 			open: ['public'],
 			tree: [],
 			items: [{
-				name:'Raspberry',
+				name:'DEVICE_WYAPP_FILESYSTEM',
 				children:[],
 				path:'/',
 				size:0,
-				key:'Raspberry'+0+'root'
+				key:'FILESYSTEM'+0+'root'
 
 			}],
 			switch1:false,

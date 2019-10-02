@@ -126,5 +126,9 @@
     "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
         "message": "Vă rugăm să deschideți un proiect nou",
         "description": "Notification text when there is no project selected"
-    }
+    },
+	"DEVICE_WYAPP_FILESYSTEM": {
+		"message": "Sistem de fisiere",
+		"description": "The message shown for the selected device filesystem"
+	}
 }
