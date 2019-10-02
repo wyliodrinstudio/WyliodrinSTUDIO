@@ -153,14 +153,18 @@ function Architect(config) {
 		hooks: {
 			addPreHook (serviceName, serviceFunction, fn)
 			{
-				app.preHookData[serviceName + '.' + serviceFunction] = fn;
+				if (!app.preHookData[serviceName + '.' + serviceFunction])
+					app.preHookData[serviceName + '.' + serviceFunction] = [];
+				app.preHookData[serviceName + '.' + serviceFunction].push(fn);
 				return () => {
 					delete app.preHookData[serviceName + '.' + serviceFunction];
 				};
 			},
 			addPostHook (serviceName, serviceFunction, fn)
 			{
-				app.postHookData[serviceName + '.' + serviceFunction] = fn;
+				if (!app.postHookData[serviceName + '.' + serviceFunction])
+					app.postHookData[serviceName + '.' + serviceFunction] = [];
+				app.postHookData[serviceName + '.' + serviceFunction].push(fn);
 				return () => {
 					delete app.postHookData[serviceName + '.' + serviceFunction];
 				};
@@ -228,7 +232,15 @@ function Architect(config) {
 				}
 				// PROXY
 				provided[name].__name = name;
-				services[name] = new Proxy (provided[name], handler);
+				for (let prop of Object.keys (provided[name]))
+				{
+					if (_.isFunction (provided[name][prop]))
+					{
+						provided[name]['__'+prop] = provided[name][prop];
+						provided[name][prop] = hookFunction.bind (app, provided[name], prop);
+					}
+				}
+				services[name] = provided[name];
 				app.pluginToPackage[name] = {
 					path: plugin.packagePath,
 					package: packageName,
@@ -250,7 +262,9 @@ function Architect(config) {
 	}
 	
 	function hookFunction(target, prop, ...args) 
-	{
+	{ 
+		console.log('[hookFunction]');
+		console.log('\t' + target.__name + '.' + prop);
 		let preResult = null;
 		let result = {};
 		let postResult = {};
@@ -258,53 +272,77 @@ function Architect(config) {
 		let preHook = app.preHookData[target.__name + '.' + prop];
 		let postHook = app.postHookData[target.__name + '.' + prop];
 		
-		// run preHook function if exists
-		if (_.isFunction (preHook))
+		// check if there are preHooks to be called
+		if (preHook)
 		{
-			preResult = preHook (...args);
+			// set the args for the next call
+			preResult = {
+				'args': args
+			};	
+
+			// iterate through the array of functions
+			for (let fn of preHook)
+			{
+				// run the preHook 
+				if (_.isFunction(fn))
+				{
+					let oldArgs = preResult.args;
+					preResult = fn (...oldArgs);
+
+					/**
+					 * set the args if the preHook function 
+					 * returns undefined || null
+					 */ 
+					if (!preResult) 
+						preResult = {
+							args: oldArgs
+						};
+
+					// stop if abort is true
+					if (preResult.abort)
+						break;
+				}
+			}
 		}
 
-		// set the args for the next call
-		if (!preResult) preResult = {
-			args: args
-		};
+		if (!preResult)
+			preResult = {
+				args: args
+			};
 
 		// check if the original function is to be called
 		// set the result
-		if (_.isFunction(target[prop]) && preResult.abort !== true)
+		if (_.isFunction(target['__'+prop]) && preResult.abort !== true)
 		{
-			result = target[prop] (...preResult.args);
+			result = target['__'+prop] (...preResult.args);
 		}
 		else 
 		{
 			result = preResult.ret;
 		}
-			
-		// run postHook function with original or modified args
-		if (_.isFunction (postHook))
+		
+		// check to see if there is any postHook function to call
+		if (postHook)
 		{
-			postResult = postHook (result, ...preResult.args);
-			// if (preResult.abort) {
-			// } else {
-			// 	postResult = postHook (result, ...args);
-			// }
+			postResult = result;
+
+			// iterate through the array
+			for (let fn in postHook)
+			{
+
+				// run the postHook
+				if (_.isFunction(fn)) {
+					let oldRes = postResult;
+					postResult = fn (oldRes, ...preResult.args);
+
+				}
+			}
 			result = postResult;
 		}
 		
 		return result;
 	}
 
-	var handler = {
-		get: function(target, prop/*, receiver*/) {
-			if (_.isFunction(target[prop])) {
-				return hookFunction.bind(this, target, prop);
-			} 
-			else
-			{
-				return Reflect.get(...arguments);	
-			}
-		}
-	};
 	// Give createApp some time to subscribe to our 'ready' event
 	(typeof process === 'object' ? process.nextTick : setTimeout)(startPlugins);
 
