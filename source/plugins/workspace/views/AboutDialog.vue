@@ -15,8 +15,8 @@
 				<p><strong>Ovidiu Stoica</strong> - {{$t('ABOUT_UI_UX')}}</p>
 				<p><strong>Ioana Culic</strong> - Development Manager</p>
 				<p><strong>Marius-Andrei Aluculesei</strong> - Projects, Application</p>
-				<p><strong>Cosmin-Daniel Radu</strong> - RPK</p>
-				<p><strong>Liviu-Nicolae Moraru</strong> - RPK</p>
+				<p><strong>Cosmin-Daniel Radu</strong> - Embedded Software</p>
+				<p><strong>Liviu-Nicolae Moraru</strong> - Embedded Software</p>
 				<p><strong>Calin Dumitru</strong> - Simulators</p>
 				<p><strong>Diana Ghindaoanu</strong> - Notebook, Dashboard, Documentation</p>
 				<p><strong>Teona Severin</strong> - Web File System</p>
