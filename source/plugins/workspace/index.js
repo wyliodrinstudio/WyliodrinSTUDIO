@@ -993,6 +993,7 @@ let workspace = {
 				DEVICE_PRIORITY_SIMULATOR: workspace.DEVICE_PRIORITY_SIMULATOR,
 				DEVICE_PRIORITY_LOW: workspace.DEVICE_PRIORITY_LOW,
 				registerDeviceToolButton: this.registerDeviceToolButton.bind(this, name),
+				updateDevice: this.updateDevice.bind (this, name),
 				updateDevices: this.updateDevices.bind(this, name),
 			};
 		}
