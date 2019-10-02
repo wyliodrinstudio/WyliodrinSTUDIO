@@ -517,7 +517,7 @@ export default {
 			e.preventDefault();
 			this.fileMenu = false;
 			this.x = e.clientX;
-			this.y = e.clientY;
+			this.y = e.clientY+40;
 			this.$nextTick(() => {
 				this.fileMenu = true;
 			});
@@ -529,7 +529,7 @@ export default {
 			e.preventDefault();
 			this.folderMenu = false;
 			this.x = e.clientX;
-			this.y = e.clientY;
+			this.y = e.clientY+40;
 			this.$nextTick(() => {
 				this.folderMenu = true;
 			});
@@ -541,7 +541,7 @@ export default {
 			e.preventDefault();
 			this.projectMenu = false;
 			this.x = e.clientX;
-			this.y = e.clientY;
+			this.y = e.clientY+40;
 			this.$nextTick(() => {
 				this.projectMenu = true;
 			});
