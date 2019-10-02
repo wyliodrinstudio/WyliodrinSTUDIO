@@ -44,71 +44,6 @@
 						<p v-else-if="item.name !== currentProject.name" text @click="menuItem = item" @contextmenu="fileItem = item,showFolder($event)">
 							<v-icon>mdi-folder</v-icon>
 						</p>
-						<v-menu
-							v-model="projectMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-						<v-menu
-							v-model="folderMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-							<v-menu
-							v-model="fileMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="exportFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
 					</template>
 					<template v-slot:label="{item, open}">
 						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)"> 
@@ -120,7 +55,75 @@
 						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
 							{{item.name}} 
 						</p>
+						<!-- <v-menu
+							v-model="projectMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="newFolder(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="newFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="importFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+
 						<v-menu
+							v-model="folderMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="deleteFolder(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="renameObject(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="newFolder(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="newFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="importFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+
+							<v-menu
+							v-model="fileMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="deleteFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="renameObject(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="exportFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu> -->
+					</template>
+					
+					</v-treeview>
+					<v-menu
 							v-model="projectMenu"
 							:position-x="x"
 							:position-y="y"
@@ -185,9 +188,6 @@
 									</v-list-item>
 								</v-list>
 							</v-menu>
-					</template>
-					
-					</v-treeview>
 					<v-card-actions class="fm-actions">
 						<v-btn @click="newFile(menuItem)" text icon>
 							<v-icon>mdi-file-plus</v-icon>
