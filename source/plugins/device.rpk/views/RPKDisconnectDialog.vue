@@ -1,24 +1,24 @@
 <template>
 	<v-card class="disconnect">
-		<v-tooltip>
-			<template #activator="data">
-				<v-btn @click.stop="disconnectAndStandby" class="icon-btn">
+		<v-tooltip top>
+			<template v-slot:activator="{ on }">
+				<v-btn @click.stop="disconnectAndStandby" class="icon-btn" v-on="on">
 					<img src="plugins/device.rpk/data/img/icons/standby-icon.svg" :alt="$t('DEVICE_RPK_STANDBY')" class="s24">
 				</v-btn>
 			</template>
 			<span>{{$t('DEVICE_RPK_STANDBY')}}</span>
 		</v-tooltip>
-		<v-tooltip>
-			<template #activator="data">
-				<v-btn @click.stop="disconnect" class="icon-btn" ref="reference">
+		<v-tooltip top>
+			<template v-slot:activator="{ on }">
+				<v-btn @click.stop="disconnect" class="icon-btn" ref="reference" v-on="on">
 					<img src="plugins/device.rpk/data/img/icons/disconnect-icon.svg" :alt="$t('DEVICE_RPK_DISCONNECT')" class="s24">
 				</v-btn>
 			</template>
 			<span>{{$t('DEVICE_RPK_DISCONNECT')}}</span>
 		</v-tooltip>
-		<v-tooltip>
-			<template #activator="data">
-				<v-btn @click.stop="disconnectAndStop" class="icon-btn">
+		<v-tooltip top>
+			<template v-slot:activator="{ on }">
+				<v-btn @click.stop="disconnectAndStop" class="icon-btn" v-on="on">
 					<img src="plugins/device.rpk/data/img/icons/turn-off-icon.svg" :alt="$t('DEVICE_RPK_TURNOFF')" class="s24">
 				</v-btn>
 			</template>

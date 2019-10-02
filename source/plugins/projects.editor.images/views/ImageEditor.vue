@@ -1,5 +1,7 @@
 <template>
-	<v-img style="width:500px;height:500px" :src="encodedImage"></v-img>
+	<div class="img-box fill-height" align="center">
+		<v-img :src="encodedImage" contain height="100%" width="100%"></v-img>
+	</div>
 </template>
 
 <script>
@@ -45,3 +47,7 @@ export default {
 
 }
 </script>
+
+<style lang="less" scoped>
+	@import '../style/projectEditorImages.less';
+</style>
