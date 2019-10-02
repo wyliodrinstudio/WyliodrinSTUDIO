@@ -5,6 +5,7 @@ import VueI18n from 'vue-i18n';
 import Vuex from 'vuex';
 import VuetifyDialog from 'vuetify-dialog';
 import Dialog from './views/Dialog.vue';
+import uuid from 'uuid';
 import _ from 'lodash';
 import ConnectionSelectionDialog from './views/ConnectionSelectionDialog.vue';
 import DialogLayout from './views/DialogLayout.vue';
@@ -16,6 +17,7 @@ import AboutDialog from './views/AboutDialog.vue';
 import AsyncComputed from 'vue-async-computed';
 
 let settings = null;
+let studio = null;
 
 /**
  * a function that is called when the item may be deleted
@@ -991,6 +993,7 @@ let workspace = {
 				DEVICE_PRIORITY_SIMULATOR: workspace.DEVICE_PRIORITY_SIMULATOR,
 				DEVICE_PRIORITY_LOW: workspace.DEVICE_PRIORITY_LOW,
 				registerDeviceToolButton: this.registerDeviceToolButton.bind(this, name),
+				updateDevice: this.updateDevice.bind (this, name),
 				updateDevices: this.updateDevices.bind(this, name),
 			};
 		}
@@ -1048,6 +1051,26 @@ let workspace = {
 	},
 
 	/**
+	 * This function updates the current device with the one in the arguments list
+	 * @param {string} type 
+	 * @param {Device} device 
+	 */
+	updateDevice(type, device){
+		let dev = this.getDevice();
+		device.type = type;
+		if (device.id === dev.id && device.type === dev.type) {
+			this.dispatchToStore('workspace', 'status', device.status);
+			this.dispatchToStore('workspace', 'device', device);
+			if (device.status === 'DISCONNECTED') {
+				this.dispatchToStore('workspace', 'device', undefined);
+			}		
+		}
+		else {
+			this.warn('Trying to update status from device ' + device.id + ' (' + device.type + ') while device is the selected one');
+		}
+	},
+
+	/**
 	 * The purpose of this function is to connect Wyliodrin STUDIO to a device.
 	 * 
 	 * In order to connect, it's required to have a valid device object and the corresponding 
@@ -1088,22 +1111,19 @@ let workspace = {
 				// 	await this.disconnect ();
 				// }
 				// register device
-				let unregister = deviceDriver.registerForUpdate(update, (device) => {
-					let dev = this.getDevice();
-					if (device.id === dev.id && device.type === dev.type) {
-						this.dispatchToStore('workspace', 'status', device.status);
-						this.dispatchToStore('workspace', 'device', device);
-						if (device.status === 'DISCONNECTED') {
-							this.dispatchToStore('workspace', 'device', undefined);
-						}
-					}
-					else {
-						this.warn('Trying to update status from device ' + device.id + ' (' + device.type + ') while device is the selected one');
-					}
-					if (device.status === 'DISCONNECTED') {
-						unregister();
-					}
-				});
+				// let unregister = deviceDriver.registerForUpdate(update, (device) => {
+				// 	let dev = this.getDevice();
+				// 	if (device.id === dev.id && device.type === dev.type) {
+				// 		this.dispatchToStore('workspace', 'status', device.status);
+				// 		this.dispatchToStore('workspace', 'device', device);
+				// 		if (device.status === 'DISCONNECTED') {
+				// 			this.dispatchToStore('workspace', 'device', undefined);
+				// 		}
+				// 	}
+				// 	else {
+				// 		this.warn('Trying to update status from device ' + device.id + ' (' + device.type + ') while device is the selected one');
+				// 	}
+				// });
 				this.dispatchToStore('workspace', 'device', update);
 			}
 			// if the device has no type, disconnect it
@@ -1220,9 +1240,21 @@ let workspace = {
 	error() {
 		console.error('ERROR: ', ...arguments);
 	},
+
+	getToken ()
+	{
+		return studio.settings.loadValue('workspace', 'userid', null);
+	}
 };
 
 export function setup(options, imports, register) {
+
+	studio = imports;
+	
+	let newToken = uuid.v4 ();
+	let token = imports.settings.loadValue('workspace', 'userid', newToken);
+	if (token == newToken) imports.settings.storeValue('workspace', 'userid', token);
+
 	system = imports.system;
 	system.events.on('close-ask', () => {
 		workspace.close();
@@ -1247,9 +1279,6 @@ export function setup(options, imports, register) {
 	let mode = settings.loadValue('workspace', 'mode', 'simple');
 
 	workspace.dispatchToStore('workspace', 'mode', mode);
-
-
-
 
 	register(null, {
 		workspace: workspace
