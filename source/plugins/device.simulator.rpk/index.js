@@ -4,16 +4,16 @@ let simulator = {
 	isRunning: false,
 	opperationsCounter: 0
 };
-let deviceEvents = new EventEmitter();
 import _ from 'lodash';
-import { EventEmitter } from 'events';
 import RPKSimulator from './views/RPKSimulator.vue';
 import JSInterpreter from './JSInterpreter/interpreter.js';
 import JSInterpreterLibrary from './JSInterpreter/interpreter_library.js';
 import generic_rpk from './libraries/generic_rpk.js';
 
+let workspace = null;
+
 function updateDevice(device) {
-	deviceEvents.emit('update:' + device.id, device);
+	workspace.updateDevice (device);
 }
 
 let device_simulator_rpk = {
@@ -44,17 +44,12 @@ let device_simulator_rpk = {
 				return true;
 			}
 		}
-	},
-
-	registerForUpdate(device, fn) {
-		deviceEvents.on('update:' + device.id, fn);
-		return () => deviceEvents.removeListener('update:' + device.id, fn);
 	}
 };
 
 export default function setup(options, imports, register) {
 	studio = imports;
-	let workspace = studio.workspace.registerDeviceDriver('rpk_simulator', device_simulator_rpk);
+	workspace = studio.workspace.registerDeviceDriver('rpk_simulator', device_simulator_rpk);
 
 	workspace.updateDevices([{
 		id: 'rpk_simulator',
