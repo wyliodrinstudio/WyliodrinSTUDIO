@@ -7,7 +7,12 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "electron build/",
 		"pack": "webpack --mode=production && electron-builder --dir",
-		"dist": "webpack --mode=production && electron-builder"
+		"dist": "webpack --mode=production && electron-builder",
+		"electron": "webpack",
+		"browser": "webpack --config=webpack.browser.config.js",
+		"electron-production": "NODE_ENV=production webpack",
+		"browser-production": "NODE_ENV=production webpack --config=webpack.browser.config.js",
+		"clean": "rm -rf build/ dist"
 	},
 	"repository": {
 		"type": "git",
@@ -49,7 +54,7 @@
 		"axios": "^0.19.0",
 		"brace": "^0.11.1",
 		"copy-webpack-plugin": "^5.0.3",
-		"countly-sdk-nodejs": "^19.8.0",
+		"countly-sdk-web": "^19.8.0",
 		"css-loader": "^3.0.0",
 		"dexie": "^2.0.4",
 		"electron": "^5.0.6",

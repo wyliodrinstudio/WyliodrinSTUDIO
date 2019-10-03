@@ -18,6 +18,20 @@ for (let plugin of webPlugins)
 	items.push ({ from: 'plugins/'+plugin.name+'/package*.json', context: 'source' }, { from: 'plugins/'+plugin.name+'/data/**', context: 'source' });
 }
 
+let env = {
+	APP_KEY: JSON.stringify('a74d67f34fa3b0ea93465d9589af735a6d81c4bd')
+};
+
+let mode = 'none';
+
+if (process.env.NODE_ENV === 'production')
+{
+	env = {
+		APP_KEY: JSON.stringify('afbca5438a7d9c08b131ec0d89572df0ae26af84')
+	};
+	mode = 'production';
+}
+
 class StudioPluginsWeb {
 	apply(compiler) {
 		compiler.hooks.environment.tap('Studio Plugins Browser', () => {
@@ -124,7 +138,7 @@ module.exports = {
 			// }
 		],
 	},
-	mode: 'none',
+	mode: mode,
 	node: {
 		__dirname: false
 	},
@@ -163,6 +177,7 @@ module.exports = {
 		new TranslationPlugin ({}),
 		new StudioPluginsWeb (),
 		new webpack.DefinePlugin({
+			...env,
 			TARGET: 'web'
 		})
 	],

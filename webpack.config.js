@@ -45,6 +45,21 @@ class StudioPluginsElectron {
 	}
 }
 
+let env = {
+	APP_KEY: JSON.stringify('a74d67f34fa3b0ea93465d9589af735a6d81c4bd')
+};
+
+let mode = 'none';
+
+if (process.env.NODE_ENV === 'production')
+{
+	env = {
+		APP_KEY: JSON.stringify ('afbca5438a7d9c08b131ec0d89572df0ae26af84')
+	};
+	console.log("-----------------production---------------");
+	mode = 'production';
+}
+
 module.exports = {
 	entry: {
 		workspace: './source/plugins/workspace/index.js',
@@ -115,7 +130,7 @@ module.exports = {
 	externals: [nodeExternals({
 		whitelist: [...Object.keys(package_json.devDependencies), /^highcharts\/.*/, 'async', 'vue-asyncable', /^brace\/.*/, /^node-blockly\/.*/, 'set-immediate-shim', 'lie', 'pako', 'readable-stream']
 	})],
-	mode: 'none',
+	mode: mode,
 	node: {
 		__dirname: false
 	},
@@ -152,6 +167,7 @@ module.exports = {
 		new TranslationPlugin({}),
 		new StudioPluginsElectron(),
 		new webpack.DefinePlugin({
+			...env,
 			TARGET: 'electron'
 		})
 	],

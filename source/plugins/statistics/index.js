@@ -1,7 +1,7 @@
 
 export function setup(options, imports, register) {
 
-	var Countly = require('countly-sdk-nodejs');
+	var Countly = require('countly-sdk-web');
 
 	let currentSession = {
 		start: {},
@@ -13,10 +13,10 @@ export function setup(options, imports, register) {
 	let stopPressedCount = {};
 	let openProjects = {};
 	let connectedDevice = undefined;
-
+	// console.log(APP_KEY);
 	Countly.init({
-		app_key: '5ceac775edc0f7c07a68284a24c4c4b27825c06b',
-		url: '192.168.72.185',
+		app_key: APP_KEY,
+		url: 'https://tracking.wyliodrin.studio',
 		// debug: true,
 		app_version: 2.0
 	});
