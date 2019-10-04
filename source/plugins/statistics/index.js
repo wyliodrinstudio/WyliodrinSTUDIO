@@ -8,13 +8,15 @@ export function setup(options, imports, register) {
 		stop: {}
 	};
 
+	let app_language = null;
 	let currentDevices = {};
-	let runPressedCount = {};
-	let stopPressedCount = {};
-	let openProjects = {};
+	// let runPressedCount = {};
+	// let stopPressedCount = {};
+	// let openProjects = {};
 	let connectedDevice = undefined;
 	// console.log(APP_KEY);
 	Countly.init({
+		// eslint-disable-next-line no-undef
 		app_key: APP_KEY,
 		url: 'https://tracking.wyliodrin.studio',
 		// debug: true,
@@ -37,74 +39,88 @@ export function setup(options, imports, register) {
 		return {
 			date: today.getDate()+'.'+(today.getMonth()+1)+'.'+today.getFullYear(),
 			time: today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
-		}
+		};
 	}
 
-	console.log(typeof(token));
+	app_language = imports.workspace.getLanguage();
+
+	console.log(app_language);
 	Countly.user_details({
 		'name': token,
-		'username': token + '.' + getTime().date + '-' + getTime().time,
-		// 'email': 'test@test.com',
-		// 'organization': 'Countly',
-		// 'phone': '+37112345678',
-		//Web URL to picture
-		// 'picture': 'https://pbs.twimg.com/profile_images/1442562237/012_n_400x400.jpg', 
-		// 'gender': 'M',
-		// 'byear': 1987, //birth year
-		'custom':{
-			'date': getTime().date
-		}
+		'username': token,
+		'language': app_language
 	});
 
 
-	
-
+	// ca la add start
 	function addStop() {
 		let device = imports.workspace.getDevice();
+		let project = imports.projects.getCurrentProject();
 
-		if (device) {
-			if (!stopPressedCount[device.board])
-				stopPressedCount[device.board] = {
-					count: 0,
-					times: []
-				};
-			stopPressedCount[device.board].count += 1;
-			stopPressedCount[device.board].times.push(getTime());
-		}
+		// if (device) {
+		// 	if (!stopPressedCount[device.board])
+		// 		stopPressedCount[device.board] = {
+		// 			count: 0,
+		// 			times: []
+		// 		};
+		// 	stopPressedCount[device.board].count += 1;
+		// 	stopPressedCount[device.board].times.push(getTime());
+		// }
 
-		let newTime = getTime();
+		// let newTime = getTime();
 		Countly.add_event({
-			'key': 'pressedStopButton',
+			'key': 'StopProject',
 			'count': 1,
 			'segmentation': {
-				'time': newTime.date
+				'device.type': device.type,
+				'device.board': device.board,
+				'language': project.language
 			}
 		});
 	}
 
-
+	// get project
 	function addRun() {
 		let device = imports.workspace.getDevice();
+		let project = imports.projects.getCurrentProject();
 
-		if (device) {
-			if (!runPressedCount[device.board])
-				runPressedCount[device.board] = {
-					count: 0,
-					times: []
-				};
-			runPressedCount[device.board].count += 1;
-			runPressedCount[device.board].times.push(getTime());
-		}
+		// if (device) {
+		// 	if (!runPressedCount[device.board])
+		// 		runPressedCount[device.board] = {
+		// 			count: 0,
+		// 			times: []
+		// 		};
+		// 	runPressedCount[device.board].count += 1;
+		// 	runPressedCount[device.board].times.push(getTime());
+		// }
 
-		let newTime = getTime();
+		// let newTime = getTime();
 		Countly.add_event({
-			'key': 'pressedRunButton',
+			'key': 'RunProject',
 			'count': 1,
 			'segmentation': {
-				'time': newTime.date
+				'device.type': device.type,
+				'device.board': device.board,
+				'language': project.language
 			}
 		});
 	}
+
+	imports.hooks.addPostHook('workspace', 'setLanguage', (...args) => {
+		app_language = args[1];
+		Countly.user_details({
+			'name': token,
+			'username': token,
+			'language': app_language
+		});
+		Countly.add_event({
+			'key': 'LanguageChange',
+			'count': 1,
+			'segmentation': {
+				'language': app_language
+			}
+		});
+	});
 
 	imports.hooks.addPreHook('system', 'close', () => {
 		let stopTime = getTime(2);
@@ -145,38 +161,38 @@ export function setup(options, imports, register) {
 
 	imports.events.on ('ready', ()=>
 	{
-		let startTime = getTime(1);
 		Countly.add_event({
-			'key': 'currentSession.'+token,
+			'key': 'Start',
 			'segmentation': {
-				'start': startTime.date + '/' + startTime.time
+				
 			}
 		});
 	});
 
-	imports.hooks.addPreHook('projects', 'changeFile', (...args) => {
-		if (args[1]) {
-			let projectInfo = args[0];
+	imports.hooks.addPreHook('projects', 'selectCurrentProject', (projectInfo) => {
+		// if (args[1]) {
+		// 	let projectInfo = args[0];
 
-			if (!openProjects[projectInfo.language])
-				openProjects[projectInfo.language] = 0;
-			openProjects[projectInfo.language] += 1;
+		// if (!openProjects[projectInfo.language])
+		// 	openProjects[projectInfo.language] = 0;
+		// openProjects[projectInfo.language] += 1;
 
+		if (projectInfo)
+		{
 			Countly.add_event({
-				'key': projectInfo.language + '.projects',
+				'key': 'OpenProject',
 				'count': 1,
 				'segmentation': {
 					'language': projectInfo.language
 				}
 			});
-
 		}
-
 	});
 
-	imports.hooks.addPreHook('workspace', 'updateDevices', (...args) => {
-		let type = args[0];
-		let devices = args[1];
+	imports.hooks.addPreHook('workspace', 'updateDevices', (type, devices) => {
+		// let type = args[0];
+		// let devices = args[1];
+		let olds = currentDevices[type];
 		currentDevices[type] = {};
 		for (let device of devices) {
 			if (!device.placeholder) {
@@ -185,35 +201,58 @@ export function setup(options, imports, register) {
 				currentDevices[type][device.board] += 1;
 			}
 		}
-		for (let deviceName in currentDevices[type])
-			Countly.add_event({
-				'key': type + '.devices',
-				'count': currentDevices[type][deviceName],
-				'segmentation': {
-					'number': currentDevices[type][deviceName]
-				}
-			});	
+		let ok = false;
+
+		for (let ind in currentDevices[type]) {
+			if (olds[ind] != currentDevices[type][ind]) {
+				ok = true;
+				break;
+			}
+		}
+		// console.log(ok);
+		// console.log(ind + ':' + currentDevices[type][ind]);
+		
+		// console.log('olds');
+		// console.log(olds);
+		// console.log('currents');
+		// console.log(currentDevices[type]);
+		if (ok) {
+			let number = devices.reduce (
+				(nr, device) => { return nr + (device.placeholder?0:1); }, 0);
+			
+			if (number > 0)
+				Countly.add_event({
+					'key': 'UpdateDevices',
+					'count': 1,
+					'segmentation': {
+						'type': type,
+						'count': number
+					}
+				});	
+		}
 		return null;
 	});
 
-	imports.hooks.addPreHook('workspace', 'updateDevice', (...args) => {
-		let device = args[1];
+	imports.hooks.addPreHook('workspace', 'updateDevice', (type, device) => {
+		// let device = args[1];
 		if (device.status === 'CONNECTED') {
 			if (connectedDevice) {
 				Countly.add_event({
-					'key': 'connectionTry',
+					'key': 'ConnectionTry',
 					'count': 1,
 					'segmentation': {
-						'connectionType': device.board
+						'type': device.type,
+						'board': device.board
 					}
 				});
 			} else {
 				connectedDevice = device.id;
 				Countly.add_event({
-					'key': 'connected',
+					'key': 'Connected',
 					'count': 1,
 					'segmentation': {
-						'type': device.board
+						'type': device.type,
+						'board': device.board
 					}
 				});
 			}
@@ -221,18 +260,20 @@ export function setup(options, imports, register) {
 		if (device.status === 'DISCONNECTED') {
 			if (!connectedDevice) {
 				Countly.add_event({
-					'key': 'disconnectionTry',
+					'key': 'DisconnectionTry',
 					'count': 1,
 					'segmentation': {
-						'connectionType': device.board
+						'type': device.type,
+						'board': device.board
 					}
 				});
 			} else {
 				Countly.add_event({
-					'key': 'disconnected',
+					'key': 'Disconnected',
 					'count': 1,
 					'segmentation': {
-						'type': device.board
+						'type': device.type,
+						'board': device.board
 					}
 				});
 				connectedDevice = undefined;

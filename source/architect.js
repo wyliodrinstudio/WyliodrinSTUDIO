@@ -162,6 +162,9 @@ function Architect(config) {
 			},
 			addPostHook (serviceName, serviceFunction, fn)
 			{
+				console.log('adaugam posthook');
+				console.log(serviceName + '.' + serviceFunction);
+				console.log(fn);
 				if (!app.postHookData[serviceName + '.' + serviceFunction])
 					app.postHookData[serviceName + '.' + serviceFunction] = [];
 				app.postHookData[serviceName + '.' + serviceFunction].push(fn);
@@ -327,14 +330,12 @@ function Architect(config) {
 			postResult = result;
 
 			// iterate through the array
-			for (let fn in postHook)
+			for (let fn of postHook)
 			{
-
 				// run the postHook
 				if (_.isFunction(fn)) {
 					let oldRes = postResult;
 					postResult = fn (oldRes, ...preResult.args);
-
 				}
 			}
 			result = postResult;

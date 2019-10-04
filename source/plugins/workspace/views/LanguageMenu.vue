@@ -4,7 +4,7 @@
 			<v-menu offset-y close-on-click>
 				<template v-slot:activator="{ on: tooltip }">
 					<v-btn v-on="{ ...tooltip, ...menu }">
-						<v-img :src="'plugins/workspace/data/img/flags/'+$i18n.locale+'.png'" aria-label="Language" ></v-img>
+						<v-img :src="languageImage" aria-label="Language" eager="true"></v-img>
 					</v-btn>
 				</template>
 				<v-list>
@@ -35,13 +35,20 @@ export default {
 			LANGUAGES: Vue.translation.LANGUAGES
 		};
 	},
+	computed: {
+		languageImage ()
+		{
+			return 'plugins/workspace/data/img/flags/'+this.$i18n.locale+'.png';
+		}
+	},
 	methods: {
 		setLanguage (languageId)
 		{
+			// TODO
 			this.$i18n.locale = languageId;
 			// Trigger resize to make sure UI elements get updated
-			this.studio.settings.storeValue('workspace','language',languageId);
 			$(window).trigger ('resize');
+			this.studio.workspace.setLanguage(languageId);
 		}
 	}
 }

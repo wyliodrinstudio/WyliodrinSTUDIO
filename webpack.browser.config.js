@@ -19,7 +19,7 @@ for (let plugin of webPlugins)
 }
 
 let env = {
-	APP_KEY: JSON.stringify('a74d67f34fa3b0ea93465d9589af735a6d81c4bd')
+	APP_KEY: JSON.stringify('681861617d59c9287a87eec1b7ad495a2a16b28a')
 };
 
 let mode = 'none';

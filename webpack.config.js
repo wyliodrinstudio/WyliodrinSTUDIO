@@ -46,7 +46,7 @@ class StudioPluginsElectron {
 }
 
 let env = {
-	APP_KEY: JSON.stringify('a74d67f34fa3b0ea93465d9589af735a6d81c4bd')
+	APP_KEY: JSON.stringify('014dd0822b82fb2b8a8a4b14f1182cab5fcced07')
 };
 
 let mode = 'none';
@@ -54,9 +54,8 @@ let mode = 'none';
 if (process.env.NODE_ENV === 'production')
 {
 	env = {
-		APP_KEY: JSON.stringify ('afbca5438a7d9c08b131ec0d89572df0ae26af84')
+		APP_KEY: JSON.stringify ('66482e1728771fe4a4c440e79e7e38dc810cc5e6')
 	};
-	console.log("-----------------production---------------");
 	mode = 'production';
 }
 
