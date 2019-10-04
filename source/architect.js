@@ -162,9 +162,6 @@ function Architect(config) {
 			},
 			addPostHook (serviceName, serviceFunction, fn)
 			{
-				console.log('adaugam posthook');
-				console.log(serviceName + '.' + serviceFunction);
-				console.log(fn);
 				if (!app.postHookData[serviceName + '.' + serviceFunction])
 					app.postHookData[serviceName + '.' + serviceFunction] = [];
 				app.postHookData[serviceName + '.' + serviceFunction].push(fn);

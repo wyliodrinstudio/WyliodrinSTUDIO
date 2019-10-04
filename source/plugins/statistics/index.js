@@ -44,12 +44,14 @@ export function setup(options, imports, register) {
 
 	app_language = imports.workspace.getLanguage();
 
-	console.log(app_language);
+	// console.log(app_language);
+	Countly.q.push(['track_sessions']);
 	Countly.user_details({
 		'name': token,
 		'username': token,
-		'language': app_language
+		'locale': app_language
 	});
+	Countly.q.push(['userData.save']);
 
 
 	// ca la add start
@@ -74,7 +76,9 @@ export function setup(options, imports, register) {
 			'segmentation': {
 				'device.type': device.type,
 				'device.board': device.board,
-				'language': project.language
+				'language': project.language,
+				'username': token,
+				'locale': app_language
 			}
 		});
 	}
@@ -101,7 +105,9 @@ export function setup(options, imports, register) {
 			'segmentation': {
 				'device.type': device.type,
 				'device.board': device.board,
-				'language': project.language
+				'language': project.language,
+				'username': token,
+				'locale': app_language
 			}
 		});
 	}
@@ -111,13 +117,15 @@ export function setup(options, imports, register) {
 		Countly.user_details({
 			'name': token,
 			'username': token,
-			'language': app_language
+			'locale': app_language
 		});
+		Countly.q.push(['userData.save']);
 		Countly.add_event({
 			'key': 'LanguageChange',
 			'count': 1,
 			'segmentation': {
-				'language': app_language
+				'username': token,
+				'locale': app_language
 			}
 		});
 	});
@@ -164,7 +172,8 @@ export function setup(options, imports, register) {
 		Countly.add_event({
 			'key': 'Start',
 			'segmentation': {
-				
+				'username': token,
+				'locale': app_language
 			}
 		});
 	});
@@ -183,7 +192,9 @@ export function setup(options, imports, register) {
 				'key': 'OpenProject',
 				'count': 1,
 				'segmentation': {
-					'language': projectInfo.language
+					'language': projectInfo.language,
+					'username': token,
+					'locale': app_language
 				}
 			});
 		}
@@ -226,7 +237,9 @@ export function setup(options, imports, register) {
 					'count': 1,
 					'segmentation': {
 						'type': type,
-						'count': number
+						'count': number,
+						'username': token,
+						'locale': app_language
 					}
 				});	
 		}
@@ -242,7 +255,9 @@ export function setup(options, imports, register) {
 					'count': 1,
 					'segmentation': {
 						'type': device.type,
-						'board': device.board
+						'board': device.board,
+						'username': token,
+						'locale': app_language
 					}
 				});
 			} else {
@@ -252,7 +267,9 @@ export function setup(options, imports, register) {
 					'count': 1,
 					'segmentation': {
 						'type': device.type,
-						'board': device.board
+						'board': device.board,
+						'username': token,
+						'locale': app_language
 					}
 				});
 			}
@@ -264,7 +281,9 @@ export function setup(options, imports, register) {
 					'count': 1,
 					'segmentation': {
 						'type': device.type,
-						'board': device.board
+						'board': device.board,
+						'username': token,
+						'locale': app_language
 					}
 				});
 			} else {
@@ -273,7 +292,9 @@ export function setup(options, imports, register) {
 					'count': 1,
 					'segmentation': {
 						'type': device.type,
-						'board': device.board
+						'board': device.board,
+						'username': token,
+						'locale': app_language
 					}
 				});
 				connectedDevice = undefined;

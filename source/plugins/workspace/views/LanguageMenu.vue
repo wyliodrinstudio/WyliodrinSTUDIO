@@ -4,7 +4,7 @@
 			<v-menu offset-y close-on-click>
 				<template v-slot:activator="{ on: tooltip }">
 					<v-btn v-on="{ ...tooltip, ...menu }">
-						<v-img :src="languageImage" aria-label="Language" eager="true"></v-img>
+						<v-img :src="languageImage" aria-label="Language" :eager="true"></v-img>
 					</v-btn>
 				</template>
 				<v-list>
