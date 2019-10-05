@@ -46,7 +46,7 @@ class StudioPluginsElectron {
 }
 
 module.exports = env => {
-
+	if (!env) env = {};
 	let defines = {
 		APP_KEY: JSON.stringify('014dd0822b82fb2b8a8a4b14f1182cab5fcced07')
 	};

@@ -60,6 +60,8 @@ class StudioPluginsWeb {
 }
 
 module.exports = env => {
+	if (!env) env = {};
+	
 	let defines = {
 		APP_KEY: JSON.stringify('681861617d59c9287a87eec1b7ad495a2a16b28a')
 	};
