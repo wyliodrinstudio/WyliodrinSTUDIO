@@ -18,20 +18,6 @@ for (let plugin of webPlugins)
 	items.push ({ from: 'plugins/'+plugin.name+'/package*.json', context: 'source' }, { from: 'plugins/'+plugin.name+'/data/**', context: 'source' });
 }
 
-let env = {
-	APP_KEY: JSON.stringify('681861617d59c9287a87eec1b7ad495a2a16b28a')
-};
-
-let mode = 'none';
-
-if (process.env.NODE_ENV === 'production')
-{
-	env = {
-		APP_KEY: JSON.stringify('afbca5438a7d9c08b131ec0d89572df0ae26af84')
-	};
-	mode = 'production';
-}
-
 class StudioPluginsWeb {
 	apply(compiler) {
 		compiler.hooks.environment.tap('Studio Plugins Browser', () => {
@@ -73,113 +59,128 @@ class StudioPluginsWeb {
 	}
 }
 
-module.exports = {
-	entry: {
-		workspace: './source/plugins/workspace/index.js',
-	},
-	output: {
-		path: path.resolve(__dirname, './build/ui'),
-		filename: 'imports/[name]_[hash].js',
-	},
-	optimization: {
-		splitChunks: {
-			chunks: 'all',
-			name: '../vendor'
-		},
-	},
-	module:
+module.exports = env => {
+	let defines = {
+		APP_KEY: JSON.stringify('681861617d59c9287a87eec1b7ad495a2a16b28a')
+	};
+	
+	let mode = 'none';
+	
+	if (env.NODE_ENV === 'production')
 	{
-		rules: [
-			// ... other rules
-			{
-				test: /\.vue$/,
-				loader: 'vue-loader'
+		defines = {
+			APP_KEY: JSON.stringify('afbca5438a7d9c08b131ec0d89572df0ae26af84')
+		};
+		mode = 'production';
+	}
+	return {
+		entry: {
+			workspace: './source/plugins/workspace/index.js',
+		},
+		output: {
+			path: path.resolve(__dirname, './build/ui'),
+			filename: 'imports/[name]_[hash].js',
+		},
+		optimization: {
+			splitChunks: {
+				chunks: 'all',
+				name: '../vendor'
 			},
-			{
-				test: /\.less$/,
-				use: [
-					{
-						loader: 'vue-style-loader',
-						options: {
-							// convertToAbsoluteUrls: true
+		},
+		module:
+		{
+			rules: [
+				// ... other rules
+				{
+					test: /\.vue$/,
+					loader: 'vue-loader'
+				},
+				{
+					test: /\.less$/,
+					use: [
+						{
+							loader: 'vue-style-loader',
+							options: {
+								// convertToAbsoluteUrls: true
+							}
+						},
+						{
+							loader: 'css-loader',
+							options: { url: false }
+						},
+						{
+							loader: 'less-loader',
+							options: {
+								relativeUrls: false
+							}
 						}
-					},
-					{
-						loader: 'css-loader',
-						options: { url: false }
-					},
-					{
-						loader: 'less-loader',
-						options: {
-							relativeUrls: false
-						}
-					}
-				]
-			},
-			{
-				test: /\.txt$/i,
-				use: 'raw-loader',
-			}
-			// {
-			// 	test: /\.ts$/,
-			// 	loader: 'ts-loader',
-			// 	options: { appendTsSuffixTo: [/\.vue$/] }
-			// },
-			// {
-			// 	test: /\.(png|jpg|gif)$/,
-			// 	use: [
-			// 		{
-			// 			loader: 'url-loader',
-			// 			options: {
-			// 				limit: 5000
-			// 			}
-			// 		}
-			// 	]
-			// }
+					]
+				},
+				{
+					test: /\.txt$/i,
+					use: 'raw-loader',
+				}
+				// {
+				// 	test: /\.ts$/,
+				// 	loader: 'ts-loader',
+				// 	options: { appendTsSuffixTo: [/\.vue$/] }
+				// },
+				// {
+				// 	test: /\.(png|jpg|gif)$/,
+				// 	use: [
+				// 		{
+				// 			loader: 'url-loader',
+				// 			options: {
+				// 				limit: 5000
+				// 			}
+				// 		}
+				// 	]
+				// }
+			],
+		},
+		mode: mode,
+		node: {
+			__dirname: false
+		},
+		plugins: [
+			// make sure to include the plugin!
+			new VueLoaderPlugin({
+				esModule: false
+			}),
+			new CopyPlugin([
+				...items,
+				// { from: 'index.html', context: 'source/web' },
+				{ from: 'server.js', context: 'source/web', to: '../' },
+				{ from: 'img/**', context: 'source' },
+				{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
+				{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
+			], {logLevel: ''}),
+			// new DtsBundleWebpack({
+			// 	name: 'plugins',
+			// 	main: 'source/plugins/**/*.d.ts',
+			// 	exclude: function (file, external)
+			// 	{
+			// 		if (file.indexOf ('plugins.d.ts')>=0) return true;
+			// 		else
+			// 		if (file.indexOf ('vue-shim.d.ts')>=0) return true;
+			// 		else
+			// 		if (file.indexOf ('.vue')>=0) return true;
+			// 		console.log (file+' external: '+external);
+			// 		return false;
+			// 	},
+			// })
+			new HtmlWebpackPlugin({
+				title: 'Wyliodrin STUDIO',
+				// Load a custom template (lodash by default)
+				template: 'source/web/index.html'
+			}),
+			new TranslationPlugin ({}),
+			new StudioPluginsWeb (),
+			new webpack.DefinePlugin({
+				...defines,
+				TARGET: 'web'
+			})
 		],
-	},
-	mode: mode,
-	node: {
-		__dirname: false
-	},
-	plugins: [
-		// make sure to include the plugin!
-		new VueLoaderPlugin({
-			esModule: false
-		}),
-		new CopyPlugin([
-			...items,
-			// { from: 'index.html', context: 'source/web' },
-			{ from: 'server.js', context: 'source/web', to: '../' },
-			{ from: 'img/**', context: 'source' },
-			{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
-			{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
-		], {logLevel: ''}),
-		// new DtsBundleWebpack({
-		// 	name: 'plugins',
-		// 	main: 'source/plugins/**/*.d.ts',
-		// 	exclude: function (file, external)
-		// 	{
-		// 		if (file.indexOf ('plugins.d.ts')>=0) return true;
-		// 		else
-		// 		if (file.indexOf ('vue-shim.d.ts')>=0) return true;
-		// 		else
-		// 		if (file.indexOf ('.vue')>=0) return true;
-		// 		console.log (file+' external: '+external);
-		// 		return false;
-		// 	},
-		// })
-		new HtmlWebpackPlugin({
-			title: 'Wyliodrin STUDIO',
-			// Load a custom template (lodash by default)
-			template: 'source/web/index.html'
-		}),
-		new TranslationPlugin ({}),
-		new StudioPluginsWeb (),
-		new webpack.DefinePlugin({
-			...env,
-			TARGET: 'web'
-		})
-	],
-	target: 'web'
+		target: 'web'
+	};
 };

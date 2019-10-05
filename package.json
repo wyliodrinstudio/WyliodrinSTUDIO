@@ -6,12 +6,12 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "electron build/",
-		"pack": "NODE_ENV=production webpack && electron-builder --dir",
-		"dist": "NODE_ENV=production webpack && electron-builder",
+		"pack": "webpack --env.NODE_ENV=production && electron-builder --dir",
+		"dist": "webpack --env.NODE_ENV=production && electron-builder",
 		"electron": "webpack",
 		"browser": "webpack --config=webpack.browser.config.js",
-		"electron-production": "NODE_ENV=production webpack",
-		"browser-production": "NODE_ENV=production webpack --config=webpack.browser.config.js",
+		"electron-production": "webpack --env.NODE_ENV=production",
+		"browser-production": "webpack --config=webpack.browser.config.js --env.NODE_ENV=production",
 		"clean": "rm -rf build/ dist"
 	},
 	"repository": {
