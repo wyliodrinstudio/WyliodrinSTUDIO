@@ -14,7 +14,29 @@ module.exports = function (blockly) {
 				.appendField(new Blockly.FieldTextInput('variable_name'), 'variable_name');
 			this.appendDummyInput()
 				.appendField('Data Type')
-				.appendField(new Blockly.FieldDropdown([['Int', 'Integer'], ['option', 'OPTIONNAME'], ['option', 'OPTIONNAME']]), 'variable_type');
+				.appendField(new Blockly.FieldDropdown([
+					['Boolean', 'Boolean'], 
+					['Byte', 'Byte'], 
+					['ByteString', 'ByteString'],
+					['Double', 'Double'], 
+					['Float', 'Float'], 
+					['GUID', 'GUID'], 
+					['Integer', 'Integer'], 
+					['Int16', 'Int16'], 
+					['Int32', 'Int32'], 
+					['Int64', 'Int64'], 
+					['LocalizedText', 'LocalizedText'], 
+					['NodeId', 'NodeId'], 
+					['QualifiedName', 'QualifiedName'], 
+					['SByte', 'SByte'], 
+					['String', 'String'], 
+					['Structure', 'Structure'], 
+					['Time', 'Time'], 
+					['UInt16', 'UInt16'], 
+					['UInt32', 'UInt32'], 
+					['Uint64', 'UInt64'], 
+					['XmlElement', 'XmlElement'], 
+				]), 'variable_type');
 			this.appendDummyInput()
 				.appendField('History')
 				.appendField(new Blockly.FieldCheckbox('FALSE'), 'variable_history');
