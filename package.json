@@ -6,8 +6,8 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "electron build/",
-		"pack": "webpack --mode=production && electron-builder --dir",
-		"dist": "webpack --mode=production && electron-builder",
+		"pack": "NODE_ENV=production webpack && electron-builder --dir",
+		"dist": "NODE_ENV=production webpack && electron-builder",
 		"electron": "webpack",
 		"browser": "webpack --config=webpack.browser.config.js",
 		"electron-production": "NODE_ENV=production webpack",
