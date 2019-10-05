@@ -17,6 +17,7 @@ export default {
 			editorOptions: {
 				fontSize: '12pt',
 				readOnly: false,
+				theme: 'ace/theme/chrome',
 				enableBasicAutocompletion: true,
 				enableSnippets: true,
 				enableLiveAutocompletion: true
