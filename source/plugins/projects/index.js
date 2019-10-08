@@ -1380,7 +1380,7 @@ let projects = {
 	},
 	async deleteSchematic(project,file) {
 
-	}
+	},
 	/**
 	 * This function generates the tree structure of a project.
 	 * 

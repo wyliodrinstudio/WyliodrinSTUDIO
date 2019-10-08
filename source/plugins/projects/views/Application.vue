@@ -435,6 +435,8 @@ export default {
 			} 
 			
 			let ext = path.extname(filename).toLowerCase();
+			console.log(ext);
+			console.log(filename);
 			let device = this.studio.workspace.getDevice ();
 			let type = device.type;
 			let board = device.board;
@@ -454,6 +456,7 @@ export default {
 					}
 					
 				}
+				
 				if (!pictogram && board !== 'none' && addons['*:' + board] !== undefined) {
 					let addonPictograms = addons['*:' + board].pictograms;
 					if(addonPictograms && addonPictograms.length > 0) {
@@ -466,6 +469,7 @@ export default {
 						}
 					}
 				}
+				
 				if (!pictogram && type !== 'none' && addons[type + ':*'] !== undefined) {
 					let addonPictograms = addons[type + ':*'].pictograms;
 					if(addonPictograms && addonPictograms.length > 0) {
@@ -479,17 +483,42 @@ export default {
 						}
 					}
 				}
+				
 				if(!pictogram || (type === 'none' && board === 'none' && !pictogram)) {
 					if(pictograms && pictograms.length > 0) {
 						for( let pict of pictograms) {
 							if(pict.extension && ext === pict.extension) {
 								pictogram = pict.icon;
+								console.log(pict.icon);
 							} else if(pict.filename && filename.match(pict.filename)) {
 								pictogram = pict.icon;
+								console.log(pict.icon);
 							}
 						}
 					}
 				}
+				
+				if(!pictogram) {
+					
+					if(ext === '.c') {
+						pictogram = 'mdi-language-c'
+					} else if (ext === '.cpp') {
+						pictogram = 'mdi-language-cpp'
+					} else if (ext === '.css') {
+						pictogram = 'mdi-language-css3'
+					} else if (ext === '.html') {
+						pictogram = 'mdi-language-html5'
+					} else if (ext === '.js') {
+						pictogram = 'mdi-language-javascript'
+					} else if (ext === '.ts') {
+						pictogram = 'mdi-language-typescript'
+					} else if (ext === '.php') {
+						pictogram = 'mdi-language-php'
+					} else if (ext === '.py') {
+						pictogram = 'mdi-language-python'
+					}
+				} 
+				
 				if(pictogram) {
 					let array = pictogram.split('-');
 					let imgType = true;
@@ -503,7 +532,8 @@ export default {
 						type:imgType
 					};
 				}
-			} 
+			}
+			
 			return {
 				img:this.baseFileIcon,
 				type:false
