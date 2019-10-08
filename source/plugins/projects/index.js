@@ -1368,6 +1368,19 @@ let projects = {
 			return null;
 		}
 	},
+
+	async saveSchematic(project,name,content) {
+		if(project !== null && name !==null) {
+			let projectFolder = project.folder;
+			let specialFolder = path.join
+		}
+	},
+	async loadSchematic(project,file) {
+
+	},
+	async deleteSchematic(project,file) {
+
+	}
 	/**
 	 * This function generates the tree structure of a project.
 	 * 
