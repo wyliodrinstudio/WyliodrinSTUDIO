@@ -417,7 +417,8 @@
          "WORKSPACE_DOCUMENTATION": "Documentation",
          "ABOUT_VERSION": "Version",
          "OK": "OK",
-         "BACK": "BACK"
+         "BACK": "BACK",
+         "ABOUT_FEEDBACK": "Allow sending anonymous usage parameters in order to help us improve the software"
       },
       "es": {
          "CHAT": "CHAT",
