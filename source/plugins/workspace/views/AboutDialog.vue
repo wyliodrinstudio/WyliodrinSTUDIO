@@ -36,7 +36,7 @@
 			</div>
 
 			<div class="consent">
-				<v-checkbox dark hide-details dense v-model="checkbox" label="Allow sending anonymous usage parameters in order to help us improve the software"></v-checkbox>
+				<v-checkbox dark hide-details dense v-model="feedback" :label="$t('ABOUT_FEEDBACK')"></v-checkbox>
 			</div>
 
 		</v-card-text>
@@ -62,7 +62,7 @@ export default {
 	name:'AboutDialog',
 	data() {
 		return {
-
+			feedback: this.studio.settings.loadValue ('workspace', 'feedback', true)
 		}
 	},
 	methods: 
@@ -77,6 +77,12 @@ export default {
 		},
 		close() {
 			this.$root.$emit('submit', undefined);
+		}
+	},
+	watch: {
+		feedback (newfeedback)
+		{
+			this.studio.settings.storeValue ('workspace', 'feedback', newfeedback)
 		}
 	}
 }

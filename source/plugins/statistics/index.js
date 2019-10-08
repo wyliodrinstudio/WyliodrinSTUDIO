@@ -11,7 +11,6 @@ export function setup(options, imports, register) {
 	let app_language = null;
 	let currentDevices = {};
 	let connectedDevice = undefined;
-	let statistics = true;
 
 	Countly.init({
 		// eslint-disable-next-line no-undef
@@ -23,7 +22,7 @@ export function setup(options, imports, register) {
 
 	function optInOut()
 	{
-		statistics = imports.settings.loadValue('workspace', 'feedback', true);
+		let statistics = imports.settings.loadValue('workspace', 'feedback', true);
 		if (statistics)
 			Countly.q.push(['opt_in']);
 		else
@@ -53,7 +52,6 @@ export function setup(options, imports, register) {
 
 
 	app_language = imports.workspace.getLanguage();
-	statistics = imports.settings.loadValue('workspace', 'feedback', true);
 	// console.log(app_language);
 
 	optInOut();
