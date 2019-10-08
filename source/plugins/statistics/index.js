@@ -10,18 +10,25 @@ export function setup(options, imports, register) {
 
 	let app_language = null;
 	let currentDevices = {};
-	// let runPressedCount = {};
-	// let stopPressedCount = {};
-	// let openProjects = {};
 	let connectedDevice = undefined;
-	// console.log(APP_KEY);
+	let statistics = true;
+
 	Countly.init({
 		// eslint-disable-next-line no-undef
 		app_key: APP_KEY,
-		url: 'https://tracking.wyliodrin.studio',
+		url: 'https://statistics.wyliodrin.studio',
 		// debug: true,
 		app_version: 2.0
 	});
+
+	function optInOut()
+	{
+		statistics = imports.settings.loadValue('workspace', 'feedback', true);
+		if (statistics)
+			Countly.q.push(['opt_in']);
+		else
+			Countly.q.push(['opt_out']);
+	}
 
 	let token = imports.workspace.getToken();
 
@@ -42,9 +49,14 @@ export function setup(options, imports, register) {
 		};
 	}
 
-	app_language = imports.workspace.getLanguage();
 
+
+
+	app_language = imports.workspace.getLanguage();
+	statistics = imports.settings.loadValue('workspace', 'feedback', true);
 	// console.log(app_language);
+
+	optInOut();
 	Countly.q.push(['track_sessions']);
 	Countly.user_details({
 		'name': token,
@@ -70,6 +82,8 @@ export function setup(options, imports, register) {
 		// }
 
 		// let newTime = getTime();
+		
+		optInOut();
 		Countly.add_event({
 			'key': 'StopProject',
 			'count': 1,
@@ -99,6 +113,7 @@ export function setup(options, imports, register) {
 		// }
 
 		// let newTime = getTime();
+		optInOut();
 		Countly.add_event({
 			'key': 'RunProject',
 			'count': 1,
@@ -114,6 +129,7 @@ export function setup(options, imports, register) {
 
 	imports.hooks.addPostHook('workspace', 'setLanguage', (...args) => {
 		app_language = args[1];
+		optInOut();
 		Countly.user_details({
 			'name': token,
 			'username': token,
@@ -169,6 +185,7 @@ export function setup(options, imports, register) {
 
 	imports.events.on ('ready', ()=>
 	{
+		optInOut();
 		Countly.add_event({
 			'key': 'Start',
 			'segmentation': {
@@ -185,7 +202,7 @@ export function setup(options, imports, register) {
 		// if (!openProjects[projectInfo.language])
 		// 	openProjects[projectInfo.language] = 0;
 		// openProjects[projectInfo.language] += 1;
-
+		optInOut();
 		if (projectInfo)
 		{
 			Countly.add_event({
@@ -201,8 +218,6 @@ export function setup(options, imports, register) {
 	});
 
 	imports.hooks.addPreHook('workspace', 'updateDevices', (type, devices) => {
-		// let type = args[0];
-		// let devices = args[1];
 		let olds = currentDevices[type];
 		currentDevices[type] = {};
 		for (let device of devices) {
@@ -220,17 +235,11 @@ export function setup(options, imports, register) {
 				break;
 			}
 		}
-		// console.log(ok);
-		// console.log(ind + ':' + currentDevices[type][ind]);
-		
-		// console.log('olds');
-		// console.log(olds);
-		// console.log('currents');
-		// console.log(currentDevices[type]);
 		if (ok) {
 			let number = devices.reduce (
 				(nr, device) => { return nr + (device.placeholder?0:1); }, 0);
 			
+			optInOut();			
 			if (number > 0)
 				Countly.add_event({
 					'key': 'UpdateDevices',
@@ -247,7 +256,7 @@ export function setup(options, imports, register) {
 	});
 
 	imports.hooks.addPreHook('workspace', 'updateDevice', (type, device) => {
-		// let device = args[1];
+		optInOut();
 		if (device.status === 'CONNECTED') {
 			if (connectedDevice) {
 				Countly.add_event({
