@@ -369,6 +369,8 @@
          "PROJECTS_INVALID_PROJECT": "You have oppened an invalid project, please select another one",
          "PROJECT_EXISTS_PROMPT": "A project with that name already exists",
          "PROJECTS_READ_ONLY_FILE_SYSTEM": "The stoarge space is READ ONLY, projects can only be opened.",
+         "PROJECT_ERROR_SAVE_SCHEMATIC": "Error while saving schematic {file} with data ({error})",
+         "PROJECT_ERROR_LOAD_SCHEMATIC": "Error while deleting schematic {file} ({error})",
          "EDITOR_VISUAL_SHOW_CODE": "Show Code",
          "EDITOR_VISUAL_HIDE_CODE": "Hide Code",
          "SCHEMATICS": "Schematics",
@@ -1423,6 +1425,9 @@
          "PROJECTS_JSON_DO_NOT": "S-a încercat editarea fișierului project.json, NU FACEȚI ASTA",
          "PROJECT_EXISTS_PROMPT": "Un proiect cu acest nume există deja",
          "PROJECTS_READ_ONLY_FILE_SYSTEM": "Spațiul de stocare este numai pentru CITIRE, proiectele pot fi doar deschise.",
+         "PROJECT_ERROR_SAVE_SCHEMATIC": "Eroare la salvarea schemei {file} cu datele ({error})",
+         "PROJECT_ERROR_LOAD_SCHEMATIC": "Eroare la încărcarea schemei {file} ({error})",
+         "PROJECT_ERROR_DELETE_SCHEMATIC": "Eroare la ștergerea schemei {file} ({error})",
          "EDITOR_VISUAL_SHOW_CODE": "Afisați Sursa",
          "EDITOR_VISUAL_HIDE_CODE": "Ascundeți Sursa",
          "SCHEMATICS": "Scheme",
@@ -1469,7 +1474,8 @@
          "WORKSPACE_TOOLBAR_CLOSE": "Ieșire",
          "WORKSPACE_DOCUMENTATION": "Documentație",
          "OK": "OK",
-         "BACK": "Înapoi"
+         "BACK": "Înapoi",
+         "ABOUT_FEEDBACK": "Permiteti trimiterea de date anonime despre utilizarea software-ului. Acestea ne ajuta sa il imbunatatim."
       },
       "sk": {
          "CHAT": "CHAT",

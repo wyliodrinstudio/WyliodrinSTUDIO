@@ -299,5 +299,17 @@
     {
         "message": "The stoarge space is READ ONLY, projects can only be opened.",
         "description": "The message the user sees when the storage space is read only and no projects can be created"
-    }
+	},
+	"PROJECT_ERROR_SAVE_SCHEMATIC": {
+        "message": "Error while saving schematic {file} with data ({error})",
+        "description": "The error message shown when a special settings file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_SCHEMATIC": {
+        "message": "Error while loading schematic {file} ({error})",
+        "description": "The error message shown when a special settings file fails to be loaded"
+	},
+	"PROJECT_ERROR_LOAD_SCHEMATIC": {
+        "message": "Error while deleting schematic {file} ({error})",
+        "description": "The error message shown when a special settings file fails to be loaded"
+	}
 }

@@ -1372,14 +1372,76 @@ let projects = {
 	async saveSchematic(project,name,content) {
 		if(project !== null && name !==null) {
 			let projectFolder = project.folder;
-			let specialFolder = path.join
+			let specialFolder = path.join(projectFolder, '.project');
+			try {
+				await studio.filesystem.mkdirp(specialFolder);
+			} catch (e) {
+				console.error(e);
+			}
+			let specialFile = path.join(specialFolder, (name));
+			try {
+				await studio.filesystem.writeFile(specialFile, content);
+				return specialFile;
+			} catch (e) {
+				studio.workspace.showError('PROJECT_ERROR_SAVE_SCHEMATIC', {file: specialFile, data:content, error: e.message});
+				return false;
+			}
+		} else {
+			studio.workspace.warn('PROJECT_ERROR_SAVE_SCHEMATIC', {file:name, data:content});
+			return false;
 		}
 	},
-	async loadSchematic(project,file) {
+	async loadSchematic(project) {
+		if(project !== null) {
+			let projectFolder = project.folder;
+			let specialFolder = path.join(projectFolder, '.project');
+			try {
+				await studio.filesystem.mkdirp(specialFolder);
+			} catch (e) {
+				console.error(e);
+			}
+			let specialFile = path.join(specialFolder, 'schematic.svg');
+			try {
+				if (await studio.filesystem.pathExists(specialFile)) {
+					let data = await studio.filesystem.readFile(specialFile);
+					return data;
+				} else
+					return null;
+			} catch (e) {
+				studio.workspace.showError('PROJECT_ERROR_LOAD_SCHEMATIC', {file: specialFile, error: e.message});
 
+			}
+		} else {
+			// ERROR specialFile nu e definit aici
+			studio.workspace.showError('PROJECT_ERROR_LOAD_SCHEMATIC', {file: 'schematic.svg', error: 'NULL'});
+			return null;
+		}
 	},
-	async deleteSchematic(project,file) {
+	async deleteSchematic(project) {
+		if(project !== null) {
+			let projectFolder = project.folder;
+			let specialFolder = path.join(projectFolder, '.project');
+			try {
+				await studio.filesystem.mkdirp(specialFolder);
+			} catch (e) {
+				console.error(e);
+			}
+			let specialFile = path.join(specialFolder, 'schematic.svg');
+			try {
+				if (await studio.filesystem.pathExists(specialFile)) {
+					await studio.filesystem.remove(specialFile);
+					return true;
+				} else
+					return null;
+			} catch (e) {
+				studio.workspace.showError('PROJECT_ERROR_DELETE_SCHEMATIC', {file: specialFile, error: e.message});
 
+			}
+		} else {
+			// ERROR specialFile nu e definit aici
+			studio.workspace.showError('PROJECT_ERROR_DELETE_SCHEMATIC', {file: 'schematic.svg', error: 'NULL'});
+			return null;
+		}
 	},
 	/**
 	 * This function generates the tree structure of a project.
