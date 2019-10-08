@@ -8,6 +8,7 @@
 		</v-card-title>
 		
 		<v-card-text>
+
 			<div class="developers">
 				<h3>{{$t('ABOUT_DEVELOPED_BY')}}</h3>
 
@@ -33,6 +34,11 @@
 				<p><strong>Veronika Uhrinová</strong> - Slovak</p>
 				<p><strong>Sorina Goran</strong> - Spanish</p>
 			</div>
+
+			<div class="consent">
+				<v-checkbox dark hide-details dense v-model="checkbox" label="Allow sending anonymous usage parameters in order to help us improve the software"></v-checkbox>
+			</div>
+
 		</v-card-text>
 
 		<v-card-actions>
