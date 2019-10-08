@@ -1241,9 +1241,29 @@ let workspace = {
 		console.error('ERROR: ', ...arguments);
 	},
 
+	/**
+	 * Returns the unique token for the application
+	 */
 	getToken ()
 	{
 		return studio.settings.loadValue('workspace', 'userid', null);
+	},
+
+	/**
+	 * Sets the language of the application in the store
+	 * @param {String} languageId 
+	 */
+	setLanguage(languageId)
+	{
+		studio.settings.storeValue('workspace','language',languageId);
+	},
+
+	/**
+	 * Returns the language of the application
+	 */
+	getLanguage ()
+	{
+		return studio.settings.loadValue('workspace','language',getLanguage ());
 	}
 };
 

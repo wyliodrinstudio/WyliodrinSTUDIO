@@ -1,13 +1,18 @@
 {
 	"name": "wyliodrinstudio",
-	"version": "2.0.5-beta",
+	"version": "2.0.6-beta",
 	"description": "Wyliodrin STUDIO 2",
 	"main": "main.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "electron build/",
-		"pack": "webpack --mode=production && electron-builder --dir",
-		"dist": "webpack --mode=production && electron-builder"
+		"pack": "webpack --env.NODE_ENV=production && electron-builder --dir",
+		"dist": "webpack --env.NODE_ENV=production && electron-builder",
+		"electron": "webpack",
+		"browser": "webpack --config=webpack.browser.config.js",
+		"electron-production": "webpack --env.NODE_ENV=production",
+		"browser-production": "webpack --config=webpack.browser.config.js --env.NODE_ENV=production",
+		"clean": "rm -rf build/ dist"
 	},
 	"repository": {
 		"type": "git",
@@ -49,6 +54,7 @@
 		"axios": "^0.19.0",
 		"brace": "^0.11.1",
 		"copy-webpack-plugin": "^5.0.3",
+		"countly-sdk-web": "^19.8.0",
 		"css-loader": "^3.0.0",
 		"dexie": "^2.0.4",
 		"electron": "^5.0.6",
@@ -90,7 +96,7 @@
 		"vue2-ace-editor": "0.0.13",
 		"vue2-highcharts": "^1.2.5",
 		"vuedl": "^0.3.4",
-		"vuetify": "^2.0.1",
+		"vuetify": "2.0.3",
 		"vuetify-dialog": "^0.3.6",
 		"vuex": "^3.1.0",
 		"webpack": "^4.35.0",
