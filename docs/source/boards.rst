@@ -213,7 +213,7 @@ The final step is to refresh the board by running the command:
 |
 
 Connecting to web 
-"""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^
 
 The connection of a Raspberry Pi board to the web version of Wyliodrin STUDIO demands an Internet connection and the creation of a file, **wyliodrin.json**, that will be written and stored on the SD card. The purpose of this configuration file is to keep a series of particular informations about the device and the platform, so the both instances be able to recognize and communicate with each other.
 
@@ -242,7 +242,7 @@ After copying the configuration file to the destination indicated, you can inser
 |
 
 Wyliolab Board
-"""""""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 .. image:: images/wyliolab.png
 	:align: center

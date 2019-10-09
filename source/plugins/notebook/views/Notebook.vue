@@ -52,15 +52,6 @@
 									<span>Add</span>
 								</v-tooltip>
 
-								<v-tooltip bottom>
-									<template v-slot:activator="{ on }">
-										<v-btn text @click="resetNotebook" class="ntbk-btn">
-											<v-img src="plugins/notebook/data/img/icons/reset-icon.png"></v-img>
-										</v-btn>
-									</template>
-									<span>Reset Notebook</span>
-								</v-tooltip>
-
 								<v-tooltip bottom v-if="element.type==='markdown'">
 									<template v-slot:activator="{ on }">
 										<v-btn text @click="element.editable = !element.editable" class="ntbk-btn right">
@@ -124,7 +115,7 @@
 			</div>
 		</li>
 		<div class="bottom-space"></div>
-		<div class="server-status no-print" :class="{'connected':status === 'READY' || status === 'PROCESSING', 'stopped':status === 'STOPPED'}" v-if="visibleRun && currentProject.language === 'python'">
+		<div class="server-status no-print" :class="{'connected':status === 'READY' || status === 'PROCESSING', 'stopped':status === 'STOPPED'}" v-if="visibleRun">
 			Python {{ status }}
 			<v-tooltip top v-if="visibleRun">
 				<template v-slot:activator="{ on }">
