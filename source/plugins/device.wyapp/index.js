@@ -30,12 +30,23 @@ let workspace = null;
 let transports = {};
 let transportDevices = {};
 
+/**
+ * Searches
+ */
+let searches = {};
+let searchDevices = {};
+
 function updateDevices ()
 {
 	let devices = [];
 	for (let transportDriverName in transportDevices)
 	{
 		devices.push (...transportDevices[transportDriverName]);
+	}
+	console.log (searchDevices);
+	for (let searchName in searchDevices)
+	{
+		devices.push (...searchDevices[searchName]);
 	}
 	workspace.updateDevices (devices);
 }
@@ -598,6 +609,41 @@ export function setup(options, imports, register)
 								if (boardDriver && _.isFunction (boardDriver.found)) boardDriver.found (device);
 							});
 							transportDevices [name] = devices;
+							updateDevices ();
+						}
+						else
+						{
+							workspace.warn ('Transport Driver '+name+' did not provide an array of devices, it provied '+devices);
+						}
+					}
+				};
+			}
+			else
+			{
+				studio.workspace.error ('Transport '+name+' has already been registered');
+			}
+			return null;
+		},
+
+		/**
+		 * Register a new search provider
+		 * @param {String} name - the name of the search provider
+		 */
+		registerSearch (name)
+		{
+			if (!searches[name])
+			{
+				searches[name] = name;
+				return {
+					updateDevices (devices)
+					{
+						if (_.isArray (devices))
+						{
+							devices.map (device => {
+								let boardDriver = device_wyapp.getBoardDriver (device.board);
+								if (boardDriver && _.isFunction (boardDriver.found)) boardDriver.found (device);
+							});
+							searchDevices [name] = devices;
 							updateDevices ();
 						}
 						else

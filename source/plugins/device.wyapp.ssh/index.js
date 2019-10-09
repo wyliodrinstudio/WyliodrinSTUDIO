@@ -200,9 +200,10 @@ function updateSSHDevices (sshDevices)
 		board: 'any',
 		priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 		placeholder: true,
+		port: 22,
 		properties: {
 			// TODO update from device
-			port: 22
+			// port: 22
 		}
 	});
 	return devices;
