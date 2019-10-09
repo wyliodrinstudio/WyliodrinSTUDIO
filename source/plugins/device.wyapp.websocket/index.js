@@ -4,9 +4,6 @@ import uuid from 'uuid';
 import DeviceSetup from './views/DeviceSetup.vue';
 import _ from 'lodash';
 
-const NETWORK_PRIORITY_HIGH = 99;
-// const NETWORK_PRIORITY_LOW = 0;
-
 let wyapp = null;
 let settings = null;
 let workspace = null;
@@ -97,7 +94,7 @@ function updateDevices ()
 			name: workspace.vue.$t('WYAPP_WEBSOCKET_NEW_DEVICE_TITLE'),
 			board: 'any',
 			placeholder: true,
-			priority: NETWORK_PRIORITY_HIGH+10,
+			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			properties: {}
 		});
 	}
@@ -166,6 +163,7 @@ export function setup (options, imports, register)
 				websocketDevices = data.d;
 				websocketDevices.map ((device) => {
 					if (device.id.indexOf ('wyapp:websocket:')!==0) device.id = 'wyapp:websocket:'+device.id;
+					device.priority = workspace.DEVICE_PRIORITY_NORMAL;
 				});
 				updateDevices ();
 			}
