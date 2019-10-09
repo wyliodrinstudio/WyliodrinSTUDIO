@@ -19,16 +19,32 @@
         "message": "There is another Studio instance connected to the server with your id. You are not able to use multiple connections. Would you like to use Studio here?",
         "description": "The question dialog text the user sees when there is another instance connected with his id"
     },
-    "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
         "message": "Add Device",
         "description": "The title of the dialog with instructions on how to add a new device"
     },
-    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
         "message": "Device Name",
         "description": "The name of the device with instructions on how to add a new device"
     },
-    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
         "message": "Please enter a valid device name",
         "description": "The message the user receives when he did not enter a valid name for a new device"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID": {
+        "message": "Session ID",
+        "description": "The menu item where the user changes the session id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TITLE": {
+        "message": "Session ID",
+        "description": "The dialog title where the user changes the session id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TEXT": {
+        "message": "Unique ID used to connect to the devices, it's like a password.",
+        "description": "The text dispalyed in the dialog where the user changes the session id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_NO_UUID": {
+        "message": "The session ID must be a valid UUID.",
+        "description": "The error the user is shown when the enetered session id is not a valid"
     }
 }
