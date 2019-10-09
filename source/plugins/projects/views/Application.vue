@@ -454,6 +454,7 @@ export default {
 					}
 					
 				}
+				
 				if (!pictogram && board !== 'none' && addons['*:' + board] !== undefined) {
 					let addonPictograms = addons['*:' + board].pictograms;
 					if(addonPictograms && addonPictograms.length > 0) {
@@ -466,6 +467,7 @@ export default {
 						}
 					}
 				}
+				
 				if (!pictogram && type !== 'none' && addons[type + ':*'] !== undefined) {
 					let addonPictograms = addons[type + ':*'].pictograms;
 					if(addonPictograms && addonPictograms.length > 0) {
@@ -479,6 +481,7 @@ export default {
 						}
 					}
 				}
+				
 				if(!pictogram || (type === 'none' && board === 'none' && !pictogram)) {
 					if(pictograms && pictograms.length > 0) {
 						for( let pict of pictograms) {
@@ -490,6 +493,66 @@ export default {
 						}
 					}
 				}
+				
+				if(!pictogram) {
+					
+					if(ext === '.c') {
+						pictogram = 'mdi-language-c';
+					} else if (ext === '.cpp') {
+						pictogram = 'mdi-language-cpp';
+					} else if (ext === '.css') {
+						pictogram = 'mdi-language-css3';
+					} else if (ext === '.html') {
+						pictogram = 'mdi-language-html5';
+					} else if (ext === '.js') {
+						pictogram = 'mdi-language-javascript';
+					} else if (ext === '.ts') {
+						pictogram = 'mdi-language-typescript';
+					} else if (ext === '.php') {
+						pictogram = 'mdi-language-php';
+					} else if (ext === '.py') {
+						pictogram = 'mdi-language-python';
+					} else if (ext === '.json') {
+						pictogram = 'mdi-json';
+					} else if (ext === '.vue') {
+						pictogram = 'mdi-vuejs';
+					} else if (ext === '.md') {
+						pictogram = 'mdi-markdown';
+					} else if (ext === '.sh') {
+						pictogram = 'mdi-bash';
+					} else if (ext === '.visual') {
+						pictogram = 'mdi-puzzle';
+					} else if (ext === '.d') {
+						pictogram = 'mdi-file';
+					} else if (ext === '.png') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.svg') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.jpg') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.jpeg') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.gif') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.tiff') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.bmp') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.ppm') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.pgm') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.pbm') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.pnm') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.bat') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.bpg') {
+						pictogram = 'mdi-file-image';
+					}
+				} 
+				
 				if(pictogram) {
 					let array = pictogram.split('-');
 					let imgType = true;
@@ -503,7 +566,8 @@ export default {
 						type:imgType
 					};
 				}
-			} 
+			}
+			
 			return {
 				img:this.baseFileIcon,
 				type:false

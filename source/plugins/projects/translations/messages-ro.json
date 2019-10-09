@@ -299,5 +299,17 @@
     {
         "message": "Spațiul de stocare este numai pentru CITIRE, proiectele pot fi doar deschise.",
         "description": "The message the user sees when the storage space is read only and no projects can be created"
+	},
+	"PROJECT_ERROR_SAVE_SCHEMATIC": {
+        "message": "Eroare la salvarea schemei {file} cu datele ({error})",
+        "description": "Mesajul de eroare afișat atunci când fișier special de setări eșuează să fie salvat"
+    },
+    "PROJECT_ERROR_LOAD_SCHEMATIC": {
+        "message": "Eroare la încărcarea schemei {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un fișier special de setări eșuează să fie încărcat"
+	},
+	"PROJECT_ERROR_DELETE_SCHEMATIC": {
+        "message": "Eroare la ștergerea schemei {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un fișier special de setări eșuează să fie încărcat"
     }
 }
