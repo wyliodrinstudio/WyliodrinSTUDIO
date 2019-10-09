@@ -212,6 +212,8 @@ The final step is to refresh the board by running the command:
 
 |
 
+=====================
+
 Connecting to web 
 ^^^^^^^^^^^^^^^^^^^
 
