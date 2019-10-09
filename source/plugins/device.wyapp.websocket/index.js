@@ -116,7 +116,7 @@ export function setup (options, imports, register)
 
 	workspace.registerMenuItem('DEVICE_WYAPP_WEBSOCKET_SET_USER_ID', 90, async () => {
 		let settoken = await workspace.showPrompt ('DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TITLE', 'DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TEXT', token);
-		if (settoken)
+		if (settoken && token !== settoken)
 		{
 			if (validator.isUUID (settoken))
 			{
