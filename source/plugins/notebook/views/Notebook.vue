@@ -95,8 +95,9 @@
 							<!-- PYTHON -->
 							<div v-else>
 								<AceNotebook :syntax="'python'" :element="element" v-model="element.data" ></AceNotebook>
-								<pre v-if="visibleRun">{{ element.code }}</pre>
-								<div v-if="visibleRun" v-html="element.error"></div>
+								<pre v-if="element.code">{{ element.code }}</pre>
+								<div v-if="element.error" v-html="element.error"></div>
+								<div v-if="element.result" v-html="element.result" class="result"></div>
 
 							</div> 
 						</div>
@@ -105,9 +106,9 @@
 						</div>
 						<div v-else>
 							<AceNotebook :syntax="'python'" :element="element" v-model="element.data" :readOnly="true"></AceNotebook>
-							<pre v-if="visibleRun" class="code">{{ element.code }}</pre>
-							<div v-if="visibleRun" v-html="element.error" class="error"></div>
-							<div v-if="visibleRun" v-html="element.result" class="result"></div>
+							<pre v-if="element.code" class="code">{{ element.code }}</pre>
+							<div v-if="element.error" v-html="element.error" class="error"></div>
+							<div v-if="element.result" v-html="element.result" class="result"></div>
 						</div>
 					</v-card>
 				</v-flex>
@@ -125,7 +126,7 @@
 				</template>
 				<span>Reset</span>
 			</v-tooltip>
-			<v-tooltip top v-show="visibleRun && status !== 'STOPPED'">
+			<v-tooltip top v-if="visibleRun && status !== 'STOPPED'">
 				<template v-slot:activator="{ on }">
 					<v-btn text @click="stopInterpretor()" class="ntbk-btn">
 						<v-img src="plugins/notebook/data/img/icons/stop-icon.png"></v-img>
