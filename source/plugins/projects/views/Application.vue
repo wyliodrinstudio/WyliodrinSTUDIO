@@ -44,71 +44,6 @@
 						<p v-else-if="item.name !== currentProject.name" text @click="menuItem = item" @contextmenu="fileItem = item,showFolder($event)">
 							<v-icon>mdi-folder</v-icon>
 						</p>
-						<v-menu
-							v-model="projectMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-						<v-menu
-							v-model="folderMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-							<v-menu
-							v-model="fileMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="exportFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
 					</template>
 					<template v-slot:label="{item, open}">
 						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)"> 
@@ -120,7 +55,75 @@
 						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
 							{{item.name}} 
 						</p>
+						<!-- <v-menu
+							v-model="projectMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="newFolder(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="newFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="importFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+
 						<v-menu
+							v-model="folderMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="deleteFolder(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="renameObject(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="newFolder(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="newFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="importFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+
+							<v-menu
+							v-model="fileMenu"
+							:position-x="x"
+							:position-y="y"
+							absolute
+							offset-y
+							>
+								<v-list>
+									<v-list-item @click="deleteFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="renameObject(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
+									</v-list-item>
+									<v-list-item @click="exportFile(fileItem)">
+										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu> -->
+					</template>
+					
+					</v-treeview>
+					<v-menu
 							v-model="projectMenu"
 							:position-x="x"
 							:position-y="y"
@@ -185,9 +188,6 @@
 									</v-list-item>
 								</v-list>
 							</v-menu>
-					</template>
-					
-					</v-treeview>
 					<v-card-actions class="fm-actions">
 						<v-btn @click="newFile(menuItem)" text icon>
 							<v-icon>mdi-file-plus</v-icon>
@@ -454,6 +454,7 @@ export default {
 					}
 					
 				}
+				
 				if (!pictogram && board !== 'none' && addons['*:' + board] !== undefined) {
 					let addonPictograms = addons['*:' + board].pictograms;
 					if(addonPictograms && addonPictograms.length > 0) {
@@ -466,6 +467,7 @@ export default {
 						}
 					}
 				}
+				
 				if (!pictogram && type !== 'none' && addons[type + ':*'] !== undefined) {
 					let addonPictograms = addons[type + ':*'].pictograms;
 					if(addonPictograms && addonPictograms.length > 0) {
@@ -479,6 +481,7 @@ export default {
 						}
 					}
 				}
+				
 				if(!pictogram || (type === 'none' && board === 'none' && !pictogram)) {
 					if(pictograms && pictograms.length > 0) {
 						for( let pict of pictograms) {
@@ -490,6 +493,66 @@ export default {
 						}
 					}
 				}
+				
+				if(!pictogram) {
+					
+					if(ext === '.c') {
+						pictogram = 'mdi-language-c';
+					} else if (ext === '.cpp') {
+						pictogram = 'mdi-language-cpp';
+					} else if (ext === '.css') {
+						pictogram = 'mdi-language-css3';
+					} else if (ext === '.html') {
+						pictogram = 'mdi-language-html5';
+					} else if (ext === '.js') {
+						pictogram = 'mdi-language-javascript';
+					} else if (ext === '.ts') {
+						pictogram = 'mdi-language-typescript';
+					} else if (ext === '.php') {
+						pictogram = 'mdi-language-php';
+					} else if (ext === '.py') {
+						pictogram = 'mdi-language-python';
+					} else if (ext === '.json') {
+						pictogram = 'mdi-json';
+					} else if (ext === '.vue') {
+						pictogram = 'mdi-vuejs';
+					} else if (ext === '.md') {
+						pictogram = 'mdi-markdown';
+					} else if (ext === '.sh') {
+						pictogram = 'mdi-bash';
+					} else if (ext === '.visual') {
+						pictogram = 'mdi-puzzle';
+					} else if (ext === '.d') {
+						pictogram = 'mdi-file';
+					} else if (ext === '.png') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.svg') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.jpg') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.jpeg') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.gif') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.tiff') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.bmp') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.ppm') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.pgm') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.pbm') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.pnm') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.bat') {
+						pictogram = 'mdi-file-image';
+					} else if (ext === '.bpg') {
+						pictogram = 'mdi-file-image';
+					}
+				} 
+				
 				if(pictogram) {
 					let array = pictogram.split('-');
 					let imgType = true;
@@ -503,7 +566,8 @@ export default {
 						type:imgType
 					};
 				}
-			} 
+			}
+			
 			return {
 				img:this.baseFileIcon,
 				type:false
@@ -517,7 +581,7 @@ export default {
 			e.preventDefault();
 			this.fileMenu = false;
 			this.x = e.clientX;
-			this.y = e.clientY;
+			this.y = e.clientY+40;
 			this.$nextTick(() => {
 				this.fileMenu = true;
 			});
@@ -529,7 +593,7 @@ export default {
 			e.preventDefault();
 			this.folderMenu = false;
 			this.x = e.clientX;
-			this.y = e.clientY;
+			this.y = e.clientY+40;
 			this.$nextTick(() => {
 				this.folderMenu = true;
 			});
@@ -541,7 +605,7 @@ export default {
 			e.preventDefault();
 			this.projectMenu = false;
 			this.x = e.clientX;
-			this.y = e.clientY;
+			this.y = e.clientY+40;
 			this.$nextTick(() => {
 				this.projectMenu = true;
 			});
@@ -628,7 +692,7 @@ export default {
 		{
 			let files = await this.studio.filesystem.openImportDialog({
 				title:'Import',
-				filetypes:[]
+				filetypes:['*']
 			});
 			if (files.length > 0)
 			{

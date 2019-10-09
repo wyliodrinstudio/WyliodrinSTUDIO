@@ -17,6 +17,7 @@ export default {
 			editorOptions: {
 				fontSize: '12pt',
 				readOnly: false,
+				theme: 'ace/theme/chrome',
 				enableBasicAutocompletion: true,
 				enableSnippets: true,
 				enableLiveAutocompletion: true
@@ -33,7 +34,7 @@ export default {
 			require('brace/worker/javascript');
 
 			require('brace/mode/markdown');
-			require('brace/mode/text');
+			require('brace/mode/plain_text');
 			require('brace/mode/sh');                
 			require('brace/mode/python');    //language
 			require('brace/mode/javascript');    //language
@@ -42,6 +43,11 @@ export default {
 			require('brace/mode/html');    //language
 			require('brace/mode/less');
 			require('brace/mode/json');
+			require('brace/mode/d');
+			require('brace/mode/c_cpp');
+			require('brace/mode/php');
+			require('brace/mode/typescript');
+
 
 			require('brace/theme/chrome');
 			require('brace/theme/monokai');
@@ -55,6 +61,10 @@ export default {
 			require('brace/snippets/sh'); //snippet
 			require('brace/snippets/css'); //snippet
 			require('brace/snippets/less'); //snippet
+			require('brace/snippets/d');
+			require('brace/snippets/c_cpp');
+			require('brace/snippets/php');
+			require('brace/snippets/typescript');
 		}
 	},
 	components: {
@@ -83,7 +93,7 @@ export default {
 						}
 						case '.txt':
 						{
-							this.sourceLanguage = 'text';
+							this.sourceLanguage = 'plain_text';
 							break;
 						}
 						case '.py':
@@ -119,6 +129,36 @@ export default {
 						case '.less':
 						{
 							this.sourceLanguage = 'less';
+							break;
+						}
+						case '.vue':
+						{
+							this.sourceLanguage = 'javascript';
+							break;
+						}
+						case '.php':
+						{
+							this.sourceLanguage = 'php';
+							break;
+						}
+						case '.c':
+						{
+							this.sourceLanguage = 'c_cpp';
+							break;
+						}
+						case '.cpp':
+						{
+							this.sourceLanguage = 'c_cpp';
+							break;
+						}
+						case '.ts':
+						{
+							this.sourceLanguage = 'typescript';
+							break;
+						}
+						case '.d':
+						{
+							this.sourceLanguage = 'd';
 							break;
 						}
 						default:

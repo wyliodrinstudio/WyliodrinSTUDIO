@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div style="position:relative;">
 		<div class="terminal-btns">
 			<v-tooltip top>
 				<template v-slot:activator="{ on }">

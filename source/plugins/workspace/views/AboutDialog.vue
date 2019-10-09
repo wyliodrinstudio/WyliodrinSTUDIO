@@ -8,6 +8,7 @@
 		</v-card-title>
 		
 		<v-card-text>
+
 			<div class="developers">
 				<h3>{{$t('ABOUT_DEVELOPED_BY')}}</h3>
 
@@ -15,8 +16,8 @@
 				<p><strong>Ovidiu Stoica</strong> - {{$t('ABOUT_UI_UX')}}</p>
 				<p><strong>Ioana Culic</strong> - Development Manager</p>
 				<p><strong>Marius-Andrei Aluculesei</strong> - Projects, Application</p>
-				<p><strong>Cosmin-Daniel Radu</strong> - RPK</p>
-				<p><strong>Liviu-Nicolae Moraru</strong> - RPK</p>
+				<p><strong>Cosmin-Daniel Radu</strong> - Embedded Software</p>
+				<p><strong>Liviu-Nicolae Moraru</strong> - Embedded Software</p>
 				<p><strong>Calin Dumitru</strong> - Simulators</p>
 				<p><strong>Diana Ghindaoanu</strong> - Notebook, Dashboard, Documentation</p>
 				<p><strong>Teona Severin</strong> - Web File System</p>
@@ -33,6 +34,11 @@
 				<p><strong>Veronika Uhrinová</strong> - Slovak</p>
 				<p><strong>Sorina Goran</strong> - Spanish</p>
 			</div>
+
+			<div class="consent">
+				<v-checkbox dark hide-details dense v-model="feedback" :label="$t('ABOUT_FEEDBACK')"></v-checkbox>
+			</div>
+
 		</v-card-text>
 
 		<v-card-actions>
@@ -56,7 +62,7 @@ export default {
 	name:'AboutDialog',
 	data() {
 		return {
-
+			feedback: this.studio.settings.loadValue ('workspace', 'feedback', true)
 		}
 	},
 	methods: 
@@ -71,6 +77,12 @@ export default {
 		},
 		close() {
 			this.$root.$emit('submit', undefined);
+		}
+	},
+	watch: {
+		feedback (newfeedback)
+		{
+			this.studio.settings.storeValue ('workspace', 'feedback', newfeedback)
 		}
 	}
 }

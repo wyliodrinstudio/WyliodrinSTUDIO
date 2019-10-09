@@ -289,5 +289,10 @@
     {
         "message": "Vous avez ouvert un projet invalide, veuillez en sélectionner un autre.",
         "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
+    },
+    "PROJECTS_READ_ONLY_FILE_SYSTEM": 
+    {
+        "message": "L'espace de stockage est en lecture seule, les projets ne peuvent être ouverts.",
+        "description": "The message the user sees when the storage space is read only and no projects can be created"
     }
 }

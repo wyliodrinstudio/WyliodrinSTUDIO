@@ -45,115 +45,132 @@ class StudioPluginsElectron {
 	}
 }
 
-module.exports = {
-	entry: {
-		workspace: './source/plugins/workspace/index.js',
-	},
-	output: {
-		path: path.resolve(__dirname, './build'),
-		// library: '',
-		filename: 'plugins/[name]/index.js',
-		libraryTarget: 'commonjs2'
-	},
-	optimization: {
-		splitChunks: {
-			chunks: 'all',
-			name: '../vendor'
-		}
-	},
-	module:
+module.exports = env => {
+	if (!env) env = {};
+	let defines = {
+		APP_KEY: JSON.stringify('014dd0822b82fb2b8a8a4b14f1182cab5fcced07')
+	};
+
+	let mode = 'none';
+
+	if (env.NODE_ENV === 'production')
 	{
-		rules: [
-			// ... other rules
-			{
-				test: /\.vue$/,
-				loader: 'vue-loader'
-			},
-			{
-				test: /\.less$/,
-				use: [
-					{
-						loader: 'vue-style-loader',
-						options: {
-							// convertToAbsoluteUrls: true
+		defines = {
+			APP_KEY: JSON.stringify ('66482e1728771fe4a4c440e79e7e38dc810cc5e6')
+		};
+		mode = 'production';
+	}
+	return {
+		entry: {
+			workspace: './source/plugins/workspace/index.js',
+		},
+		output: {
+			path: path.resolve(__dirname, './build'),
+			// library: '',
+			filename: 'plugins/[name]/index.js',
+			libraryTarget: 'commonjs2'
+		},
+		optimization: {
+			splitChunks: {
+				chunks: 'all',
+				name: '../vendor'
+			}
+		},
+		module:
+		{
+			rules: [
+				// ... other rules
+				{
+					test: /\.vue$/,
+					loader: 'vue-loader'
+				},
+				{
+					test: /\.less$/,
+					use: [
+						{
+							loader: 'vue-style-loader',
+							options: {
+								// convertToAbsoluteUrls: true
+							}
+						},
+						{
+							loader: 'css-loader',
+							options: { url: false }
+						},
+						{
+							loader: 'less-loader',
+							options: {
+								relativeUrls: false
+							}
 						}
-					},
-					{
-						loader: 'css-loader',
-						options: { url: false }
-					},
-					{
-						loader: 'less-loader',
-						options: {
-							relativeUrls: false
-						}
-					}
-				]
-			},
-			{
-				test: /\.txt$/i,
-				use: 'raw-loader',
-			},
-			// {
-			// 	test: /\.ts$/,
-			// 	loader: 'ts-loader',
-			// 	options: { appendTsSuffixTo: [/\.vue$/] }
-			// },
-			// {
-			// 	test: /\.(png|jpg|gif)$/,
-			// 	use: [
-			// 		{
-			// 			loader: 'url-loader',
-			// 			options: {
-			// 				limit: 5000
-			// 			}
-			// 		}
-			// 	]
-			// }
+					]
+				},
+				{
+					test: /\.txt$/i,
+					use: 'raw-loader',
+				},
+				// {
+				// 	test: /\.ts$/,
+				// 	loader: 'ts-loader',
+				// 	options: { appendTsSuffixTo: [/\.vue$/] }
+				// },
+				// {
+				// 	test: /\.(png|jpg|gif)$/,
+				// 	use: [
+				// 		{
+				// 			loader: 'url-loader',
+				// 			options: {
+				// 				limit: 5000
+				// 			}
+				// 		}
+				// 	]
+				// }
+			],
+		},
+		externals: [nodeExternals({
+			whitelist: [...Object.keys(package_json.devDependencies), /^highcharts\/.*/, 'async', 'vue-asyncable', /^brace\/.*/, /^node-blockly\/.*/, 'set-immediate-shim', 'lie', 'pako', 'readable-stream']
+		})],
+		mode: mode,
+		node: {
+			__dirname: false
+		},
+		plugins: [
+			// make sure to include the plugin!
+			new VueLoaderPlugin({
+				esModule: false
+			}),
+			new CopyPlugin([
+				...items,
+				{ from: '*.js', context: 'source' },
+				// { from: '../package.json', context: 'source' },
+				{ from: 'index.html', context: 'source' },
+				{ from: 'img/**', context: 'source' },
+				{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
+				//{ from: 'iconfont/**', context: 'node_modules/material-design-icons/' },
+				{ from: 'fonts/**', context: 'node_modules/@mdi/font/' },
+				{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
+			], { logLevel: '' }),
+			// new DtsBundleWebpack({
+			// 	name: 'plugins',
+			// 	main: 'source/plugins/**/*.d.ts',
+			// 	exclude: function (file, external)
+			// 	{
+			// 		if (file.indexOf ('plugins.d.ts')>=0) return true;
+			// 		else
+			// 		if (file.indexOf ('vue-shim.d.ts')>=0) return true;
+			// 		else
+			// 		if (file.indexOf ('.vue')>=0) return true;
+			// 		console.log (file+' external: '+external);
+			// 		return false;
+			// 	},
+			// })
+			new TranslationPlugin({}),
+			new StudioPluginsElectron(),
+			new webpack.DefinePlugin({
+				...defines,
+				TARGET: 'electron'
+			})
 		],
-	},
-	externals: [nodeExternals({
-		whitelist: [...Object.keys(package_json.devDependencies), /^highcharts\/.*/, 'async', 'vue-asyncable', /^brace\/.*/, /^node-blockly\/.*/, 'set-immediate-shim', 'lie', 'pako', 'readable-stream']
-	})],
-	mode: 'none',
-	node: {
-		__dirname: false
-	},
-	plugins: [
-		// make sure to include the plugin!
-		new VueLoaderPlugin({
-			esModule: false
-		}),
-		new CopyPlugin([
-			...items,
-			{ from: '*.js', context: 'source' },
-			// { from: '../package.json', context: 'source' },
-			{ from: 'index.html', context: 'source' },
-			{ from: 'img/**', context: 'source' },
-			{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
-			//{ from: 'iconfont/**', context: 'node_modules/material-design-icons/' },
-			{ from: 'fonts/**', context: 'node_modules/@mdi/font/' },
-			{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
-		], { logLevel: '' }),
-		// new DtsBundleWebpack({
-		// 	name: 'plugins',
-		// 	main: 'source/plugins/**/*.d.ts',
-		// 	exclude: function (file, external)
-		// 	{
-		// 		if (file.indexOf ('plugins.d.ts')>=0) return true;
-		// 		else
-		// 		if (file.indexOf ('vue-shim.d.ts')>=0) return true;
-		// 		else
-		// 		if (file.indexOf ('.vue')>=0) return true;
-		// 		console.log (file+' external: '+external);
-		// 		return false;
-		// 	},
-		// })
-		new TranslationPlugin({}),
-		new StudioPluginsElectron(),
-		new webpack.DefinePlugin({
-			TARGET: 'electron'
-		})
-	],
-	target: 'electron-renderer'
+		target: 'electron-renderer'
+	};
 };

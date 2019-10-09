@@ -233,6 +233,7 @@
          "DEVICE_WYAPP_FILE_MANAGER": "File manager",
          "DEVICE_WYAPP_ERROR_PROJECT_RUN": "Please open a project",
          "DEVICE_WYAPP_NO_DIRECTORY": "There is no directory selected",
+         "DEVICE_WYAPP_FILESYSTEM": "File System",
          "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": "Unable to load SerialPort WyApp Transport, serial devices over wyapp will not be available (error: {{error}})",
          "DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR": "Unable to list the serial ports (error: {error})",
          "DEVICE_SERIAL_PORT": "Serial Port",
@@ -367,6 +368,9 @@
          "PROJECTS_EXTENSION_URECOGNIZED": "The file extension is not recognized",
          "PROJECTS_INVALID_PROJECT": "You have oppened an invalid project, please select another one",
          "PROJECT_EXISTS_PROMPT": "A project with that name already exists",
+         "PROJECTS_READ_ONLY_FILE_SYSTEM": "The stoarge space is READ ONLY, projects can only be opened.",
+         "PROJECT_ERROR_SAVE_SCHEMATIC": "Error while saving schematic {file} with data ({error})",
+         "PROJECT_ERROR_LOAD_SCHEMATIC": "Error while deleting schematic {file} ({error})",
          "EDITOR_VISUAL_SHOW_CODE": "Show Code",
          "EDITOR_VISUAL_HIDE_CODE": "Hide Code",
          "SCHEMATICS": "Schematics",
@@ -415,7 +419,8 @@
          "WORKSPACE_DOCUMENTATION": "Documentation",
          "ABOUT_VERSION": "Version",
          "OK": "OK",
-         "BACK": "BACK"
+         "BACK": "BACK",
+         "ABOUT_FEEDBACK": "Allow sending anonymous usage parameters in order to help us improve the software"
       },
       "es": {
          "CHAT": "CHAT",
@@ -750,6 +755,7 @@
          "PROJECTS_NO_FILE": "Aucun fichier n'est sélectionné, veuillez importer, créer ou sélectionner un fichier.",
          "PROJECTS_EXTENSION_URECOGNIZED": "L'extension de fichier n'est pas reconnue",
          "PROJECTS_INVALID_PROJECT": "Vous avez ouvert un projet invalide, veuillez en sélectionner un autre.",
+         "PROJECTS_READ_ONLY_FILE_SYSTEM": "L'espace de stockage est en lecture seule, les projets ne peuvent être ouverts.",
          "EDITOR_VISUAL_SHOW_CODE": "Afficher le code",
          "EDITOR_VISUAL_HIDE_CODE": "Masquer le code",
          "SCHEMATICS": "Schémas",
@@ -1282,6 +1288,7 @@
          "DEVICE_WYAPP_SSID_OTHER_NETWORK": "Alte rețele",
          "DEVICE_WYAPP_NO_DIRECTORY": "Nu există nici un director selectat",
          "DEVICE_WYAPP_ERROR_PROJECT_RUN": "Vă rugăm să deschideți un proiect nou",
+         "DEVICE_WYAPP_FILESYSTEM": "Sistem de fisiere",
          "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": "Imposibil de încărcat SerialPort WyApp Transport, dispozitivele seriale wyapp nu vor fi disponibile (error: {{error}})",
          "DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR": "Imposibil de listat porturile seriale (error: {error})",
          "DEVICE_SERIAL_PORT": "Port Serial",
@@ -1417,6 +1424,10 @@
          "PROJECTS_INVALID_PROJECT": "Ați deschis un proiect invalid, vă rugăm selectați altul.",
          "PROJECTS_JSON_DO_NOT": "S-a încercat editarea fișierului project.json, NU FACEȚI ASTA",
          "PROJECT_EXISTS_PROMPT": "Un proiect cu acest nume există deja",
+         "PROJECTS_READ_ONLY_FILE_SYSTEM": "Spațiul de stocare este numai pentru CITIRE, proiectele pot fi doar deschise.",
+         "PROJECT_ERROR_SAVE_SCHEMATIC": "Eroare la salvarea schemei {file} cu datele ({error})",
+         "PROJECT_ERROR_LOAD_SCHEMATIC": "Eroare la încărcarea schemei {file} ({error})",
+         "PROJECT_ERROR_DELETE_SCHEMATIC": "Eroare la ștergerea schemei {file} ({error})",
          "EDITOR_VISUAL_SHOW_CODE": "Afisați Sursa",
          "EDITOR_VISUAL_HIDE_CODE": "Ascundeți Sursa",
          "SCHEMATICS": "Scheme",
@@ -1463,7 +1474,8 @@
          "WORKSPACE_TOOLBAR_CLOSE": "Ieșire",
          "WORKSPACE_DOCUMENTATION": "Documentație",
          "OK": "OK",
-         "BACK": "Înapoi"
+         "BACK": "Înapoi",
+         "ABOUT_FEEDBACK": "Permiteti trimiterea de date anonime despre utilizarea software-ului. Acestea ne ajuta sa il imbunatatim."
       },
       "sk": {
          "CHAT": "CHAT",

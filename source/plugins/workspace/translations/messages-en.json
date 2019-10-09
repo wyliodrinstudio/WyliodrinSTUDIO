@@ -154,5 +154,9 @@
     "BACK": {
         "message": "BACK",
         "description": "Any button that has the BACK text"
+    },
+    "ABOUT_FEEDBACK": {
+        "message": "Allow sending anonymous usage parameters in order to help us improve the software",
+        "description": "The message for the checkbox to enable and disable the sending of feedback"
     }
 }

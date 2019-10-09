@@ -294,5 +294,22 @@
     {
         "message": "Un proiect cu acest nume există deja",
         "description": "The message the user sees in the Projects Library when a project with an already existing name is created or imported"
+    },
+    "PROJECTS_READ_ONLY_FILE_SYSTEM": 
+    {
+        "message": "Spațiul de stocare este numai pentru CITIRE, proiectele pot fi doar deschise.",
+        "description": "The message the user sees when the storage space is read only and no projects can be created"
+	},
+	"PROJECT_ERROR_SAVE_SCHEMATIC": {
+        "message": "Eroare la salvarea schemei {file} cu datele ({error})",
+        "description": "Mesajul de eroare afișat atunci când fișier special de setări eșuează să fie salvat"
+    },
+    "PROJECT_ERROR_LOAD_SCHEMATIC": {
+        "message": "Eroare la încărcarea schemei {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un fișier special de setări eșuează să fie încărcat"
+	},
+	"PROJECT_ERROR_DELETE_SCHEMATIC": {
+        "message": "Eroare la ștergerea schemei {file} ({error})",
+        "description": "Mesajul de eroare afișat atunci când un fișier special de setări eșuează să fie încărcat"
     }
 }

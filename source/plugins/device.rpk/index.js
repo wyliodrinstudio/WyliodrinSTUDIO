@@ -11,15 +11,7 @@ let fs = null;
 
 import RPKDeviceSetup from './views/RPKDeviceSetup.vue';
 
-import { EventEmitter } from 'events';
-
-let deviceEvents = new EventEmitter();
-
 let SerialPort = null;
-// let discoverSerialDevicesTimer = null;
-
-// const SERIAL_PRIORITY_LOW = 299;
-// const SERIAL_PRIORITY_HIGH = 200;
 
 let studio = null;
 let workspace = null;
@@ -29,6 +21,16 @@ let connections = {};
 let serialDevices = [];
 
 let ports = {};
+
+/**
+ * Send an update
+ * @param {Device} device 
+ */
+function updateDevice (device)
+{
+	// deviceEvents.emit ('update:'+device.id, device);
+	workspace.updateDevice (device);
+}
 
 function loadSerialPort() {
 	try {
@@ -161,10 +163,6 @@ function search() {
 	}
 }
 
-function updateDevice(device) {
-	deviceEvents.emit('update:' + device.id, device);
-}
-
 export function setup(options, imports, register) {
 	studio = imports;
 	drivelist = loadRPK();
@@ -178,16 +176,6 @@ export function setup(options, imports, register) {
 	let device_rpk = {
 		defaultIcon() {
 			return 'plugins/device.rpk/data/img/icons/rpk.png';
-		},
-		/**
-		 * Register to recevie device updates, use when connected
-		 * 
-		 * @param {Device} device - the device
-		 * @param {Function (device)} fn - function to be called
-		 */
-		registerForUpdate(device, fn) {
-			deviceEvents.on('update:' + device.id, fn);
-			return () => deviceEvents.removeListener('update:' + device.id, fn);
 		},
 
 		getConnections() {

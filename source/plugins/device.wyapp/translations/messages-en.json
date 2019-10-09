@@ -126,5 +126,9 @@
 	"DEVICE_WYAPP_NO_DIRECTORY": {
 		"message": "There is no directory selected",
 		"description": "The message shown in the file tree manager when there is no directory currently selected"
+	},
+	"DEVICE_WYAPP_FILESYSTEM": {
+		"message": "File System",
+		"description": "The message shown for the selected device filesystem"
 	}
 }

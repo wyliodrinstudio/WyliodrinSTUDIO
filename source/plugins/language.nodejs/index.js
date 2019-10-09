@@ -33,6 +33,10 @@ export default function setup(options, imports, register) {
 			icon:'mdi-language-javascript'
 		},
 		{
+			extension: '.py',
+			icon:'mdi-language-python'
+		},
+		{
 			extension: '.vue',
 			icon:'mdi-vuejs'
 		},

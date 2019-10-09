@@ -141,7 +141,9 @@ a:hover {text-decoration:underline;}
 
 .application a:hover {text-decoration: none;}
 
-.projname {position:absolute; background:none; top:100px; left:20px; color:@color-black; z-index: 1; font-size: 20px; letter-spacing: 0.005em; font-weight: 400;}
+.projname {position:absolute; background:none; top:100px; left:20px; color:@color-black; z-index: 1; font-size: 20px; letter-spacing: 0.005em; font-weight: 400; text-overflow: ellipsis; overflow: hidden; max-width: 30%; text-align: left; white-space: nowrap;}
+
+.dirname {position:absolute; background:none; top:100px; left:20px; color:@color-black; z-index: 1; font-size: 20px; letter-spacing: 0.005em; font-weight: 400; text-overflow: ellipsis; overflow: hidden; max-width: 30%; text-align: left; direction: rtl; white-space: nowrap;}
 
 .v-card__title {background: @color-dark-4; color: @color-white;}
 
@@ -318,7 +320,7 @@ input {caret-color:@color-highlight !important;  }
 
 .project-tree-on {width: 195px; display: inline-block; float: left; position: relative; background: @color-white; height: 100% !important; height: calc(100vh - 160px) !important;
 	.v-treeview {height: calc(~"100vh - 220px"); overflow: auto;
-	> .v-treeview-node {height: 100%;}
+		> .v-treeview-node {height: 100%; width: fit-content;}
 	}
 	
 }
@@ -404,7 +406,7 @@ outline:none;
     position: absolute;
     top: 40%;
     left: -15px;
-	z-index: 100;
+	z-index: 7;
 	img {height: 29px;}
 }
 
@@ -426,7 +428,7 @@ outline:none;
 	position:absolute;
 	top:40%;
 	left: 181px;
-	z-index: 100;
+	z-index: 7;
 	img {height: 29px;}
 }
 
@@ -460,7 +462,8 @@ outline:none;
 
 /* Scrollbar width */
 ::-webkit-scrollbar {
-    width: 8px;
+	width: 8px;
+	height: 8px;
 }
  
 /* Track */
@@ -483,7 +486,8 @@ outline:none;
 
 /* Scrollbar width */
 ::-webkit-scrollbar {
-    width: 8px;
+	width: 8px;
+	height: 8px;
 }
  
 /* Track */
@@ -509,6 +513,7 @@ outline:none;
 	/* Scrollbar width */
 	::-webkit-scrollbar {
 		width: 8px;
+		height: 8px;
 	}
 	
 	/* Track */
@@ -587,7 +592,7 @@ outline:none;
 	span{position:absolute; right: 10px; top: 90px; font-size:14px;}
 }
 
-.developers {margin:auto; text-align:center; overflow: auto; display: block; max-height: 400px;
+.developers {margin:auto; text-align:center; overflow: auto; display: block; max-height: 300px;
 	h3{font-weight:bold; width:100%; font-size:18px; margin-bottom: 20px;}
 	p{width:100%; font-size:14px; margin-bottom: 10px;}
 }
@@ -615,4 +620,8 @@ outline:none;
 	background:@color-highlight !important;
 	color:@color-white !important;
 	border:@color-highlight 2px solid;
+}
+
+.consent {margin: auto; max-width: 80%;
+	label {font-size: 14px; font-weight: 300;}
 }

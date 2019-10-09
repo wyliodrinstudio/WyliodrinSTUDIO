@@ -30,11 +30,15 @@ export default {
 	},
 	watch:{
 		async currentProject() {
-			let image = await this.studio.projects.loadSpecialFile(this.currentProject,'schematic.svg');
+			let image = await this.studio.projects.loadSchematic(this.currentProject);
 			if(image !== null){
 				this.encodedImage = 'data:image/svg+xml;base64,' + image.toString ('base64');
 				this.fileName = 'schematic.svg';
 				this.pathToFile = path.join(this.currentProject.folder,'.project',this.fileName);
+			} else {
+				this.encodedImage = null;
+				this.fileName = null;
+				this.pathToFile = null;
 			}
 		}
 	},
@@ -50,14 +54,14 @@ export default {
 				if(files) {
 					let aux = path.basename(files[0].name);
 					let extension = aux.substring(aux.lastIndexOf('.')).substring(1);
-					this.fileName = 'schematic.'+extension;
+					this.fileName = 'schematic.svg';
 					this.pathToFile = path.join(this.currentProject.folder,'.project',this.fileName);
 
 					try 
 					{
 						let content = await this.studio.filesystem.readFile(files[0].name);
 						var encoded = content.toString ('base64');
-						await this.studio.projects.saveSpecialFile(this.currentProject,this.fileName,content)
+						await this.studio.projects.saveSchematic(this.currentProject,this.fileName,content)
 						if(extension === 'svg')
 							this.encodedImage = 'data:image/svg+xml;base64,' + encoded;
 						else
@@ -75,7 +79,7 @@ export default {
 		async deleteSchematic() {
 			let value = await this.studio.workspace.showConfirmationPrompt('DELETE_CONFIRMATION', 'DELETE_MESSAGE');
 			if (value) {
-				await this.studio.projects.deleteFile(this.currentProject,this.pathToFile.replace(this.currentProject.folder,''));
+				await this.studio.projects.deleteSchematic(this.currentProject);
 				this.pathToFile=null;
 				this.fileName=null;
 				this.encodedImage=null;

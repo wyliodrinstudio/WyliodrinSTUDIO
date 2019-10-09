@@ -1,24 +1,24 @@
 <template>
 	<v-card class="disconnect">
-		<v-tooltip>
-			<template #activator="data">
-				<v-btn ref="fn" @click.stop="disconnect" class="icon-btn">
+		<v-tooltip top>
+			<template v-slot:activator="{ on }">
+				<v-btn @click.stop="disconnect" class="icon-btn" v-on="on">
 					<img src="plugins/device.wyapp/data/img/icons/disconnect-icon.svg" :alt="$t('DEVICE_WYAPP_DISCONNECT')" class="s24">
 				</v-btn>
 			</template>
 			<span>{{$t('DEVICE_WYAPP_DISCONNECT')}}</span>
 		</v-tooltip>
-		<v-tooltip>
-			<template #activator="data">
-				<v-btn @click.stop="disconnectAndReboot" class="icon-btn">
+		<v-tooltip top>
+			<template v-slot:activator="{ on }">
+				<v-btn @click.stop="disconnectAndReboot" class="icon-btn" v-on="on">
 					<img src="plugins/device.wyapp/data/img/icons/restart-icon.svg" :alt="$t('DEVICE_WYAPP_RESTART')" class="s24">
 				</v-btn>
 			</template>
 			<span>{{$t('DEVICE_WYAPP_RESTART')}}</span>
 		</v-tooltip>
-		<v-tooltip>
-			<template #activator="data">
-				<v-btn @click.stop="disconnectAndPowerOff" class="icon-btn">
+		<v-tooltip top>
+			<template v-slot:activator="{ on }">
+				<v-btn @click.stop="disconnectAndPowerOff" class="icon-btn" v-on="on">
 					<img src="plugins/device.wyapp/data/img/icons/turn-off-icon.svg" :alt="$t('DEVICE_WYAPP_TURNOFF')" class="s24">
 				</v-btn>
 			</template>
