@@ -71,6 +71,7 @@ export default class WyApp extends EventEmitter
 			this.device.properties.packageManager = packet.d.pm;
 			this.device.properties.taskManager = packet.d.tm;
 			this.device.properties.networkManager = packet.d.net;
+			this.device.properties.fileManager = packet.d.fe;
 			this.emit ('update', this.device);
 		}
 		else
@@ -260,7 +261,7 @@ export default class WyApp extends EventEmitter
 							try
 							{
 								let packet = msgpack.decode (rawPacket);
-								// console.log (packet);
+								console.log (packet);
 								try
 								{
 									this.emit ('packet', packet);

@@ -1467,7 +1467,8 @@
          "WORKSPACE_TOOLBAR_CLOSE": "Ieșire",
          "WORKSPACE_DOCUMENTATION": "Documentație",
          "OK": "OK",
-         "BACK": "Înapoi"
+         "BACK": "Înapoi",
+         "ABOUT_FEEDBACK": "Permiteti trimiterea de date anonime despre utilizarea software-ului. Acestea ne ajuta sa il imbunatatim."
       },
       "sk": {
          "CHAT": "CHAT",
