@@ -19,9 +19,9 @@
 					:open="open"
 					:items="items"
 					item-key="key"
+					:active.sync="itemsActive"
 					activatable
-					@update:active="consoleLogIt(item)"
-					active-class=""
+					@update:active="setActive"
 					color="rgba(0,0,0,0.87)"
 					return-object
 					:open-on-click="true"
@@ -29,31 +29,31 @@
 					>
 					
 					<template v-slot:prepend="{item, open}">
-						<p v-if="item.name === currentProject.name" @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)">
+						<p v-if="item.path === '/'" @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)">
 							<v-img v-if="languageImage().type" contain :src="languageImage().img" avatar ></v-img>
 							<v-icon v-else>{{languageImage().img}}</v-icon>
 						</p>
-						<p v-else-if="item.file !== undefined" @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
+						<p v-else-if="item.file !== undefined" @contextmenu="fileItem = item,showFile($event)">
 							<v-img v-if="getPictogram(item.path).type" contain :src="getPictogram(item.path).img" avatar ></v-img>
 							<v-icon v-else>{{getPictogram(item.path).img}}</v-icon>
 
 						</p>
-						<p v-else-if="open && item.name !== currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="open && item.path !== '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)">
 							<v-icon>mdi-folder-open</v-icon>
 						</p>
-						<p v-else-if="item.name !== currentProject.name" text @click="menuItem = item" @contextmenu="fileItem = item,showFolder($event)">
+						<p v-else-if="item.path !== '/'" text @click="menuItem = item" @contextmenu="fileItem = item,showFolder($event)">
 							<v-icon>mdi-folder</v-icon>
 						</p>
 					</template>
 					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="item.file  === undefined && item.name === currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)"> 
+						<p style="width:100%;" v-if="item.file  === undefined && item.path === '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)"> 
 							{{item.name}}                  
 						</p>
-						<p style="width:100%;" v-else-if="item.file  === undefined && item.name !== currentProject.name" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)"> 
+						<p style="width:100%;" v-else-if="item.file  === undefined && item.path !== '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)"> 
 							{{item.name}}                  
 						</p>
-						<p v-else style="width:100%;" text @click="fileItem = item,changeSource(item)" @contextmenu="fileItem = item,showFile($event)">
-							{{item.name}} 
+						<p v-else style="width:100%;" text @contextmenu="fileItem = item,showFile($event)">
+							{{item.name}}
 						</p>
 						<!-- <v-menu
 							v-model="projectMenu"
@@ -260,6 +260,7 @@ export default {
 			items:[],
 			item:null,
 			type:null,
+			itemsActive: [],
 			fileMenu: false,
 			folderMenu:false,
 			projectMenu:false,
@@ -364,8 +365,21 @@ export default {
 		}
 	},
 	methods: {
-		consoleLogIt(item){
+		setActive(items){
 			// TODO why is this function here?
+			console.log (items[0]);
+			if (items.length > 0)
+			{
+				this.fileItem = items[0];
+				if (this.fileItem.file !== undefined)
+				{
+					this.changeSource (this.fileItem);	
+				}
+			}
+			else if (this.fileItem)
+			{
+				items.push (this.fileItem);
+			}
 		},
 		verifyLanguage(project) {
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
@@ -618,6 +632,8 @@ export default {
 		},
 		async changeSource(item)
 		{
+			this.itemsActive = [];
+			this.itemsActive.push (item);
 			await this.studio.projects.changeFile(this.currentProject,item.path);
 		},
 		
@@ -648,8 +664,8 @@ export default {
 				let root = [{
 					name:path.basename(filename),
 					children:files,
-					path:filename.replace(this.currentProject.folder, ''),
-					key:path.basename(filename)+filename.replace(this.currentProject.folder, '')+'folder'
+					path:'/',
+					key:'/'
 				}];
 				
 				this.items = root;
@@ -778,7 +794,6 @@ export default {
 	{
 		await this.studio.projects.loadPreviousSelectedCurrentProject();
 		await this.dirTree();
-		
 	}
 }
 	
