@@ -1,0 +1,14 @@
+{
+    "DEVICE_SIMULATOR_RPK": {
+        "message": "Simulateur RPK",
+        "description": "The RPK simulator tab button"
+    },
+    "DEVICE_SIMULATOR_RPK_RUN": {
+        "message": "Exécuter",
+        "description": "The RPK simulator button to run"
+    },
+    "DEVICE_SIMULATOR_RPK_STOP": {
+        "message": "Arrêter",
+        "description": "The RPK simulator button to stop"
+    }
+}

@@ -307,9 +307,5 @@
     "PROJECT_ERROR_LOAD_SCHEMATIC": {
         "message": "Eroare la încărcarea schemei {file} ({error})",
         "description": "Mesajul de eroare afișat atunci când un fișier special de setări eșuează să fie încărcat"
-	},
-	"PROJECT_ERROR_DELETE_SCHEMATIC": {
-        "message": "Eroare la ștergerea schemei {file} ({error})",
-        "description": "Mesajul de eroare afișat atunci când un fișier special de setări eșuează să fie încărcat"
-    }
+	}
 }

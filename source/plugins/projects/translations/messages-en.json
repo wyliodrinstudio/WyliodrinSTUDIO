@@ -307,9 +307,5 @@
     "PROJECT_ERROR_LOAD_SCHEMATIC": {
         "message": "Error while loading schematic {file} ({error})",
         "description": "The error message shown when a special settings file fails to be loaded"
-	},
-	"PROJECT_ERROR_LOAD_SCHEMATIC": {
-        "message": "Error while deleting schematic {file} ({error})",
-        "description": "The error message shown when a special settings file fails to be loaded"
 	}
 }

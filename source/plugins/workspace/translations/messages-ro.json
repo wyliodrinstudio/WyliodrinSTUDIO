@@ -150,5 +150,13 @@
     "ABOUT_FEEDBACK": {
         "message": "Permiteti trimiterea de date anonime despre utilizarea software-ului. Acestea ne ajuta sa il imbunatatim.",
         "description": "The message for the checkbox to enable and disable the sending of feedback"
+    },
+    "ABOUT_TRANSLATE": {
+        "message": "Traduceri",
+        "description": "Text for translators of Wyliodrin Studio"
+    },
+    "ABOUT_VERSION": {
+        "message": "Versiune",
+        "description":" The text version that appears in the Welcome and About dialogs"
     }
 }

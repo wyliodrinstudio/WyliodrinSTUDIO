@@ -30,5 +30,9 @@
     "NOTEBOOK_RESET_NOTEBOOK_QUESTION": {
         "message": "Voulez-vous vraiment réinitialiser le Notebook? Vous allez perdre toutes les notes pour ce projet.",
         "description": "Confirmation prompt which ensures that the user really wants to reset the notebook"
+    },
+    "NOTEBOOK_LOAD_PROJECT": {
+        "message": "Charger un projet pour afficher le Notebook",
+        "description": "The message when there is no project loaded"
     }
 }

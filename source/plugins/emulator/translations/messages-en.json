@@ -1,0 +1,31 @@
+{
+	"DEVICE_EMULATOR": {
+		"message": "Emulator",
+		"description": "Name of the program that allows to imitate the behavior of another program or device."
+	},
+	"EMULATOR_AVAILABLE_IMAGES": {
+		"message": "Available Images",
+		"description": "Name of the tab with a list of available operating system images"
+	},
+	"EMULATOR_AVAILABLE_EMULATORS": {
+		"message": "Available Emulators",
+		"description": "Name of the tab with a list of available emulators"
+	},
+	"EMULATOR_DOWNLOAD_IMAGE": {
+		"message": "Download Image",
+		"description": "Button to download the image for an emulator"
+	},
+	"EMULATOR_RUN_RASPBERRYPI": {
+		"message": "Run RaspberryPi Emulator",
+		"description": "Button that starts the Raspberryi Pi emulator"
+	},
+	"EMULATOR_RUN_UBUNTU": {
+		"message": "Run Ubuntu Emulator",
+		"description": "Button that starts the Ubuntu emulator"
+	},
+	"EMULATOR_DOWNLOAD_QEMU": {
+		"message": "Download Qemu",
+		"description": "Button that redirects the user to the downloag page of qemu"
+	}
+
+}

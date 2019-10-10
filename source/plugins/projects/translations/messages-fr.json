@@ -294,5 +294,18 @@
     {
         "message": "L'espace de stockage est en lecture seule, les projets ne peuvent être ouverts.",
         "description": "The message the user sees when the storage space is read only and no projects can be created"
+    },
+	"PROJECT_ERROR_SAVE_SCHEMATIC": {
+        "message": "Erreur lors de la sauvegarde du schéma {file} avec des données ({error})",
+        "description": "The error message shown when a special settings file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_SCHEMATIC": {
+        "message": "Erreur lors du chargement du schéma {file} ({error})",
+        "description": "The error message shown when a special settings file fails to be loaded"
+	},
+	"PROJECT_EXISTS_PROMPT": 
+    {
+        "message": "Un projet portant ce nom existe déjà.",
+        "description": "The message the user sees in the Projects Library when a project with an already existing name is created or imported"
     }
 }
