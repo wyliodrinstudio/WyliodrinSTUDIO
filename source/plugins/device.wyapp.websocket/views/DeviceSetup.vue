@@ -1,12 +1,12 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t('WYAPP_WEBSOCKET_NEW_DEVICE_TITLE')}}</span>
+			<span class="headline">{{$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE')}}</span>
 		</v-card-title>
 		<v-card-text>
-			<v-text-field autofocus :label="$t('WYAPP_WEBSOCKET_NEW_DEVICE_NAME')" required v-model="value"></v-text-field>
+			<v-text-field autofocus :label="$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME')" required v-model="value"></v-text-field>
 			<pre v-show="nameValid">{{json}}</pre>
-			<div v-show="!nameValid">{{$t('WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID')}}</div>
+			<div v-show="!nameValid">{{$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID')}}</div>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>

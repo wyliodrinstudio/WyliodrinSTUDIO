@@ -3,6 +3,7 @@ import ReconnectingWebSocket from 'reconnectingwebsocket';
 import uuid from 'uuid';
 import DeviceSetup from './views/DeviceSetup.vue';
 import _ from 'lodash';
+import validator from 'validator';
 
 let wyapp = null;
 let settings = null;
@@ -91,7 +92,7 @@ function updateDevices ()
 		websocketDevices.push ({
 			id: 'wyapp:websocket:newdevice',
 			address: '',
-			name: workspace.vue.$t('WYAPP_WEBSOCKET_NEW_DEVICE_TITLE'),
+			name: workspace.vue.$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE'),
 			board: 'any',
 			placeholder: true,
 			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
@@ -113,89 +114,114 @@ export function setup (options, imports, register)
 	let token = settings.loadValue ('device.wyapp.websocket', 'userid', newtoken);
 	if (token === newtoken) settings.storeValue ('device.wyapp.websocket', 'userid', token);
 
+	workspace.registerMenuItem('DEVICE_WYAPP_WEBSOCKET_SET_USER_ID', 90, async () => {
+		let settoken = await workspace.showPrompt ('DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TITLE', 'DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TEXT', token);
+		if (settoken && token !== settoken)
+		{
+			if (validator.isUUID (settoken))
+			{
+				// the websocket is reset after the token set
+				// eslint-disable-next-line require-atomic-updates
+				token = settoken;
+				settings.storeValue ('device.wyapp.websocket', 'userid', token);
+				startSocket ();
+			}
+			else
+			{
+				workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_NO_UUID');
+			}
+		}
+	});
+
 	let pingPongTimeout = null;
 
 	let errorAlreadyShown = false;
 
-	socket = new ReconnectingWebSocket ((location.protocol==='http:'?'ws':'wss')+'://'+location.hostname+':'+location.port+'/socket/ui');
-
-	socket.onopen = function ()
+	let startSocket = () => 
 	{
-		errorAlreadyShown = false;
-		socket.send (JSON.stringify({t:'a', token: token}));
-		// console.log ('UI Socket sent authenticate');
-	};
+		if (socket) socket.close ();
+		socket = new ReconnectingWebSocket ((location.protocol==='http:'?'ws':'wss')+'://'+location.hostname+':'+location.port+'/socket/ui');
 
-	socket.onmessage = async function (evt)
-	{
-		let m = evt.data;
-		try
+		socket.onopen = function ()
 		{
-			let data = JSON.parse (m);
-			if (data.t === 'a')
+			errorAlreadyShown = false;
+			socket.send (JSON.stringify({t:'a', token: token}));
+			// console.log ('UI Socket sent authenticate');
+		};
+
+		socket.onmessage = async function (evt)
+		{
+			let m = evt.data;
+			try
 			{
-				if (data.authenticated === true) 
+				let data = JSON.parse (m);
+				if (data.t === 'a')
 				{
-					workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED', {}, 'success');
-					authenticated = true;
-					pingPongTimeout = setInterval (() => {
-						if (authenticated) socket.send (JSON.stringify ({t: 'ping'}));
-					}, 20*1000);
+					if (data.authenticated === true) 
+					{
+						workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED', {}, 'success');
+						authenticated = true;
+						pingPongTimeout = setInterval (() => {
+							if (authenticated) socket.send (JSON.stringify ({t: 'ping'}));
+						}, 20*1000);
+						updateDevices ();
+					}
+					if (data.e === 'unique')
+					{
+						let reset = await workspace.showConfirmationPrompt ('DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE', 'DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET');
+						if (reset)
+						{
+							socket.send (JSON.stringify ({t: 'a', token: token, reset: true}));
+						}
+						else
+						{
+							socket.close ();
+						}
+					}
+				}
+				else
+				if (data.t === 's')
+				{
+					data.d.map ((device) => {if (!device.properties) device.properties = {};});
+					websocketDevices = data.d;
+					websocketDevices.map ((device) => {
+						if (device.id.indexOf ('wyapp:websocket:')!==0) device.id = 'wyapp:websocket:'+device.id;
+						device.priority = workspace.DEVICE_PRIORITY_NORMAL;
+					});
 					updateDevices ();
 				}
-				if (data.e === 'unique')
+				else
+				if (data.t === 'p')
 				{
-					let reset = await workspace.showConfirmationPrompt ('DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE', 'DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET');
-					if (reset)
-					{
-						socket.send (JSON.stringify ({t: 'a', token: token, reset: true}));
-					}
-					else
-					{
-						socket.close ();
-					}
+					socketMessages.emit ('data:'+data.id, data.d);
 				}
 			}
-			else
-			if (data.t === 's')
+			catch (e)
 			{
-				data.d.map ((device) => {if (!device.properties) device.properties = {};});
-				websocketDevices = data.d;
-				websocketDevices.map ((device) => {
-					if (device.id.indexOf ('wyapp:websocket:')!==0) device.id = 'wyapp:websocket:'+device.id;
-					device.priority = workspace.DEVICE_PRIORITY_NORMAL;
-				});
-				updateDevices ();
+				workspace.error ('UI Socket '+e.message);
 			}
-			else
-			if (data.t === 'p')
-			{
-				socketMessages.emit ('data:'+data.id, data.d);
-			}
-		}
-		catch (e)
+		};
+
+		socket.onerror = function ()
 		{
-			workspace.error ('UI Socket '+e.message);
-		}
+			if (!errorAlreadyShown)
+			{
+				workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR');
+				errorAlreadyShown = true;
+			}
+		};
+		
+		socket.onclose = function ()
+		{
+			authenticated = false;
+			websocketDevices = [];
+			updateDevices ();
+			clearInterval (pingPongTimeout);
+			workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED', {}, 'warning');
+		};
 	};
 
-	socket.onerror = function ()
-	{
-		if (!errorAlreadyShown)
-		{
-			workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR');
-			errorAlreadyShown = true;
-		}
-	};
-	
-	socket.onclose = function ()
-	{
-		authenticated = false;
-		websocketDevices = [];
-		updateDevices ();
-		clearInterval (pingPongTimeout);
-		workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED', {}, 'warning');
-	};
+	startSocket ();
 
 	deviceDriver = wyapp.registerTransport ('websocket', {
 		Transport: WebSocketWyAppTransport,

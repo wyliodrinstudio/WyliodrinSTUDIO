@@ -19,15 +19,15 @@
         "message": "Une autre instance de Studio est connectée au serveur avec votre identifiant. Vous ne pouvez pas utiliser plusieurs connexions. Voulez-vous utiliser Studio ici?",
         "description": "The question dialog text the user sees when there is another instance connected with his id"
     },
-    "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
         "message": "Ajouter un périphérique",
         "description": "The title of the dialog with instructions on how to add a new device"
     },
-    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
         "message": "Nom du périphérique",
         "description": "The name of the device with instructions on how to add a new device"
     },
-    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
         "message": "Veuillez entrer un nom de périphérique valide",
         "description": "The message the user receives when he did not enter a valid name for a new device"
     }

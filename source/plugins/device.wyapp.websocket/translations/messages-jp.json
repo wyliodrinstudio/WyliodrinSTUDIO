@@ -19,15 +19,15 @@
         "message": "ＩＤでサーバーに接続された別のＳｔｕｄｉｏインスタンスがあります。複数の接続を使用することはできません。ここでＳｔｕｄｉｏを使用しますか？",
         "description": "The question dialog text the user sees when there is another instance connected with his id"
     },
-    "WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
         "message": "デバイスを足します",
         "description": "The title of the dialog with instructions on how to add a new device"
     },
-    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
         "message": "装置名",
         "description": "The name of the device with instructions on how to add a new device"
     },
-    "WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
         "message": "有効なデバイス名を入力してください",
         "description": "The message the user receives when he did not enter a valid name for a new device"
     }

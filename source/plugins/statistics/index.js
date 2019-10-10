@@ -23,10 +23,17 @@ export function setup(options, imports, register) {
 	function optInOut()
 	{
 		let statistics = imports.settings.loadValue('workspace', 'feedback', true);
-		if (statistics)
+		if (statistics) {
+			window.localStorage.removeItem('cly_ignore');
+			// BUG in Countly
+			// window.localStorage.setItem('cly_ignore', 'false');
 			Countly.q.push(['opt_in']);
-		else
+		}
+		else {
+			window.localStorage.setItem('cly_ignore', 'true');
 			Countly.q.push(['opt_out']);
+		}
+			
 	}
 
 	let token = imports.workspace.getToken();
