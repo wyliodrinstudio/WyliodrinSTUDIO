@@ -62,5 +62,21 @@
     "RPK_NEW_DEVICE_TITLE": {
         "message": "Nouvel appareil RPK",
         "description": "How to add new RPK device."
+    },
+    "DEVICE_RPK_FLASH": {
+        "message": "Écrire",
+        "description": "The flash button for an application"
+    },
+    "RPK_NEW_DEVICE_INSTRUCTIONS": {
+        "message": "Connectez le périphérique RPK à un port USB, appuyez sur le Switch 3 et redémarrez le périphérique à l’aide du pin.",
+        "description": "How to add new RPK device description."
+    },
+    "RPK_NEW_DEVICE_FLASH_INSTRUCTIONS": {
+        "message": "Enregistrez le fichier que vous avez téléchargé ici sur le drive qui apparaît lorsque vous connectez le périphérique NXP RPK..",
+        "description": "How to flash a RPK device manually."
+    },
+    "RPK_SERIAL_CONNECTON_ERROR": {
+        "message": "Erreur lors de la connexion au périphérique RPK.",
+        "description": "The error shown to the user when the serial connection fails"
     }
 }

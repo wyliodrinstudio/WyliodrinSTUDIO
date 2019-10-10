@@ -23,29 +23,25 @@
         "message": "Cinci",
         "description": "Number 5"
     },
-    "RESISTOR_COLORCODE_STRIPE": {
-        "message": "Linie",
-        "description": "Stripe option"
-    },
     "RESISTOR_COLORCODE_STRIPE_ONE": {
         "message": "Banda 1",
-        "description": ""
+        "description": "Stripe option"
     },
     "RESISTOR_COLORCODE_STRIPE_TWO": {
         "message": "Banda 2",
-        "description": ""
+        "description": "Stripe option"
     },
     "RESISTOR_COLORCODE_STRIPE_THREE": {
         "message": "Banda 3",
-        "description": ""
+        "description": "Stripe option"
     },
     "RESISTOR_COLORCODE_STRIPE_FOUR": {
         "message": "Banda 4",
-        "description": ""
+        "description": "Stripe option"
     },
     "RESISTOR_COLORCODE_STRIPE_FIVE": {
         "message": "Banda 5",
-        "description": ""
+        "description": "Stripe option"
     },
     "VALUE_VALUE": {
         "message": "Valoare",

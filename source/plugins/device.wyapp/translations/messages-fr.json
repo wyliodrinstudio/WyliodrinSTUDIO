@@ -125,5 +125,13 @@
     "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
         "message": "Veuillez ouvrir un projet.",
         "description": "Notification text when there is no project selected"
-    }
+    },
+	"DEVICE_WYAPP_NO_DIRECTORY": {
+		"message": "Il n'y a pas de directoire sélectionné",
+		"description": "The message shown in the file tree manager when there is no directory currently selected"
+	},
+	"DEVICE_WYAPP_FILESYSTEM": {
+		"message": "Système de fichiers",
+		"description": "The message shown for the selected device filesystem"
+	}
 }

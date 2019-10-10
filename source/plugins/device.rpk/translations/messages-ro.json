@@ -46,5 +46,37 @@
     "RPK_NEW_DEVICE_TITLE": {
         "message": "Dispozitiv RPK nou",
         "description": "How to add new RPK device."
+    },
+    "DEVICE_RPK_FLASH": {
+        "message": "Scriere",
+        "description": "The flash button for an application"
+    },
+    "RPK_NEW_DEVICE_INSTRUCTIONS": {
+        "message": "Conectați dispozitivul RPK la un port USB, apăsați butonul Switch 3 și reporniți dispozitivul folosind pinul.",
+        "description": "How to add new RPK device description."
+    },
+    "RPK_NEW_DEVICE_FLASH_INSTRUCTIONS": {
+        "message": "Salvați fișierul pe care l-ați descărcat aici pe unitatea care apare atunci când conectați dispozitivul NXP RPK.",
+        "description": "How to flash a RPK device manually."
+    },
+    "RPK_SERIAL_CONNECTON_ERROR": {
+        "message": "Eroare la conectarea la dispozitivul RPK.",
+        "description": "The error shown to the user when the serial connection fails"
+    },
+    "DEVICE_RPK_ANOTHER_USER": {
+        "message": "Dispozitivul este deja conectat la un alt utilizator.",
+        "description": "The notification message when another use is connected to the board and the board is busy"
+    },
+    "DEVICE_RPK_ERROR_BLE": {
+        "message": "Nu se pot enumera dispozitivele ({error}).",
+        "description": "The error shown when list devices for ble fails"
+    },
+    "DEVICE_FLASH_JAVASCRIPT": {
+        "message": "Scriere Javascript", 
+        "description": "The flash javascript button for an application"
+    },
+    "DEVICE_RPK_STANDBY": {
+        "message": "In așteptare", 
+        "description": "The stand-by option in the disconnect menu."
     }
 }

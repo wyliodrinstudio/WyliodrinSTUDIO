@@ -138,5 +138,25 @@
     "WORKSPACE_TOOLBAR_CLOSE": {
         "message": "Fermer",
         "description": "Close button"
+    },
+    "ABOUT_TRANSLATE": {
+        "message": "Traductions",
+        "description": "Text for translators of Wyliodrin Studio"
+    },
+    "ABOUT_VERSION": {
+        "message": "Version",
+        "description":" The text version that appears in the Welcome and About dialogs"
+    },
+    "OK": {
+        "message": "OK",
+        "description": "Any button that has the OK text"
+    },
+    "BACK": {
+        "message": "Retour",
+        "description": "Any button that has the BACK text"
+    },
+    "ABOUT_FEEDBACK": {
+        "message": "Autoriser l'envoi de paramètres d'utilisation anonymes afin de nous aider à améliorer le logiciel",
+        "description": "The message for the checkbox to enable and disable the sending of feedback"
     }
 }
