@@ -110,12 +110,12 @@ async function loadPlugins (progress = () => {}) {
 	progress ('projects', 36, 46);
 	plugin = await import ('../plugins/projects/index.js');
 	plugins.push ({name:'projects', consumes:["workspace","xterm","filesystem","settings"], provides:["projects"], setup: plugin.setup || plugin.default || plugin});
-	progress ('projects.editor.ace', 37, 46);
-	plugin = await import ('../plugins/projects.editor.ace/index.js');
-	plugins.push ({name:'projects.editor.ace', consumes:["workspace","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});
-	progress ('projects.editor.images', 38, 46);
+	progress ('projects.editor.images', 37, 46);
 	plugin = await import ('../plugins/projects.editor.images/index.js');
 	plugins.push ({name:'projects.editor.images', consumes:["workspace","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});
+	progress ('projects.editor.monaco', 38, 46);
+	plugin = await import ('../plugins/projects.editor.monaco/index.js');
+	plugins.push ({name:'projects.editor.monaco', consumes:["workspace","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});
 	progress ('projects.editor.opcuamodel', 39, 46);
 	plugin = await import ('../plugins/projects.editor.opcuamodel/index.js');
 	plugins.push ({name:'projects.editor.opcuamodel', consumes:["workspace","projects","editor_visual"], provides:["editor_opcuamodel"], setup: plugin.setup || plugin.default || plugin});

@@ -3,6 +3,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const TranslationPlugin = require ('./webpack.translation.js'); 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MonacoEditorPlugin = require('monaco-editor-webpack-plugin');
 const fs = require ('fs-extra');
 const webpack = require ('webpack');
 const plugins = require ('./webpack.plugins.js');
@@ -119,6 +120,10 @@ module.exports = env => {
 					]
 				},
 				{
+					test: /\.css$/,
+     				use: ['style-loader', 'css-loader']
+				},
+				{
 					test: /\.txt$/i,
 					use: 'raw-loader',
 				}
@@ -181,6 +186,14 @@ module.exports = env => {
 			new webpack.DefinePlugin({
 				...defines,
 				TARGET: 'web'
+			}),
+			new MonacoEditorPlugin({
+				// https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+				// Include a subset of languages support
+				// Some language extensions like typescript are so huge that may impact build performance
+				// e.g. Build full languages support with webpack 4.0 takes over 80 seconds
+				// Languages are loaded on demand at runtime
+				languages: ['css', 'html', 'python', 'cpp', 'sh', 'javascript']
 			})
 		],
 		target: 'web'
