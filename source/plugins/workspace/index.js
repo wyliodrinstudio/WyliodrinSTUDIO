@@ -816,7 +816,7 @@ let workspace = {
 			question,
 			title,
 			values,
-			persistent: false,
+			persistent: true,
 			originalValue: original,
 			actions: [
 				{
@@ -837,6 +837,7 @@ let workspace = {
 		return this.showDialog(QuestionDialog, {
 			question,
 			title,
+			persistent: true,
 			actions: actions,
 			values
 		});
@@ -860,6 +861,7 @@ let workspace = {
 	showConfirmationPrompt(title, question, values = {}) {
 		return this.showDialog(QuestionDialog, {
 			question,
+			persistent: true,
 			title,
 			values
 		});
