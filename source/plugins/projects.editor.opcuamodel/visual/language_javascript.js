@@ -7,7 +7,7 @@ module.exports = function (blockly) {
 
 	Blockly.JavaScript.opcuamodel_add_variable = function () {
 		if (!Blockly.JavaScript.definitions_['opcuamodel_add_variable']) {
-			Blockly.JavaScript.definitions_['opcuamodel_add_variable'] = 'function opcuamodelAddVariable (id, browseName, folder, namespace, dataType, options) {\n  namespace.addVariable({\n    componentOf: folder,\n    browseName: browseName,\n    nodeId: id,\n    dataType: dataType,\n  });\n}\n';
+			Blockly.JavaScript.definitions_['opcuamodel_add_variable'] = 'function opcuamodelAddVariable (id, browseName, folder, namespace, dataType, options) {\n  return namespace.addVariable({\n    componentOf: folder,\n    browseName: browseName,\n    nodeId: id,\n    dataType: dataType,\n  });\n}\n';
 		}
 	};
 
@@ -25,8 +25,8 @@ module.exports = function (blockly) {
 		var dropdown_variable_type = block.getFieldValue('variable_type');
 		var text_variable_history = block.getFieldValue('variable_history');
 		// TODO: Assemble JavaScript into code variable.
-		var code = 'let variable_'+text_variable_id+' = opcuamodelAddVariable (\'ns=1;s=\'+folderId+\'/'+text_variable_id+'\', \''+text_variable_name+'\', folder, namespace, \''+dropdown_variable_type+'\');\n';
-		if (text_variable_history === 'TRUE') code = code + 'server.engine.addressSpace.installHistoricalData (variable_'+text_variable_id+');\n';
+		var code = 'let variable_'+text_variable_id+' = opcuamodelAddVariable (\'ns=1;s=\'+folderId+\'/'+text_variable_id+'\', \''+text_variable_name+'\', folder, namespace, opcua.DataType.'+dropdown_variable_type+');\n';
+		if (text_variable_history === 'TRUE') code = code + 'server.engine.addressSpace.installHistoricalDataNode (variable_'+text_variable_id+');\n';
 		return code;
 	};
 

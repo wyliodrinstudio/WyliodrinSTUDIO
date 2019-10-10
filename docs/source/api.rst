@@ -200,7 +200,7 @@ Programming Languages
 """""""""""""""""""""""
 |
 
-.. autofunction:: getLanguage
+.. autofunction:: projects.getLanguage
 
 |
 

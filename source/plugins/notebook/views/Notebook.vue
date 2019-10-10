@@ -52,15 +52,6 @@
 									<span>Add</span>
 								</v-tooltip>
 
-								<v-tooltip bottom>
-									<template v-slot:activator="{ on }">
-										<v-btn text @click="resetNotebook" class="ntbk-btn">
-											<v-img src="plugins/notebook/data/img/icons/reset-icon.png"></v-img>
-										</v-btn>
-									</template>
-									<span>Reset Notebook</span>
-								</v-tooltip>
-
 								<v-tooltip bottom v-if="element.type==='markdown'">
 									<template v-slot:activator="{ on }">
 										<v-btn text @click="element.editable = !element.editable" class="ntbk-btn right">
@@ -104,8 +95,9 @@
 							<!-- PYTHON -->
 							<div v-else>
 								<AceNotebook :syntax="'python'" :element="element" v-model="element.data" ></AceNotebook>
-								<pre v-if="visibleRun">{{ element.code }}</pre>
-								<div v-if="visibleRun" v-html="element.error"></div>
+								<pre v-if="element.code">{{ element.code }}</pre>
+								<div v-if="element.error" v-html="element.error"></div>
+								<div v-if="element.result" v-html="element.result" class="result"></div>
 
 							</div> 
 						</div>
@@ -114,9 +106,9 @@
 						</div>
 						<div v-else>
 							<AceNotebook :syntax="'python'" :element="element" v-model="element.data" :readOnly="true"></AceNotebook>
-							<pre v-if="visibleRun" class="code">{{ element.code }}</pre>
-							<div v-if="visibleRun" v-html="element.error" class="error"></div>
-							<div v-if="visibleRun" v-html="element.result" class="result"></div>
+							<pre v-if="element.code" class="code">{{ element.code }}</pre>
+							<div v-if="element.error" v-html="element.error" class="error"></div>
+							<div v-if="element.result" v-html="element.result" class="result"></div>
 						</div>
 					</v-card>
 				</v-flex>
@@ -124,7 +116,7 @@
 			</div>
 		</li>
 		<div class="bottom-space"></div>
-		<div class="server-status no-print" :class="{'connected':status === 'READY' || status === 'PROCESSING', 'stopped':status === 'STOPPED'}" v-if="visibleRun && currentProject.language === 'python'">
+		<div class="server-status no-print" :class="{'connected':status === 'READY' || status === 'PROCESSING', 'stopped':status === 'STOPPED'}" v-if="visibleRun">
 			Python {{ status }}
 			<v-tooltip top v-if="visibleRun">
 				<template v-slot:activator="{ on }">
@@ -134,7 +126,7 @@
 				</template>
 				<span>Reset</span>
 			</v-tooltip>
-			<v-tooltip top v-show="visibleRun && status !== 'STOPPED'">
+			<v-tooltip top v-if="visibleRun && status !== 'STOPPED'">
 				<template v-slot:activator="{ on }">
 					<v-btn text @click="stopInterpretor()" class="ntbk-btn">
 						<v-img src="plugins/notebook/data/img/icons/stop-icon.png"></v-img>
