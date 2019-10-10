@@ -4,8 +4,20 @@
 
 <script>
 import MonacoEditor from 'vue-monaco';
+import * as monaco from 'monaco-editor';
 import path from 'path';
 import _ from 'lodash';
+
+monaco.editor.defineTheme('studio', {
+    base: 'vs',
+	inherit: true,
+	rules: [],
+    colors: {
+        'editorGutter.background': '#dedede',
+    }
+});
+
+monaco.editor.setTheme('studio');
 
 export default {
 	name: 'MonacoEditorPanel',
@@ -15,9 +27,9 @@ export default {
 			source: '',
 			sourceLanguage: 'python',
 			editorOptions: {
-				fontSize: 12,
-				readOnly: false,
+				fontSize: 14,
 				automaticLayout: true,
+				theme: 'studio'
 			}
 		};
 	},
@@ -158,3 +170,8 @@ export default {
 };
 </script>
 
+<style scoped>
+	.margin {
+		background: 'eae8e8'
+	}
+</style>
