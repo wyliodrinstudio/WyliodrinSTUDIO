@@ -1,6 +1,6 @@
 {
     "PROJECT_NOTEBOOK": {
-        "message": "Note",
+        "message": "Notițe",
         "description": "The Notebook Tab, where the user can take it's own notes"
     },
     "NOTEBOOK_SELECT_IMAGE_ERROR": {
@@ -24,15 +24,15 @@
         "description": "This error shwos up when notebook.json can't be parsed."
     },
     "NOTEBOOK_RESET_NOTEBOOK_TITLE": {
-        "message": "Resetare Notebook",
+        "message": "Resetare notițe",
         "description": "Title of the reset confirmation prompt"
     },
     "NOTEBOOK_RESET_NOTEBOOK_QUESTION": {
-        "message": "Sigur doriți să resetați Notebook-ul? Veți pierde toate notițele pentru acest proiect.",
+        "message": "Sigur doriți să resetați notițele? Veți pierde toate notițele pentru acest proiect.",
         "description": "Confirmation prompt which ensures that the user really wants to reset the notebook"
     },
     "NOTEBOOK_LOAD_PROJECT": {
-        "message": "Incarcati un proiect pentru a avea access la note",
+        "message": "Incarcati un proiect pentru a avea access la notițe",
         "description": "The message when there is no project loaded"
     }
 }

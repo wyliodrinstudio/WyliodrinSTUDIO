@@ -30,5 +30,21 @@
     "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
         "message": "Veuillez entrer un nom de périphérique valide",
         "description": "The message the user receives when he did not enter a valid name for a new device"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TITLE": {
+        "message": "ID de la session",
+        "description": "The dialog title where the user changes the session id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TEXT": {
+        "message": "Identifiant unique utilisé pour se connecter aux appareils, similaire à un mot de passe.",
+        "description": "The text dispalyed in the dialog where the user changes the session id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_NO_UUID": {
+        "message": "L'ID de la session doit doit être un UUID valide.",
+        "description": "The error the user is shown when the enetered session id is not a valid"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID": {
+        "message": "ID de la session",
+        "description": "The menu item where the user changes the session id"
     }
 }
