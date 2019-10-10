@@ -17,6 +17,10 @@
 				</p>
 				
 			</div>
+
+			<div class="consent">
+				<v-checkbox dark hide-details dense v-model="feedback" :label="$t('ABOUT_FEEDBACK')"></v-checkbox>
+			</div>
 		</v-card-text>
 
 		<v-card-actions>
@@ -35,7 +39,7 @@ import ProjectsLibrary from '../../projects/views/ProjectsLibrary.vue';
 export default {
 	data() {
 		return {
-			
+			feedback: this.studio.settings.loadValue ('workspace', 'feedback', true)
 		}
 	},
 	methods: {
@@ -54,6 +58,12 @@ export default {
 		openLink()
 		{
 			this.studio.system.openLink('https:/wyliodrin.com')
+		}
+	},
+	watch: {
+		feedback (newfeedback)
+		{
+			this.studio.settings.storeValue ('workspace', 'feedback', newfeedback)
 		}
 	}
 }
