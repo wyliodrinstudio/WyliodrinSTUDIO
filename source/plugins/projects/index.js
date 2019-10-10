@@ -725,7 +725,7 @@ let projects = {
 						name: file.file,
 						children: children,
 						path: pathTo,
-						key:file.file+pathTo+'folder'
+						key:pathTo
 					};
 				} else {
 					pathTo = fullPath.replace(project.folder, '');
@@ -733,7 +733,7 @@ let projects = {
 						name: file.file,
 						file: path.extname(fullPath).slice(1),
 						path: pathTo,
-						key:file.file+pathTo+'file'
+						key:pathTo
 					};
 				}
 				return fileInfo;
