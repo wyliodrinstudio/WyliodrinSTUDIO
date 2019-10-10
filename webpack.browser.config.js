@@ -121,7 +121,7 @@ module.exports = env => {
 				},
 				{
 					test: /\.css$/,
-     				use: ['style-loader', 'css-loader']
+					use: ['style-loader', 'css-loader']
 				},
 				{
 					test: /\.txt$/i,
@@ -193,7 +193,7 @@ module.exports = env => {
 				// Some language extensions like typescript are so huge that may impact build performance
 				// e.g. Build full languages support with webpack 4.0 takes over 80 seconds
 				// Languages are loaded on demand at runtime
-				languages: ['css', 'html', 'python', 'cpp', 'sh', 'javascript']
+				// languages: ['css', 'html', 'python', 'cpp', 'sh', 'javascript', 'typescript']
 			})
 		],
 		target: 'web'

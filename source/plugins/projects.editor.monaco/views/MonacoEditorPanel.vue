@@ -1,5 +1,5 @@
 <template>
-	<MonacoEditor style="height: 100%" v-model="source" :language="sourceLanguage"></MonacoEditor>
+	<MonacoEditor style="height: 100%" v-model="source" :options="editorOptions" :language="sourceLanguage"></MonacoEditor>
 </template>
 
 <script>
@@ -15,12 +15,9 @@ export default {
 			source: '',
 			sourceLanguage: 'python',
 			editorOptions: {
-				fontSize: '12pt',
+				fontSize: 12,
 				readOnly: false,
-				theme: 'ace/theme/chrome',
-				enableBasicAutocompletion: true,
-				enableSnippets: true,
-				enableLiveAutocompletion: true
+				automaticLayout: true,
 			}
 		};
 	},
