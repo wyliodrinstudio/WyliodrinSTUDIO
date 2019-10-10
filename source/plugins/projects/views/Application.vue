@@ -367,7 +367,6 @@ export default {
 	methods: {
 		setActive(items){
 			// TODO why is this function here?
-			console.log (items[0]);
 			if (items.length > 0)
 			{
 				this.fileItem = items[0];
