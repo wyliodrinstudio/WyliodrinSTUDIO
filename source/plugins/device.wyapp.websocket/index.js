@@ -140,7 +140,9 @@ export function setup (options, imports, register)
 	let startSocket = () => 
 	{
 		if (socket) socket.close ();
-		socket = new ReconnectingWebSocket ((location.protocol==='http:'?'ws':'wss')+'://'+location.hostname+':'+location.port+'/socket/ui');
+		let websockethostname = (location.protocol==='http:'?'ws':'wss')+'://'+location.hostname+':'+location.port;
+		if (location.href.startsWith ('file://')) websockethostname = 'wss://beta.wyliodrin.studio';
+		socket = new ReconnectingWebSocket (websockethostname+'/socket/ui');
 
 		socket.onopen = function ()
 		{
