@@ -74,23 +74,26 @@ We would love your help. Click [here](CONTRIBUTING.md) to find out how to contri
 Wyliodrin STUDIO is a product of [Wyliodrin](http://www.wyliodrin.com)
 
 * [Alexandru Radovici](https://www.github.com/alexandruradovici) - Maintainer
-* [Razvan Serban](https://www.github.com/serban-razvan) - Developer
-* [Alexandru Neculai](https://www.github.com/NeculaiAlex) - Developer
-* [Ioana Culic](https://www.github.com/ioanaculic) - Developer
 * [Ovidiu Stoica](https://www.github.com/oviska) - UX / UI
-* [Catalin Dabuleanu](https://github.com/CatalinDabuleanu) - Developer
+* [Ioana Culic](https://www.github.com/ioanaculic) - Development Manager
+* [Marius Aluculesei](https://www.github.com/mariusAlc) - Projects, Application
+* [Liviu-Nicolae Moraru](https://github.com/skyplane23) - Embedded Software
+* [Cosmin Daniel Radu](https://github.com/cosmindanielradu19) - Embedded Software
+* [Calin Dumitru](https://github.com/Dumitru98) - Simulators
+* [Diana Ghindaoanu](https://github.com/diana-ghindaoanu) - Notebook, Dashboard, Documentation
+* [Teona Severin](https://github.com/teonaseverin) - Web File Systems, Hooks, Statistics
 
 Contributions
 
-* [Paula Margarit](https://www.github.com/paula-elena) - Developer
-* [Daniel Dosaru](https://www.github.com/dosarudaniel) - Developer
-* [Mihai Popescu](https://www.github.com/mhpopescu) - Developer
+* [Ana Marinescu](https://www.github.com/paula-elena) - Pin Layout
+* [Andrei Deatcu](https://www.github.com/dosarudaniel) - Resistor Color Code, Schematics
+* [Alexandru Vochescu](https://www.github.com/valexandru) - Examples
 
 Wyliodrin is a trademark of Wyliodrin SRL. All rights reserved.
 
 ## License
 
-GPLv3 for private, non profit and educational use.
+Apache 2.0 for private, non profit and educational use.
 
 Please consider contacting us at office@wyliodrin.com if you plan to use it in a commercial software.
 This license allows you to write/distribute/sell an applications written in Wyliodrin STUDIO. If does not allow you to sell Wyliodrin STUDIO or any derived products.
