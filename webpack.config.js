@@ -4,6 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 const CopyPlugin = require('copy-webpack-plugin');
 const TranslationPlugin = require('./webpack.translation.js');
 const webpack = require('webpack');
+const MonacoEditorPlugin = require('monaco-editor-webpack-plugin');
 const plugins = require('./webpack.plugins.js');
 const license = './LICENSE';
 
@@ -106,6 +107,10 @@ module.exports = env => {
 					]
 				},
 				{
+					test: /\.css$/,
+					use: ['style-loader', 'css-loader']
+				},
+				{
 					test: /\.txt$/i,
 					use: 'raw-loader',
 				},
@@ -128,7 +133,7 @@ module.exports = env => {
 			],
 		},
 		externals: [nodeExternals({
-			whitelist: [...Object.keys(package_json.devDependencies), /^highcharts\/.*/, 'async', 'vue-asyncable', /^brace\/.*/, /^node-blockly\/.*/, 'set-immediate-shim', 'lie', 'pako', 'readable-stream']
+			whitelist: [...Object.keys(package_json.devDependencies), /^highcharts\/.*/, 'async', 'vue-asyncable', /^brace\/.*/, /^node-blockly\/.*/, 'set-immediate-shim', 'lie', 'pako', 'readable-stream', 'monaco-editor']
 		})],
 		mode: mode,
 		node: {
@@ -169,6 +174,14 @@ module.exports = env => {
 			new webpack.DefinePlugin({
 				...defines,
 				TARGET: 'electron'
+			}),
+			new MonacoEditorPlugin({
+				// https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+				// Include a subset of languages support
+				// Some language extensions like typescript are so huge that may impact build performance
+				// e.g. Build full languages support with webpack 4.0 takes over 80 seconds
+				// Languages are loaded on demand at runtime
+				// languages: ['css', 'html', 'python', 'cpp', 'sh', 'javascript', 'typescript']
 			})
 		],
 		target: 'electron-renderer'
