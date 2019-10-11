@@ -14,19 +14,19 @@ Download the application
 
 For **Windows** users:
 
-https://wyliodrin.studio/
+`Wyliodrin STUDIO beta_Windows 64 bit <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/Wyliodrin+STUDIO+Setup+2.0.6-beta.exe>`_
 
 |
 
 For **Linux** users:
 
-https://wyliodrin.studio/
+`Wyliodrin STUDIO beta_Linux 64 bit <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/Wyliodrin+STUDIO+2.0.6-beta.AppImage>`_
 
 |
 
 For **Mac OS** users:
 
-https://wyliodrin.studio/
+`Wyliodrin STUDIO beta_macOS <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/Wyliodrin+STUDIO-2.0.6-beta.dmg>`_
 
 |
 
@@ -61,12 +61,20 @@ For the **STANDALONE** version, you will have to run the following commands:
 	npm install
 	npx electron-rebuild
 	npx webpack
+	npm run electron
 
-For the **BROWSER** edition, you will use: 
+For the **BROWSER** edition, you will have to delete the *build* folder, run: 
 
 ::
 
 	npx webpack --config=webpack.browser.config.js
+
+Then change the current directory to the newly created *build* folder and run:
+
+::
+
+	npm install
+	npm run browser
 
 |
 
