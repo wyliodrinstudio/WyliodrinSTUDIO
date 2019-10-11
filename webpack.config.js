@@ -133,7 +133,7 @@ module.exports = env => {
 			],
 		},
 		externals: [nodeExternals({
-			whitelist: [...Object.keys(package_json.devDependencies), /^highcharts\/.*/, 'async', 'vue-asyncable', /^brace\/.*/, /^node-blockly\/.*/, 'set-immediate-shim', 'lie', 'pako', 'readable-stream', 'monaco-editor']
+			whitelist: [...Object.keys(package_json.devDependencies), /^highcharts\/.*/, 'async', 'vue-asyncable', /^brace\/.*/, /^node-blockly\/.*/, 'set-immediate-shim', 'lie', 'pako', 'readable-stream', 'monaco-editor', 'nano-assign']
 		})],
 		mode: mode,
 		node: {
