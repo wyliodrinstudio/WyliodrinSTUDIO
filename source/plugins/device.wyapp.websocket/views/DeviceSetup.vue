@@ -10,6 +10,7 @@
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>
+			<v-btn text @click="more">{{$t('DEVICE_WYAPP_WEBSOCKET_MORE_INFO')}}</v-btn>
 			<v-btn text @click="close">{{$t('CLOSE')}}</v-btn>
 		</v-card-actions>
 	</v-card>
@@ -35,6 +36,10 @@ export default {
 		}
 	},
 	methods: {
+		more ()
+		{
+			this.studio.system.openLink ('https://wyliodrinstudio.readthedocs.io/en/latest/boards.html');
+		},
 		close ()
 		{
 			this.$root.$emit ('submit');

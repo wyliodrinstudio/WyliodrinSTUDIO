@@ -214,7 +214,7 @@ The final step is to refresh the board by running the command:
 
 =====================
 
-Connecting to web 
+Connecting via web 
 ^^^^^^^^^^^^^^^^^^^
 
 The connection of a Raspberry Pi board to the web version of Wyliodrin STUDIO demands an Internet connection and the creation of a file, **wyliodrin.json**, that will be written and stored on the SD card. The purpose of this configuration file is to keep a series of particular informations about the device and the platform, so the both instances be able to recognize and communicate with each other.
@@ -535,7 +535,7 @@ The final step is to refresh the board by running the command:
 
 |
 
-Connecting to web 
+Connecting via web 
 ^^^^^^^^^^^^^^^^^^^^^^
 
 The connection of a Pico-Pi IMX8M board to the web version of Wyliodrin STUDIO demands an Internet connection and the creation of a file, **wyliodrin.json**, that will be written and stored on the device. The purpose of this configuration file is to keep a series of particular informations about the device and the platform, so the both instances be able to recognize and communicate with each other.
@@ -802,7 +802,7 @@ The final step is to refresh the board by running the command:
 
 |
 
-Connecting to web 
+Connecting via web 
 ^^^^^^^^^^^^^^^^^^
 
 The connection of a BeagelBone Black board to the web version of Wyliodrin STUDIO demands an Internet connection and the creation of a file, **wyliodrin.json**, that will be written and stored on the SD card. The purpose of this configuration file is to keep a series of particular informations about the device and the platform, so the both instances be able to recognize and communicate with each other.
@@ -1036,7 +1036,7 @@ The final step is to refresh the board by running the command:
 
 |
 
-Connecting to web 
+Connecting via web 
 ^^^^^^^^^^^^^^^^^^^^^
 
 The connection of a Udoo Neo board to the web version of Wyliodrin STUDIO demands an Internet connection and the creation of a file, **wyliodrin.json**, that will be written and stored on the SD card. The purpose of this configuration file is to keep a series of particular informations about the device and the platform, so the both instances be able to recognize and communicate with each other.

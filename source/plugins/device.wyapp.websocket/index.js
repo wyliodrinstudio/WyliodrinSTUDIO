@@ -94,6 +94,7 @@ function updateDevices ()
 			address: '',
 			name: workspace.vue.$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE'),
 			board: 'any',
+			icon: 'plugins/device.wyapp.websocket/data/icons/add-device-web.png',
 			placeholder: true,
 			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			properties: {}
