@@ -24,7 +24,7 @@
 		"url": "https://github.com/alexandruradovici/WyliodrinSTUDIO2/issues"
 	},
 	"build": {
-		"buildDependenciesFromSource":"true",
+		"buildDependenciesFromSource": true,
 		"appId": "wyliodrin.studio",
 		"mac": {
 			"category": "public.app-category.developer-tools",
@@ -59,7 +59,7 @@
 		"css-loader": "^3.0.0",
 		"dexie": "^2.0.4",
 		"electron": "^5.0.6",
-		"electron-builder": "^20.44.4",
+		"electron-builder": "^21.2.0",
 		"electron-rebuild": "^1.8.6",
 		"eslint": "^6.0.1",
 		"eslint-plugin-vue": "^5.2.3",
