@@ -178,6 +178,8 @@
 		"node-notifier": "^5.4.0",
 		"screenshot-desktop": "^1.8.0",
 		"ssh2": "^0.8.2",
+		"tree-kill": "^1.2.1",
+		"unzipper": "^0.10.5",
 		"vue-filereader": "^0.1.1"
 	}
 }
