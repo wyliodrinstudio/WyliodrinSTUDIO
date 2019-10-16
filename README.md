@@ -71,7 +71,7 @@ We would love your help. Click [here](CONTRIBUTING.md) to find out how to contri
 
 ## Authors
 
-Wyliodrin STUDIO is a product of [Wyliodrin](http://www.wyliodrin.com)
+Wyliodrin STUDIO is a product of [Wyliodrin](http://www.wyliodrin.com) in partnership with the [Politehnica University of Bucharest](www.upb.ro)
 
 * [Alexandru Radovici](https://www.github.com/alexandruradovici) - Maintainer
 * [Ovidiu Stoica](https://www.github.com/oviska) - UX / UI
