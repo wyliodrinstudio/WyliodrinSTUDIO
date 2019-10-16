@@ -20,7 +20,7 @@
         "description": "The question dialog text the user sees when there is another instance connected with his id"
     },
     "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
-        "message": "Add Device",
+        "message": "Add Web Device",
         "description": "The title of the dialog with instructions on how to add a new device"
     },
     "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
@@ -46,5 +46,9 @@
     "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_NO_UUID": {
         "message": "The session ID must be a valid UUID.",
         "description": "The error the user is shown when the enetered session id is not a valid"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_MORE_INFO": {
+        "message": "More Information",
+        "description": "The button the user clicks to get more information about how to connect a device through the web"
     }
 }

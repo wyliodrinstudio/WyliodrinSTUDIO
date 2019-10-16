@@ -1,6 +1,6 @@
 {
 	"name": "wyliodrinstudio",
-	"version": "2.0.6-beta",
+	"version": "2.0.9-beta",
 	"description": "Wyliodrin STUDIO 2",
 	"main": "main.js",
 	"scripts": {
@@ -24,6 +24,7 @@
 		"url": "https://github.com/alexandruradovici/WyliodrinSTUDIO2/issues"
 	},
 	"build": {
+		"buildDependenciesFromSource": true,
 		"appId": "wyliodrin.studio",
 		"mac": {
 			"category": "public.app-category.developer-tools",
@@ -58,7 +59,7 @@
 		"css-loader": "^3.0.0",
 		"dexie": "^2.0.4",
 		"electron": "^5.0.6",
-		"electron-builder": "^20.44.4",
+		"electron-builder": "^21.2.0",
 		"electron-rebuild": "^1.8.6",
 		"eslint": "^6.0.1",
 		"eslint-plugin-vue": "^5.2.3",
@@ -158,10 +159,6 @@
 			]
 		}
 	},
-	"optionalDependencies": {
-		"drivelist": "^8.0.6",
-		"serialport": "^7.1.4"
-	},
 	"dependencies": {
 		"aedes": "^0.39.0",
 		"architect": "^0.1.13",
@@ -169,6 +166,7 @@
 		"bonjour-hap": "^3.5.4",
 		"cowsay": "^1.4.0",
 		"desktop-screenshot": "^0.1.1",
+		"drivelist": "^8.0.6",
 		"electron-is-dev": "^1.1.0",
 		"fs-extra": "^7.0.1",
 		"grabity": "^1.0.5",
@@ -177,6 +175,7 @@
 		"material-icons": "^0.3.1",
 		"node-notifier": "^5.4.0",
 		"screenshot-desktop": "^1.8.0",
+		"serialport": "^7.1.4",
 		"ssh2": "^0.8.2",
 		"tree-kill": "^1.2.1",
 		"unzipper": "^0.10.5",

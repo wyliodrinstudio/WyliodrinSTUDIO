@@ -29,7 +29,16 @@ let filesystem = {
 
 	getSettingsFolder ()
 	{
-		return this._runFileSystemFn ('getSettingsFolder');
+		let settingsFolder = this._runFileSystemFn ('getSettingsFolder');
+		try
+		{
+			this.mkdirp (settingsFolder);
+		}
+		catch (e)
+		{
+			console.log (e.message);
+		}
+		return settingsFolder;
 	},
 
 	pathExists(path)

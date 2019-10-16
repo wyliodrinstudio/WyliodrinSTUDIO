@@ -24,7 +24,7 @@
         "description": "The message the user receives when he did not eneter a valid name for a new device"
     },
     "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
-        "message": "Adaugare dispozitiv",
+        "message": "Adaugare dispozitiv web",
         "description": "The title of the dialog with instructions on how to add a new device"
     },
     "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
@@ -46,5 +46,9 @@
     "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_NO_UUID": {
         "message": "ID-ul sesiunii trebuie sa fie un UUID valid.",
         "description": "The error the user is shown when the enetered session id is not a valid"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_MORE_INFO": {
+        "message": "Mai multe informatii",
+        "description": "The button the user clicks to get more information about how to connect a device through the web"
     }
 }

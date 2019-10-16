@@ -24,9 +24,9 @@ copyright = u'2019, Diana Ghindaoanu'
 author = u'Diana Ghindaoanu'
 
 # The short X.Y version
-version = u'2.0.0'
+version = u'2.0.9'
 # The full version, including alpha/beta/rc tags
-release = u'2.0.0-beta'
+release = u'2.0.9-beta'
 
 
 # -- General configuration ---------------------------------------------------

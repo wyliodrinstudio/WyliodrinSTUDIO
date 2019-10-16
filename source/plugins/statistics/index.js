@@ -93,6 +93,7 @@ export function setup(options, imports, register) {
 			'key': 'StopProject',
 			'count': 1,
 			'segmentation': {
+				'version': imports.workspace.version,
 				'device.type': device.type,
 				'device.board': device.board,
 				'language': project.language,
@@ -123,6 +124,7 @@ export function setup(options, imports, register) {
 			'key': 'RunProject',
 			'count': 1,
 			'segmentation': {
+				'version': imports.workspace.version,
 				'device.type': device.type,
 				'device.board': device.board,
 				'language': project.language,
@@ -145,6 +147,7 @@ export function setup(options, imports, register) {
 			'key': 'LanguageChange',
 			'count': 1,
 			'segmentation': {
+				'version': imports.workspace.version,
 				'username': token,
 				'locale': app_language
 			}
@@ -159,6 +162,7 @@ export function setup(options, imports, register) {
 				'key': 'currentSession.'+token,
 				'count': 1,
 				'segmentation': {
+					'version': imports.workspace.version,
 					'stop': data
 				}
 			});
@@ -194,6 +198,7 @@ export function setup(options, imports, register) {
 		Countly.add_event({
 			'key': 'Start',
 			'segmentation': {
+				'version': imports.workspace.version,
 				'username': token,
 				'locale': app_language
 			}
@@ -214,6 +219,7 @@ export function setup(options, imports, register) {
 				'key': 'OpenProject',
 				'count': 1,
 				'segmentation': {
+					'version': imports.workspace.version,
 					'language': projectInfo.language,
 					'username': token,
 					'locale': app_language
@@ -250,6 +256,7 @@ export function setup(options, imports, register) {
 					'key': 'UpdateDevices',
 					'count': 1,
 					'segmentation': {
+						'version': imports.workspace.version,
 						'type': type,
 						'count': number,
 						'username': token,
@@ -268,6 +275,7 @@ export function setup(options, imports, register) {
 					'key': 'ConnectionTry',
 					'count': 1,
 					'segmentation': {
+						'version': imports.workspace.version,
 						'type': device.type,
 						'board': device.board,
 						'username': token,
@@ -280,6 +288,7 @@ export function setup(options, imports, register) {
 					'key': 'Connected',
 					'count': 1,
 					'segmentation': {
+						'version': imports.workspace.version,
 						'type': device.type,
 						'board': device.board,
 						'username': token,
@@ -294,6 +303,7 @@ export function setup(options, imports, register) {
 					'key': 'DisconnectionTry',
 					'count': 1,
 					'segmentation': {
+						'version': imports.workspace.version,
 						'type': device.type,
 						'board': device.board,
 						'username': token,
@@ -305,6 +315,7 @@ export function setup(options, imports, register) {
 					'key': 'Disconnected',
 					'count': 1,
 					'segmentation': {
+						'version': imports.workspace.version,
 						'type': device.type,
 						'board': device.board,
 						'username': token,

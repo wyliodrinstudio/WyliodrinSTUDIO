@@ -94,6 +94,7 @@ function updateDevices ()
 			address: '',
 			name: workspace.vue.$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE'),
 			board: 'any',
+			icon: 'plugins/device.wyapp.websocket/data/icons/add-device-web.png',
 			placeholder: true,
 			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			properties: {}
@@ -140,7 +141,9 @@ export function setup (options, imports, register)
 	let startSocket = () => 
 	{
 		if (socket) socket.close ();
-		socket = new ReconnectingWebSocket ((location.protocol==='http:'?'ws':'wss')+'://'+location.hostname+':'+location.port+'/socket/ui');
+		let websockethostname = (location.protocol==='http:'?'ws':'wss')+'://'+location.hostname+':'+location.port;
+		if (location.href.startsWith ('file://')) websockethostname = 'wss://beta.wyliodrin.studio';
+		socket = new ReconnectingWebSocket (websockethostname+'/socket/ui');
 
 		socket.onopen = function ()
 		{
