@@ -82,7 +82,7 @@
 				<v-switch v-model="switch1"  label="Show Hidden"></v-switch>
 			</div> -->
 			<v-card-text v-if="fileItem !== null" >{{fileItem.name}}</v-card-text>
-			<div v-if="fileItem !== null && fileItem.children !== undefined">
+			<div v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')">
 				<v-btn text class="fileexplorer-actions" @click="deleteObject">
 					{{$t('PROJECT_DELETE_FOLDER')}}
 				</v-btn>
