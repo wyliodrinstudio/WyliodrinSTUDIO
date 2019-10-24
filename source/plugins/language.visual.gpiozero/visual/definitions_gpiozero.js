@@ -5,7 +5,7 @@ module.exports = function (blockly) {
 	// var goog = blockly.goog;
 
 	Blockly.Blocks['gpiozero_pin'] = {
-		init: function() {
+		init: function () {
 			this.appendDummyInput()
 				.appendField(new Blockly.FieldDropdown([
 					['GPIO0', '0'],
@@ -45,7 +45,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_led'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('LED');
@@ -56,8 +56,55 @@ module.exports = function (blockly) {
 		}
 	};
 
+	Blockly.Blocks['gpiozero_rgb_led'] = {
+		init: function () {
+			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_output.html#rgbled');
+			this.setColour(200);
+			this.appendValueInput('color')
+				.appendField('RGB LED')
+				.setCheck('Colour');
+			this.appendDummyInput()
+				.appendField('with pins');
+			this.appendValueInput('red')
+				.setCheck(['String', 'gpiozero_pinNumber']);
+			this.appendValueInput('green')
+				.setCheck(['String', 'gpiozero_pinNumber'])
+				.appendField('G');
+			this.appendValueInput('blue')
+				.setCheck(['String', 'gpiozero_pinNumber'])
+				.appendField('B');
+			this.setInputsInline(true);
+			this.setOutput(true, 'RGB_LED');
+			this.setTooltip('Set the color on an RGB LED. This will set only the basic colors.');
+		}
+	};
+
+	Blockly.Blocks['gpiozero_fine_rgb_led'] = {
+		init: function () {
+			this.setHelpUrl('https://gpiozero.readthedocs.io/en/stable/api_output.html#rgbled');
+			this.setColour(200);
+			this.appendValueInput('color')
+				.appendField('RGB PWM LED')
+				.setCheck('Colour');
+			this.appendDummyInput()
+				.appendField('with pins');
+			this.appendValueInput('red')
+				.setCheck(['String', 'gpiozero_pinNumber'])
+				.appendField('R');
+			this.appendValueInput('green')
+				.setCheck(['String', 'gpiozero_pinNumber'])
+				.appendField('G');
+			this.appendValueInput('blue')
+				.setCheck(['String', 'gpiozero_pinNumber'])
+				.appendField('B');
+			this.setInputsInline(true);
+			this.setOutput(true, 'REG_LED');
+			this.setTooltip('Set the color on an RGB LED. This will set colors using PWM so the pins need to be able to do that.');
+		}
+	};
+
 	Blockly.Blocks['gpiozero_servo'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck(['String', 'gpiozero_pinNumber'])
 				.setAlign(Blockly.ALIGN_RIGHT)
@@ -85,7 +132,7 @@ module.exports = function (blockly) {
 	// };
 
 	Blockly.Blocks['gpiozero_pwm_led'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('PWM LED');
@@ -97,7 +144,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_button'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin_number')
 				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('Button');
@@ -109,7 +156,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_button_when_held'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('button')
 				.appendField('When button');
@@ -127,7 +174,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_button_when_pressed'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('button')
 				.appendField('When button');
@@ -145,7 +192,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_button_when_released'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('button')
 				.appendField('When button');
@@ -164,7 +211,7 @@ module.exports = function (blockly) {
 
 
 	Blockly.Blocks['gpiozero_button_is_pressed'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('button')
 				.setCheck('button')
 				.appendField('button');
@@ -178,7 +225,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_servo_detach'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('servo')
 				.setAlign(Blockly.ALIGN_RIGHT)
@@ -195,7 +242,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_servo_max'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('servo')
 				.setAlign(Blockly.ALIGN_RIGHT)
@@ -212,7 +259,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_servo_mid'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('servo')
 				.setAlign(Blockly.ALIGN_RIGHT)
@@ -229,7 +276,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_servo_min'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('servo')
 				.setAlign(Blockly.ALIGN_RIGHT)
@@ -246,7 +293,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_servo_value'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('servo')
 				.setAlign(Blockly.ALIGN_RIGHT)
@@ -266,7 +313,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_button_wait_for_release'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('button')
 				.setCheck('button')
 				.appendField('Wait until button');
@@ -281,7 +328,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_button_held_time'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('button')
 				.setCheck('button')
 				.appendField('how many seconds button');
@@ -294,7 +341,7 @@ module.exports = function (blockly) {
 		}
 	};
 	Blockly.Blocks['gpiozero_led_blink'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('led')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
 				.setAlign(Blockly.ALIGN_CENTRE)
@@ -309,7 +356,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_pwm_on'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pwm_led')
 				.setCheck('PWM_LED')
 				.appendField('Turn on PWM LED');
@@ -328,7 +375,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_button_wait_for_press'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('button')
 				.setCheck('button')
 				.appendField('Wait until button');
@@ -343,7 +390,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_pause'] = {
-		init: function() {
+		init: function () {
 			this.appendDummyInput()
 				.appendField('Pause');
 			this.setPreviousStatement(true, null);
@@ -354,7 +401,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_trafficlight'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('red')
 				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('Traffic Lights');
@@ -370,9 +417,9 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_led_turn_on'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('NAME')
-				.setCheck(['PWM_LED', 'LED', 'traffic'])
+				.setCheck(['PWM_LED', 'RGB_LED', 'LED', 'traffic'])
 				.appendField('Turn on LED');
 			this.setInputsInline(true);
 			this.setPreviousStatement(true, null);
@@ -384,9 +431,9 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_led_turn_off'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('NAME')
-				.setCheck(['PWM_LED', 'LED', 'traffic'])
+				.setCheck(['PWM_LED', 'RGB_LED', 'LED', 'traffic'])
 				.appendField('Turn off LED');
 			this.setInputsInline(true);
 			this.setPreviousStatement(true, null);
@@ -398,7 +445,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_led_toggle'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('NAME')
 				.setCheck(['PWM_LED', 'LED', 'traffic'])
 				.appendField('Toggle LED');
@@ -412,7 +459,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_led_is_lit'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('led')
 				.setCheck(['PWM_LED', 'LED'])
 				.appendField('led');
@@ -426,7 +473,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_traffic_light_on'] = {
-		init: function() {
+		init: function () {
 			this.appendDummyInput()
 				.appendField('Turn on')
 				.appendField(new Blockly.FieldDropdown([
@@ -447,7 +494,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_traffic_blink'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('traffic')
 				.setAlign(Blockly.ALIGN_RIGHT)
@@ -462,7 +509,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_traffic_close'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('traffic')
 				.setAlign(Blockly.ALIGN_RIGHT)
@@ -477,7 +524,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_pwm_pulse'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pwm_led')
 				.setCheck('PWM_LED', 'traffic')
 				.appendField('Pulse PWM LED');
@@ -491,7 +538,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_traffic_light_off'] = {
-		init: function() {
+		init: function () {
 			this.appendDummyInput()
 				.appendField('Turn off')
 				.appendField(new Blockly.FieldDropdown([
@@ -512,7 +559,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_light_sensor'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin_number')
 				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('Light Sensor');
@@ -524,7 +571,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_light_when_dark'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('light_sensor')
 				.appendField('When light sensor');
@@ -542,7 +589,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_light_when_light'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('light_sensor')
 				.appendField('When light sensor');
@@ -560,7 +607,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_light_wait_for_dark'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin_number')
 				.setCheck('light_sensor')
 				.appendField('Wait until light sensor');
@@ -575,7 +622,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_light_wait_for_light'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin_number')
 				.setCheck('light_sensor')
 				.appendField('Wait until light sensor');
@@ -590,7 +637,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_light_detected'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin_number')
 				.setCheck('light_sensor')
 				.appendField('sensor');
@@ -604,7 +651,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_buzzer'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck(['String', 'gpiozero_pinNumber'])
 				.appendField('buzzer');
@@ -616,7 +663,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_buzzer_beep'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
 				.appendField('Beep buzzer');
@@ -629,7 +676,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_buzzer_on'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
 				.appendField('Turn on buzzer');
@@ -642,7 +689,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_buzzer_off'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
 				.appendField('Turn off buzzer');
@@ -655,7 +702,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_buzzer_toggle'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
 				.appendField('Toggle buzzer');
@@ -668,7 +715,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Blocks['gpiozero_buzzer_is_active'] = {
-		init: function() {
+		init: function () {
 			this.appendValueInput('pin')
 				.setCheck('buzzer')
 				.appendField('buzzer');

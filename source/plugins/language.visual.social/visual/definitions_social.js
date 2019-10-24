@@ -4,13 +4,6 @@ module.exports = function (blockly) {
 	var Blockly = blockly.Blockly;
 	// var goog = blockly.goog;
 
-	"use strict";
-
-	goog.provide('Blockly.Blocks.social');
-
-	goog.require('Blockly.Blocks');
-
-
 	Blockly.Blocks['mail_setup'] = {
 		init: function () {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#setup');

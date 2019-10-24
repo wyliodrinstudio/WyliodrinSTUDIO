@@ -23,6 +23,9 @@ class StudioPluginsWeb {
 	apply(compiler) {
 		compiler.hooks.environment.tap('Studio Plugins Browser', () => {
 
+			console.log ('Fixing monaco (temporary)');
+			fs.removeSync ('./node_modules/vue-monaco/node_modules');
+
 			console.log('Loading studio plugins for browser');
 
 			let source = 'async function loadPlugins (progress = () => {}) {\n\tvar plugins = [];\n\tvar plugin;\n\n';

@@ -12,15 +12,13 @@ module.exports = function (blockly) {
 
 	Blockly.Python.mail = function () {
 		if (!Blockly.Python.definitions_['import_mail']) {
-			Blockly.Python.definitions_['import_mail'] = "import sys\n" +
-				'try:\n  from email.MIMEMultipart import MIMEMultipart\n  from email.mime.image import MIMEImage\n  from email.mime.base import MIMEBase\n  from email.mime.audio import MIMEAudio\n  from email import encoders\n  from email.MIMEText import MIMEText\n  import smtplib\n  import mimetypes\nexcept:\n  print("Please open the Shell and run \'social_install\'")\n  sys.exit(1)\n';
+			Blockly.Python.definitions_['import_mail'] = 'from email.MIMEMultipart import MIMEMultipart\nfrom email.mime.image import MIMEImage\nfrom email.mime.base import MIMEBase\nfrom email.mime.audio import MIMEAudio\nfrom email import encoders\nfrom email.MIMEText import MIMEText\nimport smtplib\nimport mimetypes\n';
 		}
 	}
 
 	Blockly.Python.facebookImport = function () {
 		if (!Blockly.Python.definitions_['import_fb']) {
-			Blockly.Python.definitions_['import_fb'] = "import sys\n" +
-				'try:\n  import facebook\nexcept:\n  print("Please open the Shell and run \'social_install\' script")\n  sys.exit(1)\n';
+			Blockly.Python.definitions_['import_fb'] = 'import facebook\n';
 		}
 	}
 
@@ -32,15 +30,13 @@ module.exports = function (blockly) {
 
 	Blockly.Python.twitterImport = function () {
 		if (!Blockly.Python.definitions_['import_tw']) {
-			Blockly.Python.definitions_['import_tw'] = "import sys\n" +
-				'try:\n  import tweepy\nexcept:\n  print("Please open the Shell and run \'social_install\' script")\n  sys.exit(1)\n';
+			Blockly.Python.definitions_['import_tw'] = 'import tweepy\n';
 		}
 	}
 
 	Blockly.Python.twilioImport = function () {
 		if (!Blockly.Python.definitions_['import_twi']) {
-			Blockly.Python.definitions_['import_twi'] = "import sys\n" +
-				'try:\n  from twilio.rest import TwilioRestClient\nexcept:\n  print("Please open the Shell and run \'social_install\' script")\n  sys.exit(1)\n';
+			Blockly.Python.definitions_['import_twi'] = 'from twilio.rest import Client\n';
 		}
 	}
 
@@ -398,7 +394,7 @@ module.exports = function (blockly) {
 		var value_twi_token = Blockly.Python.valueToCode(block, 'twi_token', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		Blockly.Python.twilioSetup(value_twi_account, value_twi_token)
-		var code = Blockly.Python.twilioClient + ' = ' + "TwilioRestClient(" + Blockly.Python.twilioAccount + ", " + Blockly.Python.twilioToken + ")\n";
+		var code = Blockly.Python.twilioClient + ' = ' + "Client(" + Blockly.Python.twilioAccount + ", " + Blockly.Python.twilioToken + ")\n";
 		return code;
 	};
 
@@ -410,7 +406,7 @@ module.exports = function (blockly) {
 		var value_twi_say = Blockly.Python.valueToCode(block, 'twi_say', Blockly.Python.ORDER_ATOMIC);
 		var dropdown_twi_language = block.getFieldValue('twi_language');
 		// TODO: Assemble Python into code variable.
-		var code = 'call =' + Blockly.Python.twilioClient + '.calls.create(to=' + value_twi_to + ', from_=' + value_twi_from + ", url='http://twimlets.com/echo?'+urlencode({'Twiml':'<Response><Say voice=\"alice\" language=\"" + dropdown_twi_language + "\">'+" + value_twi_say + "+'</Say></Response>'}))\n"
+		var code = 'call =' + Blockly.Python.twilioClient + '.calls.create(to=' + value_twi_to + ', from_=' + value_twi_from + ", url='http://twimlets.com/echo?'+parse.urlencode({'Twiml':'<Response><Say voice=\"alice\" language=\"" + dropdown_twi_language + "\">'+" + value_twi_say + "+'</Say></Response>'}))\n"
 			;
 		return code;
 	};
@@ -422,7 +418,7 @@ module.exports = function (blockly) {
 		var value_twi_from = Blockly.Python.valueToCode(block, 'twi_from', Blockly.Python.ORDER_ATOMIC);
 		var value_twi_music_url = Blockly.Python.valueToCode(block, 'twi_music_url', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		var code = 'call =' + Blockly.Python.twilioClient + '.calls.create(to=' + value_twi_to + ', from_=' + value_twi_from + ", url='http://twimlets.com/message?'+urlencode({'Message[0]':" + value_twi_music_url + "}))\n"
+		var code = 'call =' + Blockly.Python.twilioClient + '.calls.create(to=' + value_twi_to + ', from_=' + value_twi_from + ", url='http://twimlets.com/message?'+parse.urlencode({'Message[0]':" + value_twi_music_url + "}))\n"
 			;
 		return code;
 	};

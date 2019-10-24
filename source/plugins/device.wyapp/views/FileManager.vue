@@ -81,32 +81,30 @@
 			<!-- <div class="onofftoggle">
 				<v-switch v-model="switch1"  label="Show Hidden"></v-switch>
 			</div> -->
-			<v-card-text v-if="fileItem !== null" >{{fileItem.name}}</v-card-text>
-			<div v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')">
-				<v-btn text class="fileexplorer-actions" @click="deleteObject">
-					{{$t('PROJECT_DELETE_FOLDER')}}
-				</v-btn>
-				<v-btn text class="fileexplorer-actions" @click="rename">
-					{{$t('PROJECT_RENAME_FOLDER')}}
-				</v-btn>
-				<v-btn text class="fileexplorer-actions" @click="newFolder">
-					{{$t('PROJECT_NEW_FOLDER')}}
-				</v-btn>
-				<v-btn text class="fileexplorer-actions" @click="upload">
-					{{$t('PROJECT_IMPORT_FILE')}}
-				</v-btn>
-			</div>
-			<div v-else-if="fileItem !== null && fileItem.file !== undefined">
-				<v-btn text class="fileexplorer-actions" @click="deleteObject">
-					{{$t('PROJECT_DELETE_FILE')}}
-				</v-btn>
-				<v-btn text class="fileexplorer-actions" @click="rename">
-					{{$t('PROJECT_RENAME_FILE')}}
-				</v-btn>
-				<v-btn text class="fileexplorer-actions" @click="download">
-					{{$t('PROJECT_EXPORT_FILE')}}
-				</v-btn>
-			</div>
+			<span v-if="fileItem !== null" >{{fileItem.name}}</span>
+			<v-spacer></v-spacer>
+			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="deleteObject">
+				{{$t('PROJECT_DELETE_FOLDER')}}
+			</v-btn>
+			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="rename">
+				{{$t('PROJECT_RENAME_FOLDER')}}
+			</v-btn>
+			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="newFolder">
+				{{$t('PROJECT_NEW_FOLDER')}}
+			</v-btn>
+			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="upload">
+				{{$t('PROJECT_IMPORT_FILE')}}
+			</v-btn>
+
+			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="deleteObject">
+				{{$t('PROJECT_DELETE_FILE')}}
+			</v-btn>
+			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="rename">
+				{{$t('PROJECT_RENAME_FILE')}}
+			</v-btn>
+			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="download">
+				{{$t('PROJECT_EXPORT_FILE')}}
+			</v-btn>
 			
 			<!-- <div class="file-manager-actions">
 				<v-tooltip top>

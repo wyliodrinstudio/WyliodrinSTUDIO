@@ -1,0 +1,25 @@
+<toolbox>
+    <category name="DHT Sensor" colour="120">
+        <block type="variables_set">
+            <field name="VAR">Temp</field>
+            <value name="VALUE">
+                <block type="adafruit_dht_sensor_temperature">
+                    <value name="pin">
+                        <block type="math_number"/>
+                    </value>
+                </block>
+            </value>
+        </block> 
+        <block type="variables_set">
+            <field name="VAR">Hum</field>
+            <value name="VALUE">
+                <block type="adafruit_dht_sensor_humidity">
+                    <value name="pin">
+                        <block type="math_number"/>
+                    </value>
+                </block>
+            </value>
+        </block> 
+    </category>
+    <sep />
+</toolbox>

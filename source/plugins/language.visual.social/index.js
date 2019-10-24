@@ -16,8 +16,8 @@ export function setup (options, imports, register)
 	
 	studio.projects.registerLanguagePackage ('python', null, [
 		{
-			name: 'python-facebook-api',
-			description: 'A Python wrapper around the Facebook API'
+			name: 'facebook-sdk',
+			description: 'Python SDK for Facebook\'s Graph API'
 		},
 		{
 			name: 'requests',
