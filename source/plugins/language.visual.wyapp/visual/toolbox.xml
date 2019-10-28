@@ -1,7 +1,14 @@
 <toolbox>
-    <category name="Date and Hour" colour="180">
+    <category name="Date and Time" colour="180">
         <block type="get_date"></block>
         <block type="get_time"></block>
+        <block type="delay">
+            <value name="millis">
+                <block type="math_number">
+                    <field name="NUM">1000</field>
+                </block>
+            </value>
+        </block>
         <block type="format_numbers"></block>
     </category>
     <category name="HTTP" colour="230">

@@ -9,7 +9,7 @@ module.exports = function (blockly) {
 		if (!Blockly.Python.definitions_['import_json']) {
 			Blockly.Python.definitions_['import_json'] = 'import json\n';
 		}
-	}
+	};
 
 	Blockly.Python['print'] = function (block) {
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
@@ -228,7 +228,7 @@ module.exports = function (blockly) {
 			var key = Blockly.Python.quote_(block.getFieldValue('KEY' + n));
 			var value = Blockly.Python.valueToCode(block, 'VALUE' + n,
 				Blockly.Python.ORDER_NONE) || '___';
-			code[n] = key + ": " + value;
+			code[n] = key + ': ' + value;
 		}
 		code = '{' + code.join(', ') + '}';
 		return [code, Blockly.Python.ORDER_ATOMIC];
