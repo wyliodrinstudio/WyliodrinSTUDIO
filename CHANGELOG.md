@@ -1,3 +1,8 @@
+## Wyliodrin STUDIO 2.1.1-beta
+  * **fixed** multiple instance popup appearing multiple times
+  * **update** electron to version 7
+  * **update** serialport to version 8
+
 ## Wyliodrin STUDIO 2.0.10-beta
 
   * **added** social (email, facebook twitter and twilio) visual programming blocks

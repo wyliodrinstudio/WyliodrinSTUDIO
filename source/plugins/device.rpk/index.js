@@ -69,8 +69,8 @@ function searchSerialDevices() {
 				let id = serialDevice.vendorId.toString().toLowerCase();
 				let priority = workspace.DEVICE_PRIORITY_NORMAL;
 				devices.push({
-					id: id,//'wyapp:serial:'+serialDevice.comName,
-					address: serialDevice.comName,
+					id: id,//'wyapp:serial:'+serialDevice.path,
+					address: serialDevice.path,
 					description,
 					name,
 					connection: 'serial',
