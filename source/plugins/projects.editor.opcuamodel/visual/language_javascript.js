@@ -18,6 +18,13 @@ module.exports = function (blockly) {
 		return foldervariable;
 	};
 
+	Blockly.JavaScript.opcuamodel_add_template = function (name, statements) {
+		let foldervariable = Blockly.JavaScript.variableDB_.getDistinctName(name, Blockly.Generator.NAME_TYPE);
+		// let folder_id = name.replace (/[^A-Za-z0-9]/g, '_');
+		Blockly.JavaScript.definitions_['opcuamodel_add_template_'+foldervariable] = 'function opcuamodelAddTemplate'+foldervariable+'(parentId, parentFolder)\n{\n  if (templateObjects[\''+name+'\'])\n  {\n    for (let objectName of templateObjects[\''+name+'\'])\n    {\n      let folderName = objectName;\n      let objectId = objectName.replace (/[^A-Za-z0-9]/g, \'_\');\n      let folder = namespace.addFolder(parentFolder,{ browseName: folderName});\n      let folderId = parentId+\'/\'+objectId;\n'+statements+'    }\n  }\n  else\n  {\n    console.error (\'No folder names found for template '+name+'\');\n  }\n}\n';
+		return foldervariable;
+	};
+
 	Blockly.JavaScript['opcuamodel_variable'] = function (block) {
 		Blockly.JavaScript.opcuamodel_add_variable ();
 		var text_variable_name = block.getFieldValue('variable_name');
@@ -47,6 +54,15 @@ module.exports = function (blockly) {
 		// TODO: Assemble JavaScript into code variable.
 		let foldervariable = Blockly.JavaScript.opcuamodel_add_folder (text_folder_name, statements_objects_properties);
 		var code = 'opcuamodelAddFolder'+foldervariable+'(folderId, folder, \''+text_folder_name+'\');\n';
+		return code;
+	};
+
+	Blockly.JavaScript['opcuamodel_template'] = function (block) {
+		var text_template_name = block.getFieldValue('template_name');
+		var statements_objects_properties = Blockly.JavaScript.statementToCode(block, 'folder_objects_properties');
+		// TODO: Assemble JavaScript into code variable.
+		let foldervariable = Blockly.JavaScript.opcuamodel_add_template (text_template_name, statements_objects_properties);
+		var code = 'opcuamodelAddTemplate'+foldervariable+'(folderId, folder);\n';
 		return code;
 	};
 

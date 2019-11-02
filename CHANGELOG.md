@@ -1,7 +1,9 @@
 ## Wyliodrin STUDIO 2.1.1-beta
+  * **added** folder template for opcua model
   * **fixed** multiple instance popup appearing multiple times
   * **update** electron to version 7
   * **update** serialport to version 8
+  * **update** new color for opcua model folder
 
 ## Wyliodrin STUDIO 2.0.10-beta
 
