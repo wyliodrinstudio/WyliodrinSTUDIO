@@ -83,7 +83,12 @@ npm install
 npm run browser
 ```
 
-Then to run the application you should open `index.html` that was generated in `/build/us/index.html`
+Then to run the application enter the `build` folder and run
+
+```
+npm install
+npm start
+```
 
 ## Contribute
 
