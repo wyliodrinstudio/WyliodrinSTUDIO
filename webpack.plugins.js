@@ -5,6 +5,9 @@ module.exports.loadPlugins = (target) =>
 	let plugins = [];
 	let allPlugins = fs.readdirSync('./source/plugins');
 
+	console.log ('Fixing monaco (temporary)');
+	fs.removeSync ('./node_modules/vue-monaco/node_modules');
+
 	for(let plugin of allPlugins)
 	{
 		let package_json = require('./source/plugins/'+ plugin + '/package.json');

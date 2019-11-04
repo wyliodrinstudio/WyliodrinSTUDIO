@@ -56,12 +56,6 @@
 						<polygon display="inline" fill="#3754A5" points="0,0 57,48 57,204 0,252 	"/>
 					</g>
 					<g id="Layer_1" display="none">
-						
-							<image display="inline" overflow="visible" opacity="0.5" width="3968" height="2976" xlink:href="419C3DB8.jpg"  transform="matrix(0.1842 0 0 0.1842 -211.417 -138.7842)">
-						</image>
-						
-							<image display="inline" overflow="visible" width="3968" height="2976" xlink:href="419C3DBF.jpg"  transform="matrix(0.1842 0 0 0.1842 580.583 147.2178)">
-						</image>
 					</g>
 				</svg>
 
