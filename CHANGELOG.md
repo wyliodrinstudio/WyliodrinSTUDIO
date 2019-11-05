@@ -4,6 +4,7 @@
   * **fixed** gutter background color in electron
   * **fixed** image error from RPK simulator
   * **fixed** display of extra brace at device os version
+  * **fixed** monaco editor workers build in the plugin folder
   * **update** electron to version 7
   * **update** serialport to version 8
   * **update** new color for opcua model folder

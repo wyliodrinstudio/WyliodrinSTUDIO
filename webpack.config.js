@@ -182,6 +182,7 @@ module.exports = env => {
 				// e.g. Build full languages support with webpack 4.0 takes over 80 seconds
 				// Languages are loaded on demand at runtime
 				// languages: ['css', 'html', 'python', 'cpp', 'sh', 'javascript', 'typescript']
+				output: 'plugins/projects.editor.monaco'
 			})
 		],
 		target: 'electron-renderer'
