@@ -6,7 +6,7 @@
 			<v-spacer></v-spacer>
 			<v-tooltip bottom>
 				<template #activator="data">
-					<v-btn text class="title-icon-btn" aria-label="Refresh" v-on="on">
+					<v-btn text class="title-icon-btn" aria-label="Refresh" >
 						<v-img contain src="plugins/device.wyapp/data/img/icons/refresh-icon.svg"></v-img>
 					</v-btn>
 				</template>
@@ -28,12 +28,12 @@
 					item-key="key"
 					>
 					
-					<template v-slot:prepend="{item, open}"	>
+					<template v-slot:label="{item, open}"	>
 						<div v-if="item.name === 'DEVICE_WYAPP_FILESYSTEM'">
-							<p style="width:100%;" @click="menuItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
+							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
 								<v-icon>mdi-folder-open</v-icon>{{$t(item.name)}}          
 							</p>
-							<p style="width:100%;" @click="menuItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
 								<v-icon>mdi-folder</v-icon>{{$t(item.name)}}
 							</p>
 							<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
@@ -41,60 +41,16 @@
 							</p>
 						</div>
 						<div v-else>
-							<p style="width:100%;" @click="menuItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
+							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
 								<v-icon>mdi-folder-open</v-icon>{{item.name}}          
 							</p>
-							<p style="width:100%;" @click="menuItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
 								<v-icon>mdi-folder</v-icon>{{item.name}}
 							</p>
 							<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
 								<v-icon>mdi-file</v-icon>{{item.name}}
 							</p>
 						</div>
-						
-<!-- 
-						<v-menu
-							v-model="folderMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteObject()">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="rename()">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFolder()">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="upload()">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-							<v-menu
-							v-model="fileMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteObject()">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="rename()">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="download()">
-										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu> -->
 					</template>
 					
 					</v-treeview>
@@ -125,7 +81,31 @@
 			<!-- <div class="onofftoggle">
 				<v-switch v-model="switch1"  label="Show Hidden"></v-switch>
 			</div> -->
+			<span v-if="fileItem !== null" >{{fileItem.name}}</span>
 			<v-spacer></v-spacer>
+			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="deleteObject">
+				{{$t('PROJECT_DELETE_FOLDER')}}
+			</v-btn>
+			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="rename">
+				{{$t('PROJECT_RENAME_FOLDER')}}
+			</v-btn>
+			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="newFolder">
+				{{$t('PROJECT_NEW_FOLDER')}}
+			</v-btn>
+			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="upload">
+				{{$t('PROJECT_IMPORT_FILE')}}
+			</v-btn>
+
+			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="deleteObject">
+				{{$t('PROJECT_DELETE_FILE')}}
+			</v-btn>
+			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="rename">
+				{{$t('PROJECT_RENAME_FILE')}}
+			</v-btn>
+			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="download">
+				{{$t('PROJECT_EXPORT_FILE')}}
+			</v-btn>
+			
 			<!-- <div class="file-manager-actions">
 				<v-tooltip top>
 					<template #activator="data">
@@ -199,6 +179,9 @@ export default {
 		async newData(){
 			await this.updateFileTree(this.newData,this.fileItem);
 		},
+		fileItem() {
+			console.log(this.fileItem);
+		}
 
 	},
 	async created () {
@@ -207,9 +190,11 @@ export default {
 		this.connection.on('tag:fe3',await this.saveFileDialog);
 		this.connection.on('tag:fe6',this.error);
 		this.connection.on('tag:fe7',this.error);
-		
 	},
-	async destroyed ()
+	mounted() {
+		this.items[0].name = this.$t(this.items[0].name);
+	},
+ 	async destroyed ()
 	{
 		this.connection.removeListener('tag:fe1',this.update);
 		this.connection.removeListener('tag:fe3',await this.saveFileDialog);

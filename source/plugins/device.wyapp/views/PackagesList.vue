@@ -16,7 +16,7 @@
 				</td>
 				<td class="w-50 d-flex">{{packageData.description}}</td>
 				<td class="w-20 text-right lib-btn-box">
-					<div v-show="!working[packageData.name]">
+					<div v-show="!working[packageData.name] && !(language === 'nodejs' && packageData.name === 'studio-supervisor')">
 						<v-btn text v-show="packageData.installed" class="lib-app-btn" @click="uninstall (packageData)">{{$t('DEVICE_WYAPP_UNINSTALL')}}</v-btn>
 						<v-btn text v-show="!packageData.installed" class="lib-app-btn" @click="install (packageData)">{{$t('DEVICE_WYAPP_INSTALL')}}</v-btn>
 					</div>

@@ -149,6 +149,36 @@ module.exports = function (blockly) {
 		return code;
 	};
 
+	Blockly.Python['gpiozero_rgb_led'] = function(block) {
+		var value_color = Blockly.Python.valueToCode(block, 'color', Blockly.Python.ORDER_ATOMIC);
+		var value_red = Blockly.Python.valueToCode(block, 'red', Blockly.Python.ORDER_ATOMIC);
+		Blockly.Python.setpinmode (value_red, 1);
+		var value_green = Blockly.Python.valueToCode(block, 'green', Blockly.Python.ORDER_ATOMIC);
+		Blockly.Python.setpinmode (value_green, 1);
+		var value_blue = Blockly.Python.valueToCode(block, 'blue', Blockly.Python.ORDER_ATOMIC);
+		Blockly.Python.setpinmode (value_blue, 1);
+		// TODO: Assemble Python into code variable.
+		// var colorVar = Blockly.Python.variableDB_.getDistinctName(
+		// 	'color', Blockly.Variables.NAME_TYPE);
+		var code = 'RGBLED ('+value_red+', '+value_green+', '+value_blue+', initial_value=(tuple([int('+value_color+'[i:i + 2], 16) for i in (1, 3, 5)])), pwm=False)';
+		return [code, Blockly.Python.ORDER_NONE];
+	};
+
+	Blockly.Python['gpiozero_fine_rgb_led'] = function(block) {
+		var value_color = Blockly.Python.valueToCode(block, 'color', Blockly.Python.ORDER_ATOMIC);
+		var value_red = Blockly.Python.valueToCode(block, 'red', Blockly.Python.ORDER_ATOMIC);
+		Blockly.Python.setpinmode (value_red, 1);
+		var value_green = Blockly.Python.valueToCode(block, 'green', Blockly.Python.ORDER_ATOMIC);
+		Blockly.Python.setpinmode (value_green, 1);
+		var value_blue = Blockly.Python.valueToCode(block, 'blue', Blockly.Python.ORDER_ATOMIC);
+		Blockly.Python.setpinmode (value_blue, 1);
+		// TODO: Assemble Python into code variable.
+		// var colorVar = Blockly.Python.variableDB_.getDistinctName(
+		// 	'color', Blockly.Variables.NAME_TYPE);
+		var code = 'RGBLED ('+value_red+', '+value_green+', '+value_blue+', initial_value=(tuple([int('+value_color+'[i:i + 2], 16) for i in (1, 3, 5)])), pwm=True)';
+		return [code, Blockly.Python.ORDER_NONE];
+	};
+
 	Blockly.Python['gpiozero_button_when_held'] = function(block) {
 		Blockly.Python.gpiozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);

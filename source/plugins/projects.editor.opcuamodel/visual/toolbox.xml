@@ -2,9 +2,12 @@
   <block type="opcuamodel_folder">
     <field name="folder_name">folder_name</field>
   </block>
+  <block type="opcuamodel_template">
+    <field name="template_name">template_name</field>
+  </block>
   <block type="opcuamodel_variable">
     <field name="variable_name">variable_name</field>
-    <field name="variable_type">Integer</field>
+    <field name="variable_type">Boolean</field>
     <field name="variable_history">FALSE</field>
   </block>
 </xml>

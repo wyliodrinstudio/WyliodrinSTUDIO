@@ -1,6 +1,14 @@
 module.exports = function (blockly) {
 	let Blockly = blockly.Blockly;
 
+	Blockly.Python.importtime = function ()
+	{
+		if (!Blockly.Python.definitions_['import_time'])
+		{
+			Blockly.Python.definitions_['import_time'] = 'from time import *\n';
+		}
+	};
+
 	Blockly.Python.datetime = function () {
 		if (!Blockly.Python.definitions_['import_datetime']) {
 			Blockly.Python.definitions_['import_datetime'] = 'from datetime import *\n';
@@ -69,5 +77,27 @@ module.exports = function (blockly) {
 
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
+	};
+
+	Blockly.Python['delay'] = function(block) {
+		Blockly.Python.importtime ();
+		var value_millis = Blockly.Python.valueToCode(block, 'millis', Blockly.Python.ORDER_ATOMIC);
+		var type = parseInt (block.getFieldValue('type'));
+		if (isNaN(type)) type = 0;
+		// TODO: Assemble Python into code variable.
+		var code = '';
+		if (type === 0)
+		{
+			code = 'sleep (('+value_millis+')/1000.0'+')\n';
+		}
+		else if (type === 1)
+		{
+			code = 'sleep (('+value_millis+')/1000000.0)\n';
+		}
+		else
+		{
+			code = 'sleep ('+value_millis+')\n';
+		}
+		return code;
 	};
 };

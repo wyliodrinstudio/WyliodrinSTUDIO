@@ -19,6 +19,8 @@ let socketMessages = new EventEmitter ();
 
 let authenticated = false;
 
+let displayedUnique = false;
+
 class WebSocketWyAppTransport extends EventEmitter
 {
 	/**
@@ -171,14 +173,20 @@ export function setup (options, imports, register)
 					}
 					if (data.e === 'unique')
 					{
-						let reset = await workspace.showConfirmationPrompt ('DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE', 'DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET');
-						if (reset)
+						if (displayedUnique === false)
 						{
-							socket.send (JSON.stringify ({t: 'a', token: token, reset: true}));
-						}
-						else
-						{
-							socket.close ();
+							displayedUnique = true;
+							let reset = await workspace.showConfirmationPrompt ('DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE', 'DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET');
+							// eslint-disable-next-line require-atomic-updates
+							displayedUnique = false;
+							if (reset)
+							{
+								socket.send (JSON.stringify ({t: 'a', token: token, reset: true}));
+							}
+							else
+							{
+								socket.close ();
+							}
 						}
 					}
 				}

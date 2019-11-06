@@ -88,19 +88,19 @@ export default {
 		}),
 		pythonPackages ()
 		{
-			let search = this.search.trim ();
+			let search = this.search.trim ().toLowerCase();
 			if (this.packages.python && search.length > 0)
 			{
-				return this.packages.python.filter ((p) => p.name.indexOf (search) >= 0 || p.description.indexOf (search) >= 0)
+				return this.packages.python.filter ((p) => p.name.toLowerCase().indexOf (search) >= 0 || p.description.toLowerCase().indexOf (search) >= 0)
 			}
 			else return this.packages.python;
 		},
 		nodejsPackages ()
 		{
-			let search = this.search.trim ();
+			let search = this.search.trim ().toLowerCase();
 			if (this.packages.nodejs && search.length > 0)
 			{
-				return this.packages.nodejs.filter ((p) => p.name.indexOf (search) >= 0 || p.description.indexOf (search) >= 0)
+				return this.packages.nodejs.filter ((p) => p.name.toLowerCase().indexOf (search) >= 0 || p.description.toLowerCase().indexOf (search) >= 0)
 			}
 			else return this.packages.nodejs;
 		}

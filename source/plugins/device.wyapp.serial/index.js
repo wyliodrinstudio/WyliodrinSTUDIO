@@ -71,9 +71,9 @@ function searchSerialDevices ()
 			let workspaceDevices = workspace.getDevices ().filter ((device) => device.type !== 'wyapp');
 			for (let serialDevice of serialPorts)
 			{
-				if (serialDevice.comName && !workspaceDevices.find((device) => device.address === serialDevice.comName))
+				if (serialDevice.path && !workspaceDevices.find((device) => device.address === serialDevice.path))
 				{
-					let name = serialDevice.comName;
+					let name = serialDevice.path;
 					let description = '';
 					let priority = workspace.DEVICE_PRIORITY_LOW;
 					if (serialDevice.vendorId)
@@ -120,8 +120,8 @@ function searchSerialDevices ()
 						description = 'unknown';
 					}
 					devices.push ({
-						id: 'wyapp:serial:'+serialDevice.comName,
-						address: serialDevice.comName,
+						id: 'wyapp:serial:'+serialDevice.path,
+						address: serialDevice.path,
 						description,
 						name,
 						icon: 'plugins/device.wyapp/data/img/icons/serial.png',

@@ -7,7 +7,7 @@
 		<v-card-text>
 			<v-text-field :label="$t('DEVICE_WYAPP_NAME')"  required v-model="name">{{$t('DEVICE_WYAPP_NAME')}}</v-text-field>
 			<div style="padding:0 0 10px 0;"><strong>{{$t('DEVICE_WYAPP_VERSION')}}:</strong> {{device.properties.version}}</div>
-			<div style="padding:0 0 10px 0;"><strong>{{$t('DEVICE_WYAPP_OS')}}:</strong> {{device.properties.os || device.properties.os}}}</div>
+			<div style="padding:0 0 10px 0;"><strong>{{$t('DEVICE_WYAPP_OS')}}:</strong> {{device.properties.os || device.properties.os}}</div>
 			<div style="padding:0 0 10px 0;"><strong>{{$t('DEVICE_WYAPP_LIBWYLIODRIN')}}:</strong> {{device.properties.libwyliodrin}}</div>
 			<div style="padding:0 0 10px 0;" class="langtype"><strong>{{$t('DEVICE_WYAPP_LANGUAGES')}}:</strong> <span v-for="(languageAvailable, language) in device.properties.languages" :key="language">{{language }}</span></div>
 		</v-card-text>

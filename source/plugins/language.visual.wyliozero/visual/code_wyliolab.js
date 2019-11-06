@@ -680,26 +680,6 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	// Blockly.Python['wyliozero_dht_sensor'] = function(block) {
-	//   var dropdown_dropdown = block.getFieldValue('dropdown');
-	//   var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-	//   var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
-	//   // TODO: Assemble Python into code variable.
-	//   var code = value_var.toString() + ', _ = Adafruit_DHT.read_retry(' + dropdown_dropdown.toString() + ', ' + value_pin.toString() + ')\n';
-	//   return code;
-	// };
-
-
-	// //TODO CHANGE TEMP
-	// Blockly.Python['wyliozero_dht_sensor_temperature'] = function(block) {
-	//   var dropdown_dropdown = block.getFieldValue('dropdown');
-	//   var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-	//   var value_var = Blockly.Python.valueToCode(block, 'var', Blockly.Python.ORDER_ATOMIC);
-	//   // TODO: Assemble Python into code variable.
-	//   var code = ' _, ' + value_var.toString() + ' = Adafruit_DHT.read_retry(' + dropdown_dropdown.toString() + ', ' + value_pin.toString() + ')\n';
-	//   return code;
-	// };
-
 	Blockly.Python['wyliozero_dht_temperature'] = function(block) {
 		var value_pin = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.

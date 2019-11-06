@@ -183,6 +183,60 @@
                 </block>
             </value>
         </block>
+        <block type="variables_set">
+            <field name="VAR">ledName</field>
+            <value name="VALUE">
+                <block type="gpiozero_rgb_led">
+                    <value name="color">
+                        <block type="colour_picker">
+                            <field name="COLOUR">#ff0000</field>
+                        </block>
+                    </value>
+                    <value name="red">
+                        <block type="gpiozero_pin">
+                            <field name="pin">0</field>
+                        </block>
+                    </value>
+                    <value name="green">
+                        <block type="gpiozero_pin">
+                            <field name="pin">1</field>
+                        </block>
+                    </value>
+                    <value name="blue">
+                        <block type="gpiozero_pin">
+                            <field name="pin">2</field>
+                        </block>
+                    </value>
+                </block>
+            </value>
+        </block>
+        <block type="variables_set">
+            <field name="VAR">ledName</field>
+            <value name="VALUE">
+                <block type="gpiozero_fine_rgb_led">
+                    <value name="color">
+                        <block type="colour_picker">
+                            <field name="COLOUR">#ff0000</field>
+                        </block>
+                    </value>
+                    <value name="red">
+                        <block type="gpiozero_pin">
+                            <field name="pin">0</field>
+                        </block>
+                    </value>
+                    <value name="green">
+                        <block type="gpiozero_pin">
+                            <field name="pin">1</field>
+                        </block>
+                    </value>
+                    <value name="blue">
+                        <block type="gpiozero_pin">
+                            <field name="pin">2</field>
+                        </block>
+                    </value>
+                </block>
+            </value>
+        </block>
     </category>
     <category name="Traffic Light" colour="240">
         <block type="variables_set">

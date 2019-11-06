@@ -82,6 +82,10 @@ export default function setup(options, imports, register) {
 			description: 'Request is designed to be the simplest way possible to make http calls. It supports HTTPS and follows redirects by default.'
 		},
 		{
+			name: 'axios',
+			description: 'Request is designed to be the simplest way possible to make http calls. It supports HTTPS and follows redirects by default.'
+		},
+		{
 			name: 'express',
 			description: 'Fast, unopinionated, minimalist web framework for Node.js'
 		},
@@ -110,8 +114,8 @@ export default function setup(options, imports, register) {
 			description: 'Send e-mails with Node.JS – easy as cake!'
 		},
 		{
-			name: 'mysql',
-			description: 'A pure node.js JavaScript Client implementing the MySQL protocol.'
+			name: 'mariadb',
+			description: 'MariaDB Node.js connector'
 		},
 		{
 			name: 'redis',

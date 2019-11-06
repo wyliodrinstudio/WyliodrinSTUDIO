@@ -40,6 +40,11 @@ module.exports = function (blockly) {
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
+	Blockly.JavaScript['delay'] = function(/* block */) {
+		var code = '// the delay function is not in javascript\n';
+		return code;
+	};
+
 	Blockly.JavaScript['format_numbers'] = function (block) {
 		var dropdown_name = block.getFieldValue('NAME');
 		var value_number = Blockly.Python.valueToCode(block, 'number', Blockly.Python.ORDER_ATOMIC);
