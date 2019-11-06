@@ -82,14 +82,13 @@
 		"node-blockly": "https://github.com/wyliodrinstudio/node-blockly.git",
 		"raw-loader": "^3.1.0",
 		"reconnectingwebsocket": "^1.0.0",
+		"request": "^2.88.0",
 		"style-loader": "^1.0.0",
 		"uuid": "^3.3.2",
 		"validator": "^10.11.0",
 		"vue": "^2.6.10",
 		"vue-async-computed": "^3.7.0",
 		"vue-chartjs": "^3.4.2",
-		"vue-clickaway": "^2.2.2",
-		"vue-devtools": "^5.1.0",
 		"vue-i18n": "^8.8.0",
 		"vue-loader": "^15.7.0",
 		"vue-monaco": "^1.1.0",
@@ -174,11 +173,13 @@
 		"material-design-icons": "^3.0.1",
 		"material-icons": "^0.3.1",
 		"node-notifier": "^5.4.0",
+		"request-progress": "^3.0.0",
 		"screenshot-desktop": "^1.8.0",
 		"serialport": "^7.1.4",
 		"ssh2": "^0.8.2",
 		"tree-kill": "^1.2.1",
 		"unzipper": "^0.10.5",
-		"vue-filereader": "^0.1.1"
+		"vue-filereader": "^0.1.1",
+		"zlib": "^1.0.5"
 	}
 }
