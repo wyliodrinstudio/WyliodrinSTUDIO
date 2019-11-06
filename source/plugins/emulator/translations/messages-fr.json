@@ -1,0 +1,82 @@
+{
+	"DEVICE_EMULATOR": {
+		"message": "Émulateur",
+		"description": "Name of the program that allows to imitate the behavior of another program or device."
+	},
+	"EMULATOR_AVAILABLE_IMAGES": {
+		"message": "Images Disponibles",
+		"description": "Name of the tab with a list of available operating system images"
+	},
+	"EMULATOR_AVAILABLE_EMULATORS": {
+		"message": "Émulateurs Disponibles",
+		"description": "Name of the tab with a list of available emulators"
+	},
+	"EMULATOR_DOWNLOAD_IMAGE": {
+		"message": "Télécharger l'image",
+		"description": "Button to download the image for an emulator"
+	},
+	"EMULATOR_RUN_RASPBERRYPI": {
+		"message": "Démarrer l'émulateur pour RaspberryPi",
+		"description": "Button that starts the Raspberryi Pi emulator"
+	},
+	"EMULATOR_RUN_UBUNTU": {
+		"message": "Démarrer l'émulateur pour Ubuntu",
+		"description": "Button that starts the Ubuntu emulator"
+	},
+	"EMULATOR_DOWNLOAD_QEMU": {
+		"message": "Télécharger Qemu",
+		"description": "Button that redirects the user to the downloag page of qemu"
+	},
+	"EMULATOR_STOP_DOWNLOAD": {
+		"message": "Arrêter le téléchargement",
+		"description": "Button that interrupts the download process for a chosen image"
+	},
+	"EMULATOR_STOP": {
+		"message": "Arrêter l'émulateur",
+		"description": "Button used to stop an emulator from running"
+	},
+	"EMULATOR_NO_EXISTING_IMAGE_ERROR": {
+		"message": "L'image pour cet émulateur n'existe pas sur votre ordinateur. Veuillez télécharger l'image appropriée avant d'essayer de lancer un émulateur.",
+		"description": "Error that shows up when the user is trying to run an emulator without having the operating system image"
+	},
+	"EMULATOR_DOWNLOAD_ERROR": {
+		"message": "Impossible de télécharger l'image. ",
+		"description": "Error when loading the download progress for an image"
+	},
+	"EMULATOR_UNZIP_ERROR": {
+		"message": "Impossible de décompresser l'archive de l'image. ",
+		"description": "Error when unzipping the image archive"
+	},
+	"EMULATOR_STOP_DOWNLOAD_ERROR": {
+		"message": "Impossible de supprimer le dossier de l'image en cours de téléchargement. ",
+		"description": "Error that shows up when the folder where the image should be downloaded can not be deleted"
+	},
+	"EMULATOR_NAME": {
+		"message": "Nom de l'émulateur",
+		"description": "Prompt title when choosing a name for an emulator"
+	},
+	"EMULATOR_CHOOSE_NAME": {
+		"message": "Veuillez choisir un nom pour votre émulateur:",
+		"description": "Prompt text asking the user to input a name for the new emulator"
+	},
+	"EMULATOR_CREATE_NEW": {
+		"message": "Créer un nouvel émulateur",
+		"description": "Button to make a new emulator"
+	},
+	"EMULATOR_RESTART": {
+		"message": "Démarrer l'émulateur",
+		"description": "Button to restart an existing emulator"
+	},
+	"EMULATOR_DELETE": {
+		"message": "Supprimer l'émulateur",
+		"description": "Button to permanently delete an existing emulator"
+	},
+	"EMULATOR_DELETE_EMULATOR_TITLE": {
+		"message": "Supprimer l'émulateur",
+		"description": "Title of the confirmation prompt that shows up when the user tries to delete an emulator"
+	},
+	"EMULATOR_DELETE_EMULATOR_QUESTION": {
+		"message": "Êtes-vous sûr de vouloir supprimer définitivement cet émulateur?",
+		"description": "Question addressed to the user in order to confirm the permanent deletion of an emulator"
+	}
+}

@@ -1,0 +1,22 @@
+[
+	{
+		"name": "wyliodrin_studio_raspberrypi_zero_2019_09_20.img",
+		"type": "raspberrypi",
+		"exists": "no",
+		"icon": "plugins/emulator/data/img/icons/icon-raspberrypi.png",
+		"download": "https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_emulator_raspberrypi_2019_10_17.zip",
+		"loadingEmulator": "no",
+		"progress": -1,
+		"title": "Raspberry Pi"
+	},
+	{
+		"name": "ubuntu.qcow2",
+		"type": "ubuntu",
+		"exists": "no",
+		"icon": "plugins/emulator/data/img/icons/icon-ubuntu.png",
+		"download": "https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_emulator_ubuntu_2019_10_17.zip",
+		"loadingEmulator": "no",
+		"progress": -1,
+		"title": "Ubuntu"
+	}
+]

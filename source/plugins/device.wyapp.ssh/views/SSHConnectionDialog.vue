@@ -37,8 +37,7 @@ export default {
 		return {
 			showPassword: false,
 			address: this.device.address || options.address || '',
-			port: this.device.port || options.port || 22,
-
+			port: this.device.port || options.port || 22, 
 			user: this.device.properties.username || options.username || this.device.defaultUsername || '' ,
 			password: this.device.properties.password || options.password || ''
 		};
@@ -66,7 +65,7 @@ export default {
 
 			if (boardDriver) username = this.device.defaultUsername;
 			if (boardDriver) password = this.device.defaultPassword;
-
+			
 			if(username && password && ( this.password === password && this.user === username))
 				this.studio.workspace.showNotification('DEVICE_WYAPP_CHANGE_CREDENTIALS', {}, 'warning');
 			
