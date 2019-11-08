@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Fritzing (http://www.fritzing.org/) -->
+<netlist date="Joi oct. 3 10:48:52 2019" sketch="Untitled Sketch.fzz">
+ <net>
+  <connector id="connector1" name="anode">
+   <part id="92290" label="LED1" title="Red (633nm) LED"/>
+  </connector>
+  <connector id="connector5" name="GIPO17">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector37" name="GND">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+  <connector id="connector0" name="cathode">
+   <part id="92290" label="LED1" title="Red (633nm) LED"/>
+  </connector>
+  <connector id="connector33" name="GND">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+  <connector id="connector4" name="GND">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+  <connector id="connector25" name="GND">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+  <connector id="connector19" name="GND">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+  <connector id="connector30" name="GND">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+  <connector id="connector23" name="GND">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+  <connector id="connector12" name="GND">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector20" name="GIPO21">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector26" name="ID_SC">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector21" name="GIPO20">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector31" name="GIPO24">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector7" name="GIPO22">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector3" name="GIPO4">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector18" name="GIPO26">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector14" name="GIPO5">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector15" name="GIPO6">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector32" name="GIPO23">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector34" name="GIPO18">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector6" name="GIPO27">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector27" name="GIPO7">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector11" name="GIPO11">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector16" name="GIPO13">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector17" name="GIPO19">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector36" name="GIPO14">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector22" name="GIPO16">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector9" name="GIPO10">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector2" name="GPIO3">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector35" name="GIPO15">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector0" name="3v3">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+  <connector id="connector8" name="3V3">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector10" name="GIPO9">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector1" name="GPIO2">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector39" name="5V">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+  <connector id="connector38" name="5V">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector13" name="ID_SD">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector24" name="GIPO12">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector29" name="GIPO25">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector28" name="GIPO8">
+   <part id="90300" label="Raspberry Pi 1" title="Raspberry Pi 3"/>
+  </connector>
+ </net>
+</netlist>

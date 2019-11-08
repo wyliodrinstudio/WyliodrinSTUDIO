@@ -1,0 +1,54 @@
+{
+    "DEVICE_SIMULATOR_RASPBERRY_PI": {
+        "message": "Simulator Raspberry Pi",
+        "description": "The Raspberry Pi simulator tab button"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_RUN": {
+        "message": "Ruleaza",
+        "description": "The Raspberry Pi simulator button to run"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_STOP": {
+        "message": "Opreste",
+        "description": "The Raspberry Pi simulator button to stop"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_LOAD_PROJECT": {
+        "message": "Incarca Proiect",
+        "description": "Load your own project in the simulator"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_CLOSE_PROJECT_LIST": {
+        "message": "Inchide",
+        "description": "Close the list with the projects"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_PIN": {
+        "message": "Pini",
+        "description": "The pin in the header of the table with components"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_NAME": {
+        "message": "Nume",
+        "description": "The name in the header of the table with components"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_COLOR": {
+        "message": "Culoare",
+        "description": "The color in the header of the table with components"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_NAME_LABEL": {
+        "message": "Numele Proiectului",
+        "description": "The name of your project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_UPLOAD": {
+        "message": "Incarca",
+        "description": "Upload your own project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_CLOSE": {
+        "message": "Inchide",
+        "description": "Close the dialog in which you can upload your project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_ADD_SVG": {
+        "message": "Adauga Fisierul SVG",
+        "description": "Add the SVG file of your project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_ADD_XML": {
+        "message": "Adauga Fisierul XML",
+        "description": "Add the XML file of your project"
+    }
+}

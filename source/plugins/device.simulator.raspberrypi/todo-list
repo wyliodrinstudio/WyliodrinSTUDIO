@@ -1,0 +1,11 @@
+ToDo-List:
+	* Failsafes:
+		- In cazul in care nu exista functia sa nu crape programul
+	* Work:
+		- De testat activeLow
+		- De scris implementare pentru functiile de la lcd
+		- De refacut schitele pentru tutoriale
+		- De vazut cum se poate implementa functia watch
+		- De vazut cum se poate scrie PWM pe led
+
+DE DECOMENTAT LINIA 47 DIN device.rpk/index.js

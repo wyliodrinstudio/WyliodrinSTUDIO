@@ -1,0 +1,12 @@
+{
+    "name": "device.simulator.raspberrypi",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace","console","projects"],
+		"provides": ["device_simulator_raspberrypi"],
+        "disabled": false,
+        "target": ["electron", "browser"]
+    }
+}
