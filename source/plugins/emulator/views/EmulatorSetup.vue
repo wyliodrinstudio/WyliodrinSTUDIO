@@ -24,11 +24,11 @@
 						<v-list-item-action>
 							<div v-if="item.loadingEmulator === 'no'">
 								<div v-if="item.progress === 100">
-									<v-btn @click="runEmulator(item)">{{$t('EMULATOR_CREATE_NEW')}}</v-btn>
+									<v-btn :disabled="qemuCheck" @click="runEmulator(item)">{{$t('EMULATOR_CREATE_NEW')}}</v-btn>
 								</div>
 								<div v-else>
 									<div v-if="item.progress <= 0">
-										<v-btn @click="downloadImage(item)">{{$t('EMULATOR_DOWNLOAD_IMAGE')}}</v-btn>
+										<v-btn :disabled="qemuCheck" @click="downloadImage(item)">{{$t('EMULATOR_DOWNLOAD_IMAGE')}}</v-btn>
 									</div>
 									<div v-else-if="item.progress>0 && item.progress < 100">
 										<v-progress-circular
@@ -40,7 +40,7 @@
 										>
 											{{ item.progress }} %
 										</v-progress-circular>
-										<v-btn @click="stopDownload(item)">{{$t('EMULATOR_STOP_DOWNLOAD')}}</v-btn>
+										<v-btn :disabled="qemuCheck" @click="stopDownload(item)">{{$t('EMULATOR_STOP_DOWNLOAD')}}</v-btn>
 									</div>
 								</div>
 							</div>
@@ -50,6 +50,11 @@
 						</v-list-item-action>
 					</v-list-item>
 				</v-list>
+					<v-alert v-if="qemuCheck === true" type="error" class="mb-4">
+						descarca
+						<v-btn  @click="downloadQemu()">{{$t('EMULATOR_DOWNLOAD_QEMU')}}</v-btn> 
+					</v-alert>
+					
 			</v-tab-item>
 			<v-tab-item :key="'emulator'">
 				<v-list>
@@ -62,16 +67,19 @@
 						</v-list-item-content>
 						<v-list-item-action>
 							<div v-if="emulator.running === 1">
-								<v-btn @click="stopEmulator(emulator)">{{$t('EMULATOR_STOP')}}</v-btn>
+								<v-btn :disabled="qemuCheck" @click="stopEmulator(emulator)">{{$t('EMULATOR_STOP')}}</v-btn>
 							</div>
 							<div v-else>
-								<v-btn @click="restartEmulator(emulator)">{{$t('EMULATOR_RESTART')}}</v-btn>
+								<v-btn :disabled="qemuCheck" @click="restartEmulator(emulator)">{{$t('EMULATOR_RESTART')}}</v-btn>
 							</div>
-							<v-btn @click="deleteEmulator(emulator)">{{$t('EMULATOR_DELETE')}}</v-btn>
+							<v-btn :disabled="qemuCheck" @click="deleteEmulator(emulator)">{{$t('EMULATOR_DELETE')}}</v-btn>
 						</v-list-item-action>
 					</v-list-item>
 				</v-list>
-				<v-btn v-if="qemuCheck === true" @click="downloadQemu()">{{$t('EMULATOR_DOWNLOAD_QEMU')}}</v-btn> 
+				<v-alert v-if="qemuCheck === true" type="error" class="mb-4">
+					{{$t('EMULATOR_NO_QEMU_ERROR')}}
+					<v-btn  @click="downloadQemu()">{{$t('EMULATOR_DOWNLOAD_QEMU')}}</v-btn> 
+				</v-alert>
 			</v-tab-item>
 		</v-tabs-items>
 

@@ -16,7 +16,7 @@ export default {
 	{
 		runningEmulators: ({commit}, runningEmulators) => commit('runningEmulators', runningEmulators),
 		images: ({commit}, images) => commit('images', [...images]),
-		qemuCheck: ({commit}, qemuCheck) => commit('qemuCheck', [...qemuCheck]),
+		qemuCheck: ({commit}, qemuCheck) => commit('qemuCheck', qemuCheck),
 		updateDownloadProgress: ({commit}, data) => { commit ('updateDownloadProgress', data);
 		}
 

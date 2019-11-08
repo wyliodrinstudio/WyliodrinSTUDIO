@@ -8,6 +8,7 @@ import progress from 'request-progress';
 import unzipper from 'unzipper';
 import path from 'path'; 
 
+const QEMU = 'qemu-system-';
 let qemu = null;
 let studio = null;
 let search = null;
@@ -23,12 +24,13 @@ let runningEmulatorsFolder = '';
 let imagesFolder = '';
 let imageTypeFolder = '';
 let currentlyRunningFolder = '';
+let qemuExitCode = {};
 
 const { spawn } = require ('child_process');
 
 let emulator = {
 	store: null,
-	registerEmulator(name, id, type, system, machine, cpu, cmdline, mem, user, password, image, port, runningFolder, icon)
+	registerEmulator(name, id, type, user, password, image, port, runningFolder, icon)
 	{
 		let sameEmulator = Object.keys(runningEmulators).find((emulator) => emulator === name);
 		if(!sameEmulator)
@@ -37,11 +39,6 @@ let emulator = {
 				name,
 				id, 
 				type, 
-				system, 
-				machine, 
-				cpu, 
-				cmdline, 
-				mem, 
 				user, 
 				password, 
 				image, 
@@ -57,6 +54,28 @@ let emulator = {
 			studio.workspace.showError('EMULATOR_SAME_NAME');
 		}
 	},
+	// checkForQemu()
+	// {
+	// 	for(let image of images){
+	// 		const check = spawn(QEMU + 'nimic', ['--version'], {
+	// 			env: process.env
+	// 		});
+	// 		check.on('close',  (code) => {
+	// 			if(code !== 0)
+	// 			{
+	// 				qemuCheck = true;
+	// 				studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
+	// 			}
+	// 			else
+	// 			{
+	// 				qemuCheck = false;
+	// 				studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
+	// 			}
+	// 			qemuExitCode[image.type] = code;
+	// 		});
+	// 		check.on('error', (err) => {console.log('err code is', err);});
+	// 	}
+	// },
 	async registerImages()
 	{
 		emulatorFolder = path.join(studio.filesystem.getSettingsFolder(), 'emulator');
@@ -85,6 +104,24 @@ let emulator = {
 					}
 			}			
 			image.dataFolder = imageTypeFolder;
+
+			const check = spawn(QEMU + image.qemu.system, ['--version'], {
+				env: process.env
+			});
+			check.on('close',  (code) => {
+				if(code !== 0)
+				{
+					qemuCheck = true;
+					studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
+				}
+				else
+				{
+					qemuCheck = false;
+					studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
+				}
+				qemuExitCode[image.type] = code;
+			});
+			check.on('error', (err) => {console.log('err code is', err);});
 		} 
 	
 		runningEmulatorsFolder = path.join(emulatorFolder, 'runningEmulators');
@@ -103,7 +140,6 @@ let emulator = {
 		try {
 			let availableEmulators = await fs.readFile(jsonFile);
 			runningEmulators = JSON.parse(availableEmulators);
-			console.log(runningEmulators);
 			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
 		} catch(e)
 		{
@@ -118,10 +154,11 @@ let emulator = {
 			if(images[index].progress !== 100)
 				studio.workspace.showError('EMULATOR_NO_EXISTING_IMAGE_ERROR');
 		}
-		else
+		else if(qemuExitCode[imageRunning.type] === 0)
 		{
+			qemuCheck = false;
+			studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
 			let emulatorName = await studio.workspace.showPrompt('EMULATOR_NAME', 'EMULATOR_CHOOSE_NAME');
-			console.log(emulatorName);
 			if(emulatorName && !runningEmulators[emulatorName]) {
 				for(let image of images)
 				{
@@ -155,151 +192,150 @@ let emulator = {
 
 				if(imageRunning.type === 'raspberrypi')
 				{
-					this.registerEmulator(emulatorName, uuid.v4(), imageRunning.type, 'arm', 'versatilepb', 'arm1178', 'rw console=ttyAMA0 root=/dev/sda2 rootfstype=ext4  loglevel=8 rootwait fsck.repair=yes memtest=1', '256M', 'pi', 'raspberry', runningEmulatorImage, emulatorPort, currentlyRunningFolder, 'plugins/emulator/data/img/icons/icon-raspberrypi.png');
+					this.registerEmulator(emulatorName, uuid.v4(), imageRunning.type, 'pi', 'raspberry', runningEmulatorImage, emulatorPort, currentlyRunningFolder, 'plugins/emulator/data/img/icons/icon-raspberrypi.png');
 				}
 				else
 				if(imageRunning.type === 'ubuntu')
 				{
-					this.registerEmulator(emulatorName, uuid.v4(), imageRunning.type, 'x86_64', 'accel=hax:wpxh:kvm:hvf:tcg', null, null, '2G', 'ubuntu', 'ubuntu', runningEmulatorImage, emulatorPort, currentlyRunningFolder, 'plugins/emulator/data/img/icons/icon-ubuntu.png');
+					this.registerEmulator(emulatorName, uuid.v4(), imageRunning.type, 'ubuntu', 'ubuntu', runningEmulatorImage, emulatorPort, currentlyRunningFolder, 'plugins/emulator/data/img/icons/icon-ubuntu.png');
 				}
 
 				fs.writeFileSync(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
 				
-
-				const check = spawn('qemu-system-arm', ['--version'], {
+				let parameters = ['-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::'+emulatorPort+ '-:22','-no-reboot'];
+				if(imageRunning.qemu.kernel)
+					parameters.push('-kernel', path.join(imagesFolder, imageRunning.type, imageRunning.qemu.kernel));
+				if(imageRunning.qemu.dtb)
+					parameters.push('-dtb', path.join(imagesFolder, imageRunning.type, imageRunning.qemu.dtb));
+				if(imageRunning.qemu.mem)
+					parameters.push('-m', imageRunning.qemu.mem);
+				if(imageRunning.qemu.machine)
+					parameters.push('-M', imageRunning.qemu.machine);
+				if(imageRunning.qemu.cpu)
+					parameters.push('-cpu', imageRunning.qemu.cpu);
+				if(imageRunning.qemu.serial)
+					parameters.push('-serial', imageRunning.qemu.serial);
+				if(imageRunning.qemu.cmdline)
+					parameters.push('-append', imageRunning.qemu.cmdline);
+				if(imageRunning.qemu.drive)
+					parameters.push('-drive', imageRunning.qemu.drive + runningEmulatorImage + ',format=raw');
+				if(imageRunning.qemu.hda)
+					parameters.push('-hda', runningEmulatorImage);
+				if(imageRunning.qemu.boot)
+					parameters.push('-boot', imageRunning.qemu.boot);
+				qemu = spawn(QEMU + imageRunning.qemu.system, parameters, {
 					env: process.env
 				});
-				check.on('close', (code) => {
-					if(code === 1)
-					{
-						studio.workspace.showNotification('Please install qemu.');
-						qemuCheck = true;
-						studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
-					}
-					else
-					{
-						if(imageRunning.type === 'raspberrypi')
-						{
-							qemu = spawn('qemu-system-arm', ['-kernel', path.join(imagesFolder, imageRunning.type, 'kernel-qemu-4.14.79-stretch'), '-dtb', path.join(imagesFolder, imageRunning.type, 'versatile-pb.dtb'), '-m', '256', '-M', 'versatilepb', '-cpu', 'arm1176', '-serial', 'stdio', '-append', 'rw console=ttyAMA0 root=/dev/sda2 rootfstype=ext4  loglevel=8 rootwait fsck.repair=yes memtest=1', '-drive', 'file=' + runningEmulatorImage + ',format=raw', '-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::' + emulatorPort + '-:22', '-no-reboot'], {
-								env: process.env
-							});
 
-							qemu.stdout.on('data', () => {
-								runningEmulators[emulatorName].running = 1;
-								runningEmulators[emulatorName].pid = qemu.pid;
-								studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
-							});
-							
-							qemu.stderr.on('data', (data) => {
-								console.error(`stderr: ${data}`);
-							});
-							devices.push ({
-								id: 'wyapp:emulator:'+emulatorPort,
-								transport: 'ssh',
-								address: '127.0.0.1',
-								name: emulatorName,
-								priority: studio.workspace.DEVICE_PRIORITY_HIGH,
-								port: emulatorPort,
-								board: 'raspberrypi',
-								properties: {
-									category: 'raspberrypi',
-									platform: 'linux'
-								}
-							});
-
-							search.updateDevices (devices);
-						}
-						else if(imageRunning.type === 'ubuntu')
-						{
-							qemu = spawn('qemu-system-x86_64', ['-hda', runningEmulatorImage, '-boot', 'd', '-m', '2048', '-M', 'accel=hax:wpxh:kvm:hvf:tcg', '-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::' + emulatorPort + '-:22', '-no-reboot'], {
-								env: process.env
-							});
-
-							qemu.stdout.on('data', () => {
-								runningEmulators[emulatorName].running = 1;
-								runningEmulators[emulatorName].pid = qemu.pid;
-								studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
-							});
-							
-							qemu.stderr.on('data', (data) => {
-								console.error(`stderr: ${data}`);
-							});
-
-							devices.push ({
-								id: 'wyapp:emulator:'+ emulatorPort,
-								transport: 'ssh',
-								address: '127.0.0.1',
-								name: emulatorName,
-								priority: studio.workspace.DEVICE_PRIORITY_HIGH,
-								port: emulatorPort,
-								board: 'ubuntu',
-								properties: {
-									category: 'ubuntu',
-									platform: 'linux'
-								}
-							});
-							search.updateDevices (devices);
-						}
-						studio.workspace.dispatchToStore('workspace', 'devices', devices);
+				qemu.stdout.on('data', () => {
+					runningEmulators[emulatorName].running = 1;
+					runningEmulators[emulatorName].pid = qemu.pid;
+					studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+				});
+				
+				qemu.stderr.on('data', (data) => {
+					console.error(`stderr: ${data}`);
+				});
+				qemu.on('close', async () => {
+					devices = devices.filter(device => device.port !== runningEmulators[emulatorName].port);
+					runningEmulators[emulatorName].running = 0;
+					studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+					await fs.writeFile(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
+					search.updateDevices(devices);
+				});
+				devices.push ({
+					id: 'wyapp:emulator:' + emulatorPort,
+					transport: 'ssh',
+					address: '127.0.0.1',
+					name: emulatorName,
+					priority: studio.workspace.DEVICE_PRIORITY_HIGH,
+					port: emulatorPort,
+					board: imageRunning.type,
+					properties: {
+						category: imageRunning.type,
+						platform: 'linux'
 					}
 				});
+
+				search.updateDevices (devices);
+				
+				studio.workspace.dispatchToStore('workspace', 'devices', devices);
 			}
 			else {
 				studio.workspace.showError('EMULATOR_INVALID_NAME');
 			}
 		}
+		else {
+			studio.workspace.showError('EMULATOR_MISSING_QEMU_ERROR', {system: imageRunning.qemu.system});
+		}
 	},
 	restartEmulator(emulator)
 	{
-		if(emulator.type === 'raspberrypi') {
-			qemu = spawn('qemu-system-arm', ['-kernel', path.join(imagesFolder, emulator.type, 'kernel-qemu-4.14.79-stretch'), '-dtb', path.join(imagesFolder, emulator.type, 'versatile-pb.dtb'), '-m', '256', '-M', 'versatilepb', '-cpu', 'arm1176', '-serial', 'stdio', '-append', 'rw console=ttyAMA0 root=/dev/sda2 rootfstype=ext4  loglevel=8 rootwait fsck.repair=yes memtest=1', '-drive', 'file=' + emulator.image + ',format=raw', '-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::' + emulator.port + '-:22', '-no-reboot'], {
-				env: process.env
-			});
-			qemu.stdout.on('data', () => {
-				runningEmulators[emulator.name].running = 1;
-				runningEmulators[emulator.name].pid = qemu.pid;
-				studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
-			});
-			devices.push ({
-				id: 'wyapp:emulator:'+ emulator.port,
-				transport: 'ssh',
-				address: '127.0.0.1',
-				name: emulator.name,
-				priority: studio.workspace.DEVICE_PRIORITY_HIGH,
-				port: emulator.port,
-				board: 'raspberrypi',
-				properties: {
-					category: 'raspberrypi',
-					platform: 'linux'
-				}
-			});
-			search.updateDevices (devices);
-		}
-		else if(emulator.type === 'ubuntu') {
-			qemu = spawn('qemu-system-x86_64', ['-hda', emulator.image, '-boot', 'd', '-m', '2048', '-M', 'accel=hax:wpxh:kvm:hvf:tcg', '-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::' + emulator.port + '-:22', '-no-reboot'], {
-				env: process.env
-			});
-			runningEmulators[emulator.name].pid = qemu.pid;
-			runningEmulators[emulator.name].running = 1;
-			qemu.stderr.on('data', (data) => {
-				console.error(`stderr: ${data}`);
-			});
+		let imageRunning = {};
+		for(let image of images)
+			if(image.type === emulator.type)
+				imageRunning = image;
 
-			devices.push ({
-				id: 'wyapp:emulator:'+ emulator.port,
-				transport: 'ssh',
-				address: '127.0.0.1',
-				name: emulator.name,
-				priority: studio.workspace.DEVICE_PRIORITY_HIGH,
-				port: emulatorPort,
-				board: 'ubuntu',
-				properties: {
-					category: 'ubuntu',
-					platform: 'linux'
-				}
-			});
-			search.updateDevices (devices);
-		}
+		let parameters = ['-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::'+emulatorPort+ '-:22','-no-reboot'];
+		if(imageRunning.qemu.kernel)
+			parameters.push('-kernel', path.join(imagesFolder, imageRunning.type, imageRunning.qemu.kernel));
+		if(imageRunning.qemu.dtb)
+			parameters.push('-dtb', path.join(imagesFolder, imageRunning.type, imageRunning.qemu.dtb));
+		if(imageRunning.qemu.mem)
+			parameters.push('-m', imageRunning.qemu.mem);
+		if(imageRunning.qemu.machine)
+			parameters.push('-M', imageRunning.qemu.machine);
+		if(imageRunning.qemu.cpu)
+			parameters.push('-cpu', imageRunning.qemu.cpu);
+		if(imageRunning.qemu.serial)
+			parameters.push('-serial', imageRunning.qemu.serial);
+		if(imageRunning.qemu.cmdline)
+			parameters.push('-append', imageRunning.qemu.cmdline);
+		if(imageRunning.qemu.drive)
+			parameters.push('-drive', imageRunning.qemu.drive + emulator.image + ',format=raw');
+		if(imageRunning.qemu.hda)
+			parameters.push('-hda', emulator.image);
+		if(imageRunning.qemu.boot)
+			parameters.push('-boot', imageRunning.qemu.boot);
+
+		qemu = spawn(QEMU + imageRunning.qemu.system, parameters, {
+			env: process.env
+		});
+
+		qemu.stdout.on('data', () => {
+			runningEmulators[emulator.name].running = 1;
+			runningEmulators[emulator.name].pid = qemu.pid;
+			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+		});
+		
+		qemu.stderr.on('data', (data) => {
+			console.error(`stderr: ${data}`);
+		});
+		qemu.on('close', async () => {
+			devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
+			runningEmulators[emulator.name].running = 0;
+			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+			await fs.writeFile(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
+			search.updateDevices(devices);
+		});
+		devices.push ({
+			id: 'wyapp:emulator:'+emulator.port,
+			transport: 'ssh',
+			address: '127.0.0.1',
+			name: emulator.name,
+			priority: studio.workspace.DEVICE_PRIORITY_HIGH,
+			port: emulator.port,
+			board: imageRunning.type,
+			properties: {
+				category: imageRunning.type,
+				platform: 'linux'
+			}
+		});
+
+		search.updateDevices (devices);
+		
+		studio.workspace.dispatchToStore('workspace', 'devices', devices);
+	
 	},
 	async stopEmulator(emulator)
 	{

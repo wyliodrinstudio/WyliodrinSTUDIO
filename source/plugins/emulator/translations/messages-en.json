@@ -64,7 +64,7 @@
 		"description": "Button to make a new emulator"
 	},
 	"EMULATOR_RESTART": {
-		"message": "Restart emulator",
+		"message": "Start emulator",
 		"description": "Button to restart an existing emulator"
 	},
 	"EMULATOR_DELETE": {
@@ -78,5 +78,25 @@
 	"EMULATOR_DELETE_EMULATOR_QUESTION": {
 		"message": "Are you sure you want to permanently delete this emulator?",
 		"description": "Question addressed to the user in order to confirm the permanent deletion of an emulator"
+	},
+	"EMULATOR_INVALID_NAME": {
+		"message": "Please choose a valid name.",
+		"description": "Error that shows up when the user tries to create an emulator using an invalid name"
+	},
+	"EMULATOR_COPY_FILE_ERROR": {
+		"message": "Cannot load the image for this emulator",
+		"description": "Error that shows up when the image for an emulator can not be copied"
+	},
+	"EMULATOR_PROGRESS_ERROR": {
+		"message": "Cannot load the download progress for this image",
+		"description": "Error that shows up when the download progress for an image can not be loaded"
+	},
+	"EMULATOR_MISSING_QEMU_ERROR": {
+		"message": "Please install qemu-system-{system} ",
+		"description": "Error that shows up when the user is trying to run an emulator without having the qemu system installed."
+	}, 
+	"EMULATOR_NO_QEMU_ERROR": {
+		"message": "Please install qemu to create an emulator.",
+		"description": "Alert text when the user is trying to create an emulator without having the qemu system installed."
 	}
 }

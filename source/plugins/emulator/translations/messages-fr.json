@@ -78,5 +78,25 @@
 	"EMULATOR_DELETE_EMULATOR_QUESTION": {
 		"message": "Êtes-vous sûr de vouloir supprimer définitivement cet émulateur?",
 		"description": "Question addressed to the user in order to confirm the permanent deletion of an emulator"
+	},
+	"EMULATOR_INVALID_NAME": {
+		"message": "Veuillez choisir un nom valide.",
+		"description": "Error that shows up when the user tries to create an emulator using an invalid name"
+	},
+	"EMULATOR_COPY_FILE_ERROR": {
+		"message": "Impossible de charger l'image pour cet émulateur.",
+		"description": "Error that shows up when the image for an emulator can not be copied"
+	},
+	"EMULATOR_PROGRESS_ERROR": {
+		"message": "Impossible d'afficher' la progression du téléchargement pour cette image",
+		"description": "Error that shows up when the download progress for an image can not be loaded"
+	},
+	"EMULATOR_MISSING_QEMU_ERROR": {
+		"message": "Veuillez installer qemu-system-{system}",
+		"description": "Error that shows up when the user is trying to run an emulator without having the qemu system installed."
+	}, 
+	"EMULATOR_NO_QEMU_ERROR": {
+		"message": "Veuillez installer qemu pour créer un émulateur.",
+		"description": "Alert text when the user is trying to create an emulator without having the qemu system installed."
 	}
 }

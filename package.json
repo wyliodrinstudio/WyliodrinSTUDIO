@@ -58,6 +58,7 @@
 		"countly-sdk-web": "^19.8.0",
 		"css-loader": "^3.0.0",
 		"dexie": "^2.0.4",
+		"electron": "^7.0.0",
 		"electron-builder": "^21.2.0",
 		"electron-rebuild": "^1.8.6",
 		"eslint": "^6.0.1",
@@ -106,8 +107,7 @@
 		"webpack-cli": "^3.3.9",
 		"webpack-node-externals": "^1.7.2",
 		"xml-js": "^1.6.11",
-		"xterm": "^3.14.5",
-		"yodasay": "^1.1.9"
+		"xterm": "^3.14.5"
 	},
 	"eslintConfig": {
 		"env": {
@@ -166,7 +166,6 @@
 		"cowsay": "^1.4.0",
 		"desktop-screenshot": "^0.1.1",
 		"drivelist": "^8.0.6",
-		"electron": "^7.0.0",
 		"electron-is-dev": "^1.1.0",
 		"fs-extra": "^7.0.1",
 		"grabity": "^1.0.5",
