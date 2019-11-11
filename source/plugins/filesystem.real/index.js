@@ -75,7 +75,7 @@ let filesystem_real = {
 				{name:'export', extensions: opts.filetypes || []}
 			]
 		};
-		return dialog.showSaveDialog(null, options);
+		return dialog.showSaveDialog(remote.getCurrentWindow (), options);
 		// TODO save the actual data to the file
 	},
 	readImportFile (file)
@@ -90,11 +90,11 @@ let filesystem_real = {
 				{name:'import', extensions: opts.filetypes || []}
 			]
 		};
-		let files = await dialog.showOpenDialog(null, options);
+		let files = await dialog.showOpenDialog(remote.getCurrentWindow (), options);
 		let list = [];
-		if (files)
+		if (files && !files.canceled && files.filePaths)
 		{
-			for (let f of files)
+			for (let f of files.filePaths)
 			{
 				list.push ({
 					name: f
