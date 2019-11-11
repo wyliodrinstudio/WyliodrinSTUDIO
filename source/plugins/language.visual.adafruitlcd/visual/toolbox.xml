@@ -1,0 +1,64 @@
+<toolbox>
+    <category name="Adafruit LCD" colour="260">
+        <block type="adafruit_init_lcd">
+            <field name="rows">2</field>
+            <value name="rs">
+                <block type="math_number">
+                    <field name="NUM">10</field>
+                </block>
+            </value>
+            <value name="strobe">
+                <block type="math_number">
+                    <field name="NUM">11</field>
+                </block>
+            </value>
+            <value name="backlight">
+                <block type="math_number">
+                    <field name="NUM">12</field>
+                </block>
+            </value>
+            <value name="d0">
+                <block type="math_number">
+                    <field name="NUM">5</field>
+                </block>
+            </value>
+            <value name="d1">
+                <block type="math_number">
+                    <field name="NUM">6</field>
+                </block>
+            </value>
+            <value name="d2">
+                <block type="math_number">
+                    <field name="NUM">7</field>
+                </block>
+            </value>
+            <value name="d3">
+                <block type="math_number">
+                    <field name="NUM">9</field>
+                </block>
+            </value>
+        </block>
+        <block type="adafruit_clear_lcd"></block>
+        <block type="adafruit_reset_lcd"></block>
+        <block type="adafruit_set_position_lcd">
+            <value name="col">
+                <block type="math_number">
+                    <field name="NUM">1</field>
+                </block>
+            </value>
+            <value name="row">
+                <block type="math_number">
+                    <field name="NUM">1</field>
+                </block>
+            </value>
+        </block>
+        <block type="adafruit_print_lcd">
+            <value name="text">
+                <block type="text">
+                    <field name="TEXT">Hey Wyliodrin</field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <sep />
+</toolbox>
