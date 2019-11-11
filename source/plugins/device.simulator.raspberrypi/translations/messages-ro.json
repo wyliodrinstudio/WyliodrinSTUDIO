@@ -1,6 +1,6 @@
 {
     "DEVICE_SIMULATOR_RASPBERRY_PI": {
-        "message": "Raspberry Pi",
+        "message": "Simulator Raspberry Pi",
         "description": "The Raspberry Pi simulator tab button"
     },
     "DEVICE_SIMULATOR_RASPBERRY_PI_RUN": {
@@ -11,16 +11,8 @@
         "message": "Opreste",
         "description": "The Raspberry Pi simulator button to stop"
     },
-    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_NOT_OPEN": {
-        "message": "Nu a-ti deschis nici un proiect!\nVa rugam sa deschideti mai intai un proiect.",
-        "description": "Project not open"
-    },
-    "DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE": {
-        "message": "Simulatorul RaspberryPi suport doar NodeJS!\nVa rugam deschideti un proiect in acest limbaj.",
-        "description": "Language not supported"
-    },
     "DEVICE_SIMULATOR_RASPBERRY_PI_LOAD_PROJECT": {
-        "message": "Incarca Proiect",
+        "message": "Incarca Schema",
         "description": "Load your own project in the simulator"
     },
     "DEVICE_SIMULATOR_RASPBERRY_PI_CLOSE_PROJECT_LIST": {
@@ -56,7 +48,7 @@
         "description": "Add the SVG file of your project"
     },
     "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_ADD_XML": {
-        "message": "Adauga Fisierul XML",
+        "message": "Adauga Fisierul XML netlist",
         "description": "Add the XML file of your project"
     }
 }
