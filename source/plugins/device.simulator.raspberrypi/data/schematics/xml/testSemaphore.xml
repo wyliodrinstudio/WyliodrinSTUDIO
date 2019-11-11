@@ -1,12 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Fritzing (http://www.fritzing.org/) -->
-<netlist date="Lun nov. 11 10:11:33 2019" sketch="Untitled Sketch.fzz">
+<netlist date="Lun nov. 11 10:14:15 2019" sketch="Untitled Sketch.fzz">
  <net>
-  <connector name="GND" id="connector33">
-   <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
-  </connector>
   <connector name="cathode" id="connector0">
-   <part title="Red (633nm) LED" label="LED1" id="92310"/>
+   <part title="Green (555nm) LED" label="LED3" id="92960"/>
   </connector>
   <connector name="GND" id="connector25">
    <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
@@ -28,6 +25,31 @@
   </connector>
   <connector name="GND" id="connector19">
    <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
+  </connector>
+  <connector name="GND" id="connector33">
+   <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part title="Red (633nm) LED" label="LED1" id="92310"/>
+  </connector>
+  <connector name="cathode" id="connector0">
+   <part title="Yellow (585nm) LED" label="LED2" id="92900"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GIPO27" id="connector6">
+   <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
+  </connector>
+  <connector name="anode" id="connector1">
+   <part title="Green (555nm) LED" label="LED3" id="92960"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GIPO17" id="connector5">
+   <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
+  </connector>
+  <connector name="anode" id="connector1">
+   <part title="Yellow (585nm) LED" label="LED2" id="92900"/>
   </connector>
  </net>
  <net>
@@ -117,11 +139,6 @@
   </connector>
  </net>
  <net>
-  <connector name="GIPO17" id="connector5">
-   <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
-  </connector>
- </net>
- <net>
   <connector name="GIPO8" id="connector28">
    <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
   </connector>
@@ -133,11 +150,6 @@
  </net>
  <net>
   <connector name="GIPO13" id="connector16">
-   <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
-  </connector>
- </net>
- <net>
-  <connector name="GIPO27" id="connector6">
    <part title="Raspberry Pi 3" label="Raspberry Pi 1" id="90320"/>
   </connector>
  </net>

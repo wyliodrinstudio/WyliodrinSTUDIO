@@ -80,7 +80,7 @@ export default {
 				filetypes:['svg']
 			});
 
-			if (files.length) {
+			if (files) {
 				this.svgLoading = true;
 				this.svgNotLoaded = false;
 

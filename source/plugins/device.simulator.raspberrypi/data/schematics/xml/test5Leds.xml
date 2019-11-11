@@ -1,12 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Fritzing (http://www.fritzing.org/) -->
-<netlist date="Lun nov. 11 10:38:35 2019" sketch="Untitled Sketch.fzz">
+<netlist date="Lun nov. 11 10:28:47 2019" sketch="Untitled Sketch.fzz">
  <net>
-  <connector id="connector19" name="GND">
+  <connector id="connector1" name="anode">
+   <part id="101700" title="Red (633nm) LED" label="LED5"/>
+  </connector>
+  <connector id="connector6" name="GIPO27">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
-  <connector id="connector0" name="VSS">
-   <part id="106510" title="LCD screen" label="LCD1"/>
+ </net>
+ <net>
+  <connector id="connector0" name="cathode">
+   <part id="101700" title="Red (633nm) LED" label="LED5"/>
+  </connector>
+  <connector id="connector19" name="GND">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
   <connector id="connector4" name="GND">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
@@ -29,21 +37,54 @@
   <connector id="connector30" name="GND">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
+  <connector id="connector0" name="cathode">
+   <part id="101670" title="Blue (470nm) LED" label="LED4"/>
+  </connector>
+  <connector id="connector0" name="cathode">
+   <part id="101640" title="Green (555nm) LED" label="LED3"/>
+  </connector>
+  <connector id="connector0" name="cathode">
+   <part id="101610" title="Yellow (585nm) LED" label="LED2"/>
+  </connector>
+  <connector id="connector0" name="cathode">
+   <part id="92310" title="Red (633nm) LED" label="LED1"/>
+  </connector>
  </net>
  <net>
-  <connector id="connector29" name="GIPO25">
+  <connector id="connector5" name="GIPO17">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
-  <connector id="connector3" name="RS">
-   <part id="106510" title="LCD screen" label="LCD1"/>
+  <connector id="connector1" name="anode">
+   <part id="101670" title="Blue (470nm) LED" label="LED4"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector1" name="anode">
+   <part id="101640" title="Green (555nm) LED" label="LED3"/>
+  </connector>
+  <connector id="connector7" name="GIPO22">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector1" name="anode">
+   <part id="101610" title="Yellow (585nm) LED" label="LED2"/>
+  </connector>
+  <connector id="connector14" name="GIPO5">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector1" name="anode">
+   <part id="92310" title="Red (633nm) LED" label="LED1"/>
+  </connector>
+  <connector id="connector3" name="GIPO4">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>
  <net>
   <connector id="connector38" name="5V">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector1" name="VDD">
-   <part id="106510" title="LCD screen" label="LCD1"/>
   </connector>
   <connector id="connector39" name="5V">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
@@ -53,78 +94,6 @@
   <connector id="connector20" name="GIPO21">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
-  <connector id="connector10" name="DB4">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector21" name="GIPO20">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector11" name="DB5">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector22" name="GIPO16">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector12" name="DB6">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector24" name="GIPO12">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector13" name="DB7">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector5" name="E">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector9" name="DB3">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector7" name="DB1">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector6" name="DB0">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector14" name="LED+">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector15" name="LED-">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector4" name="R/W">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector2" name="V0">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector8" name="DB2">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
  </net>
  <net>
   <connector id="connector17" name="GIPO19">
@@ -133,6 +102,11 @@
  </net>
  <net>
   <connector id="connector11" name="GIPO11">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector29" name="GIPO25">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>
@@ -147,17 +121,17 @@
   </connector>
  </net>
  <net>
+  <connector id="connector24" name="GIPO12">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+ </net>
+ <net>
   <connector id="connector32" name="GIPO23">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>
  <net>
   <connector id="connector16" name="GIPO13">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector5" name="GIPO17">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>
@@ -205,12 +179,17 @@
   </connector>
  </net>
  <net>
-  <connector id="connector7" name="GIPO22">
+  <connector id="connector22" name="GIPO16">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>
  <net>
   <connector id="connector9" name="GIPO10">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector21" name="GIPO20">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>
@@ -225,27 +204,12 @@
   </connector>
  </net>
  <net>
-  <connector id="connector3" name="GIPO4">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
- </net>
- <net>
   <connector id="connector31" name="GIPO24">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>
  <net>
   <connector id="connector35" name="GIPO15">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector14" name="GIPO5">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector6" name="GIPO27">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>

@@ -79,7 +79,7 @@ export default function setup(options, imports, register) {
 	// Register a new device: 'RaspberryPi simulator'
 	workspace.updateDevices([{
 			id: 'raspberrypi_simulator',
-			name: 'RaspberryPi Simulator',
+			name: 'RaspberryPi',
 			priority: workspace.DEVICE_PRIORITY_SIMULATOR,
 			address: 'raspberrypi_simulator',
 			board: 'raspberrypi_simulator',
@@ -97,65 +97,63 @@ export default function setup(options, imports, register) {
 			// Load the project code
 			let project = studio.projects.getCurrentProject();
 			if (!project) {
-				studio.workspace.showNotification('Your project is not loaded!');
-				return;
+				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_NOT_OPEN'));
 			} else if (project.language !== 'nodejs') {
-				studio.workspace.showNotification('The RaspberryPi Simulator supports only NodeJS language!');
-				return;
-			}
-			
-			let filePath = studio.projects.getDefaultRunFileName(project);
-			let code = await studio.projects.loadFile(project, filePath);
+				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE'));
+			} else {	
+				let filePath = studio.projects.getDefaultRunFileName(project);
+				let code = await studio.projects.loadFile(project, filePath);
 
-			let device = studio.workspace.getDevice();
-			if (device && device.properties.isRunning === false) {
-				// Show and select the right console for this device (RaspberryPi simulator)
-				studio.console.show();
-				studio.console.select(device.id);
+				let device = studio.workspace.getDevice();
+				if (device && device.properties.isRunning === false) {
+					// Show and select the right console for this device (RaspberryPi simulator)
+					studio.console.show();
+					studio.console.select(device.id);
 
-				// Create the object constructors for each library and
-				// append them to the users code
-				let librariesToLoad = 
-					`var libraries = {};\n\n` +
-					onoff +
-					lcd +
-					`function require (name) {
-						return libraries[name];
-					};\n\n`;
-				code = librariesToLoad.toString() + code.toString();
-				generic_raspberrypi.setDefault();
+					// Create the object constructors for each library and
+					// append them to the users code
+					let librariesToLoad = 
+						`var libraries = {};\n\n` +
+						onoff +
+						lcd +
+						`function require (name) {
+							return libraries[name];
+						};\n\n`;
+					code = librariesToLoad.toString() + code.toString();
+					generic_raspberrypi.setDefault();
 
-				// Create the JS interpreter with the associated functions
-				let interpreter = new JSInterpreter(code, JSInterpreterLibrary(studio, device, simulator));
+					// Create the JS interpreter with the associated functions
+					let interpreter = new JSInterpreter(code, JSInterpreterLibrary(studio, device, simulator));
 
-				// Set the variables of the device to 'running' and update the device
-				simulator.opperationsCounter = 0;
-				simulator.isRunning = true;
-				device.properties.isRunning = true;
-				workspace.updateDevice(device);
+					// Set the variables of the device to 'running' and update the device
+					simulator.opperationsCounter = 0;
+					simulator.isRunning = true;
+					device.properties.isRunning = true;
+					workspace.updateDevice(device);
 
-				/**
-				 * The function to be executed by the interpreter
-				 * The code written by the user is executed step by step, and each
-				 * 100 steps it is slowed down in order for the application not to
-				 * crash in case of an infinite loop
-				 */
-				let runToCompletion = function() {
-					if (simulator.isRunning && interpreter.step()) {
-						simulator.opperationsCounter ++;
-						if (simulator.opperationsCounter === 100) {
-							setTimeout(runToCompletion, 10);
-							simulator.opperationsCounter = 0;
+					/**
+					 * The function to be executed by the interpreter
+					 * The code written by the user is executed step by step, and each
+					 * 100 steps it is slowed down in order for the application not to
+					 * crash in case of an infinite loop
+					 */
+					let runToCompletion = function() {
+						if (simulator.isRunning && interpreter.step()) {
+							simulator.opperationsCounter ++;
+							if (simulator.opperationsCounter === 100) {
+								setTimeout(runToCompletion, 10);
+								simulator.opperationsCounter = 0;
+							} else {
+								setTimeout(runToCompletion, 1);
+							}
 						} else {
-							setTimeout(runToCompletion, 1);
+							simulator.isRunning = false;
+							device.properties.isRunning = false;
+							workspace.updateDevice(device);
 						}
-					} else {
-						simulator.isRunning = false;
-						device.properties.isRunning = false;
-						workspace.updateDevice(device);
-					}
-				};
-				process.nextTick(runToCompletion);
+					};
+					process.nextTick(runToCompletion);
+				}
 			}
 		} catch(e) {
 			console.log(e);

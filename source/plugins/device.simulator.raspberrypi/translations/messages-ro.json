@@ -1,6 +1,6 @@
 {
     "DEVICE_SIMULATOR_RASPBERRY_PI": {
-        "message": "Simulator Raspberry Pi",
+        "message": "Raspberry Pi",
         "description": "The Raspberry Pi simulator tab button"
     },
     "DEVICE_SIMULATOR_RASPBERRY_PI_RUN": {
@@ -10,6 +10,14 @@
     "DEVICE_SIMULATOR_RASPBERRY_PI_STOP": {
         "message": "Opreste",
         "description": "The Raspberry Pi simulator button to stop"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_NOT_OPEN": {
+        "message": "Nu a-ti deschis nici un proiect!\nVa rugam sa deschideti mai intai un proiect.",
+        "description": "Project not open"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE": {
+        "message": "Simulatorul RaspberryPi suport doar NodeJS!\nVa rugam deschideti un proiect in acest limbaj.",
+        "description": "Language not supported"
     },
     "DEVICE_SIMULATOR_RASPBERRY_PI_LOAD_PROJECT": {
         "message": "Incarca Proiect",

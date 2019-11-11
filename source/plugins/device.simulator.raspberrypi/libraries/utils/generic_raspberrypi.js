@@ -6,7 +6,7 @@ import update_components from './update_components.js';
 let generic_raspberrypi = {
 	name: 'Raspberry Pi 3 Model B v1.2',
 
-	nameStartingProject: 'testLcdPosition',
+	nameStartingProject: 'testLed',
 
 	// Generic data
 	startingNameForTutorials: 'test',

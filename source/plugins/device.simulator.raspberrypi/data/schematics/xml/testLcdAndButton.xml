@@ -1,35 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Fritzing (http://www.fritzing.org/) -->
-<netlist date="Lun nov. 11 10:38:35 2019" sketch="Untitled Sketch.fzz">
- <net>
-  <connector id="connector19" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector0" name="VSS">
-   <part id="106510" title="LCD screen" label="LCD1"/>
-  </connector>
-  <connector id="connector4" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector25" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector23" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector37" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector33" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector12" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector30" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
- </net>
+<netlist date="Lun nov. 11 10:38:11 2019" sketch="Untitled Sketch.fzz">
  <net>
   <connector id="connector29" name="GIPO25">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
@@ -46,6 +17,41 @@
    <part id="106510" title="LCD screen" label="LCD1"/>
   </connector>
   <connector id="connector39" name="5V">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector3" name="Pin 4">
+   <part id="105590" title="Pushbutton" label="S2"/>
+  </connector>
+  <connector id="connector0" name="VSS">
+   <part id="106510" title="LCD screen" label="LCD1"/>
+  </connector>
+  <connector id="connector2" name="Pin 3">
+   <part id="105590" title="Pushbutton" label="S2"/>
+  </connector>
+  <connector id="connector37" name="GND">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+  <connector id="connector25" name="GND">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+  <connector id="connector4" name="GND">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+  <connector id="connector23" name="GND">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+  <connector id="connector19" name="GND">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+  <connector id="connector33" name="GND">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+  <connector id="connector12" name="GND">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+  <connector id="connector30" name="GND">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>
@@ -79,6 +85,17 @@
   </connector>
   <connector id="connector13" name="DB7">
    <part id="106510" title="LCD screen" label="LCD1"/>
+  </connector>
+ </net>
+ <net>
+  <connector id="connector0" name="Pin 1">
+   <part id="105590" title="Pushbutton" label="S2"/>
+  </connector>
+  <connector id="connector6" name="GIPO27">
+   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  </connector>
+  <connector id="connector1" name="Pin 2">
+   <part id="105590" title="Pushbutton" label="S2"/>
   </connector>
  </net>
  <net>
@@ -241,11 +258,6 @@
  </net>
  <net>
   <connector id="connector14" name="GIPO5">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector6" name="GIPO27">
    <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
   </connector>
  </net>
