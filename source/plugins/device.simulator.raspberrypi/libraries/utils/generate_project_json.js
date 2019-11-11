@@ -104,7 +104,7 @@ export default function generate_project_json(xml) {
 		};
 
 		// Case for connections that are attached to a GPIO pin
-		if (connection.name.toLowerCase().includes('gipo') &&
+		if ((connection.name.toLowerCase().includes('gipo') ||  connection.name.toLowerCase().includes('gpio')) &&
 			connection.components.length > 0) {
 			newPinObject.value = 0;
 			newPinObject.edge = 'none';
@@ -116,7 +116,7 @@ export default function generate_project_json(xml) {
 			// Find the number of the pin with the given name 
 			// GPIOx where 'x' is replaced by a number
 			for (let pin of Object.keys(generic_raspberrypi.pins)) {
-				if (generic_raspberrypi.pins[pin].name === connection.name) {
+				if (generic_raspberrypi.pins[pin].name === 'GIPO' + connection.name.substr(4)) {
 					newPinObject.id = pin;
 					projectJson[pin] = newPinObject;
 					break;

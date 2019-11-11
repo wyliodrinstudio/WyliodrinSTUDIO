@@ -1,204 +1,204 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Fritzing (http://www.fritzing.org/) -->
-<netlist date="Lun nov. 11 10:23:48 2019" sketch="Untitled Sketch.fzz">
+<netlist date="Lun nov. 11 13:06:50 2019" sketch="Untitled Sketch.fzz">
  <net>
-  <connector id="connector25" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GND" id="connector33">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector2" name="Pin 3">
-   <part id="99180" title="Pushbutton" label="S1"/>
+  <connector name="Pin 4" id="connector3">
+   <part label="S1" title="Pushbutton" id="139900"/>
   </connector>
-  <connector id="connector4" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GND" id="connector30">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector23" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GND" id="connector4">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector19" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GND" id="connector19">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector37" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GND" id="connector37">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector33" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GND" id="connector23">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector12" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GND" id="connector25">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector30" name="GND">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GND" id="connector12">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector3" name="Pin 4">
-   <part id="99180" title="Pushbutton" label="S1"/>
+  <connector name="Pin 3" id="connector2">
+   <part label="S1" title="Pushbutton" id="139900"/>
   </connector>
-  <connector id="connector0" name="cathode">
-   <part id="92310" title="Red (633nm) LED" label="LED1"/>
+  <connector name="cathode" id="connector0">
+   <part label="LED5" title="Red (633nm) LED" id="131840"/>
   </connector>
  </net>
  <net>
-  <connector id="connector0" name="Pin 1">
-   <part id="99180" title="Pushbutton" label="S1"/>
+  <connector name="Pin 2" id="connector1">
+   <part label="S1" title="Pushbutton" id="139900"/>
   </connector>
-  <connector id="connector6" name="GIPO27">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO22" id="connector7">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector1" name="Pin 2">
-   <part id="99180" title="Pushbutton" label="S1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector1" name="anode">
-   <part id="92310" title="Red (633nm) LED" label="LED1"/>
-  </connector>
-  <connector id="connector3" name="GIPO4">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="Pin 1" id="connector0">
+   <part label="S1" title="Pushbutton" id="139900"/>
   </connector>
  </net>
  <net>
-  <connector id="connector38" name="5V">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO4" id="connector3">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
-  <connector id="connector39" name="5V">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
- </net>
- <net>
-  <connector id="connector20" name="GIPO21">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="anode" id="connector1">
+   <part label="LED5" title="Red (633nm) LED" id="131840"/>
   </connector>
  </net>
  <net>
-  <connector id="connector17" name="GIPO19">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO8" id="connector28">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector11" name="GIPO11">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO14" id="connector36">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector29" name="GIPO25">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO6" id="connector15">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector27" name="GIPO7">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO10" id="connector9">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector28" name="GIPO8">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="5V" id="connector38">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
+  </connector>
+  <connector name="5V" id="connector39">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector24" name="GIPO12">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO16" id="connector22">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector32" name="GIPO23">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="ID_SC" id="connector26">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector16" name="GIPO13">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO24" id="connector31">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector5" name="GIPO17">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO11" id="connector11">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector1" name="GPIO2">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO19" id="connector17">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector34" name="GIPO18">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO25" id="connector29">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector18" name="GIPO26">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO27" id="connector6">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector26" name="ID_SC">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO13" id="connector16">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector2" name="GPIO3">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO26" id="connector18">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector10" name="GIPO9">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO20" id="connector21">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector0" name="3v3">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
-  </connector>
-  <connector id="connector8" name="3V3">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO9" id="connector10">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector13" name="ID_SD">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="3V3" id="connector8">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
+  </connector>
+  <connector name="3v3" id="connector0">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector22" name="GIPO16">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO12" id="connector24">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector7" name="GIPO22">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO7" id="connector27">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector9" name="GIPO10">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="ID_SD" id="connector13">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector21" name="GIPO20">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO18" id="connector34">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector36" name="GIPO14">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO21" id="connector20">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector15" name="GIPO6">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO2" id="connector1">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector31" name="GIPO24">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO5" id="connector14">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector35" name="GIPO15">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO15" id="connector35">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
  <net>
-  <connector id="connector14" name="GIPO5">
-   <part id="90320" title="Raspberry Pi 3" label="Raspberry Pi 1"/>
+  <connector name="GPIO23" id="connector32">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GPIO17" id="connector5">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
+  </connector>
+ </net>
+ <net>
+  <connector name="GPIO3" id="connector2">
+   <part label="Raspberry Pi 1" title="Raspberry Pi 3" id="129730"/>
   </connector>
  </net>
 </netlist>

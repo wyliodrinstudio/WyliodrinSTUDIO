@@ -79,11 +79,12 @@ export default {
 	 */
 	async created() {
 
-		// Name the header titles of the table
-		console.log(this.studio.workspace);
-		this.headerTable[0].text = this.$t('DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_PIN');
-		this.headerTable[1].text = this.$t('DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_NAME');
-		this.headerTable[2].text = this.$t('DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_COLOR');
+		// Update virtual LCD position
+		let that = this;
+		console.log(that);
+		$(window).resize(function() {
+			that.loadLcdDisplay();
+		})
 
 		// Load the tutorials list of projects
 		this.svgGenericPath = generic_raspberrypi.svgGenericPath;
@@ -127,12 +128,13 @@ export default {
 			if (this.active) {
 				setTimeout (() => {
 					this.loadLcdDisplay();
+
+					// Name the header titles of the table
+					this.headerTable[0].text = this.$t('DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_PIN');
+					this.headerTable[1].text = this.$t('DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_NAME');
+					this.headerTable[2].text = this.$t('DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_COLOR');
 				}, 250);
 			}
-		},
-
-		studio() {
-			console.log(this.studio);
 		}
 	},
 
@@ -228,7 +230,13 @@ export default {
 				let elementLcd = $(document.querySelector('#raspberrypi_svg').firstElementChild).find('g[partID="' + component + '"]');
 
 				if (elementLcd[0]) {
+					while (document.getElementById('lcd_display').hasChildNodes()) {
+						document.getElementById('lcd_display').removeChild(document.getElementById('lcd_display').firstElementChild);
+					}
+
 					let position = elementLcd[0].getBoundingClientRect();
+					console.log('BUNA\n\n\n');
+					console.log(position);
 					let svgLeftPosition = position.left;
 					let svgTopPosition = position.top - 185.5;
 					
