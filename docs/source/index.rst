@@ -67,7 +67,7 @@ Also, the recognized programming languages at the time are:
    plugin
    translations
    dialogs_notifications
-   simulator_raspberrypi
+   simulators
 
 
 .. Indices and tables
