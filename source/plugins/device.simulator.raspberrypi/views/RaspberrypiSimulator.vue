@@ -32,6 +32,8 @@
 				<v-data-table v-show="componentsTable.length !== 0" hide-default-footer :headers="headerTable" :items="componentsTable" item-key="pin" class="elevation-1"></v-data-table>
 			</div>
 		</div>
+
+
 	</div>
 </template>
 
