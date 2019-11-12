@@ -1,0 +1,17 @@
+@import '../../../style/var.less';
+
+.emulator-box {
+	.v-window {height: 30vh !important;}
+	.v-alert {margin-bottom: 0px; bottom: 0; position: absolute; width: 100%;
+		::v-deep.v-alert__icon.v-icon {margin-top: 5px !important;}
+	}
+}
+
+::v-deep.emu-btn { min-width: initial; padding: 0 10px !important; margin: 0 1px !important; min-width: initial !important;
+	.v-image {height: 16px; width: 16px;}
+}
+.emu-btn:hover {
+	background:@color-highlight;
+	.v-image {filter: invert(100%);}
+	.v-image {opacity:1;}
+}

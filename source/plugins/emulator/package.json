@@ -6,6 +6,6 @@
     "plugin": {
         "consumes": ["workspace", "filesystem", "system", "settings", "device_wyapp"],
         "provides": ["emulator"],
-        "target": ["electron", "browser"]
+        "target": ["electron"]
     }
 }
