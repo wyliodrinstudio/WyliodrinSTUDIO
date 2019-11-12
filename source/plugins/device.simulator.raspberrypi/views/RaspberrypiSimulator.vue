@@ -8,8 +8,8 @@
 
 		<v-navigation-drawer v-if="projectsList" v-model="projectsListShow" absolute temporary width="300" dark>
 			<v-list>
-				<v-btn text color="secondary" dark @click="projectsListShow = !projectsListShow">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_CLOSE_PROJECT_LIST')}}</v-btn>
-				<v-btn text color="secondary" dark @click="uploadOwnProject(); projectsListShow = !projectsListShow">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_LOAD_PROJECT')}}</v-btn>
+				<v-btn text @click="projectsListShow = !projectsListShow">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_CLOSE_PROJECT_LIST')}}</v-btn>
+				<v-btn text @click="uploadOwnProject(); projectsListShow = !projectsListShow">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_LOAD_PROJECT')}}</v-btn>
 
 				<v-list-item v-for="(project, index) in projectsList" :key="index" @click="projectName = project.originalName; projectsListShow = !projectsListShow">
 					<v-list-item-title>{{ project.name }}</v-list-item-title>

@@ -2,12 +2,12 @@
 
 .library-box {overflow: hidden;
 	.itemlist {width: 100%}
-	.v-card__text { height: 55vh !important; overflow-y: scroll;}
+	.v-card__text { height: 55vh !important; overflow-y: scroll; overflow-x: hidden;}
 	.v-avatar {width: initial !important; height: initial !important; border-radius: 0;}
 	a{min-height: 130px !important; height: 130px !important;}
 	.v-list-item__title {cursor: pointer; color:@color-black; font-size: 16px; font-weight: bold; padding: 0px 0 5px 0;}
 	.v-list-item__subtitle {cursor: pointer; color:@color-black !important; padding-TOP: 5px; font-size: 13px;}
-	.projlang {padding: 3px; font-size: 10px; color: @color-grey-3; background: @color-white; border-radius: 4px; border: @color-grey-2 1px solid; display: inline; margin: 0 0 0 5px; font-weight: normal;}
+	.projlang {padding: 3px; font-size: 10px; color: @color-grey-3; background: @color-white; border-radius: 4px; border: @color-grey-2 1px solid; display: inline; margin: 0 0 0 5px; font-weight: normal; top: -5px; position: relative;}
 	.projects-container {min-height: 400px; position: relative;}
 	.noprojmsg {position: absolute; margin: auto; top: 0; bottom: 0; left: 0; right: 0; text-align: center; max-width: 300px; max-height: 50px;
 		strong {color:@color-grey-6; font-size: 21px;}
@@ -18,6 +18,7 @@
 .lib-app {padding: 15px 20px; width: 33%; float: left;
 	.v-list-item__content, .v-list-item__title, .v-list-item__subtitle {overflow: visible;}
 	::v-deep .v-list-item { height: 75px !important;}
+	.projtitle{text-overflow: ellipsis; overflow: hidden !important; max-width: 70%; text-align: left; white-space: nowrap; display: inline-block;}
 }
 
 .newapp {border: @color-highlight 2px solid; background: @color-white; color: @color-black; padding-left: 10px; padding-right: 10px;}
