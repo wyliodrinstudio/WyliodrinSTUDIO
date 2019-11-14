@@ -169,7 +169,9 @@ export function setup (options, imports, register)
 						pingPongTimeout = setInterval (() => {
 							if (authenticated) socket.send (JSON.stringify ({t: 'ping'}));
 						}, 20*1000);
+						socket.send (JSON.stringify ({t: 'i'}));
 						updateDevices ();
+
 					}
 					if (data.e === 'unique')
 					{

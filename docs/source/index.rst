@@ -68,6 +68,7 @@ Also, the recognized programming languages at the time are:
    translations
    dialogs_notifications
    emulator
+   simulators
 
 
 .. Indices and tables

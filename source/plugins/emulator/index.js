@@ -393,7 +393,7 @@ export function setup(options, imports, register)
 	studio = imports;
 
 	studio.workspace.registerMenuItem('DEVICE_EMULATOR', 20, () => {
-		studio.workspace.showDialog(EmulatorSetup);
+		studio.workspace.showDialog(EmulatorSetup,{width:'600px'});
 
 	});
 	emulator.registerImages();

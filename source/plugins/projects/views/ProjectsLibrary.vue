@@ -29,7 +29,7 @@
 
 							<v-list-item-content>
 								<v-list-item-title>
-									{{project.name}}
+									<span class="projtitle">{{project.name}}</span>
 									<span class="projlang">{{project.language}}</span>
 								</v-list-item-title>
 								<v-list-item-subtitle style="word-wrap: break-word">{{formatDate(project.date)}}</v-list-item-subtitle>

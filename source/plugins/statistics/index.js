@@ -229,7 +229,7 @@ export function setup(options, imports, register) {
 	});
 
 	imports.hooks.addPreHook('workspace', 'updateDevices', (type, devices) => {
-		let olds = currentDevices[type];
+		let olds = currentDevices[type] || {};
 		currentDevices[type] = {};
 		for (let device of devices) {
 			if (!device.placeholder) {

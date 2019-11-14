@@ -1,0 +1,33 @@
+@import '../../../style/var.less';
+
+.sim-box {text-align: center; padding-top: 30px; padding-left: 50px;
+	.checkm-box {max-width: 250px; text-align: center; margin: auto; padding-left: 30px;
+		.v-input--checkbox {float: left; margin-right: 15px;}
+	}
+}
+
+.rpi-sim {margin: auto; position: relative;
+	canvas {position: absolute; left: 75px; top: 66px;}
+}
+
+.val-container {overflow: auto; padding: 20px; max-height: 100%;
+	> div {width: 100%; display: inline-table;}
+}
+
+.val-box {border: @color-grey-5 1px solid; background: @color-grey-5; padding:55px 30px 0px; position: relative; margin-top: 20px;
+	span {position: absolute; margin: auto; display: inline-table; left: 0; right: 0; top: -20px; background: @color-grey-5; padding: 10px 30px; font-size: 14px; font-weight: bold;}
+	.v-input__slider {margin-bottom: 15px;}
+}
+
+.val-box2 {border: @color-grey-5 1px solid; background: @color-grey-5; padding:35px 30px 0px; position: relative; margin-top: 20px;
+	span {position: absolute; margin: auto; display: inline-table; left: 0; right: 0; top: -20px; background: @color-grey-5; padding: 10px 30px; font-size: 14px; font-weight: bold;}
+	.v-input__slider {margin-bottom: 15px;}
+}
+
+#lcd_display g {left: 43px !important; top: 289px !important;}
+
+aside {height: calc(~"100% - 68px") !important;
+	.v-list-item__avatar {margin-bottom: 20px !important; margin-top: 20px !important; margin-right: 20px !important;}
+	.v-list-item{border-bottom: #324b50 solid 1px;}
+	.v-btn:not(.v-btn--round).v-size--default {height: auto; min-width: 64px; padding: 16px 16px; width: 50%; float: left; border-radius: 0; background: @color-dark-1 !important;}
+}
