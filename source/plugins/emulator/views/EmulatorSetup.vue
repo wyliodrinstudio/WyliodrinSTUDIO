@@ -18,11 +18,13 @@
 							</v-list-item-avatar>
 							<v-list-item-content>
 								<v-list-item-title v-text="item.title"></v-list-item-title>
+								<v-list-item-subtitle v-text="item.qemu.mem"></v-list-item-subtitle>
 							</v-list-item-content>
 							<v-list-item-action>
 								<div v-if="item.loadingEmulator === 'no'">
-									<div v-if="item.progress === 25">
+									<div v-if="item.progress === 100">
 										<v-btn :disabled="qemuCheck" @click="runEmulator(item)">{{$t('EMULATOR_CREATE_NEW')}}</v-btn>
+										<v-btn :disabled="qemuCheck" @click="deleteImage(item)">{{$t('EMULATOR_DELETE_IMAGE')}}</v-btn>
 									</div>
 									<div v-else>
 										<div v-if="item.progress <= 0">
@@ -114,8 +116,6 @@ export default {
 	data () {
 		return {
 			active: 0
-			// _active: 0,
-			// _activeSet: false
 		}
 	},
 	computed: {

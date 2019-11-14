@@ -32,11 +32,10 @@ Once you have the QEMU machine installed on your computer, you will be able to e
 
 If you don't have any emulator previously created on your computer, the first tab will be automatically displayed in the prompt that will pop up. Here, you will be able to see a list with all the supported types of emulators.
 
-.. AICI VINE O IMAGINE
+.. image:: images/emulator_availableImages.png
+	:align: center
 
-Since you don't have any kernel image, you will have the option to download one previously configured by us. By clicking on the "Download image" button, a zip archive will be downloaded and unzipped in a special folder created on your computer. Once the download and decompression processes will be done, 2, new options will be available for the Raspberry Pi emulator.
-
-.. AICI VINE ALTA IMAGINE
+If you don't have any kernel image, you will have the option to download one previously configured by us. By clicking on the "Download image" button, a zip archive will be downloaded and unzipped in a special folder created on your computer. Once the download and decompression processes will be done, 2, new options will be available for the emulator.
 
 As you can see in the picture shown above, you can either click on the **"Delete image"** button, that will permanently remove the kernel image from your computer, or on the **"Create new emulator"** button. 
 
@@ -44,7 +43,8 @@ This last option will pop up a prompt where you will be asked to input the name 
 
 By switching to the second tab of the Emulator prompt, you will see a list of all the available emulators that exist on your computer.
 
-.. ALTA POZA 
+.. image:: images/emulator_availableEmulators.png
+	:align: center
 
 Here, for each available emulator, you will have 3 options:
 
@@ -66,6 +66,7 @@ Once the emulator completely loaded, you will be asked to input the default user
 
 After that, you will be able to find your emulator in the Connection Menu and to connect to it.
 
-.. POZA
+.. iamge:: images/emulatorDevice.png
+	:align: center
 
 

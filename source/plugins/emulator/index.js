@@ -18,6 +18,8 @@ let runningEmulators = {};
 let images = [];
 let devices = [];
 let runningEmulatorImage = '';
+let runningEmulatorKernel = '';
+let runningEmulatorDatabase = '';
 let emulatorPort = '';
 let emulatorFolder = '';
 let runningEmulatorsFolder = '';
@@ -62,7 +64,7 @@ let emulator = {
 		imagesFolder = path.join(emulatorFolder, 'images');
 		await studio.filesystem.mkdirp(imagesFolder);
 
-		images = JSON.parse(await studio.filesystem.readFile('./source/plugins/emulator/data/emulatorImages/images.json'));
+		images = require('./images.json');
 		for(let image of images)
 		{
 			image.id = uuid.v4();
@@ -113,12 +115,28 @@ let emulator = {
 	},
 	async deleteImage(image)
 	{
+		console.log(image);
 		let value = await studio.workspace.showConfirmationPrompt(
 			'EMULATOR_DELETE_IMAGE_TITLE',
 			'EMULATOR_DELETE_IMAGE_QUESTION',
 		);
 		if (value) {
-			await fs.unlink(path.join(image.dataFolder, image.name));
+			try{
+				await fs.unlink(path.join(image.dataFolder, image.name));
+			} catch(e) {
+				console.log(e.message);
+			}
+			try{
+				await fs.unlink(path.join(image.dataFolder, image.qemu.kernel));
+			} catch(e) {
+				console.log(e.message);
+			}
+			try{
+				await fs.unlink(path.join(image.dataFolder, image.qemu.dtb));
+			} catch(e) {
+				console.log(e.message);
+			}
+			
 			studio.workspace.dispatchToStore('emulator', 'images', images);
 			studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: -1});
 		}
@@ -163,9 +181,31 @@ let emulator = {
 						let copyImage = path.join(imagesFolder, imageRunning.type, image.name);
 						
 						runningEmulatorImage = path.join(currentlyRunningFolder, emulatorName + '_' + image.name);
+						runningEmulatorKernel = path.join(currentlyRunningFolder, 'kernel-qemu-4.14.79-stretch');
+						runningEmulatorDatabase = path.join(currentlyRunningFolder, 'versatile-pb.dtb');
 						
 						try{ 
 							await fs.copyFile(copyImage, runningEmulatorImage);
+						} catch(e) {
+							studio.workspace.showError('EMULATOR_COPY_FILE_ERROR', {extra: e.message});
+							image.loadingEmulator = 'no';
+							studio.workspace.dispatchToStore('emulator', 'images', images);
+							await fs.remove(currentlyRunningFolder);
+							return;
+						}
+						let copyKernel = path.join(imagesFolder, imageRunning.type, 'kernel-qemu-4.14.79-stretch');
+						try{ 
+							await fs.copyFile(copyKernel, runningEmulatorKernel);
+						} catch(e) {
+							studio.workspace.showError('EMULATOR_COPY_FILE_ERROR', {extra: e.message});
+							image.loadingEmulator = 'no';
+							studio.workspace.dispatchToStore('emulator', 'images', images);
+							await fs.remove(currentlyRunningFolder);
+							return;
+						}
+						let copyDatabase = path.join(imagesFolder, imageRunning.type, 'versatile-pb.dtb');
+						try{ 
+							await fs.copyFile(copyDatabase, runningEmulatorDatabase);
 						} catch(e) {
 							studio.workspace.showError('EMULATOR_COPY_FILE_ERROR', {extra: e.message});
 							image.loadingEmulator = 'no';
