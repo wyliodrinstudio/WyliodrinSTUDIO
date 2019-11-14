@@ -98,5 +98,17 @@
 	"EMULATOR_NO_QEMU_ERROR": {
 		"message": "Vă rugăm instalați qemu pentru a crea un emulator.",
 		"description": "Alert text when the user is trying to create an emulator without having the qemu system installed."
+	},
+	"EMULATOR_DELETE_IMAGE_TITLE": {
+		"message": "Ștergeți imaginea",
+		"description": "Title of the confirmation prompt that shows up when the user tries to delete an image"
+	},
+	"EMULATOR_DELETE_IMAGE_QUESTION": {
+		"message": "Sigur doriți să ștergeți definitiv această imagine?",
+		"description": "Question addressed to the user in order to confirm the permanent deletion of an image"
+	},
+	"EMULATOR_DELETE_IMAGE": {
+		"message": "Ștergeți imaginea",
+		"description": "Button to delete an existing image"
 	}
 }

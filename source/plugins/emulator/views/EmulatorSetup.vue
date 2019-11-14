@@ -6,8 +6,8 @@
 		</v-card-title>
 		<v-card-text>
 			<v-tabs v-model="active" left class="tabs-box">
-				<v-tab :key="'this.'" ripple >{{$t('EMULATOR_AVAILABLE_IMAGES')}}</v-tab>
-				<v-tab :key="'emulators'" ripple>{{$t('EMULATOR_AVAILABLE_EMULATORS')}}</v-tab>
+				<v-tab :key="'image'" ripple >{{$t('EMULATOR_AVAILABLE_IMAGES')}}</v-tab>
+				<v-tab :key="'emulator'" ripple>{{$t('EMULATOR_AVAILABLE_EMULATORS')}}</v-tab>
 			</v-tabs>
 		</v-card-text>
 
@@ -25,6 +25,7 @@
 							<div v-if="item.loadingEmulator === 'no'">
 								<div v-if="item.progress === 100">
 									<v-btn :disabled="qemuCheck" @click="runEmulator(item)">{{$t('EMULATOR_CREATE_NEW')}}</v-btn>
+									<v-btn :disabled="qemuCheck" @click="deleteImage(item)">{{$t('EMULATOR_DELETE_IMAGE')}}</v-btn>
 								</div>
 								<div v-else>
 									<div v-if="item.progress <= 0">
@@ -51,7 +52,6 @@
 					</v-list-item>
 				</v-list>
 					<v-alert v-if="qemuCheck === true" type="error" class="mb-4">
-						descarca
 						<v-btn  @click="downloadQemu()">{{$t('EMULATOR_DOWNLOAD_QEMU')}}</v-btn> 
 					</v-alert>
 					
@@ -95,7 +95,9 @@ import { mapGetters } from 'vuex';
 export default {
 	data () {
 		return {
-			active: 1,
+			active: 0
+			// _active: 0,
+			// _activeSet: false
 		}
 	},
 	computed: {
@@ -115,7 +117,29 @@ export default {
 				array.push(this.runningEmulators[emulatorName]);
 			}
 			return array;
-		}
+		},
+		// active: {
+		// 	set (value)
+		// 	{
+		// 		this._activeSet = true;
+		// 		this._active = value;
+		// 	},
+		// 	get ()
+		// 	{
+		// 		if (!this._activeSet)
+		// 		{
+		// 			if (this.runningEmulators)
+		// 			{
+		// 				if(Object.keys(this.runningEmulators).length < 1)
+		// 					this._active = 0;
+		// 				else
+		// 					this._active = 1;
+		// 			}
+		// 		}
+		// 		console.log (this._active);
+		// 		return this._active;
+		// 	},
+		// }
 	},
 	methods: {
 		downloadImage(image) 
@@ -125,6 +149,10 @@ export default {
 		async runEmulator(type)
 		{
 			this.studio.emulator.runEmulator(type);
+		},
+		async deleteImage(image)
+		{
+			this.studio.emulator.deleteImage(image);
 		},
 		stopEmulator(emulator)
 		{

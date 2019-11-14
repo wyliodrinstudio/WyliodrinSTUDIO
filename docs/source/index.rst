@@ -67,6 +67,7 @@ Also, the recognized programming languages at the time are:
    plugin
    translations
    dialogs_notifications
+   emulator
 
 
 .. Indices and tables

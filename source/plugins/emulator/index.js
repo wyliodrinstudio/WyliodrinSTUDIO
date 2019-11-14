@@ -54,28 +54,6 @@ let emulator = {
 			studio.workspace.showError('EMULATOR_SAME_NAME');
 		}
 	},
-	// checkForQemu()
-	// {
-	// 	for(let image of images){
-	// 		const check = spawn(QEMU + 'nimic', ['--version'], {
-	// 			env: process.env
-	// 		});
-	// 		check.on('close',  (code) => {
-	// 			if(code !== 0)
-	// 			{
-	// 				qemuCheck = true;
-	// 				studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
-	// 			}
-	// 			else
-	// 			{
-	// 				qemuCheck = false;
-	// 				studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
-	// 			}
-	// 			qemuExitCode[image.type] = code;
-	// 		});
-	// 		check.on('error', (err) => {console.log('err code is', err);});
-	// 	}
-	// },
 	async registerImages()
 	{
 		emulatorFolder = path.join(studio.filesystem.getSettingsFolder(), 'emulator');
@@ -132,6 +110,18 @@ let emulator = {
 			search = studio.device_wyapp.registerSearch ('emulator');
 		}
 		studio.workspace.dispatchToStore('emulator', 'images', images);
+	},
+	async deleteImage(image)
+	{
+		let value = await studio.workspace.showConfirmationPrompt(
+			'EMULATOR_DELETE_IMAGE_TITLE',
+			'EMULATOR_DELETE_IMAGE_QUESTION',
+		);
+		if (value) {
+			await fs.unlink(path.join(image.dataFolder, image.name));
+			studio.workspace.dispatchToStore('emulator', 'images', images);
+			studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: -1});
+		}
 	},
 	async loadAvailableEmulators() 
 	{
@@ -230,6 +220,8 @@ let emulator = {
 				qemu.stdout.on('data', () => {
 					runningEmulators[emulatorName].running = 1;
 					runningEmulators[emulatorName].pid = qemu.pid;
+					runningEmulators[emulatorName].system = imageRunning.qemu.system;
+					runningEmulators[emulatorName].parameters = parameters;
 					studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
 				});
 				
@@ -271,37 +263,9 @@ let emulator = {
 	},
 	restartEmulator(emulator)
 	{
-		let imageRunning = {};
-		for(let image of images)
-			if(image.type === emulator.type)
-				imageRunning = image;
-
-		let parameters = ['-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::'+emulatorPort+ '-:22','-no-reboot'];
-		if(imageRunning.qemu.kernel)
-			parameters.push('-kernel', path.join(imagesFolder, imageRunning.type, imageRunning.qemu.kernel));
-		if(imageRunning.qemu.dtb)
-			parameters.push('-dtb', path.join(imagesFolder, imageRunning.type, imageRunning.qemu.dtb));
-		if(imageRunning.qemu.mem)
-			parameters.push('-m', imageRunning.qemu.mem);
-		if(imageRunning.qemu.machine)
-			parameters.push('-M', imageRunning.qemu.machine);
-		if(imageRunning.qemu.cpu)
-			parameters.push('-cpu', imageRunning.qemu.cpu);
-		if(imageRunning.qemu.serial)
-			parameters.push('-serial', imageRunning.qemu.serial);
-		if(imageRunning.qemu.cmdline)
-			parameters.push('-append', imageRunning.qemu.cmdline);
-		if(imageRunning.qemu.drive)
-			parameters.push('-drive', imageRunning.qemu.drive + emulator.image + ',format=raw');
-		if(imageRunning.qemu.hda)
-			parameters.push('-hda', emulator.image);
-		if(imageRunning.qemu.boot)
-			parameters.push('-boot', imageRunning.qemu.boot);
-
-		qemu = spawn(QEMU + imageRunning.qemu.system, parameters, {
+		qemu = spawn(QEMU + emulator.system, emulator.parameters, {
 			env: process.env
 		});
-
 		qemu.stdout.on('data', () => {
 			runningEmulators[emulator.name].running = 1;
 			runningEmulators[emulator.name].pid = qemu.pid;
@@ -319,102 +283,108 @@ let emulator = {
 			search.updateDevices(devices);
 		});
 		devices.push ({
-			id: 'wyapp:emulator:'+emulator.port,
+			id: 'wyapp:emulator:' + emulator.port,
 			transport: 'ssh',
 			address: '127.0.0.1',
 			name: emulator.name,
 			priority: studio.workspace.DEVICE_PRIORITY_HIGH,
 			port: emulator.port,
-			board: imageRunning.type,
+			board: emulator.type,
 			properties: {
-				category: imageRunning.type,
+				category: emulator.type,
 				platform: 'linux'
 			}
 		});
-
-		search.updateDevices (devices);
-		
-		studio.workspace.dispatchToStore('workspace', 'devices', devices);
-	
 	},
 	async stopEmulator(emulator)
 	{
-		kill(runningEmulators[emulator.name].pid, 'SIGKILL');
-		devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
-		runningEmulators[emulator.name].running = 0;
-		studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
-		await fs.writeFile(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
-		search.updateDevices(devices);
-	},
-	async deleteEmulator(emulator)
-	{
-		let value = await studio.workspace.showConfirmationPrompt(
-			'EMULATOR_DELETE_EMULATOR_TITLE',
-			'EMULATOR_DELETE_EMULATOR_QUESTION',
-		);
-		if (value) {
+		if(emulator && runningEmulators[emulator.name])
+		{
 			kill(runningEmulators[emulator.name].pid, 'SIGKILL');
-			await fs.remove(runningEmulators[emulator.name].runningFolder);
 			devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
-			delete runningEmulators[emulator.name];
+			runningEmulators[emulator.name].running = 0;
 			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
 			await fs.writeFile(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
 			search.updateDevices(devices);
 		}
 	},
+	async deleteEmulator(emulator)
+	{
+		if(emulator)
+		{
+			let value = await studio.workspace.showConfirmationPrompt(
+				'EMULATOR_DELETE_EMULATOR_TITLE',
+				'EMULATOR_DELETE_EMULATOR_QUESTION',
+			);
+			if (value && runningEmulators[emulator.name].pid) {
+				kill(runningEmulators[emulator.name].pid, 'SIGKILL');
+				await fs.remove(runningEmulators[emulator.name].runningFolder);
+				devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
+				delete runningEmulators[emulator.name];
+				studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+				await fs.writeFile(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
+				search.updateDevices(devices);
+			}
+		}
+	},
 	async downloadImage(image)
 	{
-		await studio.filesystem.mkdirp(path.join(imagesFolder, image.type));
-		
-		let download = progress(request(image.download));
-		downloadingImages[image.type] = download;
-		
-		try {
-			download.pipe(fs.createWriteStream(path.join(image.dataFolder, 'image.zip')));
-		} catch(e) {
-			this.studio.workspace.showError('EMULATOR_DOWNLOAD_ERROR' + {extra: e.message});
-		}
-		try{
-			download.on('progress', (progress) => {
-				let percent = (progress.percent * 100).toFixed(2);
-				studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: percent});
-			});
-		} catch(e) {
-			this.studio.workspace.showError('EMULATOR_PROGRESS_ERROR' + {extra: e.message});
-		}
-		download.on ('abort', () => {
-			download.__aborted = true;
-		});
-		download.on('end', async () => {
-			if (!download.__aborted)
-			{			
-				try{
-					let pathing = path.join(image.dataFolder, 'image.zip');
-					let unzip =  fs.createReadStream(pathing);
-					unzip.pipe(unzipper.Extract({path: image.dataFolder}));
-					unzip.on('end', async () => {
-						await fs.remove(path.join(image.dataFolder, 'image.zip'));
-						studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 100});
-					});
-				} catch(e) {
-					console.error(e);
-					this.studio.workspace.showError('EMULATOR_UNZIP_ERROR' + {extra: e.message});
-					await fs.remove(image.dataFolder);
-				}
+		if(image) {
+			await studio.filesystem.mkdirp(path.join(imagesFolder, image.type));
+			
+			let download = progress(request(image.download));
+			downloadingImages[image.type] = download;
+			
+			try {
+				download.pipe(fs.createWriteStream(path.join(image.dataFolder, 'image.zip')));
+			} catch(e) {
+				this.studio.workspace.showError('EMULATOR_DOWNLOAD_ERROR' + {extra: e.message});
 			}
-		});
+			try{
+				download.on('progress', (progress) => {
+					let percent = (progress.percent * 100).toFixed(2);
+					studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: percent});
+				});
+			} catch(e) {
+				this.studio.workspace.showError('EMULATOR_PROGRESS_ERROR' + {extra: e.message});
+			}
+			download.on ('abort', () => {
+				download.__aborted = true;
+			});
+			download.on('end', async () => {
+				if (!download.__aborted)
+				{			
+					try{
+						let pathing = path.join(image.dataFolder, 'image.zip');
+						let unzip =  fs.createReadStream(pathing);
+						unzip.pipe(unzipper.Extract({path: image.dataFolder}));
+						unzip.on('end', async () => {
+							await fs.remove(path.join(image.dataFolder, 'image.zip'));
+							studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 100});
+						});
+					} catch(e) {
+						console.error(e);
+						this.studio.workspace.showError('EMULATOR_UNZIP_ERROR' + {extra: e.message});
+						await fs.remove(image.dataFolder);
+					}
+				}
+			});
+		}
 	},
 	async stopDownload(image)
 	{
-		let download = downloadingImages[image.type];
-		download.abort();
-		try { 
-			await fs.remove(image.dataFolder);
-		} catch(e) {
-			console.log(e.message);
-			studio.workspace.showError('EMULATOR_STOP_DOWNLOAD_ERROR' + {extra: e.message});
+		if(image)
+		{
+			let download = downloadingImages[image.type];
+			download.abort();
+			try { 
+				await fs.remove(image.dataFolder);
+			} catch(e) {
+				console.log(e.message);
+				studio.workspace.showError('EMULATOR_STOP_DOWNLOAD_ERROR' + {extra: e.message});
+			}
+			studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 0});
 		}
-		studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 0});
 	}
 };
 
