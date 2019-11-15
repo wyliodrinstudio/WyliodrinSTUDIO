@@ -65,6 +65,7 @@ let emulator = {
 		await studio.filesystem.mkdirp(imagesFolder);
 
 		images = require('./images.json');
+
 		for(let image of images)
 		{
 			image.id = uuid.v4();
@@ -115,7 +116,6 @@ let emulator = {
 	},
 	async deleteImage(image)
 	{
-		console.log(image);
 		let value = await studio.workspace.showConfirmationPrompt(
 			'EMULATOR_DELETE_IMAGE_TITLE',
 			'EMULATOR_DELETE_IMAGE_QUESTION',

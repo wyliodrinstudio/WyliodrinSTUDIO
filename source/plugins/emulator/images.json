@@ -1,6 +1,6 @@
 [
 	{
-		"name": "wyliodrin_studio_raspberrypi_zero_2019_09_20.img",
+		"name": "wyliodrin_studio_raspberrypi_emulator_2019_11_14.img",
 		"type": "raspberrypi",
 		"exists": "no",
 		"icon": "plugins/emulator/data/img/icons/icon-raspberrypi.png",

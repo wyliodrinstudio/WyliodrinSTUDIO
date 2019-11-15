@@ -136,28 +136,6 @@ export default {
 			}
 			return array;
 		},
-		// active: {
-		// 	set (value)
-		// 	{
-		// 		this._activeSet = true;
-		// 		this._active = value;
-		// 	},
-		// 	get ()
-		// 	{
-		// 		if (!this._activeSet)
-		// 		{
-		// 			if (this.runningEmulators)
-		// 			{
-		// 				if(Object.keys(this.runningEmulators).length < 1)
-		// 					this._active = 0;
-		// 				else
-		// 					this._active = 1;
-		// 			}
-		// 		}
-		// 		console.log (this._active);
-		// 		return this._active;
-		// 	},
-		// }
 	},
 	methods: {
 		downloadImage(image) 
