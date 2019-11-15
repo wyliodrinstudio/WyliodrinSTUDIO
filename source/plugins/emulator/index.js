@@ -220,6 +220,7 @@ let emulator = {
 				}
 				emulatorPort = Math.floor(Math.random() * (10000 - 1024)) + 1024;
 
+				// TODO ar trebui facut automat inregistrarea
 				if(imageRunning.type === 'raspberrypi')
 				{
 					this.registerEmulator(emulatorName, uuid.v4(), imageRunning.type, 'pi', 'raspberry', runningEmulatorImage, emulatorPort, currentlyRunningFolder, 'plugins/emulator/data/img/icons/icon-raspberrypi.png');
@@ -335,6 +336,7 @@ let emulator = {
 				platform: 'linux'
 			}
 		});
+		search.updateDevices(devices);
 	},
 	async stopEmulator(emulator)
 	{
@@ -356,8 +358,11 @@ let emulator = {
 				'EMULATOR_DELETE_EMULATOR_TITLE',
 				'EMULATOR_DELETE_EMULATOR_QUESTION',
 			);
-			if (value && runningEmulators[emulator.name].pid) {
-				kill(runningEmulators[emulator.name].pid, 'SIGKILL');
+			if (value) {
+				if (runningEmulators[emulator.name].pid)
+				{
+					kill(runningEmulators[emulator.name].pid, 'SIGKILL');
+				}
 				await fs.remove(runningEmulators[emulator.name].runningFolder);
 				devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
 				delete runningEmulators[emulator.name];

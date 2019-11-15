@@ -64,7 +64,7 @@
 							<v-list-item-content>
 								<v-list-item-title v-text="emulator.name"></v-list-item-title>
 							</v-list-item-content>
-							<v-list-tile-action>
+							<v-list-item-action>
 								<v-tooltip top v-if="emulator.running === 1">
 									<template v-slot:activator="{ on }">
 										<v-btn text :disabled="qemuCheck" @click="stopEmulator(emulator)" v-on="on" class="emu-btn">
@@ -89,7 +89,7 @@
 									</template>
 									<span>{{$t('EMULATOR_DELETE')}}</span>
 								</v-tooltip>
-							</v-list-tile-action>
+							</v-list-item-action>
 						</v-list-item>
 					</v-list>
 					<v-alert tile v-if="qemuCheck === true" type="error">
