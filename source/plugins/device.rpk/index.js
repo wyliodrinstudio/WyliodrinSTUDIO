@@ -64,7 +64,7 @@ function searchSerialDevices() {
 		let devices = [];
 		for (let serialDevice of serialPorts) {
 			if (serialDevice.vendorId === '1fc9' && serialDevice.productId === '0094') {
-				let name = 'Running NXP RPK';
+				let name = 'Running Rapid Prototyping Kit';
 				let description = '';
 				let id = serialDevice.vendorId.toString().toLowerCase();
 				let priority = workspace.DEVICE_PRIORITY_NORMAL;
@@ -149,7 +149,7 @@ function search() {
 					if (rpkDevice.mountpoints.length > 0)
 						devices.push({
 							id: 'rpk:' + rpkDevice.mountpoints[0].path,
-							name: 'RPK',
+							name: 'Rapid Prototyping Kit',
 							address: rpkDevice.mountpoints[0].path,
 							priority: workspace.DEVICE_PRIORITY_NORMAL,
 							board: 'rpk',
