@@ -53,7 +53,7 @@ export default function setup(options, imports, register) {
 
 	workspace.updateDevices([{
 		id: 'rpk_simulator',
-		name: 'RPK Simulator',
+		name: 'Rapid Prototyping Kit',
 		priority: workspace.DEVICE_PRIORITY_SIMULATOR,
 		address: 'rpk_simulator',
 		board: 'rpk',
