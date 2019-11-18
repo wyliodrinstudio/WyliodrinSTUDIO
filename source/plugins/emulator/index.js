@@ -72,6 +72,7 @@ let emulator = {
 			image.id = uuid.v4();
 
 			imageTypeFolder = path.join(imagesFolder, image.type);
+			image.dataFolder = imageTypeFolder;
 			await studio.filesystem.mkdirp(imageTypeFolder);
 			
 			let imageFiles = [];
@@ -85,7 +86,6 @@ let emulator = {
 						image.progress = 100;
 					}
 			}			
-			image.dataFolder = imageTypeFolder;
 
 			const check = spawn(QEMU + image.qemu.system, ['--version'], {
 				env: process.env

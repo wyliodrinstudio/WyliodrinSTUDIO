@@ -44,7 +44,7 @@
         "description": "Notification shown when flashing is done."
     },
     "RPK_NEW_DEVICE_TITLE": {
-        "message": "Dispozitiv RPK nou",
+        "message": "Dispozitiv Rapid Prototyping Kit nou",
         "description": "How to add new RPK device."
     },
     "DEVICE_RPK_FLASH": {

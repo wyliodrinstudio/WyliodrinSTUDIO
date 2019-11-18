@@ -64,7 +64,7 @@
         "description": "Notification shown when flashing is done."
     },
     "RPK_NEW_DEVICE_TITLE": {
-        "message": "New RPK Device",
+        "message": "New Rapid Prototyping Kit Device",
         "description": "How to add new RPK device."
     },
     "RPK_NEW_DEVICE_INSTRUCTIONS": {
