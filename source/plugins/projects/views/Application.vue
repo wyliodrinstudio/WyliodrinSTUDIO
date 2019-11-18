@@ -254,7 +254,8 @@ export default {
 			previous:[],
 
 			showTree: this.advanced,
-
+			previousProject: null,
+			previousRoot: null,
 			open: [],
 			tree: [],
 			items:[],
@@ -322,11 +323,21 @@ export default {
 		{
 			this.updateTitle ();
 			await this.dirTree();
+			console.log("This is that");
+			// while(this.items.name === this.previousRoot.name) {
+			// 	await this.dirTree();	
+			// }
+			
 		},
 		async currentFile ()
 		{
 			this.updateTitle ();
-			await this.dirTree();
+			//await this.dirTree();
+			console.log("THis is this");
+			// while(this.items.name === this.previousRoot.name) {
+			// 	await this.dirTree();	
+			// }
+			
 		},
 		async source ()
 		{
@@ -666,9 +677,11 @@ export default {
 					path:'/',
 					key:'/'
 				}];
-				
+				console.log(this.items);
 				this.items = root;
+				
 				this.previous = this.items;
+				
 				console.log(this.items);
 			}
 		},
@@ -793,6 +806,8 @@ export default {
 	{
 		await this.studio.projects.loadPreviousSelectedCurrentProject();
 		await this.dirTree();
+		this.previousProject = this.currentProject;
+		this.previousRoot = this.items;
 	}
 }
 	

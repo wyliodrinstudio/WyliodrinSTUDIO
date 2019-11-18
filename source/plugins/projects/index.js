@@ -1130,7 +1130,7 @@ let projects = {
 						});
 					});
 
-					studio.workspace.dispatchToStore('projects', 'currentProject', project);
+					await studio.workspace.dispatchToStore('projects', 'currentProject', project);
 					// studio.workspace.setWorkspaceTitle (project.name);
 					// Close file in editor and make sure project is consistent
 					await studio.settings.storeValue('projects', 'currentProject', project);
@@ -1144,6 +1144,11 @@ let projects = {
 							await this.changeFile(project,null);
 						}
 					}
+					await new Promise((resolve) => {
+						process.nextTick(() => {
+							resolve();
+						});
+					});
 				}
 				// return true if the project is selected or false otherwise
 			} else {
