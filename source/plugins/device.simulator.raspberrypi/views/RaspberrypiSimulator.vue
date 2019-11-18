@@ -5,7 +5,7 @@
 			<v-toolbar-title>{{ projectNameToBeShown }}</v-toolbar-title>
 		</v-toolbar>
 
-		<v-btn block @click="openDocumentation()"><v-icon>help-circle-outline</v-icon>{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_HELP')}}</v-btn>
+		<v-btn color="primary" @click="openDocumentation()">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_HELP')}}</v-btn>
 
 		<v-navigation-drawer v-if="projectsList" v-model="projectsListShow" absolute temporary width="300" dark>
 			<v-list>
