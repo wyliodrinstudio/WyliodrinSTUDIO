@@ -32,7 +32,7 @@ const { spawn } = require ('child_process');
 
 let emulator = {
 	store: null,
-	registerEmulator(name, id, type, user, password, image, port, runningFolder, icon)
+	registerEmulator(name, id, type, user, password, image, port, runningFolder, icon, qemu)
 	{
 		let sameEmulator = Object.keys(runningEmulators).find((emulator) => emulator === name);
 		if(!sameEmulator)
@@ -46,7 +46,8 @@ let emulator = {
 				image, 
 				port,
 				runningFolder,
-				icon
+				icon,
+				qemu
 			};
 			runningEmulators[name] = item;
 			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
@@ -220,79 +221,11 @@ let emulator = {
 				}
 				emulatorPort = Math.floor(Math.random() * (10000 - 1024)) + 1024;
 
-				// TODO ar trebui facut automat inregistrarea
-				if(imageRunning.type === 'raspberrypi')
-				{
-					this.registerEmulator(emulatorName, uuid.v4(), imageRunning.type, 'pi', 'raspberry', runningEmulatorImage, emulatorPort, currentlyRunningFolder, 'plugins/emulator/data/img/icons/icon-raspberrypi.png');
-				}
-				else
-				if(imageRunning.type === 'ubuntu')
-				{
-					this.registerEmulator(emulatorName, uuid.v4(), imageRunning.type, 'ubuntu', 'ubuntu', runningEmulatorImage, emulatorPort, currentlyRunningFolder, 'plugins/emulator/data/img/icons/icon-ubuntu.png');
-				}
+				this.registerEmulator(emulatorName, uuid.v4(), imageRunning.type, 'pi', 'raspberry', runningEmulatorImage, emulatorPort, currentlyRunningFolder, imageRunning.icon, imageRunning.qemu);
 
 				fs.writeFileSync(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
-				
-				let parameters = ['-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::'+emulatorPort+ '-:22','-no-reboot'];
-				if(imageRunning.qemu.kernel)
-					parameters.push('-kernel', path.join(imagesFolder, imageRunning.type, imageRunning.qemu.kernel));
-				if(imageRunning.qemu.dtb)
-					parameters.push('-dtb', path.join(imagesFolder, imageRunning.type, imageRunning.qemu.dtb));
-				if(imageRunning.qemu.mem)
-					parameters.push('-m', imageRunning.qemu.mem);
-				if(imageRunning.qemu.machine)
-					parameters.push('-M', imageRunning.qemu.machine);
-				if(imageRunning.qemu.cpu)
-					parameters.push('-cpu', imageRunning.qemu.cpu);
-				if(imageRunning.qemu.serial)
-					parameters.push('-serial', imageRunning.qemu.serial);
-				if(imageRunning.qemu.cmdline)
-					parameters.push('-append', imageRunning.qemu.cmdline);
-				if(imageRunning.qemu.drive)
-					parameters.push('-drive', imageRunning.qemu.drive + runningEmulatorImage + ',format=raw');
-				if(imageRunning.qemu.hda)
-					parameters.push('-hda', runningEmulatorImage);
-				if(imageRunning.qemu.boot)
-					parameters.push('-boot', imageRunning.qemu.boot);
-				qemu = spawn(QEMU + imageRunning.qemu.system, parameters, {
-					env: process.env
-				});
-
-				qemu.stdout.on('data', () => {
-					runningEmulators[emulatorName].running = 1;
-					runningEmulators[emulatorName].pid = qemu.pid;
-					runningEmulators[emulatorName].system = imageRunning.qemu.system;
-					runningEmulators[emulatorName].parameters = parameters;
-					studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
-				});
-				
-				qemu.stderr.on('data', (data) => {
-					console.error(`stderr: ${data}`);
-				});
-				qemu.on('close', async () => {
-					devices = devices.filter(device => device.port !== runningEmulators[emulatorName].port);
-					runningEmulators[emulatorName].running = 0;
-					studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
-					await fs.writeFile(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
-					search.updateDevices(devices);
-				});
-				devices.push ({
-					id: 'wyapp:emulator:' + emulatorPort,
-					transport: 'ssh',
-					address: '127.0.0.1',
-					name: emulatorName,
-					priority: studio.workspace.DEVICE_PRIORITY_HIGH,
-					port: emulatorPort,
-					board: imageRunning.type,
-					properties: {
-						category: imageRunning.type,
-						platform: 'linux'
-					}
-				});
-
-				search.updateDevices (devices);
-				
-				studio.workspace.dispatchToStore('workspace', 'devices', devices);
+							
+				this.startEmulator(runningEmulators[emulatorName]);
 			}
 			else {
 				studio.workspace.showError('EMULATOR_INVALID_NAME');
@@ -302,9 +235,30 @@ let emulator = {
 			studio.workspace.showError('EMULATOR_MISSING_QEMU_ERROR', {system: imageRunning.qemu.system});
 		}
 	},
-	restartEmulator(emulator)
-	{
-		qemu = spawn(QEMU + emulator.system, emulator.parameters, {
+	startEmulator(emulator)
+	{	
+		let parameters = ['-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::' + emulatorPort + '-:22', '-no-reboot'];
+		if(emulator.qemu.kernel)
+			parameters.push('-kernel', path.join(imagesFolder, emulator.type, emulator.qemu.kernel));
+		if(emulator.qemu.dtb)
+			parameters.push('-dtb', path.join(imagesFolder, emulator.type, emulator.qemu.dtb));
+		if(emulator.qemu.mem)
+			parameters.push('-m', emulator.qemu.mem);
+		if(emulator.qemu.machine)
+			parameters.push('-M', emulator.qemu.machine);
+		if(emulator.qemu.cpu)
+			parameters.push('-cpu', emulator.qemu.cpu);
+		if(emulator.qemu.serial)
+			parameters.push('-serial', emulator.qemu.serial);
+		if(emulator.qemu.cmdline)
+			parameters.push('-append', emulator.qemu.cmdline);
+		if(emulator.qemu.drive)
+			parameters.push('-drive', emulator.qemu.drive + emulator.image + ',format=raw');
+		if(emulator.qemu.hda)
+			parameters.push('-hda', emulator.image);
+		if(emulator.qemu.boot)
+			parameters.push('-boot', emulator.qemu.boot);
+		qemu = spawn(QEMU + emulator.qemu.system, parameters, {
 			env: process.env
 		});
 		qemu.stdout.on('data', () => {
@@ -324,12 +278,12 @@ let emulator = {
 			search.updateDevices(devices);
 		});
 		devices.push ({
-			id: 'wyapp:emulator:' + emulator.port,
+			id: 'wyapp:emulator:' + runningEmulators[emulator.name].port,
 			transport: 'ssh',
 			address: '127.0.0.1',
 			name: emulator.name,
 			priority: studio.workspace.DEVICE_PRIORITY_HIGH,
-			port: emulator.port,
+			port: runningEmulators[emulator.name].port,
 			board: emulator.type,
 			properties: {
 				category: emulator.type,
@@ -337,12 +291,16 @@ let emulator = {
 			}
 		});
 		search.updateDevices(devices);
+		studio.workspace.dispatchToStore('workspace', 'devices', devices);
 	},
 	async stopEmulator(emulator)
 	{
 		if(emulator && runningEmulators[emulator.name])
 		{
-			kill(runningEmulators[emulator.name].pid, 'SIGKILL');
+			if (runningEmulators[emulator.name].pid)
+			{
+				kill(runningEmulators[emulator.name].pid, 'SIGKILL');
+			}
 			devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
 			runningEmulators[emulator.name].running = 0;
 			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);

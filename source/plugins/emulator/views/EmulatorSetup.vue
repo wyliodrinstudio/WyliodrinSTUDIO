@@ -75,7 +75,7 @@
 								</v-tooltip>
 								<v-tooltip top v-else>
 									<template v-slot:activator="{ on }">
-										<v-btn text :disabled="qemuCheck" @click="restartEmulator(emulator)" v-on="on" class="emu-btn">
+										<v-btn text :disabled="qemuCheck" @click="startEmulator(emulator)" v-on="on" class="emu-btn">
 											<v-img src="plugins/notebook/data/img/icons/run-icon.png"></v-img>
 										</v-btn>
 									</template>
@@ -158,9 +158,9 @@ export default {
 		{
 			this.studio.emulator.deleteEmulator(emulator);
 		},
-		restartEmulator(emulator)
+		startEmulator(emulator)
 		{
-			this.studio.emulator.restartEmulator(emulator);
+			this.studio.emulator.startEmulator(emulator);
 		},
 		stopDownload(image)
 		{
