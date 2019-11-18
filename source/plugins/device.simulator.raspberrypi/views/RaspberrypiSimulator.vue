@@ -3,9 +3,11 @@
 		<v-toolbar text color="grey lighten-4">
 			<v-app-bar-nav-icon @click.stop="projectsListShow = !projectsListShow" style="margin-left:15px;"></v-app-bar-nav-icon>
 			<v-toolbar-title>{{ projectNameToBeShown }}</v-toolbar-title>
+			<v-spacer></v-spacer>
+			<v-btn icon @click="openDocumentation()" style="margin-right:15px;"><v-icon>mdi-help</v-icon></v-btn>
 		</v-toolbar>
 
-		<v-btn color="primary" @click="openDocumentation()">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_HELP')}}</v-btn>
+		<!-- <v-btn color="primary" @click="openDocumentation()">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_HELP')}}</v-btn> -->
 
 		<v-navigation-drawer v-if="projectsList" v-model="projectsListShow" absolute temporary width="300" dark>
 			<v-list>
