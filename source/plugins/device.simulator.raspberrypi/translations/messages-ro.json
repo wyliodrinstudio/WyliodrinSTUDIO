@@ -19,6 +19,10 @@
         "message": "Inchide",
         "description": "Close the list with the projects"
     },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_HELP": {
+        "message": "Ajutor",
+        "description": "Go to the documentation"
+    },
     "DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_PIN": {
         "message": "Pini",
         "description": "The pin in the header of the table with components"
