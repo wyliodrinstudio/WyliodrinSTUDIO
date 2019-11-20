@@ -1,14 +1,15 @@
 ## Wyliodrin STUDIO 2.1.1-beta
   * **added** Adafruit LCD visual programming blocks
   * **added** folder template for opcua model
-  * **Added** Raspberry Pi 1 and Zero emulator (QEMU)
-  * **Added** Raspberry Pi Simulator (NodeJS only)
+  * **added** Raspberry Pi 1 and Zero emulator (QEMU)
+  * **added** Raspberry Pi Simulator (NodeJS only)
   * **fixed** device buttons not showing up for websocket (requires studio-supervisor update)
   * **fixed** multiple instance popup appearing multiple times
   * **fixed** gutter background color in electron
   * **fixed** image error from RPK simulator
   * **fixed** display of extra brace at device os version
   * **fixed** monaco editor workers build in the plugin folder
+  * **fixed** project tree display
   * **update** electron to version 7
   * **update** serialport to version 8
   * **update** new color for opcua model folder
