@@ -209,6 +209,7 @@ export function setup(options, imports, register) {
 		Countly.add_event({
 			'key': 'StopEmulator',
 			'segmentation': {
+				'version': imports.workspace.version,
 				'type': emulator.type,
 				'username': token,
 				'locale': app_language
@@ -220,6 +221,7 @@ export function setup(options, imports, register) {
 		Countly.add_event({
 			'key': 'RunEmulator',
 			'segmentation': {
+				'version': imports.workspace.version,
 				'type': imageRunning.type,
 				'username': token,
 				'locale': app_language
@@ -231,6 +233,7 @@ export function setup(options, imports, register) {
 		Countly.add_event({
 			'key': 'StartEmulator',
 			'segmentation': {
+				'version': imports.workspace.version,
 				'type': emulator.type,
 				'username': token,
 				'locale': app_language
@@ -242,6 +245,7 @@ export function setup(options, imports, register) {
 		Countly.add_event({
 			'key': 'DownloadImage',
 			'segmentation': {
+				'version': imports.workspace.version,
 				'type': image.type,
 				'username': token,
 				'locale': app_language
