@@ -1,10 +1,10 @@
 [
 	{
-		"name": "wyliodrin_studio_raspberrypi_emulator_2019_11_14.img",
+		"name": "wyliodrin_studio_raspberrypi_emulator_2019_11_21.img",
 		"type": "raspberrypi",
 		"exists": "no",
 		"icon": "plugins/emulator/data/img/icons/icon-raspberrypi.png",
-		"download": "https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_emulator_raspberrypi_2019_11_14.zip",
+		"download": "https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_emulator_2019_11_21.zip",
 		"loadingEmulator": "no",
 		"progress": -1,
 		"title": "Raspberry Pi Zero & 1",
