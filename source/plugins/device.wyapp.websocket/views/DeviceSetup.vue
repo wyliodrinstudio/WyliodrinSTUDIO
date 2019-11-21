@@ -28,7 +28,9 @@ export default {
 	computed: {
 		json ()
 		{
-			return JSON.stringify ({token: this.token, id: this.value.trim (), server: window.location.href+'socket/remote'}, null, 2);
+			let server = window.location.href;
+			if (server.startsWith('file://')) server = 'https://beta.wyliodrin.studio/';
+			return JSON.stringify ({token: this.token, id: this.value.trim (), server: server+'socket/remote'}, null, 2);
 		},
 		nameValid ()
 		{

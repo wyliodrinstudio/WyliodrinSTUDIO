@@ -11,6 +11,8 @@
   * **fixed** monaco editor workers build in the plugin folder
   * **fixed** project tree display
   * **fixed** MIMEMultipart import for social email block
+  * **fixed** use only lowercase session id (issue #3)
+  * **fixed** websocket server link for electron (use https://beta.wyliodrin.server/socket/remote)
   * **update** electron to version 7
   * **update** serialport to version 8
   * **update** new color for opcua model folder
