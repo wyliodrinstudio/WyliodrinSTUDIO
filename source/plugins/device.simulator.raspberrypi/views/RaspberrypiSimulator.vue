@@ -93,7 +93,7 @@ export default {
 		// Load the tutorials list of projects
 		this.svgGenericPath = generic_raspberrypi.svgGenericPath;
 
-		let svgList = await this.studio.filesystem.readdir('./source' + this.svgGenericPath.substr(1));
+		let svgList = require ('../projects.json');
 		let projectsList = [];
 
 		for (let i = 0; i < svgList.length; i ++) {
