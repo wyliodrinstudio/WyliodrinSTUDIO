@@ -14,6 +14,8 @@ Install QEMU for `Linux <https://www.qemu.org/download/#linux>`_.
 
 Install QEMU for `Windows <https://www.qemu.org/download/#windows>`_.
 
+If your PC is running on Windows, you will have to add qemu in the PATH variable. In order to accomplish that, you will have to right click on *This PC*, select *Properties*, open the *Environment Variables* option, then edit the *PATH* variable. Here, you will have to add the absolute path to the folder where you chose to install qemu. The last step is to save the changes.
+
 Install QEMU for `mac OS <https://www.qemu.org/download/#macos>`_.
 
 Compile the QEMU `source code <https://www.qemu.org/download/#source>`_.
