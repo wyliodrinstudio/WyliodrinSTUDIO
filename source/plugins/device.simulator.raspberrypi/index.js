@@ -8,7 +8,6 @@ let simulator = {
 let workspace = null;
 
 import _ from 'lodash';
-import { EventEmitter } from 'events';
 import RaspberrypiSimulator from './views/RaspberrypiSimulator.vue';
 import JSInterpreter from './JSInterpreter/interpreter.js';
 import JSInterpreterLibrary from './JSInterpreter/interpreter_library.js';
@@ -22,9 +21,7 @@ let device_simulator_raspberrypi = {
 	 * @param  {Object} device The 'device' object in the platform
 	 */
 	connect(device) {
-		console.log('check already connected');
 		if (simulator.connected === false) {
-			console.log('check object');
 			if (_.isObject(device)) {
 				process.nextTick(() => {
 					device.status = 'CONNECTED';
@@ -42,9 +39,7 @@ let device_simulator_raspberrypi = {
 	 * @param  {Object} device The 'device' object in the platform
 	 */
 	disconnect(device) {
-		console.log('check already disconnected');
 		if (simulator.connected === true) {
-			console.log('check object');
 			if (_.isObject(device)) {
 				device.status = 'DISCONNECTED';
 				workspace.updateDevice(device);
@@ -53,16 +48,6 @@ let device_simulator_raspberrypi = {
 				return true;
 			}
 		}
-	},
-
-	/**
-	 * Register a device in order to be updated
-	 * @param  {Object} device The 'device' object in the platform
-	 * @param  {Function} fn The function to be executed for the update
-	 */
-	registerForUpdate(device, fn) {
-		deviceEvents.on('update:' + device.id, fn);
-		return() => deviceEvents.removeListener('update:' + device.id, fn);
 	}
 };
 
@@ -78,17 +63,17 @@ export default function setup(options, imports, register) {
 
 	// Register a new device: 'RaspberryPi simulator'
 	workspace.updateDevices([{
-			id: 'raspberrypi_simulator',
-			name: 'RaspberryPi',
-			priority: workspace.DEVICE_PRIORITY_SIMULATOR,
-			address: 'raspberrypi_simulator',
-			board: 'raspberrypi_simulator',
-			properties: {
-				isRunning: false
-			},
-			placeholder: true,
-			icon: 'plugins/device.simulator.raspberrypi/data/img/icons/icon-raspberrypi.png'
-		}
+		id: 'raspberrypi_simulator',
+		name: 'RaspberryPi',
+		priority: workspace.DEVICE_PRIORITY_SIMULATOR,
+		address: 'raspberrypi_simulator',
+		board: 'raspberrypi_simulator',
+		properties: {
+			isRunning: false
+		},
+		placeholder: true,
+		icon: 'plugins/device.simulator.raspberrypi/data/img/icons/icon-raspberrypi.png'
+	}
 	]);
 
 	// The code that should be executed in case of run button pressing
@@ -113,7 +98,7 @@ export default function setup(options, imports, register) {
 					// Create the object constructors for each library and
 					// append them to the users code
 					let librariesToLoad = 
-						`var libraries = {};\n\n` +
+						'var libraries = {};\n\n' +
 						onoff +
 						lcd +
 						`function require (name) {
