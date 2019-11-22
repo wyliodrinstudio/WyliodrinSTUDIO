@@ -64,7 +64,7 @@
 							<v-list-item-content>
 								<v-list-item-title v-text="emulator.name"></v-list-item-title>
 							</v-list-item-content>
-							<v-list-item-action>
+							<v-list-item-action class="emu-actions">
 								<v-tooltip top v-if="emulator.running === 1">
 									<template v-slot:activator="{ on }">
 										<v-btn text :disabled="qemuCheck" @click="stopEmulator(emulator)" v-on="on" class="emu-btn">
