@@ -209,7 +209,7 @@ By the end, our **index.js** file should look like this:
 
 		/* Register the object that this plugin will provide */
 		register(null, {
-			button_example: button_example;
+			button_example: button_example
 		})
 	}
 
