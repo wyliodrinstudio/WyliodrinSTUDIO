@@ -108,7 +108,7 @@ The properties of the *"plugin"* component are:
 	  - required
 	  - ["workspace"]
 	* - *provides*
-	  - we specify if our plugin functions will be exported (*"example_button"*)
+	  - we specify if our plugin functions will be exported (*"button_example"*)
 	  - optional
 	  - []
 	* - *target*
