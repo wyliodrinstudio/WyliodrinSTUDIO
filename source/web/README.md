@@ -1,4 +1,4 @@
-# Wyliodrin STUDIO
+# Wyliodrin STUDIO Browser
 
 Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.
 
@@ -31,63 +31,14 @@ Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.
 
 ## Install
 
-### Windows
-
-If there are any errors, run
-
-```cmd
-npm install --global --production windows-build-tools
+```
+npm install --global --production wstudio-web
 ```
 
-For bluetooth
-WinUSB driver with Zadig tool
-
-### macOS
-
-Install Xcode
-
-## Build
-
-This section is used for when you want to build application from the source code.
-
-### Dependencies
-
-- [NodeJS](http://www.nodejs.org) version 10 or higher.
-
-### Build Instructions
-
-The application itself can run in 2 modes.
-
-#### Electron
-
-Electron is the preffered way of running the application. The resulting tool starts as a standalone application.
+## Runb
 
 ```
-npm install
-npx electron-rebuild
-npm run electron
-```
-
-To start the application you can issue:
-
-```
-npm start
-```
-
-#### Web
-
-Another way of running the application is leveragin your internet browser, [Firefox](https://www.mozilla.org/en-US/firefox/new/) is recommended. Following lines will build all the needed artifacts:
-
-```
-npm install
-npm run browser
-```
-
-Then to run the application enter the `build` folder and run
-
-```
-npm install
-npm start
+wstudio-web
 ```
 
 ## Contribute
