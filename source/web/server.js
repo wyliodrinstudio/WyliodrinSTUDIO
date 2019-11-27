@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 
 const express = require ('express');
@@ -6,6 +8,8 @@ const WebSocket = require ('ws');
 
 const http = require ('http');
 const url = require ('url');
+
+const os = require ('os');
 
 let users = {};
 
@@ -59,8 +63,8 @@ uiSocket.on ('connection', (socket) => {
 		try 
 		{
 			let packet = JSON.parse (message);
-			console.log ('UI Socket');
-			console.log (packet);
+			// console.log ('UI Socket');
+			// console.log (packet);
 			if (!id && packet && packet.t === 'a')
 			{
 				console.log (packet.token);
@@ -108,7 +112,7 @@ uiSocket.on ('connection', (socket) => {
 				else
 				if (packet && packet.t === 'ping')
 				{
-					console.log ('UISocket ping');
+					// console.log ('UISocket ping');
 					socket.send (JSON.stringify ({t: 'pong'}));
 				}
 				else
@@ -160,7 +164,7 @@ remoteSocket.on ('connection', (socket) => {
 		try 
 		{
 			let packet = JSON.parse (message);
-			console.log ('Remote Socket');
+			// console.log ('Remote Socket');
 			// console.log (packet);
 			if (!userId && packet && packet.t === 'a')
 			{
@@ -238,6 +242,27 @@ server.on ('upgrade', function (req, socket, head)
 
 app.use (express.static (path.join (__dirname,'ui'), { cacheControl: false }));
 let serverListener = server.listen (process.env.PORT || 8080, function (err) {
-	if (!err) console.log ('Listening on port '+serverListener.address().port);
+	if (!err) {
+		let n = 0;
+		let networks = os.networkInterfaces();
+		for (let network in networks) {
+			if (network !== 'lo')
+			{
+				for (let networkAddress of networks[network])
+				{
+					if (networkAddress.family === 'IPv4')
+					{
+						n = n + 1;
+						console.log ('Wyliodrin STUDIO running at http://'+networkAddress.address+':'+serverListener.address().port);
+					}
+				}
+			}
+		}
+		if (n === 0)
+		{
+			console.log ('wstudio running at http://127.0.0.1:'+serverListener.address().port);
+		}
+		// console.log ('Listening on port '+serverListener.address());
+	}
 	else console.log (err);
 });

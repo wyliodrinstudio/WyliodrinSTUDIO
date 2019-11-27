@@ -3,6 +3,7 @@
   * **added** folder template for opcua model
   * **added** Raspberry Pi 1 and Zero emulator (QEMU)
   * **added** Raspberry Pi Simulator (NodeJS only)
+  * **added** npm package for the web version (wstudio-web)
   * **fixed** device buttons not showing up for websocket (requires studio-supervisor update)
   * **fixed** multiple instance popup appearing multiple times
   * **fixed** gutter background color in electron

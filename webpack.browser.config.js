@@ -45,8 +45,13 @@ class StudioPluginsWeb {
 			delete package_json.devDependencies;
 			delete package_json.optionalDependencies;
 			delete package_json.scripts;
+			package_json.name = 'wstudio-web';
+			package_json.description = 'Wyliodrin STUDIO web browser version';
 			package_json.scripts = {
 				start: 'node server.js'
+			};
+			package_json.bin = {
+				'wstudio-web': 'server.js'
 			};
 			package_json.dependencies = {
 				express: '*',
@@ -55,6 +60,10 @@ class StudioPluginsWeb {
 			fs.mkdirpSync ('./build/ui');
 			fs.writeFileSync ('./build/package.json', JSON.stringify (package_json, null, 4));
 			
+		});
+
+		compiler.hooks.done.tap('Setting permissions', () => {
+			fs.chmodSync ('./build/server.js', 0o755);
 		});
 	
 	}
@@ -161,6 +170,7 @@ module.exports = env => {
 				{ from: 'img/**', context: 'source' },
 				{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
 				{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
+				{ from: 'README.md', context: 'source/web', to: '../' },
 			], {logLevel: ''}),
 			// new DtsBundleWebpack({
 			// 	name: 'plugins',
