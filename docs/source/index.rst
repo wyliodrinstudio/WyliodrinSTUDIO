@@ -70,7 +70,6 @@ Also, the recognized programming languages at the time are:
    emulator
    simulators
 
-
 .. Indices and tables
 .. ==================
 

@@ -19,7 +19,7 @@
 				<p><strong>Cosmin-Daniel Radu</strong> - Embedded Software</p>
 				<p><strong>Liviu-Nicolae Moraru</strong> - Embedded Software</p>
 				<p><strong>Calin Dumitru</strong> - Simulators</p>
-				<p><strong>Diana Ghindaoanu</strong> - Notebook, Dashboard, Documentation</p>
+				<p><strong>Diana Ghindaoanu</strong> - Notebook, Dashboard, Documentation, Emulator</p>
 				<p><strong>Teona Severin</strong> - Web File System</p>
 				<p><strong>Ana Marinescu</strong> - Pin Layout</p>
 				<p><strong>Andrei Deatcu</strong> - Resistor Color Code, Schematics</p>

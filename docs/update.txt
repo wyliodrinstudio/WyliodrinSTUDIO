@@ -1,0 +1,11 @@
+Auto-Updates for Windows
+
+This file is for internal development use only.
+
+If you want to test the auto-updates on your personal computer, you will have to add a special file in the **build/** folder.
+The file will be named **dev-app-update.yml** and its content will include the application provider, the name of the bucket where
+the files are stored and the corresponding region:
+
+	provider: "s3"
+	bucket: "wyliodrin-studio"
+	region: "us-east-2"

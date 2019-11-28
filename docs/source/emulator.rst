@@ -68,7 +68,5 @@ Once the emulator completely loaded, you will be asked to input the default user
 
 After that, you will be able to find your emulator in the Connection Menu and to connect to it.
 
-.. iamge:: images/emulatorDevice.png
-	:align: center
 
 

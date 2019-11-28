@@ -1281,6 +1281,7 @@ export function setup(options, imports, register) {
 	system.events.on('close-ask', () => {
 		workspace.close();
 	});
+	
 	Vue.use(VueI18n);
 	Vue.use(Vuetify, {
 		font: 'mdi',

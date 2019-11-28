@@ -53,5 +53,9 @@ export function setup (options, imports, register) {
 		system.events.emit ('close-ask');
 	});
 
+	ipcRenderer.on ('message', (...arg) => {
+		console.log (...arg);
+	});
+
 	register (null, { system });
 }

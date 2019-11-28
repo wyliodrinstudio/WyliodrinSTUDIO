@@ -1,8 +1,34 @@
 const app = require ('electron').app;
+const dialog = require ('electron').dialog;
 const BrowserWindow = require ('electron').BrowserWindow;
 const ipcMain = require ('electron').ipcMain;
 const path = require ('path');
 const isDev = require ('electron-is-dev');
+const { autoUpdater } = require('electron-updater');
+const log = require('electron-log');
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+function sendStatusToWindow(text) {
+	log.info(text);
+	win.webContents.send('message', text);
+}
+
+autoUpdater.on('update-downloaded', (ev, releaseNotes, releaseName) => {
+	sendStatusToWindow('Update downloaded; will install in 5 seconds');
+	const dialogOpts = {
+		type: 'info',
+		buttons: ['Restart', 'Later'],
+		title: 'Application Update',
+		message: process.platform === 'win32' ? releaseNotes : releaseName,
+		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+	};
+	
+	dialog.showMessageBox(dialogOpts).then((returnValue) => {
+		if (returnValue.response === 0) autoUpdater.quitAndInstall()
+	});
+	
+});
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -68,7 +94,11 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+	
+	createWindow();
+	autoUpdater.checkForUpdates();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
