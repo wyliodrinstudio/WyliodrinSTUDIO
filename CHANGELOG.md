@@ -1,5 +1,5 @@
 ## Wyliodrin STUDIO 2.1.2-beta
-  * **added** auto-update version
+  * **added** electron auto-update version
   * **fixed** social email blocks
   
 ## Wyliodrin STUDIO 2.1.1-beta
