@@ -1,6 +1,6 @@
 {
 	"name": "wyliodrinstudio",
-	"version": "2.1.1-beta",
+	"version": "2.1.2-beta",
 	"description": "Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.",
 	"main": "main.js",
 	"scripts": {
