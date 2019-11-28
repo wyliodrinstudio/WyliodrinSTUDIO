@@ -1,5 +1,7 @@
 ## Wyliodrin STUDIO 2.1.2-beta
   * **added** auto-update version
+  * **fixed** social email blocks
+  
 ## Wyliodrin STUDIO 2.1.1-beta
   * **added** Adafruit LCD visual programming blocks
   * **added** folder template for opcua model

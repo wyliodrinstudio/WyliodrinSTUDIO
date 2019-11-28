@@ -12,7 +12,7 @@ module.exports = function (blockly) {
 
 	Blockly.Python.mail = function () {
 		if (!Blockly.Python.definitions_['import_mail']) {
-			Blockly.Python.definitions_['import_mail'] = 'email.mime.multipart import MIMEMultipart\nfrom email.mime.image import MIMEImage\nfrom email.mime.base import MIMEBase\nfrom email.mime.audio import MIMEAudio\nfrom email import encoders\nfrom email.MIMEText import MIMEText\nimport smtplib\nimport mimetypes\n';
+			Blockly.Python.definitions_['import_mail'] = 'from email.mime.multipart import MIMEMultipart\nfrom email.mime.image import MIMEImage\nfrom email.mime.base import MIMEBase\nfrom email.mime.audio import MIMEAudio\nfrom email import encoders\nfrom email.mime.text import MIMEText\nimport smtplib\nimport mimetypes\n';
 		}
 	}
 
