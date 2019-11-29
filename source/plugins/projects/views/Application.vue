@@ -1,221 +1,224 @@
 <template>
 	<div v-if="currentProject">
-		<div>
-			<div layout="row">
-				<div :class="treeShow" class="tree-show" v-if="advanced">
-					<v-btn text @click="changeClassHide">
-						<img src="plugins/projects/data/img/filem-hide.png" >
-					</v-btn>
+		<multipane layout="vertical">
+			<div>
+				<div layout="row">
+					<div :class="treeShow" class="tree-show" v-if="advanced">
+						<v-btn text @click="changeClassHide">
+							<img src="plugins/projects/data/img/filem-hide.png" >
+						</v-btn>
+					</div>
+					<div :class="treeHide" class="tree-hide" v-if="advanced">
+						<v-btn text @click="changeClassShow">
+							<img src="plugins/projects/data/img/filem-show.png" >
+						</v-btn>
+					</div>
+					
+					<div :class="projectTree" class="project-tree-on" v-if="advanced">
+						<v-treeview
+						v-model="tree"
+						:open="open"
+						:items="items"
+						item-key="key"
+						:active.sync="itemsActive"
+						activatable
+						@update:active="setActive"
+						color="rgba(0,0,0,0.87)"
+						return-object
+						:open-on-click="true"
+						dense
+						>
+						
+						<template v-slot:prepend="{item, open}">
+							<p v-if="item.path === '/'" @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)">
+								<v-img v-if="languageImage().type" contain :src="languageImage().img" avatar ></v-img>
+								<v-icon v-else>{{languageImage().img}}</v-icon>
+							</p>
+							<p v-else-if="item.file !== undefined" @contextmenu="fileItem = item,showFile($event)">
+								<v-img v-if="getPictogram(item.path).type" contain :src="getPictogram(item.path).img" avatar ></v-img>
+								<v-icon v-else>{{getPictogram(item.path).img}}</v-icon>
+
+							</p>
+							<p v-else-if="open && item.path !== '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)">
+								<v-icon>mdi-folder-open</v-icon>
+							</p>
+							<p v-else-if="item.path !== '/'" text @click="menuItem = item" @contextmenu="fileItem = item,showFolder($event)">
+								<v-icon>mdi-folder</v-icon>
+							</p>
+						</template>
+						<template v-slot:label="{item, open}">
+							<p style="width:100%;" v-if="item.file  === undefined && item.path === '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)"> 
+								{{item.name}}                  
+							</p>
+							<p style="width:100%;" v-else-if="item.file  === undefined && item.path !== '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)"> 
+								{{item.name}}                  
+							</p>
+							<p v-else style="width:100%;" text @contextmenu="fileItem = item,showFile($event)">
+								{{item.name}}
+							</p>
+							<!-- <v-menu
+								v-model="projectMenu"
+								:position-x="x"
+								:position-y="y"
+								absolute
+								offset-y
+								>
+									<v-list>
+										<v-list-item @click="newFolder(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="newFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="importFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+										</v-list-item>
+									</v-list>
+								</v-menu>
+
+							<v-menu
+								v-model="folderMenu"
+								:position-x="x"
+								:position-y="y"
+								absolute
+								offset-y
+								>
+									<v-list>
+										<v-list-item @click="deleteFolder(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="renameObject(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="newFolder(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="newFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="importFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+										</v-list-item>
+									</v-list>
+								</v-menu>
+
+								<v-menu
+								v-model="fileMenu"
+								:position-x="x"
+								:position-y="y"
+								absolute
+								offset-y
+								>
+									<v-list>
+										<v-list-item @click="deleteFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="renameObject(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="exportFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
+										</v-list-item>
+									</v-list>
+								</v-menu> -->
+						</template>
+						
+						</v-treeview>
+						<v-menu
+								v-model="projectMenu"
+								:position-x="x"
+								:position-y="y"
+								absolute
+								offset-y
+								>
+									<v-list>
+										<v-list-item @click="newFolder(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="newFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="importFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+										</v-list-item>
+									</v-list>
+								</v-menu>
+
+							<v-menu
+								v-model="folderMenu"
+								:position-x="x"
+								:position-y="y"
+								absolute
+								offset-y
+								>
+									<v-list>
+										<v-list-item @click="deleteFolder(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="renameObject(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="newFolder(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="newFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="importFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
+										</v-list-item>
+									</v-list>
+								</v-menu>
+
+								<v-menu
+								v-model="fileMenu"
+								:position-x="x"
+								:position-y="y"
+								absolute
+								offset-y
+								>
+									<v-list>
+										<v-list-item @click="deleteFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="renameObject(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
+										</v-list-item>
+										<v-list-item @click="exportFile(fileItem)">
+											<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
+										</v-list-item>
+									</v-list>
+								</v-menu>
+						<v-card-actions class="fm-actions">
+							<v-btn @click="newFile(menuItem)" text icon>
+								<v-icon>mdi-file-plus</v-icon>
+							</v-btn>
+							<v-btn @click="newFolder(menuItem)" text icon>
+								<v-icon>mdi-folder-plus</v-icon>
+							</v-btn>
+							<v-btn @click="dirTree(menuItem)" text icon>
+								<v-icon>mdi-refresh</v-icon>
+							</v-btn>						
+						</v-card-actions>		
+					</div> 
 				</div>
-				<div :class="treeHide" class="tree-hide" v-if="advanced">
-					<v-btn text @click="changeClassShow">
-						<img src="plugins/projects/data/img/filem-show.png" >
-					</v-btn>
+				<!--  -->
+			</div>
+			<multipane-resizer></multipane-resizer>
+			<div :class="editorBox" class="hs-100">
+				<component v-if="currentEditor && currentFile && verifyLanguage(currentProject)" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
+				<div v-else-if="!verifyLanguage(currentProject)" class="projects-msg">
+					{{$t('PROJECTS_INVALID_PROJECT')}}
+				</div>
+				<div v-else-if="currentFile === null" class="projects-msg">
+					{{$t('PROJECTS_NO_FILE')}}
+				</div>
+				<div v-else-if="currentEditor === null" class="projects-msg">
+					{{$t('PROJECTS_EXTENSION_URECOGNIZED')}}
 				</div>
 				
-				<div :class="projectTree" class="project-tree-on" v-if="advanced">
-					<v-treeview
-					v-model="tree"
-					:open="open"
-					:items="items"
-					item-key="key"
-					:active.sync="itemsActive"
-					activatable
-					@update:active="setActive"
-					color="rgba(0,0,0,0.87)"
-					return-object
-					:open-on-click="true"
-					dense
-					>
-					
-					<template v-slot:prepend="{item, open}">
-						<p v-if="item.path === '/'" @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)">
-							<v-img v-if="languageImage().type" contain :src="languageImage().img" avatar ></v-img>
-							<v-icon v-else>{{languageImage().img}}</v-icon>
-						</p>
-						<p v-else-if="item.file !== undefined" @contextmenu="fileItem = item,showFile($event)">
-							<v-img v-if="getPictogram(item.path).type" contain :src="getPictogram(item.path).img" avatar ></v-img>
-							<v-icon v-else>{{getPictogram(item.path).img}}</v-icon>
-
-						</p>
-						<p v-else-if="open && item.path !== '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)">
-							<v-icon>mdi-folder-open</v-icon>
-						</p>
-						<p v-else-if="item.path !== '/'" text @click="menuItem = item" @contextmenu="fileItem = item,showFolder($event)">
-							<v-icon>mdi-folder</v-icon>
-						</p>
-					</template>
-					<template v-slot:label="{item, open}">
-						<p style="width:100%;" v-if="item.file  === undefined && item.path === '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)"> 
-							{{item.name}}                  
-						</p>
-						<p style="width:100%;" v-else-if="item.file  === undefined && item.path !== '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showFolder($event)"> 
-							{{item.name}}                  
-						</p>
-						<p v-else style="width:100%;" text @contextmenu="fileItem = item,showFile($event)">
-							{{item.name}}
-						</p>
-						<!-- <v-menu
-							v-model="projectMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-						<v-menu
-							v-model="folderMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-							<v-menu
-							v-model="fileMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="exportFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu> -->
-					</template>
-					
-					</v-treeview>
-					<v-menu
-							v-model="projectMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-						<v-menu
-							v-model="folderMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFolder(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="newFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_NEW_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="importFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_IMPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-
-							<v-menu
-							v-model="fileMenu"
-							:position-x="x"
-							:position-y="y"
-							absolute
-							offset-y
-							>
-								<v-list>
-									<v-list-item @click="deleteFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="renameObject(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_RENAME_FILE')}}</v-list-item-title>
-									</v-list-item>
-									<v-list-item @click="exportFile(fileItem)">
-										<v-list-item-title>{{$t('PROJECT_EXPORT_FILE')}}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-					<v-card-actions class="fm-actions">
-						<v-btn @click="newFile(menuItem)" text icon>
-							<v-icon>mdi-file-plus</v-icon>
-						</v-btn>
-						<v-btn @click="newFolder(menuItem)" text icon>
-							<v-icon>mdi-folder-plus</v-icon>
-						</v-btn>
-						<v-btn @click="dirTree(menuItem)" text icon>
-							<v-icon>mdi-refresh</v-icon>
-						</v-btn>						
-					</v-card-actions>		
-				</div> 
 			</div>
-			<!--  -->
-		</div>
-		<div :class="editorBox" class="hs-100">
-			<component v-if="currentEditor && currentFile && verifyLanguage(currentProject)" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
-			<div v-else-if="!verifyLanguage(currentProject)" class="projects-msg">
-				{{$t('PROJECTS_INVALID_PROJECT')}}
-			</div>
-			<div v-else-if="currentFile === null" class="projects-msg">
-				{{$t('PROJECTS_NO_FILE')}}
-			</div>
-			<div v-else-if="currentEditor === null" class="projects-msg">
-				{{$t('PROJECTS_EXTENSION_URECOGNIZED')}}
-			</div>
-			
-		</div>
+		</multipane>
 	</div>
 	<div v-else-if="currentProject === null">
 		<div class="projects-msg">
@@ -236,6 +239,8 @@ import { mapGetters } from 'vuex';
 import path from 'path';
 import ProjectsLibrary from './ProjectsLibrary.vue';
 import $ from 'jquery';
+
+import { Multipane, MultipaneResizer } from 'vue-multipane';
 
 export default {
 	name: 'Application',
@@ -271,6 +276,10 @@ export default {
 			baseFileIcon:'mdi-file',
 			baseFolderIcon:'mdi-folder-account',
 		};
+	},
+	components: {
+		Multipane,
+		MultipaneResizer
 	},
 	computed: {
 
@@ -859,5 +868,10 @@ background: url('plugins/projects/data/img/icons/32px.png') no-repeat -32px 0px 
 	min-height:40px !important;
 	padding-left: 0px !important;
 	padding-right:0px !important;
+}
+.multipane.foo.layout-v .multipane-resizer {
+  margin: 0; left: 0; /* reset default styling */
+  width: 15px;
+  background: blue;
 }
 </style>
