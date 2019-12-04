@@ -56,6 +56,9 @@ export function setup (options, imports, register) {
 	ipcRenderer.on ('message', (...arg) => {
 		console.log (...arg);
 	});
+	ipcRenderer.on('updated', () => {
+		system.events.emit('updated');
+	});
 
 	register (null, { system });
 }
