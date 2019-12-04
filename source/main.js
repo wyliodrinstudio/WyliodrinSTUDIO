@@ -25,7 +25,8 @@ autoUpdater.on('update-downloaded', (ev, releaseNotes, releaseName) => {
 	};
 	
 	dialog.showMessageBox(dialogOpts).then((returnValue) => {
-		if (returnValue.response === 0) autoUpdater.quitAndInstall()
+		if (returnValue.response === 0) autoUpdater.quitAndInstall();
+		win.webContents.send('updated');
 	});
 	
 });
