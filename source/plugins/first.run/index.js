@@ -1,21 +1,33 @@
 import FirstRunDialog from './views/FirstRunDialog.vue';
 let studio = null;
 
+let firstrun = {
+
+	isFirstRun()
+	{
+		return studio.settings.loadValue('firstrun', 'firstrun', true);
+	},
+
+	showFirstRun()
+	{
+		studio.workspace.showDialog(FirstRunDialog,{width:550});
+		studio.settings.storeValue('firstrun', 'firstRun', false);
+	}
+}
+
 export function setup(options, imports, register)
 {
-
 	imports.events.on ('ready', (imports) =>
 	{
 		studio = imports; 
 
-		if(studio.settings.loadValue('firstrun', 'firstRun', true))
+		if(firstrun.isFirstRun())
 		{
-			studio.workspace.showDialog(FirstRunDialog,{width:550});
-			studio.settings.storeValue('firstrun', 'firstRun', false);
+			firstrun.showFirstRun();
 		}
 			
 	});
 	register(null, {
-		
+		firstrun: firstrun
 	});
 }

@@ -76,18 +76,6 @@ export function setup(options, imports, register) {
 		let device = imports.workspace.getDevice();
 		let project = imports.projects.getCurrentProject();
 
-		// if (device) {
-		// 	if (!stopPressedCount[device.board])
-		// 		stopPressedCount[device.board] = {
-		// 			count: 0,
-		// 			times: []
-		// 		};
-		// 	stopPressedCount[device.board].count += 1;
-		// 	stopPressedCount[device.board].times.push(getTime());
-		// }
-
-		// let newTime = getTime();
-		
 		optInOut();
 		Countly.add_event({
 			'key': 'StopProject',
@@ -108,17 +96,6 @@ export function setup(options, imports, register) {
 		let device = imports.workspace.getDevice();
 		let project = imports.projects.getCurrentProject();
 
-		// if (device) {
-		// 	if (!runPressedCount[device.board])
-		// 		runPressedCount[device.board] = {
-		// 			count: 0,
-		// 			times: []
-		// 		};
-		// 	runPressedCount[device.board].count += 1;
-		// 	runPressedCount[device.board].times.push(getTime());
-		// }
-
-		// let newTime = getTime();
 		optInOut();
 		Countly.add_event({
 			'key': 'RunProject',
@@ -253,13 +230,20 @@ export function setup(options, imports, register) {
 		});
 	});
 
-	imports.hooks.addPreHook('projects', 'selectCurrentProject', (projectInfo) => {
-		// if (args[1]) {
-		// 	let projectInfo = args[0];
+	imports.hooks.addPreHook('firstrun', 'showFirstRun', () => {
+		Countly.add_event({
+			'key': 'ShowFirstRun', 
+			'segmentation': {
+				'version': imports.workspace.version,
+				'username': token,
+				'locale': app_language
+			}
+		});
+	});
 
-		// if (!openProjects[projectInfo.language])
-		// 	openProjects[projectInfo.language] = 0;
-		// openProjects[projectInfo.language] += 1;
+	// imports.hooks.addPreHook('')
+
+	imports.hooks.addPreHook('projects', 'selectCurrentProject', (projectInfo) => {
 		optInOut();
 		if (projectInfo)
 		{

@@ -5,7 +5,7 @@
     "private": true,
     "plugin": {
         "consumes": ["events", "settings", "projects", "system", "workspace"],
-        "provides": [],
+        "provides": ["firstrun"],
         "target": ["electron", "browser"]
     }
 }
