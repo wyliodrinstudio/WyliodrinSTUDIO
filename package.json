@@ -99,6 +99,7 @@
 		"vue-i18n": "^8.8.0",
 		"vue-loader": "^15.7.0",
 		"vue-monaco": "^1.1.0",
+		"vue-multipane": "^0.9.5",
 		"vue-resource": "^1.5.1",
 		"vue-router": "^3.0.2",
 		"vue-swatches": "^1.0.3",
