@@ -169,7 +169,18 @@ export function setup(options, imports, register) {
 		addStop();
 	});
 
-	imports.events.on ('ready', ()=>
+	imports.events.on('updated', () => {
+		Countly.add_event({
+			'key': 'UpdateVersion',
+			'segmentation': {
+				'version': imports.workspace.version,
+				'username': token,
+				'locale': app_language
+			}
+		});
+	});
+
+	imports.events.on ('ready', () =>
 	{
 		optInOut();
 		Countly.add_event({
@@ -240,8 +251,6 @@ export function setup(options, imports, register) {
 			}
 		});
 	});
-
-	// imports.hooks.addPreHook('')
 
 	imports.hooks.addPreHook('projects', 'selectCurrentProject', (projectInfo) => {
 		optInOut();
