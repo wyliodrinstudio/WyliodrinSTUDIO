@@ -1,7 +1,7 @@
 <template>
 	<div v-if="currentProject">
-		<multipane layout="vertical">
-			<div>
+		<multipane layout="vertical" class="vertical-panes">
+			<div class="pane" :style="{ minWidth: '120px', width: '195px', maxWidth: '400px' }">
 				<div layout="row">
 					<div :class="treeShow" class="tree-show" v-if="advanced">
 						<v-btn text @click="changeClassHide">
@@ -204,8 +204,8 @@
 				</div>
 				<!--  -->
 			</div>
-			<multipane-resizer></multipane-resizer>
-			<div :class="editorBox" class="hs-100">
+			<multipane-resizer class="hs-100"></multipane-resizer>
+			<div :class="editorBox" class="hs-100 pane" :style="{ flexGrow: 1 }">
 				<component v-if="currentEditor && currentFile && verifyLanguage(currentProject)" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
 				<div v-else-if="!verifyLanguage(currentProject)" class="projects-msg">
 					{{$t('PROJECTS_INVALID_PROJECT')}}
