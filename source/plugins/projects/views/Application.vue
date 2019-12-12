@@ -205,7 +205,7 @@
 				<!--  -->
 			</div>
 			<multipane-resizer class="hs-100"></multipane-resizer>
-			<div :class="editorBox" class="hs-100 pane" :style="{ flexGrow: 1 }">
+			<div :class="editorBox" class="hs-100 pane" :style="{ flexGrow: 1, width: '600px' }">
 				<component v-if="currentEditor && currentFile && verifyLanguage(currentProject)" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
 				<div v-else-if="!verifyLanguage(currentProject)" class="projects-msg">
 					{{$t('PROJECTS_INVALID_PROJECT')}}
