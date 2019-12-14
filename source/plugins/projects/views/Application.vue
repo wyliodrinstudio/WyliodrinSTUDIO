@@ -1,16 +1,11 @@
 <template>
 	<div v-if="currentProject">
 		<multipane layout="vertical" class="vertical-panes">
-			<div class="pane" :style="{ minWidth: '120px', width: '195px', maxWidth: '400px' }">
+			<div class="pane tree-show":class="treeShow"  :style="{ minWidth: '120px', width: '195px', maxWidth: '400px' }" style="left:0;" v-if="advanced">
 				<div layout="row">
 					<div :class="treeShow" class="tree-show" v-if="advanced">
 						<v-btn text @click="changeClassHide">
 							<img src="plugins/projects/data/img/filem-hide.png" >
-						</v-btn>
-					</div>
-					<div :class="treeHide" class="tree-hide" v-if="advanced">
-						<v-btn text @click="changeClassShow">
-							<img src="plugins/projects/data/img/filem-show.png" >
 						</v-btn>
 					</div>
 					
@@ -204,8 +199,14 @@
 				</div>
 				<!--  -->
 			</div>
-			<multipane-resizer class="hs-100"></multipane-resizer>
-			<div :class="editorBox" class="hs-100 pane" :style="{ flexGrow: 1, width: '600px' }">
+			<multipane-resizer class="hs-100" style="z-index:2;">
+				<div :class="treeHide" class="tree-hide" v-if="advanced">
+					<v-btn text @click="changeClassShow">
+						<img src="plugins/projects/data/img/filem-show.png" >
+					</v-btn>
+				</div>
+			</multipane-resizer>
+			<div :class="editorBox" class="hs-100 pane" :style="{ flexGrow: 1, width: '100px' }">
 				<component v-if="currentEditor && currentFile && verifyLanguage(currentProject)" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
 				<div v-else-if="!verifyLanguage(currentProject)" class="projects-msg">
 					{{$t('PROJECTS_INVALID_PROJECT')}}
