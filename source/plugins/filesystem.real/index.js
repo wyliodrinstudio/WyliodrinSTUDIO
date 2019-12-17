@@ -3,7 +3,6 @@ import fs from 'fs-extra';
 import path from 'path';
 import { remote } from 'electron';
 const dialog = remote.dialog;
-let studio = null;
 
 let filesystem_real = {
 	getDefaultFolder ()
@@ -20,7 +19,16 @@ let filesystem_real = {
 	},
 	getSettingsFolder ()
 	{
-		return process.env.WYLIDORIN_STUDIO_SETTINGS || path.join (this.getUserFolder(), '.wyliodrinstudio');
+		let settingsFolder = process.env.WYLIDORIN_STUDIO_SETTINGS || path.join (this.getUserFolder(), '.wyliodrinstudio');
+		try
+		{
+			this.mkdirp (settingsFolder);
+		}
+		catch (e)
+		{
+			console.log (e.message);
+		}
+		return settingsFolder;
 	},
 	pathExists: fs.pathExists,
 	mkdirp: fs.mkdirp,
@@ -132,7 +140,7 @@ let filesystem_real = {
 };
 
 export default function setup(options, imports, register) {
-	studio = imports;
-	studio.filesystem.registerFileSystem('fs', filesystem_real);
-	register(null, {});
+	register(null, {
+		filesystem: filesystem_real
+	});
 }

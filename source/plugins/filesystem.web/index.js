@@ -581,8 +581,7 @@ let web_filesystem = {
 
 };
 export default async function setup(options, imports, register) {
-	const studio = imports;
-
+	
 	await initStoragePersistence ();
 
 
@@ -591,6 +590,8 @@ export default async function setup(options, imports, register) {
 		data: '++id,&fileId,data,size'
 	});
 	db.open();
-	studio.filesystem.registerFileSystem('webfs', web_filesystem);
-	register(null, {});
+
+	register(null, {
+		filesystem: web_filesystem
+	});
 }

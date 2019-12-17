@@ -4,8 +4,8 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["filesystem"],
-        "provides": [],
+        "consumes": [],
+        "provides": ["filesystem"],
         "target": ["browser"]
     }
 }

@@ -63,7 +63,7 @@ export default {
 	data() {
 		return {
 			feedback: this.studio.settings.loadValue ('workspace', 'feedback', true)
-		}
+		};
 	},
 	methods: 
 	{
@@ -82,10 +82,10 @@ export default {
 	watch: {
 		feedback (newfeedback)
 		{
-			this.studio.settings.storeValue ('workspace', 'feedback', newfeedback)
+			this.studio.settings.storeValue ('workspace', 'feedback', newfeedback);
 		}
 	}
-}
+};
 </script>
 
 

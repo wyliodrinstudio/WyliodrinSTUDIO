@@ -1369,7 +1369,7 @@ let projects = {
 			}
 		} else {
 			// ERROR specialFile nu e definit aici
-			studio.workspace.showError('PROJECT_ERROR_LOAD_SPECIAL_FILE', {file: specialFile, error: 'NULL'});
+			studio.workspace.showError('PROJECT_ERROR_LOAD_SPECIAL_FILE', {file: 'NULL', error: 'NULL'});
 			return null;
 		}
 	},

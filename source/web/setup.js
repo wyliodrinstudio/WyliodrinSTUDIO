@@ -33,9 +33,18 @@ function getJoke ()
 
 function progress (name, index, all)
 {
-	document.querySelector('#loading').innerHTML = 'Loading plugin '+name;
-	document.querySelector('#loading-progress-bar').setAttribute ('style', 'width: '+Math.round((index/all*100))+'%');
-	console.log ('Loading '+name);
+	if (index || all)
+	{
+		document.querySelector('#loading').innerHTML = 'Loading plugin '+name;
+		document.querySelector('#loading-progress-bar').setAttribute ('style', 'width: '+Math.round((index/all*100))+'%');
+		console.log ('Loading '+name);
+	}
+	else
+	{
+		document.querySelector('#loading').innerHTML = name;
+		document.querySelector('#loading-progress-bar').setAttribute ('style', 'width: 100%');
+		console.log (name);
+	}
 }
 
 async function main ()

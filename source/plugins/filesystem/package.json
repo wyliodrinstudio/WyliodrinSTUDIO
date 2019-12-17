@@ -6,6 +6,7 @@
     "plugin": {
         "consumes": [],
         "provides": ["filesystem"],
-        "target": ["electron", "browser"]
+        "target": ["electron", "browser"],
+        "disabled": true
     }
 }

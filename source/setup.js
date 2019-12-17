@@ -32,6 +32,22 @@ function getJoke ()
 	return str;
 }
 
+function progress (name, index, all)
+{
+	if (index || all)
+	{
+		document.querySelector('#loading').innerHTML = 'Loading plugin '+name;
+		document.querySelector('#loading-progress-bar').setAttribute ('style', 'width: '+Math.round((index/all*100))+'%');
+		console.log ('Loading '+name);
+	}
+	else
+	{
+		document.querySelector('#loading').innerHTML = name;
+		document.querySelector('#loading-progress-bar').setAttribute ('style', 'width: 100%');
+		console.log (name);
+	}
+}
+
 async function loadPlugins (pluginsFolder)
 {
 	let plugins = [];
@@ -53,9 +69,7 @@ async function loadPlugins (pluginsFolder)
 						let package_json = require (path.join (pluginsFolder, l, 'package.json'));
 						if (!package_json.plugin.disabled)
 						{
-							document.querySelector('#loading').innerHTML = 'Loading plugin '+l;
-							document.querySelector('#loading-progress-bar').setAttribute ('style', 'width: '+Math.round((pluginNumber/(list.length)*100))+'%');
-							console.log ('Loading '+l);
+							progress (l, pluginNumber, list.length);
 							let plugin = require (path.join (pluginsFolder, l));
 							let setupFunction = plugin.setup || plugin.default || plugin;
 							if (typeof setupFunction !== 'function')
@@ -76,6 +90,7 @@ async function loadPlugins (pluginsFolder)
 					console.error (e);
 				}
 			}
+			progress ('Your workspace is almost ready ...');
 		}
 	}
 	catch (e)

@@ -1,5 +1,9 @@
 ## Wyliodrin STUDIO 2.1.3-beta
   * **added** resizable project tree
+  * **fixed** display IP address for local web server
+  * **fixed** welcome screen appearing every time
+  * **fixed** loading issue that sometimes prevents studio to access the filesystem
+  * **update** browser loading speedup by asynchronous plugin loading
 
 ## Wyliodrin STUDIO 2.1.2-beta
   * **added** electron auto-update version (windows only)

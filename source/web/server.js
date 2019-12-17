@@ -246,15 +246,12 @@ let serverListener = server.listen (process.env.PORT || 8080, function (err) {
 		let n = 0;
 		let networks = os.networkInterfaces();
 		for (let network in networks) {
-			if (network !== 'lo')
+			for (let networkAddress of networks[network])
 			{
-				for (let networkAddress of networks[network])
+				if (networkAddress.family === 'IPv4' && !networkAddress.address.startsWith ('127'))
 				{
-					if (networkAddress.family === 'IPv4')
-					{
-						n = n + 1;
-						console.log ('Wyliodrin STUDIO running at http://'+networkAddress.address+':'+serverListener.address().port);
-					}
+					n = n + 1;
+					console.log ('Wyliodrin STUDIO running at http://'+networkAddress.address+':'+serverListener.address().port);
 				}
 			}
 		}

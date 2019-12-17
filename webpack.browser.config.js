@@ -25,14 +25,25 @@ class StudioPluginsWeb {
 
 			console.log('Loading studio plugins for browser');
 
-			let source = 'async function loadPlugins (progress = () => {}) {\n\tvar plugins = [];\n\tvar plugin;\n\n';
+			let source = 'async function loadPlugins (progress = () => {}) {\n\tvar plugins = [];\n\tvar index = 0;\n\n';
 
 			let index = 0;
 			for (let plugin of webPlugins)
 			{
+				source = source + '\tlet plugin'+index+' = import (\'../plugins/'+plugin.name+'/'+plugin.main+'\').then ((plugin) => { plugins.push ({name:\''+plugin.name+'\', consumes:'+JSON.stringify (plugin.consumes)+', provides:'+JSON.stringify (plugin.provides)+', setup: plugin.setup || plugin.default || plugin}); index=index+1; progress (\''+plugin.name+'\', index, '+webPlugins.length+'); });\n';
 				index=index+1;
-				source = source + '\tprogress (\''+plugin.name+'\', '+index+', '+webPlugins.length+');\n\tplugin = await import (\'../plugins/'+plugin.name+'/'+plugin.main+'\');\n\tplugins.push ({name:\''+plugin.name+'\', consumes:'+JSON.stringify (plugin.consumes)+', provides:'+JSON.stringify (plugin.provides)+', setup: plugin.setup || plugin.default || plugin});\n';
 			}
+
+			source = source + '\tawait Promise.all ([';
+
+			for (let index = 0; index < webPlugins.length; index++)
+			{
+				source = source + 'plugin'+index+', ';
+			}
+
+			source = source + '])\n';
+
+			source = source + '\tprogress (\'Your workspace is almost ready ...\');\n';
 
 			source = source + '\treturn plugins;\n}\nmodule.exports.loadPlugins = loadPlugins;\n';
 			
