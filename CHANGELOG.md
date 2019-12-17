@@ -1,3 +1,6 @@
+## Wyliodrin STUDIO 2.1.3-beta
+  * **added** resizable project tree
+
 ## Wyliodrin STUDIO 2.1.2-beta
   * **added** electron auto-update version (windows only)
   * **fixed** social email blocks

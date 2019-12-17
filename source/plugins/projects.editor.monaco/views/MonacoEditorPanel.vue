@@ -6,15 +6,14 @@
 import MonacoEditor from 'vue-monaco';
 import * as monaco from 'monaco-editor';
 import path from 'path';
-import _ from 'lodash';
 
 monaco.editor.defineTheme('studio', {
-    base: 'vs',
+	base: 'vs',
 	inherit: true,
 	rules: [],
-    colors: {
-        'editorGutter.background': '#dedede',
-    }
+	colors: {
+		'editorGutter.background': '#dedede',
+	}
 });
 
 monaco.editor.setTheme('studio');
@@ -53,87 +52,89 @@ export default {
 						this.sourceLanguage = 'makefile';
 					}
 					else
-					switch (path.extname (this.filename).toLowerCase())
 					{
-						case '.md':
+						switch (path.extname (this.filename).toLowerCase())
 						{
-							this.sourceLanguage = 'markdown';
-							break;
-						}
-						case '.txt':
-						{
-							this.sourceLanguage = 'plain_text';
-							break;
-						}
-						case '.py':
-						{
-							this.sourceLanguage = 'python';
-							break;
-						}
-						case '.sh':
-						{
-							this.sourceLanguage = 'sh';
-							break;
-						}
-						case '.html':
-						{
-							this.sourceLanguage = 'html';
-							break;
-						}
-						case '.js':
-						{
-							this.sourceLanguage = 'javascript';
-							break;
-						}
-						case '.json':
-						{
-							this.sourceLanguage = 'json';
-							break;
-						}
-						case '.css':
-						{
-							this.sourceLanguage = 'css';
-							break;
-						}
-						case '.less':
-						{
-							this.sourceLanguage = 'less';
-							break;
-						}
-						case '.vue':
-						{
-							this.sourceLanguage = 'javascript';
-							break;
-						}
-						case '.php':
-						{
-							this.sourceLanguage = 'php';
-							break;
-						}
-						case '.c':
-						{
-							this.sourceLanguage = 'c_cpp';
-							break;
-						}
-						case '.cpp':
-						{
-							this.sourceLanguage = 'c_cpp';
-							break;
-						}
-						case '.ts':
-						{
-							this.sourceLanguage = 'typescript';
-							break;
-						}
-						case '.d':
-						{
-							this.sourceLanguage = 'd';
-							break;
-						}
-						default:
-						{
-							this.sourceLanguage = '';
-							break;
+							case '.md':
+							{
+								this.sourceLanguage = 'markdown';
+								break;
+							}
+							case '.txt':
+							{
+								this.sourceLanguage = 'plain_text';
+								break;
+							}
+							case '.py':
+							{
+								this.sourceLanguage = 'python';
+								break;
+							}
+							case '.sh':
+							{
+								this.sourceLanguage = 'sh';
+								break;
+							}
+							case '.html':
+							{
+								this.sourceLanguage = 'html';
+								break;
+							}
+							case '.js':
+							{
+								this.sourceLanguage = 'javascript';
+								break;
+							}
+							case '.json':
+							{
+								this.sourceLanguage = 'json';
+								break;
+							}
+							case '.css':
+							{
+								this.sourceLanguage = 'css';
+								break;
+							}
+							case '.less':
+							{
+								this.sourceLanguage = 'less';
+								break;
+							}
+							case '.vue':
+							{
+								this.sourceLanguage = 'javascript';
+								break;
+							}
+							case '.php':
+							{
+								this.sourceLanguage = 'php';
+								break;
+							}
+							case '.c':
+							{
+								this.sourceLanguage = 'c_cpp';
+								break;
+							}
+							case '.cpp':
+							{
+								this.sourceLanguage = 'c_cpp';
+								break;
+							}
+							case '.ts':
+							{
+								this.sourceLanguage = 'typescript';
+								break;
+							}
+							case '.d':
+							{
+								this.sourceLanguage = 'd';
+								break;
+							}
+							default:
+							{
+								this.sourceLanguage = '';
+								break;
+							}
 						}
 					}
 				}

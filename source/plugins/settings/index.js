@@ -8,7 +8,6 @@ export async function setup (options, imports, register)
 {
 	let filesystem = imports.filesystem;
 	let SETTINGS_FOLDER = await filesystem.getSettingsFolder ();
-	filesystem.make
 	let SETTINGS_FILE = path.join (SETTINGS_FOLDER, 'settings.json');
 	try
 	{

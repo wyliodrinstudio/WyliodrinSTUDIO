@@ -1,7 +1,7 @@
 <template>
 	<div v-if="currentProject">
-		<multipane layout="vertical" class="vertical-panes">
-			<div class="pane tree-show":class="treeShow"  :style="{ minWidth: '120px', width: '195px', maxWidth: '400px' }" style="left:0;" v-if="advanced">
+		<multipane @paneResize="panelresize" @paneResizeStop="storeresize" layout="vertical" class="vertical-panes">
+			<div class="pane tree-show" :class="treeShow"  :style="{ minWidth: '195px', width: filetree_size, maxWidth: ' ' }" style="left:0;" v-if="advanced">
 				<div layout="row">
 					<div :class="treeShow" class="tree-show" v-if="advanced">
 						<v-btn text @click="changeClassHide">
@@ -207,7 +207,7 @@
 				</div>
 			</multipane-resizer>
 			<div :class="editorBox" class="hs-100 pane" :style="{ flexGrow: 1, width: '100px' }">
-				<component v-if="currentEditor && currentFile && verifyLanguage(currentProject)" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
+				<component ref="editor" v-if="currentEditor && currentFile && verifyLanguage(currentProject)" :is="currentEditor" :project="currentProject" :filename="currentFile" :active="active"></component>
 				<div v-else-if="!verifyLanguage(currentProject)" class="projects-msg">
 					{{$t('PROJECTS_INVALID_PROJECT')}}
 				</div>
@@ -239,7 +239,6 @@
 import { mapGetters } from 'vuex';
 import path from 'path';
 import ProjectsLibrary from './ProjectsLibrary.vue';
-import $ from 'jquery';
 
 import { Multipane, MultipaneResizer } from 'vue-multipane';
 
@@ -258,6 +257,8 @@ export default {
 			tabItem:null,
 
 			previous:[],
+
+			filetree_size: this.studio.settings.loadValue ('projects', 'filetree_size', '195px'),
 
 			showTree: this.advanced,
 			previousProject: null,
@@ -333,17 +334,15 @@ export default {
 		{
 			this.updateTitle ();
 			await this.dirTree();
-			console.log("This is that");
 			// while(this.items.name === this.previousRoot.name) {
 			// 	await this.dirTree();	
 			// }
 			
 		},
-		async currentFile ()
+		currentFile ()
 		{
 			this.updateTitle ();
 			//await this.dirTree();
-			console.log("THis is this");
 			// while(this.items.name === this.previousRoot.name) {
 			// 	await this.dirTree();	
 			// }
@@ -356,7 +355,7 @@ export default {
 		mode:
 		{
 			immediate: true,
-			async handler ()
+			handler ()
 			{
 				// if(this.mode===true){
 				// 	await this.changeSource({
@@ -401,7 +400,19 @@ export default {
 				items.push (this.fileItem);
 			}
 		},
-		verifyLanguage(project) {
+
+		panelresize ()
+		{
+			if (this.$refs.editor.resize)
+			{
+				this.$refs.editor.resize ();
+			}
+		},
+		storeresize (pane, container, size)
+		{
+			this.studio.settings.storeValue ('projects', 'filetree_size', size);
+		},
+		verifyLanguage() {
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
 			if(language){
 				return true;
@@ -687,12 +698,11 @@ export default {
 					path:'/',
 					key:'/'
 				}];
-				console.log(this.items);
 				this.items = root;
 				
 				this.previous = this.items;
 				
-				console.log(this.items);
+
 			}
 		},
 		async newFolder (item)
@@ -819,7 +829,7 @@ export default {
 		this.previousProject = this.currentProject;
 		this.previousRoot = this.items;
 	}
-}
+};
 	
 </script>
 

@@ -13,7 +13,6 @@
 import VisualAce from './VisualAce.vue';
 import xml from 'xml-js';
 
-import $ from 'jquery';
 import { mapGetters } from 'vuex';
 
 import path from 'path';
@@ -48,10 +47,7 @@ export default {
 		initVisual ()
 		{
 			let Blockly = this.studio.editor_visual.getBlockly();
-			let visualPanel = this.$el;
 			let blocklyDiv = this.$refs.visual;
-
-			let jsToolbox = [];
 
 			let toolbox = this.getToolBox ();
 
@@ -66,7 +62,7 @@ export default {
 					maxScale: 3,
 					minScale: 0.3,
 					scaleSpeed: 1.2},
-				}
+			}
 			);
 
 			// console.log (document.getElementById('toolbox').innerHTML);
@@ -118,7 +114,6 @@ export default {
 		{
 			let toolbox = '<xml>';
 			let toolboxes = this.studio.editor_visual.getToolboxes ();
-			console.log (toolboxes);
 			for (let blocks of toolboxes)
 			{
 				if (((blocks.type === null && blocks.board === null) 
@@ -167,7 +162,11 @@ export default {
 					}
 					catch (e)
 					{
-						console.log (e.message);
+						let visualSource = '# There was an error while generating the file:\n    '+e.message;
+						//this.$emit ('visual-source', visualSource);
+						this.visualSource = visualSource;
+						this.saveVisualSource(this.visualSource, 'py');
+						this.extension = 'py';
 					}
 				}
 				else if (sourceLanguage === 'javascript')
@@ -185,7 +184,11 @@ export default {
 					}
 					catch (e)
 					{
-						console.log (e.emssage);
+						let visualSource = '// There was an error while generating the file:\n    '+e.message;
+						//this.$emit ('visual-source', visualSource);
+						this.visualSource = visualSource;
+						this.saveVisualSource(this.visualSource, 'js');
+						this.extension = 'js';
 					}
 				}
 			}
