@@ -76,7 +76,7 @@ async function loadPlugins (progress = () => {}) {
 	plugins.push ({name:'filesystem.web', consumes:["filesystem"], provides:[], setup: plugin.setup || plugin.default || plugin});
 	progress ('first.run', 25, 51);
 	plugin = await import ('../plugins/first.run/index.js');
-	plugins.push ({name:'first.run', consumes:["events","settings","projects","system","workspace"], provides:[], setup: plugin.setup || plugin.default || plugin});
+	plugins.push ({name:'first.run', consumes:["events","settings","projects","system","workspace"], provides:["firstrun"], setup: plugin.setup || plugin.default || plugin});
 	progress ('language.nodejs', 26, 51);
 	plugin = await import ('../plugins/language.nodejs/index.js');
 	plugins.push ({name:'language.nodejs', consumes:["workspace","projects"], provides:[], setup: plugin.setup || plugin.default || plugin});
@@ -145,7 +145,7 @@ async function loadPlugins (progress = () => {}) {
 	plugins.push ({name:'shell', consumes:["workspace","xterm"], provides:["shell"], setup: plugin.setup || plugin.default || plugin});
 	progress ('statistics', 48, 51);
 	plugin = await import ('../plugins/statistics/index.js');
-	plugins.push ({name:'statistics', consumes:["workspace","hooks","events","projects","settings"], provides:[], setup: plugin.setup || plugin.default || plugin});
+	plugins.push ({name:'statistics', consumes:["workspace","hooks","events","projects","settings","firstrun"], provides:[], setup: plugin.setup || plugin.default || plugin});
 	progress ('system.browser', 49, 51);
 	plugin = await import ('../plugins/system.browser/index.js');
 	plugins.push ({name:'system.browser', consumes:[], provides:["system"], setup: plugin.setup || plugin.default || plugin});
