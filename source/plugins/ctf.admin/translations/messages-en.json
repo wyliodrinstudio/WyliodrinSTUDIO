@@ -1,0 +1,10 @@
+{
+	"EXAMPLE_BUTTTON_NAME": {
+			"message": "Notify",
+			"description": "This button pops-up a notification."
+	},
+	"EXAMPLE_BUTTON_NOTIFICATION_TEXT": {
+			"messages": "You have successfully created your button!",
+			"description": "This is the notification text when the user clicks the button."
+	}
+}
