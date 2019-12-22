@@ -29,7 +29,7 @@ function createDatabase(dbPath) {
 
 function runSQLCMD(cmd) {
     return new Promise((resolve, rejects) => {
-		db.run(cmd, (err) => {
+		db = db.run(cmd, (err) => {
 			if (err) {
 				rejects(err);
 			} else {
@@ -46,6 +46,18 @@ function getFirstRow(table, column, value) {
 				rejects(err);
 			} else {
 				resolve(row);
+			}
+		}) 
+	})
+}
+
+function getAll(table) {
+	return new Promise((resolve, rejects) => {
+		db.all("SELECT * FROM `" + table + "`", (err, rows) => {
+			if (err) {
+				rejects(err);
+			} else {
+				resolve(rows);
 			}
 		}) 
 	})
@@ -83,7 +95,8 @@ async function setup(dbName, studio) {
 			`ID`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\
 			`Question`	TEXT NOT NULL,\
 			`Answer`	TEXT NOT NULL,\
-			`Score`	INTEGER NOT NULL\
+			`Score`	INTEGER NOT NULL,\
+			`LockedBy`	INTEGER NOT NULL\
 		);\
 	');
 
@@ -113,6 +126,7 @@ async function getDbDirPath(studio) {
 export default {
 	runSQLCMD,
 	getFirstRow,
+	getAll,
 	setup,
 	close,
 	getDbDirPath

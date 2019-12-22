@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="344"
+    max-width="600"
     outlined
   >
     <v-list-item three-line>
@@ -20,25 +20,49 @@
           v-model="activeElement"
           :disabled="serverStarted"
         ></v-overflow-btn>
-        <v-text-field
-          v-model="newDbName"
-          label="Choose a data base name"
-          placeholder="newDatabase"
-          :disabled="serverStarted"
-          v-if="activeElement  === 'Create new database'"
-        ></v-text-field>
+        <div v-if="activeElement  === 'Create new database'">
+          <v-layout row wrap align-center>  
+            <v-col :cols="8">
+              <v-text-field
+                v-model="newDbName"
+                label="Choose a data base name"
+                placeholder="newDatabase"
+                :disabled="serverStarted"
+              ></v-text-field>
+            </v-col>
+            <v-col :cols="4">
+              <v-btn :disabled="serverStarted" @click="addDbToList()" color="success" text>Create</v-btn>
+            </v-col>
+          </v-layout>
+        </div>
       </v-list-item-content>
     </v-list-item>
 
     <v-card-actions>
-      <v-btn :disabled="serverStarted" @click="startServer()" color="success" text>Start</v-btn>
+      <v-btn 
+        :disabled="serverStarted 
+                    || (this.dropDownList.length < 2 
+                    || activeElement  === 'Create new database')" 
+        @click="startServer()" 
+        color="success" 
+        text
+      >Start</v-btn>
       <v-btn :disabled="!serverStarted" @click="stopServer()" color="error" text>Stop</v-btn>
+      <v-btn 
+        :disabled="serverStarted 
+                    || (this.dropDownList.length < 2 
+                    || activeElement  === 'Create new database')" 
+        @click="editQuestions()" 
+        color="warning" 
+        text
+      >Edit questions</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
   import moment from 'moment';
+  import Questions from './Questions.vue';
 
 	export default {
     name: 'CTF',
@@ -52,11 +76,15 @@
       }
     },
     async created() {
-        let dbPath = await this.studio.ctf_admin.getDbPath();
         this.dropDownList.push('Create new database');
-        this.dropDownList = this.dropDownList.concat(await this.studio.ctf_admin.getAvailableDatabases(dbPath));
+        this.dropDownList = this.dropDownList.concat(await this.studio.ctf_admin.getAvailableDatabases());
         this.newDbName = "newDatabase" + moment().format('DDMMYYYYhhmm');
-      
+
+        this.dropDownList = this.dropDownList.map((item) => {
+          item = item.replace(/.sqlite$/g, '');
+          return item;
+        });
+
         if (this.dropDownList.length == 1) {
           this.activeElement = this.dropDownList[0];
         } else if (this.dropDownList.length > 1) {
@@ -65,15 +93,7 @@
     },
     methods: {
       startServer() {
-        if (this.activeElement === 'Create new database') {
-          if (this.dropDownList.includes(this.newDbName)) {
-            this.newDbName += moment().format('DDMMYYYYhhmm');
-          }
-          this.activeElement = this.newDbName;
-          this.dropDownList.push(this.activeElement);
-        }
-        
-        this.studio.ctf_admin.startServer(this.portNumber, this.activeElement);
+        this.studio.ctf_admin.startServer(this.portNumber, this.activeElement + '.sqlite');
         this.changeServerButtonState();
       },
       stopServer() {
@@ -82,6 +102,18 @@
       },
       changeServerButtonState() {
         this.serverStarted = !this.serverStarted;
+      },
+      addDbToList() {
+        if (this.activeElement === 'Create new database') {
+          if (this.dropDownList.includes(this.newDbName)) {
+            this.newDbName += moment().format('DDMMYYYYhhmm');
+          }
+          this.activeElement = this.newDbName;
+          this.dropDownList.push(this.activeElement);
+        }
+      },
+      editQuestions() {
+        this.studio.workspace.showDialog(Questions, {width: '700px', activeDb: this.activeElement});
       }
     }
 	}

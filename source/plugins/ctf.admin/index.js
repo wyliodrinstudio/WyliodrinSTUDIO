@@ -37,7 +37,8 @@ let ctf_admin = {
             server = undefined;
         }
     },
-    async getAvailableDatabases(path) {
+    async getAvailableDatabases() {
+        let path = await db.getDbDirPath(studio);
         try {
             let files = await fs.readdir(path);
             return files
@@ -45,8 +46,38 @@ let ctf_admin = {
             console.log(err);
         }
     },
-    async getDbPath() {
-        return await db.getDbDirPath(studio);
+    async getAllQuestions(activeDb) {
+        await db.setup(activeDb, studio);
+        let questions = db.getAll('Questions');
+        await db.close();
+
+        return questions;
+    },
+    async updateDbQuestions(questions, deletedQuestions, activeDb) {
+        await db.setup(activeDb, studio);
+
+        let cmd = '';
+
+        deletedQuestions.forEach (async (ID) => {
+            await db.runSQLCMD("DELETE FROM `Questions` WHERE `ID`='" + ID + "';")
+        })
+
+        questions.forEach(async ({ID, Question, Answer, Score, LockedBy, newQuestion}, idx) => {
+            
+
+            if (newQuestion) {           
+                cmd = "INSERT INTO `Questions`(`ID`,`Question`,`Answer`,`Score`,`LockedBy`) VALUES (" + idx + ",'" 
+                        + Question + "','" + Answer + "'," + Score + ", " + LockedBy +");";
+            } else {
+                cmd = "UPDATE `Questions` SET `Question`='" + Question + "', `Answer`='" + Answer 
+                        + "', `Score`='" + Score + "', `LockedBy`='" + LockedBy + "', `ID`='" + idx + "' WHERE ID='" + ID + "';";
+            }
+
+            console.log(cmd);
+
+            await db.runSQLCMD(cmd)
+        })
+        await db.close();
     }
 }
 
