@@ -4,6 +4,7 @@ import fs from 'fs-extra';
 
 import CTF from './views/CTF.vue';
 import mainRoutes from './routes/main';
+import frontRoutes from './routes/front';
 import db from './functions/database';
 
 let studio = null;
@@ -21,8 +22,10 @@ let ctf_admin = {
         app.use(express.urlencoded({ extended: true }));
         app.use(express.json());
 
-        //Main Routes
+        //Main API Routes
         app.use('/api/v1', mainRoutes);
+        //Frontend Routes
+        app.use('/', frontRoutes);
 
         const PORT = parseInt(port) || 5000;
         server = app.listen(PORT, console.log(`Server started on port ${PORT}`));
@@ -56,7 +59,7 @@ let ctf_admin = {
     async updateDbQuestions(questions, deletedQuestions, activeDb) {
         await db.setup(activeDb, studio);
 
-        let cmd = '';
+        let sqlCMD = '';
 
         deletedQuestions.forEach (async (ID) => {
             await db.runSQLCMD("DELETE FROM `Questions` WHERE `ID`='" + ID + "';")
@@ -66,16 +69,14 @@ let ctf_admin = {
             
 
             if (newQuestion) {           
-                cmd = "INSERT INTO `Questions`(`ID`,`Question`,`Answer`,`Score`,`LockedBy`) VALUES (" + idx + ",'" 
+                sqlCMD = "INSERT INTO `Questions`(`ID`,`Question`,`Answer`,`Score`,`LockedBy`) VALUES (" + idx + ",'" 
                         + Question + "','" + Answer + "'," + Score + ", " + LockedBy +");";
             } else {
-                cmd = "UPDATE `Questions` SET `Question`='" + Question + "', `Answer`='" + Answer 
+                sqlCMD = "UPDATE `Questions` SET `Question`='" + Question + "', `Answer`='" + Answer 
                         + "', `Score`='" + Score + "', `LockedBy`='" + LockedBy + "', `ID`='" + idx + "' WHERE ID='" + ID + "';";
             }
 
-            console.log(cmd);
-
-            await db.runSQLCMD(cmd)
+            await db.runSQLCMD(sqlCMD)
         })
         await db.close();
     }

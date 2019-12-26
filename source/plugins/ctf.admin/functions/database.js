@@ -39,9 +39,17 @@ function runSQLCMD(cmd) {
     })
 }
 
-function getFirstRow(table, column, value) {
+function getFirstRow(table, parameters) {
 	return new Promise((resolve, rejects) => {
-		db.get("SELECT * FROM `" + table + "` WHERE `" + column + "` LIKE '" + value + "'", (err, row) => {
+		let sqlCMD =  "SELECT * FROM `" + table + "`";
+		parameters.forEach(({column, value}, idx) => {
+			if (idx) {
+				sqlCMD += " AND `" + column + "` LIKE '" + value + "'";
+			} else {
+				sqlCMD +=  " WHERE `" + column + "` LIKE '" + value + "'";
+			}
+		});
+		db.get(sqlCMD, (err, row) => {
 			if (err) {
 				rejects(err);
 			} else {
