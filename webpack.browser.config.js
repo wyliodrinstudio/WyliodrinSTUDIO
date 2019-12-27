@@ -16,7 +16,7 @@ let items = [{ from: '.ebextensions/**', context: 'source/web', to: '..' }];
 
 for (let plugin of webPlugins)
 {
-	items.push ({ from: 'plugins/'+plugin.name+'/package*.json', context: 'source' }, { from: 'plugins/'+plugin.name+'/data/**', context: 'source' });
+	items.push ({ from: 'plugins/'+plugin.folder+'/'+plugin.name+'/package*.json', context: 'source' }, { from: 'plugins/'+plugin.folder+'/'+plugin.name+'/data/**', context: 'source' });
 }
 
 class StudioPluginsWeb {
@@ -30,7 +30,7 @@ class StudioPluginsWeb {
 			let index = 0;
 			for (let plugin of webPlugins)
 			{
-				source = source + '\tlet plugin'+index+' = import (\'../plugins/'+plugin.name+'/'+plugin.main+'\').then ((plugin) => { plugins.push ({name:\''+plugin.name+'\', consumes:'+JSON.stringify (plugin.consumes)+', provides:'+JSON.stringify (plugin.provides)+', setup: plugin.setup || plugin.default || plugin}); index=index+1; progress (\''+plugin.name+'\', index, '+webPlugins.length+'); });\n';
+				source = source + '\tlet plugin'+index+' = import (\'../plugins/'+plugin.folder+'/'+plugin.name+'/'+plugin.main+'\').then ((plugin) => { plugins.push ({folder: \''+plugin.folder+'\', name:\''+plugin.name+'\', consumes:'+JSON.stringify (plugin.consumes)+', provides:'+JSON.stringify (plugin.provides)+', setup: plugin.setup || plugin.default || plugin}); index=index+1; progress (\''+plugin.folder+'/'+plugin.name+'\', index, '+webPlugins.length+'); });\n';
 				index=index+1;
 			}
 
@@ -207,12 +207,12 @@ module.exports = env => {
 				template: 'source/web/index.html'
 			}),
 			new TranslationPlugin ({
-				target: 'web'
+				target: 'browser'
 			}),
 			new StudioPluginsWeb (),
 			new webpack.DefinePlugin({
 				...defines,
-				TARGET: 'web'
+				TARGET: 'browser'
 			}),
 			new MonacoEditorPlugin({
 				// https://github.com/Microsoft/monaco-editor-webpack-plugin#options

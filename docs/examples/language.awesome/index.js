@@ -24,7 +24,7 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('awesome', 'awesome', 'plugins/language.awesome/data/img/awesome.png', awesome);
+	studio.projects.registerLanguage('awesome', 'awesome', 'plugins/language.awesome/data/img/project.png', 'plugins/language.awesome/data/img/awesome.png', awesome);
 
 	register (null, {});
 }

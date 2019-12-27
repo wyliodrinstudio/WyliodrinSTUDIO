@@ -24,7 +24,7 @@
 					<template v-for="project in projectList"  >
 						<v-list-item :key="project.name" class="lib-app" @click="selectProject(project)">
 							<v-list-item-avatar>
-								<v-img contain :src="'plugins/projects/projects/data/img/languages/project/'+projectLanguage (project)+'.png'" avatar ></v-img>
+								<v-img contain :src="projectIcon (project)" avatar ></v-img>
 							</v-list-item-avatar>
 
 							<v-list-item-content>
@@ -191,6 +191,12 @@ export default {
 				} else return 'unknown';
 			}
 			this.studio.projects.showProjectsLibrary ();
+		},
+		projectIcon (project)
+		{
+			let language = this.studio.projects.getLanguage(project.language);
+			if (language && language.projectIcon) return language.projectIcon;
+			else return 'plugins/projects/projects/data/img/languages/project/unknown.png';
 		},
 		async selectProject (project)
 		{

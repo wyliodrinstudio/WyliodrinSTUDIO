@@ -17,7 +17,7 @@ export default function setup (options, imports, register)
 			}
 		}
 	}, */
-	let pictograms = [
+	let fileIcons = [
 		{
 			extension: '.sh',
 			icon:'mdi-bash'
@@ -48,7 +48,7 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/languages/shell/data/img/shellLittle.png',pictograms, shell);
+	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/languages/shell/data/img/project.png', 'plugins/languages/shell/data/img/shellLittle.png',fileIcons, shell);
 
 	register (null, {});
 }

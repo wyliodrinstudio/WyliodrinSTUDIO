@@ -801,7 +801,7 @@ The next step is to register the new programming language, using the function :r
 
 .. code-block:: javascript
 
-	studio.projects.registerLanguage('awesome', 'awesome', 'plugins/language.awesome/data/img/awesome.png', awesome);
+	studio.projects.registerLanguage('awesome', 'awesome', 'plugins/language.awesome/data/img/project.png', 'plugins/language.awesome/data/img/awesome.png', awesome);
 
 where the last parameter represents the *awesome* object we created before.
 

@@ -27,7 +27,7 @@ export default function setup(options, imports, register) {
 				getCurrentProject,
 			}
 	 */
-	let pictograms = [
+	let fileIcons = [
 		{
 			extension: '.js',
 			icon:'mdi-language-javascript'
@@ -74,7 +74,7 @@ export default function setup(options, imports, register) {
 		},
 	};
 
-	studio.projects.registerLanguage('nodejs', 'NodeJS', 'plugins/languages/nodejs/data/img/javascriptLittle.png',pictograms, javaScript);
+	studio.projects.registerLanguage('nodejs', 'NodeJS', 'plugins/languages/nodejs/data/img/project.png', 'plugins/languages/nodejs/data/img/javascriptLittle.png',fileIcons, javaScript);
 
 	studio.projects.registerLanguagePackage ('nodejs', null, [
 		{

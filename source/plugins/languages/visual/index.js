@@ -16,7 +16,7 @@ export default function setup(options, imports, register) {
 			}
 		}
 	}, */
-	let pictograms = [
+	let fileIcons = [
 		{
 			extension: '.visual',
 			icon:'mdi-puzzle'
@@ -57,7 +57,7 @@ export default function setup(options, imports, register) {
 		}
 	};
 
-	studio.projects.registerLanguage('visual', 'Visual', 'plugins/languages/visual/data/img/visualLittle.png',pictograms, visual);
+	studio.projects.registerLanguage('visual', 'Visual', 'plugins/languages/visual/data/img/project.png', 'plugins/languages/visual/data/img/visualLittle.png', fileIcons, visual);
 
 	register(null, {});
 }

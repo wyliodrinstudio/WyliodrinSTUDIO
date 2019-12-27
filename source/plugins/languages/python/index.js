@@ -17,7 +17,7 @@ export default function setup (options, imports, register)
 			}
 		}
 	}, */
-	let pictograms = [
+	let fileIcons = [
 		{
 			extension: '.py',
 			icon:'mdi-language-python'
@@ -48,7 +48,7 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('python', 'Python', 'plugins/languages/python/data/img/pythonLittle.png',pictograms, python);
+	studio.projects.registerLanguage('python', 'Python', 'plugins/languages/python/data/img/project.png', 'plugins/languages/python/data/img/pythonLittle.png',fileIcons, python);
 
 	studio.projects.registerLanguagePackage ('python', null, [
 		{

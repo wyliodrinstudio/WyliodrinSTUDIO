@@ -17,7 +17,7 @@ export default function setup (options, imports, register)
 			}
 		}
 	}, */
-	let pictograms = [
+	let fileIcons = [
 		{
 			extension: '.rs',
 			icon:'plugins/languages/rust/data/img/rustLittle.png'
@@ -45,7 +45,7 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('rust', 'Rust', 'plugins/languages/rust/data/img/rust.png', pictograms, rust);
+	studio.projects.registerLanguage('rust', 'Rust', null, 'plugins/languages/rust/data/img/rust.png', fileIcons, rust);
 
 	// studio.projects.registerLanguagePackage ('python', null, [
 	// 	{

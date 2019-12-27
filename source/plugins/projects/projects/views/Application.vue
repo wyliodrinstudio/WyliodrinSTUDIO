@@ -476,7 +476,7 @@ export default {
 		{
 			let language = this.studio.projects.getLanguage(this.currentProject.language);
 			let addons = null;
-			let pictograms = [];
+			let fileIcons = [];
 			if(language){
 				addons = language.addons;
 			} 
@@ -487,9 +487,9 @@ export default {
 			let board = device.board;
 			let pictogram = null;
 			if(language) {
-				pictograms = language.pictograms;
+				fileIcons = language.fileIcons;
 				if(type !== 'none' && board !== 'none' && addons[type + ':' + board] !== undefined) {
-					let addonPictograms = addons[type + ':' + board].pictograms;
+					let addonPictograms = addons[type + ':' + board].fileIcons;
 					if(!pictogram && addonPictograms && addonPictograms.length > 0) {
 						for(let pict of addonPictograms) {
 							if(pict.extension && ext === pict.extension) {
@@ -503,7 +503,7 @@ export default {
 				}
 				
 				if (!pictogram && board !== 'none' && addons['*:' + board] !== undefined) {
-					let addonPictograms = addons['*:' + board].pictograms;
+					let addonPictograms = addons['*:' + board].fileIcons;
 					if(addonPictograms && addonPictograms.length > 0) {
 						for( let pict of addonPictograms) {
 							if(pict.extension && ext === pict.extension) {
@@ -516,7 +516,7 @@ export default {
 				}
 				
 				if (!pictogram && type !== 'none' && addons[type + ':*'] !== undefined) {
-					let addonPictograms = addons[type + ':*'].pictograms;
+					let addonPictograms = addons[type + ':*'].fileIcons;
 					if(addonPictograms && addonPictograms.length > 0) {
 						for( let pict of addonPictograms) {
 							if(pict.extension && ext === pict.extension) {
@@ -530,8 +530,8 @@ export default {
 				}
 				
 				if(!pictogram || (type === 'none' && board === 'none' && !pictogram)) {
-					if(pictograms && pictograms.length > 0) {
-						for( let pict of pictograms) {
+					if(fileIcons && fileIcons.length > 0) {
+						for( let pict of fileIcons) {
 							if(pict.extension && ext === pict.extension) {
 								pictogram = pict.icon;
 							} else if(pict.filename && filename.match(pict.filename)) {

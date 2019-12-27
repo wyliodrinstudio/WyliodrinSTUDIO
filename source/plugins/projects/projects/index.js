@@ -26,7 +26,7 @@ let packages = {};
  * @property {object} addons - the specific features of the language // language addons
  * @property {string} icon - path to the language image
  * @property {string} id - language name
- * @property {array} pictograms - array of language specific pictograms
+ * @property {array} fileIcons - array of language specific fileIcons
  * @property  {Object} options - language functions 
  */
 
@@ -114,26 +114,29 @@ let projects = {
 	 * 
 	 * @param {string} id - language id
 	 * @param {string} title - language title
-	 * @param {string} icon - language icon
+	 * @param {string} projectIcon - icon that appears in the projects library
+	 * @param {string} fileTreeIcon - icon that appears at the top of the file tree
+	 * @param {string} fileIcons - icons for files
 	 * @param {Object} options - language options
 	 * 
 	 * 
 	 * @example
 	 * 
-	 * registerLanguage('python', 'Python', 'plugins/languages/python/data/img/python.png', python);
+	 * registerLanguage('python', 'Python', 'plugins/languages/python/data/img/project_python.png', 'plugins/languages/python/data/img/python.png', python);
 	 */
-	registerLanguage(id, title, icon, pictograms, options) {
-		if(!pictograms) pictograms = [];
+	registerLanguage(id, title, projectIcon, fileTreeIcon, fileIcons, options) {
+		if(!fileIcons) fileIcons = [];
 		if (!options) options = {};
-		if(id !== null && title !== null && icon !== null)
+		if(id !== null && title !== null && fileTreeIcon !== null)
 		{
 			this.languages.push({
 				id,
 				title,
-				icon,
+				projectIcon,
+				icon: fileTreeIcon,
 				addons: {},
 				options: options,
-				pictograms:pictograms
+				fileIcons:fileIcons
 			});
 		} else {
 			studio.workspace.warn('PROJECTS_NULL');
