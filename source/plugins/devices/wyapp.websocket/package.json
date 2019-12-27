@@ -1,0 +1,11 @@
+{
+    "name": "wyapp.websocket",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace", "settings", "device_wyapp"],
+        "provides": [],
+        "target": ["browser", "electron"]
+    }
+}

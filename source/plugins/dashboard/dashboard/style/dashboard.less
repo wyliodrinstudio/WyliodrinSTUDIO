@@ -1,0 +1,105 @@
+@import '../../../../style/var.less';
+@import '../../../../../node_modules/vue-swatches/dist/vue-swatches.min.css';
+.widgets-toolBox {
+    z-index: 0;
+    display: none;
+    width: 178px;
+    padding: 0 5px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+	display:block;
+}
+
+.widget_item {
+    background: @color-grey-5;
+    height: 160px;
+    margin: 7px 0;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+}
+
+.widget_item p.widget_title {
+    background: @color-grey-6;
+    font-size: 12px;
+    font-weight: bold;
+    color: @color-white;
+    text-transform: uppercase;
+	position: absolute;
+    top: 0;
+    width: 100%;
+	margin: 0;
+    padding: 0;
+    line-height: 25px;
+}
+
+.widget_item .v-btn {
+    box-shadow: none !important;
+    height: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.widget_btn .v-btn__content {
+	height: 160px !important;
+}
+
+.widget_item img {
+	position: absolute;
+    left: 0;
+    right: 0;
+	margin: auto;
+	height: initial !important;
+    top: 40px;
+}
+
+.widget_item img:focus {
+	outline:none;
+}
+
+.dashboard-content{
+	position:relative;
+	background:@color-white;
+	overflow: hidden;
+	height: calc(~"100vh - 158px") !important;
+}
+
+.graph-signal {width: calc(~"100% - 190px") !important; height: 100% !important; overflow: auto;
+	li {list-style: none; margin-top: 16px;}
+}
+
+.signal-info {
+    display: inline;
+    padding: 5px 10px;
+    background: @color-grey-5;
+    border-radius: 5px;
+}
+
+.signal-info img{ vertical-align:bottom; }
+
+
+.signalcolor{
+	width:80px !important;
+}
+
+ .dash-btn {height: 36px !important; width: 36px !important; background: none !important; box-shadow: none !important;
+    .v-image__image {max-height: 36px;}
+    .v-btn__content {width: 36px;}
+	.s24 .v-image__image{background-size: 24px !important;}
+	.s18 .v-image__image{background-size: 18px !important;}
+}
+
+.dash-btn:hover {border: 0 !important; background: @color-highlight !important;
+	.v-image__image {filter: invert(100);}
+}
+
+.dash-btn:nth-child(1){margin-left:10px;} 
+
+.graph-title {line-height: 36px; margin:0 16px; float: left;}
+
+.highcharts-container { position: relative; margin: auto; height: 30% !important;}

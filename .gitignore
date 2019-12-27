@@ -96,3 +96,6 @@ tools/translation/*.json
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+source/plugins.js
+source/web/plugins.js

@@ -1,0 +1,11 @@
+{
+    "name": "sendfeedback",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace"],
+        "provides": ["info"],
+        "target": ["electron"]
+    }
+}

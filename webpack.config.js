@@ -6,18 +6,19 @@ const TranslationPlugin = require('./webpack.translation.js');
 const webpack = require('webpack');
 const MonacoEditorPlugin = require('monaco-editor-webpack-plugin');
 const plugins = require('./webpack.plugins.js');
-const license = './LICENSE';
 
 const package_json = require('./package.json');
 
 const fs = require('fs-extra');
 const _ = require('lodash');
 
+const license = fs.readFileSync ('./LICENSE').toString();
+
 let electronPlugins = plugins.loadPlugins('electron');
 let items = [];
 
 for (let plugin of electronPlugins) {
-	items.push({ from: 'plugins/' + plugin.name + '/package*.json', context: 'source' }, { from: 'plugins/' + plugin.name + '/data/**', context: 'source' });
+	items.push({ from: 'plugins/' + plugin.folder + '/' + plugin.name + '/package*.json', context: 'source' }, { from: 'plugins/' + plugin.folder + '/' + plugin.name + '/data/**', context: 'source' });
 }
 
 class StudioPluginsElectron {
@@ -28,8 +29,10 @@ class StudioPluginsElectron {
 
 				compiler.options.entry = {};
 
+				fs.writeFileSync ('./source/plugins.js', 'module.exports = '+JSON.stringify (electronPlugins, null, 2)+';');
+
 				for (let plugin of electronPlugins) {
-					compiler.options.entry[plugin.name] = './source/plugins/' + plugin.name + '/' + plugin.main;
+					compiler.options.entry[plugin.folder+'/'+plugin.name] = './source/plugins/' + plugin.folder + '/' + plugin.name + '/' + plugin.main;
 				}
 			}
 			let build_package_json = _.assign({}, package_json);
@@ -39,8 +42,7 @@ class StudioPluginsElectron {
 			fs.mkdirpSync('./build');
 			fs.writeFileSync('./build/package.json', JSON.stringify(build_package_json, null, 4));
 
-			let build_license = _.assign({}, license);
-			fs.writeFileSync('./build/LICENSE', build_license);
+			fs.writeFileSync('./build/LICENSE', license);
 		});
 
 	}
@@ -173,7 +175,9 @@ module.exports = env => {
 			// 		return false;
 			// 	},
 			// })
-			new TranslationPlugin({}),
+			new TranslationPlugin({
+				target: 'electron'
+			}),
 			new StudioPluginsElectron(),
 			new webpack.DefinePlugin({
 				...defines,
@@ -186,7 +190,7 @@ module.exports = env => {
 				// e.g. Build full languages support with webpack 4.0 takes over 80 seconds
 				// Languages are loaded on demand at runtime
 				// languages: ['css', 'html', 'python', 'cpp', 'sh', 'javascript', 'typescript']
-				output: 'plugins/projects.editor.monaco'
+				output: 'plugins/projects/editor.monaco'
 			})
 		],
 		target: 'electron-renderer'

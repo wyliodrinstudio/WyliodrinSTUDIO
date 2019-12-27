@@ -68,7 +68,7 @@
 								<v-tooltip top v-if="emulator.running === 1">
 									<template v-slot:activator="{ on }">
 										<v-btn text :disabled="qemuCheck" @click="stopEmulator(emulator)" v-on="on" class="emu-btn">
-											<v-img src="plugins/notebook/data/img/icons/stop-icon.png"></v-img>
+											<v-img src="plugins/projects/notebook/data/img/icons/stop-icon.png"></v-img>
 										</v-btn>
 									</template>
 									<span>{{$t('EMULATOR_STOP')}}</span>
@@ -76,7 +76,7 @@
 								<v-tooltip top v-else>
 									<template v-slot:activator="{ on }">
 										<v-btn text :disabled="qemuCheck" @click="startEmulator(emulator)" v-on="on" class="emu-btn">
-											<v-img src="plugins/notebook/data/img/icons/run-icon.png"></v-img>
+											<v-img src="plugins/projects/notebook/data/img/icons/run-icon.png"></v-img>
 										</v-btn>
 									</template>
 									<span>{{$t('EMULATOR_RESTART')}}</span>
@@ -84,7 +84,7 @@
 								<v-tooltip top>
 									<template v-slot:activator="{ on }">
 										<v-btn text :disabled="qemuCheck" @click="deleteEmulator(emulator)" v-on="on" class="emu-btn">
-											<v-img src="plugins/notebook/data/img/icons/delete-icon.png"></v-img>
+											<v-img src="plugins/projects/notebook/data/img/icons/delete-icon.png"></v-img>
 										</v-btn>
 									</template>
 									<span>{{$t('EMULATOR_DELETE')}}</span>

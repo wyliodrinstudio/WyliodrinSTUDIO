@@ -1,0 +1,11 @@
+{
+    "name": "graph.extra",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace","dashboard"],
+        "provides": ["dashboard_graph_extra"],
+        "target": ["electron", "browser"]
+    }
+}

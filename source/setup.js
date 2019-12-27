@@ -1,6 +1,5 @@
 const path = require ('path');
 const architect = require ('./architect');
-const fs = require ('fs-extra');
 const ipcRenderer = require ('electron').ipcRenderer;
 const cowsay = require ('cowsay');
 const jokesData = require ('./itjokes.js');
@@ -48,50 +47,36 @@ function progress (name, index, all)
 	}
 }
 
-async function loadPlugins (pluginsFolder)
+function loadPlugins (pluginsFolder)
 {
 	let plugins = [];
 	try
 	{
-		let list = await fs.readdir (pluginsFolder);
+		plugins = require ('./plugins.js');
 		let pluginNumber = 0;
 		document.querySelector('#loading-progress').style.display='block';
 		document.querySelector('#jokes').innerHTML = cowsay.say ({text: getJoke()});
-		for (let l of list)
+		for (let p of plugins)
 		{
 			pluginNumber = pluginNumber + 1;
-			if ((await fs.stat (path.join (pluginsFolder, l))).isDirectory())
+			try
 			{
-				try
+				progress (p.folder + '/' + p.name, pluginNumber, plugins.length);
+				let plugin = require (path.join (pluginsFolder, p.folder, p.name));
+				let setupFunction = plugin.setup || plugin.default || plugin;
+				if (typeof setupFunction !== 'function')
 				{
-					if (l !== 'vendors~workspace')
-					{
-						let package_json = require (path.join (pluginsFolder, l, 'package.json'));
-						if (!package_json.plugin.disabled)
-						{
-							progress (l, pluginNumber, list.length);
-							let plugin = require (path.join (pluginsFolder, l));
-							let setupFunction = plugin.setup || plugin.default || plugin;
-							if (typeof setupFunction !== 'function')
-							{
-								throw (new Error ('Plugin '+l+' is missing the setup function'));
-							}
-							plugins.push ({
-								consumes: package_json.plugin.consumes,
-								provides: package_json.plugin.provides,
-								setup: setupFunction
-							});
-						}
-					}
+					throw (new Error ('Plugin '+p.name+' is missing the setup function'));
 				}
-				catch (e)
-				{
-					console.error ('Error loading plugin '+l+' '+e.message);
-					console.error (e);
-				}
+				p.setup = setupFunction;
 			}
-			progress ('Your workspace is almost ready ...');
+			catch (e)
+			{
+				console.error ('Error loading plugin '+p.name+' '+e.message);
+				console.error (e);
+			}
 		}
+		progress ('Your workspace is almost ready ...');
 	}
 	catch (e)
 	{

@@ -206,7 +206,9 @@ module.exports = env => {
 				// Load a custom template (lodash by default)
 				template: 'source/web/index.html'
 			}),
-			new TranslationPlugin ({}),
+			new TranslationPlugin ({
+				target: 'web'
+			}),
 			new StudioPluginsWeb (),
 			new webpack.DefinePlugin({
 				...defines,

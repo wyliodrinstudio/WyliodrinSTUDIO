@@ -1,0 +1,11 @@
+{
+    "name": "resistorcolorcodes",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace"],
+        "provides": [],
+        "target": ["electron", "browser"]
+    }
+}

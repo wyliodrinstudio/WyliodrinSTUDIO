@@ -1,28 +1,50 @@
 const fs = require ('fs-extra');
+const path = require ('path');
+
+let plugins = [];
+let latestTarget = '';
 
 module.exports.loadPlugins = (target) =>
 {
-	let plugins = [];
-	let allPlugins = fs.readdirSync('./source/plugins');
+	function loadPluginsFolder (folder) {
+		let localFolder = path.join (__dirname,'source/plugins', folder);
+		let allPlugins = fs.readdirSync(localFolder).filter (file => file !== '.' && file !== '..' && fs.statSync (path.join (localFolder, file)).isDirectory());
 
-	console.log ('Fixing monaco (temporary)');
-	fs.removeSync ('./node_modules/vue-monaco/node_modules');
-
-	for(let plugin of allPlugins)
-	{
-		let package_json = require('./source/plugins/'+ plugin + '/package.json');
-		if (package_json.plugin.target.indexOf (target) >=0)
+		for(let plugin of allPlugins)
 		{
-			if (!package_json.plugin.disabled)
+			let file_package_json = path.join (localFolder, plugin, 'package.json');
+			if (fs.existsSync (file_package_json))
 			{
-				plugins.push ({
-					name: package_json.name,
-					main: package_json.main,
-					consumes: package_json.plugin.consumes,
-					provides: package_json.plugin.provides
-				});
+				let package_json = require(file_package_json);
+				if (package_json.plugin.target.indexOf (target) >=0)
+				{
+					if (!package_json.plugin.disabled)
+					{
+						plugins.push ({
+							folder: folder,
+							name: package_json.name,
+							main: package_json.main,
+							consumes: package_json.plugin.consumes,
+							provides: package_json.plugin.provides
+						});
+					}
+				}
+			}
+			else
+			{
+				loadPluginsFolder (path.join (folder, plugin));
 			}
 		}
 	}
+
+	if (target !== latestTarget)
+	{
+		console.log ('Fixing monaco (temporary)');
+		fs.removeSync ('./node_modules/vue-monaco/node_modules');
+		latestTarget = target;
+		plugins = [];
+		loadPluginsFolder ('');
+	}
+
 	return plugins;
 };

@@ -1,22 +1,28 @@
 const path = require ('path');
 const fs = require ('fs-extra');
 const _ = require ('lodash');
+const plugins = require ('./webpack.plugins.js');
 
 class TranslationPlugin {
+	constructor (options)
+	{
+		this.target = options.target;
+	}
+
 	apply(compiler) {
 		compiler.hooks.environment.tap('Translation Plugin', () => {
 			console.log('Writing translation files');
 			// TODO apply merge here
 			
-			let allPlugins = fs.readdirSync('source/plugins');
-			var TRANSLATION_WRITE = 'source/plugins/workspace/translations.json';
+			let allPlugins = plugins.loadPlugins (this.target);
+			var TRANSLATION_WRITE = 'source/plugins/studio/workspace/translations.json';
 			var languages = {};
 			var translations = {};
 			for(let plugin of allPlugins)
 			{
 				try
 				{
-					let TRANSLATION_READ = 'source/plugins/'+plugin+'/translations/';
+					let TRANSLATION_READ = 'source/plugins/'+plugin.folder+'/'+plugin.name+'/translations/';
 					let languageList = fs.readdirSync (TRANSLATION_READ);
 
 					for (let file of languageList)
