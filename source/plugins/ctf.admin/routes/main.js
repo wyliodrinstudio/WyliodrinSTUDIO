@@ -1,4 +1,6 @@
 import express from 'express';
+import vm from 'vm';
+import util from 'util';
 
 import db from '../functions/database';
 
@@ -31,7 +33,7 @@ router.get('/questions', async (req, res) => {
 });
 
 router.post('/team/add', async (req, res) => {
-	let {teamName} = req.body;
+	let {teamName, boardID} = req.body;
 	
 	let team = await db.getFirstRow('Teams', [
 		{
@@ -41,7 +43,7 @@ router.post('/team/add', async (req, res) => {
 	])
 
 	if (!team) {
-		await db.runSQLCMD("INSERT INTO `Teams`(`Name`) VALUES ('" + teamName + "');")
+		await db.runSQLCMD("INSERT INTO `Teams`(`Name`,`BoardID`) VALUES ('" + teamName + "', " + boardID + ");")
 		res.sendStatus(200);
 	} else {
 		res.send({
@@ -65,38 +67,39 @@ router.post('/answer/start', async (req, res) => {
 			value: questionText
 		}
 	])
-	let answer = await db.getFirstRow('Answers', [
-		{
-			column: 'TeamID',
-			value: team.ID
-		},
-		{
-			column: 'QuestionID',
-			value: question.ID
-		}
-	])
 
 	
-	if (!answer) {
-		if (team) {
-			if (question) {
+	if (team) {
+		if (question) {
+			let answer = await db.getFirstRow('Answers', [
+				{
+					column: 'TeamID',
+					value: team.ID
+				},
+				{
+					column: 'QuestionID',
+					value: question.ID
+				}
+			])
+			
+			if (!answer) {
 				await db.runSQLCMD("INSERT INTO `Answers`(`QuestionID`, `TeamID`, `Started`) VALUES (" + question.ID 
 										+ "," + team.ID + "," + Date.now().toString() + ");")
 				
 				res.sendStatus(200);
 			} else {
 				res.send({
-					err: 'Missing question'
+					err: 'Question already started'
 				})
 			}
 		} else {
 			res.send({
-				err: 'Missing team'
+				err: 'Missing question'
 			})
 		}
 	} else {
 		res.send({
-			err: 'Question already started'
+			err: 'Missing team'
 		})
 	}
 });
@@ -116,29 +119,45 @@ router.post('/answer/finish', async (req, res) => {
 			value: questionText
 		}
 	])
-	let answer = await db.getFirstRow('Answers', [
-		{
-			column: 'TeamID',
-			value: team.ID
-		},
-		{
-			column: 'QuestionID',
-			value: question.ID
-		}
-	])
-
 	
 	if (team) {
-		if (question) {
+		if (question) {	
+			let answer = await db.getFirstRow('Answers', [
+				{
+					column: 'TeamID',
+					value: team.ID
+				},
+				{
+					column: 'QuestionID',
+					value: question.ID
+				}
+			])
+		
+
 			if (answer) {
-				let sqlCMD = "UPDATE `Answers` SET `Finished`='" + Date.now().toString() + "', `Score`='" + question.Score
+				const sandbox = { boardID: team.BoardID };
+				vm.createContext(sandbox);
+				const code = 'var answer = ' + question.Answer;
+				try {
+					vm.runInContext(code, sandbox);
+				} catch (err) {
+					console.log(err);
+				}
+
+				if (sandbox.answer === teamAnswer) {
+					let sqlCMD = "UPDATE `Answers` SET `Finished`='" + Date.now().toString() + "', `Score`='" + question.Score
 								+ "' WHERE ID='" + answer.ID + "';";
 				
+					console.log(sqlCMD);
+					await db.runSQLCMD(sqlCMD);
 
-				console.log(sqlCMD);
-				await db.runSQLCMD(sqlCMD);
-
-				res.sendStatus(200);
+					res.sendStatus(200);
+				} else {
+					res.send({
+						err: 'Wrong answer'
+					})
+				}
+				
 			} else {
 				res.send({
 					err: 'Question didn\'t started yet'
@@ -155,6 +174,5 @@ router.post('/answer/finish', async (req, res) => {
 		})
 	}
 });
-
 
 export default router;

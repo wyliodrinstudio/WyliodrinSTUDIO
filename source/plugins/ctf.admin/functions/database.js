@@ -94,7 +94,8 @@ async function setup(dbName, studio) {
 	await runSQLCMD('\
 		CREATE TABLE IF NOT EXISTS `Teams` ( \
 			`ID`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, \
-			`Name`	TEXT NOT NULL \
+			`Name`	TEXT NOT NULL,\
+			`BoardID`	INTEGER NOT NULL\
 		);\
 	');
 

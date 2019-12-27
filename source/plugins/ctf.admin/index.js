@@ -66,8 +66,6 @@ let ctf_admin = {
         })
 
         questions.forEach(async ({ID, Question, Answer, Score, LockedBy, newQuestion}, idx) => {
-            
-
             if (newQuestion) {           
                 sqlCMD = "INSERT INTO `Questions`(`ID`,`Question`,`Answer`,`Score`,`LockedBy`) VALUES (" + idx + ",'" 
                         + Question + "','" + Answer + "'," + Score + ", " + LockedBy +");";
@@ -76,7 +74,13 @@ let ctf_admin = {
                         + "', `Score`='" + Score + "', `LockedBy`='" + LockedBy + "', `ID`='" + idx + "' WHERE ID='" + ID + "';";
             }
 
-            await db.runSQLCMD(sqlCMD)
+            console.log(sqlCMD);
+
+            try {
+                await db.runSQLCMD(sqlCMD)
+            } catch (err) {
+                console.log(err);
+            }
         })
         await db.close();
     }

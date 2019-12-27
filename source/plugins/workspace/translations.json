@@ -121,6 +121,7 @@
          "CHAT_LOGIN_BUTTON": "Login",
          "CONSOLE": "Console",
          "CONSOLE_NO_SHELL": "Run a project to enable the console",
+         "EXAMPLE_BUTTTON_NAME": "Notify",
          "PROJECT_DASHBOARD": "Dashboard",
          "DASHBOARD_VIEWER_INVALID_SIGNAL": "Signal name invalid",
          "DASHBOARD_VIEWER_MOVE_LEFT": "Move left",
