@@ -1,3 +1,6 @@
+## Wyliodrin STUDIO 2.1.4-beta
+  * **update** editor registering to use extension or regular expressions
+
 ## Wyliodrin STUDIO 2.1.3-beta
   * **added** resizable project tree
   * **fixed** display IP address for local web server

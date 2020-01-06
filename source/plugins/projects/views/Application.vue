@@ -317,10 +317,10 @@ export default {
 			let baseEditor = null;
 			if (this.currentFile)
 			{
-				let extension = path.extname (this.currentFile).substring (1).toLowerCase();
+				// let extension = path.extname (this.currentFile).substring (1).toLowerCase();
 				for (let editor of this.editors) {
 					for (let lang of editor.languages) {
-						if (lang === extension) {
+						if (lang.test (this.currentFile)) {
 							return editor.component;
 						}
 					}

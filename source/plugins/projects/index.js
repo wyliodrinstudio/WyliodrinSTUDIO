@@ -231,6 +231,14 @@ let projects = {
 			visible: () => true,
 			enabled: () => true
 		}, options);
+		languages = languages.map ((lang) => {
+			let l = lang;
+			if (!(lang instanceof RegExp))
+			{
+				l = new RegExp (lang.toString()+'$');
+			}
+			return l;
+		});
 		let sameEditors = editors.find((editor) => editor.name === name);
 		if (!sameEditors) {
 			studio.workspace.registerComponent(component);
