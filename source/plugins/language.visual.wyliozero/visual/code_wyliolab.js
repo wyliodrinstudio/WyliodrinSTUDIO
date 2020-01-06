@@ -173,10 +173,10 @@ module.exports = function (blockly) {
 		Blockly.Python.wyliozero_setUp();
 		var value_variable = Blockly.Python.valueToCode(block, 'variable', Blockly.Python.ORDER_ATOMIC);
 		var value_msg = Blockly.Python.valueToCode(block, 'msg', Blockly.Python.ORDER_ATOMIC);
-		var statements_function = Blockly.Python.statementToCode(block, 'function');
+		var statements_function = Blockly.Python.statementToCode(block, 'function') || '  pass\n\n';
 		var functionName = Blockly.Python.uniqueName('function');
 		// TODO: Assemble Python into code variable.
-		var code =  'def ' + functionName + '(' + value_msg.toString() + '):\n\t' + statements_function.toString()
+		var code =  'def ' + functionName + '(' + value_msg.toString() + '):\n' + statements_function.toString()
 					+ value_variable + '.when_updated = ' + functionName + '\n';
 		return code;
 	};
@@ -401,7 +401,7 @@ module.exports = function (blockly) {
 	Blockly.Python['wyliozero_button_when_held'] = function(block) {
 		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-		var statements_function = Blockly.Python.statementToCode(block, 'function');
+		var statements_function = Blockly.Python.statementToCode(block, 'function') || '  pass\n\n';
 		var functionName = Blockly.Python.uniqueName('function');
 		// TODO: Assemble Python into code variable.
 		var code =  '\ndef ' + functionName + '():\n' + statements_function.toString()
@@ -412,7 +412,7 @@ module.exports = function (blockly) {
 	Blockly.Python['wyliozero_button_when_pressed'] = function(block) {
 		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-		var statements_function = Blockly.Python.statementToCode(block, 'function');
+		var statements_function = Blockly.Python.statementToCode(block, 'function') || '  pass\n\n';
 		var functionName = Blockly.Python.uniqueName('function');
 		// TODO: Assemble Python into code variable.
 		var code =  '\ndef ' + functionName + '():\n' + statements_function.toString()
@@ -423,10 +423,10 @@ module.exports = function (blockly) {
 	Blockly.Python['wyliozero_button_when_released'] = function(block) {
 		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-		var statements_function = Blockly.Python.statementToCode(block, 'function');
+		var statements_function = Blockly.Python.statementToCode(block, 'function') || '  pass\n\n';
 		var functionName = Blockly.Python.uniqueName('function');
 		// TODO: Assemble Python into code variable.
-		var code =  '\ndef ' + functionName + '():\n\t' + statements_function.toString()
+		var code =  '\ndef ' + functionName + '():\n' + statements_function.toString()
 				+ value_pin + '.when_released = ' + functionName + '\n';
 		return code;
 	};
@@ -587,10 +587,10 @@ module.exports = function (blockly) {
 	Blockly.Python['wyliozero_light_when_dark'] = function(block) {
 		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-		var statements_function = Blockly.Python.statementToCode(block, 'function');
+		var statements_function = Blockly.Python.statementToCode(block, 'function') || '  pass\n\n';
 		var functionName = Blockly.Python.uniqueName('function');
 		// TODO: Assemble Python into code variable.
-		var code =  '\ndef ' + functionName + '():\n\t' + statements_function.toString()
+		var code =  '\ndef ' + functionName + '():\n' + statements_function.toString()
 				+ value_pin + '.when_dark = ' + functionName + '\n\n';
 		return code;
 	};
@@ -598,10 +598,10 @@ module.exports = function (blockly) {
 	Blockly.Python['wyliozero_light_when_light'] = function(block) {
 		Blockly.Python.wyliozero_setUp();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-		var statements_function = Blockly.Python.statementToCode(block, 'function');
+		var statements_function = Blockly.Python.statementToCode(block, 'function') || '  pass\n\n';
 		var functionName = Blockly.Python.uniqueName('function');
 		// TODO: Assemble Python into code variable.
-		var code =  '\ndef ' + functionName + '():\n\t' + statements_function.toString()
+		var code =  '\ndef ' + functionName + '():\n' + statements_function.toString()
 				+ value_pin + '.when_light = ' + functionName + '\n\n';
 		return code;
 	};

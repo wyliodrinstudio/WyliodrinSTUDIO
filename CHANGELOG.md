@@ -3,8 +3,10 @@
   * **fixed** display IP address for local web server
   * **fixed** welcome screen appearing every time
   * **fixed** loading issue that sometimes prevents studio to access the filesystem
-  * **fixed** visual programming gpiozero and wyliozero blocks for buttons (deleted extra tab)
+  * **fixed** visual programming gpiozero and wyliozero blocks for buttons and light (deleted extra tab)
+  * **fixed** visual programming gpiozero and wyliozero empty function declaration
   * **update** browser loading speedup by asynchronous plugin loading
+  * **update** monaco editor version to 0.19
 
 ## Wyliodrin STUDIO 2.1.2-beta
   * **added** electron auto-update version (windows only)

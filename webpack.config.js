@@ -114,6 +114,10 @@ module.exports = env => {
 					test: /\.txt$/i,
 					use: 'raw-loader',
 				},
+				{
+					test: /\.ttf$/,
+					use: ['file-loader']
+				}
 				// {
 				// 	test: /\.ts$/,
 				// 	loader: 'ts-loader',

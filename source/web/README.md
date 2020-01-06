@@ -35,7 +35,7 @@ Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.
 npm install --global --production wstudio-web
 ```
 
-## Runb
+## Run
 
 ```
 wstudio-web
