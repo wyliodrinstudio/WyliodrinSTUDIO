@@ -15,7 +15,6 @@ router.get('/questions', async (req, res) => {
 		let questions = [];
 		
 		(await db.getAll('Questions')).map(({ID, LockedBy, Question}) => {
-			console.log(ID, LockedBy, Question);
 			questions.push({
 				id: ID,
 				lockedBy: LockedBy,
@@ -31,6 +30,31 @@ router.get('/questions', async (req, res) => {
 		})
 	} 
 });
+
+router.get('/answers', async (req, res) => {
+	try {
+		let answers = [];
+
+		(await db.getAll(`Answers`)).map(({ID, TeamID, QuestionID, Started, Finished, Score}) => {
+			answers.push({
+				id: ID,
+				teamID: TeamID,
+				questionID: QuestionID,
+				started: Started,
+				finished: Finished,
+				score: Score
+			})
+		});
+
+		console.log();
+		res.send(answers);
+	} catch (err) {
+		console.error(err);
+		res.send({
+			err: "There was a problem fetching the answers from database"
+		})
+	}
+})
 
 router.post('/team/add', async (req, res) => {
 	let {teamName, boardID} = req.body;
