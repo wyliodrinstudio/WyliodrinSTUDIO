@@ -3,6 +3,7 @@
   * **fixed** display IP address for local web server
   * **fixed** welcome screen appearing every time
   * **fixed** loading issue that sometimes prevents studio to access the filesystem
+  * **fixed** visual programming gpiozero and wyliozero blocks for buttons (deleted extra tab)
   * **update** browser loading speedup by asynchronous plugin loading
 
 ## Wyliodrin STUDIO 2.1.2-beta

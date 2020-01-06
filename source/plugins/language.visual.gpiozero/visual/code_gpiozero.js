@@ -196,7 +196,7 @@ module.exports = function (blockly) {
 		var statements_function = Blockly.Python.statementToCode(block, 'function');
 		var functionName = Blockly.Python.gpiozero_uniqueName('function');
 		// TODO: Assemble Python into code variable.
-		var code =  '\ndef ' + functionName + '():\n\t' + statements_function.toString()
+		var code =  '\ndef ' + functionName + '():\n' + statements_function.toString()
 				+ value_pin + '.when_pressed = ' + functionName + '\n\n';
 		return code;
 	};
@@ -207,7 +207,7 @@ module.exports = function (blockly) {
 		var statements_function = Blockly.Python.statementToCode(block, 'function');
 		var functionName = Blockly.Python.gpiozero_uniqueName('function');
 		// TODO: Assemble Python into code variable.
-		var code =  '\ndef ' + functionName + '():\n\t' + statements_function.toString()
+		var code =  '\ndef ' + functionName + '():\n' + statements_function.toString()
 				+ value_pin + '.when_released = ' + functionName + '\n';
 		return code;
 	};
