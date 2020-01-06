@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import path from 'path';
 import fs from 'fs-extra';
 
@@ -18,6 +19,9 @@ let ctf_admin = {
     async startServer(port, dbName) {
         await db.setup(dbName, studio);
         
+        // Allow all cors
+        app.use(cors());
+
         // Express body parser
         app.use(express.urlencoded({ extended: true }));
         app.use(express.json());
@@ -25,7 +29,9 @@ let ctf_admin = {
         //Main API Routes
         app.use('/api/v1', mainRoutes);
         //Frontend Routes
-        app.use('/', frontRoutes);
+        // app.use('/', frontRoutes);
+        app.use('/', express.static(path.join(__dirname, 'data' , 'frontend')));
+        console.log(path.join(__dirname, 'frontend'));
 
         const PORT = parseInt(port) || 5000;
         server = app.listen(PORT, console.log(`Server started on port ${PORT}`));
