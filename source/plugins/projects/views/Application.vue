@@ -320,6 +320,8 @@ export default {
 				// let extension = path.extname (this.currentFile).substring (1).toLowerCase();
 				for (let editor of this.editors) {
 					for (let lang of editor.languages) {
+						console.log (lang);
+						console.log (lang.test (this.currentFile));
 						if (lang.test (this.currentFile)) {
 							return editor.component;
 						}

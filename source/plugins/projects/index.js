@@ -235,7 +235,7 @@ let projects = {
 			let l = lang;
 			if (!(lang instanceof RegExp))
 			{
-				l = new RegExp (lang.toString()+'$');
+				l = new RegExp ('\\.'+lang.toString()+'$');
 			}
 			return l;
 		});
