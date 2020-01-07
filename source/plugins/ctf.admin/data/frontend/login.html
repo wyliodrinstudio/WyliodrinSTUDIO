@@ -25,48 +25,26 @@
 </head>
 
 <body>
-	<div id="questions-app">
+	<div id="login-app">
 		<v-app>
 			<div class="jumbotron jumbotron-fluid text-black" style="background-color:orange">
 				<div class="container">
 					<h1 class="text-center"> Welcome to USO CTF </h1>
 				</div>
 			</div>
-			<div class="container" >
+			<div class="container">
 				<div style="margin: auto; width: fit-content;">
 					<p>
-						<v-text-field v-model="teamName" label="Team Name"></v-text-field>
-					</p>
-					<p>
-						<v-text-field v-model="boardID" label="Board ID"></v-text-field>
+						<v-text-field v-model="hashTag" label="Hashtag"></v-text-field>
 					</p>
 				</div>
 				<div style="margin: auto; width: fit-content;">
-					<v-btn v-on:click="post"> Register </button>
+					<v-btn v-on:click.prevent="post"> Login </v-btn>
 				</div>
 			</div>
-
-			<v-snackbar v-model="snackbar1" persistent :multi-line="multiLine">
-				Please insert Team Name
-				<v-btn color="red" text @click="snackbar1 = false">
-					Close
-				</v-btn>
-			</v-snackbar>
-
-			<v-snackbar v-model="snackbar2" persistent :multi-line="multiLine">
-				Please insert Board ID
-				<v-btn color="red" text @click="snackbar2 = false">
-					Close
-				</v-btn>
-			</v-snackbar>
-
-			<v-snackbar v-model="teamNameUsed" persistent :multi-line="multiLine">
-				{{ response }}
-				<v-btn color="red" text @click="teamNameUsed = false">
-					Close
-				</v-btn>
-			</v-snackbar>
 		</v-app>
 	</div>
-	<script src="./js/index.js"></script>
+	<script src="./js/login.js"></script>
 </body>
+
+</html>
