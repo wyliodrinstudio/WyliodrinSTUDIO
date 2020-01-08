@@ -14,10 +14,10 @@ router.get('/questions', async (req, res) => {
 	try {
 		let questions = [];
 		
-		(await db.getAll('Questions')).map(({ID, LockedBy, Question}) => {
+		(await db.getAll('Questions')).map(({ID, Parent, Question}) => {
 			questions.push({
 				id: ID,
-				lockedBy: LockedBy,
+				parent: Parent,
 				question: Question
 			});
 		})
@@ -66,31 +66,42 @@ router.post('/team/add', async (req, res) => {
 	])
 
 	if (!team) {
-		await db.runSQLCMD("INSERT INTO `Teams`(`Name`,`BoardID`) VALUES ($teamNAme, $boardID;", {
+		await db.runSQLCMD("INSERT INTO `Teams` (`Name`,`BoardID`) VALUES ($teamName, $boardID);", {
 			$teamName: teamName,
 			$boardID: boardID
 		})
-		res.sendStatus(200);
+
+		team = await db.getFirstRow('Teams', [
+			{
+				column: 'Name',
+				value: teamName
+			}
+		])
+
+		res.send({
+			teamID: team.ID
+		});
 	} else {
 		res.send({
+			teamID: team.ID,
 			err: 'Team name is already in use'
 		})
 	}
 });
 
 router.post('/answer/start', async (req, res) => {
-	let {teamName, questionText} = req.body;
+	let {teamID, questionID} = req.body;
 
 	let team = await db.getFirstRow('Teams', [
 		{
-			column: 'Name',
-			value: teamName
+			column: 'ID',
+			value: teamID
 		}
 	])
 	let question = await db.getFirstRow('Questions', [
 		{
-			column: 'Question',
-			value: questionText
+			column: 'ID',
+			value: questionID
 		}
 	])
 
@@ -110,7 +121,7 @@ router.post('/answer/start', async (req, res) => {
 			
 			if (!answer) {
 
-				await db.runSQLCMD("INSERT INTO `Answers`(`QuestionID`, `TeamID`, `Started`) VALUES ($questionID,$teamID,$startMoment);", {
+				await db.runSQLCMD("INSERT INTO `Answers`(`QuestionID`,`TeamID`,`Started`) VALUES ($questionID,$teamID,$startMoment);", {
 					$questionID: question.ID,
 					$teamID: team.ID,
 					$startMoment: Date.now().toString()
@@ -135,18 +146,18 @@ router.post('/answer/start', async (req, res) => {
 });
 
 router.post('/answer/finish', async (req, res) => {
-	let { teamName, questionText, teamAnswer } = req.body;
+	let { teamID, questionID, teamAnswer } = req.body;
 
 	let team = await db.getFirstRow('Teams', [
 		{
-			column: 'Name',
-			value: teamName
+			column: 'ID',
+			value: teamID
 		}
 	])
 	let question = await db.getFirstRow('Questions', [
 		{
 			column: 'Question',
-			value: questionText
+			value: questionID
 		}
 	])
 	
@@ -165,36 +176,56 @@ router.post('/answer/finish', async (req, res) => {
 		
 
 			if (answer) {
-				const sandbox = { boardID: team.BoardID };
-				vm.createContext(sandbox);
-				let code = '';
-				if (question.AnswerType === 0) {
-					code = 'function myFunc () {\nreturn "' + question.Answer + '" \n}'; 
-				} else {
-					code = 'function myFunc () {\n' + question.Answer + ' \n}';
-				}
-
-				try {
-					vm.runInContext(code, sandbox);
-				} catch (err) {
-					console.log(err);
-				}
-
-
-				if (sandbox.myFunc() === teamAnswer) {
-					await db.runSQLCMD("UPDATE `Answers` SET `Finished`=$finishMoment, `Score`=$questionScore WHERE ID=$answerID';", {
-						$finishMoment: Date.now().toString(),
-						$questionScore: question.Score,
-						$answerID: answer.ID
-					});
-
-					res.sendStatus(200);
+				if (!answer.Finished) {
+					const sandbox = { boardID: team.BoardID };
+					vm.createContext(sandbox);
+					let code = '';
+					if (question.AnswerType === 0) {
+						code = 'function myFunc () {\nreturn "' + question.Answer + '" \n}'; 
+					} else {
+						code = 'function myFunc () {\n' + question.Answer + ' \n}';
+					}
+	
+					try {
+						vm.runInContext(code, sandbox);
+					} catch (err) {
+						console.log(err);
+					}
+	
+	
+					if (sandbox.myFunc() === teamAnswer) {
+						let answers = (await db.getAll(`Answers`)).filter((item) => {
+							return item.QuestionID === question.ID && item.Finished;
+						})
+	
+						switch(answers.length) {
+							case 1:
+								question.Score *= 1;
+								break;
+							case 2:
+								question.Score *= 0.8;
+								break;
+							default:
+								question.Score *= 0.6;
+						  }
+	
+						await db.runSQLCMD("UPDATE `Answers` SET `Finished`=$finishMoment, `Score`=$questionScore WHERE ID=$answerID;", {
+							$finishMoment: Date.now().toString(),
+							$questionScore: question.Score,
+							$answerID: answer.ID
+						});
+	
+						res.sendStatus(200);
+					} else {
+						res.send({
+							err: 'Wrong answer'
+						})
+					}
 				} else {
 					res.send({
-						err: 'Wrong answer'
+						err: 'Question already answered'
 					})
 				}
-				
 			} else {
 				res.send({
 					err: 'Question didn\'t started yet'
