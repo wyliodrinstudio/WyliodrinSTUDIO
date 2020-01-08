@@ -18,7 +18,11 @@ export function setup (options, imports, register)
 		{
 			name: 'gpiozero',
 			description: 'A simple interface to GPIO devices with Raspberry Pi.'
-		}
+		},
+		{
+			name: 'RPi.GPIO',
+			description: 'A module to control Raspberry Pi GPIO channels.'
+		},
 	]);
 
 	studio.editor_visual.registerBlocksDefinitions ('gpiozero', blocks, code, toolbox, {

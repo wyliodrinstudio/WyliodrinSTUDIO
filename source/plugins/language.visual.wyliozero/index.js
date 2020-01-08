@@ -15,7 +15,10 @@ export function setup (options, imports, register)
 		{
 			name: 'wyliozero',
 			description: 'WyliodrinLab'
-		}
+		},{
+			name: 'RPi.GPIO',
+			description: 'A module to control Raspberry Pi GPIO channels.'
+		},
 	]);
 
 	let toolbox = xml.xml2js (toolboxStr);
