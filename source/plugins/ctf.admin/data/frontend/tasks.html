@@ -52,11 +52,11 @@
 				</v-dialog>
 			</v-row>
 			
-			<v-snackbar v-model="snackbar1" persistent :multi-line="multiLine">
-				<p v-if="serverResponse == 200">
+			<v-snackbar v-model="snackbar1" persistent :multi-line="multiLine" top right>
+				<p v-if="serverResponse == 'OK'" style="margin: auto; width: fit-content;">
 					Correct answer!
 				</p>
-				<p v-else>
+				<p v-else style="margin: auto; width: fit-content;">
 					{{ serverResponse }}					
 				</p>
 				<v-btn color="red" text @click="snackbar1 = false">

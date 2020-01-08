@@ -46,21 +46,21 @@
 				</div>
 			</div>
 
-			<v-snackbar v-model="snackbar1" persistent :multi-line="multiLine">
+			<v-snackbar v-model="snackbar1" persistent :multi-line="multiLine" top right>
 				Please insert Team Name
 				<v-btn color="red" text @click="snackbar1 = false">
 					Close
 				</v-btn>
 			</v-snackbar>
 
-			<v-snackbar v-model="snackbar2" persistent :multi-line="multiLine">
+			<v-snackbar v-model="snackbar2" persistent :multi-line="multiLine" top right>
 				Please insert Board ID
 				<v-btn color="red" text @click="snackbar2 = false">
 					Close
 				</v-btn>
 			</v-snackbar>
 
-			<v-snackbar v-model="teamNameUsed" persistent :multi-line="multiLine">
+			<v-snackbar v-model="teamNameUsed" persistent :multi-line="multiLine" top right>
 				{{ response }}
 				<v-btn color="red" text @click="teamNameUsed = false">
 					Close

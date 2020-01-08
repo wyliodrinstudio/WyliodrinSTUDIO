@@ -161,7 +161,7 @@ router.post('/answer/finish', async (req, res) => {
 			if (answer) {
 				const sandbox = { boardID: team.BoardID };
 				vm.createContext(sandbox);
-				const code = 'var answer = ' + question.Answer;
+				const code = 'var answer = \'' + question.Answer + '\';';
 				try {
 					vm.runInContext(code, sandbox);
 				} catch (err) {

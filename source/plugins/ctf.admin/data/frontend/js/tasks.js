@@ -1,7 +1,7 @@
 new Vue({
     el: '#tasks-app',
     vuetify: new Vuetify(),
-	data: {
+    data: {
         multiLine: false,
         response: '',
         questionDialog: false,
@@ -17,42 +17,43 @@ new Vue({
             // get body data
             this.questions = response.data;
             console.log(this.questions.length)
-          }, response => {
+        }, response => {
             // error callback
             console.log('get error');
         });
     },
     methods: {
-        submit: function() {
+        submit: function () {
             this.questionDialog = false;
             let teamNameUsed = 'salut';
-            this.$http.post('/api/v1/answer/finish', { teamName: teamNameUsed, questionText: this.currentQuestion, teamAnswer: this.response} ).then ( response => {
-                if (response.data.err === 'Wrong answer') {
+            this.$http.post('/api/v1/answer/finish', { teamName: teamNameUsed, questionText: this.currentQuestion, teamAnswer: this.response }).then(response => {
+                if (response.data.err) {
                     this.serverResponse = response.data.err;
                     this.snackbar1 = true;
                 } else {
                     this.snackbar1 = true;
                 }
+                console.log(response.data);
             });
-            
+
             this.response = '';
         },
-        taskFunction: function(question) {
+        taskFunction: function (question) {
             this.currentQuestion = question;
-            this.response =  '';
+            this.response = '';
             this.questionDialog = true;
         },
-        closeDialog: function() {
+        closeDialog: function () {
             this.questionDialog = false;
         },
         startTask() {
             let teamNameUsed = 'salut';
-            this.$http.post('/api/v1/answer/start', { teamName: teamNameUsed, questionText: this.currentQuestion} ).then ( response => {
+            this.$http.post('/api/v1/answer/start', { teamName: teamNameUsed, questionText: this.currentQuestion }).then(response => {
                 if (response.data.err) {
                     this.teamNameUsed = true;
                     this.serverResponse = response.data.err;
                 }
-//                console.log(response.data);
+                //                console.log(response.data);
             });
         }
     }
