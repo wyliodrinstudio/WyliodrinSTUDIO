@@ -46,7 +46,6 @@ router.get('/answers', async (req, res) => {
 			})
 		});
 
-		console.log();
 		res.send(answers);
 	} catch (err) {
 		console.error(err);
@@ -67,7 +66,10 @@ router.post('/team/add', async (req, res) => {
 	])
 
 	if (!team) {
-		await db.runSQLCMD("INSERT INTO `Teams`(`Name`,`BoardID`) VALUES ('" + teamName + "', " + boardID + ");")
+		await db.runSQLCMD("INSERT INTO `Teams`(`Name`,`BoardID`) VALUES ($teamNAme, $boardID;", {
+			$teamName: teamName,
+			$boardID: boardID
+		})
 		res.sendStatus(200);
 	} else {
 		res.send({
@@ -107,9 +109,13 @@ router.post('/answer/start', async (req, res) => {
 			])
 			
 			if (!answer) {
-				await db.runSQLCMD("INSERT INTO `Answers`(`QuestionID`, `TeamID`, `Started`) VALUES (" + question.ID 
-										+ "," + team.ID + "," + Date.now().toString() + ");")
-				
+
+				await db.runSQLCMD("INSERT INTO `Answers`(`QuestionID`, `TeamID`, `Started`) VALUES ($questionID,$teamID,$startMoment);", {
+					$questionID: question.ID,
+					$teamID: team.ID,
+					$startMoment: Date.now().toString()
+				})
+
 				res.sendStatus(200);
 			} else {
 				res.send({
@@ -161,19 +167,26 @@ router.post('/answer/finish', async (req, res) => {
 			if (answer) {
 				const sandbox = { boardID: team.BoardID };
 				vm.createContext(sandbox);
-				const code = 'var answer = ' + question.Answer;
+				let code = '';
+				if (question.AnswerType === 0) {
+					code = 'function myFunc () {\nreturn "' + question.Answer + '" \n}'; 
+				} else {
+					code = 'function myFunc () {\n' + question.Answer + ' \n}';
+				}
+
 				try {
 					vm.runInContext(code, sandbox);
 				} catch (err) {
 					console.log(err);
 				}
 
-				if (sandbox.answer === teamAnswer) {
-					let sqlCMD = "UPDATE `Answers` SET `Finished`='" + Date.now().toString() + "', `Score`='" + question.Score
-								+ "' WHERE ID='" + answer.ID + "';";
-				
-					console.log(sqlCMD);
-					await db.runSQLCMD(sqlCMD);
+
+				if (sandbox.myFunc() === teamAnswer) {
+					await db.runSQLCMD("UPDATE `Answers` SET `Finished`=$finishMoment, `Score`=$questionScore WHERE ID=$answerID';", {
+						$finishMoment: Date.now().toString(),
+						$questionScore: question.Score,
+						$answerID: answer.ID
+					});
 
 					res.sendStatus(200);
 				} else {

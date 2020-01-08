@@ -26,9 +26,9 @@ function createDatabase(dbPath) {
     })
 }
 
-function runSQLCMD(cmd) {
+function runSQLCMD(cmd, parameters = {}) {
     return new Promise((resolve, rejects) => {
-		db = db.run(cmd, (err) => {
+		db = db.run(cmd, parameters, (err) => {
 			if (err) {
 				rejects(err);
 			} else {
@@ -103,8 +103,9 @@ async function setup(dbName, studio) {
 			`ID`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,\
 			`Question`	TEXT NOT NULL,\
 			`Answer`	TEXT NOT NULL,\
+			`AnswerType`	INTEGER NOT NULL,\
 			`Score`	INTEGER NOT NULL,\
-			`LockedBy`	INTEGER NOT NULL\
+			`Parent`	INTEGER NOT NULL\
 		);\
 	');
 

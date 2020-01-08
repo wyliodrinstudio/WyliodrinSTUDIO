@@ -68,25 +68,46 @@ let ctf_admin = {
         let sqlCMD = '';
 
         deletedQuestions.forEach (async (ID) => {
-            await db.runSQLCMD("DELETE FROM `Questions` WHERE `ID`='" + ID + "';")
+            await db.runSQLCMD("DELETE FROM `Questions` WHERE `ID`=$ID;", {
+                $ID: ID
+            })
         })
 
-        questions.forEach(async ({ID, Question, Answer, Score, LockedBy, newQuestion}, idx) => {
+        questions.forEach(async ({ID, Question, Answer, AnswerType, Score, Parent, newQuestion}, idx) => {
             if (newQuestion) {           
-                sqlCMD = "INSERT INTO `Questions`(`ID`,`Question`,`Answer`,`Score`,`LockedBy`) VALUES (" + idx + ",'" 
-                        + Question + "','" + Answer + "'," + Score + ", " + LockedBy +");";
+                sqlCMD = "INSERT INTO `Questions` (`ID`,`Question`,`Answer`,`AnswerType`,`Score`,`Parent`)\
+                            VALUES ($idx, $Question, $Answer, $AnswerType, $Score, $Parent);";
+                try {
+                    await db.runSQLCMD(sqlCMD, {
+                        $idx: idx,
+                        $Question: Question,
+                        $Answer: Answer,
+                        $AnswerType: AnswerType,
+                        $Score: Score,
+                        $Parent: Parent
+                    })
+                } catch (err) {
+                    console.log(err);
+                }
             } else {
-                sqlCMD = "UPDATE `Questions` SET `Question`='" + Question + "', `Answer`='" + Answer 
-                        + "', `Score`='" + Score + "', `LockedBy`='" + LockedBy + "', `ID`='" + idx + "' WHERE ID='" + ID + "';";
+                sqlCMD = "UPDATE `Questions` SET `Question`=$Question, `Answer`=$Answer, `AnswerType`=$AnswerType,\
+                            `Score`=$Score, `Parent`=$Parent, `ID`=$idx WHERE ID=$ID;";
+                try {
+                    await db.runSQLCMD(sqlCMD, {
+                        $ID: ID,
+                        $idx: idx,
+                        $Question: Question,
+                        $Answer: Answer,
+                        $AnswerType: AnswerType,
+                        $Score: Score,
+                        $Parent: Parent
+                    })
+                } catch (err) {
+                    console.log(err);
+                }
             }
 
             console.log(sqlCMD);
-
-            try {
-                await db.runSQLCMD(sqlCMD)
-            } catch (err) {
-                console.log(err);
-            }
         })
         await db.close();
     }
