@@ -118,8 +118,7 @@
 				editorOptions: {
 					fontSize: 13,
 					automaticLayout: true
-				},
-				parentsList: ['None']
+				}
 			}
 		},
 		components: {
