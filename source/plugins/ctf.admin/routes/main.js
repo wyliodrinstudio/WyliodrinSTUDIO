@@ -203,7 +203,7 @@ router.post('/answer/finish', async (req, res) => {
 	])
 	let question = await db.getFirstRow('Questions', [
 		{
-			column: 'Question',
+			column: 'ID',
 			value: questionID
 		}
 	])
