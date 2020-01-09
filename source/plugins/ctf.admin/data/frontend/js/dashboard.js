@@ -5,18 +5,17 @@ new Vue({
 		teams: []
 	},
 	mounted() {
-		//
-			this.$http.get('/api/v1/answers').then(response => {
+		setInterval(() => {
+			this.$http.get('/api/v1/teams').then(response => {
 				// get body data
 				if (response.data.err) {
-
+					console.log(response.data.err)
 				} else {
-					this.teams = JSON.parse(response.data);
-					console.log(this.teams)
+					this.teams = response.data;
+					console.log(this.teams);
 				}
 			}, response => {
-				// error callback
-				console.log('get error');
-			})//, 5000);
+				console.log(response);
+			})}, 500);
 	}
 });
