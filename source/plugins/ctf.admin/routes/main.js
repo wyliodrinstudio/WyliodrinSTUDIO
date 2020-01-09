@@ -31,6 +31,27 @@ router.get('/questions', async (req, res) => {
 	} 
 });
 
+router.get('/teams', async (req, res) => {
+	try {
+		let teams = [];
+		
+		(await db.getAll('Teams')).map(({ID, Name, BoardID}) => {
+			teams.push({
+				id: ID,
+				name: Name,
+				boardID: BoardID
+			});
+		})
+
+		res.send(teams);
+	} catch (err) {
+		console.error(err);
+		res.send({
+			err: "There was a problem fetching the teams from database"
+		})
+	} 
+});
+
 router.get('/answers', async (req, res) => {
 	try {
 		let answers = [];
