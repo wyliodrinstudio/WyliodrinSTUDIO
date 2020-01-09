@@ -43,6 +43,33 @@ router.get('/teams', async (req, res) => {
 			});
 		})
 
+		let answers = [];
+
+		(await db.getAll(`Answers`)).map(({ID, TeamID, QuestionID, Started, Finished, Score}) => {
+			answers.push({
+				id: ID,
+				teamID: TeamID,
+				questionID: QuestionID,
+				started: Started,
+				finished: Finished,
+				score: Score
+			})
+		});
+
+		teams.map((team) => {
+			let score = 0;
+			
+			(answers.filter((answer) => {
+				return answer.teamID === team.id
+			})).forEach((answer) => {
+				score += answer.score;
+			})
+
+			team.score = score;
+
+			return team;
+		})
+
 		res.send(teams);
 	} catch (err) {
 		console.error(err);
