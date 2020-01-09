@@ -6,7 +6,8 @@ new Vue({
         response: '',
         questionDialog: false,
         questions: [],
-        currentQuestion: null,
+        currentQuestion: '',
+        currentQuestionID: null,
         flag: '',
         teams: [],
         serverResponse: '',
@@ -26,7 +27,7 @@ new Vue({
         submit: function () {
             this.questionDialog = false;
             let teamNameUsed = 'salut';
-            this.$http.post('/api/v1/answer/finish', { teamName: teamNameUsed, questionText: this.currentQuestion, teamAnswer: this.response }).then(response => {
+            this.$http.post('/api/v1/answer/finish', { teamID: localStorage.saveData, questionID: this.currentQuestionID, teamAnswer: this.response }).then(response => {
                 if (response.data.err) {
                     this.serverResponse = response.data.err;
                     this.snackbar1 = true;
@@ -38,8 +39,9 @@ new Vue({
 
             this.response = '';
         },
-        taskFunction: function (question) {
-            this.currentQuestion = question;
+        taskFunction: function (questionID) {
+            this.currentQuestionID = questionID;
+            this.currentQuestion = this.questions[questionID].question;
             this.response = '';
             this.questionDialog = true;
         },
@@ -48,12 +50,11 @@ new Vue({
         },
         startTask() {
             let teamNameUsed = 'salut';
-            this.$http.post('/api/v1/answer/start', { teamName: teamNameUsed, questionText: this.currentQuestion }).then(response => {
+            this.$http.post('/api/v1/answer/start', { teamID: localStorage.saveData, questionID: this.currentQuestionID }).then(response => {
                 if (response.data.err) {
                     this.teamNameUsed = true;
                     this.serverResponse = response.data.err;
                 }
-                //                console.log(response.data);
             });
         }
     }

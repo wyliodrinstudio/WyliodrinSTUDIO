@@ -83,7 +83,6 @@ router.post('/team/add', async (req, res) => {
 		});
 	} else {
 		res.send({
-			teamID: team.ID,
 			err: 'Team name is already in use'
 		})
 	}
