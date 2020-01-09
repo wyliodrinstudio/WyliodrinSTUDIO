@@ -42,7 +42,7 @@
 							grow
 							class="mt-1"
 						>
-							<v-tab-item v-for="tab in item.answerTabOptions" :key="tab.key" @click="infoLog">
+							<v-tab-item v-for="tab in item.answerTabOptions" :key="tab.key">
 								<v-text-field
 									v-model="tab.content"
 									v-if="tab.key === 'string'"
@@ -62,10 +62,16 @@
 							type="number"
 						></v-text-field>
 						<span class="subtitle-2 mb-n4">-> Parent</span>
-						<v-text-field
+						<v-overflow-btn
+							class="mt-5"
+							:items="questions"
+							label="None"
 							v-model="item.Parent"
-							type="number"
-						></v-text-field>
+							item-text="Question"
+							item-value="index"
+							clearable
+							dense
+						></v-overflow-btn>
 						<v-spacer></v-spacer>
 						<div class="d-flex justify-center">
 							<v-btn @click="deleteQuestion" color="error">Delete question</v-btn>
@@ -76,12 +82,13 @@
 			</v-list>
 			<v-spacer></v-spacer>
 			<div class="d-flex justify-center">
-				<v-btn @click="addQuestion" color="blue darken-1">Add question</v-btn>
+				<v-btn @click="addQuestion" color="blue darken-1" dark>Add question</v-btn>
 			</div>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>
-			<v-btn @click="closeDialog" color="success">Done</v-btn>
+			<v-btn @click="closeDialog" color="error">Close</v-btn>
+			<v-btn @click="saveChanges" color="success">Save Changes</v-btn>
 		</v-card-actions>
 	</v-card>
 </template>
@@ -111,14 +118,15 @@
 				editorOptions: {
 					fontSize: 13,
 					automaticLayout: true
-				}
+				},
+				parentsList: ['None']
 			}
 		},
 		components: {
 			MonacoEditor
 		},
 		async created() {
-			(await this.studio.ctf_admin.getAllQuestions(this.activeDb + '.sqlite')).forEach((item) => {
+			(await this.studio.ctf_admin.getAllQuestions(this.activeDb + '.sqlite')).forEach((item, idx) => {
 				item.answerTabOptions = [
 					{
 						text: 'String',
@@ -133,27 +141,31 @@
 				];
 				item.answerTabOptions[item.AnswerType].content = item.Answer;
 				item.answerTab = item.AnswerType;
+				item.index = idx;
 
 				this.questions.push(item);
 			})
 
-
-			console.log(this.questions)
 			this.$forceUpdate ();
 		},
 		methods: {
-			closeDialog ()
+			saveChanges ()
 			{
 				this.questions.map((item) => {
 					item.AnswerType = item.answerTab;
 					item.Answer = item.answerTabOptions[item.answerTab].content;
 
+					if (item.Parent === undefined) {
+						item.Parent = -1;
+					}
+
 					return item;
 				})
 
-				console.log(this.deletedQuestions);
-
 				this.studio.ctf_admin.updateDbQuestions(this.questions, this.deletedQuestions, this.activeDb + '.sqlite');
+				this.closeDialog();
+			},
+			closeDialog() {
 				this.$root.$emit('submit');
 			},
 			addQuestion () {
@@ -179,8 +191,6 @@
 				}
 
 				this.questions.push(question);
-
-				console.log(this.questions);
 			},
 			deleteQuestion () {
 				this.questions.forEach((item, idx) => {
