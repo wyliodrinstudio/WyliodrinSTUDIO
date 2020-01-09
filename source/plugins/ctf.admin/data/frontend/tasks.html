@@ -34,7 +34,7 @@
 			</div>
 
 			<v-btn class="mb-2" v-for="(item, index) in questions" style="margin: auto; width: fit-content;"
-				@click="taskFunction(item.question); startTask();"> Task {{ index+1 }} </v-btn>
+				@click="taskFunction(item.id); startTask();" :key="index"> Task {{ index+1 }} </v-btn>
 
 			<v-row justify="center">
 				<v-dialog v-model="questionDialog" persistent max-width="290">
@@ -63,7 +63,6 @@
 					Close
 				</v-btn>
 			</v-snackbar>
-
 		</v-app>
 	</div>
 	<script src="./js/tasks.js"></script>

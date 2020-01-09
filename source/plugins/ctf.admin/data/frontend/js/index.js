@@ -22,9 +22,14 @@ new Vue({
 			}
 			if (this.teamName && this.boardID) {
 				this.$http.post('/api/v1/team/add', { teamName: this.teamName, boardID: this.boardID} ).then ( response => {
-					if (response.data.err) {
+					const {teamID, err} = response.data;
+
+					if (err) {
 						this.teamNameUsed = true;
-						this.response = response.data.err;
+						this.response = err;
+					} else {
+						localStorage.saveData = teamID;
+						window.location.replace('/tasks.html');
 					}
 					
 				})
