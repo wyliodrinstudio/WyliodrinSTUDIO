@@ -2,17 +2,15 @@ new Vue({
 	el: '#login-app',
 	vuetify: new Vuetify(),
 	data: {
-		teamName: '',
-		boardID: '',
-		questions: '',
 		hashTag: ''
 	},
 	mounted(){
 
 	},
 	methods: {
-		post: function(){
-			// if ()			
+		login: function(){
+			localStorage.data = this.hashTag;
+			window.location.replace('/tasks.html');
 		}
 	}
 });

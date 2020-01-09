@@ -2,7 +2,8 @@ new Vue({
 	el: '#dashboard-app',
 	vuetify: new Vuetify(),
 	data: {
-		teams: []
+		teams: [],
+		answers: []
 	},
 	mounted() {
 		setInterval(() => {
@@ -12,10 +13,10 @@ new Vue({
 					console.log(response.data.err)
 				} else {
 					this.teams = response.data;
+					this.teams.sort((a, b) => (a.score < b.score) ? 1 : -1);
 					console.log(this.teams);
 				}
-			}, response => {
-				console.log(response);
-			})}, 500);
+			});
+		}, 2500);
 	}
 });

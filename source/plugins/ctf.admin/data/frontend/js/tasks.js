@@ -3,7 +3,7 @@ new Vue({
     vuetify: new Vuetify(),
     data: {
         multiLine: false,
-        response: '',
+        teamResponse: '',
         questionDialog: false,
         questions: [],
         currentQuestion: '',
@@ -25,7 +25,7 @@ new Vue({
         submit: function () {
             this.questionDialog = false;
             let teamNameUsed = 'salut';
-            this.$http.post('/api/v1/answer/finish', { teamID: localStorage.saveData, questionID: this.currentQuestionID, teamAnswer: this.response }).then(response => {
+            this.$http.post('/api/v1/answer/finish', { teamID: localStorage.saveData, questionID: this.currentQuestionID, teamAnswer: this.teamResponse }).then(response => {
                 if (response.data.err) {
                     this.serverResponse = response.data.err;
                     this.snackbar1 = true;
@@ -36,12 +36,12 @@ new Vue({
                 console.log(response.data);
             });
 
-            this.response = '';
+            this.teamResponse = '';
         },
         taskFunction: function (questionID) {
             this.currentQuestionID = questionID;
             this.currentQuestion = this.questions[questionID].question;
-            this.response = '';
+            this.teamResponse = '';
             this.questionDialog = true;
         },
         closeDialog: function () {
