@@ -15,12 +15,10 @@ new Vue({
     },
     mounted() {
         this.$http.get('/api/v1/questions').then(response => {
-            // get body data
             this.questions = response.data;
             console.log(this.questions.length)
         }, response => {
-            // error callback
-            console.log('get error');
+            console.log(response);
         });
     },
     methods: {
@@ -32,6 +30,7 @@ new Vue({
                     this.serverResponse = response.data.err;
                     this.snackbar1 = true;
                 } else {
+                    this.serverResponse = response.data;
                     this.snackbar1 = true;
                 }
                 console.log(response.data);

@@ -43,9 +43,10 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="item in desserts" :key="item.name">
+							<tr v-for="(item, index) in teams" :key="index">
+								<td> {{ index + 1}} </td> 
 								<td>{{ item.name }}</td>
-								<td>{{ item.calories }}</td>
+								<td>{{ item.boardID }}</td>
 							</tr>
 						</tbody>
 					</template>
