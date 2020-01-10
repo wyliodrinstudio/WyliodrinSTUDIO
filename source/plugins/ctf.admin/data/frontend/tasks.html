@@ -56,6 +56,12 @@
 				<p v-if="serverResponse == 'OK'" style="margin: auto; width: fit-content;">
 					Correct answer!
 				</p>
+				<p v-else-if="alreadySolved == true" style="margin: auto; width: fit-content;">
+					Task already solved!					
+				</p>
+				<p v-else-if="canStartTask == false" style="margin: auto; width: fit-content;">
+					Please solve {{ unfinishedQuestion }}					
+				</p>
 				<p v-else style="margin: auto; width: fit-content;">
 					{{ serverResponse }}					
 				</p>
@@ -63,6 +69,7 @@
 					Close
 				</v-btn>
 			</v-snackbar>
+
 		</v-app>
 	</div>
 	<script src="./js/tasks.js"></script>
