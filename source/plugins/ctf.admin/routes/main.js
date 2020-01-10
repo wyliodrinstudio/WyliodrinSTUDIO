@@ -59,13 +59,16 @@ router.get('/teams', async (req, res) => {
 		teams.map((team) => {
 			let score = 0;
 			
-			(answers.filter((answer) => {
-				return answer.teamID === team.id
-			})).forEach((answer) => {
+			let filteredAnswers = (answers.filter((answer) => {
+				return answer.teamID === team.id && answer.finished
+			}))
+
+			filteredAnswers.forEach((answer) => {
 				score += answer.score;
 			})
 
 			team.score = score;
+			team.solvedTasks = filteredAnswers.length;
 
 			return team;
 		})
