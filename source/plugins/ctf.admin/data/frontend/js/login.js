@@ -9,7 +9,7 @@ new Vue({
 	},
 	methods: {
 		login: function(){
-			localStorage.data = this.hashTag;
+			localStorage.saveData = this.hashTag;
 			window.location.replace('/tasks.html');
 		}
 	}
