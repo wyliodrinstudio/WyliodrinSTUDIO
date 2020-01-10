@@ -20,6 +20,11 @@ new Vue({
     mounted() {
         this.$http.get('/api/v1/questions').then(response => {
             this.questions = response.data;
+            this.questions.map((item) => {
+                item.alreadySolved = false;
+
+                return item;
+            })
         }, response => {
             console.log(response);
         });
@@ -33,7 +38,7 @@ new Vue({
                     if (element.teamID == localStorage.saveData) {
                         console.log(this.questions[element.questionID].question);
                         if (element.finished != undefined) {
-                            this.finishedQuestions.push(this.questions[element.questionID].question);
+                            this.finishedQuestions.push(element.questionID);
                         }
                     }
                 });
@@ -52,7 +57,7 @@ new Vue({
                 } else {
                     this.serverResponse = response.data;
                     this.snackbar1 = true;
-                    this.finishedQuestions.push(this.questions[this.currentQuestionID].question);
+                    this.finishedQuestions.push(this.currentQuestionID);
                 }
             });
 
@@ -60,7 +65,7 @@ new Vue({
             this.serverResponse = '';
         },
         taskFunction: function (questionID) {
-            if (this.finishedQuestions.includes(this.questions[questionID].question)) {
+            if (this.finishedQuestions.includes(questionID)) {
                 this.alreadySolved = true;
                 this.canStartTask = false;
             } else {
@@ -81,6 +86,7 @@ new Vue({
         },
         closeDialog: function () {
             this.questionDialog = false;
+            this.canStartTask = false;
         },
         startTask() {
             if (this.canStartTask) {

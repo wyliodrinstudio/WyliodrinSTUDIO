@@ -165,6 +165,7 @@
 		"bonjour-hap": "^3.5.4",
 		"cors": "^2.8.5",
 		"cowsay": "^1.4.0",
+		"crypto": "^1.0.1",
 		"desktop-screenshot": "^0.1.1",
 		"drivelist": "^8.0.6",
 		"electron-is-dev": "^1.1.0",
