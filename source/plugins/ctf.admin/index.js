@@ -110,6 +110,49 @@ let ctf_admin = {
             console.log(sqlCMD);
         })
         await db.close();
+    },
+    async getTeamsInfo (activeDb) {
+        await db.setup(activeDb, studio);
+
+        let teams = [];
+		
+		(await db.getAll('Teams')).map(({ID, Name, BoardID}) => {
+			teams.push({
+				id: ID,
+				teamName: Name,
+				boardID: BoardID
+			});
+		})
+
+		let answers = [];
+
+		(await db.getAll(`Answers`)).map(({ID, TeamID, QuestionID, Started, Finished, Score}) => {
+			answers.push({
+				id: ID,
+				teamID: TeamID,
+				questionID: QuestionID,
+				started: Started,
+				finished: Finished,
+				score: Score
+			})
+		});
+
+		teams.map((team) => {
+			let score = 0;
+			
+			(answers.filter((answer) => {
+				return answer.teamID === team.id
+			})).forEach((answer) => {
+				score += answer.score;
+			})
+
+			team.score = score;
+
+			return team;
+        })
+        await db.close();
+        
+        return teams;
     }
 }
 
