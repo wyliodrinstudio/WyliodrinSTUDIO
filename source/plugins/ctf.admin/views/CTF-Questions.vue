@@ -110,6 +110,7 @@
 	import * as monaco from 'monaco-editor';
 
 	export default {
+		name: 'Questions',
 		props: ['width', 'activeDb'],
 		data () {
 			return {
