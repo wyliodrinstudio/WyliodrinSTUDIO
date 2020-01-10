@@ -38,15 +38,21 @@
           	{ text: 'Board ID', value: 'boardID' },
 			{ text: 'Score', value: 'score' }
         ],
-        teams: []
+		teams: [],
+		updateInterval: undefined
       }
 	},
 	async created () {
 		this.teams = await this.studio.ctf_admin.getTeamsInfo(this.activeDb + '.sqlite');
-		console.log(this.teams);
+	},
+	mounted () {
+		this.updateInterval = setInterval(async () => {
+			this.teams = await this.studio.ctf_admin.getTeamsInfo(this.activeDb + '.sqlite');
+		}, 3000)
 	},
 	methods: {
 		closeDialog() {
+			clearInterval(this.updateInterval);
 			this.$root.$emit('submit');
 		}
 	}
