@@ -87,6 +87,8 @@ new Vue({
             this.serverResponse = '';
         },
         taskFunction: function (questionID) {
+            this.serverResponse = '';
+            this.snackbar1 = false;
             if (this.finishedQuestions.includes(questionID)) {
                 this.alreadySolved = true;
                 this.canStartTask = false;
