@@ -15,7 +15,8 @@ new Vue({
         finishedQuestions: [],
         canStartTask: false,
         unfinishedQuestion: '',
-        alreadySolved: false
+        alreadySolved: false,
+        serverError: ''
     },
     mounted() {
         this.$http.get('/api/v1/questions').then(response => {
@@ -46,13 +47,34 @@ new Vue({
         }, response => {
             console.log(response);
         });
+        this.$http.get('/api/v1/teams').then(response => {
+            // get body data
+            if (response.data.err) {
+                console.log(response.data.err)
+            } else {
+                console.log(response.data);
+                if (localStorage.saveData) {
+                    var loggedIn = false;
+                    response.data.forEach(element => {
+                        if (element.id == localStorage.saveData) {
+                            loggedIn = true;
+                        }
+                    });
+                    if (!loggedIn) {
+                        window.location.replace('/');
+                    }
+                } else {
+                    window.location.replace('/');
+                }
+            }
+        });
     },
     methods: {
         submit: function () {
             this.questionDialog = false;
             this.$http.post('/api/v1/answer/finish', { teamID: localStorage.saveData, questionID: this.currentQuestionID, teamAnswer: this.teamResponse }).then(response => {
                 if (response.data.err) {
-                    this.serverResponse = response.data.err;
+                    this.serverError = response.data.err;
                     this.snackbar1 = true;
                 } else {
                     this.serverResponse = response.data;
@@ -87,13 +109,16 @@ new Vue({
         closeDialog: function () {
             this.questionDialog = false;
             this.canStartTask = false;
+            this.serverResponse = '';
         },
         startTask() {
             if (this.canStartTask) {
                 this.$http.post('/api/v1/answer/start', { teamID: localStorage.saveData, questionID: this.currentQuestionID }).then(response => {
                     if (response.data.err) {
                         this.teamNameUsed = true;
-                        this.serverResponse = response.data.err;
+                        this.serverError = response.data.err;
+                    } else {
+                        this.serverResponse = '';
                     }
                 });
             } else {
