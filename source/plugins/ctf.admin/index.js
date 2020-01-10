@@ -39,6 +39,7 @@ let ctf_admin = {
     async stopServer() {
         if (server) {
             server.close();
+            server = undefined;
             await db.close();
 
             console.log('Server closed');
