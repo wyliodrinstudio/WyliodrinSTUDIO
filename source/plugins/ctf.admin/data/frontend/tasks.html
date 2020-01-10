@@ -34,7 +34,7 @@
 			</div>
 
 			<v-btn class="mb-2" v-for="(item, index) in questions" style="margin: auto; width: fit-content;"
-				@click="taskFunction(item.id); startTask();" :key="index"> Task {{ index+1 }} </v-btn>
+				@click="taskFunction(item.id); startTask();" :key="index"> {{ item.question }} </v-btn>
 
 			<v-row justify="center">
 				<v-dialog v-model="questionDialog" persistent max-width="290">
@@ -45,7 +45,7 @@
 						</v-card-text>
 						<v-card-actions>
 							<v-spacer></v-spacer>
-							<v-btn color="green darken-1" text @click="closeDialog">Close</v-btn>
+							<v-btn color="red darken-1" text @click="closeDialog">Close</v-btn>
 							<v-btn color="green darken-1" text @click="submit">Agree</v-btn>
 						</v-card-actions>
 					</v-card>
