@@ -187,7 +187,8 @@
 					],
 					Score: 0,
 					Parent: -1,
-					newQuestion: true
+					newQuestion: true,
+					index: this.questions.length
 				}
 
 				this.questions.push(question);

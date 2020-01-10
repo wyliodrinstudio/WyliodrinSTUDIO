@@ -1,6 +1,6 @@
 import express from 'express';
 import vm from 'vm';
-import util from 'util';
+import crypto from 'crypto';
 
 import db from '../functions/database';
 
@@ -227,7 +227,11 @@ router.post('/answer/finish', async (req, res) => {
 
 			if (answer) {
 				if (!answer.Finished) {
-					const sandbox = { boardID: team.BoardID };
+					const sandbox = { 
+						boardID: team.BoardID,
+						crypto: crypto,
+						Date: Date
+					 };
 					vm.createContext(sandbox);
 					let code = '';
 					if (question.AnswerType === 0) {
@@ -241,7 +245,8 @@ router.post('/answer/finish', async (req, res) => {
 					} catch (err) {
 						console.log(err);
 					}
-	
+					
+					console.log(sandbox.myFunc());
 	
 					if (sandbox.myFunc() === teamAnswer) {
 						let answers = (await db.getAll(`Answers`)).filter((item) => {
