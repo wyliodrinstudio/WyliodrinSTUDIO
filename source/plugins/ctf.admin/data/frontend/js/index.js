@@ -34,6 +34,9 @@ new Vue({
 					
 				})
 			}
+		},
+		recover: function() {
+			window.location.replace('/login.html');
 		}
 	}
 });
