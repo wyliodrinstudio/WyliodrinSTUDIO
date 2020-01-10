@@ -252,12 +252,12 @@ router.post('/answer/finish', async (req, res) => {
 						let answers = (await db.getAll(`Answers`)).filter((item) => {
 							return item.QuestionID === question.ID && item.Finished;
 						})
-	
+
 						switch(answers.length) {
-							case 1:
+							case 0:
 								question.Score *= 1;
 								break;
-							case 2:
+							case 1:
 								question.Score *= 0.8;
 								break;
 							default:
