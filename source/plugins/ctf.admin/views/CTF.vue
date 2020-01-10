@@ -1,68 +1,82 @@
 <template>
-  <v-card
-    class="mx-auto"
-    max-width="600"
-    outlined
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="overline mb-4">CTF Admin Panel</div>
-        <v-list-item-title class="headline mb-1">Server Options</v-list-item-title>
-        <v-text-field
-            v-model="portNumber"
-            label="Server Port"
-            placeholder="5000 (default port)"
-            :disabled="serverStarted"
-        ></v-text-field>
-        <v-overflow-btn
-          :items="dropDownList"
-          label="Choose Database"
-          v-model="activeElement"
-          :disabled="serverStarted"
-        ></v-overflow-btn>
-        <div v-if="activeElement  === 'Create new database'">
-          <v-layout row wrap align-center>  
-            <v-col :cols="8">
-              <v-text-field
-                v-model="newDbName"
-                label="Choose a data base name"
-                placeholder="newDatabase"
+  <div>
+    <v-card
+      class="mx-auto"
+      max-width="600"
+      outlined
+    >
+      <v-card-title>
+        <span class="headline">CTF Admin Panel</span>
+        <v-spacer></v-spacer>
+      </v-card-title>
+      <v-card-text>
+        <v-list-item three-line>
+          <v-list-item-content>
+            <v-list-item-title class="headline mb-1">Server Options</v-list-item-title>
+            <v-text-field
+                v-model="portNumber"
+                label="Server Port"
+                placeholder="5000 (default port)"
                 :disabled="serverStarted"
-              ></v-text-field>
-            </v-col>
-            <v-col :cols="4">
-              <v-btn :disabled="serverStarted" @click="addDbToList()" color="success" text>Create</v-btn>
-            </v-col>
-          </v-layout>
-        </div>
-      </v-list-item-content>
-    </v-list-item>
-
-    <v-card-actions>
-      <v-btn 
-        :disabled="serverStarted 
-                    || (this.dropDownList.length < 2 
-                    || activeElement  === 'Create new database')" 
-        @click="startServer()" 
-        color="success" 
-        text
-      >Start</v-btn>
-      <v-btn :disabled="!serverStarted" @click="stopServer()" color="error" text>Stop</v-btn>
-      <v-btn 
-        :disabled="serverStarted 
-                    || (this.dropDownList.length < 2 
-                    || activeElement  === 'Create new database')" 
-        @click="editQuestions()" 
-        color="warning" 
-        text
-      >Edit questions</v-btn>
-    </v-card-actions>
-  </v-card>
+            ></v-text-field>
+            <v-overflow-btn
+              :items="dropDownList"
+              label="Choose Database"
+              v-model="activeElement"
+              :disabled="serverStarted"
+            ></v-overflow-btn>
+            <div v-if="activeElement  === 'Create new database'">
+              <v-layout row wrap align-center>  
+                <v-col :cols="8">
+                  <v-text-field
+                    v-model="newDbName"
+                    label="Choose a data base name"
+                    placeholder="newDatabase"
+                    :disabled="serverStarted"
+                  ></v-text-field>
+                </v-col>
+                <v-col :cols="4">
+                  <v-btn :disabled="serverStarted" @click="addDbToList()" color="success" text>Create</v-btn>
+                </v-col>
+              </v-layout>
+            </div>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn 
+          :disabled="serverStarted 
+                      || (this.dropDownList.length < 2 
+                      || activeElement  === 'Create new database')" 
+          @click="startServer()" 
+          color="success" 
+          text
+        >Start</v-btn>
+        <v-btn :disabled="!serverStarted" @click="stopServer()" color="error" text>Stop</v-btn>
+        <v-btn 
+          :disabled="serverStarted 
+                      || (this.dropDownList.length < 2 
+                      || activeElement  === 'Create new database')" 
+          @click="editQuestions()" 
+          color="warning" 
+          text
+        >Edit questions</v-btn>
+        <v-btn 
+          :disabled="(this.dropDownList.length < 2 
+                      || activeElement  === 'Create new database')" 
+          @click="showTeams()" 
+          color="warning" 
+          text
+        >Show Teams</v-btn>
+      </v-card-actions>
+    </v-card>
+  </div>
 </template>
 
 <script>
   import moment from 'moment';
-  import Questions from './Questions.vue';
+  import Questions from './CTF-Questions.vue';
+  import Teams from './CTF-Teams.vue';
 
 	export default {
     name: 'CTF',
@@ -114,6 +128,9 @@
       },
       editQuestions() {
         this.studio.workspace.showDialog(Questions, {width: '700px', activeDb: this.activeElement});
+      },
+      showTeams() {
+        this.studio.workspace.showDialog(Teams, {width: '700px', activeDb: this.activeElement});
       }
     }
 	}
