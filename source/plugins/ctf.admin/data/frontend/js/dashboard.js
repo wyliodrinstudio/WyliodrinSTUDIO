@@ -3,9 +3,16 @@ new Vue({
 	vuetify: new Vuetify(),
 	data: {
 		teams: [],
-		answers: []
+		questions: []
 	},
 	mounted() {
+		
+		this.$http.get('/api/v1/questions').then(response => {
+            this.questions = response.data;
+        }, response => {
+            console.log(response);
+		});
+		
 		setInterval(() => {
 			this.$http.get('/api/v1/teams').then(response => {
 				// get body data
@@ -14,7 +21,6 @@ new Vue({
 				} else {
 					this.teams = response.data;
 					this.teams.sort((a, b) => (a.score < b.score) ? 1 : -1);
-					console.log(this.teams);
 				}
 			});
 		}, 2500);
