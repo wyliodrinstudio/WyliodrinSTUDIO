@@ -112,7 +112,9 @@ let ctf_admin = {
         await db.close();
     },
     async getTeamsInfo (activeDb) {
-        await db.setup(activeDb, studio);
+        if (!server) {
+            await db.setup(activeDb, studio);
+        }
 
         let teams = [];
 		
@@ -150,7 +152,10 @@ let ctf_admin = {
 
 			return team;
         })
-        await db.close();
+
+        if (!server) {
+            await db.close();
+        }
         
         return teams;
     }
