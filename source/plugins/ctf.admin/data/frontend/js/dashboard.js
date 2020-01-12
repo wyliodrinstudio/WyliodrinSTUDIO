@@ -9,6 +9,7 @@ new Vue({
 	mounted() {
 		this.$http.get('/api/v1/getIP').then(response => {
 			this.address = response.data;
+			this.address += ':5000';
 		});
 		
 		this.$http.get('/api/v1/questions').then(response => {
