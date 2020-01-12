@@ -3,16 +3,20 @@ new Vue({
 	vuetify: new Vuetify(),
 	data: {
 		teams: [],
-		questions: []
+		questions: [],
+		address: '',
 	},
 	mounted() {
-		
-		this.$http.get('/api/v1/questions').then(response => {
-            this.questions = response.data;
-        }, response => {
-            console.log(response);
+		this.$http.get('/api/v1/getIP').then(response => {
+			this.address = response.data;
 		});
 		
+		this.$http.get('/api/v1/questions').then(response => {
+			this.questions = response.data;
+		}, response => {
+			console.log(response);
+		});
+
 		setInterval(() => {
 			this.$http.get('/api/v1/teams').then(response => {
 				// get body data

@@ -1,10 +1,35 @@
 import express from 'express';
 import vm from 'vm';
 import crypto from 'crypto';
+import os from 'os';
 
 import db from '../functions/database';
 
 const router = express.Router();
+
+router.get('/getIP', (req, res) => {
+	var ifaces = os.networkInterfaces();
+	
+	Object.keys(ifaces).forEach(function (ifname) {
+		var alias = 0;
+	
+		ifaces[ifname].forEach(function (iface) {
+			if ('IPv4' !== iface.family || iface.internal !== false) {
+				return;
+			}
+	
+			if (ifname === 'eno1') {
+				res.send(iface.address).sendStatus(200);
+				return
+			}
+			++alias;
+		});
+	});
+
+	res.send({
+		err: 'IP not found'
+	});
+})
 
 router.get('/', (req, res) => {
 	res.send('Testare ruta').sendStatus(200);

@@ -33,6 +33,7 @@
 				</div>
 			</div>
 			<div>
+				<h3 class="text-center"> Please register on {{ address }} </h3>
 				<v-simple-table fixed-header height="700px">
 					<template v-slot:default>
 						<thead>
@@ -51,7 +52,8 @@
 								<td>{{ item.name }}</td>
 								<td>{{ item.score }}</td>
 								<td>
-									<v-progress-linear v-model="item.solvedTasks / questions.length * 100" height="25" reactive>
+									<v-progress-linear v-model="item.solvedTasks / questions.length * 100" height="25"
+										reactive>
 										<strong>{{ Math.ceil(item.solvedTasks / questions.length * 100) }}%</strong>
 									</v-progress-linear>
 								</td>
