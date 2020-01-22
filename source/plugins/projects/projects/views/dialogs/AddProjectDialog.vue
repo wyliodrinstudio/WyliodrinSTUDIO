@@ -3,7 +3,7 @@
 		<v-card-title>
 			<span class="headline">{{$t('PROJECT_WELCOME_CREATE_NEW_APP')}}</span>
 		</v-card-title>
-		<v-card-text style="height:240px;">
+		<v-card-text style="height:210px;">
 			<v-layout wrap>
 				<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_NAME')"  required v-model="projectName"></v-text-field>
 			</v-layout>
