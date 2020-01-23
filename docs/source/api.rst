@@ -420,7 +420,7 @@ For example, if you want to register a Raspberry Pi board, inside the correspond
 
 .. code-block:: javascript
 
-	studio.pin_layout.registerPinLayout ('wyapp', 'raspberrypi', 'plugins/devices/wyapp.device.raspberrypi/data/img/pins-raspberrypi.png');
+	studio.pin_layout.registerPinLayout ('wyapp', 'raspberrypi', 'plugins/devices/wyapp/devices/raspberrypi/data/img/pins-raspberrypi.png');
 
 In this situation, the program will search for a device that has the *'wyapp'* type, and the name of the corresponding board '*raspberrypi'*. 
 
@@ -428,7 +428,7 @@ However, you can register a pin layout only for a device type, and the selected 
 
 .. code-block:: javascript
 
-	studio.pin_layout.registerPinLayout ('wyapp', '', 'plugins/devices/wyapp.device.raspberrypi/data/img/pins-raspberrypi.png');
+	studio.pin_layout.registerPinLayout ('wyapp', '', 'plugins/devices/wyapp/devices/raspberrypi/data/img/pins-raspberrypi.png');
 
 |
 

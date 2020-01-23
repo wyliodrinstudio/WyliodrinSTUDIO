@@ -377,7 +377,7 @@ export function setup(options, imports, register) {
 					studio.workspace.showDialog (RPKDeviceSetup);
 				}
 			}
-		}, 'plugins/devices/wyapp/data/img/icons/run-icon.svg',
+		}, 'plugins/devices/wyapp/plugin/data/img/icons/run-icon.svg',
 		{
 			visible() {
 				let device = studio.workspace.getDevice();

@@ -16,6 +16,11 @@ module.exports.loadPlugins = (target) =>
 			if (fs.existsSync (file_package_json))
 			{
 				let package_json = require(file_package_json);
+				if (package_json.name !== plugin)
+				{
+					console.log ('  plugin '+folder+':'+plugin+' has wrong name, rename to '+plugin);
+					package_json.name = plugin;
+				}
 				if (package_json.plugin.target.indexOf (target) >=0)
 				{
 					if (!package_json.plugin.disabled)

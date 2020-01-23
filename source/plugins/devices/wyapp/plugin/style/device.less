@@ -1,0 +1,52 @@
+@import '../../../../../style/var.less';
+
+.disconnect {
+	background:@color-dark-1 !important;
+	padding: 10% 0;
+	text-align: center;
+
+
+	.icon-btn{
+		background: transparent !important;
+		text-transform:none;
+		color: @color-white !important;
+	    min-width: 80px;
+	    min-height:80px;
+	    padding: 0;
+		margin: 0;
+		box-shadow: none !important;
+	}
+
+	.icon-btn .s24{
+		color: @color-white !important;
+		width:40px;
+		height:40px;
+	}
+
+	.icon-btn:hover { 
+		background:@color-highlight !important;
+	}
+
+
+}
+
+.langtype span{
+    padding: 3px;
+    font-size: 11px;
+    color: @color-grey-3;
+    background: @color-white;
+    border-radius: 4px;
+    border: @color-grey-2 1px solid;
+    display: inline;
+    margin: 0 0 0 5px;
+	font-weight: normal;
+	display: inline-block;
+	line-height: 14px;
+}
+
+.devicesett-box {
+	.v-card__text {padding: 0; overflow: hidden; color: @color-black; max-height: 55vh; min-height: 100px; overflow: auto;}
+	.v-window {height: calc(~"100vh - 48px"); overflow-y: scroll;}
+	.d-flex {align-items: center;}
+	.v-window__container { background: @color-white; height: 100% !important;}
+}
