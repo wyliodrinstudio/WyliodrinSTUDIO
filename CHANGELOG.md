@@ -1,4 +1,5 @@
 ## Wyliodrin STUDIO 2.1.4-beta
+  * **fixed** delay block for libwyliodrin having the same name as in Raspberry Pi
   * **update** editor registering to use extension or regular expressions
 
 ## Wyliodrin STUDIO 2.1.3-beta
