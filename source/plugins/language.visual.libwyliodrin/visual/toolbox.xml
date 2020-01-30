@@ -1,6 +1,6 @@
 <toolbox>
     <category name="Timing" colour="17">
-        <block type="delay">
+        <block type="wyliodrin_delay">
             <value name="millis">
                 <block type="math_number">
                     <field name="NUM">1000</field>

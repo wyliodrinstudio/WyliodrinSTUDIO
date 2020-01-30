@@ -216,7 +216,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['delay'] = function (block) {
+	Blockly.Python['wyliodrin_delay'] = function (block) {
 		Blockly.Python.wiringpi();
 		Blockly.Python.importtime();
 		var value_millis = Blockly.Python.valueToCode(block, 'millis', Blockly.Python.ORDER_ATOMIC);

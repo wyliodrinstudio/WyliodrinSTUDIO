@@ -110,7 +110,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-	Blockly.Blocks['delay'] = {
+	Blockly.Blocks['wyliodrin_delay'] = {
 		init: function () {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#delay');
 			this.setColour(17);
