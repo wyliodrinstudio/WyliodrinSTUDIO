@@ -112,12 +112,12 @@ export default {
 							}
 							case '.c':
 							{
-								this.sourceLanguage = 'c_cpp';
+								this.sourceLanguage = 'cpp';
 								break;
 							}
 							case '.cpp':
 							{
-								this.sourceLanguage = 'c_cpp';
+								this.sourceLanguage = 'cpp';
 								break;
 							}
 							case '.ts':
