@@ -52,9 +52,9 @@ To download the source code, you must have a GitHub account. Open a terminal, ch
 
 |
 
-There are 2 methods to build the application:
+There are 2 methods to build and run the application:
 
-For the **STANDALONE** version, you will have to run the following commands: 
+To build the **STANDALONE** version, you will have to run the following commands: 
 
 ::
 
@@ -62,22 +62,26 @@ For the **STANDALONE** version, you will have to run the following commands:
 	npx electron-rebuild
 	npx webpack
 	npm run electron
+
+To run the **STANDALONE** version , you will have to run the following command:
+::
+
 	npm start
 
-For the **BROWSER** edition, you will have to delete the *build* folder, run: 
+To build **BROWSER** version, you will have to delete the *build* folder, run: 
 
 ::
-
+	
 	npx webpack --config=webpack.browser.config.js
-
-Then change the current directory to the newly created *build* folder and run:
-
+	cd build
+	npm install
+	
+To run the **BROWSER** version , you will have to run the following command:
 ::
 
-	npm install
-	npm run browser
-
+	npm start
 |
+
 
 Once the application was installed and built, you can make changes on our source code, in order to improve it.
 
