@@ -62,6 +62,7 @@ For the **STANDALONE** version, you will have to run the following commands:
 	npx electron-rebuild
 	npx webpack
 	npm run electron
+	npm start
 
 For the **BROWSER** edition, you will have to delete the *build* folder, run: 
 
