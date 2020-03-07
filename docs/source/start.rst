@@ -48,7 +48,7 @@ To download the source code, you must have a GitHub account. Open a terminal, ch
 
 .. code-block:: bash
 
-	git clone https://github.com/alexandruradovici/WyliodrinSTUDIO2/tree/plugin-works
+	git clone https://github.com/wyliodrinstudio/WyliodrinSTUDIO
 
 |
 
