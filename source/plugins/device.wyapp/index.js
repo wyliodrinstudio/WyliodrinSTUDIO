@@ -623,9 +623,10 @@ export function setup(options, imports, register)
 		 */
 		async runDocker() {
 			let project = await studio.projects.getCurrentProject ();
+			console.log(project);
 			if (project)
 			{
-				let docker = 'run:\n\tdocker rmi --force ' + project.name + '; sudo docker build --tag ' + project.name + ':1.0 .; sudo docker run --restart=always --detach --name ' + project.name + ' ' + project.name + ':1.0';
+				let docker = 'run:\n\tsudo docker stop ' + project.name + '; sudo docker container rm ' + project.name + '; docker rmi --force ' + project.name + ':1.0; sudo docker build --tag ' + project.name + ':1.0 .; sudo docker run --restart=always --detach --name ' + project.name + ' ' + project.name + ':1.0';
 				await this.runProject(docker);
 				//docker label to start with pi
 				//force stop
