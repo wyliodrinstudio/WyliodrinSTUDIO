@@ -321,14 +321,8 @@ export default {
 				console.log(this.currentFile);
 				for (let editor of this.editors) {
 					for (let lang of editor.languages) {
-						if (this.currentFile === '/Dockerfile') {
-							if (lang.test ('.txt')) {
-								return editor.component;
-							}
-						} else {
-							if (lang.test (this.currentFile)) {
-								return editor.component;
-							}
+						if (lang.test (this.currentFile)) {
+							return editor.component;
 						}
 					}
 				}

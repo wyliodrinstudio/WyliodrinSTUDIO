@@ -428,7 +428,7 @@ export function setup(options, imports, register)
 
 		/* Register the Container button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_DOCKER', 15, () => {
-			device_wyapp.runProject(true);
+			device_wyapp.runDocker();
 		}), 'plugins/device.wyapp/data/img/icons/docker-icon.svg',
 		{
 			visible () {
@@ -617,10 +617,26 @@ export function setup(options, imports, register)
 			}
 		},
 
+
+		/**
+		 * Run current project in a container
+		 */
+		async runDocker() {
+			let project = await studio.projects.getCurrentProject ();
+			if (project)
+			{
+				let docker = 'run:\n\tdocker rmi --force ' + project.name + '; sudo docker build --tag ' + project.name + ':1.0 .; sudo docker run --restart=always --detach --name ' + project.name + ' ' + project.name + ':1.0';
+				await this.runProject(docker);
+				//docker label to start with pi
+				//force stop
+				//restart with pi
+			}
+		},
+
 		/**
 		 * Run the current project
 		 */
-		async runProject (docker = false)
+		async runProject (docker = null)
 		{
 			let project = await studio.projects.getCurrentProject ();
 
@@ -628,8 +644,9 @@ export function setup(options, imports, register)
 			{
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
-				if (docker) makefile = 'run:\n\tdocker build --tag ' + project.name + ':1.0 .; docker run --detach ' + project.name + ':1.0';
+				if (docker) makefile = docker;
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
+				console.log(makefile);
 
 				console.log(makefile);
 				console.log(typeof(makefile));

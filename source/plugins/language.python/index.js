@@ -33,7 +33,8 @@ export default function setup (options, imports, register)
 	];
 	let python = {
 		async createProject(name){
-			await studio.projects.newFile(name,'/main.py','print (\'Hello from Python\')');			
+			await studio.projects.newFile(name,'/main.py','print (\'Hello from Python\')');
+			await studio.projects.newFile(name,'/Dockerfile', 'FROM balenalib/raspberrypi3-python:latest-bionic-build\n\rCOPY src/ /usr/src/app\nCMD ["python", "/usr/src/app/main.py"]');
 		},
 		getDefaultFileName() {
 			return '/main.py';
