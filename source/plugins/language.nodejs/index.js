@@ -60,6 +60,7 @@ export default function setup(options, imports, register) {
 	let javaScript = {
 		async createProject(name) {
 			await studio.projects.newFile(name, '/main.js', 'console.log(\'Hello from NodeJS\');');
+			await studio.projects.newFile(name,'/Dockerfile', 'FROM balenalib/raspberrypi3-node:10.18\n\rCOPY package.json /package.json\nRUN npm install\n\rCOPY src/ /usr/src/app\nCMD ["node", "/usr/src/app/main.js"]');
 		},
 		getDefaultFileName() {
 			return '/main.js';

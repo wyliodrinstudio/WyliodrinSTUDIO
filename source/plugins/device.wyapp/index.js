@@ -426,6 +426,18 @@ export function setup(options, imports, register)
 			type: 'stop'
 		});
 
+		/* Register the Container button */
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_DOCKER', 15, () => {
+			device_wyapp.runProject(true);
+		}), 'plugins/device.wyapp/data/img/icons/docker-icon.svg',
+		{
+			visible () {
+				let device = studio.workspace.getDevice();
+				return (device.status === 'CONNECTED' && device.properties.treeRun === false);
+			},
+			type: 'run'
+		}
+
 		/* Register the File Manager button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_FILE_MANAGER', 20, () => {
 			let device = studio.workspace.getDevice ();
@@ -608,7 +620,7 @@ export function setup(options, imports, register)
 		/**
 		 * Run the current project
 		 */
-		async runProject ()
+		async runProject (docker = false)
 		{
 			let project = await studio.projects.getCurrentProject ();
 
@@ -618,6 +630,8 @@ export function setup(options, imports, register)
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
 
+				console.log(makefile);
+				console.log(typeof(makefile));
 				let device = studio.workspace.getDevice ();
 				if (device)
 				{
@@ -641,11 +655,11 @@ export function setup(options, imports, register)
 							}
 						]
 					};
-
 					let setFiles = async (projectChildren, tpChildren, filenamePath) =>
 					{
 						for (let file of projectChildren)
 						{
+							console.log(file.name);
 							if (file.children)
 							{
 								let folder = {

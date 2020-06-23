@@ -94,6 +94,7 @@ let system = null;
 
 function getLanguage() {
 	let languageString = navigator.language;
+	console.log("limba este: " + languageString);
 	let languageId = languageString.split('-')[0];
 	if (translations.TRANSLATION[languageString]) return languageString;
 	return languageId;
