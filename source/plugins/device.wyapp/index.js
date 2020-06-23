@@ -628,6 +628,7 @@ export function setup(options, imports, register)
 			{
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
+				if (docker) makefile = 'run:\n\tdocker build --tag ' + project.name + ':1.0 .; docker run --detach ' + project.name + ':1.0';
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
 
 				console.log(makefile);

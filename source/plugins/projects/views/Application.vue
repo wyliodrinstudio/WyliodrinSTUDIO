@@ -318,12 +318,17 @@ export default {
 			if (this.currentFile)
 			{
 				// let extension = path.extname (this.currentFile).substring (1).toLowerCase();
+				console.log(this.currentFile);
 				for (let editor of this.editors) {
 					for (let lang of editor.languages) {
-						console.log (lang);
-						console.log (lang.test (this.currentFile));
-						if (lang.test (this.currentFile)) {
-							return editor.component;
+						if (this.currentFile === '/Dockerfile') {
+							if (lang.test ('.txt')) {
+								return editor.component;
+							}
+						} else {
+							if (lang.test (this.currentFile)) {
+								return editor.component;
+							}
 						}
 					}
 				}
