@@ -3,13 +3,9 @@
 //import ESPDeviceSetup from './views/ESPDeviceSetup.vue';
 
 
-
-
-//Bus 001 Device 009: ID 10c4:ea60 Cygnal Integrated Products, Inc. CP210x UART Bridge 
-//  / myAVR mySmartUSB light
-import _ from 'lodash';
-
-import path from 'path';
+import _, { update } from 'lodash';
+import { isElectron } from './lib.js'
+//import path from 'path';
 
 let studio = null;
 let workspace = null;
@@ -36,7 +32,8 @@ function loadSerialPort ()
         }
         catch (e)
         {
-                studio.workspace.error ('device_awesome: esp is not available '+e.message);
+
+                studio.workspace.error ('device_esp: esp is not available '+e.message);
                 return {
                         list: function ()
                         {
@@ -47,7 +44,7 @@ function loadSerialPort ()
         }
 }
 
-async function listESP()
+async function listSerialPorts()
 {
         let ports = [];
         try
@@ -56,18 +53,85 @@ async function listESP()
         }
         catch (e)
         {
-                studio.workspace.error ('device_awesome: failed to list awesome '+e.message);
+                studio.workspace.error ('device_esp: failed to list awesome '+e.message);
         }
         return ports;
 }
 
-function updateDevices()
-{
-        workspace.updateDevices ([...devices, ...serialDevices]);
-}
+
+
+
+
+        
 
 function searchSerialDevices(){
-        return null;
+
+        setInterval(async ()=> {
+                        let serial_devices = await listSerialPorts();
+                        devices = [];
+                        console.log("devices");
+                        console.log(serial_devices);
+                        console.log('wtf');
+                        if(isElectron()){
+                                console.log("Electron");
+                            }else{
+                                console.log("browser");
+                            }
+                        
+
+                        for(let serialDevice of serial_devices)
+                        {
+                                if(serialDevice.vendorId === '10c4' && serialDevice.productId === 'ea60' )
+                                {
+                                        let name = 'NodeMCU (ESP8266)';
+                                        let description = '';
+                                        let id = serialDevice.productId;
+                                        devices.push({
+                                                id: id,
+                                                adress: serialDevice.path,
+                                                description,
+                                                name,
+                                                connection:'serial',
+                                                icon:'plugins/device.esp/data/img/icons/rsz_runningesp-ish.jpg',
+                                                board:'any',
+                                                status:'',
+                                                properties: {
+                                                        productId: serialDevice.productId,
+                                                        vendorId: serialDevice.vendorId,
+                                                        locationId: serialDevice.locationId,
+                                                        serialNumber: serialDevice.serialNumber,
+                                                        pnpId: serialDevice.pnpId,
+                                                }
+
+                                        });
+                                }
+                        }
+
+                        serialDevices = devices;
+                        console.log('heheheh');
+                        console.log(devices);
+                        updateDevices();
+                        
+
+                },10000);
+        
+}
+
+
+function updateDevices(){
+        let add = [];
+        if (serialDevices.length === 0 && devices.length === 0)
+        {
+                add.push({
+                        id: 'esp:new device',
+                        adress:'',
+                        name: studio.workspace.vue.$t('ESP_NEW_DEVICE_TITLE'),
+			board: 'any',
+			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
+			placeholder: true
+                });
+        }
+        workspace.updateDevices([...devices, ...add]);//??
 }
 
 export function setup (options, imports, register)
@@ -75,6 +139,8 @@ export function setup (options, imports, register)
         studio = imports;
         SerialPort = loadSerialPort();
         searchSerialDevices();
+        //console.log(serialDevices);
+        console.log(process.versions.electron);
 
         let device_esp = {
 		defaultIcon() {
@@ -125,26 +191,45 @@ export function setup (options, imports, register)
                 
                         /* Here goes the actual code that will make your device run a project */
                         console.log('Run');
-                        }, 'plugins/device.awesome/data/img/icons/run-icon.svg',
+                        }, 'plugins/device.esp/data/img/icons/run-icon.svg',
+
                 
                         /* The aditional options that make the Run Button visible and enabled only if there is a connected device
                         and its type is "awesome" */
                         {
                                 visible () {
                                         let device = studio.workspace.getDevice ();
-                                        return (device.status === 'CONNECTED' && device.connection === 'awesome');
+                                        return (device.status === 'CONNECTED' && device.connection === 'esp');
                                 },
                                 enabled () {
                                         let device = studio.workspace.getDevice ();
-                                        return (device.status === 'CONNECTED' && device.connection === 'awesome');
+                                        return (device.status === 'CONNECTED' && device.connection === 'esp');
                                 },
                                 type: 'run'
                         });
 
                         register(null, {
-                                device_awesome
+                                device_esp
                         });
+
+                        // devices = [
+                        //         {
+                        //                 id: 'esp:web',
+                        //                 address: '',
+                        //                 name: 'ESP',
+                        //                 board: 'any',
+                        //                 connection: 'web-usb',
+                        //                 priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
+                        //                 placeholder: true
+                        //         }
+                        // ];
+                        workspace.updateDevices ([...devices]);
+                        
+                        
                 
         }
 
+
 }
+
+
