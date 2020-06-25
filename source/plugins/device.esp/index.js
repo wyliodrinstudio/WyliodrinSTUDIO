@@ -5,6 +5,7 @@
 
 import _, { update } from 'lodash';
 import { isElectron } from './lib.js'
+
 //import path from 'path';
 
 let studio = null;
@@ -53,7 +54,7 @@ async function listSerialPorts()
         }
         catch (e)
         {
-                studio.workspace.error ('device_esp: failed to list awesome '+e.message);
+                studio.workspace.error ('device_esp: failed to list ports '+e.message);
         }
         return ports;
 }
@@ -107,6 +108,8 @@ function searchSerialDevices(){
                                 }
                         }
 
+                        
+
                         serialDevices = devices;
                         console.log('heheheh');
                         console.log(devices);
@@ -125,7 +128,7 @@ function updateDevices(){
                 add.push({
                         id: 'esp:new device',
                         adress:'',
-                        name: studio.workspace.vue.$t('ESP_NEW_DEVICE_TITLE'),
+                        name: studio.workspace.vue.$t('NodeMCU ESP8266'),
 			board: 'any',
 			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			placeholder: true
@@ -170,6 +173,7 @@ export function setup (options, imports, register)
                         setTimeout(() => {
                                 device.status = 'CONNECTED';
                         }, 1000);
+                        return device;
                 },
 
 
