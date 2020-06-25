@@ -54,10 +54,7 @@ async function listSerialPorts()
         }
         catch (e)
         {
-<<<<<<< HEAD
-=======
                 studio.workspace.error ('device_esp: failed to list esp '+e.message);
->>>>>>> c3b4c909cb9cebbb5c7b5ef6e90aa32551be667b
         }
         return ports;
 }
@@ -184,6 +181,15 @@ export function setup (options, imports, register)
                 {
                         /* Here goes the actual code that you will write in order to connect the device. */
 
+                        if (studio.system.platform () === 'electron')
+                        {
+                                //ELECTRON
+                        }
+                        else
+                        {
+                                //BROWSER
+                        }
+
                         setTimeout(() => {
                                 device.status = 'CONNECTED';
                         }, 1000);
@@ -194,6 +200,16 @@ export function setup (options, imports, register)
                 disconnect(device, options)
                 {
                         /* Here goes the actual code that you will write in order to connect the device. */
+                        
+                        if (studio.system.platform () === 'electron')
+                        {
+                                //ELECTRON
+                        }
+                        else
+                        {
+                                //BROWSER
+                        }
+                        
                         setTimeout(() => {
                                 device.status = 'DISCONNECTED';
                         }, 1000);
@@ -225,6 +241,15 @@ export function setup (options, imports, register)
                                 },
                                 type: 'run'
                         });
+
+                        if (studio.system.platform () === 'electron')
+                        {
+                                //ELECTRON
+                        }
+                        else
+                        {
+                                //BROWSER
+                        }
 
                         register(null, {
                                 device_esp
