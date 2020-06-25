@@ -4,7 +4,6 @@
 
 
 import _, { update } from 'lodash';
-import { isElectron } from './lib.js'
 
 //import path from 'path';
 
@@ -153,7 +152,7 @@ export function setup (options, imports, register)
         SerialPort = loadSerialPort();
         searchSerialDevices();
         //console.log(serialDevices);
-        console.log(process.versions.electron);
+        //console.log(process.versions.electron);
 
         let device_esp = {
 		defaultIcon() {
