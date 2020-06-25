@@ -53,35 +53,46 @@ async function listSerialPorts()
         }
         catch (e)
         {
-                studio.workspace.error ('device_esp: failed to list awesome '+e.message);
+                studio.workspace.error ('device_esp: failed to list esp '+e.message);
         }
         return ports;
 }
 
 
 
-
+// function listPorts() {
+//         SerialPort.list().then(
+//          ports => {
+//           ports.forEach(port => {
+//            console.log(`${port.comName}\t${port.pnpId || ''}\t${port.manufacturer || ''}`)
+//           })
+//          },
+//          err => {
+//           console.error('Error listing ports', err)
+//          }
+//         )
+//        }
 
         
 
 function searchSerialDevices(){
 
         setInterval(async ()=> {
-                        let serial_devices = await listSerialPorts();
+                        let serial_devices =  await listSerialPorts();
                         devices = [];
                         console.log("devices");
                         console.log(serial_devices);
-                        console.log('wtf');
-                        if(isElectron()){
-                                console.log("Electron");
-                            }else{
-                                console.log("browser");
-                            }
-                        
+                        // console.log('wtf');
+                        // if(isElectron()){
+                        //         console.log("Electron");
+                        //     }else{
+                        //         console.log("browser");
+                        //     }
+                        // // 
 
                         for(let serialDevice of serial_devices)
                         {
-                                if(serialDevice.vendorId === '10c4' && serialDevice.productId === 'ea60' )
+                                if(serialDevice.vendorId === '2a03' && serialDevice.productId === '0043' )
                                 {
                                         let name = 'NodeMCU (ESP8266)';
                                         let description = '';
