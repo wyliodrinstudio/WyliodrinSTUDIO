@@ -54,10 +54,6 @@ async function listSerialPorts()
         }
         catch (e)
         {
-<<<<<<< HEAD
-=======
-                studio.workspace.error ('device_esp: failed to list esp '+e.message);
->>>>>>> c3b4c909cb9cebbb5c7b5ef6e90aa32551be667b
         }
         return ports;
 }
