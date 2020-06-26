@@ -4,8 +4,11 @@
 
 
 import _, { update } from 'lodash';
+import { Search } from 'brace';
+import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
 
-//import path from 'path';
+
+import path from 'path';
 
 let studio = null;
 let workspace = null;
@@ -96,7 +99,8 @@ function searchSerialDevices(){
                                 {
                                         let name = 'NodeMCU (ESP8266)';
                                         let description = '';
-                                        let id = serialDevice.productId;
+                                        let id = serialDevice.productId;//.toString().toLowerCase();
+                                        console.log(id);
                                         devices.push({
                                                 id: id,
                                                 adress: serialDevice.path,
@@ -152,7 +156,7 @@ export function setup (options, imports, register)
         studio = imports;
         SerialPort = loadSerialPort();
         searchSerialDevices();
-        //console.log(serialDevices);
+        console.log(SerialPort);
         //console.log(process.versions.electron);
 
         let device_esp = {
@@ -176,23 +180,27 @@ export function setup (options, imports, register)
                         return null;//connections;
                 },
 
-                connect(device, options)
+                connect(device/*, options*/)
                 {
                         /* Here goes the actual code that you will write in order to connect the device. */
 
-                        if (studio.system.platform () === 'electron')
-                        {
-                                //ELECTRON
-                        }
-                        else
-                        {
-                                //BROWSER
-                        }
+                        // if (studio.system.platform () === 'electron')
+                        // {
+                        //         if(_.isObject(device))
+                        //         {
+                        //                 if(device.id === "")
+                        //         }
 
-                        setTimeout(() => {
-                                device.status = 'CONNECTED';
-                        }, 1000);
-                        return device;
+                        // }
+                        // else
+                        // {
+                        //         //BROWSER
+                        // }
+
+                        // setTimeout(() => {
+                        //         device.status = 'CONNECTED';
+                        // }, 1000);
+                        // return device;
                 },
 
 
@@ -200,18 +208,19 @@ export function setup (options, imports, register)
                 {
                         /* Here goes the actual code that you will write in order to connect the device. */
                         
-                        if (studio.system.platform () === 'electron')
-                        {
-                                //ELECTRON
-                        }
-                        else
-                        {
-                                //BROWSER
-                        }
+                        // if (studio.system.platform () === 'electron')
+                        // {
+                        //         //ELECTRON
+                                
+                        // }
+                        // else
+                        // {
+                        //         //BROWSER
+                        //  }
                         
-                        setTimeout(() => {
-                                device.status = 'DISCONNECTED';
-                        }, 1000);
+                        // setTimeout(() => {
+                        //         device.status = 'DISCONNECTED';
+                        // }, 1000);
                 }
 
         };
@@ -241,14 +250,16 @@ export function setup (options, imports, register)
                                 type: 'run'
                         });
 
-                        if (studio.system.platform () === 'electron')
-                        {
-                                //ELECTRON
-                        }
-                        else
-                        {
-                                //BROWSER
-                        }
+                        // if (studio.system.platform () === 'electron')
+                        // {
+                        //         //ELECTRON
+
+                        //         searchSerialDevices();
+                        // }
+                        // else
+                        // {
+                        //         //BROWSER
+                        // }
 
                         register(null, {
                                 device_esp

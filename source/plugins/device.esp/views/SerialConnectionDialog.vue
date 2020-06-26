@@ -24,7 +24,7 @@ export default {
 	data ()
 	{
 		return {
-			baudrate: this.device.baudrate || 9600,
+			baudrate: this.device.baudrate || 115200,
 			port: this.device.address
 		};
 	},

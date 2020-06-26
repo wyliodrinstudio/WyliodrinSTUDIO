@@ -66,7 +66,7 @@
 		"dexie": "^2.0.4",
 		"electron": "^7.0.0",
 		"electron-builder": "^21.2.0",
-		"electron-rebuild": "^1.8.6",
+		"electron-rebuild": "^1.11.0",
 		"eslint": "^6.0.1",
 		"eslint-plugin-vue": "^5.2.3",
 		"file-loader": "^4.0.0",
