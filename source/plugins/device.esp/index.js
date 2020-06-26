@@ -187,14 +187,15 @@ export function setup (options, imports, register)
                         else
                         {
                                 //BROWSER
-
-                                //Filtru pentru un VendorID specific
-
-                                // const requestOptions = {    
-                                //         filters: [{ vendorId: 0x2341 }],
-                                // };
                                 
                                 async function connectFromBrowser() {
+
+                                        //Filtru pentru un VendorID specific
+
+                                        // const requestOptions = {    
+                                        //         filters: [{ vendorId: 0x2341 }],
+                                        // };
+
                                         //Cererea permisiuni de conectare
                                         const portConnect = await navigator.serial.requestPort();
                                         console.log(portConnect);
