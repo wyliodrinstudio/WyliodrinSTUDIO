@@ -1,11 +1,14 @@
 
 //import ESPDisconnectDialog from './views/ESPDisconnectDialog.vue'
-//import ESPDeviceSetup from './views/ESPDeviceSetup.vue';
+import ESPDeviceSetup from './views/ESPDeviceSetup.vue';
 
 
 import _, { update } from 'lodash';
+import { Search } from 'brace';
+import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
 
-//import path from 'path';
+
+import path from 'path';
 
 let studio = null;
 let workspace = null;
@@ -94,16 +97,17 @@ function searchSerialDevices(){
                         {
                                 if(serialDevice.vendorId === '2a03' && serialDevice.productId === '0043' )
                                 {
-                                        let name = 'NodeMCU (ESP8266)';
+                                        let name = 'NodeMCU_(ESP8266)'.toString();
                                         let description = '';
-                                        let id = serialDevice.productId;
+                                        let id = serialDevice.productId;//.toString().toLowerCase();
+                                        console.log(id);
                                         devices.push({
                                                 id: id,
                                                 adress: serialDevice.path,
                                                 description,
                                                 name,
                                                 connection:'serial',
-                                                icon:'plugins/device.esp/data/img/icons/rsz_runningesp-ish.jpg',
+                                                icon:'plugins/device.esp/data/img/icons/esp.png',
                                                 board:'any',
                                                 status:'',
                                                 properties: {
@@ -137,8 +141,8 @@ function updateDevices(){
         {
                 add.push({
                         id: 'esp:new device',
-                        adress:'',
-                        name: studio.workspace.vue.$t('NodeMCU ESP8266'),
+                        address:'',
+                        name: studio.workspace.vue.$t('NodeMCU_ESP8266'),
 			board: 'any',
 			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			placeholder: true
@@ -152,8 +156,8 @@ export function setup (options, imports, register)
         studio = imports;
         SerialPort = loadSerialPort();
         searchSerialDevices();
-        //console.log(serialDevices);
-        console.log(process.versions.electron);
+        console.log(SerialPort);
+        //console.log(process.versions.electron);
 
         let device_esp = {
 		defaultIcon() {
@@ -176,12 +180,13 @@ export function setup (options, imports, register)
                         return null;//connections;
                 },
 
-                connect(device, options)
+                connect(device/*, options*/)
                 {
                         /* Here goes the actual code that you will write in order to connect the device. */
 
                         if (studio.system.platform () === 'electron')
                         {
+<<<<<<< HEAD
                                 //ELECTRON
                         }
                         else
@@ -207,9 +212,69 @@ export function setup (options, imports, register)
                                                 if (done) break;
                                                 console.log(data);
                                         }
+=======
+                                console.log("checking");
+                                if(_.isObject(device))
+                                {
+                                        //daca nu e nimic conectat
+                                        if(device.id === "esp:new device")
+                                        {
+                                                studio.workspace.showDialog(ESPDeviceSetup,{width: '500px'});
+					        return null;
+                                        }
                                 }
-                                connectFromBrowser();
+                                else{
+                                        if(device.connection === 'serial'){
 
+                                                ports[device.id] = new SerialPort(device.address,(err)=>{
+                                                        if(err){
+                                                                device.status = 'DISCONNECTED';
+                                                                //updateDevice(device);
+                                                                studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
+								delete connections[device.id];
+								delete ports[device.id];
+                                                        }
+                                                        else
+                                                        {
+                                                                device.status = 'CONNECTED';
+                                                                studio.workspace.showDialog(SerialConnectionDialog,{width: '500px'});
+                                                                updateDevice(device);
+                                                                if (studio.console)
+                                                                {
+                                                                        studio.console.select (device.id);
+                                                                        studio.console.reset();
+                                                                        studio.console.show ();
+                                                                }     
+                                                        }
+
+                                                });
+
+                                                ports[device.id].on('data', (data) => {
+                                                        console.log(data.toString());
+                                                        studio.console.write(device.id, data.toString());
+                                                });
+                                                ports[device.id].on('error', (err) => {
+                                                        // console.log(data.toString());
+                                                        studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
+                                                });
+                                                ports[device.id].on('close', () => {
+                                                        // console.log(data.toString());
+                                                        device.status = 'DISCONNECTED';
+                                                        updateDevice(device);
+                                                        delete connections[device.id];
+                                                        delete ports[device.id];
+                                                });
+                                                return device;
+                                        }
+
+
+>>>>>>> 8281954dcf07623a4f727356325887132ba34e0c
+                                }
+
+                        }
+                        else
+                        {
+                                //BROWSER
                         }
 
                         setTimeout(() => {
@@ -223,18 +288,19 @@ export function setup (options, imports, register)
                 {
                         /* Here goes the actual code that you will write in order to connect the device. */
                         
-                        if (studio.system.platform () === 'electron')
-                        {
-                                //ELECTRON
-                        }
-                        else
-                        {
-                                //BROWSER
-                        }
+                        // if (studio.system.platform () === 'electron')
+                        // {
+                        //         //ELECTRON
+                                
+                        // }
+                        // else
+                        // {
+                        //         //BROWSER
+                        //  }
                         
-                        setTimeout(() => {
-                                device.status = 'DISCONNECTED';
-                        }, 1000);
+                        // setTimeout(() => {
+                        //         device.status = 'DISCONNECTED';
+                        // }, 1000);
                 }
 
         };
@@ -267,6 +333,8 @@ export function setup (options, imports, register)
                         if (studio.system.platform () === 'electron')
                         {
                                 //ELECTRON
+
+                                searchSerialDevices();
                         }
                         else
                         {
