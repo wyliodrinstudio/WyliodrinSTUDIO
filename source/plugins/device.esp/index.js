@@ -186,33 +186,6 @@ export function setup (options, imports, register)
 
                         if (studio.system.platform () === 'electron')
                         {
-<<<<<<< HEAD
-                                //ELECTRON
-                        }
-                        else
-                        {
-                                //BROWSER
-                                
-                                async function connectFromBrowser() {
-
-                                        //Filtru pentru un VendorID specific
-
-                                        // const requestOptions = {    
-                                        //         filters: [{ vendorId: 0x2341 }],
-                                        // };
-
-                                        //Cererea permisiuni de conectare
-                                        const portConnect = await navigator.serial.requestPort();
-                                        console.log(portConnect);
-                                        
-                                        //Citirea de pe port
-                                        await portConnect.open({ baudrate: 115200 });
-                                        const reader = portConnect.in.getReader();
-                                        for await (const { done, data } of reader.read()) {
-                                                if (done) break;
-                                                console.log(data);
-                                        }
-=======
                                 console.log("checking");
                                 if(_.isObject(device))
                                 {
@@ -268,19 +241,41 @@ export function setup (options, imports, register)
                                         }
 
 
->>>>>>> 8281954dcf07623a4f727356325887132ba34e0c
                                 }
 
                         }
                         else
                         {
                                 //BROWSER
+                                
+                                async function connectFromBrowser() {
+
+                                        //Filtru pentru un VendorID specific
+
+                                        // const requestOptions = {    
+                                        //         filters: [{ vendorId: 0x2341 }],
+                                        // };
+
+                                        //Cererea permisiuni de conectare
+                                        const portConnect = await navigator.serial.requestPort();
+                                        console.log(portConnect);
+                                        
+                                        //Citirea de pe port
+                                        console.log(await portConnect.open({ baudrate: 115200 }));
+                                        const reader = portConnect.in.getReader();
+                                        for await (const { done, data } of reader.read()) {
+                                                if (done) break;
+                                                console.log(data);
+                                        }
+                                }
+                                connectFromBrowser();
                         }
 
                         setTimeout(() => {
                                 device.status = 'CONNECTED';
                         }, 1000);
                         return device;
+                        
                 },
 
 
@@ -303,6 +298,7 @@ export function setup (options, imports, register)
                         // }, 1000);
                 }
 
+        
         };
 
         workspace = studio.workspace.registerDeviceDriver('esp', device_esp);
@@ -361,8 +357,4 @@ export function setup (options, imports, register)
                         
                 
         }
-
-
 }
-
-
