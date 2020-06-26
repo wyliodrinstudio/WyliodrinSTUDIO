@@ -4,7 +4,6 @@
 
 
 import _, { update } from 'lodash';
-import { isElectron } from './lib.js'
 
 //import path from 'path';
 
@@ -188,6 +187,28 @@ export function setup (options, imports, register)
                         else
                         {
                                 //BROWSER
+
+                                //Filtru pentru un VendorID specific
+
+                                // const requestOptions = {    
+                                //         filters: [{ vendorId: 0x2341 }],
+                                // };
+                                
+                                async function connectFromBrowser() {
+                                        //Cererea permisiunii de conectare
+                                        const portConnect = await navigator.serial.requestPort();
+                                        console.log(portConnect);
+                                        
+                                        //Citirea de pe port
+                                        await portConnect.open({ baudrate: 115200 });
+                                        const reader = portConnect.in.getReader();
+                                        for await (const { done, data } of reader.read()) {
+                                                if (done) break;
+                                                console.log(data);
+                                        }
+                                }
+                                connectFromBrowser();
+
                         }
 
                         setTimeout(() => {
