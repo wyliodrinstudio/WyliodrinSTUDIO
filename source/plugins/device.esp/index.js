@@ -195,7 +195,7 @@ export function setup (options, imports, register)
                                 // };
                                 
                                 async function connectFromBrowser() {
-                                        //Cererea permisiunii de conectare
+                                        //Cererea permisiuni de conectare
                                         const portConnect = await navigator.serial.requestPort();
                                         console.log(portConnect);
                                         
