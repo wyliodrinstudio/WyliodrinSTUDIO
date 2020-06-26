@@ -1,10 +1,10 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t('RPK_NEW_DEVICE_TITLE')}}</span>
+			<span class="headline">{{$t('ESP_NEW_DEVICE_TITLE')}}</span>
 		</v-card-title>
 		<v-card-text>
-			<img src="plugins/device.esp/data/img??????????" style="width:100%;"></img>
+			<img src="plugins/device.esp/data/img/icons/nothing_here.jpg" style="width:100%;"></img>
 			<div>
 				{{$t('ESP_NEW_DEVICE_INSTRUCTIONS')}}
 			</div>
