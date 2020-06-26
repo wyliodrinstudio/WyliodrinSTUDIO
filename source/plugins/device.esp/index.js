@@ -261,12 +261,28 @@ export function setup (options, imports, register)
                                         console.log(portConnect);
                                         
                                         //Citirea de pe port
-                                        console.log(await portConnect.open({ baudrate: 115200 }));
-                                        const reader = portConnect.in.getReader();
-                                        for await (const { done, data } of reader.read()) {
-                                                if (done) break;
-                                                console.log(data);
-                                        }
+                                        await portConnect.open({ baudrate: 115200 });
+                                        device.status='CONNECTED';
+                                        workspace.updateDevice(device);
+                                        console.log(portConnect);
+                                        const reader = portConnect.readable.getReader();
+                                        console.log(await reader.read());
+                                        do{
+
+                                               let {done,value} = await reader.read();
+                                               
+                                               console.log(Buffer.from(value).toString());
+                                               if(done)
+                                               {
+                                                       break;
+                                               }
+
+                                        }while(true);
+                                        
+                                        // for await (const { done, data } of reader.read()) {
+                                        //         if (done) break;
+                                        //         console.log(data);
+                                        // }
                                 }
                                 connectFromBrowser();
                         }
