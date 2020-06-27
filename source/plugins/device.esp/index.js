@@ -6,6 +6,7 @@ import ESPDeviceSetup from './views/ESPDeviceSetup.vue';
 import _, { update } from 'lodash';
 import { Search } from 'brace';
 import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
+import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
 
 
 import path from 'path';
@@ -247,44 +248,54 @@ export function setup (options, imports, register)
                         else
                         {
                                 //BROWSER
+
+                                if(navigator.serial != undefined)
+                                {
                                 
-                                async function connectFromBrowser() {
+                                        async function connectFromBrowser() {
 
-                                        //Filtru pentru un VendorID specific
+                                                //Filtru pentru un VendorID specific
 
-                                        // const requestOptions = {    
-                                        //         filters: [{ vendorId: 0x2341 }],
-                                        // };
+                                                // const requestOptions = {    
+                                                //         filters: [{ vendorId: 0x2341 }],
+                                                // };
 
-                                        //Cererea permisiuni de conectare
-                                        const portConnect = await navigator.serial.requestPort();
-                                        console.log(portConnect);
-                                        
-                                        //Citirea de pe port
-                                        await portConnect.open({ baudrate: 115200 });
-                                        device.status='CONNECTED';
-                                        workspace.updateDevice(device);
-                                        console.log(portConnect);
-                                        const reader = portConnect.readable.getReader();
-                                        console.log(await reader.read());
-                                        do{
+                                                //Cererea permisiuni de conectare
+                                                const portConnect = await navigator.serial.requestPort();
+                                                console.log(portConnect);
+                                                
+                                                //Citirea de pe port
+                                                await portConnect.open({ baudrate: 115200 });
+                                                device.status='CONNECTED';
+                                                workspace.updateDevice(device);
+                                                console.log(portConnect);
+                                                const reader = portConnect.readable.getReader();
+                                                console.log(await reader.read());
+                                                do{
 
-                                               let {done,value} = await reader.read();
-                                               
-                                               console.log(Buffer.from(value).toString());
-                                               if(done)
-                                               {
-                                                       break;
-                                               }
+                                                let {done,value} = await reader.read();
+                                                
+                                                console.log(Buffer.from(value).toString());
+                                                if(done)
+                                                {
+                                                        break;
+                                                }
 
-                                        }while(true);
-                                        
-                                        // for await (const { done, data } of reader.read()) {
-                                        //         if (done) break;
-                                        //         console.log(data);
-                                        // }
+                                                }while(true);
+                                                
+                                                // for await (const { done, data } of reader.read()) {
+                                                //         if (done) break;
+                                                //         console.log(data);
+                                                // }
+                                        }
+                                        connectFromBrowser();
                                 }
-                                connectFromBrowser();
+                                else
+                                {
+                                        studio.workspace.showDialog(ChromeFlagSetup,{width: '500px'});
+                                }        
+
+
                         }
 
                         setTimeout(() => {
