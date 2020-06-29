@@ -62,7 +62,13 @@ async function listSerialPorts()
         return ports;
 }
 
-
+function getConnectedDevice (id)
+{
+	let device = null;
+	let connection = connections[id];
+	if (connection) device = connection.device;
+	return device;
+}
 
 // function listPorts() {
 //         SerialPort.list().then(
@@ -273,6 +279,7 @@ export function setup (options, imports, register)
                                                 await portConnect.open({ baudrate: 115200 });
                                                 device.status='CONNECTED';
                                                 workspace.updateDevice(device);
+                                                studio.shell.select (device.id);
                                                 console.log(portConnect);
                                                 const reader = portConnect.readable.getReader();
                                                 console.log(await reader.read());
@@ -281,9 +288,14 @@ export function setup (options, imports, register)
                                                 let {done,value} = await reader.read();
                                                 
                                                 console.log(Buffer.from(value).toString());
+                                                
                                                 if(done)
                                                 {
-                                                        break;
+                                                         break;
+                                                }
+                                                else
+                                                {
+                                                        studio.shell.write(device.id, Buffer.from(value).toString());
                                                 }
 
                                                 }while(true);
@@ -294,6 +306,9 @@ export function setup (options, imports, register)
                                                 // }
                                         }
                                         connectFromBrowser();
+
+                                        
+
                                 }
                                 else
                                 {
@@ -375,8 +390,23 @@ export function setup (options, imports, register)
 
                         
                         workspace.updateDevices ([...devices]);
+        
                         
                         
                 
         }
+
+        studio.shell.register ((event, id, ...data) =>
+	{
+		let device = getConnectedDevice (id);
+		if (device)
+		{
+			if (event === 'data')
+			{	
+                                const writer = portConnect.writable.getWriter();
+                                writer.write(data);
+                        }
+                }
+        });
+
 }
