@@ -1,12 +1,13 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t('ESP_NEW_DEVICE_TITLE')}}</span>
+			<span class="headline">{{$t('ESP_NOT_CONNECTED_YET')}}</span>
 		</v-card-title>
-		<v-card-text>
-			<img src="plugins/device.esp/data/img/icons/nothing_here.jpg" style="width:100%;"></img>
+		<v-card-text>,
+			<img src="plugins/device.esp/data/img/icons/nothing_here.jpg" style="width:100%;"><!--</img> -->
+			
 			<div>
-				{{$t('ESP_NEW_DEVICE_INSTRUCTIONS')}}
+				{{$t('CONNECT_ESP_DEVICE')}}
 			</div>
 			<div v-show="binary">
 				{{$t('ESP_NEW_DEVICE_FLASH_INSTRUCTIONS')}}
