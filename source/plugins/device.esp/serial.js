@@ -29,29 +29,20 @@ export function setup (s)
 }
 
 export default {
-	list ()
+	async list ()
 	{
-		// if electron ...
-		// else ...
-		return [];
-	}
-}
-
-export class SerialPortClient extends EventEmitter{
-	constructor (serialPort)
-	{
-		this.serialPort = serialPort;
-
 		if (studio.system.platform () === 'electron')
 		{
-		    return SerialPort.list ();
+			return SerialPort.list ();
 		}
 		else
 		{
 			return [];
 		}
 	}
+}
 
+export class SerialPort extends EventEmitter {
 	async connect (address, baudRate)
 	{
 		if (studio.system.platform () === 'electron')
