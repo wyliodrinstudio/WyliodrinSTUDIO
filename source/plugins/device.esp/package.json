@@ -4,7 +4,7 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace", "projects", "events", "device_wyapp", "console", "filesystem", "system"],
+        "consumes": ["workspace", "projects", "events", "device_wyapp", "console", "filesystem", "system", "shell"],
         "provides": [],
 		"target": ["electron", "browser"],
 		"disabled": false
