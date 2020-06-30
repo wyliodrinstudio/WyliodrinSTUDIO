@@ -62,13 +62,7 @@ async function listSerialPorts()
         return ports;
 }
 
-function getConnectedDevice (id)
-{
-	let device = null;
-	let connection = connections[id];
-	if (connection) device = connection.device;
-	return device;
-}
+
 
 // function listPorts() {
 //         SerialPort.list().then(
@@ -202,24 +196,31 @@ export function setup (options, imports, register)
                                                 console.log(options);
                                                 if(options)
                                                 {
-                                                        device.status = 'CONNECTING';
+                                                        device.status = 'CONNECTED';
                                                         updateDevices();
                                                         
                                                 }
-                                                return;
-                                                ports[device.id] = new SerialPort(device.address, function(err){
+                                                
+                                                console.log(device.status);
+                                                
+                                                ports[device.priority] = new SerialPort(device.address, function(err){
                                                         if (err) {
                                                                 device.status = 'DISCONNECTED';
                                                                 updateDevice(device);
-                                                                studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
-                                                                delete connections[device.id];
-                                                                delete ports[device.id];
+                                                                studio.workspace.showError ('ESP_SERIAL_CONNECTiON_ERROR', {extra: err.message});
+                                                                delete connections[device.priority];
+                                                                delete ports[device.priority];
                                                                 return null;
                                                         }
                                                 });
+
                                                        
-                                                device.status = 'CONNECTED';
+                                                //device.status = 'CONNECTED';
+                                                console.log(device.status);
                                                 updateDevice(device);
+                                                studio.shell.select(device.id);
+                                                
+
                         
                                                 if (studio.console)
                                                 {
@@ -229,25 +230,28 @@ export function setup (options, imports, register)
                                                 }
                                                         
                                                 
-                                                //await studioworkspace.showDialog(SerialConnectionDialog);
                                                 
                                                 
+                                        // ports[device.priority].on('readable', function () {
+                                        //         console.log('Data:', ports[device.priority].read())
+                                        //         })
+                                                            
                                         
 
-                                        ports[device.id].on('data', (data) => {
-                                                console.log(data.toString());
+                                        ports[device.priority].on('data', (data) => {
+                                                //console.log(data.toString());
                                                 studio.console.write(device.id, data.toString());
                                         });
-                                        ports[device.id].on('error', (err) => {
+                                        ports[device.priority].on('error', (err) => {
                                         
                                                 studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
                                         });
-                                        ports[device.id].on('close', () => {
+                                        ports[device.priority].on('close', () => {
                                                 
                                                 device.status = 'DISCONNECTED';
-                                                updateDevice(device);
-                                                delete connections[device.id];
-                                                delete ports[device.id];
+                                                workspace.updateDevice(device);
+                                                delete connections[device.priority];
+                                                delete ports[device.priority];
                                         });
 
                                         }
@@ -279,7 +283,6 @@ export function setup (options, imports, register)
                                                 await portConnect.open({ baudrate: 115200 });
                                                 device.status='CONNECTED';
                                                 workspace.updateDevice(device);
-                                                studio.shell.select (device.id);
                                                 console.log(portConnect);
                                                 const reader = portConnect.readable.getReader();
                                                 console.log(await reader.read());
@@ -288,14 +291,9 @@ export function setup (options, imports, register)
                                                 let {done,value} = await reader.read();
                                                 
                                                 console.log(Buffer.from(value).toString());
-                                                
                                                 if(done)
                                                 {
-                                                         break;
-                                                }
-                                                else
-                                                {
-                                                        studio.shell.write(device.id, Buffer.from(value).toString());
+                                                        break;
                                                 }
 
                                                 }while(true);
@@ -306,9 +304,6 @@ export function setup (options, imports, register)
                                                 // }
                                         }
                                         connectFromBrowser();
-
-                                        
-
                                 }
                                 else
                                 {
@@ -390,23 +385,8 @@ export function setup (options, imports, register)
 
                         
                         workspace.updateDevices ([...devices]);
-        
                         
                         
                 
         }
-
-        studio.shell.register ((event, id, ...data) =>
-	{
-		let device = getConnectedDevice (id);
-		if (device)
-		{
-			if (event === 'data')
-			{	
-                                const writer = portConnect.writable.getWriter();
-                                writer.write(data);
-                        }
-                }
-        });
-
 }
