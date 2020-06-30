@@ -7,7 +7,7 @@ import _, { update } from 'lodash';
 import { Search } from 'brace';
 import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
-
+//import {Serial_Port} from './serial.js'
 import path from 'path';
 
 //import serial from './serial';
@@ -196,14 +196,13 @@ export function setup (options, imports, register)
                                                         device: device,
                                                         width: '500px'
                                                 });
+                                                //console.log(options);
                                                 if(options)
                                                 {
                                                         device.status = 'CONNECTING';
                                                         updateDevices();
                                                         
                                                 }
-                                                
-                                                console.log(device.status);
                                                 
                                                 ports[device.id] = new SerialPort(device.address, function(err){
                                                         if (err) {
@@ -218,6 +217,7 @@ export function setup (options, imports, register)
                                                                 device.status = 'CONNECTED';
                                                                 updateDevice(device);
                                                                 studio.shell.select(device.id);
+
                                                                 studio.console.select (device.id);
                                                                 studio.console.reset();
                                                                 studio.console.show ();
@@ -236,10 +236,18 @@ export function setup (options, imports, register)
                                                                         delete connections[device.priority];
                                                                         delete ports[device.priority];
                                                                 });
+
+                                                                
                         
 
                                                         }
                                                 });
+
+                                        }
+                
+                                
+                        
+
                         }
                         else
                         {
@@ -294,9 +302,9 @@ export function setup (options, imports, register)
 
                         }
 
-                        // setTimeout(() => {
-                        //         device.status = 'CONNECTED';
-                        // }, 1000);
+                        setTimeout(() => {
+                                device.status = 'CONNECTED';
+                        }, 1000);
                         return device;
                         
                 },
@@ -306,19 +314,35 @@ export function setup (options, imports, register)
                 {
                         /* Here goes the actual code that you will write in order to connect the device. */
                         
-                        // if (studio.system.platform () === 'electron')
-                        // {
-                        //         //ELECTRON
+                        if (studio.system.platform () === 'electron')
+                        {
+                                //ELECTRON
+
+                                if(_.isObject(device))
+                                {
+                                        if(device)
+                                        {
+                                                ports[device.id].close();
+                                        }
+                                        device.status = 'DISCONNECTED';
+                                        updateDevice(device);
+                                        studio.console.reset();
+                                        studio.console.close();
+                                        //studio.shell.close();
+                                                                
+                                        delete connections[device.id];
+                                }
                                 
-                        // }
-                        // else
-                        // {
-                        //         //BROWSER
-                        //  }
+                         }
+                        else
+                        {
+                                //BROWSER
+                                return null;
+                        }
                         
-                        // setTimeout(() => {
-                        //         device.status = 'DISCONNECTED';
-                        // }, 1000);
+                        setTimeout(() => {
+                                device.status = 'DISCONNECTED';
+                        }, 1000);
                 }
 
         

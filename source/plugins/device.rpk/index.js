@@ -295,7 +295,7 @@ export function setup(options, imports, register) {
 			}
 
 			else {
-				studio.workspace.warn('device_wyapp_disconnect: there is no device connecte');
+				studio.workspace.warn('device_wyapp_disconnect: there is no device connected');
 			}
 		}
 	};
