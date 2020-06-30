@@ -10,6 +10,8 @@ import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
 
 import path from 'path';
 
+//import serial from './serial';
+
 let studio = null;
 let workspace = null;
 let devices = [];
@@ -187,78 +189,57 @@ export function setup (options, imports, register)
                         {
                                
                                         console.log("checking");
+                                        console.log(device.id);
                                         if(_.isObject(device))
                                         {
                                                 let options = await studio.workspace.showDialog (SerialConnectionDialog, {
                                                         device: device,
                                                         width: '500px'
                                                 });
-                                                console.log(options);
                                                 if(options)
                                                 {
-                                                        device.status = 'CONNECTED';
+                                                        device.status = 'CONNECTING';
                                                         updateDevices();
                                                         
                                                 }
                                                 
                                                 console.log(device.status);
                                                 
-                                                ports[device.priority] = new SerialPort(device.address, function(err){
+                                                ports[device.id] = new SerialPort(device.address, function(err){
                                                         if (err) {
                                                                 device.status = 'DISCONNECTED';
                                                                 updateDevice(device);
                                                                 studio.workspace.showError ('ESP_SERIAL_CONNECTiON_ERROR', {extra: err.message});
-                                                                delete connections[device.priority];
-                                                                delete ports[device.priority];
+                                                                delete connections[device.id];
+                                                                delete ports[device.id];
                                                                 return null;
                                                         }
+                                                        else{
+                                                                device.status = 'CONNECTED';
+                                                                updateDevice(device);
+                                                                studio.shell.select(device.id);
+                                                                studio.console.select (device.id);
+                                                                studio.console.reset();
+                                                                studio.console.show ();
+                                                                ports[device.id].on('data', (data) => {
+                                                                        //console.log(data.toString());
+                                                                        studio.console.write(device.id, data.toString());
+                                                                });
+                                                                ports[device.id].on('error', (err) => {
+                                                                
+                                                                        studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
+                                                                });
+                                                                ports[device.id].on('close', () => {
+                                                                        
+                                                                        device.status = 'DISCONNECTED';
+                                                                        workspace.updateDevice(device);
+                                                                        delete connections[device.priority];
+                                                                        delete ports[device.priority];
+                                                                });
+                        
+
+                                                        }
                                                 });
-
-                                                       
-                                                //device.status = 'CONNECTED';
-                                                console.log(device.status);
-                                                updateDevice(device);
-                                                studio.shell.select(device.id);
-                                                
-
-                        
-                                                if (studio.console)
-                                                {
-                                                        studio.console.select (device.id);
-                                                        studio.console.reset();
-                                                        studio.console.show ();
-                                                }
-                                                        
-                                                
-                                                
-                                                
-                                        // ports[device.priority].on('readable', function () {
-                                        //         console.log('Data:', ports[device.priority].read())
-                                        //         })
-                                                            
-                                        
-
-                                        ports[device.priority].on('data', (data) => {
-                                                //console.log(data.toString());
-                                                studio.console.write(device.id, data.toString());
-                                        });
-                                        ports[device.priority].on('error', (err) => {
-                                        
-                                                studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
-                                        });
-                                        ports[device.priority].on('close', () => {
-                                                
-                                                device.status = 'DISCONNECTED';
-                                                workspace.updateDevice(device);
-                                                delete connections[device.priority];
-                                                delete ports[device.priority];
-                                        });
-
-                                        }
-                
-                                
-                        
-
                         }
                         else
                         {
@@ -313,9 +294,9 @@ export function setup (options, imports, register)
 
                         }
 
-                        setTimeout(() => {
-                                device.status = 'CONNECTED';
-                        }, 1000);
+                        // setTimeout(() => {
+                        //         device.status = 'CONNECTED';
+                        // }, 1000);
                         return device;
                         
                 },
