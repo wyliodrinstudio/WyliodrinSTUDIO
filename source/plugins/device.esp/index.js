@@ -128,7 +128,7 @@ function searchSerialDevices(){
                         console.log(serialDevices);
                         
 
-                },10000);
+                },3000);
                 //search();
                
                         
@@ -189,7 +189,6 @@ export function setup (options, imports, register)
                         {
                                
                                         console.log("checking");
-                                        console.log(device.id);
                                         if(_.isObject(device))
                                         {
                                                 let options = await studio.workspace.showDialog (SerialConnectionDialog, {
@@ -211,7 +210,7 @@ export function setup (options, imports, register)
                                                                 studio.workspace.showError ('ESP_SERIAL_CONNECTiON_ERROR', {extra: err.message});
                                                                 delete connections[device.id];
                                                                 delete ports[device.id];
-                                                                return null;
+                                                                //return null;
                                                         }
                                                         else{
                                                                 device.status = 'CONNECTED';
@@ -219,8 +218,10 @@ export function setup (options, imports, register)
                                                                 studio.shell.select(device.id);
 
                                                                 studio.console.select (device.id);
+
                                                                 studio.console.reset();
                                                                 studio.console.show ();
+
                                                                 ports[device.id].on('data', (data) => {
                                                                         //console.log(data.toString());
                                                                         studio.console.write(device.id, data.toString());
@@ -327,8 +328,7 @@ export function setup (options, imports, register)
                                         device.status = 'DISCONNECTED';
                                         updateDevice(device);
                                         studio.console.reset();
-                                        studio.console.close();
-                                        //studio.shell.close();
+                                       
                                                                 
                                         delete connections[device.id];
                                 }
