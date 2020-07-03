@@ -130,7 +130,7 @@ function searchSerialDevices(){
         }
                 //},3000);
                 search();
-                console.log(serialDevices);
+                //console.log(serialDevices);
      
                         
 
@@ -157,11 +157,9 @@ function updateDevices(){
 
 export function setup (options, imports, register)
 {
-        console.log('intro setup');
         studio = imports;
         serial.setup(studio);
         searchSerialDevices();
-        console.log('intro setup');
         SerialPortlist = loadSerialPort();
        
         let device_esp = {
@@ -187,28 +185,28 @@ export function setup (options, imports, register)
 
                 async connect(device/*, options*/)
                 {
-                        if (studio.system.platform () === 'electron')
-                        {
-                               
-                                        console.log("checking");
-                                        if(_.isObject(device))
+                        
+                                console.log("checking");
+                                if(_.isObject(device))
+                                {
+                                        let options = null;
+                                        if(studio)
                                         {
-                                                let options = await studio.workspace.showDialog (SerialConnectionDialog, {
-                                                        device: device,
-                                                        width: '500px'
+                                                options = await studio.workspace.showDialog (SerialConnectionDialog, {
+                                                device: device,
+                                                width: '500px'
                                                 });
-                                                
-                                                if(options)
-                                                {
-                                                        device.status = 'CONNECTING';
-                                                        updateDevices();
-                                                        
-                                                }
-                                                
-                                                ports[device.id] = new SerialPort();
-                                               
+                                        }
+                                        
+                                        if(options)
+                                        {
+                                                device.status = 'CONNECTING';
+                                                updateDevices();
 
-                                                ports[device.id].connect(device.address,device.baudrate);
+                                                ports[device.id] = new SerialPort();
+                                        
+
+                                                ports[device.id].connect(device.address,options.baudrate);
 
                                                 ports[device.id].on('connected',(data)=>{
                                                         device.status = 'CONNECTED';
@@ -216,6 +214,7 @@ export function setup (options, imports, register)
                                                         studio.shell.select(device.id);
 
                                                         studio.console.select (device.id);
+                                                        studio.shell.write(device.id, data);
 
                                                         studio.console.reset();
                                                         studio.console.show ();                                   
@@ -225,11 +224,9 @@ export function setup (options, imports, register)
 
                                                         device.status = 'DISCONNECTED';
                                                         updateDevice(device);
-                                                        studio.workspace.showError ('ESP_SERIAL_CONNECTiON_ERROR', {extra: err.message});
+                                                        studio.workspace.showError ('ESP_SERIAL_CONNECTION_ERROR', {extra: err.message});
                                                         delete connections[device.id];
-                                                        delete ports[device.id];
-                                                        console.log('disconnected');
-                                                                
+                                                        delete ports[device.id];                
                                                         //studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
                                                 });
                                                 
@@ -241,93 +238,90 @@ export function setup (options, imports, register)
                                                         workspace.updateDevice(device);
                                                         delete connections[device.id];
                                                         delete ports[device.id];
-                                                        console.log('close');
                                                 });
 
-                                        
+                            
                                         }
+                                        
+                                        
+                                }
                 
-                        }
-                        else
-                        {
+                        
                                 //BROWSER
 
-                                if(navigator.serial != undefined)
-                                {
+                                // if(navigator.serial != undefined)
+                                // {
                                 
-                                        // async function connectFromBrowser() {
+                                //         // async function connectFromBrowser() {
 
-                                        //         //Filtru pentru un VendorID specific
+                                //         //         //Filtru pentru un VendorID specific
 
-                                        //         // const requestOptions = {    
-                                        //         //         filters: [{ vendorId: 0x2341 }],
-                                        //         // };
+                                //         //         // const requestOptions = {    
+                                //         //         //         filters: [{ vendorId: 0x2341 }],
+                                //         //         // };
 
-                                        //         //Cererea permisiuni de conectare
-                                        //         const portConnect = await navigator.serial.requestPort();
-                                        //         console.log(portConnect);
+                                //         //         //Cererea permisiuni de conectare
+                                //         //         const portConnect = await navigator.serial.requestPort();
+                                //         //         console.log(portConnect);
                                                 
-                                        //         //Citirea de pe port
-                                        //         await portConnect.open({ baudrate: 115200 });
-                                        //         device.status='CONNECTED';
-                                        //         workspace.updateDevice(device);
-                                        //         console.log(portConnect);
-                                        //         const reader = portConnect.readable.getReader();
-                                        //         console.log(await reader.read());
-                                        //         do{
+                                //         //         //Citirea de pe port
+                                //         //         await portConnect.open({ baudrate: 115200 });
+                                //         //         device.status='CONNECTED';
+                                //         //         workspace.updateDevice(device);
+                                //         //         console.log(portConnect);
+                                //         //         const reader = portConnect.readable.getReader();
+                                //         //         console.log(await reader.read());
+                                //         //         do{
 
-                                        //         let {done,value} = await reader.read();
+                                //         //         let {done,value} = await reader.read();
                                                 
-                                        //         console.log(Buffer.from(value).toString());
-                                        //         if(done)
-                                        //         {
-                                        //                 break;
-                                        //         }
+                                //         //         console.log(Buffer.from(value).toString());
+                                //         //         if(done)
+                                //         //         {
+                                //         //                 break;
+                                //         //         }
 
-                                        //         }while(true);
+                                //         //         }while(true);
                                                 
-                                        //         // for await (const { done, data } of reader.read()) {
-                                        //         //         if (done) break;
-                                        //         //         console.log(data);
-                                        //         // }
-                                        // }
-                                        // connectFromBrowser();
-                                        ports[device.id] = new SerialPort();
-                                        ports[device.id].connect(device.address,'112500');
+                                //         //         // for await (const { done, data } of reader.read()) {
+                                //         //         //         if (done) break;
+                                //         //         //         console.log(data);
+                                //         //         // }
+                                //         // }
+                                //         // connectFromBrowser();
+                                //         ports[device.id] = new SerialPort();
+                                //         ports[device.id].connect(device.address,'112500');
 
-                                        ports[device.id].on('connected',() => {
+                                //         ports[device.id].on('connected',() => {
                                                                         
-                                                device.status='CONNECTED';
-                                                workspace.updateDevice(device);
+                                //                 device.status='CONNECTED';
+                                //                 workspace.updateDevice(device);
 
-                                        });
+                                //         });
 
-                                        ports[device.id].on('data',(value) => {
-                                                studio.shell.select(device.id);
-                                                studio.shell.write (device.id, value);
-                                        });
+                                //         ports[device.id].on('data',(value) => {
+                                //                 studio.shell.select(device.id);
+                                //                 studio.shell.write (device.id, value);
+                                //         });
 
-                                        ports[device.id].on('close',() => {
+                                //         ports[device.id].on('close',() => {
                                                                         
-                                                device.status = 'DISCONNECTED';
-                                                workspace.updateDevice(device);
-                                        });
+                                //                 device.status = 'DISCONNECTED';
+                                //                 workspace.updateDevice(device);
+                                //         });
 
-                                        ports[device.id].on('error',(err) => {
+                                //         ports[device.id].on('error',(err) => {
 
-                                                device.status = 'DISCONNECTED';
-                                                studio.workspace.showError ('ESP_SERIAL_CONNECTiON_ERROR', {extra: err.message});
-                                                workspace.updateDevice(device);
-                                        });
+                                //                 device.status = 'DISCONNECTED';
+                                //                 studio.workspace.showError ('ESP_SERIAL_CONNECTiON_ERROR', {extra: err.message});
+                                //                 workspace.updateDevice(device);
+                                //         });
 
-                                }
-                                else
-                                {
-                                        studio.workspace.showDialog(ChromeFlagSetup,{width: '500px'});
-                                }        
-
-
-                        }
+                                // }
+                                // else
+                                // {
+                                //         studio.workspace.showDialog(ChromeFlagSetup,{width: '500px'});
+                                // }    
 
                         setTimeout(() => {
                                 device.status = 'CONNECTED';
