@@ -192,7 +192,7 @@ export function setup (options, imports, register)
                                 if(_.isObject(device))
                                 {
                                         let options = null;
-                                        if(studio)
+                                        if(studio && studio.system.platform() === 'electron')
                                         {
                                                 options = await studio.workspace.showDialog (SerialConnectionDialog, {
                                                 device: device,
