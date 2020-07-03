@@ -92,7 +92,7 @@ function searchSerialDevices(){
 
                         for(let serialDevice of serial_devices)
                         {
-                                if(serialDevice.vendorId === '2a03'/*'1a86'*/ && serialDevice.productId === '0043'/*'7523'*/ )
+                                if(serialDevice.vendorId === /*'2a03'*/'1a86' && serialDevice.productId === /*'0043'*/'7523' )
                                 {
                                         let name = 'NodeMCU_(ESP8266)'.toString();
                                         let description = '';
@@ -163,6 +163,14 @@ export function setup (options, imports, register)
         serial.setup(studio);
         searchSerialDevices();
         SerialPortlist = loadSerialPort();
+        ///let event = 'data';
+        studio.shell.register((event,id,data)=>
+        {
+                if(ports[id])
+                {
+                        ports[id].write(Buffer.from(data+''));
+                }
+        });
        
         let device_esp = {
 		defaultIcon() {
@@ -196,6 +204,7 @@ export function setup (options, imports, register)
                                         device: device,
                                         width: '500px'
                                         });
+                                        console.log(options);
 
                                         if(options || studio.system.platform() === 'browser')
                                         {
@@ -205,19 +214,24 @@ export function setup (options, imports, register)
                                                 ports[device.id] = new SerialPort();
                                         
 
-                                                ports[device.id].connect(device.address,options.baudrate);
+                                                ports[device.id].connect(options.port,options.baudrate);
 
-                                                ports[device.id].on('connected',(data)=>{
+                                                ports[device.id].on('connected',()=>{
                                                         device.status = 'CONNECTED';
                                                         updateDevice(device);
                                                         studio.shell.select(device.id);
 
                                                         studio.console.select (device.id);
-                                                        studio.shell.write(device.id, data);
 
                                                         studio.console.reset();
                                                         studio.console.show ();                                   
                                                 });
+
+                                                ports[device.id].on('data', (data)=>
+                                                {
+                                                        console.log('data ' +  Buffer.from(data).toString);
+                                                        studio.shell.write(device.id, Buffer.from(data).toString());
+                                                })
 
                                                 ports[device.id].on('error',(err) => {
 
@@ -235,7 +249,7 @@ export function setup (options, imports, register)
                                                                         
                                                         device.status = 'DISCONNECTED';
                                                         workspace.updateDevice(device);
-                                                        studio.console.close();
+                                                        //studio.console.close();
                                                         delete connections[device.id];
                                                         delete ports[device.id];
                                                 });
@@ -253,6 +267,8 @@ export function setup (options, imports, register)
                         return device;
                         
                 },
+
+                
 
 
                 disconnect(device, options)

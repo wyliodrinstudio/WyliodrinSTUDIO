@@ -54,7 +54,9 @@ export class SerialPort extends EventEmitter {
 	{ 
 		if (studio.system.platform () === 'electron')
 		{
-			this.serial = new SerialPortLib(address,(err)=>{
+			this.serial = new SerialPortLib(address,{
+				baudRate
+			},(err)=>{
 			if(err){
 				this.emit ('error', err);
 			}
