@@ -77,18 +77,18 @@ export class SerialPort extends EventEmitter {
 		}
 		else
 		{
-			const portConnect = await navigator.serial.requestPort();
-			await portConnect.open({ baudrate: baudRate || 115200 });
-			this.reader = portConnect.readable.getReader();
-			this.writer = portConnect.readable.getWriter();
+			this.portConnect = await navigator.serial.requestPort();
+			await this.portConnect.open({ baudrate: baudRate || 115200 });
+			this.reader = this.portConnect.readable.getReader();
+			this.writer = this.portConnect.writable.getWriter();
 			this.emit('connected');
-			do {
+			// do {
 				try
 				{
 					let {done,value} = await reader.read();
 					if(done)
 					{
-						break;
+						//break;
 					}
 					else
 					{
@@ -99,8 +99,8 @@ export class SerialPort extends EventEmitter {
 				{
 					this.emit ('error', e);
 				}
-			} while(true);
-			this.emit ('close');
+			// } while(true);
+			//this.emit ('close');
 		}
 	}
 
@@ -123,7 +123,9 @@ export class SerialPort extends EventEmitter {
 			this.serial.close();
 		}
 		else{
-			return null;
+			this.reader.cancel();
+			this.writer.close();
+			this.portConnect.close();
 		}
 	}
 }
