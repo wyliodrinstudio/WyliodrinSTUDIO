@@ -192,15 +192,12 @@ export function setup (options, imports, register)
                                 if(_.isObject(device))
                                 {
                                         let options = null;
-                                        if(studio)
-                                        {
-                                                options = await studio.workspace.showDialog (SerialConnectionDialog, {
-                                                device: device,
-                                                width: '500px'
-                                                });
-                                        }
+                                        options = await studio.workspace.showDialog (SerialConnectionDialog, {
+                                        device: device,
+                                        width: '500px'
+                                        });
                                         
-                                        if(options)
+                                        if(options || studio.system.platform() === 'browser')
                                         {
                                                 device.status = 'CONNECTING';
                                                 updateDevices();
