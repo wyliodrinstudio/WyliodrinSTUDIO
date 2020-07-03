@@ -7,10 +7,11 @@ import _, { update } from 'lodash';
 import { Search } from 'brace';
 import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
-//import {Serial_Port} from './serial.js'
+import {SerialPort, loadSerialPort} from './serial.js';
+import serial from './serial.js';
 import path from 'path';
 
-//import serial from './serial';
+
 
 let studio = null;
 let workspace = null;
@@ -20,7 +21,7 @@ let serialDevices = [];
 
 
 let connections = {};
-let SerialPort = null;
+let SerialPortlist = null;
 let ports = {};
 
 
@@ -30,32 +31,32 @@ function updateDevice (device)
 	workspace.updateDevice (device);
 }
 
-function loadSerialPort ()
-{
-        try
-        {
-                return eval ('require(\'serialport\')');
-        }
-        catch (e)
-        {
+// function loadSerialPort ()
+// {
+//         try
+//         {
+//                 return eval ('require(\'serialport\')');
+//         }
+//         catch (e)
+//         {
 
-                studio.workspace.error ('device_esp: esp is not available '+e.message);
-                return {
-                        list: function ()
-                        {
-                                return [
-                                ];
-                        }
-                };
-        }
-}
+//                 studio.workspace.error ('device_esp: esp is not available '+e.message);
+//                 return {
+//                         list: function ()
+//                         {
+//                                 return [
+//                                 ];
+//                         }
+//                 };
+//         }
+// }
 
 async function listSerialPorts()
 {
         let ports = [];
         try
         {
-                ports = await SerialPort.list ();
+                ports = await SerialPortlist.list ();
         }
         catch (e)
         {
@@ -83,8 +84,7 @@ async function listSerialPorts()
 
 function searchSerialDevices(){
 
-    // let search 
-        setInterval( async ()=> {
+    /*setInterval(*/ async function search(){
                         let serial_devices =  await listSerialPorts();
                         devices = [];
 
@@ -123,13 +123,13 @@ function searchSerialDevices(){
 
                         
                         updateDevices();
-                        //setTimeout(search, 10000);
+                        setTimeout(search, 10000);
                         console.log('heheheh');
                         console.log(serialDevices);
                         
-
-                },3000);
-                //search();
+                }
+               // },3000);
+                search();
                
                         
 
@@ -157,7 +157,8 @@ function updateDevices(){
 export function setup (options, imports, register)
 {
         studio = imports;
-        SerialPort = loadSerialPort();
+        serial.setup(studio);
+        SerialPortlist = loadSerialPort();
         searchSerialDevices();
         console.log("check serial");
         console.log(SerialPort);
@@ -203,52 +204,45 @@ export function setup (options, imports, register)
                                                         
                                                 }
                                                 
-                                                ports[device.id] = new SerialPort(device.address, function(err){
-                                                        if (err) {
-                                                                device.status = 'DISCONNECTED';
+                                                ports[device.id] = new SerialPort();
+
+                                                ports[device.id].connect(device.address,device.baudrate);
+                                                ports[device.id].on('error',(err) => {
+
+                                                        device.status = 'DISCONNECTED';
                                                                 updateDevice(device);
                                                                 studio.workspace.showError ('ESP_SERIAL_CONNECTiON_ERROR', {extra: err.message});
                                                                 delete connections[device.id];
                                                                 delete ports[device.id];
-                                                                //return null;
-                                                        }
-                                                        else{
-                                                                device.status = 'CONNECTED';
-                                                                updateDevice(device);
-                                                                studio.shell.select(device.id);
-
-                                                                studio.console.select (device.id);
-
-                                                                studio.console.reset();
-                                                                studio.console.show ();
-
-                                                                ports[device.id].on('data', (data) => {
-                                                                        //console.log(data.toString());
-                                                                        studio.console.write(device.id, data.toString());
-                                                                });
-                                                                ports[device.id].on('error', (err) => {
+                                                                console.log('MAMA EI DE VIATA');
                                                                 
-                                                                        studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
-                                                                });
-                                                                ports[device.id].on('close', () => {
-                                                                        
-                                                                        device.status = 'DISCONNECTED';
-                                                                        workspace.updateDevice(device);
-                                                                        delete connections[device.priority];
-                                                                        delete ports[device.priority];
-                                                                });
-
-                                                                
-                        
-
-                                                        }
+                                                        //studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
                                                 });
 
+                                                ports[device.id].on('connected',(data)=>{
+                                                        device.status = 'CONNECTED';
+                                                        updateDevice(device);
+                                                        studio.shell.select(device.id);
+
+                                                        studio.console.select (device.id);
+
+                                                        studio.console.reset();
+                                                        studio.console.show ();
+
+
+                                                });
+
+                                                ports[device.id].on('close',() => {
+                                                                        
+                                                        device.status = 'DISCONNECTED';
+                                                        workspace.updateDevice(device);
+                                                        delete connections[device.id];
+                                                        delete ports[device.id];
+                                                });
+
+                                        
                                         }
                 
-                                
-                        
-
                         }
                         else
                         {

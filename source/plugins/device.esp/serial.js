@@ -1,4 +1,4 @@
-function loadSerialPort ()
+export function loadSerialPort ()
 {
 	try
 	{
@@ -19,21 +19,25 @@ function loadSerialPort ()
 
 const EventEmitter = require ('events').EventEmitter;
 
-let SerialPort = loadSerialPort();
+let SerialPortlib = null;
+
 
 let studio = null;
 
-export function setup (s)
-{
-	this.studio = s;
-}
+
+
 
 export default {
+	setup (s)
+	{
+		studio = s;
+		SerialPortlib = loadSerialPort();
+	},
 	async list ()
 	{
 		if (studio.system.platform () === 'electron')
 		{
-			return SerialPort.list ();
+			return SerialPortlib.list ();
 		}
 		else
 		{
@@ -62,6 +66,7 @@ export class SerialPort extends EventEmitter {
 				serial.on('close', () => {
 					this.emit ('close');	
 				});
+				this.emit('connected');
 			}
 		});
 
@@ -71,6 +76,7 @@ export class SerialPort extends EventEmitter {
 			const portConnect = await navigator.serial.requestPort();
 			this.reader = portConnect.readable.getReader();
 			this.writer = portConnect.readable.getWriter();
+			this.emit('connected');
 			do {
 				try
 				{
