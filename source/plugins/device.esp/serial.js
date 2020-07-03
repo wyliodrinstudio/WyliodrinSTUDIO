@@ -52,14 +52,10 @@ export default {
 export class SerialPort extends EventEmitter {
 	async connect (address, baudRate)
 	{ 
-		console.log('connect 345');
 		if (studio.system.platform () === 'electron')
 		{
-			console.log('sunt pe electron');
-			
 			this.serial = new SerialPortLib(address,(err)=>{
 			if(err){
-				console.log(' 666 serial port');
 				this.emit ('error', err);
 			}
 			else
