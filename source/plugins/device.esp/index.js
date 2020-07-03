@@ -151,7 +151,7 @@ function updateDevices(){
 		});
         }
         
-        if(serial.system.platform === 'browser')
+        if(studio.system.platform() === 'browser')
                 workspace.updateDevices([...devices, ...serialDevices, ...add]);
         else
                 workspace.updateDevices([...serialDevices]);
