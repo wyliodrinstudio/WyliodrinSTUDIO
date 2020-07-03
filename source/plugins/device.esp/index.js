@@ -6,6 +6,7 @@ import ESPDeviceSetup from './views/ESPDeviceSetup.vue';
 import _, { update } from 'lodash';
 import { Search } from 'brace';
 import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
+import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
 import {SerialPort, loadSerialPort} from './serial.js';
 import serial from './serial.js';
@@ -200,13 +201,22 @@ export function setup (options, imports, register)
                                 if(_.isObject(device))
                                 {
                                         let options = null;
-                                        options = await studio.workspace.showDialog (SerialConnectionDialog, {
-                                        device: device,
-                                        width: '500px'
-                                        });
-                                        console.log(options);
+                                        if(studio.system.platform() === 'electron')
+                                        {
+                                                options = await studio.workspace.showDialog (SerialConnectionDialog, {
+                                                device: device,
+                                                width: '500px'
+                                                });
+                                        }
+                                        else
+                                        {
+                                                options = await studio.workspace.showDialog (BrateConnectionBrowser, {
+                                                        device: device,
+                                                        width: '500px'
+                                                });
+                                        }
 
-                                        if(options || studio.system.platform() === 'browser')
+                                        if(options)
                                         {
                                                 device.status = 'CONNECTING';
                                                 updateDevices();
@@ -222,6 +232,10 @@ export function setup (options, imports, register)
                                                         studio.shell.select(device.id);
 
                                                         studio.console.select (device.id);
+<<<<<<< HEAD
+=======
+                                                        studio.shell.write(device.id, '');
+>>>>>>> ff8ce648bd746f33d0d0a101f3672272b1fb04f6
 
                                                         studio.console.reset();
                                                         studio.console.show ();                                   
@@ -237,7 +251,7 @@ export function setup (options, imports, register)
 
                                                         device.status = 'DISCONNECTED';
                                                         updateDevice(device);
-                                                        studio.workspace.showError ('ESP_SERIAL_CONNECTION_ERROR', {extra: err.message});
+                                                        studio.workspace.showError ('ERROR', {extra: err.message});
                                                         delete connections[device.id];
                                                         delete ports[device.id];                
                                                         //studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
@@ -297,7 +311,14 @@ export function setup (options, imports, register)
                         else
                         {
                                 //BROWSER
-                                return null;
+                                if(device)
+                                {
+                                        ports[device.id].close();
+                                }
+                                device.status = 'DISCONNECTED';
+                                updateDevice(device);
+                                studio.console.reset();                     
+                                delete connections[device.id];
                         }
                         
                         setTimeout(() => {
