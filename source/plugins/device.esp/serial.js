@@ -19,7 +19,7 @@ export function loadSerialPort ()
 
 const EventEmitter = require ('events').EventEmitter;
 
-let SerialPortlib = null;
+let SerialPortLib = null;
 
 
 let studio = null;
@@ -31,13 +31,16 @@ export default {
 	setup (s)
 	{
 		studio = s;
-		SerialPortlib = loadSerialPort();
+		SerialPortLib = loadSerialPort();
+		console.log("setup");
+		console.log(SerialPortLib);
+		
 	},
-	async list ()
+	list ()
 	{
 		if (studio.system.platform () === 'electron')
 		{
-			return SerialPortlib.list ();
+			return SerialPortLib.list ();
 		}
 		else
 		{
@@ -48,22 +51,27 @@ export default {
 
 export class SerialPort extends EventEmitter {
 	async connect (address, baudRate)
-	{
+	{ 
+		console.log('connect 345');
 		if (studio.system.platform () === 'electron')
 		{
-			this.serial = new SerialPort(address,(err)=>{
+			console.log('sunt pe electron');
+			
+			this.serial = new SerialPortLib(address,(err)=>{
 			if(err){
+				console.log(' 666 serial port');
 				this.emit ('error', err);
 			}
 			else
 			{
-				serial.on('data', (data) => {
+				console.log('else');
+				this.serial.on('data', (data) => {
 					this.emit ('data', data);
 				});
-				serial.on('error', (err) => {
+				this.serial.on('error', (err) => {
 					this.emit ('error', err);
 				});
-				serial.on('close', () => {
+				this.serial.on('close', () => {
 					this.emit ('close');	
 				});
 				this.emit('connected');
@@ -109,6 +117,16 @@ export class SerialPort extends EventEmitter {
 			if (this.writer) {
 				return this.writer.write (data);
 			}
+		}
+	}
+
+	close(){
+		if(studio.system.platform() === 'electron')
+		{
+			this.serial.close();
+		}
+		else{
+			return null;
 		}
 	}
 }

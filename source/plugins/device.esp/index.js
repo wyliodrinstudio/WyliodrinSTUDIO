@@ -13,6 +13,7 @@ import path from 'path';
 
 
 
+
 let studio = null;
 let workspace = null;
 let devices = [];
@@ -51,12 +52,13 @@ function updateDevice (device)
 //         }
 // }
 
+
 async function listSerialPorts()
 {
         let ports = [];
         try
         {
-                ports = await SerialPortlist.list ();
+                ports = await serial.list ();
         }
         catch (e)
         {
@@ -84,13 +86,13 @@ async function listSerialPorts()
 
 function searchSerialDevices(){
 
-    /*setInterval(*/ async function search(){
+        /*setInterval(*/ async function search(){
                         let serial_devices =  await listSerialPorts();
                         devices = [];
 
                         for(let serialDevice of serial_devices)
                         {
-                                if(serialDevice.vendorId === '1a86' && serialDevice.productId === '7523' )
+                                if(serialDevice.vendorId === '2a03'/*'1a86'*/ && serialDevice.productId === '0043'/*'7523'*/ )
                                 {
                                         let name = 'NodeMCU_(ESP8266)'.toString();
                                         let description = '';
@@ -123,14 +125,13 @@ function searchSerialDevices(){
 
                         
                         updateDevices();
-                        setTimeout(search, 10000);
-                        console.log('heheheh');
-                        console.log(serialDevices);
+                        setTimeout(search, 10000);                       
                         
-                }
-               // },3000);
+        }
+                //},3000);
                 search();
-               
+                console.log(serialDevices);
+     
                         
 
         
@@ -156,13 +157,13 @@ function updateDevices(){
 
 export function setup (options, imports, register)
 {
+        console.log('intro setup');
         studio = imports;
         serial.setup(studio);
-        SerialPortlist = loadSerialPort();
         searchSerialDevices();
-        console.log("check serial");
-        console.log(SerialPort);
-
+        console.log('intro setup');
+        SerialPortlist = loadSerialPort();
+       
         let device_esp = {
 		defaultIcon() {
 			return 'plugins/device.esp/data/img/icons/esp.png';
@@ -196,7 +197,7 @@ export function setup (options, imports, register)
                                                         device: device,
                                                         width: '500px'
                                                 });
-                                                //console.log(options);
+                                                
                                                 if(options)
                                                 {
                                                         device.status = 'CONNECTING';
@@ -205,19 +206,9 @@ export function setup (options, imports, register)
                                                 }
                                                 
                                                 ports[device.id] = new SerialPort();
+                                               
 
                                                 ports[device.id].connect(device.address,device.baudrate);
-                                                ports[device.id].on('error',(err) => {
-
-                                                        device.status = 'DISCONNECTED';
-                                                                updateDevice(device);
-                                                                studio.workspace.showError ('ESP_SERIAL_CONNECTiON_ERROR', {extra: err.message});
-                                                                delete connections[device.id];
-                                                                delete ports[device.id];
-                                                                console.log('MAMA EI DE VIATA');
-                                                                
-                                                        //studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
-                                                });
 
                                                 ports[device.id].on('connected',(data)=>{
                                                         device.status = 'CONNECTED';
@@ -227,10 +218,22 @@ export function setup (options, imports, register)
                                                         studio.console.select (device.id);
 
                                                         studio.console.reset();
-                                                        studio.console.show ();
-
-
+                                                        studio.console.show ();                                   
                                                 });
+
+                                                ports[device.id].on('error',(err) => {
+
+                                                        device.status = 'DISCONNECTED';
+                                                        updateDevice(device);
+                                                        studio.workspace.showError ('ESP_SERIAL_CONNECTiON_ERROR', {extra: err.message});
+                                                        delete connections[device.id];
+                                                        delete ports[device.id];
+                                                        console.log('disconnected');
+                                                                
+                                                        //studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
+                                                });
+                                                
+                                                
 
                                                 ports[device.id].on('close',() => {
                                                                         
@@ -238,6 +241,7 @@ export function setup (options, imports, register)
                                                         workspace.updateDevice(device);
                                                         delete connections[device.id];
                                                         delete ports[device.id];
+                                                        console.log('close');
                                                 });
 
                                         
@@ -345,7 +349,7 @@ export function setup (options, imports, register)
         workspace = studio.workspace.registerDeviceDriver('esp', device_esp);
                 
         if(workspace){
-                workspace.registerDeviceToolButton('DEVICE_AWESOME_RUN', 10, async () => {
+                workspace.registerDeviceToolButton('DEVICE_ESP_RUN', 10, async () => {
                         let device = studio.workspace.getDevice ();
                 
                         /* Here goes the actual code that will make your device run a project */

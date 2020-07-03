@@ -35,7 +35,7 @@ function updateDevices ()
 	{
 		devices.push (...transportDevices[transportDriverName]);
 	}
-	console.log (searchDevices);
+	
 	for (let searchName in searchDevices)
 	{
 		devices.push (...searchDevices[searchName]);
