@@ -90,7 +90,7 @@ function searchSerialDevices(){
 
                         for(let serialDevice of serial_devices)
                         {
-                                if(serialDevice.vendorId === '2a03' && serialDevice.productId === '0043' )
+                                if(serialDevice.vendorId === '1a86' && serialDevice.productId === '7523' )
                                 {
                                         let name = 'NodeMCU_(ESP8266)'.toString();
                                         let description = '';
