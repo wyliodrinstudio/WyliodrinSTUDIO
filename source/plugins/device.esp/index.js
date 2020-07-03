@@ -200,7 +200,7 @@ export function setup (options, imports, register)
                                                 });
                                         }
                                         
-                                        if(options)
+                                        if(options || studio.system.platform() === 'browser')
                                         {
                                                 device.status = 'CONNECTING';
                                                 updateDevices();
