@@ -196,7 +196,7 @@ export function setup (options, imports, register)
                                         device: device,
                                         width: '500px'
                                         });
-                                        
+
                                         if(options || studio.system.platform() === 'browser')
                                         {
                                                 device.status = 'CONNECTING';
