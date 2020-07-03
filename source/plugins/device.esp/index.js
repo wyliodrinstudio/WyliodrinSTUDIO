@@ -139,20 +139,18 @@ function searchSerialDevices(){
 
 
 function updateDevices(){
-        // let add = [];
-        // if (serialDevices.length === 0 && devices.length === 0)
-        // {
-        //         add.push({
-        //                 id: 'esp:new device',
-        //                 address:'',
-        //                 name: studio.workspace.vue.$t('NodeMCU_ESP8266'),
-	// 		board: 'any',
-	// 		priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
-	// 		placeholder: true
-        //         });
-        // }
-       
-        workspace.updateDevices([ ...serialDevices]);
+        let add = [];
+	if (serialDevices.length === 0 && devices.length === 0) {
+		add.push({
+			id: 'esp:newdevice',
+			address: '',
+			name: studio.workspace.vue.$t('ESP 8266'),
+			board: 'any',
+			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
+			placeholder: true
+		});
+	}
+	workspace.updateDevices([...devices, ...serialDevices, ...add]);
 }
 
 export function setup (options, imports, register)
@@ -420,20 +418,14 @@ export function setup (options, imports, register)
                                                 placeholder: true
                                         }
                                 ];
-                                updateDevices ();
+                                updateDevices();
 
                         }
 
                         register(null, {
                                 device_esp
                         });
-
-
-
-                        
-                        workspace.updateDevices ([...devices]);
-                        
-                        
+   
                 
         }
 }
