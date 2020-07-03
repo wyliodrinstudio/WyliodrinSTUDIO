@@ -149,8 +149,12 @@ function updateDevices(){
 			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			placeholder: true
 		});
-	}
-	workspace.updateDevices([...devices, ...serialDevices, ...add]);
+        }
+        
+        if(serial.system.platform === 'browser')
+                workspace.updateDevices([...devices, ...serialDevices, ...add]);
+        else
+                workspace.updateDevices([...serialDevices]);
 }
 
 export function setup (options, imports, register)
