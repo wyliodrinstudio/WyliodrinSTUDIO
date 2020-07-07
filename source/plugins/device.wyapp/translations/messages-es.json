@@ -4,19 +4,19 @@
         "description": "The run button for an application"
     },
     "DEVICE_WYAPP_STOP": {
-        "message": "Stop",
+        "message": "Detener",
         "description": "The stop button for an application"
     },
     "DEVICE_WYAPP_TASK_MANAGER": {
-        "message": "Herramienta de tareas",
+        "message": "Administrador de tareas",
         "description": "The button for the task manager "
     },
     "DEVICE_WYAPP_PACKAGE_MANAGER": {
-        "message": "Herramienta de paquetes",
+        "message": "Administrador de paquetes",
         "description": "The button for the package manager "
     },
     "DEVICE_WYAPP_NETWORK_MANAGER": {
-        "message": "Los parámetros de la red",
+        "message": "Administrador de redes",
         "description": "The button for the network manager "
     },
     "DEVICE_WYAPP_DISCONNECT": {
@@ -24,11 +24,111 @@
         "description": "The disconnect option in the disconnect menu"
     },
     "DEVICE_WYAPP_RESTART": {
-        "message": "Reiniciar y desconectar",
+        "message": "Reiniciar y Desconectar",
         "description": "The reboot and disconnect option in the disconnect menu"
     },
     "DEVICE_WYAPP_TURNOFF": {
-        "message": "Power Off and Disconnect",
+        "message": "Apagar y Desconectar",
         "description": "The power off and disconnect option in the disconnect menu"
+    },
+    "DEVICE_WYAPP_ANOTHER_USER": {
+        "message": "El dispositivo ya está conectado a otro usuario.",
+        "description": "The notification message when another use is connected to the board and the board is busy"
+    },
+    "DEVICE_WYAPP_SETTINGS": {
+        "message": "Ajustes del dispositivo",
+        "description": "Title of popup that contains details about the connected board"
+    },
+    "DEVICE_WYAPP_NAME": {
+        "message": "Nombre",
+        "description": "Name of connected board"
+    },
+    "DEVICE_WYAPP_VERSION": {
+        "message": "Versión",
+        "description": "Supervisor verson"
+    },
+    "DEVICE_WYAPP_LIBWYLIODRIN": {
+        "message": "Versión de la biblioteca Wyliodrin",
+        "description": "The used version of the Wyliodrin Library."
+    },
+    "DEVICE_WYAPP_OS": {
+        "message": "Sistema operativo",
+        "description": "Operating system on the board"
+    },
+    "DEVICE_WYAPP_LANGUAGES": {
+        "message": "Lenguajes",
+        "description": "Programming languages supported by the board"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_IP": {
+        "message": "IP",
+        "description": "IP Address for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_MASK": {
+        "message": "Máscara",
+        "description": "Mask for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
+        "message": "Difusión",
+        "description": "Broadcast for the wired network"
+    },
+    "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
+        "message": "Dirección física",
+        "description": "Hardware Address for the wired network"
+    },
+    "DEVICE_WYAPP_UNINSTALL": {
+        "message": "Desinstalar",
+        "description": "Button to uninstall a package."
+    },
+    "DEVICE_WYAPP_WYLIODRIN_DEVICENAME": {
+        "message": "Nombre del dispositivo",
+        "description": "Name of the connected device"
+    },
+    "DEVICE_WYAPP_INSTALL": {
+        "message": "Instalar",
+        "description": "Button to install a package."
+    },
+    "DEVICE_WYAPP_PACKAGE_INSTALL_ERROR": {
+        "message": "Falló instalar el paquete {packageName} de {language} .",
+        "description": "The error the users sees when a packages failes to install"
+    },
+    "DEVICE_WYAPP_PACKAGE_UNINSTALL_ERROR": {
+        "message": "Falló desinstalar el paquete {packageName} de {language}.",
+        "description": "The error the users sees when a packages failes to uninstall"
+    },
+    "DEVICE_WYAPP_SSID": {
+        "message": "Nombre de la Red",
+        "description": "The SSID of a wireless network"
+    },
+    "DEVICE_WYAPP_PSK": {
+        "message": "Frase de contraseña de la Red",
+        "description": "The passphrase of a wireless network"
+    },
+    "DEVICE_WYAPP_CONNECT": {
+        "message": "Conectar",
+        "description": "The  network connect button"
+    },
+    "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
+        "message": "Otra Red",
+        "description": "The option to connect to a network that is not displayed"
+    },
+    "DEVICE_WYAPP_REFRESH": {
+        "message": "Refrescar",
+        "description": "The option to refresh the file tree"
+    },
+    "DEVICE_WYAPP_FILE_MANAGER": {
+        "message": "Adminstrador de archivos",
+        "description": "The option to refresh the file tree"
+    },
+    "DEVICE_WYAPP_ERROR_PROJECT_RUN": {
+        "message": "Por favor abra un proyecto",
+        "description": "Notification text when there is no project selected"
+    },
+    "DEVICE_WYAPP_NO_DIRECTORY": {
+        "message": "No hay un directorio seleccionado",
+        "description": "The message shown in the file tree manager when there is no directory currently selected"
+    },
+    "DEVICE_WYAPP_FILESYSTEM": {
+        "message": "Sistema de archivos",
+        "description": "The message shown for the selected device filesystem"
     }
 }

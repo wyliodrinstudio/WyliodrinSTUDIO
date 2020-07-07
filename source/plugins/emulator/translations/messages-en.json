@@ -1,114 +1,114 @@
 {
-	"DEVICE_EMULATOR": {
-		"message": "Emulator",
-		"description": "Name of the program that allows to imitate the behavior of another program or device."
-	},
-	"EMULATOR_AVAILABLE_IMAGES": {
-		"message": "Available Images",
-		"description": "Name of the tab with a list of available operating system images"
-	},
-	"EMULATOR_AVAILABLE_EMULATORS": {
-		"message": "Available Emulators",
-		"description": "Name of the tab with a list of available emulators"
-	},
-	"EMULATOR_DOWNLOAD_IMAGE": {
-		"message": "Download Image",
-		"description": "Button to download the image for an emulator"
-	},
-	"EMULATOR_RUN_RASPBERRYPI": {
-		"message": "Run RaspberryPi Emulator",
-		"description": "Button that starts the Raspberryi Pi emulator"
-	},
-	"EMULATOR_RUN_UBUNTU": {
-		"message": "Run Ubuntu Emulator",
-		"description": "Button that starts the Ubuntu emulator"
-	},
-	"EMULATOR_DOWNLOAD_QEMU": {
-		"message": "Download Qemu",
-		"description": "Button that redirects the user to the downloag page of qemu"
-	},
-	"EMULATOR_STOP_DOWNLOAD": {
-		"message": "Stop Download",
-		"description": "Button that interrupts the download process for a chosen image"
-	},
-	"EMULATOR_STOP": {
-		"message": "Stop Emulator",
-		"description": "Button used to stop an emulator from running"
-	},
-	"EMULATOR_NO_EXISTING_IMAGE_ERROR": {
-		"message": "The image for this emulator doesn't exist on your computer. Please download the appropriate image before trying to run an emulator.",
-		"description": "Error that shows up when the user is trying to run an emulator without having the operating system image"
-	},
-	"EMULATOR_DOWNLOAD_ERROR": {
-		"message": "Unable to download the image. ",
-		"description": "Error when loading the download progress for an image"
-	},
-	"EMULATOR_UNZIP_ERROR": {
-		"message": "Unable to unzip the image archive. ",
-		"description": "Error when unzipping the image archive"
-	},
-	"EMULATOR_STOP_DOWNLOAD_ERROR": {
-		"message": "Unable to delete the download image folder. ",
-		"description": "Error that shows up when the folder where the image should be downloaded can not be deleted"
-	},
-	"EMULATOR_NAME": {
-		"message": "Emulator name",
-		"description": "Prompt title when choosing a name for an emulator"
-	},
-	"EMULATOR_CHOOSE_NAME": {
-		"message": "Please choose a name for your emulator:",
-		"description": "Prompt text asking the user to input a name for the new emulator"
-	},
-	"EMULATOR_CREATE_NEW": {
-		"message": "Create new emulator",
-		"description": "Button to make a new emulator"
-	},
-	"EMULATOR_RESTART": {
-		"message": "Start emulator",
-		"description": "Button to restart an existing emulator"
-	},
-	"EMULATOR_DELETE": {
-		"message": "Delete emulator",
-		"description": "Button to permanently delete an existing emulator"
-	},
-	"EMULATOR_DELETE_EMULATOR_TITLE": {
-		"message": "Delete emulator",
-		"description": "Title of the confirmation prompt that shows up when the user tries to delete an emulator"
-	},
-	"EMULATOR_DELETE_EMULATOR_QUESTION": {
-		"message": "Are you sure you want to permanently delete this emulator?",
-		"description": "Question addressed to the user in order to confirm the permanent deletion of an emulator"
-	},
-	"EMULATOR_INVALID_NAME": {
-		"message": "Please choose a valid name.",
-		"description": "Error that shows up when the user tries to create an emulator using an invalid name"
-	},
-	"EMULATOR_COPY_FILE_ERROR": {
-		"message": "Cannot load the image for this emulator",
-		"description": "Error that shows up when the image for an emulator can not be copied"
-	},
-	"EMULATOR_PROGRESS_ERROR": {
-		"message": "Cannot load the download progress for this image",
-		"description": "Error that shows up when the download progress for an image can not be loaded"
-	},
-	"EMULATOR_MISSING_QEMU_ERROR": {
-		"message": "Please install qemu-system-{system} ",
-		"description": "Error that shows up when the user is trying to run an emulator without having the qemu system installed."
-	}, 
-	"EMULATOR_NO_QEMU_ERROR": {
-		"message": "Please install qemu to create an emulator.",
-		"description": "Alert text when the user is trying to create an emulator without having the qemu system installed."
-	},
-	"EMULATOR_DELETE_IMAGE_TITLE": {
-		"message": "Delete image",
-		"description": "Title of the confirmation prompt that shows up when the user tries to delete an image"
-	},
-	"EMULATOR_DELETE_IMAGE_QUESTION": {
-		"message": "Are you sure you want to permanently delete this image?",
-		"description": "Question addressed to the user in order to confirm the permanent deletion of an image"
-	},
-	"EMULATOR_DELETE_IMAGE": {
-		"message": "Delete image",
-		"description": "Button to delete an existing image"
-	}
+    "DEVICE_EMULATOR": {
+        "message": "Emulator",
+        "description": "Name of the program that allows to imitate the behavior of another program or device."
+    },
+    "EMULATOR_AVAILABLE_IMAGES": {
+        "message": "Available Images",
+        "description": "Name of the tab with a list of available operating system images"
+    },
+    "EMULATOR_AVAILABLE_EMULATORS": {
+        "message": "Available Emulators",
+        "description": "Name of the tab with a list of available emulators"
+    },
+    "EMULATOR_DOWNLOAD_IMAGE": {
+        "message": "Download Image",
+        "description": "Button to download the image for an emulator"
+    },
+    "EMULATOR_RUN_RASPBERRYPI": {
+        "message": "Run RaspberryPi Emulator",
+        "description": "Button that starts the Raspberryi Pi emulator"
+    },
+    "EMULATOR_RUN_UBUNTU": {
+        "message": "Run Ubuntu Emulator",
+        "description": "Button that starts the Ubuntu emulator"
+    },
+    "EMULATOR_DOWNLOAD_QEMU": {
+        "message": "Download Qemu",
+        "description": "Button that redirects the user to the downloag page of qemu"
+    },
+    "EMULATOR_STOP_DOWNLOAD": {
+        "message": "Stop Download",
+        "description": "Button that interrupts the download process for a chosen image"
+    },
+    "EMULATOR_STOP": {
+        "message": "Stop Emulator",
+        "description": "Button used to stop an emulator from running"
+    },
+    "EMULATOR_NO_EXISTING_IMAGE_ERROR": {
+        "message": "The image for this emulator doesn't exist on your computer. Please download the appropriate image before trying to run an emulator.",
+        "description": "Error that shows up when the user is trying to run an emulator without having the operating system image"
+    },
+    "EMULATOR_DOWNLOAD_ERROR": {
+        "message": "Unable to download the image. ",
+        "description": "Error when loading the download progress for an image"
+    },
+    "EMULATOR_UNZIP_ERROR": {
+        "message": "Unable to unzip the image archive. ",
+        "description": "Error when unzipping the image archive"
+    },
+    "EMULATOR_STOP_DOWNLOAD_ERROR": {
+        "message": "Unable to delete the download image folder. ",
+        "description": "Error that shows up when the folder where the image should be downloaded can not be deleted"
+    },
+    "EMULATOR_NAME": {
+        "message": "Emulator name",
+        "description": "Prompt title when choosing a name for an emulator"
+    },
+    "EMULATOR_CHOOSE_NAME": {
+        "message": "Please choose a name for your emulator:",
+        "description": "Prompt text asking the user to input a name for the new emulator"
+    },
+    "EMULATOR_CREATE_NEW": {
+        "message": "Create new emulator",
+        "description": "Button to make a new emulator"
+    },
+    "EMULATOR_RESTART": {
+        "message": "Start emulator",
+        "description": "Button to restart an existing emulator"
+    },
+    "EMULATOR_DELETE": {
+        "message": "Delete emulator",
+        "description": "Button to permanently delete an existing emulator"
+    },
+    "EMULATOR_DELETE_EMULATOR_TITLE": {
+        "message": "Delete emulator",
+        "description": "Title of the confirmation prompt that shows up when the user tries to delete an emulator"
+    },
+    "EMULATOR_DELETE_EMULATOR_QUESTION": {
+        "message": "Are you sure you want to permanently delete this emulator?",
+        "description": "Question addressed to the user in order to confirm the permanent deletion of an emulator"
+    },
+    "EMULATOR_INVALID_NAME": {
+        "message": "Please choose a valid name.",
+        "description": "Error that shows up when the user tries to create an emulator using an invalid name"
+    },
+    "EMULATOR_COPY_FILE_ERROR": {
+        "message": "Cannot load the image for this emulator",
+        "description": "Error that shows up when the image for an emulator can not be copied"
+    },
+    "EMULATOR_PROGRESS_ERROR": {
+        "message": "Cannot load the download progress for this image",
+        "description": "Error that shows up when the download progress for an image can not be loaded"
+    },
+    "EMULATOR_MISSING_QEMU_ERROR": {
+        "message": "Please install qemu-system-{system} ",
+        "description": "Error that shows up when the user is trying to run an emulator without having the qemu system installed."
+    },
+    "EMULATOR_NO_QEMU_ERROR": {
+        "message": "Please install qemu to create an emulator.",
+        "description": "Alert text when the user is trying to create an emulator without having the qemu system installed."
+    },
+    "EMULATOR_DELETE_IMAGE_TITLE": {
+        "message": "Delete image",
+        "description": "Title of the confirmation prompt that shows up when the user tries to delete an image"
+    },
+    "EMULATOR_DELETE_IMAGE_QUESTION": {
+        "message": "Are you sure you want to permanently delete this image?",
+        "description": "Question addressed to the user in order to confirm the permanent deletion of an image"
+    },
+    "EMULATOR_DELETE_IMAGE": {
+        "message": "Delete image",
+        "description": "Button to delete an existing image"
+    }
 }

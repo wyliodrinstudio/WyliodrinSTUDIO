@@ -16,11 +16,31 @@
         "description": "Input text area for the password of the user on the raspberry pi"
     },
     "NETWORK_SHOWPASSWORD": {
-        "message": "Mostrar la contraseña",
+        "message": "Mostrar contraseña",
         "description": "Switch use to make the password visible"
     },
     "DEVICE_CONNECT": {
         "message": "Conectar",
         "description": "Button used to connect to a device"
+    },
+    "DEVICE_SERIAL_OPTIONS": {
+        "message": "Conexión serial",
+        "description": "The title of the serial device options dialog"
+    },
+    "DEVICE_BAUDRATE": {
+        "message": "Velocidad en Baudios",
+        "description": "The baud rate input of the serial port options dialog"
+    },
+    "NETWORK_CONNECTION": {
+        "message": "Conexión de Red",
+        "description": "Title of the popup used to connect to a device"
+    },
+    "DEVICE_WYAPP_SSH_IP_ADDRESS": {
+        "message": "Dirección IP",
+        "description": "The name of the pseudo device that allows the user the connect to any IP address"
+    },
+    "DEVICE_WYAPP_CHANGE_CREDENTIALS": {
+        "message": "Estás tratando de iniciar sesión usando las credenciales por defecto para este dispositivo. Te recomendamos cambiar la contraseña por defecto usando el comando passwd en la terminal.",
+        "description": "Warning message when the user tries to login to a board with the default credentials."
     }
 }

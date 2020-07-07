@@ -35,8 +35,7 @@
         "message": "Connection à l'adresse",
         "description": "Title of the popup used to connect to a device"
     },
-    "DEVICE_WYAPP_SSH_IP_ADDRESS":
-    {
+    "DEVICE_WYAPP_SSH_IP_ADDRESS": {
         "message": "Adresse IP",
         "description": "The name of the pseudo device that allows the user the connect to any IP address"
     },

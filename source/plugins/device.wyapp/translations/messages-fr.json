@@ -55,8 +55,7 @@
         "message": "Langages",
         "description": "Programming languages supported by the board"
     },
-    "DEVICE_WYAPP_SSID": 
-    {
+    "DEVICE_WYAPP_SSID": {
         "message": "Nom de réseau",
         "description": "The SSID of a wireless network"
     },
@@ -69,7 +68,7 @@
         "description": "Mask for the wired network"
     },
     "DEVICE_WYAPP_WIREDNETWORK_BROADCAST": {
-        "message": "Broadcast", 
+        "message": "Broadcast",
         "description": "Broadcast for the wired network"
     },
     "DEVICE_WYAPP_WIREDNETWORK_HARDWARE": {
@@ -96,28 +95,26 @@
         "message": "Impossible de désinstaller le paquet {packageName} pour {language}.",
         "description": "The error the users sees when a packages failes to uninstall"
     },
-    "DEVICE_WYAPP_PSK": 
-    {
+    "DEVICE_WYAPP_PSK": {
         "message": "Phrase de passe du réseau",
         "description": "The passphrase of a wireless network"
     },
-    "DEVICE_WYAPP_CONNECT": 
-    {
+    "DEVICE_WYAPP_CONNECT": {
         "message": "Connecter",
         "description": "The  network connect button"
     },
     "DEVICE_WYAPP_SSID_OTHER_NETWORK": {
         "message": "Autre réseau",
         "description": "The option to connect to a network that is not displayed"
-	},
-	"DEVICE_WYAPP_REFRESH": {
-		"message": "Actualiser",
-		"description": "The option to refresh the file tree"
-	},
-	"DEVICE_WYAPP_FILE_MANAGER": {
-		"message": "Gestionnaire de fichiers",
-		"description": "The option to refresh the file tree"
-	},
+    },
+    "DEVICE_WYAPP_REFRESH": {
+        "message": "Actualiser",
+        "description": "The option to refresh the file tree"
+    },
+    "DEVICE_WYAPP_FILE_MANAGER": {
+        "message": "Gestionnaire de fichiers",
+        "description": "The option to refresh the file tree"
+    },
     "DEVICE_WYAPP_LIBWYLIODRIN": {
         "message": "Version de Wyliodrin Library",
         "description": "The used version of the Wyliodrin Library."
@@ -126,12 +123,12 @@
         "message": "Veuillez ouvrir un projet.",
         "description": "Notification text when there is no project selected"
     },
-	"DEVICE_WYAPP_NO_DIRECTORY": {
-		"message": "Il n'y a pas de directoire sélectionné",
-		"description": "The message shown in the file tree manager when there is no directory currently selected"
-	},
-	"DEVICE_WYAPP_FILESYSTEM": {
-		"message": "Système de fichiers",
-		"description": "The message shown for the selected device filesystem"
-	}
+    "DEVICE_WYAPP_NO_DIRECTORY": {
+        "message": "Il n'y a pas de directoire sélectionné",
+        "description": "The message shown in the file tree manager when there is no directory currently selected"
+    },
+    "DEVICE_WYAPP_FILESYSTEM": {
+        "message": "Système de fichiers",
+        "description": "The message shown for the selected device filesystem"
+    }
 }

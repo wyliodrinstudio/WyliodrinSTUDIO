@@ -72,11 +72,11 @@
         "description": "The error shown when list devices for ble fails"
     },
     "DEVICE_FLASH_JAVASCRIPT": {
-        "message": "Scriere Javascript", 
+        "message": "Scriere Javascript",
         "description": "The flash javascript button for an application"
     },
     "DEVICE_RPK_STANDBY": {
-        "message": "In așteptare", 
+        "message": "In așteptare",
         "description": "The stand-by option in the disconnect menu."
     }
 }

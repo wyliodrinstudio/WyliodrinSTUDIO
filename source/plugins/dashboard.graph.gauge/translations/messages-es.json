@@ -1,0 +1,10 @@
+{
+    "GAUGE_GRAPH": {
+        "message": "INDICADOR",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDGAUGE": {
+        "message": "Indicador - Agregar señal",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

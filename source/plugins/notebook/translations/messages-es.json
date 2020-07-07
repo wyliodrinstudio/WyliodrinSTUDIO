@@ -1,6 +1,38 @@
 {
     "PROJECT_NOTEBOOK": {
-        "message": "Block de notas",
+        "message": "Cuaderno",
         "description": "The Notebook Tab, where the user can take it's own notes"
+    },
+    "NOTEBOOK_SELECT_IMAGE_ERROR": {
+        "message": "Por favor seleccione una imagen.",
+        "description": "Notification error that shows up when the user didn't choose an image to load"
+    },
+    "NOTEBOOK_SELECT_FILE_ERROR": {
+        "message": "Por favor seleccione una imagen válida.",
+        "description": "Notification error that shows up when the user didn't choose a file to load"
+    },
+    "NOTEBOOK_DELETE_ITEM_QUESTION": {
+        "message": "¿Está seguro que quiere eliminar este elemento?",
+        "description": "Confirmation prompt which ensures that the user really wants to delete the current notebook element"
+    },
+    "NOTEBOOK_DELETE_ITEM_TITLE": {
+        "message": "Eliminar elemento",
+        "description": "Title of the delete confirmation prompt"
+    },
+    "NOTEBOOK_LOAD_DATA_ERROR": {
+        "message": "No puede cargar los datos del cuaderno ({error})",
+        "description": "This error shwos up when notebook.json can't be parsed."
+    },
+    "NOTEBOOK_RESET_NOTEBOOK_TITLE": {
+        "message": "Reiniciar cuaderno",
+        "description": "Title of the reset confirmation prompt"
+    },
+    "NOTEBOOK_RESET_NOTEBOOK_QUESTION": {
+        "message": "¿Está seguro que desea reiniciar el cuaderno?\nPerdera todos las notas para este proyecto.",
+        "description": "Confirmation prompt which ensures that the user really wants to reset the notebook"
+    },
+    "NOTEBOOK_LOAD_PROJECT": {
+        "message": "Cargar un proyecto para mostrar en el cuaderno",
+        "description": "The message when there is no project loaded"
     }
 }

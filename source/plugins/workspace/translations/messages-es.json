@@ -4,7 +4,7 @@
         "description": "Button that indicates the current language of the program, represented by a flag"
     },
     "WORKSPACE_TOOLBAR_EXIT": {
-        "message": "Salida",
+        "message": "Salir",
         "description": "Close the program"
     },
     "WORKSPACE_TOOLBAR_FULLSCREEN": {
@@ -28,7 +28,7 @@
         "description": "Located in the help menu, displays informations about the application"
     },
     "WORKSPACE_PROJECT_NOTEBOOK": {
-        "message": "Block de notas",
+        "message": "Cuaderno",
         "description": "Tool for project management and task management"
     },
     "WORKSPACE_DEVICE_CONNECT": {
@@ -51,6 +51,26 @@
         "message": "Desconectar",
         "description": "The Disconnect button"
     },
+    "WORKSPACE_STATUS_DISCONNECTED": {
+        "message": "DESCONECTADO",
+        "description": "Status of a device that is not connected."
+    },
+    "WORKSPACE_STATUS_CONNECTED": {
+        "message": "CONECTADO",
+        "description": "Status of a device that is connected."
+    },
+    "WORKSPACE_STATUS_SYNCHRONIZING": {
+        "message": "SINCRONIZANDO",
+        "description": "Status of a device that is synchronizing."
+    },
+    "WORKSPACE_STATUS_CONNECTING": {
+        "message": "CONECTANDO",
+        "description": "Status of a device that is connecting."
+    },
+    "WORKSPACE_STATUS_ERROR": {
+        "message": "ERROR",
+        "description": "Status of a device that has an error."
+    },
     "WORKSPACE_TOOLBAR_EXIT_QUESTION": {
         "message": "¿Estás seguro que quieres salir?",
         "description": "Select if you are sure you want to exit"
@@ -64,7 +84,79 @@
         "description": "The 'no' button"
     },
     "EXIT": {
-        "message": "Salida",
+        "message": "Salir",
         "description": "A button with the text exit"
+    },
+    "WORKSPACE_TOOLBAR_CLOSE": {
+        "message": "Cerrar",
+        "description": "Close button"
+    },
+    "WORKSPACE_SET_MODE_ADVANCED": {
+        "message": "Usar Modo Avanzado",
+        "description": "The menu to set the editor in advanced mode"
+    },
+    "WORKSPACE_SET_MODE_SIMPLE": {
+        "message": "Usar Modo Simple",
+        "description": "The menu to set the editor in simple mode"
+    },
+    "ABOUT_DEVELOPED_BY": {
+        "message": "Desarrollado por",
+        "description": "Text for authors of Wyliodrin Studio"
+    },
+    "ABOUT_TRANSLATE": {
+        "message": "Traducciones",
+        "description": "Text for translators of Wyliodrin Studio"
+    },
+    "ABOUT_MAINTAINER": {
+        "message": "Encargado",
+        "description": "Maintainer of Wyliodrin Studio"
+    },
+    "ABOUT_UI_UX": {
+        "message": "UI/UX",
+        "description": "User Interface for Wyliodrin Studio"
+    },
+    "ABOUT_DEVELOPMENT": {
+        "message": "Desarrollador",
+        "description": "Contributor to Wylidron Studio Development"
+    },
+    "ABOUT_LICENSE": {
+        "message": "Licencia",
+        "description": "Button to show the license"
+    },
+    "ABOUT_LICENSE_TITLE": {
+        "message": "Licencia de uso",
+        "description": "Title of the license popup"
+    },
+    "ABOUT_PROVIDED_BY": {
+        "message": "Proporcionado por",
+        "description": "Provider of Wyliodrin STUDIO"
+    },
+    "WORKSPACE_DEVICE_SETUP_TEXT": {
+        "message": "Tal vez quieras instalar algunos dispositivos. Para obtener más información, por favor visite nuestro sitio web de tutoriales.",
+        "description": "The message the user gets if there are no devices available in the connection selection"
+    },
+    "WORKSPACE_DEVICE_SETUP": {
+        "message": "Configuración del dispositivo",
+        "description": "The devices setup button for the setup website"
+    },
+    "WORKSPACE_DOCUMENTATION": {
+        "message": "Documentación",
+        "description": "Open a new window with the documentation of Wyliodrin STUDIO"
+    },
+    "ABOUT_VERSION": {
+        "message": "Versión",
+        "description": " The text version that appears in the Welcome and About dialogs"
+    },
+    "OK": {
+        "message": "OK",
+        "description": "Any button that has the OK text"
+    },
+    "BACK": {
+        "message": "ATRÁS",
+        "description": "Any button that has the BACK text"
+    },
+    "ABOUT_FEEDBACK": {
+        "message": "Permitir el envío anónimo de parámetros de uso para ayudarnos a mejorar el software",
+        "description": "The message for the checkbox to enable and disable the sending of feedback"
     }
 }

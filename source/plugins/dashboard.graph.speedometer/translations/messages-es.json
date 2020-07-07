@@ -1,0 +1,10 @@
+{
+    "SPEEDOMETER_GRAPH": {
+        "message": "VELOCÍMETRO",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDSPEEDOMETER": {
+        "message": "Velocímetro - Agregar señal",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

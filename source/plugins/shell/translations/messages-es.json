@@ -1,6 +1,10 @@
 {
     "PROJECT_SHELL": {
-        "message": "Shell",
+        "message": "Terminal",
         "description": "The Shell tab, opens a terminal"
+    },
+    "SHELL_NO_SHELL": {
+        "message": "Conecte un dispositivo para habilitar la terminal",
+        "description": "The text that is displayed when the shell is not enabled"
     }
 }

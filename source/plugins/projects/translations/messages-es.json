@@ -3,56 +3,304 @@
         "message": "Aplicación",
         "description": "Description of tab"
     },
+    "PROJECT_DELETE_FOLDER": {
+        "message": "Eliminar carpeta",
+        "description": "Delete a folder within a project"
+    },
+    "PROJECT_RENAME_FOLDER": {
+        "message": "Cambiar nombre de la carpeta",
+        "description": "Rename a folder within a project"
+    },
     "PROJECT_NEW_FOLDER": {
-        "message": "Nuevo Folder",
+        "message": "Nueva carpeta",
         "description": "Create a folder within a project"
     },
+    "PROJECT_NEW_FOLDER_NAME": {
+        "message": "Nuevo nombre de la carpeta",
+        "description": "Label for the new name of the folder"
+    },
+    "PROJECT_FOLDER_SURE": {
+        "message": "¿Está seguro que desea eliminar esta carpeta?",
+        "description": "Prompt asking for assurance on deleting a folder"
+    },
+    "PROJECT_DELETE_FILE": {
+        "message": "Eliminar archivo",
+        "description": "Delete a file within a project"
+    },
+    "PROJECT_RENAME_FILE": {
+        "message": "Cambiar nombre del archivo",
+        "description": "Rename a file within a project"
+    },
     "PROJECT_NEW_FILE": {
-        "message": "Nuevo fichiero",
+        "message": "Nuevo archivo",
         "description": "Create a file within a project"
     },
+    "PROJECT_IMPORT_FILE": {
+        "message": "Importar archivo",
+        "description": "Import a file within a project"
+    },
+    "PROJECT_EXPORT_FILE": {
+        "message": "Exportar archivo",
+        "description": "Export a file from the project"
+    },
+    "PROJECT_NEW_FILE_NAME": {
+        "message": "Nuevo nombre del archivo",
+        "description": "Label for the new name of the file"
+    },
+    "PROJECT_FILE_SURE": {
+        "message": "¿Está seguro que desea eliminar este archivo?",
+        "description": "Prompt asking for assurance on deleting a file"
+    },
+    "PROJECT_NEW_NAME": {
+        "message": "Nuevo nombre",
+        "description": "Label for the new name of the object"
+    },
+    "PROJECT_DELETE_PROJECT": {
+        "message": "Eliminar proyecto",
+        "description": "Label for the dialog to delete a project within the workspace"
+    },
+    "PROJECT_LOAD_PROJECT": {
+        "message": "Cargar un proyecto de la biblioteca",
+        "description": "Text meaning that there is no project loaded"
+    },
+    "PROJECT_PROJECT_SURE": {
+        "message": "¿Está seguro que desea eliminar este proyecto?",
+        "description": "Prompt asking for assuruance on deleting a project"
+    },
     "PROJECT_HIDE_CONSOLE": {
-        "message": "Esconder la Consola",
+        "message": "Ocultar la consola",
         "description": "Button designed to hide the console"
     },
     "PROJECT_WELCOME_CREATE_NEW_APP": {
-        "message": "Crear una aplicación nueva",
+        "message": "Crear una nueva aplicación",
         "description": "Button to create a new project within the workspace"
     },
-    "PROJECT_LIBRARY_IMPORT": {
-        "message": "Importar",
-        "description": "Import a project from an archive"
+    "PROJECT_LIBRARY": {
+        "message": "Biblioteca de proyectos",
+        "description": "Opens the projects library"
     },
-    "PROJECT_LIBRARY_CLONE": {
-        "message": "Clonar",
-        "description": "Clone a project within the workspace"
+    "PROJECT_LIBRARY_NAME": {
+        "message": "Nombre del proyecto",
+        "description": "Label for the name of the project"
     },
-    "PROJECT_LIBRARY_EXPORT": {
-        "message": "Exportar",
-        "description": "Export a project from the workspace"
-    },
-    "PROJECT_LIBRARY_OPTIONS": {
-        "message": "Opciones",
-        "description": "Label for the options menu"
+    "PROJECT_LIBRARY_NEW_PROJECT": {
+        "message": "Crear proyecto",
+        "description": "Create a project within the workspace"
     },
     "PROJECT_LIBRARY_RENAME": {
         "message": "Cambiar el nombre",
         "description": "Rename a project within the workspace"
     },
     "PROJECT_LIBRARY_DELETE": {
-        "message": "Borrar",
+        "message": "Eliminar",
         "description": "Delete a project within the workspace"
+    },
+    "PROJECT_LIBRARY_CLONE": {
+        "message": "Clonar",
+        "description": "Clone a project within the workspace"
+    },
+    "PROJECT_LIBRARY_IMPORT": {
+        "message": "Importar",
+        "description": "Import a project from an archive"
     },
     "PROJECT_LIBRARY_CLOSE": {
         "message": "Cerrar",
         "description": "Close a dialog"
     },
+    "PROJECT_LIBRARY_EXPORT": {
+        "message": "Exportar",
+        "description": "Export a project from the workspace"
+    },
     "PROJECT_LIBRARY_PROJECTS": {
         "message": "Proyectos",
         "description": "Label for the projects dialog"
     },
+    "PROJECT_LIBRARY_OPTIONS": {
+        "message": "Opciones",
+        "description": "Label for the options menu"
+    },
     "PROJECT_LIBRARY_LOAD_EXAMPLE": {
         "message": "Cargar un ejemplo",
         "description": "Load a project Example"
+    },
+    "PROJECT_ERROR_LANGUAGE_ADDON": {
+        "message": "Registrar adición falló para el lenguaje {language}",
+        "description": "The error message shown when a language addon fails to register"
+    },
+    "PROJECT_ERROR_REGISTER_EDITOR": {
+        "message": "Registrar editor falló para el nombre editor {name}, ya está registrado",
+        "description": "The error message shown when an edtitor fails to register"
+    },
+    "PROJECT_ERROR_LOAD_PROJECTS": {
+        "message": "Error mientras cargaba los proyectos ({error})",
+        "description": "The error message shown when the projects fail to load"
+    },
+    "PROJECT_ERROR_SELECT_PROJECT": {
+        "message": "Error mientras seleccionaba el proyecto {project} ({error})",
+        "description": " The error message shown when a project fails to be selected"
+    },
+    "PROJECT_ERROR_CREATE_PROJECT": {
+        "message": "Error mientras creaba el proyecto {project} ({error})",
+        "description": "The error message shown when a project fails to be created"
+    },
+    "PROJECT_ERROR_RENAME_PROJECT": {
+        "message": "Error mientras renombraba el proyecto {project} a {name} ({error})",
+        "description": "The error message shown when a project fails to be renamed"
+    },
+    "PROJECT_ERROR_CLONE_PROJECT": {
+        "message": "Error mientras clonaba el proyecto {project} ({error})",
+        "description": "The error message shown when a project fails to be cloned"
+    },
+    "PROJECT_ERROR_DELETE_PROJECT": {
+        "message": "Error mientras eliminaba el proyecto {project} ({error})",
+        "description": "The error message shown when a project fails to be deleted"
+    },
+    "PROJECT_ERROR_IMPORT_PROJECT": {
+        "message": "Error mientras importaba el proyecto {project} ({error})",
+        "description": "The error message shown when a project fails to be imported"
+    },
+    "PROJECT_ERROR_EXPORT_PROJECT": {
+        "message": "Error mientras exportaba el proyecto {project} ({error})",
+        "description": "The error message shown when a project fails to be exported"
+    },
+    "PROJECT_ERROR_NEW_FOLDER": {
+        "message": "Error mientras creaba la nueva carpeta {folder} ({error})",
+        "description": "The error message shown when a folder fails to be created"
+    },
+    "PROJECT_ERROR_NEW_FILE": {
+        "message": "Error mientras creaba el nuevo archivo {file} ({error})",
+        "description": "The error message shown when a file fails to be created"
+    },
+    "PROJECT_ERROR_RENAME_OBJECT": {
+        "message": "Error mientras cambiaba el nombre del objecto {object} ({error})",
+        "description": "The error message shown when an object fails to be renamed"
+    },
+    "PROJECT_ERROR_DELETE_FOLDER": {
+        "message": "Error mientras eliminaba la carpeta {folder} ({error})",
+        "description": "The error message shown when a folder fails to be deleted"
+    },
+    "PROJECT_ERROR_DELETE_FILE": {
+        "message": "Error mientras eliminaba el archivo {file} ({error})",
+        "description": "The error message shown when a file fails to be deleted"
+    },
+    "PROJECTS_JSON_DO_NOT": {
+        "message": "Trató de editar project.json, NO HAGA ESTO",
+        "description": "The error message when the user is trying to edit the project.json file of a project."
+    },
+    "PROJECT_ERROR_SAVE_FILE": {
+        "message": "Error mientras guardaba el archivo {file} ({error})",
+        "description": "The error message shown when a file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_FILE": {
+        "message": "Error mientras cargaba el archivo {file} ({error})",
+        "description": "The error message shown when file fails to be loaded"
+    },
+    "PROJECT_ERROR_READ_DATA": {
+        "message": "Error mientras leía los datos para el proyecto {project} ({error})",
+        "description": "The error message shown when there is an error reading the data for the project"
+    },
+    "PROJECT_ERROR_NOT_FOLDER": {
+        "message": "Carpeta del proyecto {project} no es una carpeta",
+        "description": "The error message shown when there is no folder"
+    },
+    "PROJECT_ERROR_SAVE_SPECIAL_FILE": {
+        "message": "Error mientras guardaba el archivo especial {file} con datos ({error})",
+        "description": "The error message shown when a special settings file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_SPECIAL_FILE": {
+        "message": "Error mientras cargaba el archivo especial {file} ({error})",
+        "description": "The error message shown when a special settings file fails to be loaded"
+    },
+    "PROJECT_ERROR_SEND_CODE": {
+        "message": "Error mientras enviaba el archivo de código {file} ({error})",
+        "description": "The error message shown when there is an error while sending the file code to the device"
+    },
+    "PROJECT_ERROR_PATH_INVALID": {
+        "message": "Error, la ruta no está dentro de la carpeta del espacio de trabajo",
+        "description": "The error message shown when the specified path is not in the workspace folder"
+    },
+    "PROJECT_ERROR_CHANGE_DATE": {
+        "message": "Error, no se puede escribir la fecha {project} ({error})",
+        "description": "The error message shown when a date for a file fails to be written"
+    },
+    "PROJECT_JSON_DO_NOT": {
+        "message": "Trató de editar project.json, NO HAGA ESTO",
+        "description": "The error message shown when there is an attempt at editing the project settings file"
+    },
+    "PROJECT_CLONE_PROJECT": {
+        "message": "Clonar Proyecto",
+        "description": "Label for the clone project dialog"
+    },
+    "PROJECT_RENAME_PROJECT": {
+        "message": "Cambiar de nombre al proyecto",
+        "description": "Label for the rename project dialog"
+    },
+    "PROJECT_NAME_PROMPT": {
+        "message": "Por favor ingrese el nombre del proyecto",
+        "description": "Label for the new name to be given to the project"
+    },
+    "PROJECT_LIBRARY_SEARCH": {
+        "message": "Buscar",
+        "description": "Label to search for projects"
+    },
+    "PROJECT_NULL": {
+        "message": "Uno o más parámetros están sin valor",
+        "description": "One or more of the funciton's parameters are null"
+    },
+    "PATH_NULL": {
+        "message": "La ruta no tiene valor",
+        "description": "The given path turned out null"
+    },
+    "PROJECTS_NO_PROJECT": {
+        "message": "Aún no tiene ningún proyecto",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
+    },
+    "PROJECTS_CREATE_APPLICATION": {
+        "message": "Clic en el botón \"Crear nueva aplicación\" abajo",
+        "description": "Message displayed in the Projects Library when the list of projects is empty."
+    },
+    "PROJECTS_STORAGE_NOT_PERSISTENT": {
+        "message": "El sistema de almacenamiento no es persistente. Esto significa que sus proyectos pueden ser borrados en cualquier momento sin previo aviso. Para evitar esto, por favor, exporte sus proyectos con frecuencia.",
+        "description": "The message the user sees in the Projects Library when persistent storage is not available. We recommend you to use Firefox."
+    },
+    "PROJECTS_STORAGE_ASK_PERSISTENT": {
+        "message": "El sistema de almacenamiento no es persistente. Por favor, autorice el permiso para hacer el almacenamiento persistente.",
+        "description": "The message the user sees in the Projects Library when persistent storage is available but not permitted."
+    },
+    "PROJECTS_STORAGE_BUTTON_ASK_PERSISTENT": {
+        "message": "Autorizar persistencia",
+        "description": "The button the user clicks to ask persistance."
+    },
+    "PROJECTS_STORAGE_BROWSER_ERROR": {
+        "message": "Si su navegador no le preguntó si permite la persistencia, puede haber un problema con su navegador. Para evitar perder sus proyectos, debería añadir este sitio web a los marcadores, usarlo más a menudo y exportar sus proyectos con más frecuencia. También le recomendamos que use Firefox.",
+        "description": "The message the user sees in the Projects Library when persistent storage is not available."
+    },
+    "PROJECTS_NO_FILE": {
+        "message": "No hay un archivo seleccionado, por favor, importe, cree o seleccione un archivo",
+        "description": "The message the user sees in the Application Tab when there is no file for the editor"
+    },
+    "PROJECTS_EXTENSION_URECOGNIZED": {
+        "message": "La extensión del archivo no es reconocida",
+        "description": "The message the user sees in the Application Tab when the file extension is not valid"
+    },
+    "PROJECTS_INVALID_PROJECT": {
+        "message": "Ha abierto un proyecto inválido, por favor seleccione otro",
+        "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
+    },
+    "PROJECT_EXISTS_PROMPT": {
+        "message": "Un proyecto con este nombre ya existe",
+        "description": "The message the user sees in the Projects Library when a project with an already existing name is created or imported"
+    },
+    "PROJECTS_READ_ONLY_FILE_SYSTEM": {
+        "message": "El espacio de almacenamiento es de SOLO LECTURA, los proyectos pueden ser abiertos solamente.",
+        "description": "The message the user sees when the storage space is read only and no projects can be created"
+    },
+    "PROJECT_ERROR_SAVE_SCHEMATIC": {
+        "message": "Error mientras guardaba el archivo esquemático {file} con datos ({error})",
+        "description": "The error message shown when a special settings file fails to be saved"
+    },
+    "PROJECT_ERROR_LOAD_SCHEMATIC": {
+        "message": "Error mientras cargaba el archivo esquemático {file} ({error})",
+        "description": "The error message shown when a special settings file fails to be loaded"
     }
 }

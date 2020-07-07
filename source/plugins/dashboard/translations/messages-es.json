@@ -1,10 +1,30 @@
 {
     "PROJECT_DASHBOARD": {
-        "message": "El tablero de Control",
+        "message": "Tablero de Control",
         "description": "The Dashboard tab, used to send signals from a board."
     },
+    "DASHBOARD_VIEWER_INVALID_SIGNAL": {
+        "message": "Nombre de señal invalido",
+        "description": "Warning that shows up when the signal name entered by the user is not correct."
+    },
+    "DASHBOARD_VIEWER_MOVE_LEFT": {
+        "message": "Mover a la izquierda",
+        "description": "Button used to move a graph to the left"
+    },
+    "DASHBOARD_VIEWER_MOVE_RIGHT": {
+        "message": "Mover a la derecha",
+        "description": "Button used to move a graph to the right"
+    },
+    "DASHBOARD_VIEWER_GRAPH_SETTINGS": {
+        "message": "Configuración de la gráfica",
+        "description": "Button that opens a prompt where the user can modify the graph's properties"
+    },
+    "DASHBOARD_VIEWER_ERASE_GRAPH": {
+        "message": "Borrar gráfica",
+        "description": "Button used to delete a graph"
+    },
     "DASHBOARD_SIGNAL_NAME": {
-        "message": "El nombre de la señal",
+        "message": "Nombre de la señal",
         "description": "Input text area for the name of the signal"
     },
     "DASHBOARD_SIGNAL_DESCRIPTION": {
@@ -20,7 +40,67 @@
         "description": "Signal's name"
     },
     "DASHBOARD_ADD_SIGNAL": {
-        "message": "Añadir",
+        "message": "Agregar",
         "description": "Button used to add a signal graph"
+    },
+    "DASHBOARD_LOW_COLOR": {
+        "message": "Color bajo",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_LOW_VALUE": {
+        "message": "Valor bajo",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_MID_COLOR": {
+        "message": "Color medio",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_MID_VALUE": {
+        "message": "Valor medio",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_HIGH_COLOR": {
+        "message": "Color alto",
+        "description": "Button used to pick the color of the signal"
+    },
+    "DASHBOARD_MIN_AXES_VALUE": {
+        "message": "Valor mínimo",
+        "description": "Input text area foar the minimum value of an axis"
+    },
+    "DASHBOARD_MAX_AXES_VALUE": {
+        "message": "Valor máximo",
+        "description": "Input text area foar the maximum value of an axis"
+    },
+    "DASHBOARD_KILOMETERS": {
+        "message": "Kilómetros",
+        "description": "Unit of measure for speedometer and gauge"
+    },
+    "DASHBOARD_MILES": {
+        "message": "Millas",
+        "description": "Unit of measure for speedometer and gauge"
+    },
+    "DASHBOARD_MIN_VALUE": {
+        "message": "Valor mínimo de los ejes",
+        "description": "Input text area foar the minimum value of an axis"
+    },
+    "DASHBOARD_MAX_VALUE": {
+        "message": "Valor máximo de los ejes",
+        "description": "Input text area foar the maximum value of an axis"
+    },
+    "DASHBOARD_AXIS_NAME": {
+        "message": "Nombre del eje",
+        "description": "Name of an axis"
+    },
+    "DASHBOARD_DELETE_TITLE": {
+        "message": "Borrar señal",
+        "description": "Title of confirmation prompt when the user tries to delete a signal"
+    },
+    "DASHBOARD_DELETE_QUESTION": {
+        "message": "¿Está seguro que quiere borrar esta señal?",
+        "description": "Delete signal confirmation "
+    },
+    "DASHBOARD_NO_TITLE": {
+        "message": "Por favor, escoja un nombre para la señal.",
+        "description": "Notification text when the user didn't chose a name for the signal"
     }
 }

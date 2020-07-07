@@ -2,5 +2,85 @@
     "CHAT": {
         "message": "CHAT",
         "description": "The Chat tab"
+    },
+    "CHAT_CHANNEL": {
+        "message": "Canal",
+        "description": "A chat channel"
+    },
+    "CHAT_CANCEL": {
+        "message": "Cancelar",
+        "description": "The Cancel button"
+    },
+    "CHAT_DISCONNECT": {
+        "message": "Desconectar",
+        "description": "The Disconnect button"
+    },
+    "CHAT_TYPE_MESSAGE": {
+        "message": "Escribir mensaje",
+        "description": "Input message area label"
+    },
+    "CHAT_PART_CHANNEL": {
+        "message": "Dejar canal",
+        "description": "Button to leave a channel"
+    },
+    "CHAT_TAKEN_NAME": {
+        "message": "Tu apodo ya está en uso. Ha sido cambiado a {nickName}",
+        "description": "Text of notification that shows up when the user tries to use a nickname already taken."
+    },
+    "CHAT_COULD_NOT_JOIN_CHANNEL": {
+        "message": "¡No se puede unir a este canal! ¡Por favor, elija otro!",
+        "description": "Text of notification that shows up when the user can not connect to a certain channel"
+    },
+    "CHAT_TITLE_DISCONNECT": {
+        "message": "Desconectar del servidor",
+        "description": "Title of the prompt that show up when the user wants to disconnect from the server"
+    },
+    "CHAT_TEXT_DISCONNECT": {
+        "message": "¿Está seguro que se quiere desconectar del servidor?",
+        "description": "Text of the prompt that show up when the user wants to disconnect from the server"
+    },
+    "CHAT_INSERT_CHANNEL_MESSAGE": {
+        "message": "¡Por favor, escriba un mensaje!",
+        "description": "Notification text when the user didn't write a message."
+    },
+    "CHAT_TITLE_WARNING": {
+        "message": "Dejando el canal",
+        "description": "Title of prompt that show up when the user wants to leave a channel."
+    },
+    "CHAT_TEXT_PART_CHANNEL": {
+        "message": "¿Está seguro que quiere ser parte de este canal?",
+        "description": "Text of prompt that show up when the user wants to leave a channel."
+    },
+    "CHAT_WELCOME_ADD_CHANNEL": {
+        "message": "Agregar Nuevo Canal",
+        "description": "Text used when the user wants to add a new channel"
+    },
+    "CHAT_NEW_CHANNEL": {
+        "message": "Ingrese el nombre del canal",
+        "description": "The name of the new channel"
+    },
+    "CHAT_AVAILABLE_CHANNELS": {
+        "message": "Canales disponibles",
+        "description": "List of the available channels"
+    },
+    "CHAT_USERS": {
+        "message": "Usuarios",
+        "description": "List with chat users."
+    },
+    "CHAT_JOIN_CHANNEL": {
+        "message": "Unirse al canal",
+        "description": "Button used to connect to a channel."
+    },
+    "CHAT_INSERT_CHANNEL_NAME": {
+        "message": "¡Por favor, ingrese un nombre del canal!",
+        "description": "Warning when the user didn't choose a channel name."
+    },
+    "CHAT_LOGIN_TITLE": {
+        "message": "Iniciar sesión en el servidor",
+        "description": "Text when the user is connecting to a server."
+    },
+    "CHAT_LOGIN_BUTTON": {
+        "message": "Iniciar sesión",
+        "description": "The login button"
     }
 }

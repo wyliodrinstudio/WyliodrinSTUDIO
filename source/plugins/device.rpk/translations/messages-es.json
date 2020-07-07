@@ -3,21 +3,33 @@
         "message": "Ejecutar",
         "description": "The run button for an application"
     },
+    "DEVICE_FLASH_JAVASCRIPT": {
+        "message": "Descargar Javascript",
+        "description": "The flash javascript button for an application"
+    },
     "DEVICE_RPK_STOP": {
-        "message": "Stop",
+        "message": "Detener",
         "description": "The stop button for an application"
     },
     "DEVICE_RPK_TASK_MANAGER": {
-        "message": "Herramienta de tareas",
+        "message": "Administrador de tareas",
         "description": "The button for the task manager "
     },
     "DEVICE_RPK_PACKAGE_MANAGER": {
-        "message": "Herramienta de paquetes",
+        "message": "Administrador de paquetes",
         "description": "The button for the package manager "
     },
+    "DEVICE_RPK_FLASH": {
+        "message": "Programar",
+        "description": "The flash button for an application"
+    },
     "DEVICE_RPK_NETWORK_MANAGER": {
-        "message": "Los parámetros de la red",
+        "message": "Administrador de redes",
         "description": "The button for the network manager "
+    },
+    "DEVICE_RPK_STANDBY": {
+        "message": "En espera",
+        "description": "The stand-by option in the disconnect menu."
     },
     "DEVICE_RPK_DISCONNECT": {
         "message": "Desconectar",
@@ -28,7 +40,43 @@
         "description": "The reboot and disconnect option in the disconnect menu"
     },
     "DEVICE_RPK_TURNOFF": {
-        "message": "Power Off and Disconnect",
+        "message": "Apagar y desconectar",
         "description": "The power off and disconnect option in the disconnect menu"
+    },
+    "DEVICE_RPK_ANOTHER_USER": {
+        "message": "El dispositivo ya está conectado a otro usuario.",
+        "description": "The notification message when another use is connected to the board and the board is busy"
+    },
+    "DEVICE_RPK_ERROR_BLE": {
+        "message": "Listar dispositivos falló ({error}).",
+        "description": "The error shown when list devices for ble fails"
+    },
+    "DEVICE_RPK_FLASHING_IN_PROGRESS_PLEASE_WAIT": {
+        "message": "Programación en progreso, por favor espere.",
+        "description": "Notification text while the binary is written on the RPK."
+    },
+    "DEVICE_RPK_TOO_LONG_SOURCE_CODE": {
+        "message": "El número de caracteres del código fuente debe ser menor que 30000.",
+        "description": "Error shown when source code is bigger than the RPK supports."
+    },
+    "DEVICE_RPK_FLASH_DONE": {
+        "message": "Programación lista. El dispositivo se reiniciará y se desconectara automáticamente. Ponga el dispositivo en el modo DFU para programar de nuevo.",
+        "description": "Notification shown when flashing is done."
+    },
+    "RPK_NEW_DEVICE_TITLE": {
+        "message": "Nuevo dispositivo Kit Prototipado Rapid",
+        "description": "How to add new RPK device."
+    },
+    "RPK_NEW_DEVICE_INSTRUCTIONS": {
+        "message": "Conecte el dispositivo RPK al puerto USB, presione el Switch 3 y reinicie el dispositivo usando el pin",
+        "description": "How to add new RPK device description."
+    },
+    "RPK_NEW_DEVICE_FLASH_INSTRUCTIONS": {
+        "message": "Guarde el archivo descargado aquí a la unidad que se muestra cuando se conecta el dispositivo NXP RPK.",
+        "description": "How to flash a RPK device manually."
+    },
+    "RPK_SERIAL_CONNECTON_ERROR": {
+        "message": "Error mientras se conectaba al dispositivo RPK.",
+        "description": "The error shown to the user when the serial connection fails"
     }
 }
