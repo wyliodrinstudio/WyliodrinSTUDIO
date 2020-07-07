@@ -24,7 +24,7 @@
         "description": "Button to leave a channel"
     },
     "CHAT_TAKEN_NAME": {
-        "message": "Tu apodo ya está en uso. Ha sido cambiado a {nickName}",
+        "message": "Su apodo ya está en uso. Ha sido cambiado a {nickName}",
         "description": "Text of notification that shows up when the user tries to use a nickname already taken."
     },
     "CHAT_COULD_NOT_JOIN_CHANNEL": {
