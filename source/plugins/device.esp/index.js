@@ -175,42 +175,38 @@ export function setup (options, imports, register)
 
         studio.notebook.register ((event, ...data) => 
 	{
-		let device = studio.workspace.getDevice ();
-		if (device.type === 'wyapp' && device.status === 'CONNECTED')
+		if (event === 'run')
 		{
-			if (event === 'run')
-			{
-                                if(studio.system.platform() === 'electron')
-                                {
-                                        //ELECTRON
-                                }
-                                else
-                                {
-                                        //BROWSER
-                                }
+                        if(studio.system.platform() === 'electron')
+                        {
+                                 //ELECTRON
+                        }
+                         else
+                        {
+                             //BROWSER
+                        }
 			}
-			else if(event === 'stop')
-			{
-				if(studio.system.platform() === 'electron')
-                                {
-                                        //ELECTRON
-                                }
-                                else
-                                {
-                                        //BROWSER
-                                }
-			}
-			else if (event === 'reset')
-			{
-				if(studio.system.platform() === 'electron')
-                                {
-                                        //ELECTRON
-                                }
-                                else
-                                {
-                                       //BROWSER
-                                }
-			}
+		else if(event === 'stop')
+		{
+			if(studio.system.platform() === 'electron')
+                        {
+                                //ELECTRON
+                        }
+                        else
+                        {
+                                //BROWSER
+                        }
+		}
+		else if (event === 'reset')
+		{
+			if(studio.system.platform() === 'electron')
+                        {
+                                 //ELECTRON
+                        }
+                        else
+                        {
+                                //BROWSER
+                        }
 		}
 	});
        
