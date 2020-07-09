@@ -172,6 +172,47 @@ export function setup (options, imports, register)
                         ports[id].write(Buffer.from(data+''));
                 }
         });
+
+        studio.notebook.register ((event, ...data) => 
+	{
+		let device = studio.workspace.getDevice ();
+		if (device.type === 'wyapp' && device.status === 'CONNECTED')
+		{
+			if (event === 'run')
+			{
+                                if(studio.system.platform() === 'electron')
+                                {
+                                        //ELECTRON
+                                }
+                                else
+                                {
+                                        //BROWSER
+                                }
+			}
+			else if(event === 'stop')
+			{
+				if(studio.system.platform() === 'electron')
+                                {
+                                        //ELECTRON
+                                }
+                                else
+                                {
+                                        //BROWSER
+                                }
+			}
+			else if (event === 'reset')
+			{
+				if(studio.system.platform() === 'electron')
+                                {
+                                        //ELECTRON
+                                }
+                                else
+                                {
+                                       //BROWSER
+                                }
+			}
+		}
+	});
        
         let device_esp = {
 		defaultIcon() {
@@ -232,10 +273,6 @@ export function setup (options, imports, register)
                                                         studio.shell.select(device.id);
 
                                                         studio.console.select (device.id);
-<<<<<<< HEAD
-=======
-                                                        studio.shell.write(device.id, '');
->>>>>>> ff8ce648bd746f33d0d0a101f3672272b1fb04f6
 
                                                         studio.console.reset();
                                                         studio.console.show ();                                   
