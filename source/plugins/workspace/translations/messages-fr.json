@@ -145,7 +145,7 @@
     },
     "ABOUT_VERSION": {
         "message": "Version",
-        "description":" The text version that appears in the Welcome and About dialogs"
+        "description": " The text version that appears in the Welcome and About dialogs"
     },
     "OK": {
         "message": "OK",

@@ -1,0 +1,18 @@
+{
+    "WELCOME_TEXT": {
+        "message": "Bienvenido a Wyliodrin STUDIO",
+        "description": "Welcome text"
+    },
+    "WELCOME_START_WORK": {
+        "message": "Puedes empezar creando nuevas aplicaciones, configurando tarjetas o importando tus propios proyectos.",
+        "description": "Introduction message"
+    },
+    "WELCOME_CREATE_APP": {
+        "message": "Crear una nueva aplicación",
+        "description": "Button that will redirect the user to a popup where he can create new applicatons."
+    },
+    "WELCOME_CONNECT_BOARD": {
+        "message": "Conectar tarjeta",
+        "description": "Button that will open a browser window with a documentation chapter regarding the setup of a Raspberry Pi board."
+    }
+}

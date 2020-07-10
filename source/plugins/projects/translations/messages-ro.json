@@ -271,18 +271,15 @@
         "message": "Dacă browser-ul dvs. nu v-a întrebat dacă permiteți persistența, ar putea fi o problemă cu browserul. Pentru a preveni pierderea proiectelor, ar trebui să adăugați acest site web la marcaje, să-l utilizați mai des și să exportați frecvent proiectele. De asemenea, vă recomandăm să utilizați Firefox.",
         "description": "The message the user sees in the Projects Library when persistent storage is not available."
     },
-	"PROJECTS_NO_FILE": 
-    {
+    "PROJECTS_NO_FILE": {
         "message": "Nu este nici un fișier selectat, vă rugăm creați, importați sau selectați un fișier.",
         "description": "The message the user sees in the Application Tab when there is no file for the editor"
     },
-	"PROJECTS_EXTENSION_URECOGNIZED": 
-    {
+    "PROJECTS_EXTENSION_URECOGNIZED": {
         "message": "Extensia fișierului nu este recunoscută.",
         "description": "The message the user sees in the Application Tab when the file extension is not valid"
     },
-	"PROJECTS_INVALID_PROJECT": 
-    {
+    "PROJECTS_INVALID_PROJECT": {
         "message": "Ați deschis un proiect invalid, vă rugăm selectați altul.",
         "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
     },
@@ -290,22 +287,20 @@
         "message": "S-a încercat editarea fișierului project.json, NU FACEȚI ASTA",
         "description": "The error message when the user is trying to edit the project.json file of a project."
     },
-	"PROJECT_EXISTS_PROMPT": 
-    {
+    "PROJECT_EXISTS_PROMPT": {
         "message": "Un proiect cu acest nume există deja",
         "description": "The message the user sees in the Projects Library when a project with an already existing name is created or imported"
     },
-    "PROJECTS_READ_ONLY_FILE_SYSTEM": 
-    {
+    "PROJECTS_READ_ONLY_FILE_SYSTEM": {
         "message": "Spațiul de stocare este numai pentru CITIRE, proiectele pot fi doar deschise.",
         "description": "The message the user sees when the storage space is read only and no projects can be created"
-	},
-	"PROJECT_ERROR_SAVE_SCHEMATIC": {
+    },
+    "PROJECT_ERROR_SAVE_SCHEMATIC": {
         "message": "Eroare la salvarea schemei {file} cu datele ({error})",
         "description": "Mesajul de eroare afișat atunci când fișier special de setări eșuează să fie salvat"
     },
     "PROJECT_ERROR_LOAD_SCHEMATIC": {
         "message": "Eroare la încărcarea schemei {file} ({error})",
         "description": "Mesajul de eroare afișat atunci când un fișier special de setări eșuează să fie încărcat"
-	}
+    }
 }

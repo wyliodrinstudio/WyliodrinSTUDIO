@@ -1,0 +1,54 @@
+{
+    "DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED": {
+        "message": "Autenticado en el servidor del dispositivo websocket",
+        "description": "The notification the user sees when authetnicated with the devices server"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR": {
+        "message": "Error del servidor",
+        "description": "The error notification the user sees with the error for the websocket server"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED": {
+        "message": "Desconectar del servidor los dispositivos websocket",
+        "description": "The notification the user sees when disconnected from the devices server"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE": {
+        "message": "¿Usar Studio aquí?",
+        "description": "The title of the question dialog the user sees when there is another connection with his id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET": {
+        "message": "Hay otra instancia de Studio conectada al servidor con tu id. No puedes usar múltiples conexiones. ¿Te gustaría usar Studio aquí?",
+        "description": "The question dialog text the user sees when there is another instance connected with his id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TITLE": {
+        "message": "Agregar dispositivo Web",
+        "description": "The title of the dialog with instructions on how to add a new device"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME": {
+        "message": "Nombre del dispositivo",
+        "description": "The name of the device with instructions on how to add a new device"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID": {
+        "message": "Por favor ingrese un nombre de dispositivo válido",
+        "description": "The message the user receives when he did not enter a valid name for a new device"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID": {
+        "message": "Identificador de Sesión",
+        "description": "The menu item where the user changes the session id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TITLE": {
+        "message": "Identificador de Sesión",
+        "description": "The dialog title where the user changes the session id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TEXT": {
+        "message": "Identificador único usado para conectar a los dispositivos, es como una contraseña.",
+        "description": "The text dispalyed in the dialog where the user changes the session id"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_NO_UUID": {
+        "message": "El identificador de sesión debe ser un UUID válido.",
+        "description": "The error the user is shown when the enetered session id is not a valid"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_MORE_INFO": {
+        "message": "Más información",
+        "description": "The button the user clicks to get more information about how to connect a device through the web"
+    }
+}

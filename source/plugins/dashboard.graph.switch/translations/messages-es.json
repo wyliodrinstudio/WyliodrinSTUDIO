@@ -1,0 +1,14 @@
+{
+    "SWITCH_GRAPH": {
+        "message": "INTERRUPTOR",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDSWITCH": {
+        "message": "Interruptor - Agregar señal",
+        "description": "Title of the prompt used to add a new signal"
+    },
+    "SWITCH_PUSH": {
+        "message": "Pulsar",
+        "description": "Checkbox used to push values"
+    }
+}

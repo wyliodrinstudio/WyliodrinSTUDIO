@@ -1,22 +1,26 @@
 {
     "SCHEMATICS": {
-        "message": "Esquema",
+        "message": "Esquemático",
         "description": "The Schematics Tab, used to load a circuit diagram"
     },
     "ADD_SCHEMATIC": {
-        "message": "Add schematics",
+        "message": "Agregar esquemático",
         "description": "Button used to add a schematics"
     },
     "DELETE_SCHEMATIC": {
-        "message": "Delete schematics",
+        "message": "Eliminar esquemático",
         "description": "Button used to delete a schematics"
     },
     "DELETE_MESSAGE": {
-        "message": "¿Desea borrar el esquema?",
+        "message": "¿Está seguro que desea eliminarlo?",
         "description": "Delete confirmation prompt question"
     },
     "DELETE_CONFIRMATION": {
-        "message": "Delete confirmation",
+        "message": "Confimación eliminar",
         "description": "Delete confirmation prompt title"
+    },
+    "SCHEMATICS_IMPORT": {
+        "message": "Importar su archivo esquemático .svg de Fritzing",
+        "description": "The message that appears when there is no picture"
     }
 }

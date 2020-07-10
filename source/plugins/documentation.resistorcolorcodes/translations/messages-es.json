@@ -1,58 +1,58 @@
 {
     "TOOLBAR_RESISTOR_COLOR_CODE": {
-        "message": "Resistor color code",
+        "message": "Código de color de resistencia",
         "description": "Option in the Help Menu which opens a dialog that makes a connection between the color of a resistor and it's value"
     },
     "RESISTOR_COLORCODE_FROM_COLOR_TO_NUMBER": {
-        "message": "FROM COLOR TO NUMBER",
+        "message": "DEL COLOR AL NÚMERO",
         "description": "Options that transforms the color in a value"
     },
     "RESISTOR_COLORCODE_FROM_NUMBER_TO_COLOR": {
-        "message": "FROM NUMBER TO COLOR",
+        "message": "DEL NÚMERO AL COLOR",
         "description": "Option that transforms the value in a color"
     },
     "RESISTOR_COLORCODE_STRIPES": {
-        "message": "Stripes",
+        "message": "Bandas",
         "description": "Number of stripes in the resistor"
     },
     "VALUE_FOUR": {
-        "message": "Four",
+        "message": "Cuatro",
         "description": "Number 4"
     },
     "VALUE_FIVE": {
-        "message": "Five",
+        "message": "Cinco",
         "description": "Number 5"
     },
     "RESISTOR_COLORCODE_STRIPE_ONE": {
-        "message": "Stripe 1",
+        "message": "Banda 1",
         "description": "Stripe option"
     },
     "RESISTOR_COLORCODE_STRIPE_TWO": {
-        "message": "Stripe 2",
+        "message": "Banda 2",
         "description": "Stripe option"
     },
     "RESISTOR_COLORCODE_STRIPE_THREE": {
-        "message": "Stripe 3",
+        "message": "Banda 3",
         "description": "Stripe option"
     },
     "RESISTOR_COLORCODE_STRIPE_FOUR": {
-        "message": "Stripe 4",
+        "message": "Banda 4",
         "description": "Stripe option"
     },
     "RESISTOR_COLORCODE_STRIPE_FIVE": {
-        "message": "Stripe 5",
+        "message": "Banda 5",
         "description": "Stripe option"
     },
     "VALUE_VALUE": {
-        "message": "Value",
+        "message": "Valor",
         "description": "Value of the resistance"
     },
     "RESISTOR_COLORCODE_RESISTANCE": {
-        "message": "Resistance",
+        "message": "Resistencia",
         "description": "Label for the value of the resistance"
     },
     "VALUE_TOLERANCE": {
-        "message": "Tolerance",
+        "message": "Tolerancia",
         "description": "Tolerance of the resistor"
     }
 }

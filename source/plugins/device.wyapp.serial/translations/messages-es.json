@@ -1,0 +1,18 @@
+{
+    "DEVICE_WYAPP_SERIAL_SERIAL_PORT_LOAD_ERROR": {
+        "message": "No se puede cargar SerialPort WyApp Transport, los dispositivos seriales sobre wyapp no estarán disponibles (error: {{error}})",
+        "description": "The error message shown when the serial port library has an error while being loaded"
+    },
+    "DEVICE_WYAPP_SERIAL_LIST_PORTS_ERROR": {
+        "message": "No se puede listar los puertos seriales (error: {error})",
+        "description": "The error message shown when there is an werror while listing the serial ports"
+    },
+    "DEVICE_SERIAL_PORT": {
+        "message": "Puerto Serial",
+        "description": "Input text area for the port number of a serial device"
+    },
+    "DEVICE_SERIAL_BAUDRATE": {
+        "message": "Velocidad en Baudios",
+        "description": "Input text area for the baud rate of a serial device"
+    }
+}

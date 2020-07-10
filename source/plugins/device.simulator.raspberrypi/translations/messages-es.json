@@ -1,0 +1,58 @@
+{
+    "DEVICE_SIMULATOR_RASPBERRY_PI": {
+        "message": "Simulador de Raspberry Pi",
+        "description": "The Raspberry Pi simulator tab button"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_RUN": {
+        "message": "Ejecutar",
+        "description": "The Raspberry Pi simulator button to run"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_STOP": {
+        "message": "Detener",
+        "description": "The Raspberry Pi simulator button to stop"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_LOAD_PROJECT": {
+        "message": "Cargar esquemático",
+        "description": "Load your own project in the simulator"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_CLOSE_PROJECT_LIST": {
+        "message": "Cerrar",
+        "description": "Close the list with the projects"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_HELP": {
+        "message": "Ayuda",
+        "description": "Go to the documentation"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_PIN": {
+        "message": "Pines",
+        "description": "The pin in the header of the table with components"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_NAME": {
+        "message": "Nombre",
+        "description": "The name in the header of the table with components"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_TABLE_COLOR": {
+        "message": "Color",
+        "description": "The color in the header of the table with components"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_NAME_LABEL": {
+        "message": "Nombre del simulador",
+        "description": "The name of your project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_UPLOAD": {
+        "message": "Subir",
+        "description": "Upload your own project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_CLOSE": {
+        "message": "Cerrar",
+        "description": "Close the dialog in which you can upload your project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_ADD_SVG": {
+        "message": "Agregar archivo SVG",
+        "description": "Add the SVG file of your project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_ADD_XML": {
+        "message": "Agregar lista de redes XML",
+        "description": "Add the XML file of your project"
+    }
+}

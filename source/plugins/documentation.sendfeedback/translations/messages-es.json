@@ -1,0 +1,22 @@
+{
+    "SEND_FEEDBACK_TITLE": {
+        "message": "Enviar retroalimentación",
+        "description": "Option in the Help Menu to send a feedback"
+    },
+    "SEND_FEEDBACK_MESSAGE": {
+        "message": "Escribe tu retroalimentación",
+        "description": "Label of the input text area of the feedback"
+    },
+    "SEND_FEEDBACK_SEND": {
+        "message": "Envía tu retroalimentación",
+        "description": "Button used to send the feecback"
+    },
+    "FEEDBACK_SCREENSHOT_ERROR": {
+        "message": "¡Hubo un error mientras obtenía la página! Por favor intente de nuevo",
+        "description": "Notification that shows up when  the system can't take a screenshot"
+    },
+    "SEND_FEEDBACK_CANCEL": {
+        "message": "Cancelar",
+        "description": "Button to close the feedback dialog"
+    }
+}

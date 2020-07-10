@@ -1,114 +1,114 @@
 {
     "DEVICE_EMULATOR": {
-        "message": "Emulator",
+        "message": "Emulador",
         "description": "Name of the program that allows to imitate the behavior of another program or device."
     },
     "EMULATOR_AVAILABLE_IMAGES": {
-        "message": "Imagini Disponibile",
+        "message": "Imágenes disponibles",
         "description": "Name of the tab with a list of available operating system images"
     },
     "EMULATOR_AVAILABLE_EMULATORS": {
-        "message": "Emulatoare Disponibile",
+        "message": "Emuladores disponibles",
         "description": "Name of the tab with a list of available emulators"
     },
     "EMULATOR_DOWNLOAD_IMAGE": {
-        "message": "Descărcați imaginea",
+        "message": "Descargar imagen",
         "description": "Button to download the image for an emulator"
     },
     "EMULATOR_RUN_RASPBERRYPI": {
-        "message": "Porniți emulatorul de RaspberryPi",
+        "message": "Ejecutar el emulador de RaspberryPi",
         "description": "Button that starts the Raspberryi Pi emulator"
     },
     "EMULATOR_RUN_UBUNTU": {
-        "message": "Porniți emulatorul de Ubuntu",
+        "message": "Ejecutar el emulador de Ubuntu",
         "description": "Button that starts the Ubuntu emulator"
     },
     "EMULATOR_DOWNLOAD_QEMU": {
-        "message": "Descărcați Qemu",
+        "message": "Descargar Qemu",
         "description": "Button that redirects the user to the downloag page of qemu"
     },
     "EMULATOR_STOP_DOWNLOAD": {
-        "message": "Opriți descărcarea",
+        "message": "Detener descarga",
         "description": "Button that interrupts the download process for a chosen image"
     },
     "EMULATOR_STOP": {
-        "message": "Opriți emulatorul",
+        "message": "Detener emulador",
         "description": "Button used to stop an emulator from running"
     },
     "EMULATOR_NO_EXISTING_IMAGE_ERROR": {
-        "message": "Imaginea pentru acest emulator nu există pe computer. Descărcați imaginea corespunzătoare înainte de a încerca să porniți un emulator.",
+        "message": "La imagen para este emulador no existe en tu computador. Por favor descargue la imagen apropiada antes de tratar de ejecutar un emulador.",
         "description": "Error that shows up when the user is trying to run an emulator without having the operating system image"
     },
     "EMULATOR_DOWNLOAD_ERROR": {
-        "message": "Imposibil de descărcat imaginea. ",
+        "message": "No se puede descargar la imagen. ",
         "description": "Error when loading the download progress for an image"
     },
     "EMULATOR_UNZIP_ERROR": {
-        "message": "Imposibil de dezarhivat imaginea. ",
+        "message": "No se puede descomprimir el archivo de imagen. ",
         "description": "Error when unzipping the image archive"
     },
     "EMULATOR_STOP_DOWNLOAD_ERROR": {
-        "message": "Imposibil de șters folderul asociat imaginii in curs de descărcare. ",
+        "message": "No se puede eliminar la carpeta de descarga de imágenes. ",
         "description": "Error that shows up when the folder where the image should be downloaded can not be deleted"
     },
     "EMULATOR_NAME": {
-        "message": "Denumire emulator",
+        "message": "Nombre del emulador",
         "description": "Prompt title when choosing a name for an emulator"
     },
     "EMULATOR_CHOOSE_NAME": {
-        "message": "Alegeți un nume pentru emulator:",
+        "message": "Por favor elija un nombre para su emulador:",
         "description": "Prompt text asking the user to input a name for the new emulator"
     },
     "EMULATOR_CREATE_NEW": {
-        "message": "Creați un nou emulator",
+        "message": "Crear un nuevo emulador",
         "description": "Button to make a new emulator"
     },
     "EMULATOR_RESTART": {
-        "message": "Porniți emulatorul",
+        "message": "Iniciar emulador",
         "description": "Button to restart an existing emulator"
     },
     "EMULATOR_DELETE": {
-        "message": "Ștergeți emulatorul",
+        "message": "Eliminar emulador",
         "description": "Button to permanently delete an existing emulator"
     },
     "EMULATOR_DELETE_EMULATOR_TITLE": {
-        "message": "Ștergeți emulatorul",
+        "message": "Eliminar emulador",
         "description": "Title of the confirmation prompt that shows up when the user tries to delete an emulator"
     },
     "EMULATOR_DELETE_EMULATOR_QUESTION": {
-        "message": "Sigur doriți să ștergeți definitiv acest emulator?",
+        "message": "¿Está seguro que desea eliminar permanentemente este emulador?",
         "description": "Question addressed to the user in order to confirm the permanent deletion of an emulator"
     },
     "EMULATOR_INVALID_NAME": {
-        "message": "Vă rugăm să alegeți un nume valid.",
+        "message": "Por favor elija un nombre válido.",
         "description": "Error that shows up when the user tries to create an emulator using an invalid name"
     },
     "EMULATOR_COPY_FILE_ERROR": {
-        "message": "Nu se poate încărca imaginea pentru acest emulator.",
+        "message": "No se puede cargar la imagen para este emulador",
         "description": "Error that shows up when the image for an emulator can not be copied"
     },
     "EMULATOR_PROGRESS_ERROR": {
-        "message": "Nu se poate încărca progresul descărcării pentru această imagine",
+        "message": "No se puede cargar el progreso de descarga para esta imagen",
         "description": "Error that shows up when the download progress for an image can not be loaded"
     },
     "EMULATOR_MISSING_QEMU_ERROR": {
-        "message": "Vă rugăm instalați qemu-system-{system}",
+        "message": "Por favor instalar qemu-system-{system} ",
         "description": "Error that shows up when the user is trying to run an emulator without having the qemu system installed."
     },
     "EMULATOR_NO_QEMU_ERROR": {
-        "message": "Vă rugăm instalați qemu pentru a crea un emulator.",
+        "message": "Por favor instalar qemu para crear un emulador.",
         "description": "Alert text when the user is trying to create an emulator without having the qemu system installed."
     },
     "EMULATOR_DELETE_IMAGE_TITLE": {
-        "message": "Ștergeți imaginea",
+        "message": "Eliminar imagen",
         "description": "Title of the confirmation prompt that shows up when the user tries to delete an image"
     },
     "EMULATOR_DELETE_IMAGE_QUESTION": {
-        "message": "Sigur doriți să ștergeți definitiv această imagine?",
+        "message": "¿Está seguro de querer eliminar permanentemente esta imagen?",
         "description": "Question addressed to the user in order to confirm the permanent deletion of an image"
     },
     "EMULATOR_DELETE_IMAGE": {
-        "message": "Ștergeți imaginea",
+        "message": "Eliminar imagen",
         "description": "Button to delete an existing image"
     }
 }

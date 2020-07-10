@@ -103,11 +103,11 @@
         "message": "Renommer le fichier",
         "description": "Rename a file within a project"
     },
-	"PROJECT_IMPORT_FILE": {
+    "PROJECT_IMPORT_FILE": {
         "message": "Importer le fichier",
         "description": "Import a file within a project"
-	},
-	"PROJECT_EXPORT_FILE": {
+    },
+    "PROJECT_EXPORT_FILE": {
         "message": "Exporter le fichier",
         "description": "Export a file from the project"
     },
@@ -242,11 +242,11 @@
     "PROJECT_ERROR_PATH_INVALID": {
         "message": "Erreur, le chemin n'est pas dans le dossier workspace",
         "description": "The error message shown when the specified path is not in the workspace folder"
-	},
-	"PROJECT_ERROR_CHANGE_DATE": {
-		"message": "Erreur, impossible d'écrire la date {project} ({error})",
-		"description": "The error message shown when a date for a file fails to be written"
-	},
+    },
+    "PROJECT_ERROR_CHANGE_DATE": {
+        "message": "Erreur, impossible d'écrire la date {project} ({error})",
+        "description": "The error message shown when a date for a file fails to be written"
+    },
     "PROJECT_JSON_DO_NOT": {
         "message": "Vous avez essayé de modifier le fichier project.json, NE FAITES PAS CELA",
         "description": "The error message shown when there is an attempt at editing the project settings file"
@@ -262,11 +262,11 @@
     "PROJECT_NAME_PROMPT": {
         "message": "Veuillez saisir le nom du projet.",
         "description": "Label for the new name to be given to the project"
-	},
-	"PROJECT_LIBRARY_SEARCH":{
-		"message":"Chercher",
-		"description":"Label to search for projects"
-	},
+    },
+    "PROJECT_LIBRARY_SEARCH": {
+        "message": "Chercher",
+        "description": "Label to search for projects"
+    },
     "PROJECT_NULL": {
         "message": "Un ou plusieurs paramètres sont nuls",
         "description": "One or more of the funciton's parameters are null"
@@ -275,36 +275,31 @@
         "message": "Un chemin est nul",
         "description": "The given path turned out null"
     },
-	"PROJECTS_NO_FILE": 
-    {
+    "PROJECTS_NO_FILE": {
         "message": "Aucun fichier n'est sélectionné, veuillez importer, créer ou sélectionner un fichier.",
         "description": "The message the user sees in the Application Tab when there is no file for the editor"
     },
-	"PROJECTS_EXTENSION_URECOGNIZED": 
-    {
+    "PROJECTS_EXTENSION_URECOGNIZED": {
         "message": "L'extension de fichier n'est pas reconnue",
         "description": "The message the user sees in the Application Tab when the file extension is not valid"
     },
-	"PROJECTS_INVALID_PROJECT": 
-    {
+    "PROJECTS_INVALID_PROJECT": {
         "message": "Vous avez ouvert un projet invalide, veuillez en sélectionner un autre.",
         "description": "The message the user sees in the Application Tab when the selected project is an invalid one"
     },
-    "PROJECTS_READ_ONLY_FILE_SYSTEM": 
-    {
+    "PROJECTS_READ_ONLY_FILE_SYSTEM": {
         "message": "L'espace de stockage est en lecture seule, les projets ne peuvent être ouverts.",
         "description": "The message the user sees when the storage space is read only and no projects can be created"
     },
-	"PROJECT_ERROR_SAVE_SCHEMATIC": {
+    "PROJECT_ERROR_SAVE_SCHEMATIC": {
         "message": "Erreur lors de la sauvegarde du schéma {file} avec des données ({error})",
         "description": "The error message shown when a special settings file fails to be saved"
     },
     "PROJECT_ERROR_LOAD_SCHEMATIC": {
         "message": "Erreur lors du chargement du schéma {file} ({error})",
         "description": "The error message shown when a special settings file fails to be loaded"
-	},
-	"PROJECT_EXISTS_PROMPT": 
-    {
+    },
+    "PROJECT_EXISTS_PROMPT": {
         "message": "Un projet portant ce nom existe déjà.",
         "description": "The message the user sees in the Projects Library when a project with an already existing name is created or imported"
     }

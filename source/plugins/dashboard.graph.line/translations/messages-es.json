@@ -1,0 +1,62 @@
+{
+    "LINE_GRAPH": {
+        "message": "LÍNEA",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDLINE": {
+        "message": "Línea - Agregar señal",
+        "description": "Title of the prompt used to add a new signal"
+    },
+    "LINE_STYLE": {
+        "message": "Estilo",
+        "description": "The style of a line signal"
+    },
+    "LINE_HIDE_LEGEND": {
+        "message": "Ocultar leyenda",
+        "description": "Checkbox option to hide the legend of a graph"
+    },
+    "LINE_FIX_AXES_VALUES": {
+        "message": "Fijar los valores de los ejes",
+        "description": "Checkbox option to fix the axis values for the line graph"
+    },
+    "LINE_LOGARITHMIC_AXES": {
+        "message": "Ejes logarítmicos",
+        "description": "Checkbox option to show logarithmic for the line graph"
+    },
+    "LINE_TIME_SERIES": {
+        "message": "Series de tiempo",
+        "description": "Checkbox option to show the time series for the line graph"
+    },
+    "LINE_SHOW_POINTS": {
+        "message": "Mostrar puntos",
+        "description": "Checkbox option to show the points for the line graph"
+    },
+    "LINE_MAX_POINTS": {
+        "message": "Puntos máximos a mostar (0 significa mostrar todos)",
+        "description": "Input text area for the maximum points to show in a line graph"
+    },
+    "LINE_AXIS_NAME": {
+        "message": "Nombre de eje",
+        "description": "Name of the axis"
+    },
+    "LINE_OVERVIEW": {
+        "message": "Mostrar descripción",
+        "description": "Checkbox option to show an overview for the line graph"
+    },
+    "LINE_SCROLLBAR": {
+        "message": "Mostrar barra de desplazamiento",
+        "description": "Checkbox option to show the scrollbar for the line graph"
+    },
+    "LINE_STEP": {
+        "message": "Paso",
+        "description": "Type of line graph"
+    },
+    "LINE_STRAIGHT": {
+        "message": "Recta",
+        "description": "Type of line graph"
+    },
+    "LINE_SPLINE": {
+        "message": "Spline",
+        "description": "Type of line graph"
+    }
+}

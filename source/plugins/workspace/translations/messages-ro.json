@@ -157,6 +157,6 @@
     },
     "ABOUT_VERSION": {
         "message": "Versiune",
-        "description":" The text version that appears in the Welcome and About dialogs"
+        "description": " The text version that appears in the Welcome and About dialogs"
     }
 }
