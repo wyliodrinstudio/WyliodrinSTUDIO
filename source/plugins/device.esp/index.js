@@ -267,6 +267,7 @@ export function setup (options, imports, register)
                                                         device.status = 'CONNECTED';
                                                         updateDevice(device);
                                                         studio.shell.select(device.id);
+                                                        studio.notebook.setStatus (packet.d.l, 'READY');
 
                                                         studio.console.select (device.id);
 
