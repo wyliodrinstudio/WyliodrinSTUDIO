@@ -108,3 +108,7 @@ Please ensure you follow the coding standards used through-out the existing code
 
  - indent with 4-spaces, no tabs.
  - opening brace on the next line as `if`/`for`/`function` and so on, closing brace on its own line.
+ 
+## License
+Any contribution intentionally submitted for inclusion in Wyliodrin STUDIO by you, shall be licensed under the 
+Apache 2.0 license, without any additional terms or conditions.
