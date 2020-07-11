@@ -72,6 +72,7 @@ To build **BROWSER** version, you will have to delete the *build* folder, run:
 
 ::
 	
+	npm install
 	npx webpack --config=webpack.browser.config.js
 	cd build
 	npm install
