@@ -177,36 +177,23 @@ export function setup (options, imports, register)
 	{
 		if (event === 'run')
 		{
-                        if(studio.system.platform() === 'electron')
-                        {
-                                 //ELECTRON
-                        }
-                         else
-                        {
-                             //BROWSER
-                        }
-			}
+                       
+                        console.log(data);
+                        // data[1] - codul
+                        // write pe placa
+
+		}
 		else if(event === 'stop')
 		{
-			if(studio.system.platform() === 'electron')
-                        {
-                                //ELECTRON
-                        }
-                        else
-                        {
-                                //BROWSER
-                        }
+                        
+                        // CTRL+C 
+
 		}
 		else if (event === 'reset')
 		{
-			if(studio.system.platform() === 'electron')
-                        {
-                                 //ELECTRON
-                        }
-                        else
-                        {
-                                //BROWSER
-                        }
+                        
+                        // "PRESS THE RESET BUTTON ON THE BOARD"
+
 		}
 	});
        
@@ -267,7 +254,7 @@ export function setup (options, imports, register)
                                                         device.status = 'CONNECTED';
                                                         updateDevice(device);
                                                         studio.shell.select(device.id);
-                                                        studio.notebook.setStatus (packet.d.l, 'READY');
+                                                        studio.notebook.setStatus (null, 'READY');
 
                                                         studio.console.select (device.id);
 
