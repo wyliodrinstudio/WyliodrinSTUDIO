@@ -181,12 +181,20 @@ export function setup (options, imports, register)
                         console.log(data);
                         // data[1] - codul
                         // write pe placa
+                        let commands = data[1]+"\n\n";
+                        console.log(commands);
+                        ports[id].write(commands);
+
 
 		}
 		else if(event === 'stop')
 		{
                         
-                        // CTRL+C 
+                        // CTRL+C - \x03 (etx)
+
+                        // \x03 (etx) - am gasit pe google ca este CRTL + C
+
+                        port[id].write("\x03");
 
 		}
 		else if (event === 'reset')
