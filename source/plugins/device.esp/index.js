@@ -175,34 +175,24 @@ export function setup (options, imports, register)
 
         studio.notebook.register ((event, ...data) => 
 	{
-		if (event === 'run')
-		{
-                       
-                        console.log(data);
-                        // data[1] - codul
-                        // write pe placa
-                        let commands = data[1]+"\n\n";
-                        console.log(commands);
-                        ports[id].write(commands);
-
-
-		}
-		else if(event === 'stop')
-		{
-                        
-                        // CTRL+C - \x03 (etx)
-
-                        // \x03 (etx) - am gasit pe google ca este CRTL + C
-
-                        port[id].write("\x03");
-
-		}
-		else if (event === 'reset')
-		{
-                        
-                        // "PRESS THE RESET BUTTON ON THE BOARD"
-
-		}
+                let device = studio.workspace.getDevice ();
+                if(device.type === 'esp' && device.status === 'CONNECTED' && ports[device.id])
+                {
+                        if (event === 'run')
+                        {
+                                let commands = data[1]+"\n\n";
+                                ports[device.id].write(Buffer.from(commands));
+                        }
+                        else if(event === 'stop')
+                        {
+                                // "\x03" - CTRL + C
+                                port[device.id].write("\x03");
+                        }
+                        else if (event === 'reset')
+                        {
+                                // "PRESS THE RESET BUTTON ON THE BOARD"
+                        }
+                }
 	});
        
         let device_esp = {
