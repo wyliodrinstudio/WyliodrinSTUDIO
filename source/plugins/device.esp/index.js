@@ -186,7 +186,7 @@ export function setup (options, imports, register)
                         else if(event === 'stop')
                         {
                                 // "\x03" - CTRL + C
-                                port[device.id].write("\x03");
+                                port[device.id].write(Buffer.from("\x03"));
                         }
                         else if (event === 'reset')
                         {
