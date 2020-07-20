@@ -173,6 +173,14 @@ export function setup (options, imports, register)
                 }
         });
 
+        studio.console.register ((event, id, data) =>
+	{
+		if(ports[id])
+                {
+                        ports[id].write(Buffer.from(data+''));
+                }
+	});
+
         studio.notebook.register ((event, ...data) => 
 	{
                 let device = studio.workspace.getDevice ();
@@ -356,6 +364,7 @@ export function setup (options, imports, register)
                 
                         /* Here goes the actual code that will make your device run a project */
                         console.log('Run');
+                        device.runProject();
                         }, 'plugins/device.esp/data/img/icons/run-icon.svg',
 
                 
