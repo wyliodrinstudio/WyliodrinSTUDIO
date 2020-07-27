@@ -84,24 +84,26 @@ export class SerialPort extends EventEmitter {
 			this.reader = this.portConnect.readable.getReader();
 			this.writer = this.portConnect.writable.getWriter();
 			this.emit('connected');
-			// do {
+			do {
 				try
 				{
 					let {done,value} = await this.reader.read();
 					if(done)
 					{
-						//break;
+						break;
 					}
 					else
 					{
 						this.emit ('data', value);
+						console.log(value);
 					}
 				}
 				catch (e)
 				{
+					console.error(e);
 					this.emit ('error', e);
 				}
-			// } while(true);
+			} while(true);
 			//this.emit ('close');
 		}
 	}

@@ -188,8 +188,8 @@ export function setup (options, imports, register)
                 {
                         if (event === 'run')
                         {
-                                let commands = data[1]+"\n\n";
-                                ports[device.id].write(Buffer.from(commands));
+                                let commands = (data[1]+"\n\n").replace(/\r?\n/g, "\r\n");
+                                ports[device.id].write(Buffer.from("\r\x01"));
                         }
                         else if(event === 'stop')
                         {
@@ -272,6 +272,7 @@ export function setup (options, imports, register)
                                                 {
                                                         console.log('data ' +  Buffer.from(data).toString);
                                                         studio.shell.write(device.id, Buffer.from(data).toString());
+                                                        studio.console.write(device.id, Buffer.from(data).toString());
                                                 })
 
                                                 ports[device.id].on('error',(err) => {
@@ -290,7 +291,7 @@ export function setup (options, imports, register)
                                                                         
                                                         device.status = 'DISCONNECTED';
                                                         workspace.updateDevice(device);
-                                                        //studio.console.close();
+                                                        studio.console.close();
                                                         delete connections[device.id];
                                                         delete ports[device.id];
                                                 });
@@ -373,11 +374,12 @@ export function setup (options, imports, register)
                         {
                                 visible () {
                                         let device = studio.workspace.getDevice ();
-                                        return (device.status === 'CONNECTED' && device.connection === 'esp');
+                                        console.log(device);
+                                        return (device.status === 'CONNECTED' && device.type === 'esp');
                                 },
                                 enabled () {
                                         let device = studio.workspace.getDevice ();
-                                        return (device.status === 'CONNECTED' && device.connection === 'esp');
+                                        return (device.status === 'CONNECTED' && device.type === 'esp');
                                 },
                                 type: 'run'
                         });
