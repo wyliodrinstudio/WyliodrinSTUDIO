@@ -10,6 +10,7 @@ import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
 import {SerialPort, loadSerialPort} from './serial.js';
 import serial from './serial.js';
+import enter_raw_repl from './mpy.js';
 import path from 'path';
 
 
@@ -190,11 +191,25 @@ export function setup (options, imports, register)
                         {
                                 let commands = (data[1]+"\n\n").replace(/\r?\n/g, "\r\n");
                                 ports[device.id].write(Buffer.from("\r\x01"));
+
+                                console.log(Buffer.from(commands));
+                                let command_bytes = Buffer.from(commands);
+
+                                for(let i = 0 ; i < command_bytes.length ; i=i+256)
+                                {       
+                                        let subarray_command_bytes = command_bytes.slice(i,Math.min(i+256, command_bytes.length));
+                                        ports[device.id].write(subarray_command_bytes);
+
+                                }
+
+                                ports[device.id].write(Buffer.from("\r\x04"));
+                                ports[device.id].write(Buffer.from("\r\x02"));
+
                         }
                         else if(event === 'stop')
                         {
                                 // "\x03" - CTRL + C
-                                port[device.id].write(Buffer.from("\x03"));
+                                ports[device.id].write(Buffer.from("\x03"));
                         }
                         else if (event === 'reset')
                         {
