@@ -10,7 +10,7 @@ import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
 import {SerialPort, loadSerialPort} from './serial.js';
 import serial from './serial.js';
-import enter_raw_repl from './mpy.js';
+import {RawRepl} from './mpy.js';
 import path from 'path';
 
 
@@ -187,11 +187,16 @@ export function setup (options, imports, register)
                 let device = studio.workspace.getDevice ();
                 if(device.type === 'esp' && device.status === 'CONNECTED' && ports[device.id])
                 {
+                        let raw = new RawRepl();
                         if (event === 'run')
                         {
-                                let commands = (data[1]+"\n\n").replace(/\r?\n/g, "\r\n");
-                                ports[device.id].write(Buffer.from("\r\x01"));
 
+                                let commands = (data[1]+"\n\n").replace(/\r?\n/g, "\r\n");
+                                //ports[device.id].write(Buffer.from("\r\x01"));
+                                raw.writeRawRepl(ports[device.id], commands);
+
+
+                                /*
                                 console.log(Buffer.from(commands));
                                 let command_bytes = Buffer.from(commands);
 
@@ -204,12 +209,14 @@ export function setup (options, imports, register)
 
                                 ports[device.id].write(Buffer.from("\r\x04"));
                                 ports[device.id].write(Buffer.from("\r\x02"));
+                                */
 
                         }
                         else if(event === 'stop')
                         {
                                 // "\x03" - CTRL + C
-                                ports[device.id].write(Buffer.from("\x03"));
+                                // ports[device.id].write(Buffer.from("\x03"));
+                                raw.close(ports[device.id]);
                         }
                         else if (event === 'reset')
                         {
