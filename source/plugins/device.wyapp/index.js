@@ -124,6 +124,9 @@ class Connection extends EventEmitter
 		{
 			// TODO return?
 			this.send ('disc', {a: options.disconnect});
+            setTimeout( () => {
+                this.transport.disconnect ();
+            }, 1000);
 		}
 		else
 		{
