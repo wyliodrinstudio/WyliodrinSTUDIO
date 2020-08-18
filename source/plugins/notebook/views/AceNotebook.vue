@@ -110,82 +110,81 @@ export default {
 		},
 		async importFile(element)
 		{
-			// const options = {
-			// 	title: 'Select file',
-			// 	filters: []
-			// };
-			// let imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg'];
-			// let openPath = dialog.showOpenDialog(null, options);
-			// try
-			// {
-			// 	var fileName = openPath[0].substring(openPath[0].lastIndexOf("\\")+1);
-			// 	var fileType;
-			// 	var fileExtension;
-			// 	let extension = fileName.substring(fileName.lastIndexOf('.'));
-			// 	if(imageExtensions.includes(extension))
-			// 	{
-			// 		fileType = 'image';
-			// 		fileExtension = extension.substring(1);
-			// 		this.editor.insert('!');
-			// 	}
-			// 	else
-			// 	{
-			// 		if(extension === '.html')
-			// 		{
-			// 			fileType = 'text';
-			// 			fileExtension = 'html';
-			// 		}
-			// 		else
-			// 		{
-			// 			fileType = 'application';
-			// 			if(extension === '.json' || extension === '.doc' || extension ==='.docx')
-			// 				fileExtension = 'octet-stream:';
-			// 			else if(extension === '.js')
-			// 				fileExtension = 'javascript:';
-			// 			else
-			// 				fileExtension = extension.substring(1) + ':';
-			// 		}
-			// 	}	
-			// 	try {
-			// 		var encoded = (await studio.filesystem.readFile(openPath[0])).toString ('base64');
-			// 		this.editor.insert('[' + fileName+ ']'+'(data:'+fileType+'/'+fileExtension+';base64,' + encoded + ')');
-			// 	}
-			// 	catch(e)
-			// 	{
-			// 		console.log(e.message);
-			// 	}
-			// }
-			// catch(e)
-			// {
-			// 	this.studio.workspace.showError('NOTEBOOK_SELECT_FILE_ERROR');
-			// 	console.log('Please select a file. ' + e.message);
-			// }
+			const options = {
+				title: 'Select file',
+				filetypes: ['*']
+			};
+			let imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg'];
+			let openPath = await this.studio.filesystem.openImportDialog(options);
+			if (openPath.length > 0) {
+				try
+				{
+					var fileName = path.basename (openPath[0].name);
+					var fileType;
+					var fileExtension;
+					let extension = fileName.substring(fileName.lastIndexOf('.'));
+					if(imageExtensions.includes(extension))
+					{
+						fileType = 'image';
+						fileExtension = extension.substring(1);
+						this.editor.insert('!');
+					}
+					else
+					{
+						if(extension === '.html')
+						{
+							fileType = 'text';
+							fileExtension = 'html';
+						}
+						else
+						{
+							fileType = 'application';
+							if(extension === '.json' || extension === '.doc' || extension ==='.docx')
+								fileExtension = 'octet-stream:';
+							else if(extension === '.js')
+								fileExtension = 'javascript:';
+							else
+								fileExtension = extension.substring(1) + ':';
+						}
+					}	
+					try {
+						var encoded = (await this.studio.filesystem.readImportFile(openPath[0])).toString ('base64');
+						this.editor.insert('[' + fileName+ ']'+'(data:'+fileType+'/'+fileExtension+';base64,' + encoded + ')');
+					}
+					catch(e)
+					{
+						console.log(e.message);
+					}
+				}
+				catch(e)
+				{
+					this.studio.workspace.showError('NOTEBOOK_SELECT_FILE_ERROR');
+					console.log('Please select a file. ' + e.message);
+				}
+			}
 		},
 		async importImage(element)
 		{
-			// const options = {
-			// 	title: 'Select file',
-			// 	filters: ['.jpg', '.jpeg', '.png', '.gif', '.svg']
-			// };
-			// let openPath = dialog.showOpenDialog(null, options);
-			// try
-			// {
-			// 	var fileName = openPath[0].substring(openPath[0].lastIndexOf("\\")+1);
-			// 	try 
-			// 	{
-			// 		var encoded = (await studio.filesystem.readFile(openPath[0])).toString ('base64');
-			// 		this.editor.insert('![' + fileName+ ']'+'(data:image/jpeg;base64,' + encoded + ')');
-			// 	}
-			// 	catch(e)
-			// 	{
-			// 		console.log(e.message);
-			// 	}	
-			// }
-			// catch(e)
-			// {
-			// 	this.studio.workspace.showError('NOTEBOOK_SELECT_IMAGE_ERROR');
-			// 	console.log('Please select an image. ' + e.message);
-			// }
+			const options = {
+				title: 'Select file',
+				filetypes: ['*']
+			};
+			let openPath = await this.studio.filesystem.openImportDialog(options);
+			console.log (openPath);
+			if (openPath.length > 0)
+			{
+				try
+				{
+					var fileName = path.basename (openPath[0].name);
+					var encoded = (await this.studio.filesystem.readImportFile(openPath[0])).toString ('base64');
+					this.editor.insert('![' + fileName+ ']'+'(data:image/jpeg;base64,' + encoded + ')');
+				}
+				catch(e)
+				{
+					this.studio.workspace.showError('NOTEBOOK_SELECT_IMAGE_ERROR');
+					console.log('Please select an image. ' + e.message);
+				}
+			}
 			
 		},
 		addImageLink(element)
