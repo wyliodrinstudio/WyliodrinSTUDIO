@@ -10,7 +10,7 @@ import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
 import {SerialPort, loadSerialPort} from './serial.js';
 import serial from './serial.js';
-import {RawRepl} from './mpy.js';
+import {MicroPython} from './mpy.js';
 import path from 'path';
 
 
@@ -182,41 +182,23 @@ export function setup (options, imports, register)
                 }
 	});
 
-        studio.notebook.register ((event, ...data) => 
+        studio.notebook.register ((event, ...data) =>
 	{
                 let device = studio.workspace.getDevice ();
                 if(device.type === 'esp' && device.status === 'CONNECTED' && ports[device.id])
                 {
-                        let raw = new RawRepl();
+                        let mp = new MicroPython(ports[device.id]); //ports[device.id] = new MP
                         if (event === 'run')
                         {
-
                                 let commands = (data[1]+"\n\n").replace(/\r?\n/g, "\r\n");
-                                //ports[device.id].write(Buffer.from("\r\x01"));
-                                raw.writeRawRepl(ports[device.id], commands);
-
-
-                                /*
-                                console.log(Buffer.from(commands));
-                                let command_bytes = Buffer.from(commands);
-
-                                for(let i = 0 ; i < command_bytes.length ; i=i+256)
-                                {       
-                                        let subarray_command_bytes = command_bytes.slice(i,Math.min(i+256, command_bytes.length));
-                                        ports[device.id].write(subarray_command_bytes);
-
-                                }
-
-                                ports[device.id].write(Buffer.from("\r\x04"));
-                                ports[device.id].write(Buffer.from("\r\x02"));
-                                */
-
+                                mp.enterRawRepl();
+                                mp.writeRawRepl(commands);
+                                studio.notebook.setStatus (null, 'RUNNING');
                         }
                         else if(event === 'stop')
                         {
-                                // "\x03" - CTRL + C
-                                // ports[device.id].write(Buffer.from("\x03"));
-                                raw.close(ports[device.id]);
+                                mp.stop();
+                                studio.notebook.setStatus (null, 'READY');
                         }
                         else if (event === 'reset')
                         {
@@ -273,10 +255,8 @@ export function setup (options, imports, register)
                                                 device.status = 'CONNECTING';
                                                 updateDevices();
 
-                                                ports[device.id] = new SerialPort();
-                                        
-
-                                                ports[device.id].connect(options.port,options.baudrate);
+                                                let mp = new MicroPython(new SerialPort().connect(options.port,options.baudrate));
+                                                ports[device.id]=mp;
 
                                                 ports[device.id].on('connected',()=>{
                                                         device.status = 'CONNECTED';
@@ -287,17 +267,24 @@ export function setup (options, imports, register)
                                                         studio.console.select (device.id);
 
                                                         studio.console.reset();
-                                                        studio.console.show ();                                   
+                                                        studio.console.show (); 
+                                                   
                                                 });
 
-                                                ports[device.id].on('data', (data)=>
+                                                mp.on('data', (data)=>
                                                 {
-                                                        console.log('data ' +  Buffer.from(data).toString);
+                                                        
+                                                        console.log('data ' +  Buffer.from(data).toString().replace(/\n/g, ''));
                                                         studio.shell.write(device.id, Buffer.from(data).toString());
                                                         studio.console.write(device.id, Buffer.from(data).toString());
-                                                })
+                                                        
+                                                });
 
-                                                ports[device.id].on('error',(err) => {
+                                                mp.on('status', (status)=>{
+                                                        console.error("HERE");
+                                                });
+
+                                                mp.on('error',(err) => {
 
                                                         device.status = 'DISCONNECTED';
                                                         updateDevice(device);
@@ -387,7 +374,21 @@ export function setup (options, imports, register)
                 
                         /* Here goes the actual code that will make your device run a project */
                         console.log('Run');
-                        device.runProject();
+
+                        let project = await studio.projects.getCurrentProject();
+
+                        if (project) {
+                                let pySource;
+                                console.log(pySource);
+                                if (project.language === 'python') {
+                                        pySource = await studio.projects.getCurrentFileCode();
+                                        let mp = ports[device.id];
+                                        mp.enterRawRepl();
+                                        mp.writeRawRepl(pySource);
+                                }
+
+                        }
+
                         }, 'plugins/device.esp/data/img/icons/run-icon.svg',
 
                 
