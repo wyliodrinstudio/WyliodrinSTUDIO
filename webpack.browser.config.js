@@ -16,7 +16,7 @@ let items = [{ from: '.ebextensions/**', context: 'source/web', to: '..' }];
 
 for (let plugin of webPlugins)
 {
-	items.push ({ from: 'plugins/'+plugin.folder+'/'+plugin.name+'/package*.json', context: 'source' }, { from: 'plugins/'+plugin.folder+'/'+plugin.name+'/data/**', context: 'source' });
+	items.push ({ from: 'plugins/'+plugin.folder+'/'+plugin.name+'/package*.json', context: 'source' }, { from: 'plugins/'+plugin.folder+'/'+plugin.name+'/data/**', context: 'source', noErrorOnMissing: true });
 }
 
 class StudioPluginsWeb {
@@ -134,7 +134,9 @@ module.exports = env => {
 						{
 							loader: 'less-loader',
 							options: {
-								relativeUrls: false
+								lessOptions: {
+									relativeUrls: false
+								}
 							}
 						}
 					]
@@ -178,15 +180,16 @@ module.exports = env => {
 			new VueLoaderPlugin({
 				esModule: false
 			}),
-			new CopyPlugin([
-				...items,
-				// { from: 'index.html', context: 'source/web' },
-				{ from: 'server.js', context: 'source/web', to: '../' },
-				{ from: 'img/**', context: 'source' },
-				{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
-				{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
-				{ from: 'README.md', context: 'source/web', to: '../' },
-			], {logLevel: ''}),
+			new CopyPlugin({
+				patterns: [
+					...items,
+					// { from: 'index.html', context: 'source/web' },
+					{ from: 'server.js', context: 'source/web', to: '../' },
+					{ from: 'img/**', context: 'source' },
+					{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
+					{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
+					{ from: 'README.md', context: 'source/web', to: '../' },
+				]}),
 			// new DtsBundleWebpack({
 			// 	name: 'plugins',
 			// 	main: 'source/plugins/**/*.d.ts',

@@ -7,6 +7,8 @@ const isDev = require ('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 
+app.allowRendererProcessReuse = false;
+
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 function sendStatusToWindow(text) {

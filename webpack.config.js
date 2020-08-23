@@ -18,7 +18,7 @@ let electronPlugins = plugins.loadPlugins('electron');
 let items = [];
 
 for (let plugin of electronPlugins) {
-	items.push({ from: 'plugins/' + plugin.folder + '/' + plugin.name + '/package*.json', context: 'source' }, { from: 'plugins/' + plugin.folder + '/' + plugin.name + '/data/**', context: 'source' });
+	items.push({ from: 'plugins/' + plugin.folder + '/' + plugin.name + '/package*.json', context: 'source' }, { from: 'plugins/' + plugin.folder + '/' + plugin.name + '/data/**', context: 'source', noErrorOnMissing: true });
 }
 
 class StudioPluginsElectron {
@@ -103,7 +103,9 @@ module.exports = env => {
 						{
 							loader: 'less-loader',
 							options: {
-								relativeUrls: false
+								lessOptions: {
+									relativeUrls: false
+								}
 							}
 						}
 					]
@@ -150,17 +152,18 @@ module.exports = env => {
 			new VueLoaderPlugin({
 				esModule: false
 			}),
-			new CopyPlugin([
-				...items,
-				{ from: '*.js', context: 'source' },
-				// { from: '../package.json', context: 'source' },
-				{ from: 'index.html', context: 'source' },
-				{ from: 'img/**', context: 'source' },
-				{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
-				//{ from: 'iconfont/**', context: 'node_modules/material-design-icons/' },
-				{ from: 'fonts/**', context: 'node_modules/@mdi/font/' },
-				{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
-			], { logLevel: '' }),
+			new CopyPlugin({
+				patterns: [
+					...items,
+					{ from: '*.js', context: 'source' },
+					// { from: '../package.json', context: 'source' },
+					{ from: 'index.html', context: 'source' },
+					{ from: 'img/**', context: 'source' },
+					{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
+					//{ from: 'iconfont/**', context: 'node_modules/material-design-icons/' },
+					{ from: 'fonts/**', context: 'node_modules/@mdi/font/' },
+					{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
+				]}),
 			// new DtsBundleWebpack({
 			// 	name: 'plugins',
 			// 	main: 'source/plugins/**/*.d.ts',
