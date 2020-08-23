@@ -44,8 +44,8 @@ module.exports.loadPlugins = (target) =>
 
 	if (target !== latestTarget)
 	{
-		// console.log ('Fixing monaco (temporary)');
-		// fs.removeSync ('./node_modules/vue-monaco/node_modules');
+		console.log ('Fixing monaco (vue-monaco imports it two times)');
+		fs.removeSync ('./node_modules/vue-monaco/node_modules');
 		latestTarget = target;
 		plugins = [];
 		loadPluginsFolder ('');

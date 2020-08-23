@@ -1,7 +1,14 @@
 var replacer = require('./replacer');
 
 var textCache = {
-	default: require ('raw-loader!./default.cow').default
+	default: `$the_cow = <<"EOC";
+        $thoughts   ^__^
+         $thoughts  ($eyes)\\_______
+            (__)\\       )\\/\\
+             $tongue ||----w |
+                ||     ||
+EOC
+`
 };
 
 exports.get = function (cow) {

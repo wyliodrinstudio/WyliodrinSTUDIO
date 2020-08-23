@@ -1,7 +1,7 @@
 const path = require ('path');
 const architect = require ('./architect');
 const ipcRenderer = require ('electron').ipcRenderer;
-const cowsay = require ('cowsay');
+const cowsay = require ('./cowsay');
 const jokesData = require ('./itjokes.js');
 
 function getRandomInt(max) {

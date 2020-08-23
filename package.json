@@ -166,7 +166,6 @@
 	"dependencies": {
 		"aedes": "^0.42.5",
 		"bonjour-hap": "^3.5.4",
-		"cowsay": "^1.4.0",
 		"drivelist": "^8.0.6",
 		"electron-is-dev": "^1.1.0",
 		"electron-log": "^3.0.9",

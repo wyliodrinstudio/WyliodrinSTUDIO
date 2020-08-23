@@ -1,6 +1,6 @@
 let architect = require ('./../architect.js');
 let plugins = require ('./plugins.js');
-const cowsay = require ('./cowsay');
+const cowsay = require ('./../cowsay');
 const jokesData = require ('./../itjokes.js');
 
 function getRandomInt(max) {

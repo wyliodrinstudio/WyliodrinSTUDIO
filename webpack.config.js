@@ -156,6 +156,7 @@ module.exports = env => {
 				patterns: [
 					...items,
 					{ from: '*.js', context: 'source' },
+					{ from: 'cowsay/**', context: 'source' },
 					// { from: '../package.json', context: 'source' },
 					{ from: 'index.html', context: 'source' },
 					{ from: 'img/**', context: 'source' },
