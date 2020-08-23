@@ -106,7 +106,7 @@
 		"vue-template-compiler": "^2.6.10",
 		"vue2-ace-editor": "0.0.13",
 		"vue2-highcharts": "^1.2.5",
-		"vuedl": "^0.3.4",
+		"vuedl": "0.3.4",
 		"vuetify": "2.0.3",
 		"vuetify-dialog": "^0.3.6",
 		"vuex": "^3.1.0",
