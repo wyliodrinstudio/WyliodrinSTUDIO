@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import ReconnectingWebSocket from 'reconnectingwebsocket';
-import uuid from 'uuid';
+import { v4 } from 'uuid';
 import DeviceSetup from './views/DeviceSetup.vue';
 import _ from 'lodash';
 import validator from 'validator';
@@ -113,7 +113,7 @@ export function setup (options, imports, register)
 	workspace = imports.workspace;
 
 	// TODO store token
-	let newtoken = uuid.v4 ();
+	let newtoken = v4 ();
 	let token = settings.loadValue ('device.wyapp.websocket', 'userid', newtoken);
 	if (token === newtoken) settings.storeValue ('device.wyapp.websocket', 'userid', token);
 

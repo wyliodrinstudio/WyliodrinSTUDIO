@@ -17,13 +17,13 @@ function checkConfig(config, lookup) {
 	config.forEach(function (plugin) {
 		if (plugin.checked) { return; }
 		if (!Object.prototype.hasOwnProperty.call (plugin, 'setup')) {
-			throw new Error('Plugin is missing the setup function ' + JSON.stringify(plugin));
+			throw new Error('Plugin is missing the setup function ' + JSON.stringify(plugin.folder+'/'+plugin.name));
 		}
 		if (!Object.prototype.hasOwnProperty.call (plugin, 'provides')) {
-			throw new Error('Plugin is missing the provides array ' + JSON.stringify(plugin));
+			throw new Error('Plugin is missing the provides array ' + JSON.stringify(plugin.folder+'/'+plugin.name));
 		}
 		if (!Object.prototype.hasOwnProperty.call (plugin, 'consumes')) {
-			throw new Error('Plugin is missing the consumes array ' + JSON.stringify(plugin));
+			throw new Error('Plugin is missing the consumes array ' + JSON.stringify(plugin.folder+'/'+plugin.name));
 		}
 	});
 

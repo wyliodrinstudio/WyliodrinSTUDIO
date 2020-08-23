@@ -22,10 +22,7 @@
 
 <script>
 import path from "path";
-import fs from "fs-extra";
-import Vue from "vue";
-import VueResource from "vue-resource";
-Vue.use(VueResource);
+import axios from 'axios';
 
 export default {
 	name: 'SendFeedback',
@@ -50,24 +47,25 @@ export default {
 		cancel() {
 			this.$root.$emit('submit');
 		},
-		prepareMessage() {
+		async prepareMessage() {
 			this.dataToSend = {
 				image: this.data.toString ('base64'),
 				feedbackMessage: this.feedback,
 			};
 
 			console.log(this.dataToSend);
-			Vue.http.post('http://localhost:3000/', this.dataToSend).then(
-				response => {
-					console.log(response);
-				}, response => {
-					console.log("failed");
-				}
-			);
+			// await axios.request ({url: 'plugins/'+pluginName+'/data/'+filename, responseType: 'arraybuffer', method: 'get'})).data
+			// Vue.http.post('http://localhost:3000/', this.dataToSend).then(
+			// 	response => {
+			// 		console.log(response);
+			// 	}, response => {
+			// 		console.log("failed");
+			// 	}
+			// );
 		},
 		async readFile() {
-			this.data = await fs.readFile(this.completePath);
-			console.log("data e gata");
+			// this.data = await fs.readFile(this.completePath);
+			// console.log("data e gata");
 		}
   }
 };

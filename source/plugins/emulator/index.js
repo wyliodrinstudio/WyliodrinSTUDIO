@@ -1,10 +1,9 @@
 import EmulatorSetup from './views/EmulatorSetup.vue';
 import emulatorStore from './store';
-import uuid from 'uuid';
+import { v4 } from 'uuid';
 import fs from 'fs-extra';
 import kill from 'tree-kill';
-import request from 'request';
-import progress from 'request-progress';
+import axios from 'axios';
 import unzipper from 'unzipper';
 import path from 'path'; 
 
@@ -69,7 +68,7 @@ let emulator = {
 
 		for(let image of images)
 		{
-			image.id = uuid.v4();
+			image.id = v4();
 
 			imageTypeFolder = path.join(imagesFolder, image.type);
 			image.dataFolder = imageTypeFolder;
@@ -221,7 +220,7 @@ let emulator = {
 				}
 				emulatorPort = Math.floor(Math.random() * (10000 - 1024)) + 1024;
 
-				this.registerEmulator(emulatorName, uuid.v4(), imageRunning.type, 'pi', 'raspberry', runningEmulatorImage, emulatorPort, currentlyRunningFolder, imageRunning.icon, imageRunning.qemu);
+				this.registerEmulator(emulatorName, v4(), imageRunning.type, 'pi', 'raspberry', runningEmulatorImage, emulatorPort, currentlyRunningFolder, imageRunning.icon, imageRunning.qemu);
 
 				fs.writeFileSync(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
 							
@@ -335,7 +334,18 @@ let emulator = {
 		if(image) {
 			await studio.filesystem.mkdirp(path.join(imagesFolder, image.type));
 			
-			let download = progress(request(image.download));
+			let download = await axios.request ({
+				url: image.download,
+				method: 'GET',
+				responseType: 'stream',
+				onDownloadProgress: (progressEvent) => {
+					var percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+					studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: percent});
+				},
+			  });
+
+			  console.log ('downloading');
+
 			downloadingImages[image.type] = download;
 			
 			try {
@@ -343,18 +353,11 @@ let emulator = {
 			} catch(e) {
 				this.studio.workspace.showError('EMULATOR_DOWNLOAD_ERROR' + {extra: e.message});
 			}
-			try{
-				download.on('progress', (progress) => {
-					let percent = (progress.percent * 100).toFixed(2);
-					studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: percent});
-				});
-			} catch(e) {
-				this.studio.workspace.showError('EMULATOR_PROGRESS_ERROR' + {extra: e.message});
-			}
-			download.on ('abort', () => {
+			
+			download.data.on ('abort', () => {
 				download.__aborted = true;
 			});
-			download.on('end', async () => {
+			download.data.on('end', async () => {
 				if (!download.__aborted)
 				{			
 					try{

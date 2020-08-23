@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import uuid from 'uuid';
+import { v4 } from 'uuid';
 import marked from 'marked';
 import AceNotebook from './AceNotebook.vue';
 import { mapGetters } from 'vuex';
@@ -210,7 +210,7 @@ export default {
 		return {
 			elements: [
 			
-				{ id: uuid.v4(), type: 'markdown',editable: false,data: '# New Item', code: '', error: '', result:''},
+				{ id: v4(), type: 'markdown',editable: false,data: '# New Item', code: '', error: '', result:''},
 			],
 			nextId : 0,
 			visibleId: '',
@@ -256,14 +256,14 @@ export default {
 					} 
 					else
 					{
-						this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
+						this.elements = [{ id: v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
 					}
 					if (this.elements.length === 0) 
-						this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
+						this.elements = [{ id: v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
 				}
 				else
 				{
-					this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
+					this.elements = [{ id: v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
 				}				
 			},
 		},
@@ -301,7 +301,7 @@ export default {
 			);
 			if (value === 'yes')
 			{
-				this.elements = [{ id: uuid.v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
+				this.elements = [{ id: v4(), type: 'markdown',editable: false, data: '# Steps to build a project', code: '', error: '', result: ''}];
 				if (this.currentProject)
 				{
 					this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
@@ -376,7 +376,7 @@ export default {
 		{
 			this.elements.push(
 				{
-					id: uuid.v4 (), 
+					id: v4 (), 
 					type: 'markdown',
 					editable: false,
 					data: '# New Item',

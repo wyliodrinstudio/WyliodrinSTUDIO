@@ -35,6 +35,3 @@ export default {
 };
 </script>
 
-<style lang="less">
-@import '../../../../../node_modules/xterm/dist/xterm.css';
-</style>

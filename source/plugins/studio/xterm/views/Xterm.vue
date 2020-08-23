@@ -36,45 +36,43 @@
 <script>
 
 var $ = require ('jquery');
-var xterm = require ('xterm');
+import { Terminal } from 'xterm';
+import { FitAddon } from 'xterm-addon-fit';
 
-// var fit = require ('xterm/lib/addons/fit/fit');
-// xterm.Terminal.applyAddon (fit);
+// xterm.Terminal.prototype.proposeGeometry = function () {
+//     if (!this.element.parentElement) {
+//         return null;
+// 	}
+//     var parentElementStyle = window.getComputedStyle(this.element.parentElement);
+//     var parentElementHeight = parseInt(parentElementStyle.getPropertyValue('height'));
+//     var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')));
+//     var elementStyle = window.getComputedStyle(this.element);
+//     var elementPadding = {
+//         top: parseInt(elementStyle.getPropertyValue('padding-top')),
+//         bottom: parseInt(elementStyle.getPropertyValue('padding-bottom')),
+//         right: parseInt(elementStyle.getPropertyValue('padding-right')),
+//         left: parseInt(elementStyle.getPropertyValue('padding-left'))
+//     };
+//     var elementPaddingVer = elementPadding.top + elementPadding.bottom;
+//     var elementPaddingHor = elementPadding.right + elementPadding.left;
+//     var availableHeight = parentElementHeight - elementPaddingVer;
+//     var availableWidth = parentElementWidth - elementPaddingHor - this._core.viewport.scrollBarWidth;
+//     var geometry = {
+//         cols: Math.floor(availableWidth / (this._core._renderCoordinator.dimensions.actualCellWidth || 9)),
+//         rows: Math.floor(availableHeight / (this._core._renderCoordinator.dimensions.actualCellHeight || 17))
+//     };
+//     return geometry;
+// };
 
-xterm.Terminal.prototype.proposeGeometry = function () {
-    if (!this.element.parentElement) {
-        return null;
-	}
-    var parentElementStyle = window.getComputedStyle(this.element.parentElement);
-    var parentElementHeight = parseInt(parentElementStyle.getPropertyValue('height'));
-    var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')));
-    var elementStyle = window.getComputedStyle(this.element);
-    var elementPadding = {
-        top: parseInt(elementStyle.getPropertyValue('padding-top')),
-        bottom: parseInt(elementStyle.getPropertyValue('padding-bottom')),
-        right: parseInt(elementStyle.getPropertyValue('padding-right')),
-        left: parseInt(elementStyle.getPropertyValue('padding-left'))
-    };
-    var elementPaddingVer = elementPadding.top + elementPadding.bottom;
-    var elementPaddingHor = elementPadding.right + elementPadding.left;
-    var availableHeight = parentElementHeight - elementPaddingVer;
-    var availableWidth = parentElementWidth - elementPaddingHor - this._core.viewport.scrollBarWidth;
-    var geometry = {
-        cols: Math.floor(availableWidth / (this._core._renderCoordinator.dimensions.actualCellWidth || 9)),
-        rows: Math.floor(availableHeight / (this._core._renderCoordinator.dimensions.actualCellHeight || 17))
-    };
-    return geometry;
-};
-
-xterm.Terminal.prototype.fit = function () {
-    var geometry = this.proposeGeometry();
-    if (geometry) {
-        if (this.rows !== geometry.rows || this.cols !== geometry.cols) {
-            this._core._renderCoordinator.clear();
-            this.resize(geometry.cols, geometry.rows);
-        }
-    }
-}
+// xterm.Terminal.prototype.fit = function () {
+//     var geometry = this.proposeGeometry();
+//     if (geometry) {
+//         if (this.rows !== geometry.rows || this.cols !== geometry.cols) {
+//             this._core._renderCoordinator.clear();
+//             this.resize(geometry.cols, geometry.rows);
+//         }
+//     }
+// }
 
 export default {
 	name: 'Xterm',
@@ -83,6 +81,7 @@ export default {
 	{
 		return {
 			shell: null,
+			fitAddon: null,
 			id: null,
 			currentTerminalTitle: '',
 			buffers: {
@@ -99,12 +98,15 @@ export default {
 	methods: {
 		start ()
 		{
-			let shell = new xterm.Terminal ({cols: 80, rows: 24});
+			let shell = new Terminal ({cols: 80, rows: 24});
+			let fitAddon = new FitAddon();
+			shell.loadAddon (fitAddon);
 			this.shell = shell;
+			this.fitAddon = fitAddon;
 			shell.open (this.$refs.shell);
 			$(window).resize(this.resize);
 			this.update ();
-			shell.on('title', (title) => {
+			shell.onTitleChange((title) => {
 				try
 				{
 					if (this.id)
@@ -120,7 +122,7 @@ export default {
 				}
 				
 			});
-			shell.on ('data', (data) =>{
+			shell.onData ((data) =>{
 				if (this.id !== null)
 				{
 					this.$emit ('data', this.id, data);
@@ -143,8 +145,8 @@ export default {
 					this.buffers[this.id] = {
 						title: this.shell.title,
 						data: this.shell.getSelection (),
-						x: this.shell.buffer.cursorX,
-						y: this.shell.buffer.cursorY,
+						x: this.shell.buffer.active.cursorX,
+						y: this.shell.buffer.active.cursorY,
 						// title: (this.buffers[this.id]?this.buffers[this.id].title:'')
 					};
 				}
@@ -183,12 +185,12 @@ export default {
 				this.shouldResize = false;
 				if (this.shell)
 				{
-					let geometry = this.shell.proposeGeometry ();
-					if (geometry.rows !== Infinity && geometry.rows > 0 && geometry.cols > 0)
-					{
-						this.shell.fit ();
+					// let geometry = this.shell.proposeGeometry ();
+					// if (geometry.rows !== Infinity && geometry.rows > 0 && geometry.cols > 0)
+					// {
+						this.fitAddon.fit ();
 						this.$emit ('resize', this.id, this.shell.cols, this.shell.rows);
-					}
+					// }
 				}
 			}
 		},
@@ -223,5 +225,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '../../../../../node_modules/xterm/dist/xterm.css';
+@import '../../../../../node_modules/xterm/css/xterm.css';
 </style>

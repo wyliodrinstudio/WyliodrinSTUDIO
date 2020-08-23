@@ -46,7 +46,7 @@
 	</div>
 </template>
 <script>
-import uuid from 'uuid';
+import { v4 } from 'uuid';
 import { mapGetters } from 'vuex';
 import _ from 'lodash';
 
@@ -127,7 +127,7 @@ export default {
 		async addSignal (graph)
 		{
 			let signal = {
-				id: uuid.v4(),
+				id: v4(),
 				component: graph.component,
 				setup: graph.setup,
 				data: {}
