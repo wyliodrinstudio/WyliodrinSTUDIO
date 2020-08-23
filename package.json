@@ -167,8 +167,6 @@
 	},
 	"dependencies": {
 		"aedes": "^0.39.0",
-		"architect": "^0.1.13",
-		"archiver": "^3.0.0",
 		"bonjour-hap": "^3.5.4",
 		"cowsay": "^1.4.0",
 		"drivelist": "^8.0.6",
@@ -180,13 +178,10 @@
 		"irc-upd": "^0.10.0",
 		"material-design-icons": "^3.0.1",
 		"material-icons": "^0.3.1",
-		"node-notifier": "^5.4.0",
 		"request-progress": "^3.0.0",
 		"serialport": "^9.0.1",
 		"ssh2": "^0.8.9",
 		"tree-kill": "^1.2.1",
-		"unzipper": "^0.10.5",
-		"vue-filereader": "^0.1.1",
-		"zlib": "^1.0.5"
+		"unzipper": "^0.10.5"
 	}
 }
