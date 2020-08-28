@@ -6,15 +6,33 @@ export const STATUS_READY = 'ready';
 export const STATUS_REPL_REQ = 'repl_req';
 export const STATUS_REPL = 'repl';
 export const STATUS_RUNNING = 'running';
+export const STATUS_OFFLINE = 'offline';
 
 
 export class MicroPython extends EventEmitter {
 	constructor(port){
 		super();
 		this.port = port;
-		this.setStatus(STATUS_READY);
+		this.data;
+		this.setStatus(STATUS_OFFLINE);
+		port.on('connected', ()=>{
+			this.emit('connected');
+			this.setStatus(STATUS_READY);
+		});
 		port.on('data', (data)=>{
-			this.emit('data', data);
+			this.data = this.data+Buffer.from(data).toString();
+			if(this.status === STATUS_REPL_REQ && this.data.endsWith('raw REPL; CTRL-B to exit\r\n>'))
+			{
+				console.log('OK');
+				//Am facut emitul pentru a scrie pe ESP atunci cand a intrat sigur in Raw Repl
+				this.emit('readyrepl');
+			}
+			else
+			{
+				this.emit('data', data);
+			}
+			
+			
 		});
 		port.on('error', (err)=>{
 			this.emit('error', err);
@@ -24,7 +42,12 @@ export class MicroPython extends EventEmitter {
 	async enterRawRepl()
 	{
 		await this.port.write(Buffer.from("\r\x01"));
-		this.setStatus(STATUS_REPL_REQ);
+		await this.setStatus(STATUS_REPL_REQ);
+	}
+
+	write(data)
+	{
+		this.port.write(data);
 	}
 
 	async writeRawRepl(commands){
@@ -50,15 +73,22 @@ export class MicroPython extends EventEmitter {
 	setStatus(status)
 	{
 		this.status = status;
-		console.log(status);
-		console.log(this);
-		this.emit('data', status);
+		this.emit('status', status);
+	}
+
+	getStatus()
+	{
+		return this.status;
+	}
+
+	getPort()
+	{
+		return this.port;
 	}
 
 	async stop()
 	{
-		await this.port.write(Buffer.from("\r\x02"));
-		this.port.write(Buffer.from("\r\x03"));
+		await this.port.write(Buffer.from("\r\x03"));
 		this.setStatus(STATUS_READY);
 	}
 

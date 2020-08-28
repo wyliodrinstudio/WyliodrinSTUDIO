@@ -10,7 +10,7 @@ import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
 import {SerialPort, loadSerialPort} from './serial.js';
 import serial from './serial.js';
-import {MicroPython} from './mpy.js';
+import {MicroPython, STATUS_RUNNING, STATUS_READY, STATUS_OFFLINE, STATUS_REPL_REQ} from './mpy.js';
 import path from 'path';
 
 
@@ -255,11 +255,15 @@ export function setup (options, imports, register)
                                                 device.status = 'CONNECTING';
                                                 updateDevices();
 
-                                                let mp = new MicroPython(new SerialPort().connect(options.port,options.baudrate));
+                                                let port = new SerialPort();
+                                                let sts;
+
+                                                let mp = new MicroPython(port);
                                                 ports[device.id]=mp;
 
                                                 ports[device.id].on('connected',()=>{
                                                         device.status = 'CONNECTED';
+                                                        device.running = false;
                                                         updateDevice(device);
                                                         studio.shell.select(device.id);
                                                         studio.notebook.setStatus (null, 'READY');
@@ -267,21 +271,22 @@ export function setup (options, imports, register)
                                                         studio.console.select (device.id);
 
                                                         studio.console.reset();
-                                                        studio.console.show (); 
+                                                        studio.console.show ();
                                                    
+                                                });
+
+                                                mp.on('status', (status)=>{
+                                                        sts = status;
+                                                        console.log('STATUS: '+sts);
                                                 });
 
                                                 mp.on('data', (data)=>
                                                 {
-                                                        
-                                                        console.log('data ' +  Buffer.from(data).toString().replace(/\n/g, ''));
-                                                        studio.shell.write(device.id, Buffer.from(data).toString());
-                                                        studio.console.write(device.id, Buffer.from(data).toString());
-                                                        
-                                                });
-
-                                                mp.on('status', (status)=>{
-                                                        console.error("HERE");
+                                                        if(sts === STATUS_READY || sts === STATUS_RUNNING)
+                                                        {
+                                                                studio.shell.write(device.id, Buffer.from(data).toString());
+                                                                studio.console.write(device.id, Buffer.from(data).toString());
+                                                        }
                                                 });
 
                                                 mp.on('error',(err) => {
@@ -305,7 +310,7 @@ export function setup (options, imports, register)
                                                         delete ports[device.id];
                                                 });
 
-                                        
+                                                port.connect(options.port,options.baudrate);
                                                 
                                         }
                                         
@@ -325,6 +330,8 @@ export function setup (options, imports, register)
                 disconnect(device, options)
                 {
                         /* Here goes the actual code that you will write in order to connect the device. */
+
+                        let mp = ports[device.id];
                         
                         if (studio.system.platform () === 'electron')
                         {
@@ -350,12 +357,14 @@ export function setup (options, imports, register)
                                 //BROWSER
                                 if(device)
                                 {
-                                        ports[device.id].close();
+                                        //ports[device.id].close();
+                                        mp.getPort().close();
                                 }
                                 device.status = 'DISCONNECTED';
                                 updateDevice(device);
                                 studio.console.reset();                     
-                                delete connections[device.id];
+                                //delete connections[device.id];
+                                delete connections[mp.getPort()];
                         }
                         
                         setTimeout(() => {
@@ -370,7 +379,7 @@ export function setup (options, imports, register)
                 
         if(workspace){
                 workspace.registerDeviceToolButton('DEVICE_ESP_RUN', 10, async () => {
-                        let device = studio.workspace.getDevice ();
+                        let device = studio.workspace.getDevice();
                 
                         /* Here goes the actual code that will make your device run a project */
                         console.log('Run');
@@ -379,12 +388,17 @@ export function setup (options, imports, register)
 
                         if (project) {
                                 let pySource;
-                                console.log(pySource);
                                 if (project.language === 'python') {
                                         pySource = await studio.projects.getCurrentFileCode();
                                         let mp = ports[device.id];
-                                        mp.enterRawRepl();
-                                        mp.writeRawRepl(pySource);
+                                        await mp.enterRawRepl();
+                                        //mp.writeRawRepl(pySource);
+
+                                        mp.on('readyrepl', ()=>{
+                                                mp.writeRawRepl(pySource);
+                                                device.running = true;
+                                                updateDevice(device);
+                                        });
                                 }
 
                         }
@@ -402,39 +416,79 @@ export function setup (options, imports, register)
                                 },
                                 enabled () {
                                         let device = studio.workspace.getDevice ();
-                                        return (device.status === 'CONNECTED' && device.type === 'esp');
+                                        return (device.status === 'CONNECTED' && device.type === 'esp' && device.running === false);
                                 },
                                 type: 'run'
                         });
 
-                        if (studio.system.platform () === 'electron')
-                        {
-                                //ELECTRON
+                
 
-                                //searchSerialDevices();
+                workspace.registerDeviceToolButton('DEVICE_ESP_STOP', 10, async () => {
+                        let device = studio.workspace.getDevice();
+                        
+                        /* Here goes the actual code that will make your device stop a project */
+        
+                        let project = await studio.projects.getCurrentProject();
+        
+                        if (project) {
+                                if (project.language === 'python') {
+                                        let mp = ports[device.id];
+                                        await mp.stop();
+                                        device.running = false;
+                                        updateDevice(device);
+                                }
+        
                         }
-                        else
+        
+                        }, 'plugins/device.esp/data/img/icons/run-icon.svg',
+        
+                        
+                        /* The aditional options that make the Run Button visible and enabled only if there is a connected device
+                        and its type is "awesome" */
                         {
-                                //BROWSER
+                                visible () {
+                                        let device = studio.workspace.getDevice ();
+                                        console.log(device);
+                                        return (device.status === 'CONNECTED' && device.type === 'esp');
+                                },
+                                enabled () {
+                                        let device = studio.workspace.getDevice ();
+                                        return (device.status === 'CONNECTED' && device.type === 'esp' && device.running === true);
+                                },
+                                type: 'stop'
+                        });        
+                
 
-                                devices = [
-                                        {
-                                                id: 'esp:web',
-                                                address: '',
-                                                name: 'ESP 8266',
-                                                board: 'any',
-                                                connection: 'web-usb',
-                                                priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
-                                                placeholder: true
-                                        }
-                                ];
-                                updateDevices();
 
-                        }
 
-                        register(null, {
-                                device_esp
-                        });
+                if (studio.system.platform () === 'electron')
+                {
+                        //ELECTRON
+
+                        //searchSerialDevices();
+                }
+                else
+                {
+                        //BROWSER
+
+                        devices = [
+                                {
+                                        id: 'esp:web',
+                                        address: '',
+                                        name: 'ESP 8266',
+                                        board: 'any',
+                                        connection: 'web-usb',
+                                        priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
+                                        placeholder: true,
+                                }
+                        ];
+                        updateDevices();
+
+                }
+
+                register(null, {
+                        device_esp
+                });
    
                 
         }

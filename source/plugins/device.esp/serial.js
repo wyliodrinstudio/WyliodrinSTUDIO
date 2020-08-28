@@ -116,7 +116,7 @@ export class SerialPort extends EventEmitter {
 		else
 		{
 			if (this.writer) {
-				return this.writer.write (data);
+				return this.writer.write(data);
 			}
 		}
 	}
