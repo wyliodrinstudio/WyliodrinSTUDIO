@@ -141,7 +141,7 @@ export default function setup(options, imports, register) {
 				}
 			}
 		} catch(e) {
-			console.log(e);
+			studio.showError ('DEVICE_SIMULATOR_RASPBERRY_PI_RUN_ERROR', {error: e.message});
 		}
 	}, 'plugins/simulators/raspberrypi/data/img/icons/run-icon.svg', {
 		visible() {

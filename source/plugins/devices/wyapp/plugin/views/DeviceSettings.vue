@@ -43,6 +43,6 @@ export default {
 			this.$root.$emit ('submit', this.name);
 		},
 	}
-}
+};
 </script>
 

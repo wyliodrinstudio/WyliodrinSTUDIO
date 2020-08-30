@@ -5,7 +5,6 @@
 </template>
 <script>
 
-import path from 'path';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -26,7 +25,7 @@ export default {
 	},
 	methods: {
 	}
-}
+};
 </script>
 
 <style lang="less" scoped>

@@ -116,7 +116,7 @@ export default {
 	data () {
 		return {
 			active: 0
-		}
+		};
 	},
 	computed: {
 		...mapGetters ({
@@ -129,7 +129,6 @@ export default {
 			return true;
 		},
 		runningEmulatorsArray() {
-			console.log(this.runningEmulators);
 			let array = [];
 			for(let emulatorName in this.runningEmulators) {
 				array.push(this.runningEmulators[emulatorName]);
@@ -142,11 +141,11 @@ export default {
 		{
 			this.studio.emulator.downloadImage(image);
 		},
-		async runEmulator(type)
+		runEmulator(type)
 		{
 			this.studio.emulator.runEmulator(type);
 		},
-		async deleteImage(image)
+		deleteImage(image)
 		{
 			this.studio.emulator.deleteImage(image);
 		},
@@ -179,5 +178,5 @@ export default {
 		}
 		
 	}
-}
+};
 </script>

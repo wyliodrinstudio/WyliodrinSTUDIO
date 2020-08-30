@@ -32,9 +32,7 @@ let device_simulator_rpk = {
 	},
 
 	disconnect(device) {
-		console.log('check already disconnected');
 		if (simulator.connected === true) {
-			console.log('check object');
 			if (_.isObject(device)) {
 				simulator.run = false;
 				device.status = 'DISCONNECTED';

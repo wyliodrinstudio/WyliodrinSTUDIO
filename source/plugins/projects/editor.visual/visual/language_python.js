@@ -220,7 +220,6 @@ module.exports = function (blockly) {
 
 
 	Blockly.Python['dicts_create_with'] = function (block) {
-		var value_keys = Blockly.Python.valueToCode(block, 'keys', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = new Array(block.itemCount_);
 

@@ -1,3 +1,4 @@
+/* eslint no-console: ["warn", { allow: ["warn", "error"] }] */
 import os from 'os';
 import fs from 'fs-extra';
 import path from 'path';
@@ -26,7 +27,7 @@ let filesystem_real = {
 		}
 		catch (e)
 		{
-			console.log (e.message);
+			console.error (e.message);
 		}
 		return settingsFolder;
 	},
@@ -118,7 +119,6 @@ let filesystem_real = {
 	 */
 	loadDataFile (pluginName, filename)
 	{
-		console.log (path.join (__dirname, '..', pluginName, 'data', filename));
 		return fs.readFile (path.join (__dirname, '..', pluginName, 'data', filename));
 	},
 	

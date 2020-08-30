@@ -537,7 +537,8 @@ let projects = {
 					return false;
 				}
 			} catch(e) {
-				console.error(e);
+
+				// TODO show notification				studio.error(e);
 				return false;
 			}
 			
@@ -671,7 +672,8 @@ let projects = {
 			}
 			return true;
 		} catch(e) {
-			console.error(e);
+
+			// TODO show notification			studio.error(e);
 		}  
 	},
 	/**
@@ -875,7 +877,8 @@ let projects = {
 				await studio.filesystem.writeFile(savePath, content);
 			}
 		} catch (e) {
-			console.error(e);
+			// TODO show notification
+			studio.error(e);
 		}
 		
 	},
@@ -895,7 +898,8 @@ let projects = {
 				await studio.filesystem.writeFile(savePath,data);
 			}
 		} catch (e) {
-			console.error(e);
+			// TODO show notification
+			studio.error(e);
 		}
 	},
 	/**
@@ -1331,7 +1335,8 @@ let projects = {
 			try {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
-				console.error(e);
+				// TODO show notification
+				studio.error(e);
 			}
 			let specialFile = path.join(specialFolder, (name));
 			try {
@@ -1367,7 +1372,8 @@ let projects = {
 			try {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
-				console.error(e);
+				// TODO show notification
+				studio.error(e);
 			}
 			let specialFile = path.join(specialFolder, name);
 			try {
@@ -1394,7 +1400,8 @@ let projects = {
 			try {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
-				console.error(e);
+				// TODO show notification
+				studio.error(e);
 			}
 			let specialFile = path.join(specialFolder, (name));
 			try {
@@ -1416,7 +1423,8 @@ let projects = {
 			try {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
-				console.error(e);
+				// TODO show notification
+				studio.error(e);
 			}
 			let specialFile = path.join(specialFolder, 'schematic.svg');
 			try {
@@ -1442,7 +1450,8 @@ let projects = {
 			try {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
-				console.error(e);
+				// TODO show notification
+				studio.error(e);
 			}
 			let specialFile = path.join(specialFolder, 'schematic.svg');
 			try {
@@ -1494,7 +1503,7 @@ let projects = {
 				if (isRoot) return items[0];
 				else return items;
 			} catch(e){
-				console.error(e.message);
+				studio.error(e.message);
 			}
 		} else {
 			studio.workspace.warn('PROJECT_NULL');

@@ -58,63 +58,63 @@ function updateDevices ()
 
 class SerialWyAppTransport extends EventEmitter
 {
-    /**
+	/**
      *
      * @param {Device} device
      * @param {SerialDeviceOptions} options
      */
-    constructor (device, options, autoconnect = true)
-    {
-        super ();
-        this.device = device;
-        this.baudrate = parseInt(options.baudrate);
-        this.port = options.port;
-        this.serial = null;
-        if (autoconnect)
-        {
-            process.nextTick (this.connect.bind (this));
-        }
-    }
-
-    connect ()
+	constructor (device, options, autoconnect = true)
 	{
-        this.serial = new SerialPort (this.port, {
-            baudRate: this.baudrate,
-            autoOpen: false
+		super ();
+		this.device = device;
+		this.baudrate = parseInt(options.baudrate);
+		this.port = options.port;
+		this.serial = null;
+		if (autoconnect)
+		{
+			process.nextTick (this.connect.bind (this));
+		}
+	}
+
+	connect ()
+	{
+		this.serial = new SerialPort (this.port, {
+			baudRate: this.baudrate,
+			autoOpen: false
 		});
 
-        this.serial.on ('error', (err) => {
+		this.serial.on ('error', (err) => {
 			// TODO translate
 			workspace.showError ('Device '+this.device.name,  {extra: err.message});
 			this.emit ('error');
 		});
 
-        this.serial.on ('data', this.emit.bind (this, 'data'));
+		this.serial.on ('data', this.emit.bind (this, 'data'));
 
-        this.serial.open( err => {
-            if(err)
-            {
-                // TODO translate
-                workspace.showError ('Device '+this.device.name, {extra: err.message});
-            }
-            else
-            {
-                this.emit ('synchronizing');
-            }
-        });
-    }
-
-    write (data, done)
-	{
-        this.serial.write (data, done);
+		this.serial.open( err => {
+			if(err)
+			{
+				// TODO translate
+				workspace.showError ('Device '+this.device.name, {extra: err.message});
+			}
+			else
+			{
+				this.emit ('synchronizing');
+			}
+		});
 	}
 
-    disconnect ()
+	write (data, done)
 	{
-        this.serial.removeAllListeners ();
-        this.serial.close();
-        this.emit ('disconnected');
-    }
+		this.serial.write (data, done);
+	}
+
+	disconnect ()
+	{
+		this.serial.removeAllListeners ();
+		this.serial.close();
+		this.emit ('disconnected');
+	}
 }
 
 function searchSerialDevices ()

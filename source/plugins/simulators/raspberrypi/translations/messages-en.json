@@ -54,5 +54,9 @@
     "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_ADD_XML": {
         "message": "Add XML netlist",
         "description": "Add the XML file of your project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_RUN_ERROR": {
+        "message": "Error running project ({{error}})",
+        "description": "The Raspberry Pi simulator button to run"
     }
 }

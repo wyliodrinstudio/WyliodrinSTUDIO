@@ -35,7 +35,7 @@ export default {
 	methods: {
 		close ()
 		{
-			this.studio.workspace.closeStatusButton ()
+			this.studio.workspace.closeStatusButton ();
 		},
 		data: events.emit.bind (events, 'data'),
 		update: events.emit.bind (events, 'update'),
@@ -49,6 +49,6 @@ export default {
 	{
 		shell = this.$refs.shell;
 	}
-}
+};
 </script>
 

@@ -200,7 +200,7 @@ module.exports = function (blockly) {
 
 	Blockly.JavaScript['rpk_gui_fillellipse'] = function (block) {
 		Blockly.JavaScript.setupGUI();
-		var value_x1 = Blockly.JavaScript.valueToCode(block, 'X1', Blockly.JavaScript.ORDER_ATOMIC);
+		var value_x = Blockly.JavaScript.valueToCode(block, 'X1', Blockly.JavaScript.ORDER_ATOMIC);
 		var value_y = Blockly.JavaScript.valueToCode(block, 'Y', Blockly.JavaScript.ORDER_ATOMIC);
 		var value_rx = Blockly.JavaScript.valueToCode(block, 'RX', Blockly.JavaScript.ORDER_ATOMIC);
 		var value_ry = Blockly.JavaScript.valueToCode(block, 'RY', Blockly.JavaScript.ORDER_ATOMIC);
@@ -209,14 +209,14 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.JavaScript['rpk_gui_display_clear'] = function (block) {
+	Blockly.JavaScript['rpk_gui_display_clear'] = function (/* block */) {
 		Blockly.JavaScript.setupGUI();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'GUI.displayClear();\n';
 		return code;
 	};
 
-	Blockly.JavaScript['rpk_gui_display_newline'] = function (block) {
+	Blockly.JavaScript['rpk_gui_display_newline'] = function (/* block */) {
 		Blockly.JavaScript.setupGUI();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'GUI.displayNewLine();\n';
@@ -272,7 +272,7 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.JavaScript['rpk_rgb_get_brightness'] = function (block) {
+	Blockly.JavaScript['rpk_rgb_get_brightness'] = function (/* block */) {
 		Blockly.JavaScript.setupRGB();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'RGB.getBrightness()';
@@ -280,7 +280,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
-	Blockly.JavaScript['rpk_rgb_get_color'] = function (block) {
+	Blockly.JavaScript['rpk_rgb_get_color'] = function (/* block */) {
 		Blockly.JavaScript.setupRGB();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'RGB.getColor()';
@@ -288,7 +288,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
-	Blockly.JavaScript['rpk_sensors_get_light'] = function (block) {
+	Blockly.JavaScript['rpk_sensors_get_light'] = function (/* block */) {
 		Blockly.JavaScript.setupAMBIENTLIGHT();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'ambientLight.getValue()';
@@ -296,7 +296,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
-	Blockly.JavaScript['rpk_sensors_get_airquality'] = function (block) {
+	Blockly.JavaScript['rpk_sensors_get_airquality'] = function (/* block */) {
 		Blockly.JavaScript.setupAIRQUALITY();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'airQuality.getValue()';
@@ -329,6 +329,7 @@ module.exports = function (blockly) {
 	Blockly.JavaScript['rpk_sensors_get_temperature'] = function (block) {
 		Blockly.JavaScript.setupTEMPERATURE();
 		var dropdown_measurement_unit = block.getFieldValue('Measurement unit');
+		let code = '';
 		// TODO: Assemble JavaScript into code variable.
 		if (dropdown_measurement_unit === '1') {
 			// TODO: Change ORDER_NONE to the correct strength.
@@ -341,15 +342,15 @@ module.exports = function (blockly) {
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
-	Blockly.JavaScript['rpk_sensors_get_motion'] = function (block) {
+	Blockly.JavaScript['rpk_sensors_get_motion'] = function (/* block */) {
 		Blockly.JavaScript.setupMOTION();
 		// TODO: Assemble JavaScript into code variable.
-		var code = 'motion.getValue()';
+		let code = 'motion.getValue()';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
-	Blockly.JavaScript['rpk_sensors_get_freefall'] = function (block) {
+	Blockly.JavaScript['rpk_sensors_get_freefall'] = function (/* block */) {
 		Blockly.JavaScript.setupFREEFALL();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'freefall.getValue()';
@@ -408,7 +409,7 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.JavaScript['rpk_sensors_get_buzzer'] = function (block) {
+	Blockly.JavaScript['rpk_sensors_get_buzzer'] = function (/* block */) {
 		Blockly.JavaScript.setupBUZZER();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'buzzer.getState()';
@@ -416,7 +417,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
-	Blockly.JavaScript['rpk_sensors_get_touch'] = function (block) {
+	Blockly.JavaScript['rpk_sensors_get_touch'] = function (/* block */) {
 		Blockly.JavaScript.setupTOUCHSCREEN();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'touchscreen.getValue()';
@@ -424,7 +425,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
-	Blockly.JavaScript['rpk_sensors_get_switch'] = function (block) {
+	Blockly.JavaScript['rpk_sensors_get_switch'] = function (/* block */) {
 		Blockly.JavaScript.setupSWITCHES();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'switches.getValue()';
@@ -518,7 +519,7 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.JavaScript['rpk_console_read'] = function (block) {
+	Blockly.JavaScript['rpk_console_read'] = function (/* block */) {
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'console.read()';
 		// TODO: Change ORDER_NONE to the correct strength.
@@ -549,7 +550,7 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.JavaScript['rpk_ble_read_int_8'] = function (block) {
+	Blockly.JavaScript['rpk_ble_read_int_8'] = function (/* block */) {
 		Blockly.JavaScript.setupBLE();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'BLE.readInt8()';
@@ -557,7 +558,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
-	Blockly.JavaScript['rpk_ble_read_int_16'] = function (block) {
+	Blockly.JavaScript['rpk_ble_read_int_16'] = function (/* block */) {
 		Blockly.JavaScript.setupBLE();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'BLE.readInt16()';
@@ -565,7 +566,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.JavaScript.ORDER_NONE];
 	};
 
-	Blockly.JavaScript['rpk_ble_read_int_32'] = function (block) {
+	Blockly.JavaScript['rpk_ble_read_int_32'] = function (/* block */) {
 		Blockly.JavaScript.setupBLE();
 		// TODO: Assemble JavaScript into code variable.
 		var code = 'BLE.readInt32()';

@@ -102,7 +102,7 @@ let emulator = {
 				}
 				qemuExitCode[image.type] = code;
 			});
-			check.on('error', (err) => {console.log('err code is', err);});
+			check.on('error', (err) => {studio.error('err code is', err);});
 		} 
 	
 		runningEmulatorsFolder = path.join(emulatorFolder, 'runningEmulators');
@@ -124,17 +124,17 @@ let emulator = {
 			try{
 				await fs.unlink(path.join(image.dataFolder, image.name));
 			} catch(e) {
-				console.log(e.message);
+				studio.error(e.message);
 			}
 			try{
 				await fs.unlink(path.join(image.dataFolder, image.qemu.kernel));
 			} catch(e) {
-				console.log(e.message);
+				studio.error(e.message);
 			}
 			try{
 				await fs.unlink(path.join(image.dataFolder, image.qemu.dtb));
 			} catch(e) {
-				console.log(e.message);
+				studio.error(e.message);
 			}
 			
 			studio.workspace.dispatchToStore('emulator', 'images', images);
@@ -151,7 +151,7 @@ let emulator = {
 			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
 		} catch(e)
 		{
-			console.log(e.message);
+			studio.error(e.message);
 		}
 	},
 	async runEmulator(imageRunning)
@@ -267,7 +267,7 @@ let emulator = {
 		});
 		
 		qemu.stderr.on('data', (data) => {
-			console.error(`stderr: ${data}`);
+			studio.error(`stderr: ${data}`);
 		});
 		qemu.on('close', async () => {
 			devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
@@ -342,9 +342,7 @@ let emulator = {
 					var percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
 					studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: percent});
 				},
-			  });
-
-			  console.log ('downloading');
+			});
 
 			downloadingImages[image.type] = download;
 			
@@ -369,7 +367,7 @@ let emulator = {
 							studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 100});
 						});
 					} catch(e) {
-						console.error(e);
+						studio.error(e);
 						this.studio.workspace.showError('EMULATOR_UNZIP_ERROR' + {extra: e.message});
 						await fs.remove(image.dataFolder);
 					}
@@ -386,7 +384,7 @@ let emulator = {
 			try { 
 				await fs.remove(image.dataFolder);
 			} catch(e) {
-				console.log(e.message);
+				studio.error(e.message);
 				studio.workspace.showError('EMULATOR_STOP_DOWNLOAD_ERROR' + {extra: e.message});
 			}
 			studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 0});

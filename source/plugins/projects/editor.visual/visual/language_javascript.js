@@ -132,7 +132,6 @@ module.exports = function (blockly) {
 
 
 	Blockly.JavaScript['dicts_create_with'] = function (block) {
-		var value_keys = Blockly.JavaScript.valueToCode(block, 'keys', Blockly.JavaScript.ORDER_ATOMIC);
 		// TODO: Assemble JavaScript into code variable.
 		var code = new Array(block.itemCount_);
 
@@ -140,7 +139,7 @@ module.exports = function (blockly) {
 			var key = Blockly.JavaScript.quote_(block.getFieldValue('KEY' + n));
 			var value = Blockly.JavaScript.valueToCode(block, 'VALUE' + n,
 				Blockly.JavaScript.ORDER_NONE) || 'undefined';
-			code[n] = key + ": " + value;
+			code[n] = key + ': ' + value;
 		}
 		code = '{' + code.join(', ') + '}';
 		return [code, Blockly.JavaScript.ORDER_ATOMIC];

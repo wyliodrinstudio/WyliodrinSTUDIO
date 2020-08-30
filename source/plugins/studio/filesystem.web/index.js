@@ -1,3 +1,4 @@
+/* eslint no-console: ["warn", { allow: ["warn", "error"] }] */
 import Dexie from 'dexie';
 import EventEmitter from 'events';
 import axios from 'axios';

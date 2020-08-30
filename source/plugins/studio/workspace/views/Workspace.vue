@@ -56,6 +56,6 @@ export default {
 	{
 		this.$refs.tabs.callSlider ();
 	}
-}
+};
 </script>
 

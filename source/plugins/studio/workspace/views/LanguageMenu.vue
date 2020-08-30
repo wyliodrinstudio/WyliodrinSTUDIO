@@ -51,5 +51,5 @@ export default {
 			this.studio.workspace.setLanguage(languageId);
 		}
 	}
-}
+};
 </script>

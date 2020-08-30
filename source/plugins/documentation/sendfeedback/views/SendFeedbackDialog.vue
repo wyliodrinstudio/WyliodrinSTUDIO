@@ -14,32 +14,31 @@
       <v-img :src="completePath" aspect-ratio="1.7"></v-img>
     </v-card-text>
     <v-card-actions>
-    	<v-btn @click="prepareMessage">{{ $t('SEND_FEEDBACK_SEND') }}</v-btn>
+		<v-btn @click="prepareMessage">{{ $t('SEND_FEEDBACK_SEND') }}</v-btn>
 		<v-btn @click="cancel">{{ $t('SEND_FEEDBACK_CANCEL') }}</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import path from "path";
-import axios from 'axios';
+import path from 'path';
 
 export default {
 	name: 'SendFeedback',
 	data() {
 		return {
-      		feedback: '',
-      		data: '',
+			feedback: '',
+			data: '',
 			name: '',
 			completePath: '',
 			dataToSend: {}
-		}
+		};
 	},
 	created() {
 		this.name = this.studio.info.getFirstName();
 		this.completePath = path.join(this.studio.info.path, this.name);
 		this.readFile(); 
-  	},
+	},
 	methods: {
 		esc() {
 			this.cancel();
@@ -47,13 +46,15 @@ export default {
 		cancel() {
 			this.$root.$emit('submit');
 		},
-		async prepareMessage() {
+		prepareMessage() {
 			this.dataToSend = {
 				image: this.data.toString ('base64'),
 				feedbackMessage: this.feedback,
 			};
 
-			console.log(this.dataToSend);
+			// TODO implement send
+
+			// console.log(this.dataToSend);
 			// await axios.request ({url: 'plugins/'+pluginName+'/data/'+filename, responseType: 'arraybuffer', method: 'get'})).data
 			// Vue.http.post('http://localhost:3000/', this.dataToSend).then(
 			// 	response => {
@@ -67,7 +68,7 @@ export default {
 			// this.data = await fs.readFile(this.completePath);
 			// console.log("data e gata");
 		}
-  }
+	}
 };
 </script>
 

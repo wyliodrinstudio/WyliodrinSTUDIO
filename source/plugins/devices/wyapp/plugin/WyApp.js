@@ -200,7 +200,8 @@ export default class WyApp extends EventEmitter
 				}
 				catch (e)
 				{
-					console.log ('Send data '+e.message);
+					// TODO show notification
+					// console.log ('Send data '+e.message);
 					this.isSending = false;
 				}
 			}
@@ -261,7 +262,6 @@ export default class WyApp extends EventEmitter
 							try
 							{
 								let packet = msgpack.decode (rawPacket);
-								console.log (packet);
 								try
 								{
 									this.emit ('packet', packet);
@@ -273,8 +273,8 @@ export default class WyApp extends EventEmitter
 							}
 							catch (e)
 							{
-								// this.emit ('error', e.message);
-								console.error (e.message);
+								this.emit ('packet-error', e.message);
+								// console.error (e.message);
 								// console.log ('Packet error '+e.message);
 							}
 						}

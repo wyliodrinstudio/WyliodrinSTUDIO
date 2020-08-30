@@ -1,3 +1,4 @@
+/* eslint no-console: ["error", { allow: ["warn", "error"] }] */
 import path from 'path';
 
 let settingsData = {
@@ -47,6 +48,7 @@ export async function setup (options, imports, register)
 				});
 			}
 			catch(e){
+				// TODO show notification
 				console.error('settings: error storing settings ' + e);
 			}
 		},

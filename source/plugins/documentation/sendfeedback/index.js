@@ -10,21 +10,21 @@ let info = {
 	getNameFromDate() {
 		let d = new Date();
 		return d.getDate().toString() + '-' +
-			   (d.getMonth() + 1).toString() + '-' +
-			   d.getFullYear().toString() + '-' +
-			   d.getHours().toString() + '-' +
-			   d.getMinutes().toString() + '.png';
+				(d.getMonth() + 1).toString() + '-' +
+				d.getFullYear().toString() + '-' +
+				d.getHours().toString() + '-' +
+				d.getMinutes().toString() + '.png';
 	},
 	getFirstName() {
 		return this.screens.shift();
 	}
-}
+};
 
 export default function setup (options, imports, register)
 {
 	let win = remote.getCurrentWindow ();
 	const studio = imports;
-	studio.workspace.registerMenuItem ('SEND_FEEDBACK_TITLE', 10, async () => {
+	studio.workspace.registerMenuItem ('SEND_FEEDBACK_TITLE', 10, () => {
 		try
 		{
 			setTimeout(async () => {
@@ -37,7 +37,6 @@ export default function setup (options, imports, register)
 		}
 		catch (e)
 		{
-			console.log (e);
 			studio.workspace.showError ('FEEDBACK_SCREENSHOT_ERROR', {
 				error: e.message
 			});

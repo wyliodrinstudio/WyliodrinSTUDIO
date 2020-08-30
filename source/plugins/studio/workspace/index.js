@@ -1233,6 +1233,7 @@ let workspace = {
 	 * Display warning
 	 */
 	warn() {
+		/* eslint-disable-next-line  no-console */
 		console.warn('WARNING: ', ...arguments);
 	},
 
@@ -1240,6 +1241,7 @@ let workspace = {
 	 * Display error
 	 */
 	error() {
+		/* eslint-disable-next-line  no-console */
 		console.error('ERROR: ', ...arguments);
 	},
 

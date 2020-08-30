@@ -51,6 +51,6 @@ let switches = {
 			generic_rpk.switchesDictionary['4'] = false;
 		});
 	}
-}
+};
 
 export default switches;

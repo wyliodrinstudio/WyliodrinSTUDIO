@@ -38,4 +38,4 @@ export default function xml2json(xml) {
 	}
 
 	return obj;
-};
+}

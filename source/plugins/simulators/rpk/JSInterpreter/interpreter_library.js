@@ -11,7 +11,8 @@ export default function interpreter_library (studio, device, generic_rpk) {
 
 				studio.console.write(device.id, text + '\r\n');
 			} catch(e) {
-				console.log(e);
+				// TODO write to some simulator console
+				studio.error(e);
 			}
 		};
 
@@ -183,7 +184,8 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				ctx.fillRect(0, 0, 100, 100);
 				ctx.stroke();
 			} catch(e) {
-				console.log(e);
+				// TODO write to some simulator console
+				studio.error(e);
 			}
 		};
 
@@ -191,15 +193,17 @@ export default function interpreter_library (studio, device, generic_rpk) {
 			try {
 				generic_rpk.textColor = color;
 			} catch(e) {
-				console.log(e);
+				// TODO write to some simulator console
+				studio.error(e);
 			}
 		};
 
-		let guiSetBacklight = function(backlight) {
+		let guiSetBacklight = function(/* backlight */) {
 			try {
-				console.log('guiSetBacklight');
+				// TODO implement backlight
 			} catch(e) {
-				console.log(e);
+				// TODO write to some simulator console
+				studio.error(e);
 			}
 		};
 
@@ -208,7 +212,8 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				generic_rpk.rgbBrightness = brightness;
 				$('#led_brightness').attr('fill', 'rgba(0, 0, 0,  ' + generic_rpk.rgbBrightnessDictionary[generic_rpk.rgbBrightness]);
 			} catch(e) {
-				console.log(e);
+				// TODO write to some simulator console
+				studio.error(e);
 			}
 		};
 
@@ -223,7 +228,8 @@ export default function interpreter_library (studio, device, generic_rpk) {
 					$('#led_color').attr('fill', 'hsl('+ generic_rpk.rgbColorDictionary[generic_rpk.rgbColor] + ', 50%, 50%)');
 				}
 			} catch(e) {
-				console.log(e);
+				// TODO write to some simulator console
+				studio.error(e);
 			}
 		};
 
@@ -232,7 +238,8 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				rgbSetBrightness(brightness);
 				rgbSetColor(color);
 			} catch(e) {
-				console.log(e);
+				// TODO write to some simulator console
+				studio.error(e);
 			}
 		};
 
@@ -467,5 +474,5 @@ export default function interpreter_library (studio, device, generic_rpk) {
 
 		interpreter.setProperty(scope, 'sleep', interpreter.createAsyncFunction(sleep));
 		interpreter.setProperty(scope, 'require', interpreter.createNativeFunction(require));
-	}
+	};
 }

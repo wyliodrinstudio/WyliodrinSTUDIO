@@ -8,13 +8,13 @@ module.exports = function (blockly) {
 		if (!Blockly.Python.definitions_['import_wiringpi']) {
 			Blockly.Python.definitions_['import_wiringpi'] = 'from wyliodrin import *\n';
 		}
-	}
+	};
 
 	Blockly.Python.importtime = function () {
 		if (!Blockly.Python.definitions_['import_time']) {
 			Blockly.Python.definitions_['import_time'] = 'from time import *\n';
 		}
-	}
+	};
 
 	Blockly.Python.rapiro = function () {
 		if (!Blockly.Python.definitions_['import_serial']) {
@@ -29,13 +29,13 @@ module.exports = function (blockly) {
 			Blockly.Python.rapiro_robot = rapiro;
 			Blockly.Python.definitions_['rapiro_setup'] = rapiro + ' = Serial (port=\'/dev/ttyAMA0\', baudrate=57600)\n';//def handler(signum, frame):\n  print \'stopping rapiro\'\n  '+rapiro+'.write (\'#S\')\nsignal.signal(signal.SIGTERM, handler)';
 		}
-	}
+	};
 
-	function leadingnumbers(number, digits) {
-		number = '' + number;
-		for (var i = number.length; i < digits; i++) number = '0' + number;
-		return number;
-	}
+	// function leadingnumbers(number, digits) {
+	// 	number = '' + number;
+	// 	for (var i = number.length; i < digits; i++) number = '0' + number;
+	// 	return number;
+	// }
 
 	Blockly.Python.buttons_switched = function () {
 		if (!Blockly.Python.definitions_['buttons_switched']) {
@@ -61,7 +61,7 @@ module.exports = function (blockly) {
 				'      return False\n' +
 				'  return False\n';
 		}
-	}
+	};
 
 	Blockly.Python.bmp180_init = function () {
 		Blockly.Python.wiringpi();
@@ -71,7 +71,7 @@ module.exports = function (blockly) {
 			Blockly.Python.bmp180_device = bmp180_device;
 			Blockly.Python.definitions_['bmp180_init'] = bmp180_device + ' = Adafruit_BMP085_Unified ()\n' + bmp180_device + '.begin()\n';
 		}
-	}
+	};
 
 	Blockly.Python.buttons_initial_value = function (button) {
 		if (!isNaN(parseInt(button))) {
@@ -79,13 +79,13 @@ module.exports = function (blockly) {
 				Blockly.Python.definitions_['buttons_initial_value_' + button] = Blockly.Python.buttons + '[' + button + '] = digitalRead (' + button + ')\n';
 			}
 		}
-	}
+	};
 
 	Blockly.Python.titleFromStream = function () {
 		if (!Blockly.Python.definitions_['titleFromStream']) {
 			Blockly.Python.definitions_['titleFromStream'] = 'def titleFromStream(data):\n  try:\n    return data[data.index("StreamTitle=\'")+13:data.index("\';")]\n  except:\n    return data\n';
 		}
-	}
+	};
 
 
 	Blockly.Python.colors = function () {
@@ -99,7 +99,7 @@ module.exports = function (blockly) {
 			Blockly.Python.definitions_['basic_color'] = 'def basic_color (color):\n  value = 0\n  if color>=128:\n    value = 1\n  else:\n    value = 0\n  return value\n';
 		}
 
-	}
+	};
 
 
 	Blockly.Python.mplayer = function () {
@@ -110,7 +110,7 @@ module.exports = function (blockly) {
 			Blockly.Python.player = player;
 			Blockly.Python.definitions_['mplayer_variable'] = player + ' = Player()\n';
 		}
-	}
+	};
 
 	Blockly.Python.bass_init = function () {
 		if (!Blockly.Python.definitions_['import_pybass']) {
@@ -119,29 +119,29 @@ module.exports = function (blockly) {
 				'BASS_PluginLoad (\'/usr/local/lib/libbassflac.so\', 0)\n' +
 				'BASS_PluginLoad (\'/usr/local/lib/libbass_aac.so\', 0)\n';
 		}
-	}
+	};
 
 	Blockly.Python.hi_lo_words = function () {
 		if (!Blockly.Python.definitions_['hi_lo_words']) {
 			Blockly.Python.definitions_['hi_lo_words'] = 'def HIWORD (words):\n  return words & 0x0000ffff\n' +
 				'def LOWORD (words):\n  return words >> 16\n';
 		}
-	}
+	};
 
 	Blockly.Python.stream_level = function () {
 		if (!Blockly.Python.definitions_['stream_level']) {
 			Blockly.Python.definitions_['stream_level'] = 'def StreamLevel (stream, scale):\n  level = BASS_ChannelGetLevel (stream)\n  return ((HIWORD(level)+LOWORD(level))/2)*scale/32768';
 		}
-	}
+	};
 
 	Blockly.Python.stream_level_side = function () {
 		if (!Blockly.Python.definitions_['stream_level_side']) {
 			Blockly.Python.definitions_['stream_level_side'] = 'def StreamLevelSide (stream, side, scale):\n  level = BASS_ChannelGetLevel (stream)\n  return (HIWORD(level) if side == "left" else LOWORD(level))*scale/32768';
 		}
-	}
+	};
 
 	Blockly.Python.setpinmode = function (pin, mode) {
-		if (!isNaN(pin) && pin != "") {
+		if (!isNaN(pin) && pin != '') {
 			if (Blockly.Python.definitions_['pin_mode_in_' + pin]) throw 'Pin ' + pin + ' is used to input and output.';
 			if (!Blockly.Python.definitions_['pin_mode_out_' + pin]) Blockly.Python.definitions_['pin_mode_out_' + pin] = 'pinMode (' + pin + ', ' + mode + ')\n';
 			return true;
@@ -149,12 +149,12 @@ module.exports = function (blockly) {
 		else {
 			return false;
 		}
-	}
+	};
 
 	Blockly.Python.signalName = function (name) {
 		var res = name.match(/[a-zA-Z_0-9]+/);
 		return res;
-	}
+	};
 
 
 	Blockly.Python['setpin'] = function (block) {
@@ -220,7 +220,7 @@ module.exports = function (blockly) {
 		Blockly.Python.wiringpi();
 		Blockly.Python.importtime();
 		var value_millis = Blockly.Python.valueToCode(block, 'millis', Blockly.Python.ORDER_ATOMIC);
-		var type = parseInt(block.getFieldValue("type"));
+		var type = parseInt(block.getFieldValue('type'));
 		if (isNaN(type)) type = 0;
 		// TODO: Assemble Python into code variable.
 		var code = '';
@@ -240,7 +240,7 @@ module.exports = function (blockly) {
 		Blockly.Python.wiringpi();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var value_mode = block.getFieldValue('mode');
-		if (parseInt(value_pin) != NaN) {
+		if (isNaN(parseInt(value_pin))) {
 			if (Blockly.Python.definitions_['pin_mode_in_' + value_pin]) delete Blockly.Python.definitions_['pin_mode_in_' + value_pin];
 			if (Blockly.Python.definitions_['pin_mode_out_' + value_pin]) delete Blockly.Python.definitions_['pin_mode_out_' + value_pin];
 		}
@@ -257,7 +257,7 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['millis'] = function (block) {
+	Blockly.Python['millis'] = function (/* block */) {
 		Blockly.Python.wiringpi();
 		// TODO: Assemble Python into code variable.
 		var code = 'millis()';
@@ -265,7 +265,7 @@ module.exports = function (blockly) {
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
-	Blockly.Python['micros'] = function (block) {
+	Blockly.Python['micros'] = function (/* block */) {
 		Blockly.Python.wiringpi();
 		// TODO: Assemble Python into code variable.
 		var code = 'micros()';
@@ -283,7 +283,7 @@ module.exports = function (blockly) {
 
 	Blockly.Python['read'] = function (block) {
 		// TODO: Assemble Python into code variable.
-		var type = parseInt(block.getFieldValue("type"));
+		var type = parseInt(block.getFieldValue('type'));
 		var code;
 		if (type == 0) {
 			code = 'raw_input ("")';
@@ -301,7 +301,7 @@ module.exports = function (blockly) {
 	Blockly.Python['readwrite'] = function (block) {
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		var type = parseInt(block.getFieldValue("type"));
+		var type = parseInt(block.getFieldValue('type'));
 		var code;
 		if (type == 0) {
 			code = 'raw_input (' + value_value + ')';
@@ -374,24 +374,24 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['pause'] = function (block) {
+	Blockly.Python['pause'] = function (/* block */) {
 		Blockly.Python.mplayer();
 		// TODO: Assemble Python into code variable.
 		var code = Blockly.Python.player + '.pause()\n';
 		return code;
 	};
 
-	Blockly.Python['stop'] = function (block) {
+	Blockly.Python['stop'] = function (/* block */) {
 		Blockly.Python.mplayer();
 		// TODO: Assemble Python into code variable.
 		var code = Blockly.Python.player + '.stop()\n';
 		return code;
 	};
 
-	Blockly.Python['isplaying'] = function (block) {
-		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
+	Blockly.Python['isplaying'] = function (/* block */) {
+		// var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		var type = parseInt(block.getFieldValue("type"));
+		// var type = parseInt(block.getFieldValue('type'));
 		var code = Blockly.Python.player + '.filename!=None';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
@@ -449,7 +449,7 @@ module.exports = function (blockly) {
 		Blockly.Python.bass_init();
 		var value_stream = Blockly.Python.valueToCode(block, 'stream', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		code = 'BASS_ChannelIsActive (' + value_stream + ') == BASS_ACTIVE_PLAYING';
+		let code = 'BASS_ChannelIsActive (' + value_stream + ') == BASS_ACTIVE_PLAYING';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
@@ -516,7 +516,6 @@ module.exports = function (blockly) {
 		var dropdown_type = block.getFieldValue('type');
 		// TODO: Assemble Python into code variable.
 		var code = '';
-		var code = '';
 		if (dropdown_type == 0) {
 			code = 'BASS_ChannelSetPosition (' + value_stream + ', BASS_ChannelSeconds2Bytes(' + value_stream + ', ' + value_pos + '), BASS_POS_BYTE)\n';
 		}
@@ -553,7 +552,7 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['get_volume_audio'] = function (block) {
+	Blockly.Python['get_volume_audio'] = function (/* block */) {
 		Blockly.Python.bass_init();
 		// TODO: Assemble Python into code variable.
 		var code = 'int (BASS_GetVolume ())*100';
@@ -564,9 +563,9 @@ module.exports = function (blockly) {
 		Blockly.Python.wiringpi();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var value_value = block.getFieldValue('value');
-		var code = "";
+		var code = '';
 		if (!Blockly.Python.setpinmode(value_pin, 1)) {
-			code = "pinMode (" + value_pin + ", 1)\n";
+			code = 'pinMode (' + value_pin + ', 1)\n';
 		}
 		// TODO: Assemble Python into code variable.
 		code = code + 'digitalWrite (' + value_pin + ', ' + value_value + ')\n';
@@ -648,24 +647,24 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['clear_lcd'] = function (block) {
+	Blockly.Python['clear_lcd'] = function (/* block */) {
 		if (Blockly.Python.definitions_['lcd_variable']) {
 			Blockly.Python.wiringpi();
 			// TODO: Assemble Python into code variable.
 			var code = Blockly.Python.lcd + '.clear()\n';
 			return code;
 		}
-		else throw "You must init the LCD before using clear lcd";
+		else throw 'You must init the LCD before using clear lcd';
 	};
 
-	Blockly.Python['reset_lcd'] = function (block) {
+	Blockly.Python['reset_lcd'] = function (/* block */) {
 		if (Blockly.Python.definitions_['lcd_variable']) {
 			Blockly.Python.wiringpi();
 			// TODO: Assemble Python into code variable.
 			var code = Blockly.Python.lcd + '.home()\n';
 			return code;
 		}
-		else throw "You must init the LCD before using reset lcd";
+		else throw 'You must init the LCD before using reset lcd';
 	};
 
 	Blockly.Python['set_position_lcd'] = function (block) {
@@ -677,7 +676,7 @@ module.exports = function (blockly) {
 			var code = Blockly.Python.lcd + '.setCursor(' + value_col + '-1, ' + value_row + '-1)\n';
 			return code;
 		}
-		else throw "You must init the LCD before using set position lcd";
+		else throw 'You must init the LCD before using set position lcd';
 	};
 
 	Blockly.Python['print_lcd'] = function (block) {
@@ -688,7 +687,7 @@ module.exports = function (blockly) {
 			var code = Blockly.Python.lcd + '._print (str(' + value_text + '))\n';
 			return code;
 		}
-		else throw "You must init the LCD before using print lcd";
+		else throw 'You must init the LCD before using print lcd';
 	};
 
 	Blockly.Python['button_is'] = function (block) {
@@ -735,7 +734,7 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['rapiro_stop'] = function (block) {
+	Blockly.Python['rapiro_stop'] = function (/* block */) {
 		Blockly.Python.rapiro();
 		// TODO: Assemble Python into code variable.
 		var code = Blockly.Python.rapiro_robot + '.write (\'#M0\')\nsleep(2)\n' + Blockly.Python.rapiro_robot + '.write(\'#S\')\n';
@@ -747,7 +746,7 @@ module.exports = function (blockly) {
 		if (!Blockly.Python.definitions_['import_os']) {
 			Blockly.Python.definitions_['import_os'] = 'import os';
 		}
-		Blockly.Python.definitions_['import_os_pins'] = 'os.environ["PINS_NUMBERING"] = \"' + dropdown_pins_numbering + '\"'
+		Blockly.Python.definitions_['import_os_pins'] = 'os.environ["PINS_NUMBERING"] = "' + dropdown_pins_numbering + '"';
 		// TODO: Assemble Python into code variable.
 		var code = '';
 		return code;
@@ -759,7 +758,7 @@ module.exports = function (blockly) {
 		var cmd = '';
 		if (directon == 0) cmd = '#M1';
 		else
-			if (directon == 1) cmd = '#M2';
+		if (directon == 1) cmd = '#M2';
 		var wait = Blockly.Python.valueToCode(block, 'wait', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = Blockly.Python.rapiro_robot + '.write (\'' + cmd + '\')\nsleep(' + wait + ')\n';
@@ -772,7 +771,7 @@ module.exports = function (blockly) {
 		var cmd = '';
 		if (directon == 0) cmd = '#M3';
 		else
-			if (directon == 1) cmd = '#M4';
+		if (directon == 1) cmd = '#M4';
 		var wait = Blockly.Python.valueToCode(block, 'wait', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = Blockly.Python.rapiro_robot + '.write (\'' + cmd + '\')\nsleep(' + wait + ')\n';
@@ -826,7 +825,7 @@ module.exports = function (blockly) {
 				'valueToDisplay', Blockly.Generator.NAME_TYPE);
 			Blockly.Python.valueToDiplay = valueToBeDispl;
 			if (!Blockly.Python.definitions_['sevenSegment']) {
-				Blockly.Python.definitions_['sevenSegment'] = "def display(sevenSegment, value):\n" +
+				Blockly.Python.definitions_['sevenSegment'] = 'def display(sevenSegment, value):\n' +
 					'  if value == "0":\n' +
 					'    displaySegment(sevenSegment, 1, 1, 1, 1, 1, 1, 0, 1)\n' +
 					'  if value == "1":\n' +
@@ -847,7 +846,7 @@ module.exports = function (blockly) {
 					'    displaySegment(sevenSegment, 1, 1, 1, 1, 1, 1, 1, 1)\n' +
 					'  if value == "9":\n' +
 					'    displaySegment(sevenSegment, 1, 1, 1, 1, 0, 1, 1, 1)\n' +
-					"  if value == 'A':\n" +
+					'  if value == \'A\':\n' +
 					'    displaySegment(sevenSegment, 1, 1, 1, 0, 1, 1, 1, 1)\n' +
 					'  if value == "B":\n' +
 					'    displaySegment(sevenSegment, 1, 1, 1, 1, 1, 1, 1, 1)\n' +
@@ -861,10 +860,10 @@ module.exports = function (blockly) {
 					'    displaySegment(sevenSegment, 1, 0, 0, 0, 1, 1, 1, 1)\n' +
 					'  if value == ".":\n' +
 					'    displaySegment(sevenSegment, 0, 0, 0, 0, 0, 0, 0, 1)\n'
-					;
+				;
 			}
 		}
-	}
+	};
 
 	Blockly.Python.sevenSegmentFunction = function () {
 		if (!Blockly.Python.definitions_['sevenSegmentFunction']) {
@@ -877,48 +876,48 @@ module.exports = function (blockly) {
 				'  digitalWrite(sevenSegment[6], abs(sevenSegment[0]-f))\n' +
 				'  digitalWrite(sevenSegment[7], abs(sevenSegment[0]-g))\n' +
 				'  if len(sevenSegment)>=9: digitalWrite(sevenSegment[8], abs(sevenSegment[0]-dp))\n'
-				;
+			;
 		}
-	}
+	};
 
 	Blockly.Python.Adafruit_7segment_init = function () {
 		if (!Blockly.Python.definitions_['Adafruit_7segment_init']) {
-			Blockly.Python.definitions_['Adafruit_7segment_init'] = "def Adafruit_7segment_init(bus):\n" +
-				"  ada_7segm=Adafruit_7segment()\n" +
-				"  ada_7segm.begin(bus)\n" +
-				"  return ada_7segm";
+			Blockly.Python.definitions_['Adafruit_7segment_init'] = 'def Adafruit_7segment_init(bus):\n' +
+				'  ada_7segm=Adafruit_7segment()\n' +
+				'  ada_7segm.begin(bus)\n' +
+				'  return ada_7segm';
 		}
-	}
+	};
 
 	Blockly.Python.mpu6050_init = function () {
 		if (!Blockly.Python.definitions_['mpu6050_init']) {
-			Blockly.Python.definitions_['mpu6050_init'] = "def mpu6050_init(bus):\n" +
-				"  mpu6050=MPU6050(bus)\n" +
-				"  mpu6050.initialize()\n" +
-				"  return mpu6050";
+			Blockly.Python.definitions_['mpu6050_init'] = 'def mpu6050_init(bus):\n' +
+				'  mpu6050=MPU6050(bus)\n' +
+				'  mpu6050.initialize()\n' +
+				'  return mpu6050';
 		}
-	}
+	};
 
 	Blockly.Python.htu21d_init = function () {
 		if (!Blockly.Python.definitions_['htu21d_init']) {
-			Blockly.Python.definitions_['htu21d_init'] = "def htu21d_init():\n" +
-				"  htu21d=HTU21D(bus)\n" +
-				"  htu21d.initialize()\n" +
-				"  return htu21d";
+			Blockly.Python.definitions_['htu21d_init'] = 'def htu21d_init():\n' +
+				'  htu21d=HTU21D(bus)\n' +
+				'  htu21d.initialize()\n' +
+				'  return htu21d';
 		}
-	}
+	};
 
 	Blockly.Python.Adafruit_24bar_init = function () {
 		if (!Blockly.Python.definitions_['Adafruit_24bar_init']) {
-			Blockly.Python.definitions_['Adafruit_24bar_init'] = "def Adafruit_24bar_init(bus):\n" +
-				" ada_24bar=Adafruit_24bargraph()\n" +
-				" ada_24bar.begin(bus)\n" +
-				" for i in range (0 ,24):\n" +
-				"   ada_24bar.setBar(i, LED_OFF)\n" +
-				"   ada_24bar.writeDisplay()\n" +
-				" return ada_24bar";
+			Blockly.Python.definitions_['Adafruit_24bar_init'] = 'def Adafruit_24bar_init(bus):\n' +
+				' ada_24bar=Adafruit_24bargraph()\n' +
+				' ada_24bar.begin(bus)\n' +
+				' for i in range (0 ,24):\n' +
+				'   ada_24bar.setBar(i, LED_OFF)\n' +
+				'   ada_24bar.writeDisplay()\n' +
+				' return ada_24bar';
 		}
-	}
+	};
 
 
 
@@ -942,7 +941,7 @@ module.exports = function (blockly) {
 		Blockly.Python.setpinmode(value_seg_f, 1);
 		Blockly.Python.setpinmode(value_seg_g, 1);
 		Blockly.Python.setpinmode(value_seg_dp, 1);
-		var code = "[" + value_inverse + ', ' + value_seg_a + ', ' + value_seg_b + ', ' + value_seg_c + ', ' + value_seg_d + ', ' + value_seg_e + ', ' + value_seg_f + ', ' + value_seg_g + ', ' + value_seg_dp + ']';
+		var code = '[' + value_inverse + ', ' + value_seg_a + ', ' + value_seg_b + ', ' + value_seg_c + ', ' + value_seg_d + ', ' + value_seg_e + ', ' + value_seg_f + ', ' + value_seg_g + ', ' + value_seg_dp + ']';
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
@@ -951,7 +950,7 @@ module.exports = function (blockly) {
 		var value_tobedispl = Blockly.Python.valueToCode(block, 'tobedispl', Blockly.Python.ORDER_ATOMIC);
 		var value_ssd = Blockly.Python.valueToCode(block, 'ssd', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		var code = "display(" + value_ssd + ", str(" + value_tobedispl + "))" + "\n";
+		var code = 'display(' + value_ssd + ', str(' + value_tobedispl + '))' + '\n';
 		return code;
 	};
 
@@ -960,11 +959,11 @@ module.exports = function (blockly) {
 
 
 
-	Blockly.Python['adafruit_7segment_begin'] = function (block) {
+	Blockly.Python['adafruit_7segment_begin'] = function (/* block */) {
 		Blockly.Python.wiringpi();
 		Blockly.Python.Adafruit_7segment_init();
 		// TODO: Assemble Python into code variable.
-		var code = "Adafruit_7segment_init(112)";
+		var code = 'Adafruit_7segment_init(112)';
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
@@ -973,7 +972,7 @@ module.exports = function (blockly) {
 		Blockly.Python.Adafruit_24bar_init();
 		var value_bus = Blockly.Python.valueToCode(block, 'bus', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		var code = "Adafruit_24bar_init(" + value_bus + ")";
+		var code = 'Adafruit_24bar_init(' + value_bus + ')';
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
@@ -988,21 +987,21 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['bmp180_get_pressure'] = function (block) {
+	Blockly.Python['bmp180_get_pressure'] = function (/* block */) {
 		Blockly.Python.bmp180_init();
 		// TODO: Assemble Python into code variable.
 		var code = Blockly.Python.bmp180_device + '.getPressure()';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
-	}
+	};
 
-	Blockly.Python['bmp180_get_temperature'] = function (block) {
+	Blockly.Python['bmp180_get_temperature'] = function (/* block */) {
 		Blockly.Python.bmp180_init();
 		// TODO: Assemble Python into code variable.
 		var code = Blockly.Python.bmp180_device + '.getTemperature()';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
-	}
+	};
 
 
 
@@ -1093,7 +1092,7 @@ module.exports = function (blockly) {
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
-	Blockly.Python['htu21d_setup'] = function (block) {
+	Blockly.Python['htu21d_setup'] = function (/* block */) {
 		Blockly.Python.wiringpi();
 		// TODO: Assemble Python into code variable.
 		var code = 'HTU21D()';

@@ -53,9 +53,6 @@ export function setup (options, imports, register) {
 		system.events.emit ('close-ask');
 	});
 
-	ipcRenderer.on ('message', (...arg) => {
-		console.log (...arg);
-	});
 	ipcRenderer.on('updated', () => {
 		system.events.emit('updated');
 	});

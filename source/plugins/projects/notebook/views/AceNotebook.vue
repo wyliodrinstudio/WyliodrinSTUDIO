@@ -80,35 +80,35 @@ export default {
 			require('brace/theme/chrome');
 			require('brace/snippets/python'); 
 		},
-		boldText(element)
+		boldText(/* element */)
 		{
 			this.editor.insert('**text**');
 		},
-		italicText(element)
+		italicText(/* element */)
 		{
 			this.editor.insert('*italics*');
 		},
-		bulletedList(element)
+		bulletedList(/* element */)
 		{
 			this.editor.insert ('\n* Item\n* Item \n* Item');
 		},
-		numberedList(element)
+		numberedList(/* element */)
 		{
 			this.editor.insert ('\n1. Item\n2. Item \n3. Item');
 		},
-		heading1(element)
+		heading1(/* element */)
 		{
 			this.editor.insert ('\n# Title');
 		},
-		heading2(element)
+		heading2(/* element */)
 		{
 			this.editor.insert ('\n## Title');
 		},
-		heading3(element)
+		heading3(/* element */)
 		{
 			this.editor.insert ('\n### Title');
 		},
-		async importFile(element)
+		async importFile(/* element */)
 		{
 			const options = {
 				title: 'Select file',
@@ -153,24 +153,22 @@ export default {
 					}
 					catch(e)
 					{
-						console.log(e.message);
+						this.studio.workspace.showError('NOTEBOOK_SELECT_FILE_ERROR', {extra: e.message});
 					}
 				}
 				catch(e)
 				{
-					this.studio.workspace.showError('NOTEBOOK_SELECT_FILE_ERROR');
-					console.log('Please select a file. ' + e.message);
+					this.studio.workspace.showError('NOTEBOOK_SELECT_FILE_ERROR', {extra: e.message});
 				}
 			}
 		},
-		async importImage(element)
+		async importImage(/* element */)
 		{
 			const options = {
 				title: 'Select file',
 				filetypes: ['*']
 			};
 			let openPath = await this.studio.filesystem.openImportDialog(options);
-			console.log (openPath);
 			if (openPath.length > 0)
 			{
 				try
@@ -181,21 +179,20 @@ export default {
 				}
 				catch(e)
 				{
-					this.studio.workspace.showError('NOTEBOOK_SELECT_IMAGE_ERROR');
-					console.log('Please select an image. ' + e.message);
+					this.studio.workspace.showError('NOTEBOOK_SELECT_IMAGE_ERROR', {extra: e.message});
 				}
 			}
 			
 		},
-		addImageLink(element)
+		addImageLink(/* element */)
 		{
 			this.editor.insert ('\n![image](http://)');
 		},
-		addLink(element)
+		addLink(/* element */)
 		{			
 			this.editor.insert ('\n[text](http://)');
 		},
-		addSource(element)
+		addSource(/* element */)
 		{
 			this.editor.insert('\n```language\nsource\n```');
 		}

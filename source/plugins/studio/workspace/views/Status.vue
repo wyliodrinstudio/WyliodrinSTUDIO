@@ -53,5 +53,5 @@ export default {
 			if (_.isFunction (this.$refs.statusButton[position].esc)) this.$refs.statusButton[position].esc ();
 		}
 	}
-}
+};
 </script>

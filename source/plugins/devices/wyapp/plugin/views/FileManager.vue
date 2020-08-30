@@ -5,6 +5,7 @@
 			<span class="headline" v-else>{{menuItem.path}}</span>
 			<v-spacer></v-spacer>
 			<v-tooltip bottom>
+				<!-- eslint-disable-next-line vue/no-unused-vars -->
 				<template #activator="data">
 					<v-btn text class="title-icon-btn" aria-label="Refresh" >
 						<v-img contain src="plugins/devices/wyapp/plugin/data/img/icons/refresh-icon.svg"></v-img>
@@ -178,9 +179,9 @@ export default {
 		async newData(){
 			await this.updateFileTree(this.newData,this.fileItem);
 		},
-		fileItem() {
-			console.log(this.fileItem);
-		}
+		// fileItem() {
+		// 	console.log(this.fileItem);
+		// }
 
 	},
 	async created () {
@@ -326,8 +327,8 @@ export default {
 			this.newData=data;			
 		},
 		error(data){
-			//TODO
-			console.log(data);
+			//TODO show notification
+			this.studio.error (data);
 		},
 		updateFileTree(data, tree){
 			tree.children = [];

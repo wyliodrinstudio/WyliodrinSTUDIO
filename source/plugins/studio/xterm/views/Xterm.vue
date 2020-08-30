@@ -118,7 +118,7 @@ export default {
 				}
 				catch(e)
 				{
-					console.log(e.message);
+					this.studio.warn(e.message);
 				}
 				
 			});
@@ -188,8 +188,8 @@ export default {
 					// let geometry = this.shell.proposeGeometry ();
 					// if (geometry.rows !== Infinity && geometry.rows > 0 && geometry.cols > 0)
 					// {
-						this.fitAddon.fit ();
-						this.$emit ('resize', this.id, this.shell.cols, this.shell.rows);
+					this.fitAddon.fit ();
+					this.$emit ('resize', this.id, this.shell.cols, this.shell.rows);
 					// }
 				}
 			}
@@ -220,7 +220,7 @@ export default {
 		$(window).off('resize', this.resize);
 		this.exit ();
 	}
-}
+};
 
 </script>
 
