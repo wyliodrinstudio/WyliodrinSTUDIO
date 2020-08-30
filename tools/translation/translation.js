@@ -229,21 +229,41 @@ function loadTranslation (plugin, language='en')
 function listPluginNames ()
 {
 	let pluginNames = [];
-	let pluginsPath = path.join (__dirname, SOURCE_FOLDER, 'plugins');
-	let plugins = fs.readdirSync (pluginsPath);
-	let workspaceIndex = plugins.findIndex (pluginName => pluginName === 'workspace');
-	if (workspaceIndex !== -1)
-	{
-		plugins.splice (workspaceIndex, 1);
-		plugins.splice (0, 0, 'workspace');
-	}
-	for (let pluginName of plugins)
-	{
-		if (pluginName !== '.' && pluginName !== '..')
+	// let pluginsPath = path.join (__dirname, SOURCE_FOLDER, 'plugins');
+	// let plugins = fs.readdirSync (pluginsPath);
+	// let workspaceIndex = plugins.findIndex (pluginName => pluginName === 'workspace');
+	// if (workspaceIndex !== -1)
+	// {
+	// 	plugins.splice (workspaceIndex, 1);
+	// 	plugins.splice (0, 0, 'workspace');
+	// }
+	// for (let pluginName of plugins)
+	// {
+	// 	if (pluginName !== '.' && pluginName !== '..')
+	// 	{
+	// 		pluginNames.push (pluginName);
+	// 	}
+	// }
+	function loadPluginsFolder (folder) {
+		let localFolder = path.join (__dirname,SOURCE_FOLDER,'plugins', folder);
+		let allPlugins = fs.readdirSync(localFolder).filter (file => file !== '.' && file !== '..' && fs.statSync (path.join (localFolder, file)).isDirectory());
+
+		for(let plugin of allPlugins)
 		{
-			pluginNames.push (pluginName);
+			let file_package_json = path.join (localFolder, plugin, 'package.json');
+			if (fs.existsSync (file_package_json))
+			{
+				pluginNames.push (folder+'/'+plugin);
+			}
+			else
+			{
+				loadPluginsFolder (path.join (folder, plugin));
+			}
 		}
 	}
+
+	loadPluginsFolder ('');
+
 	return pluginNames;
 }
 
@@ -251,6 +271,7 @@ function loadAllTranslationIds (language='en')
 {
 	let allTranslationIds = {};
 	let plugins = listPluginNames ();
+	console.log (plugins);
 	for (let pluginName of plugins)
 	{
 		console.error (pluginName);
