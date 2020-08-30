@@ -104,8 +104,9 @@ module.exports = env => {
 	if (env.FORMAT == 'yes')
 	{
 		format_rule = [{
-			test: /\.js$/,
-			exclude: /node_modules/,
+			enforce: 'pre',
+        	test: /\.(js|vue)$/,
+			exclude: [/node_modules/, /web\/plugins.js/],
 			loader: 'eslint-loader',
 			options: {
 			  fix: true

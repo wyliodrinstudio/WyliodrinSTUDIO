@@ -1,3 +1,8 @@
+## Wyliodrin STUDIO 2.2.0-beta
+  * **added** Wyliodrin STUDIO CI tests for build, documentation and format
+  * **new** plugin folder structure with plugins hierarchy
+  * **update** packages
+
 ## Wyliodrin STUDIO 2.1.4-beta
   * **fixed** delay block for libwyliodrin having the same name as in Raspberry Pi
   * **update** editor registering to use extension or regular expressions
