@@ -5,7 +5,7 @@ name: Wyliodrin Documentation
 
 on:
   push:
-    branches: [ wyliodrin-tests ]
+    branches:
   pull_request:
 
 jobs:
