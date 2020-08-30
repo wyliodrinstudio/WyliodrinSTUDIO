@@ -113,6 +113,7 @@ Contributions
 - [Ana Marinescu](https://www.github.com/paula-elena) - Pin Layout
 - [Andrei Deatcu](https://www.github.com/dosarudaniel) - Resistor Color Code, Schematics
 - [Alexandru Vochescu](https://www.github.com/valexandru) - Examples
+- [Luis Miguel Capacho Valbuena](https://github.com/lmcapacho) - Translations, WyApp Serial
 
 Wyliodrin is a trademark of Wyliodrin SRL. All rights reserved.
 
