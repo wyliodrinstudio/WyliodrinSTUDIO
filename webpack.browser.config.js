@@ -101,6 +101,12 @@ module.exports = env => {
 
 	let format_rule = [];
 
+	let fix = true;
+
+	if (process.env.FIX === 'false') {
+		fix = false;
+	}
+
 	if (env.FORMAT == 'yes')
 	{
 		format_rule = [{
@@ -109,7 +115,7 @@ module.exports = env => {
 			exclude: [/node_modules/, /web\/plugins.js/],
 			loader: 'eslint-loader',
 			options: {
-			  fix: true
+			  fix: fix
 			},
 		}];
 	}

@@ -18,9 +18,8 @@ jobs:
           # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
           node-version: 12.x
       - run: npm install
-      - run: npx electron-rebuild
-      - run: rm -rf build && npm run electron-format
-      - run: rm -rf build && npm run browser-format
+      - run: rm -rf build && FIX=false npm run electron-format
+      - run: rm -rf build && FIX=false npm run browser-format
 
   webpack-electron:
     strategy:

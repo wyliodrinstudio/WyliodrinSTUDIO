@@ -82,7 +82,6 @@ export default {
 	},
 	mounted() {
 		this.unregister = this.studio.dashboard.registerForSignal ('ThermometerGraph',(data)=>{
-			console.log (data);
 			const chart = this.$refs.chart.getChart();
 			if (!chart.renderer.image('plugins/dashboard/graph.thermometer/data/img/icons/thermometer.svg').add()) {
 				this.timer = setInterval(function() {

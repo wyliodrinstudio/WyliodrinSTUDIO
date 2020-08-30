@@ -68,7 +68,13 @@ module.exports = env => {
 
 	let format_rule = [];
 
-	if (env.FORMAT == 'yes')
+	let fix = true;
+
+	if (process.env.FIX === 'false') {
+		fix = false;
+	}
+
+	if (env.FORMAT === 'yes')
 	{
 		format_rule = [{
 			enforce: 'pre',
@@ -76,7 +82,7 @@ module.exports = env => {
 			exclude: /node_modules/,
 			loader: 'eslint-loader',
 			options: {
-			  fix: true
+			  fix: fix
 			},
 		}];
 	}

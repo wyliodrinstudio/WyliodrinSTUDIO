@@ -22,5 +22,10 @@ We must be able to understand the design of your change from this description. I
 
 <!-- Enter any applicable Issues here -->
 
+### Format
+
+[ ] ran `npm run electron-format`
+[ ] ran `npm run browser-format`
+
 ### Author
 Signed-off-by: Your Full Name <youremailaddress@emailprovider.domain>

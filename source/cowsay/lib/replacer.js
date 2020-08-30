@@ -40,6 +40,7 @@ function extractTheCow (cow) {
 	var match = /\$the_cow\s*=\s*<<"*EOC"*;*\n([\s\S]+)\nEOC\n/.exec(cow);
 
 	if (!match) {
+		/* eslint-disable-next-line no-console */
 		console.error('Cannot parse cow file\n', cow);
 		return cow;
 	} else {

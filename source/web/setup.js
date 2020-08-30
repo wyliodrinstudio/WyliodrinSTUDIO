@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 let architect = require ('./../architect.js');
 let plugins = require ('./plugins.js');
 const cowsay = require ('./../cowsay');

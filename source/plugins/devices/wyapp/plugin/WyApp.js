@@ -268,7 +268,8 @@ export default class WyApp extends EventEmitter
 								}
 								catch (e)
 								{
-									console.error (e.message);
+									/* eslint-disable-next-line no-console */
+									console.warn (e.message);
 								}
 							}
 							catch (e)

@@ -521,8 +521,11 @@ let web_filesystem = {
 		});
 		return new Promise((resolve/*, reject*/) => {
 			events.once('load', (error, list) => {
-				console.log(error);
-				if (error) resolve([]);
+				if (error) 
+				{
+					console.warn (error);
+					resolve([]);
+				}
 				else resolve(list);
 			});
 		});

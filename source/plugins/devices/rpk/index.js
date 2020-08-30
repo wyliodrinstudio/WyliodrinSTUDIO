@@ -37,7 +37,7 @@ function loadSerialPort() {
 		return eval ('require(\'serialport\')');
 	}
 	catch (e) {
-		console.error (e);
+		studio.warn (e);
 		return {
 			list: function () {
 				return [
@@ -116,7 +116,7 @@ async function listRPKs() {
 		ports = await drivelist.list();
 	}
 	catch (e) {
-		console.error (e);
+		studio.error (e);
 	}
 	return ports;
 }
@@ -187,19 +187,15 @@ export function setup(options, imports, register) {
 		},
 
 		async connect(device/*, options*/) {
-			console.log('check object');
 			if (_.isObject(device)) {
 				if (device.id === 'rpk:newdevice') {
 					studio.workspace.showDialog(RPKDeviceSetup,{width: '500px'});
 					return null;
 				}
 				else {
-					console.log('check connection');
 					if (!connections[device.id]) {
-						console.log('check type');
 						connections[device.id] = {};
 						if (device.connection === 'usb') {
-							console.log('check path');
 							let exists = false;
 							exists = await fs.pathExists(device.address);
 							if (exists) {
@@ -244,15 +240,12 @@ export function setup(options, imports, register) {
 								}
 							});
 							ports[device.id].on('data', (data) => {
-								console.log(data.toString());
 								studio.console.write(device.id, data.toString());
 							});
 							ports[device.id].on('error', (err) => {
-								// console.log(data.toString());
 								studio.workspace.showError ('RPK_SERIAL_CONNECTON_ERROR', {extra: err.message});
 							});
 							ports[device.id].on('close', () => {
-								// console.log(data.toString());
 								device.status = 'DISCONNECTED';
 								updateDevice(device);
 								delete connections[device.id];
@@ -312,7 +305,6 @@ export function setup(options, imports, register) {
 					if (project) {
 						let filename;
 						let jsSource;
-						console.log(project.language);
 						if (project.language === 'visual') {
 							filename = await studio.projects.getDefaultRunFileName(project);
 							jsSource = await studio.projects.loadFile(project, filename);
@@ -448,7 +440,7 @@ async function readBinary() {
 		let data = await studio.filesystem.loadDataFile('device.rpk', 'binaries/jerryscript.bin');
 		return data;
 	} catch (err) {
-		console.error(err);
+		studio.error(err);
 	}
 }
 
@@ -456,6 +448,6 @@ async function writeBinary(device, data) {
 	try {
 		await fs.writeFile(path.join(device.address, 'jerryscript.bin'), data);
 	} catch (err) {
-		console.error(err);
+		studio.error(err);
 	}
 }
