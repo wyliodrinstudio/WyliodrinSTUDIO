@@ -5,7 +5,6 @@ name: Wyliodrin CI
 
 on:
   push:
-    branches: [ "wyliodrin-tests" ]
   pull_request:
 
 jobs:

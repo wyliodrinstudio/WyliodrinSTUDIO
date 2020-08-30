@@ -7,7 +7,7 @@ let latestTarget = '';
 module.exports.loadPlugins = (target) =>
 {
 	function loadPluginsFolder (folder) {
-		let localFolder = path.join (__dirname,'source/plugins', folder);
+		let localFolder = path.join (__dirname,'source', 'plugins', folder);
 		let allPlugins = fs.readdirSync(localFolder).filter (file => file !== '.' && file !== '..' && fs.statSync (path.join (localFolder, file)).isDirectory());
 
 		for(let plugin of allPlugins)
@@ -37,7 +37,7 @@ module.exports.loadPlugins = (target) =>
 			}
 			else
 			{
-				loadPluginsFolder (path.join (folder, plugin));
+				loadPluginsFolder (path.join (folder, plugin).replace (/\\/g, '/'));
 			}
 		}
 	}
