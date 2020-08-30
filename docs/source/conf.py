@@ -105,7 +105,7 @@ html_theme = 'sphinx_rtd_theme'
 htmlhelp_basename = 'WyliodrinStudiodoc'
 
 primary_domain = 'js'
-js_source_path = ['../../source/plugins/workspace', '../../source/plugins/projects', '../../source/plugins/settings', '../../source/plugins/pinlayout']
+js_source_path = ['../../source/plugins/studio/workspace', '../../source/plugins/projects/projects', '../../source/plugins/studio/settings', '../../source/plugins/devices/pinlayout']
 root_for_relative_js_paths = '../../source/plugins'
 
 
