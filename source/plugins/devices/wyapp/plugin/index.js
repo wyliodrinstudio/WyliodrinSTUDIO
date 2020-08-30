@@ -35,7 +35,6 @@ function updateDevices ()
 	{
 		devices.push (...transportDevices[transportDriverName]);
 	}
-	console.log (searchDevices);
 	for (let searchName in searchDevices)
 	{
 		devices.push (...searchDevices[searchName]);
@@ -113,7 +112,7 @@ class Connection extends EventEmitter
 		}
 		else
 		{
-			console.error ('Unable to send data to device '+this.device.id+', no link');
+			studio.error ('Unable to send data to device '+this.device.id+', no link');
 		}
 	}
 
@@ -124,9 +123,9 @@ class Connection extends EventEmitter
 		{
 			// TODO return?
 			this.send ('disc', {a: options.disconnect});
-            setTimeout( () => {
-                this.transport.disconnect ();
-            }, 1000);
+			setTimeout( () => {
+				this.transport.disconnect ();
+			}, 1000);
 		}
 		else
 		{
@@ -623,8 +622,6 @@ export function setup(options, imports, register)
 					studio.console.reset ();
 					let structure = await studio.projects.generateStructure (project);
 
-					console.log (structure);
-
 					let tp = {
 						name: project.name,
 						isroot: true,
@@ -666,8 +663,6 @@ export function setup(options, imports, register)
 					};
 
 					await setFiles (structure.children, tp.children[0].children, '/');
-
-					console.log (tp);
 
 					let xtrem = studio.console.getSize ();
 

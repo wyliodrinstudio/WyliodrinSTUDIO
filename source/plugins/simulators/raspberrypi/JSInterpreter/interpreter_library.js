@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import onoff_library from './onoff_library.js';
-import lcd_library from './lcd_library.js'
+import lcd_library from './lcd_library.js';
 
 /**
  * The function structure needed for the JS interpreter
@@ -32,7 +32,9 @@ export default function interpreterLibrary (studio, device, simulator) {
 
 				studio.console.write(device.id, text + '\r\n');
 			} catch(e) {
-				console.log(e);
+				// TODO show notification
+				/* eslint-disable-next-line no-console */
+				console.warn(e);
 			}
 		};
 
@@ -92,5 +94,5 @@ export default function interpreterLibrary (studio, device, simulator) {
 		interpreter.setProperty(lcd, 'autoscroll', interpreter.createNativeFunction(lcd_library.autoscroll));
 		interpreter.setProperty(lcd, 'noAutoscroll', interpreter.createNativeFunction(lcd_library.noAutoscroll));
 		interpreter.setProperty(lcd, 'close', interpreter.createNativeFunction(lcd_library.close));
-	}
+	};
 }

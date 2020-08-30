@@ -97,14 +97,10 @@ export default function setup (options, imports, register)
 				else if (!_.isArray (options.type)) options.type = [options.type];
 				if (!options.board) options.board = [null];
 				else if (!_.isArray (options.board)) options.board = [options.board];
-				console.log (options.type);
-				console.log (options.board);
 				for (let type of options.type)
 				{
 					for (let board of options.board)
 					{
-						console.log ('type '+type);
-						console.log ('board '+board);
 						this._toolboxes.push ({
 							id,
 							toolbox:_.isString(toolbox)?xml.xml2js(toolbox):toolbox,

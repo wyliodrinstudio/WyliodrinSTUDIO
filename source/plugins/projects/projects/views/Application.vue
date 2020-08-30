@@ -41,7 +41,7 @@
 								<v-icon>mdi-folder</v-icon>
 							</p>
 						</template>
-						<template v-slot:label="{item, open}">
+						<template v-slot:label="{item/*, open*/}">
 							<p style="width:100%;" v-if="item.file  === undefined && item.path === '/'" text @click="menuItem = item"  @contextmenu="fileItem = item,showProject($event)"> 
 								{{item.name}}                  
 							</p>
@@ -320,8 +320,6 @@ export default {
 				// let extension = path.extname (this.currentFile).substring (1).toLowerCase();
 				for (let editor of this.editors) {
 					for (let lang of editor.languages) {
-						console.log (lang);
-						console.log (lang.test (this.currentFile));
 						if (lang.test (this.currentFile)) {
 							return editor.component;
 						}

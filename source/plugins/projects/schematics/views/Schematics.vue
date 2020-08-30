@@ -13,7 +13,6 @@
 
 import path from 'path';
 import { mapGetters } from 'vuex';
-var $ = require('jquery');
 export default {
 	name: 'Schematics',
 	data() {
@@ -50,7 +49,6 @@ export default {
 			});
 			if (files.length > 0)
 			{
-				let fileData = await this.studio.filesystem.readImportFile (files[0]);
 				if(files) {
 					let aux = path.basename(files[0].name);
 					let extension = aux.substring(aux.lastIndexOf('.')).substring(1);
@@ -61,7 +59,7 @@ export default {
 					{
 						let content = await this.studio.filesystem.readFile(files[0].name);
 						var encoded = content.toString ('base64');
-						await this.studio.projects.saveSchematic(this.currentProject,this.fileName,content)
+						await this.studio.projects.saveSchematic(this.currentProject,this.fileName,content);
 						if(extension === 'svg')
 							this.encodedImage = 'data:image/svg+xml;base64,' + encoded;
 						else
@@ -69,7 +67,7 @@ export default {
 					}
 					catch(e)
 					{
-						console.error(e.message);
+						this.studio.showError('SCHEMATICS_IMPORT_ERROR',  {error: e.message});
 					}
 				}
 				

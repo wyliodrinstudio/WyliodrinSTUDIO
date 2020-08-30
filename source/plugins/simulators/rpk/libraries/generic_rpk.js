@@ -29,53 +29,53 @@ let generic_rpk = {
 	buzzer: 0,
 
 	guiBacklightDictionary: {
-        0: '1',
-        1: '0.6',
-        2: '0.3',
-        3: '0'
+		0: '1',
+		1: '0.6',
+		2: '0.3',
+		3: '0'
 	},
 	
 	guiColorDictionary: {
-        'GUI_BLUE': '#0000FF',
-        'GUI_GREEN': '#00FF00',
-        'GUI_RED': '#FF0000',
-        'GUI_CYAN': '#00FFFF',
-        'GUI_MAGENTA': '#FF00FF',
-        'GUI_YELLOW': '#FFFF00',
-        'GUI_LIGHTBLUE': '#8080FF',
-        'GUI_LIGHTGREEN': '#80FF80',
-        'GUI_LIGHTRED': '#FF8080',
-        'GUI_LIGHTCYAN': '#80FFFF',
-        'GUI_LIGHTYELLOW': '#FFFF80',
-        'GUI_DARKBLUE': '#000080',
-        'GUI_DARKGREEN': '#008000',
-        'GUI_DARKRED': '#800000',
-        'GUI_DARKCYAN': '#008080',
-        'GUI_DARKMAGENTA': '#800080',
-        'GUI_DARKYELLOW': '#808000',
-        'GUI_WHITE': '#FFFFFF',
-        'GUI_LIGHTGRAY': '#D3D3D3',
-        'GUI_GRAY': '#808080',
-        'GUI_DARKGRAY': '#404040',
-        'GUI_BLACK': '#000000',
-        'GUI_BROWN': '#A52A2A',
-        'GUI_ORANGE': '#FFA500'
+		'GUI_BLUE': '#0000FF',
+		'GUI_GREEN': '#00FF00',
+		'GUI_RED': '#FF0000',
+		'GUI_CYAN': '#00FFFF',
+		'GUI_MAGENTA': '#FF00FF',
+		'GUI_YELLOW': '#FFFF00',
+		'GUI_LIGHTBLUE': '#8080FF',
+		'GUI_LIGHTGREEN': '#80FF80',
+		'GUI_LIGHTRED': '#FF8080',
+		'GUI_LIGHTCYAN': '#80FFFF',
+		'GUI_LIGHTYELLOW': '#FFFF80',
+		'GUI_DARKBLUE': '#000080',
+		'GUI_DARKGREEN': '#008000',
+		'GUI_DARKRED': '#800000',
+		'GUI_DARKCYAN': '#008080',
+		'GUI_DARKMAGENTA': '#800080',
+		'GUI_DARKYELLOW': '#808000',
+		'GUI_WHITE': '#FFFFFF',
+		'GUI_LIGHTGRAY': '#D3D3D3',
+		'GUI_GRAY': '#808080',
+		'GUI_DARKGRAY': '#404040',
+		'GUI_BLACK': '#000000',
+		'GUI_BROWN': '#A52A2A',
+		'GUI_ORANGE': '#FFA500'
 	},
 
 	rgbBrightnessDictionary: {
-        0: '1',
-        1: '0.6',
-        2: '0.3',
-        3: '0'
-    },
+		0: '1',
+		1: '0.6',
+		2: '0.3',
+		3: '0'
+	},
 	
 	rgbColorDictionary: {
-        0: '0',
-        1: '120',
+		0: '0',
+		1: '120',
 		2: '210',
 		3: 'white',
-        4: '60',
-        5: '180',
+		4: '60',
+		5: '180',
 		6: '280',
 		7: 'black'
 	},
@@ -114,14 +114,14 @@ let generic_rpk = {
 			'2': false,
 			'3': false,
 			'4': false
-		}
+		};
 
 		this.touches = {
 			'1': false,
 			'2': false,
 			'3': false,
 			'4': false
-		}
+		};
 
 		let canvas = document.getElementById('rpk_display');
 		let ctx = canvas.getContext('2d');
@@ -138,6 +138,6 @@ let generic_rpk = {
 		switches.generateSwitches();
 		touches.generateTouches();
 	}
-}
+};
 
 export default generic_rpk;

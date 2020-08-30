@@ -113,6 +113,6 @@ export default {
 				this.studio.workspace.showNotification('DASHBOARD_NO_TITLE');
 		}
 	}
-}
+};
 </script>
 

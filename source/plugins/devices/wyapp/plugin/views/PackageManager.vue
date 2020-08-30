@@ -91,7 +91,7 @@ export default {
 			let search = this.search.trim ().toLowerCase();
 			if (this.packages.python && search.length > 0)
 			{
-				return this.packages.python.filter ((p) => p.name.toLowerCase().indexOf (search) >= 0 || p.description.toLowerCase().indexOf (search) >= 0)
+				return this.packages.python.filter ((p) => p.name.toLowerCase().indexOf (search) >= 0 || p.description.toLowerCase().indexOf (search) >= 0);
 			}
 			else return this.packages.python;
 		},
@@ -100,7 +100,7 @@ export default {
 			let search = this.search.trim ().toLowerCase();
 			if (this.packages.nodejs && search.length > 0)
 			{
-				return this.packages.nodejs.filter ((p) => p.name.toLowerCase().indexOf (search) >= 0 || p.description.toLowerCase().indexOf (search) >= 0)
+				return this.packages.nodejs.filter ((p) => p.name.toLowerCase().indexOf (search) >= 0 || p.description.toLowerCase().indexOf (search) >= 0);
 			}
 			else return this.packages.nodejs;
 		}
@@ -125,10 +125,6 @@ export default {
 		knows (languageId)
 		{
 			return this.device.properties.languages && this.device.properties.languages[languageId];
-		},
-		close ()
-		{
-			this.$root.$emit ('submit');
 		},
 		updatePackages (data)
 		{
@@ -228,6 +224,6 @@ export default {
 			};
 		}
 	}
-}
+};
 </script>
 

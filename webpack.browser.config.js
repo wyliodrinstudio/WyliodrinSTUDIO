@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require ('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -96,6 +98,22 @@ module.exports = env => {
 		};
 		mode = 'production';
 	}
+
+	let format_rule = [];
+
+	if (env.FORMAT == 'yes')
+	{
+		format_rule = [{
+			enforce: 'pre',
+        	test: /\.(js|vue)$/,
+			exclude: [/node_modules/, /web\/plugins.js/],
+			loader: 'eslint-loader',
+			options: {
+			  fix: true
+			},
+		}];
+	}
+	
 	return {
 		entry: {
 			workspace: './source/plugins/workspace/index.js',
@@ -113,6 +131,7 @@ module.exports = env => {
 		module:
 		{
 			rules: [
+				...format_rule,
 				// ... other rules
 				{
 					test: /\.vue$/,

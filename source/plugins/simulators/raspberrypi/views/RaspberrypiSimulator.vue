@@ -75,20 +75,20 @@ export default {
 			projectName: null,
 			projectData: null,
 			lcdComponents: null
-		}
+		};
 	},
 
 
 	/**
 	 * Read and create the list of projects, as well as load the initial project
 	 */
-	async created() {
+	created() {
 
 		// Update virtual LCD position
 		let that = this;
 		$(window).resize(function() {
 			that.loadLcdDisplay();
-		})
+		});
 
 		// Load the tutorials list of projects
 		this.svgGenericPath = generic_raspberrypi.svgGenericPath;
@@ -147,7 +147,7 @@ export default {
 		 * Open the documentation
 		 */
 		openDocumentation() {
-			this.studio.system.openLink("https://wyliodrinstudio.readthedocs.io/en/latest/simulator_raspberrypi.html");
+			this.studio.system.openLink('https://wyliodrinstudio.readthedocs.io/en/latest/simulator_raspberrypi.html');
 		},
 
 		/**
@@ -246,8 +246,6 @@ export default {
 					}
 
 					let position = elementLcd[0].getBoundingClientRect();
-					console.log('BUNA\n\n\n');
-					console.log(position);
 					let svgLeftPosition = position.left;
 					let svgTopPosition = position.top - 185.5;
 					
@@ -279,7 +277,7 @@ export default {
 			}
 		}
 	}
-}
+};
 </script>
 
 <style lang="less" scoped>

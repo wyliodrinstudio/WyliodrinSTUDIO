@@ -97,12 +97,6 @@
 import AddProjectDialog from './dialogs/AddProjectDialog.vue';
 import moment from 'moment-timezone';
 import path from 'path';
-import $ from 'jquery';
-let settings = {
-	workspace: {
-		path: path.join (require('os').homedir(), 'WyliodrinSTUDIO')
-	}
-};
 export default {
 	name: 'ProjectsLibrary',
 	data ()
@@ -123,13 +117,12 @@ export default {
 		projectList(){
 			if (!this.projects) return this.projects;
 			else
-			return this.projects.filter(project => {
-				return project.name.toLowerCase().includes(this.search.toLowerCase());
-			})
+				return this.projects.filter(project => {
+					return project.name.toLowerCase().includes(this.search.toLowerCase());
+				});
 		},
 		readonly ()
 		{
-			console.log (this.persistent);
 			return this.persistent === 'notavailable';
 		}
 	},
@@ -168,7 +161,7 @@ export default {
 			let clone = await this.studio.workspace.showPrompt('PROJECT_CLONE_PROJECT', 'PROJECT_NAME_PROMPT', project.name, 'PROJECT_NEW_NAME');
 			if (clone)
 			{
-				await this.studio.projects.cloneProject(project,clone)
+				await this.studio.projects.cloneProject(project,clone);
 			}
 			this.studio.projects.showProjectsLibrary ();
 		},
@@ -178,7 +171,7 @@ export default {
 			let rename = await this.studio.workspace.showPrompt('PROJECT_RENAME_PROJECT', 'PROJECT_NAME_PROMPT',project.name, 'PROJECT_NEW_NAME');
 			if (rename)
 			{
-				await this.studio.projects.renameProject(project, rename)
+				await this.studio.projects.renameProject(project, rename);
 			}
 			this.studio.projects.showProjectsLibrary ();
 		},
@@ -204,7 +197,7 @@ export default {
 				this.close ();
 			}
 		},
-		async deleteProject (project, projects)
+		async deleteProject (project, /* projects */)
 		{
 			this.close ();
 			let localProject = project;
@@ -218,12 +211,12 @@ export default {
 					this.studio.workspace.dispatchToStore('projects', 'currentProject', null);
 					this.studio.workspace.dispatchToStore('projects', 'currentFile', null);
 					await new Promise ((resolve) =>
+					{
+						process.nextTick (() => 
 						{
-							process.nextTick (() => 
-							{
-								resolve ();
-							});
+							resolve ();
 						});
+					});
 						
 				}
 			}
@@ -292,7 +285,7 @@ export default {
 			this.$asyncComputed.persistent.update ();
 		}
 	}
-}
+};
 </script>
 
 <style lang="less" scoped>

@@ -134,7 +134,7 @@ export default {
 				}
 				catch (e)
 				{
-					console.log (e.message);
+					this.studio.warn (e.message);
 				}
 			}
 		},

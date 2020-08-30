@@ -24,26 +24,26 @@ import { Notifiable } from 'vuedl';
 import Alert from './Alert.vue';
 
 export default {
-  components: {
-    Alert
-  },
-  mixins: [ Notifiable ],
-  props: {
-    width: {
-      type: Number,
-      default: () => 330
-    }
-  },
-  computed: {
-    getStyle () {
-      return {
-        [this.verticalProperty]: `${this.verticalOffset}px`,
-        'max-width': `${this.width}px`,
-        'z-index': this.zIndex
-      }
-    }
-  }
-}
+	components: {
+		Alert
+	},
+	mixins: [ Notifiable ],
+	props: {
+		width: {
+			type: Number,
+			default: () => 330
+		}
+	},
+	computed: {
+		getStyle () {
+			return {
+				[this.verticalProperty]: `${this.verticalOffset}px`,
+				'max-width': `${this.width}px`,
+				'z-index': this.zIndex
+			};
+		}
+	}
+};
 </script>
 
 <style lang="less">

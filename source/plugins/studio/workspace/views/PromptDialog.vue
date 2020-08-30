@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 export default {
 	name: 'PromptDialog',
 	props: ['title', 'question', 'buttons', 'values', 'originalValue'],
@@ -25,13 +24,13 @@ export default {
 				title: 'BACK',
 				class: '',
 				value: null,
-			 },
-			 {
-				 title: 'OK',
-				 class: '',
-				 value: 'ok'
-			 }],
-			 value: this.originalValue
+			},
+			{
+				title: 'OK',
+				class: '',
+				value: 'ok'
+			}],
+			value: this.originalValue
 		};
 	},
 	methods:
@@ -56,6 +55,6 @@ export default {
 			}
 		}
 	}
-}
+};
 </script>
 

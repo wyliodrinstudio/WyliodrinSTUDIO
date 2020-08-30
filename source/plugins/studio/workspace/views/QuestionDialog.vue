@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 export default {
 	name: 'QuestionDialog',
 	props: ['title', 'question', 'buttons', 'values'],
@@ -25,12 +24,12 @@ export default {
 				title: 'NO',
 				class: '',
 				value: null,
-			 },
-			 {
-				 title: 'YES',
-				 class: '',
-				 value: 'yes'
-			 }]
+			},
+			{
+				title: 'YES',
+				class: '',
+				value: 'yes'
+			}]
 		};
 	},
 	mounted ()
@@ -52,6 +51,6 @@ export default {
 			this.$root.$emit ('submit', button.value);
 		}
 	}
-}
+};
 </script>
 

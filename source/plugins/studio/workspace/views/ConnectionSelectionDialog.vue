@@ -83,6 +83,6 @@ export default {
 			this.studio.system.openLink ('https://wyliodrinstudio.readthedocs.io/en/latest/boards.html');
 		}
 	}
-}
+};
 </script>
 

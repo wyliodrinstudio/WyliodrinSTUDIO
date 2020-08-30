@@ -22,12 +22,12 @@ export default {
 	data() {
 		return {
 			license: license
-		}
+		};
 	},
 	methods: {
 		exit() {
 			this.$root.$emit('submit', undefined);
 		}
 	}
-}
+};
 </script>

@@ -67,7 +67,7 @@ export default {
 
 			xmlNotLoaded: true,
 			xmlLoading: false
-		}
+		};
 	},
 
 	methods: {
@@ -212,5 +212,5 @@ export default {
 			this.$root.$emit ('submit', object);
 		}
 	}
-}
+};
 </script>

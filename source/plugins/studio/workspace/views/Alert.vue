@@ -15,25 +15,25 @@
 
 
 export default {
-  components: {
+	components: {
     
-  },
-  layout: ['notification', { showClose: false }],
-  props: {
-    type: {
-      type: String,
-      default: () => 'info'
-    },
-    actions: [ Array, Object ],
-    text: String,
-    dismissible: {
-      type: Boolean,
-      default: true
-    },
-    extra: {
-      type: String,
-      default: null
-    }
-  }
-}
+	},
+	layout: ['notification', { showClose: false }],
+	props: {
+		type: {
+			type: String,
+			default: () => 'info'
+		},
+		actions: [ Array, Object ],
+		text: String,
+		dismissible: {
+			type: Boolean,
+			default: true
+		},
+		extra: {
+			type: String,
+			default: null
+		}
+	}
+};
 </script>

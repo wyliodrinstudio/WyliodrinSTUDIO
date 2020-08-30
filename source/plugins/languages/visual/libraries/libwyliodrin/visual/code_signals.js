@@ -4,7 +4,7 @@ module.exports = function (blockly) {
 	var Blockly = blockly.Blockly;
 
 	Blockly.Python['send_signals'] = function (block) {
-		Blockly.Python.wiringpi()
+		Blockly.Python.wiringpi();
 		var value_value_signal = Blockly.Python.valueToCode(block, 'value_signal', Blockly.Python.ORDER_ATOMIC);
 		var value_value_value = Blockly.Python.valueToCode(block, 'value_value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -39,18 +39,18 @@ module.exports = function (blockly) {
 		var statements_commands = Blockly.Python.statementToCode(block, 'commands');
 		// TODO: Assemble Python into code variable.
 		var function_name = Blockly.Python.variableDB_.getDistinctName('myFunction', Blockly.Generator.NAME_TYPE);
-		var code = "";
-		if (statements_commands != "") {
+		let code = '';
+		if (statements_commands != '') {
 			var globals = Blockly.Variables.allVariables(block);
 			for (var i = 0; i < globals.length; i++) {
 				globals[i] = Blockly.Python.variableDB_.getName(globals[i], Blockly.Variables.NAME_TYPE);
 			}
 			globals = globals.length ? '  global ' + globals.join(', ') + '\n' : '';
-			var code = "def " + function_name + "(__sender, __channel, __error, __message):\n" +
+			code = 'def ' + function_name + '(__sender, __channel, __error, __message):\n' +
 				globals +
-				"  " + value_signalvalue + " = int(json.loads(__message))\n" +
-				statements_commands + "\n" +
-				"openConnection(\"signal:\"" + " + " + value_signal + ", " + function_name + ")\n";
+				'  ' + value_signalvalue + ' = int(json.loads(__message))\n' +
+				statements_commands + '\n' +
+				'openConnection("signal:"' + ' + ' + value_signal + ', ' + function_name + ')\n';
 		}
 		return code;
 	};

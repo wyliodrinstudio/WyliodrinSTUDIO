@@ -12,6 +12,8 @@
 		"browser": "webpack --config=webpack.browser.config.js",
 		"electron-production": "webpack --env.NODE_ENV=production",
 		"browser-production": "webpack --config=webpack.browser.config.js --env.NODE_ENV=production",
+		"electron-format": "webpack --env.FORMAT=yes",
+		"browser-format": "webpack --config=webpack.browser.config.js --env.FORMAT=yes",
 		"clean": "rm -rf build/ dist"
 	},
 	"repository": {
@@ -68,6 +70,7 @@
 		"electron-builder": "^22.8.0",
 		"electron-rebuild": "^2.0.0",
 		"eslint": "^7.7.0",
+		"eslint-loader": "^4.0.2",
 		"eslint-plugin-vue": "^6.2.2",
 		"file-loader": "^6.0.0",
 		"highcharts": "^7.1.2",

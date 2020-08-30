@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import generic_raspberrypi from './generic_raspberrypi.js';
 
 export default function update_components() {

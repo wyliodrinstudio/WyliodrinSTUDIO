@@ -95,12 +95,12 @@ let lcd_library = {
 					}
 				}
 			} else {
-				studio_n.console.write(device_n.id, `\r\n----------\r\nERROR: new LCD()\r\nYou can't assign a pin already assigned\r\n----------\r\n`);
+				studio_n.studio_n.write(device_n.id, '\r\n----------\r\nERROR: new LCD()\r\nYou can\'t assign a pin already assigned\r\n----------\r\n');
 				simulator_n.isRunning = false;
 				device_n.properties.isRunning = false;
 			}
 		} else {
-			studio_n.console.write(device_n.id, `\r\n----------\r\nERROR: new LCD()\r\nThe pins are not correct\r\n----------\r\n`);
+			studio_n.studio_n.write(device_n.id, '\r\n----------\r\nERROR: new LCD()\r\nThe pins are not correct\r\n----------\r\n');
 			simulator_n.isRunning = false;
 			device_n.properties.isRunning = false;
 		}
@@ -128,7 +128,8 @@ let lcd_library = {
 
 			update_components();
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -154,7 +155,8 @@ let lcd_library = {
 
 			update_components();
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -173,7 +175,8 @@ let lcd_library = {
 				}
 			}
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -194,7 +197,8 @@ let lcd_library = {
 				}
 			}
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -216,7 +220,8 @@ let lcd_library = {
 
 			update_components();
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -236,7 +241,8 @@ let lcd_library = {
 
 			update_components();
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -246,12 +252,8 @@ let lcd_library = {
 	 * It enables the cursor blinking
 	 * @param  {Integer} pin The number of the pin from the RaspberryPi
 	 */
-	blink: function(pin) {
-		try {
-			console.log('blink');
-		} catch(e) {
-			console.log(e);
-		}
+	blink: function(/* pin */) {
+		studio_n.error ('not implemented');
 	},
 
 	/**
@@ -260,12 +262,8 @@ let lcd_library = {
 	 * It disables the cursor blinking
 	 * @param  {Integer} pin The number of the pin from the RaspberryPi
 	 */
-	noBlink: function(pin) {
-		try {
-			console.log('noBlink');
-		} catch(e) {
-			console.log(e);
-		}
+	noBlink: function(/* pin */) {
+		studio_n.error ('not implemented');
 	},
 
 	/**
@@ -284,7 +282,8 @@ let lcd_library = {
 
 			update_components();
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -306,7 +305,8 @@ let lcd_library = {
 
 			update_components();
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -316,11 +316,7 @@ let lcd_library = {
 	 * ---------------------------
 	 */
 	leftToRight: function() {
-		try {
-			console.log('leftToRight');
-		} catch(e) {
-			console.log(e);
-		}
+		studio_n.error ('not implemented');
 	},
 
 	/**
@@ -329,11 +325,7 @@ let lcd_library = {
 	 * ---------------------------
 	 */
 	rightToLeft: function() {
-		try {
-			console.log('rightToLeft');
-		} catch(e) {
-			console.log(e);
-		}
+		studio_n.error ('not implemented');
 	},
 
 	/**
@@ -343,9 +335,10 @@ let lcd_library = {
 	 */
 	autoscroll: function() {
 		try {
-			console.log('autoscroll');
+			studio_n.log('autoscroll');
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -356,9 +349,10 @@ let lcd_library = {
 	 */
 	noAutoscroll: function() {
 		try {
-			console.log('noAutoscroll');
+			studio_n.log('noAutoscroll');
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	},
 
@@ -383,9 +377,10 @@ let lcd_library = {
 				}
 			}
 		} catch(e) {
-			console.log(e);
+			// TODO write to some simulator console
+			studio_n.error(e);
 		}
 	}
-}
+};
 
 export default lcd_library;

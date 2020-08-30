@@ -385,9 +385,11 @@ let generic_raspberrypi = {
 				}
 			}
 		} catch(e) {
+			// TODO show notification
+			/* eslint-disable-next-line no-console */
 			console.log(e);
 		}
 	}
-}
+};
 
 export default generic_raspberrypi;

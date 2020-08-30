@@ -17,6 +17,7 @@
 									></v-select>
 								</v-layout>
 								<v-tooltip bottom>
+									<!-- eslint-disable-next-line vue/no-unused-vars -->
 									<template v-slot:activator="{ on }">
 										<v-btn text @click="moveUp(element.id)" class="ntbk-btn">
 											<v-img src="plugins/projects/notebook/data/img/icons/up-icon.png"></v-img>
@@ -26,6 +27,7 @@
 								</v-tooltip>
 
 								<v-tooltip bottom>
+									<!-- eslint-disable-next-line vue/no-unused-vars -->
 									<template v-slot:activator="{ on }">
 										<v-btn text @click="moveDown(element.id)" class="ntbk-btn">
 											<v-img src="plugins/projects/notebook/data/img/icons/down-icon.png"></v-img>
@@ -35,6 +37,7 @@
 								</v-tooltip>
 
 								<v-tooltip bottom>
+									<!-- eslint-disable-next-line vue/no-unused-vars -->
 									<template v-slot:activator="{ on }">
 										<v-btn text @click="deleteElement(element)" class="ntbk-btn">
 											<v-img src="plugins/projects/notebook/data/img/icons/delete-icon.png"></v-img>
@@ -44,6 +47,7 @@
 								</v-tooltip>
 
 								<v-tooltip bottom>
+									<!-- eslint-disable-next-line vue/no-unused-vars -->
 									<template v-slot:activator="{ on }">
 										<v-btn text @click="addElement" class="ntbk-btn">
 											<v-img src="plugins/projects/notebook/data/img/icons/add-icon.png"></v-img>
@@ -53,6 +57,7 @@
 								</v-tooltip>
 
 								<v-tooltip bottom v-if="element.type==='markdown'">
+									<!-- eslint-disable-next-line vue/no-unused-vars -->
 									<template v-slot:activator="{ on }">
 										<v-btn text @click="element.editable = !element.editable" class="ntbk-btn right">
 											<v-img src="plugins/projects/notebook/data/img/icons/edit-icon.png"></v-img>
@@ -62,6 +67,7 @@
 								</v-tooltip>
 
 								<v-tooltip bottom v-if="element.type==='python' && visibleRun && !runningId">
+									<!-- eslint-disable-next-line vue/no-unused-vars -->
 									<template v-slot:activator="{ on }">
 										<v-btn text @click="runCode(element.id)" class="ntbk-btn">
 											<v-img src="plugins/projects/notebook/data/img/icons/run-icon.png"></v-img>
@@ -75,6 +81,7 @@
 								</span>
 
 								<v-tooltip bottom v-if="status==='RUNNING' || status==='STOPPED'">
+									<!-- eslint-disable-next-line vue/no-unused-vars -->
 									<template v-slot:activator="{ on }">
 										<v-btn text  v-show="visibleRun" @click="stopCode(element.id)" class="ntbk-btn">
 											<v-img src="plugins/projects/notebook/data/img/icons/stop-icon.png"></v-img>
@@ -119,6 +126,7 @@
 		<div class="server-status no-print" :class="{'connected':status === 'READY' || status === 'PROCESSING', 'stopped':status === 'STOPPED'}" v-if="visibleRun">
 			Python {{ status }}
 			<v-tooltip top v-if="visibleRun">
+				<!-- eslint-disable-next-line vue/no-unused-vars -->
 				<template v-slot:activator="{ on }">
 					<v-btn text @click="resetCode(runningElementId)" class="ntbk-btn">
 						<v-img src="plugins/projects/notebook/data/img/icons/reset-icon.png"></v-img>
@@ -127,6 +135,7 @@
 				<span>Reset</span>
 			</v-tooltip>
 			<v-tooltip top v-if="visibleRun && status !== 'STOPPED'">
+				<!-- eslint-disable-next-line vue/no-unused-vars -->
 				<template v-slot:activator="{ on }">
 					<v-btn text @click="stopInterpretor()" class="ntbk-btn">
 						<v-img src="plugins/projects/notebook/data/img/icons/stop-icon.png"></v-img>
@@ -151,11 +160,6 @@ import katex from 'katex';
 
 import { EventEmitter } from 'events';
 export let events = new EventEmitter ();
-
-let menuElements = {
-	markdown: 'Markdown',
-	python: 'Python'
-};
 
 let notebook = null;
 export function getNotebook()
@@ -194,7 +198,7 @@ marked.setOptions({
 		{
 			var web = katex.renderToString (text, (style?{displayMode: true}:null));
 			if (style) web = '<span style="font-size: 20px">'+web+'</span>';
-				return web;
+			return web;
 		}
 		catch (e)
 		{
@@ -230,7 +234,7 @@ export default {
 			status:'READY',
 			runningElementId: '',
 			onlyOne: true
-		}
+		};
 	},
 	components: {
 		AceNotebook
@@ -250,8 +254,7 @@ export default {
 						}
 						catch(e)
 						{
-							console.log(e.message);
-							this.studio.workspace.showError('NOTEBOOK_LOAD_DATA_ERROR');
+							this.studio.workspace.showError('NOTEBOOK_LOAD_DATA_ERROR', {error: e.message});
 						}
 					} 
 					else
@@ -269,10 +272,10 @@ export default {
 		},
 		elements: { 
 			deep:true,
-			handler: async function (val, oldVal){
+			handler: async function (/* val, oldVal */){
 				if (this.currentProject)
 				{
-					let file = await this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
+					await this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
 				}
 			}		
 		}
@@ -328,7 +331,7 @@ export default {
 			}
 			catch(e)
 			{
-				console.log(e.message);
+				this.studio.warn (e);
 			}
 		},
 		moveDown(id)
@@ -347,7 +350,7 @@ export default {
 			}
 			catch(e)
 			{
-				console.log(e.message);
+				this.studio.warn (e);
 			}
 		},
 		async deleteElement(element)
@@ -390,9 +393,9 @@ export default {
 		{
 			let index = this.elements.findIndex(e=>e.id === id);
 			if(index=== 0)
-			return true;
+				return true;
 			else
-			return false;
+				return false;
 		},
 		openEditArea(element)
 		{
@@ -450,7 +453,7 @@ export default {
 			this.runningId = id;
 			this.status = status;
 		},
-		stopCode(id)
+		stopCode(/* id */)
 		{
 			events.emit('stop', this.runningId);
 		},
@@ -458,7 +461,7 @@ export default {
 		{
 			events.emit('stop');
 		},
-		resetCode(id)
+		resetCode(/* id */)
 		{
 			events.emit('reset');
 		}
@@ -472,7 +475,7 @@ export default {
 			return this.device.status === 'CONNECTED';
 		}
 	}
-}
+};
 </script>
 
 

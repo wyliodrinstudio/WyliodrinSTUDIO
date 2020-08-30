@@ -1,6 +1,6 @@
 <template>
 	<v-dialog v-model="isActive" :max-width="width" :persistent="persistent" @keydown.enter="enter" @keydown.esc="esc">
-    	<dialog-child v-bind="$options.propsData" ref="dialog"/>
+		<dialog-child v-bind="$options.propsData" ref="dialog"/>
 	</v-dialog>
 </template>
 
@@ -21,6 +21,6 @@ export default {
 			if (this.$refs.dialog.esc) this.$refs.dialog.esc ();
 		}
 	}
-}
+};
 </script>
 

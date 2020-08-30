@@ -1,3 +1,4 @@
+/* eslint no-console: ["warn", { allow: ["warn", "error"] }] */
 import Dexie from 'dexie';
 import EventEmitter from 'events';
 import axios from 'axios';
@@ -35,11 +36,11 @@ async function persist() {
   @returns {Promise<{quota: number, usage: number}>} Promise resolved with
   {quota: number, usage: number} or undefined.
 */
-async function showEstimatedQuota() {
-	return await navigator.storage && navigator.storage.estimate ?
-		navigator.storage.estimate() :
-		undefined;
-}
+// async function showEstimatedQuota() {
+// 	return await navigator.storage && navigator.storage.estimate ?
+// 		navigator.storage.estimate() :
+// 		undefined;
+// }
 
 /** Tries to persist storage without ever prompting user.
   @returns {Promise<string>}
@@ -81,13 +82,13 @@ async function initStoragePersistence() {
 	const persist = await tryPersistWithoutPromtingUser();
 	switch (persist) {
 		case 'never':
-			console.log('Not possible to persist storage');
+			console.warn('Not possible to persist storage');
 			break;
 		case 'persisted':
-			console.log('Successfully persisted storage silently');
+			// console.log('Successfully persisted storage silently');
 			break;
 		case 'prompt':
-			console.log('Not persisted, but we may prompt user when we want to.');
+			console.warn('Not persisted, but we may prompt user when we want to.');
 			break;
 	}
 }
@@ -488,7 +489,7 @@ let web_filesystem = {
 		await this.insertElementData(objIns[0].id, buffer.toString('base64'), buffer.length);
 	},
 
-	lastModified(path) {
+	lastModified(/* path */) {
 		//TODO
 		return false;
 	},
@@ -512,7 +513,6 @@ let web_filesystem = {
 		events.removeAllListeners();
 		$('#importFile').trigger('click');
 		$('body').one('focus', '*', function (e) {
-			console.log('focus');
 			setTimeout(() => {
 				// on change sghould fire first, so this should not fire if there is a file selected
 				events.emit('load', new Error('ENODATA'));

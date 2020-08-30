@@ -28,7 +28,7 @@ let onoff_library = {
 		let pinNumber = generic_raspberrypi.parseGpioToPin(pin);
 
 		if (generic_raspberrypi.dataLoaded.assignedPins.includes(pinNumber)) {
-			studio_n.console.write(device_n.id, `\r\n----------\r\nERROR: new Gpio(...)\r\nYou can't assign a pin already assigned\r\n----------\r\n`);
+			studio_n.console.write(device_n.id, '\r\n----------\r\nERROR: new Gpio(...)\r\nYou can\'t assign a pin already assigned\r\n----------\r\n');
 			simulator_n.isRunning = false;
 			device_n.properties.isRunning = false;
 		} else {
@@ -47,12 +47,9 @@ let onoff_library = {
 	 * @param  {Integer} pin The number of the pin from the RaspberryPi
 	 * @param  {String} state The state of the pin, 'in' or 'out'
 	 */
-	read: function(pin, state) {
-		try {
-			console.log('read');
-		} catch(e) {
-			console.log(e);
-		}
+	read: function(/* pin, state */) {
+		// TODO implement
+		studio_n.error ('not implemented');
 	},
 
 	/**
@@ -89,12 +86,12 @@ let onoff_library = {
 					}
 				}
 			} else {
-				studio_n.console.write(device_n.id, `\r\n----------\r\nERROR: onoff.Gpio.readSync()\r\nYou can't read from a pin that is assigned as "out"\r\n----------\r\n`);
+				studio_n.console.write(device_n.id, '\r\n----------\r\nERROR: onoff.Gpio.readSync()\r\nYou can\'t read from a pin that is assigned as "out"\r\n----------\r\n');
 				simulator_n.isRunning = false;
 				device_n.properties.isRunning = false;
 			}
 		} catch(e) {
-			console.log(e);
+			studio_n.error(e);
 		}
 	},
 
@@ -106,12 +103,9 @@ let onoff_library = {
 	 * @param  {String} state The state of the pin, 'in' or 'out'
 	 * @param  {Integer} value The value to be written, '0' or '1'
 	 */
-	write: function(pin, state, value) {
-		try {
-			console.log('write ' + value.toString());
-		} catch(e) {
-			console.log(e);
-		}
+	write: function(/* pin, state, value */) {
+		// TODO implement
+		studio_n.error('not implemented');
 	},
 
 	/**
@@ -140,12 +134,12 @@ let onoff_library = {
 				generic_raspberrypi.dataLoaded.pins[pinNumber].value = output;
 				update_components();
 			} else {
-				studio_n.console.write(device_n.id, `\r\n----------\r\nERROR: onoff.Gpio.writeSync()\r\nYou can't write on a pin that is assigned as "in"\r\n----------\r\n`);
+				studio_n.console.write(device_n.id, '\r\n----------\r\nERROR: onoff.Gpio.writeSync()\r\nYou can\'t write on a pin that is assigned as "in"\r\n----------\r\n');
 				simulator_n.isRunning = false;
 				device_n.properties.isRunning = false;
 			}
 		} catch(e) {
-			console.log(e);
+			studio_n.error(e);
 		}
 	},
 
@@ -155,11 +149,7 @@ let onoff_library = {
 	 * It watches the change of value of the given pin and make an interruption
 	 */
 	watch: function() {
-		try {
-			console.log('watch');
-		} catch(e) {
-			console.log(e);
-		}
+		studio_n.error('not implemented');
 	},
 
 	/**
@@ -168,11 +158,7 @@ let onoff_library = {
 	 * Itun watches the change of value of the given pin
 	 */
 	unwatch: function() {
-		try {
-			console.log('unwatch');
-		} catch(e) {
-			console.log(e);
-		}
+		studio_n.error('not implemented');
 	},
 
 	/**
@@ -181,11 +167,7 @@ let onoff_library = {
 	 * It unwatches the change of value of all the pins
 	 */
 	unwatchAll: function() {
-		try {
-			console.log('unwatchAll');
-		} catch(e) {
-			console.log(e);
-		}
+		studio_n.error('not implemented');
 	},
 
 	/**
@@ -197,7 +179,7 @@ let onoff_library = {
 		try {
 			return generic_raspberrypi.dataLoaded.pins[generic_raspberrypi.parseGpioToPin(pin)].state;
 		} catch(e) {
-			console.log(e);
+			studio_n.error(e);
 		}
 	},
 
@@ -212,7 +194,7 @@ let onoff_library = {
 		try {
 			generic_raspberrypi.dataLoaded.pins[generic_raspberrypi.parseGpioToPin(pin)].state = value;
 		} catch(e) {
-			console.log(e);
+			studio_n.error(e);
 		}
 	},
 
@@ -225,7 +207,7 @@ let onoff_library = {
 		try {
 			return generic_raspberrypi.dataLoaded.pins[generic_raspberrypi.parseGpioToPin(pin)].activeLow;
 		} catch(e) {
-			console.log(e);
+			studio_n.error(e);
 		}
 	},
 
@@ -248,9 +230,9 @@ let onoff_library = {
 
 			update_components();
 		} catch(e) {
-			console.log(e);
+			studio_n.error(e);
 		}
 	}
-}
+};
 
 export default onoff_library;

@@ -50,7 +50,7 @@ export default function generate_project_json(xml) {
 							name: null,
 							active: null,
 							valid: null
-						}
+						};
 
 						component.active = false;
 						component.valid = true;
@@ -84,7 +84,7 @@ export default function generate_project_json(xml) {
 				connections[0].components.push({
 					start: connection.components[0],
 					finish: connection.components[1]
-				})
+				});
 			} else {
 				connections.push(connection);
 			}

@@ -8,6 +8,7 @@
 					<v-img :src="device.icon"></v-img>
 				</div>
 			</div>
+			<!-- eslint-disable-next-line vue/no-use-v-if-with-v-for -->
 			<v-tooltip bottom v-for="deviceToolButton in deviceToolButtons" :key="deviceToolButton.name" v-if="deviceToolButton.type === device.type && deviceToolButton.visible()">
 				<template #activator="data">
 					<v-btn text :class="deviceToolButton.buttonType+'-bt'" @click.stop="deviceToolButton.action()" :disabled="!deviceToolButton.enabled()">
@@ -104,6 +105,6 @@ export default {
 			this.studio.workspace.disconnect ();
 		}
 	}
-}
+};
 </script>
 

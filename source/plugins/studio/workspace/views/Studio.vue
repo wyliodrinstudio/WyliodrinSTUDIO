@@ -12,6 +12,7 @@ import Toolbar from './Toolbar.vue';
 import Workspace from './Workspace.vue';
 import Status from './Status.vue';
 
+/* eslint-disable-next-line no-console */
 console.log ('Loading Studio');
 export default Vue.extend ({
 	name: 'Studio',

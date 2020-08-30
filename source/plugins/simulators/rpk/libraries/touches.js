@@ -4,7 +4,6 @@ import generic_rpk from './generic_rpk.js';
 let touches = {
 	'generateTouches': function() {
 		$('#up_touch').on ('mousedown', () => {
-			console.log('up');
 			generic_rpk.touchesDictionary['1'] = true;
 		});
 
@@ -17,7 +16,6 @@ let touches = {
 		});
 
 		$('#down_touch').on ('mousedown', () => {
-			console.log('down');
 			generic_rpk.touchesDictionary['2'] = true;
 		});
 
@@ -30,7 +28,6 @@ let touches = {
 		});
 
 		$('#left_touch').on ('mousedown', () => {
-			console.log('left');
 			generic_rpk.touchesDictionary['3'] = true;
 		});
 
@@ -43,7 +40,6 @@ let touches = {
 		});
 
 		$('#right_touch').on ('mousedown', () => {
-			console.log('right');
 			generic_rpk.touchesDictionary['4'] = true;
 		});
 
@@ -55,6 +51,6 @@ let touches = {
 			generic_rpk.touchesDictionary['4'] = false;
 		});
 	}
-}
+};
 
 export default touches;

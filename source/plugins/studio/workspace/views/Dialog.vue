@@ -8,5 +8,5 @@
 export default {
 	name: 'Dialog',
 	props: ['title', 'component', 'actions'],
-}
+};
 </script>
