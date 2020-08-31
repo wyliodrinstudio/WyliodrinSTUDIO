@@ -12,6 +12,7 @@ import FileManager from './views/FileManager.vue';
 import PackageManager from './views/PackageManager.vue';
 import TaskManager from './views/TaskManager.vue';
 import { EventEmitter } from 'events';
+import Deployments from './views/Deployments.vue';
 
 let studio = null;
 let workspace = null;
@@ -35,6 +36,7 @@ function updateDevices ()
 	{
 		devices.push (...transportDevices[transportDriverName]);
 	}
+	//console.log (searchDevices);
 	for (let searchName in searchDevices)
 	{
 		devices.push (...searchDevices[searchName]);
@@ -451,6 +453,7 @@ export function setup(options, imports, register)
 			}
 		});
 
+
 		/* Register the Package Manager button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_PACKAGE_MANAGER', 40, () => {
 			let device = studio.workspace.getDevice ();
@@ -477,6 +480,20 @@ export function setup(options, imports, register)
 			visible () {
 				let device = studio.workspace.getDevice ();
 				return (device.status === 'CONNECTED' && device.properties.networkManager === true);
+			}
+		});
+
+		/* Register the Deployments button */
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_DEPLOYMENTS', 60, () => {
+			let device = studio.workspace.getDevice ();
+			studio.workspace.showDialog(Deployments, {
+				width:550,
+				connection: connections[device.id]
+			});
+		}, 'plugins/device.wyapp/data/img/icons/deployments-icon.png', {
+			visible () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.properties.deployments === true);
 			}
 		});
 	}
