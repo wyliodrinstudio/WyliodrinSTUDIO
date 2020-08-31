@@ -1,0 +1,12 @@
+{
+    "name": "device.esp",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace", "projects", "events", "device_wyapp", "console", "filesystem", "system", "shell", "notebook"],
+        "provides": [],
+		"target": ["electron", "browser"],
+		"disabled": false
+    }
+}
