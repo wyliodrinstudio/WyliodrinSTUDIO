@@ -12,7 +12,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				studio.console.write(device.id, text + '\r\n');
 			} catch(e) {
 				// TODO write to some simulator console
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 		};
 
@@ -185,7 +185,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				ctx.stroke();
 			} catch(e) {
 				// TODO write to some simulator console
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 		};
 
@@ -194,7 +194,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				generic_rpk.textColor = color;
 			} catch(e) {
 				// TODO write to some simulator console
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 		};
 
@@ -203,7 +203,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				// TODO implement backlight
 			} catch(e) {
 				// TODO write to some simulator console
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 		};
 
@@ -213,7 +213,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				$('#led_brightness').attr('fill', 'rgba(0, 0, 0,  ' + generic_rpk.rgbBrightnessDictionary[generic_rpk.rgbBrightness]);
 			} catch(e) {
 				// TODO write to some simulator console
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 		};
 
@@ -229,7 +229,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				}
 			} catch(e) {
 				// TODO write to some simulator console
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 		};
 
@@ -239,7 +239,7 @@ export default function interpreter_library (studio, device, generic_rpk) {
 				rgbSetColor(color);
 			} catch(e) {
 				// TODO write to some simulator console
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 		};
 

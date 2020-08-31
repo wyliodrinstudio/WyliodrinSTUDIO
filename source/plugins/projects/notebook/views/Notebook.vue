@@ -331,7 +331,7 @@ export default {
 			}
 			catch(e)
 			{
-				this.studio.warn (e);
+				this.studio.workspace.warn (e);
 			}
 		},
 		moveDown(id)
@@ -350,7 +350,7 @@ export default {
 			}
 			catch(e)
 			{
-				this.studio.warn (e);
+				this.studio.workspace.warn (e);
 			}
 		},
 		async deleteElement(element)

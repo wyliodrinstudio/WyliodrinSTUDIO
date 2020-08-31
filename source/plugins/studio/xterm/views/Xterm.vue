@@ -118,7 +118,7 @@ export default {
 				}
 				catch(e)
 				{
-					this.studio.warn(e.message);
+					this.studio.workspace.warn(e.message);
 				}
 				
 			});

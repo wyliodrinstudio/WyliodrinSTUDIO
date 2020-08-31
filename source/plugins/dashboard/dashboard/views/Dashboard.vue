@@ -96,7 +96,7 @@ export default {
 			}
 			catch(e)
 			{
-				this.studio.warn(e.message);
+				this.studio.workspace.warn(e.message);
 			}
 		},
 		right(id)
@@ -114,7 +114,7 @@ export default {
 			}
 			catch(e)
 			{
-				this.studio.warn(e.message);
+				this.studio.workspace.warn(e.message);
 			}
 		},
 		async erase(signal)
@@ -159,7 +159,7 @@ export default {
 			}
 			catch(e)
 			{
-				this.studio.warn(e.message);
+				this.studio.workspace.warn(e.message);
 			}	
 		},
 		emitSignal()

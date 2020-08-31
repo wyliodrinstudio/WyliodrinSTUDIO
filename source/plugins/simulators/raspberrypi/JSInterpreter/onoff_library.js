@@ -49,7 +49,7 @@ let onoff_library = {
 	 */
 	read: function(/* pin, state */) {
 		// TODO implement
-		studio_n.error ('not implemented');
+		studio_n.workspace.error ('not implemented');
 	},
 
 	/**
@@ -91,7 +91,7 @@ let onoff_library = {
 				device_n.properties.isRunning = false;
 			}
 		} catch(e) {
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -105,7 +105,7 @@ let onoff_library = {
 	 */
 	write: function(/* pin, state, value */) {
 		// TODO implement
-		studio_n.error('not implemented');
+		studio_n.workspace.error('not implemented');
 	},
 
 	/**
@@ -139,7 +139,7 @@ let onoff_library = {
 				device_n.properties.isRunning = false;
 			}
 		} catch(e) {
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -149,7 +149,7 @@ let onoff_library = {
 	 * It watches the change of value of the given pin and make an interruption
 	 */
 	watch: function() {
-		studio_n.error('not implemented');
+		studio_n.workspace.error('not implemented');
 	},
 
 	/**
@@ -158,7 +158,7 @@ let onoff_library = {
 	 * Itun watches the change of value of the given pin
 	 */
 	unwatch: function() {
-		studio_n.error('not implemented');
+		studio_n.workspace.error('not implemented');
 	},
 
 	/**
@@ -167,7 +167,7 @@ let onoff_library = {
 	 * It unwatches the change of value of all the pins
 	 */
 	unwatchAll: function() {
-		studio_n.error('not implemented');
+		studio_n.workspace.error('not implemented');
 	},
 
 	/**
@@ -179,7 +179,7 @@ let onoff_library = {
 		try {
 			return generic_raspberrypi.dataLoaded.pins[generic_raspberrypi.parseGpioToPin(pin)].state;
 		} catch(e) {
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -194,7 +194,7 @@ let onoff_library = {
 		try {
 			generic_raspberrypi.dataLoaded.pins[generic_raspberrypi.parseGpioToPin(pin)].state = value;
 		} catch(e) {
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -207,7 +207,7 @@ let onoff_library = {
 		try {
 			return generic_raspberrypi.dataLoaded.pins[generic_raspberrypi.parseGpioToPin(pin)].activeLow;
 		} catch(e) {
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -230,7 +230,7 @@ let onoff_library = {
 
 			update_components();
 		} catch(e) {
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	}
 };

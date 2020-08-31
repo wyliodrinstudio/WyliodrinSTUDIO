@@ -328,7 +328,7 @@ export default {
 		},
 		error(data){
 			//TODO show notification
-			this.studio.error (data);
+			this.studio.workspace.error (data);
 		},
 		updateFileTree(data, tree){
 			tree.children = [];

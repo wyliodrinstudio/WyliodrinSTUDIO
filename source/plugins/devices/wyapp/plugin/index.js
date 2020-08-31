@@ -112,7 +112,7 @@ class Connection extends EventEmitter
 		}
 		else
 		{
-			studio.error ('Unable to send data to device '+this.device.id+', no link');
+			studio.workspace.error ('Unable to send data to device '+this.device.id+', no link');
 		}
 	}
 

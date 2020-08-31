@@ -37,7 +37,7 @@ function loadSerialPort() {
 		return eval ('require(\'serialport\')');
 	}
 	catch (e) {
-		studio.warn (e);
+		studio.workspace.warn (e);
 		return {
 			list: function () {
 				return [
@@ -116,7 +116,7 @@ async function listRPKs() {
 		ports = await drivelist.list();
 	}
 	catch (e) {
-		studio.error (e);
+		studio.workspace.error (e);
 	}
 	return ports;
 }
@@ -440,7 +440,7 @@ async function readBinary() {
 		let data = await studio.filesystem.loadDataFile('device.rpk', 'binaries/jerryscript.bin');
 		return data;
 	} catch (err) {
-		studio.error(err);
+		studio.workspace.error(err);
 	}
 }
 
@@ -448,6 +448,6 @@ async function writeBinary(device, data) {
 	try {
 		await fs.writeFile(path.join(device.address, 'jerryscript.bin'), data);
 	} catch (err) {
-		studio.error(err);
+		studio.workspace.error(err);
 	}
 }

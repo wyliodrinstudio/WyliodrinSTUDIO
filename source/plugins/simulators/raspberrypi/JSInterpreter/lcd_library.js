@@ -129,7 +129,7 @@ let lcd_library = {
 			update_components();
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -156,7 +156,7 @@ let lcd_library = {
 			update_components();
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -176,7 +176,7 @@ let lcd_library = {
 			}
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -198,7 +198,7 @@ let lcd_library = {
 			}
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -221,7 +221,7 @@ let lcd_library = {
 			update_components();
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -242,7 +242,7 @@ let lcd_library = {
 			update_components();
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -253,7 +253,7 @@ let lcd_library = {
 	 * @param  {Integer} pin The number of the pin from the RaspberryPi
 	 */
 	blink: function(/* pin */) {
-		studio_n.error ('not implemented');
+		studio_n.workspace.error ('not implemented');
 	},
 
 	/**
@@ -263,7 +263,7 @@ let lcd_library = {
 	 * @param  {Integer} pin The number of the pin from the RaspberryPi
 	 */
 	noBlink: function(/* pin */) {
-		studio_n.error ('not implemented');
+		studio_n.workspace.error ('not implemented');
 	},
 
 	/**
@@ -283,7 +283,7 @@ let lcd_library = {
 			update_components();
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -306,7 +306,7 @@ let lcd_library = {
 			update_components();
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -316,7 +316,7 @@ let lcd_library = {
 	 * ---------------------------
 	 */
 	leftToRight: function() {
-		studio_n.error ('not implemented');
+		studio_n.workspace.error ('not implemented');
 	},
 
 	/**
@@ -325,7 +325,7 @@ let lcd_library = {
 	 * ---------------------------
 	 */
 	rightToLeft: function() {
-		studio_n.error ('not implemented');
+		studio_n.workspace.error ('not implemented');
 	},
 
 	/**
@@ -338,7 +338,7 @@ let lcd_library = {
 			studio_n.log('autoscroll');
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -352,7 +352,7 @@ let lcd_library = {
 			studio_n.log('noAutoscroll');
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	},
 
@@ -378,7 +378,7 @@ let lcd_library = {
 			}
 		} catch(e) {
 			// TODO write to some simulator console
-			studio_n.error(e);
+			studio_n.workspace.error(e);
 		}
 	}
 };

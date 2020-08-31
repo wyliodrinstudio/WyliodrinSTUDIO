@@ -538,7 +538,7 @@ let projects = {
 				}
 			} catch(e) {
 
-				// TODO show notification				studio.error(e);
+				// TODO show notification				studio.workspace.error(e);
 				return false;
 			}
 			
@@ -673,7 +673,7 @@ let projects = {
 			return true;
 		} catch(e) {
 
-			// TODO show notification			studio.error(e);
+			// TODO show notification			studio.workspace.error(e);
 		}  
 	},
 	/**
@@ -878,7 +878,7 @@ let projects = {
 			}
 		} catch (e) {
 			// TODO show notification
-			studio.error(e);
+			studio.workspace.error(e);
 		}
 		
 	},
@@ -899,7 +899,7 @@ let projects = {
 			}
 		} catch (e) {
 			// TODO show notification
-			studio.error(e);
+			studio.workspace.error(e);
 		}
 	},
 	/**
@@ -1336,7 +1336,7 @@ let projects = {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
 				// TODO show notification
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 			let specialFile = path.join(specialFolder, (name));
 			try {
@@ -1373,7 +1373,7 @@ let projects = {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
 				// TODO show notification
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 			let specialFile = path.join(specialFolder, name);
 			try {
@@ -1401,7 +1401,7 @@ let projects = {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
 				// TODO show notification
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 			let specialFile = path.join(specialFolder, (name));
 			try {
@@ -1424,7 +1424,7 @@ let projects = {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
 				// TODO show notification
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 			let specialFile = path.join(specialFolder, 'schematic.svg');
 			try {
@@ -1451,7 +1451,7 @@ let projects = {
 				await studio.filesystem.mkdirp(specialFolder);
 			} catch (e) {
 				// TODO show notification
-				studio.error(e);
+				studio.workspace.error(e);
 			}
 			let specialFile = path.join(specialFolder, 'schematic.svg');
 			try {
@@ -1503,7 +1503,7 @@ let projects = {
 				if (isRoot) return items[0];
 				else return items;
 			} catch(e){
-				studio.error(e.message);
+				studio.workspace.error(e.message);
 			}
 		} else {
 			studio.workspace.warn('PROJECT_NULL');
