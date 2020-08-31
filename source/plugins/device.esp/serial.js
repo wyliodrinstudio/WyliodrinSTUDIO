@@ -78,7 +78,7 @@ export class SerialPort extends EventEmitter {
 
 		}
 		else
-		{
+		{	
 			this.portConnect = await navigator.serial.requestPort();
 			await this.portConnect.open({ baudrate: baudRate || 115200 });
 			this.reader = this.portConnect.readable.getReader();
