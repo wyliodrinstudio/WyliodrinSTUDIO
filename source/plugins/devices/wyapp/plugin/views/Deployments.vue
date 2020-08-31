@@ -17,13 +17,13 @@
 					</tr>-->
 					<tr v-for="container in containers" :key="container.ID" class="w-100 container">
 						<td class="w-50 d-flex">
-							<v-img src="plugins/device.wyapp/data/img/icons/container-running.png" aria-label="Container" ></v-img>
+							<v-img src="../../data/img/icons/container-running.png" aria-label="Container" ></v-img>
 							<h3>{{container.image}}</h3>
 						</td>
 						<td class="w-30 d-flex">
-							<span>{{container.ID}}</span>
+							<!--<span>{{container.ID}}</span> -->
 							<span>{{container.name}}</span>
-							<span>{{container.image}}</span>
+							<!--<span>{{container.image}}</span>-->
 							<!--<span>{{task.TT}}</span>-->
 						</td>
 						<td class="w-20 text-right lib-btn-box">
