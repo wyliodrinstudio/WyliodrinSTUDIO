@@ -168,17 +168,23 @@ export function setup (options, imports, register)
         ///let event = 'data';
         studio.shell.register((event,id,data)=>
         {
-                if(ports[id])
+                if (event === 'data')
                 {
-                        ports[id].write(Buffer.from(data+''));
+                        if(ports[id])
+                        {
+                                ports[id].write(Buffer.from(data+''));
+                        }
                 }
         });
 
         studio.console.register ((event, id, data) =>
 	{
-		if(ports[id])
+                if (event === 'data')
                 {
-                        ports[id].write(Buffer.from(data+''));
+                        if(ports[id])
+                        {
+                                ports[id].write(Buffer.from(data+''));
+                        }
                 }
 	});
 
@@ -282,11 +288,8 @@ export function setup (options, imports, register)
 
                                                 mp.on('data', (data)=>
                                                 {
-                                                        if(sts === STATUS_READY || sts === STATUS_RUNNING)
-                                                        {
-                                                                studio.shell.write(device.id, Buffer.from(data).toString());
-                                                                studio.console.write(device.id, Buffer.from(data).toString());
-                                                        }
+                                                        studio.shell.write(device.id, Buffer.from(data).toString());
+                                                        studio.console.write(device.id, Buffer.from(data).toString());
                                                 });
 
                                                 mp.on('error',(err) => {
@@ -391,14 +394,20 @@ export function setup (options, imports, register)
                                 if (project.language === 'python') {
                                         pySource = await studio.projects.getCurrentFileCode();
                                         let mp = ports[device.id];
-                                        await mp.enterRawRepl();
-                                        //mp.writeRawRepl(pySource);
-
-                                        mp.on('readyrepl', ()=>{
-                                                mp.writeRawRepl(pySource);
+                                        if (await mp.enterRawRepl())
+                                        {
                                                 device.running = true;
-                                                updateDevice(device);
-                                        });
+                                                updateDevice (device);
+                                                if (!await mp.run (pySource)) {
+                                                        device.running = false;
+                                                        updateDevice (device);
+                                                        // TODO show error
+                                                }
+                                        }
+                                        else 
+                                        {
+                                                // TODO show error
+                                        }
                                 }
 
                         }
@@ -453,7 +462,7 @@ export function setup (options, imports, register)
                                 },
                                 enabled () {
                                         let device = studio.workspace.getDevice ();
-                                        return (device.status === 'CONNECTED' && device.type === 'esp' && device.running === true);
+                                        return (device.status === 'CONNECTED' && device.type === 'esp');
                                 },
                                 type: 'stop'
                         });        
