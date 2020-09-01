@@ -17,7 +17,8 @@
 					</tr>-->
 					<tr v-for="container in containers" :key="container.ID" class="w-100 container">
 						<td class="w-50 d-flex">
-							<v-img src="plugins/devices/wyapp/plugin/data/img/icons/docker3.svg" aria-label="Container" ></v-img>
+							<v-img src="plugins/devices/wyapp/plugin/data/img/icons/docker3
+							.svg" aria-label="Container" ></v-img>
 							<h3>{{container.name}}</h3>
 						</td>
 						<td class="w-30 d-flex">
