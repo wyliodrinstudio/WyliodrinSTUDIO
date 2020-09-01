@@ -168,17 +168,23 @@ export function setup (options, imports, register)
         ///let event = 'data';
         studio.shell.register((event,id,data)=>
         {
-                if(ports[id])
+                if (event === 'data')
                 {
-                        ports[id].write(Buffer.from(data+''));
+                        if(ports[id])
+                        {
+                                ports[id].write(Buffer.from(data+''));
+                        }
                 }
         });
 
         studio.console.register ((event, id, data) =>
 	{
-		if(ports[id])
+                if (event === 'data')
                 {
-                        ports[id].write(Buffer.from(data+''));
+                        if(ports[id])
+                        {
+                                ports[id].write(Buffer.from(data+''));
+                        }
                 }
 	});
 
