@@ -490,7 +490,7 @@ export function setup(options, imports, register)
 				width:550,
 				connection: connections[device.id]
 			});
-		}, 'plugins/device.wyapp/data/img/icons/deployments-icon.png', {
+		}, 'plugins/devices/wyapp/plugin/data/img/icons/deploy.png', {
 			visible () {
 				let device = studio.workspace.getDevice ();
 				return (device.status === 'CONNECTED' && device.properties.deployments === true);
