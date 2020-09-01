@@ -95,7 +95,7 @@ export class SerialPort extends EventEmitter {
 					else
 					{
 						this.emit ('data', value);
-						console.log(value);
+						console.log(Buffer.from (value).toString());
 					}
 				}
 				catch (e)
