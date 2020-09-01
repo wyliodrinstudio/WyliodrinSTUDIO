@@ -88,6 +88,7 @@ export class SerialPort extends EventEmitter {
 				try
 				{
 					let {done,value} = await this.reader.read();
+					console.log (value);
 					if(done)
 					{
 						break;
@@ -95,13 +96,14 @@ export class SerialPort extends EventEmitter {
 					else
 					{
 						this.emit ('data', value);
-						console.log(value);
+						console.log(Buffer.from (value).toString());
 					}
 				}
 				catch (e)
 				{
 					console.error(e);
 					this.emit ('error', e);
+					break;
 				}
 			} while(true);
 			//this.emit ('close');
