@@ -275,7 +275,7 @@ export class MicroPython extends EventEmitter {
 
 	async reset()
 	{
-		
+		await this.port.write(Buffer.from("\r\x04"));
 	}
 
 }

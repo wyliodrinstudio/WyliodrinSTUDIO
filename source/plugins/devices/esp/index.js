@@ -238,7 +238,6 @@ export function setup (options, imports, register)
                 {
                         
                                 console.log("checking");
-                                console.log(navigator.serial());
                                 if(_.isObject(device))
                                 {
                                         let options = null;
@@ -400,7 +399,7 @@ export function setup (options, imports, register)
                                                 device.running = true;
                                                 updateDevice (device);
                                                 if (!await mp.run (pySource)) {
-                                                        device.running = false;
+                                                        device.running = true;
                                                         updateDevice (device);
                                                         // TODO show error
                                                 }
@@ -422,7 +421,7 @@ export function setup (options, imports, register)
                                 visible () {
                                         let device = studio.workspace.getDevice ();
                                         console.log(device);
-                                        return (device.status === 'CONNECTED' && device.type === 'esp');
+                                        return (device.status === 'CONNECTED' && device.type === 'esp' && device.running === false);
                                 },
                                 enabled () {
                                         let device = studio.workspace.getDevice ();
@@ -450,7 +449,7 @@ export function setup (options, imports, register)
         
                         }
         
-                        }, 'plugins/devices/esp/data/img/icons/run-icon.svg',
+                        }, 'plugins/devices/esp/data/img/icons/stop-icon.svg',
         
                         
                         /* The aditional options that make the Run Button visible and enabled only if there is a connected device
@@ -459,11 +458,11 @@ export function setup (options, imports, register)
                                 visible () {
                                         let device = studio.workspace.getDevice ();
                                         console.log(device);
-                                        return (device.status === 'CONNECTED' && device.type === 'esp');
+                                        return (device.status === 'CONNECTED' && device.type === 'esp' && device.running === true);
                                 },
                                 enabled () {
                                         let device = studio.workspace.getDevice ();
-                                        return (device.status === 'CONNECTED' && device.type === 'esp');
+                                        return (device.status === 'CONNECTED' && device.type === 'esp' && device.running === true);
                                 },
                                 type: 'stop'
                         });
@@ -483,6 +482,7 @@ export function setup (options, imports, register)
                         if (project) {
                                 if (project.language === 'python') {
                                         let mp = ports[device.id];
+                                        await mp.reset();
                                 }
         
                         }
