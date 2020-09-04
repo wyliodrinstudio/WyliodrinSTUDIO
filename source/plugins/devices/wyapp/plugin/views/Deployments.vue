@@ -24,8 +24,8 @@
 						<td class="w-30 d-flex">
 							<v-spacer></v-spacer>
 							<span>{{container.state}}</span>
-							<!-- <v-spacer></v-spacer>
-							<span>{{container.image}}</span> -->
+							<v-spacer></v-spacer>
+							<span>{{container.status}}</span>
 						</td>
 							
 						
@@ -111,7 +111,7 @@ export default {
 			// 	else return -10;
 			// });
 			this.containers = data.map((container) => { container.sentKill = false; container.sentDell = false; return container;});
-			console.log(data);
+			
 		},
 		
 		kill (container)
