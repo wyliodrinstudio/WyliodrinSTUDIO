@@ -105,7 +105,7 @@ function searchSerialDevices(){
                                                 description,
                                                 name,
                                                 connection:'serial',
-                                                icon:'plugins/device.esp/data/img/icons/esp.png',
+                                                icon:'plugins/devices/esp/data/img/icons/esp.png',
                                                 board:'esp8266',
                                                 status:'',
                                                 properties: {
@@ -215,7 +215,7 @@ export function setup (options, imports, register)
        
         let device_esp = {
 		defaultIcon() {
-			return 'plugins/device.esp/data/img/icons/esp.png';
+			return 'plugins/devices/esp/data/img/icons/esp.png';
                 },
 
                 registerForUpdate (device, fn)
@@ -238,6 +238,7 @@ export function setup (options, imports, register)
                 {
                         
                                 console.log("checking");
+                                console.log(navigator.serial());
                                 if(_.isObject(device))
                                 {
                                         let options = null;
@@ -412,7 +413,7 @@ export function setup (options, imports, register)
 
                         }
 
-                        }, 'plugins/device.esp/data/img/icons/run-icon.svg',
+                        }, 'plugins/devices/esp/data/img/icons/run-icon.svg',
 
                 
                         /* The aditional options that make the Run Button visible and enabled only if there is a connected device
@@ -449,7 +450,44 @@ export function setup (options, imports, register)
         
                         }
         
-                        }, 'plugins/device.esp/data/img/icons/run-icon.svg',
+                        }, 'plugins/devices/esp/data/img/icons/run-icon.svg',
+        
+                        
+                        /* The aditional options that make the Run Button visible and enabled only if there is a connected device
+                        and its type is "awesome" */
+                        {
+                                visible () {
+                                        let device = studio.workspace.getDevice ();
+                                        console.log(device);
+                                        return (device.status === 'CONNECTED' && device.type === 'esp');
+                                },
+                                enabled () {
+                                        let device = studio.workspace.getDevice ();
+                                        return (device.status === 'CONNECTED' && device.type === 'esp');
+                                },
+                                type: 'stop'
+                        });
+                        
+                        
+
+                //RESTART
+
+
+                workspace.registerDeviceToolButton('DEVICE_ESP_RESTART', 10, async () => {
+                        let device = studio.workspace.getDevice();
+                        
+                        /* Here goes the actual code that will make your device stop a project */
+        
+                        let project = await studio.projects.getCurrentProject();
+        
+                        if (project) {
+                                if (project.language === 'python') {
+                                        let mp = ports[device.id];
+                                }
+        
+                        }
+        
+                        }, 'plugins/devices/esp/data/img/icons/run-icon.svg',
         
                         
                         /* The aditional options that make the Run Button visible and enabled only if there is a connected device
@@ -466,6 +504,9 @@ export function setup (options, imports, register)
                                 },
                                 type: 'stop'
                         });        
+
+
+                //RESTART
                 
 
 

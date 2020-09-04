@@ -273,4 +273,9 @@ export class MicroPython extends EventEmitter {
 		this.setStatus(STATUS_READY);
 	}
 
+	async reset()
+	{
+		
+	}
+
 }

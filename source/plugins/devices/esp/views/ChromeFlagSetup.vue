@@ -1,20 +1,20 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t("SETUP YOUR GOOGLE FLAG")}}</span>
+			<span class="headline">{{$t('DEVICE_ESP_FLAG_HEADER')}}</span>
 		</v-card-title>
 		<v-card-text>
 			<div>
-				{{$t("1. Accesati in browser chrome://flas")}}
+				{{$t('DEVICE_ESP_FLAG_STEP_ONE')}}
 			</div>
 			<div>
-				{{$t("2. Cautati in bara de search: #enable-experimental-web-platform-features")}}
+				{{$t('DEVICE_ESP_FLAG_STEP_TWO')}}
 			</div>
 			<div>
-				{{$t("3. Dati ENABLE flag-ului respectiv.")}}
+				{{$t('DEVICE_ESP_FLAG_STEP_THREE')}}
 			</div>
 			<div>
-				{{$t("ATENTIE! Pentru a functiona trebuie sa fiti pe o conexiune securizata.")}}
+				{{$t('DEVICE_ESP_FLAG_CAREFUL')}}
 			</div>
 		</v-card-text>
 		<v-card-actions>

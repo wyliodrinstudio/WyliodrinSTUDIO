@@ -1,17 +1,17 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t('DEVICE_SERIAL_OPTIONS')}}</span>
+			<span class="headline">{{$t('DEVICE_ESP_SERIAL_OPTIONS')}}</span>
 		</v-card-title>
 		<v-card-text>
 			<v-layout class="input-container" wrap>
-				<v-text-field :label="$t('DEVICE_SERIAL_BAUDRATE')"  required v-model="baudrate">{{$t('DEVICE_SERIAL_BAUDRATE')}}</v-text-field>
+				<v-text-field :label="$t('DEVICE_ESP_SERIAL_BAUDRATE')"  required v-model="baudrate">{{$t('DEVICE_SERIAL_BAUDRATE')}}</v-text-field>
 			</v-layout>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>
-			<v-btn text @click="connect">{{$t('DEVICE_CONNECT')}}</v-btn>
-			<v-btn text @click="close">{{$t('EXIT')}}</v-btn>
+			<v-btn text @click="connect">{{$t('DEVICE_ESP_CONNECT')}}</v-btn>
+			<v-btn text @click="close">{{$t('DEVICE_ESP_EXIT')}}</v-btn>
 		</v-card-actions>
 	</v-card>
 </template>
