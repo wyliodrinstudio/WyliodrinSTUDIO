@@ -1,7 +1,7 @@
 <template>
 	<v-card class="manager-box">
 		<v-card-title>
-			<span class="headline">{{$t('DEVICE_WYAPP_DEPLOYMENTS')}}</span>
+			<span class="headline">{{$t('Deployments')}}</span>
 			<v-spacer></v-spacer>
 		</v-card-title>
 		<v-card-text>
@@ -17,21 +17,39 @@
 					</tr>-->
 					<tr v-for="container in containers" :key="container.ID" class="w-100 container">
 						<td class="w-50 d-flex">
-							<v-img src="plugins/devices/wyapp/plugin/data/img/icons/docker3
-							.svg" aria-label="Container" ></v-img>
+							<v-img src="plugins/devices/wyapp/plugin/data/img/icons/docker3.svg" aria-label="Container" ></v-img>
 							<h3>{{container.name}}</h3>
+
 						</td>
 						<td class="w-30 d-flex">
-							<!--<span>{{container.ID}}</span> -->
-							<!-- <span>{{container.name}}</span> -->
-							<!--<span>{{container.image}}</span>-->
-							<!--<span>{{task.TT}}</span>-->
+							<v-spacer></v-spacer>
+							<span>{{container.state}}</span>
+							<!-- <v-spacer></v-spacer>
+							<span>{{container.image}}</span> -->
 						</td>
+							
+						
 						<td class="w-20 text-right lib-btn-box">
 							<div class="waiting-box" v-if="container.sentKill">
 								<v-progress-circular :size="20" indeterminate></v-progress-circular>
 							</div>
-							<v-btn v-else text class="lib-app-btn" @click="kill(container)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
+
+							<div class="waiting-box" v-else-if="container.sentDell">
+								<v-progress-circular :size="20" indeterminate></v-progress-circular>
+							</div>
+
+							<v-btn text class="lib-app-btn" v-else-if="container.state === 'created'"
+							@click="kill(container)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
+
+							<v-btn text class="lib-app-btn" v-else-if="container.state === 'running'"
+							@click="kill(container)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
+
+							<v-btn text class="lib-app-btn" v-else
+							@click="deletee(container)">Delete</v-btn>
+							<!-- -if="container.sentDell"  -->
+
+							
+
 						</td>
 					</tr>
 				</table>
@@ -92,7 +110,7 @@ export default {
 			// 	else if (task1.TT === '?') return 10;
 			// 	else return -10;
 			// });
-			this.containers = data.map((container) => { container.sentKill = false; return container;});
+			this.containers = data.map((container) => { container.sentKill = false; container.sentDell = false; return container;});
 			console.log(data);
 		},
 		
@@ -100,6 +118,11 @@ export default {
 		{
 			this.connection.send ('dep', {a: 'exit', ID: container.ID}); 
 			container.sentKill = true;
+		},
+		deletee(container)
+		{
+			this.connection.send ('dep', {a: 'delete', ID: container.ID});
+			container.sentDell = true;
 		},
 		esc() {
 			this.close();

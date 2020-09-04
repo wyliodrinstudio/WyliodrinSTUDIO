@@ -484,7 +484,7 @@ export function setup(options, imports, register)
 		});
 
 		/* Register the Deployments button */
-		workspace.registerDeviceToolButton ('DEVICE_WYAPP_DEPLOYMENTS', 60, () => {
+		workspace.registerDeviceToolButton ('Deployments', 60, () => {
 			let device = studio.workspace.getDevice ();
 			studio.workspace.showDialog(Deployments, {
 				width:550,
