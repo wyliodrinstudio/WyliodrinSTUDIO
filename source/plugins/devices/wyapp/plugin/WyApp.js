@@ -72,6 +72,7 @@ export default class WyApp extends EventEmitter
 			this.device.properties.taskManager = packet.d.tm;
 			this.device.properties.networkManager = packet.d.net;
 			this.device.properties.fileManager = packet.d.fe;
+			this.device.properties.deployments = packet.d.dep;
 			this.emit ('update', this.device);
 		}
 		else
