@@ -236,88 +236,96 @@ export function setup (options, imports, register)
 
                 async connect(device/*, options*/)
                 {
-                        
-                                console.log("checking");
-                                if(_.isObject(device))
+                                if(navigator.serial !== undefined)
                                 {
-                                        let options = null;
-                                        if(studio.system.platform() === 'electron')
+                                        if(_.isObject(device))
                                         {
-                                                options = await studio.workspace.showDialog (SerialConnectionDialog, {
-                                                device: device,
-                                                width: '500px'
-                                                });
-                                        }
-                                        else
-                                        {
-                                                options = await studio.workspace.showDialog (BrateConnectionBrowser, {
+                                                let options = null;
+                                                if(studio.system.platform() === 'electron')
+                                                {
+                                                        options = await studio.workspace.showDialog (SerialConnectionDialog, {
                                                         device: device,
                                                         width: '500px'
-                                                });
-                                        }
-
-                                        if(options)
-                                        {
-                                                device.status = 'CONNECTING';
-                                                updateDevices();
-
-                                                let port = new SerialPort();
-                                                let sts;
-
-                                                let mp = new MicroPython(port);
-                                                ports[device.id]=mp;
-
-                                                ports[device.id].on('connected',()=>{
-                                                        device.status = 'CONNECTED';
-                                                        device.running = false;
-                                                        updateDevice(device);
-                                                        studio.shell.select(device.id);
-                                                        studio.notebook.setStatus (null, 'READY');
-
-                                                        studio.console.select (device.id);
-
-                                                        studio.console.reset();
-                                                        studio.console.show ();
-                                                   
-                                                });
-
-                                                mp.on('status', (status)=>{
-                                                        sts = status;
-                                                        console.log('STATUS: '+sts);
-                                                });
-
-                                                mp.on('data', (data)=>
+                                                        });
+                                                }
+                                                else
                                                 {
-                                                        studio.shell.write(device.id, Buffer.from(data).toString());
-                                                        studio.console.write(device.id, Buffer.from(data).toString());
-                                                });
+                                                        options = await studio.workspace.showDialog (BrateConnectionBrowser, {
+                                                                device: device,
+                                                                width: '500px'
+                                                        });
+                                                }
 
-                                                mp.on('error',(err) => {
+                                                if(options)
+                                                {
+                                                        device.status = 'CONNECTING';
+                                                        updateDevices();
 
-                                                        device.status = 'DISCONNECTED';
-                                                        updateDevice(device);
-                                                        studio.workspace.showError ('ERROR', {extra: err.message});
-                                                        delete connections[device.id];
-                                                        delete ports[device.id];                
-                                                        //studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
-                                                });
+                                                        let port = new SerialPort();
+                                                        let sts;
+
+                                                        let mp = new MicroPython(port);
+                                                        ports[device.id]=mp;
+
+                                                        ports[device.id].on('connected',()=>{
+                                                                device.status = 'CONNECTED';
+                                                                device.running = false;
+                                                                updateDevice(device);
+                                                                studio.shell.select(device.id);
+                                                                studio.notebook.setStatus (null, 'READY');
+
+                                                                studio.console.select (device.id);
+
+                                                                studio.console.reset();
+                                                                studio.console.show ();
+                                                        
+                                                        });
+
+                                                        mp.on('status', (status)=>{
+                                                                sts = status;
+                                                                console.log('STATUS: '+sts);
+                                                        });
+
+                                                        mp.on('data', (data)=>
+                                                        {
+                                                                studio.shell.write(device.id, Buffer.from(data).toString());
+                                                                studio.console.write(device.id, Buffer.from(data).toString());
+                                                        });
+
+                                                        mp.on('error',(err) => {
+
+                                                                device.status = 'DISCONNECTED';
+                                                                updateDevice(device);
+                                                                studio.workspace.showError ('ERROR', {extra: err.message});
+                                                                delete connections[device.id];
+                                                                delete ports[device.id];                
+                                                                //studio.workspace.showError ('ESP_SERIAL_CONNECTON_ERROR', {extra: err.message});
+                                                        });
+                                                        
+                                                        
+
+                                                        ports[device.id].on('close',() => {
+                                                                                
+                                                                device.status = 'DISCONNECTED';
+                                                                workspace.updateDevice(device);
+                                                                studio.console.close();
+                                                                delete connections[device.id];
+                                                                delete ports[device.id];
+                                                        });
+
+                                                        port.connect(options.port,options.baudrate);
+                                                        
+                                                }
                                                 
-                                                
-
-                                                ports[device.id].on('close',() => {
-                                                                        
-                                                        device.status = 'DISCONNECTED';
-                                                        workspace.updateDevice(device);
-                                                        studio.console.close();
-                                                        delete connections[device.id];
-                                                        delete ports[device.id];
-                                                });
-
-                                                port.connect(options.port,options.baudrate);
                                                 
                                         }
-                                        
-                                        
+                                }
+                                else
+                                {
+                                        await studio.workspace.showDialog (ChromeFlagSetup, {
+                                                device: device,
+                                                width: '500px'
+                                        });
                                 }
 
                         setTimeout(() => {
