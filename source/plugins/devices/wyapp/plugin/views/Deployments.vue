@@ -1,7 +1,7 @@
 <template>
 	<v-card class="manager-box">
 		<v-card-title>
-			<span class="headline">{{$t('Deployments')}}</span>
+			<span class="headline">{{$t('DEVICE_WYAPP_DEPLOYMENTS')}}</span>
 			<v-spacer></v-spacer>
 		</v-card-title>
 		<v-card-text>

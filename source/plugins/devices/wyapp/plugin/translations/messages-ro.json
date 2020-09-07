@@ -15,6 +15,10 @@
         "message": "Administrare pachete",
         "description": "The button for the package manager "
     },
+    "DEVICE_WYAPP_DELPOYMENTS":{
+        "message": "Implementari",
+        "description": "The button for deployments"
+    },
     "DEVICE_WYAPP_NETWORK_MANAGER": {
         "message": "Setări rețea",
         "description": "The button for the network manager "

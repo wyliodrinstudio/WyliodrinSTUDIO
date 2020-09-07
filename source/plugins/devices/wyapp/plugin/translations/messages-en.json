@@ -11,6 +11,10 @@
         "message": "Task Manager",
         "description": "The button for the task manager "
     },
+    "DEVICE_WYAPP_DELPOYMENTS":{
+        "message": "Deployments",
+        "description": "The button for deployments"
+    }, 
     "DEVICE_WYAPP_PACKAGE_MANAGER": {
         "message": "Package Manager",
         "description": "The button for the package manager "
@@ -131,4 +135,5 @@
         "message": "File System",
         "description": "The message shown for the selected device filesystem"
     }
+
 }
