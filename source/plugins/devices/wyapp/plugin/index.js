@@ -496,6 +496,19 @@ export function setup(options, imports, register)
 				return (device.status === 'CONNECTED' && device.properties.deployments === true);
 			}
 		});
+
+		/* Register the Deploy button */
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_DEPLOY', 70, () => {
+			// console.log ('stop');
+			device_wyapp.deploy();
+
+		}, 'plugins/devices/wyapp/plugin/data/img/icons/just_deploy.png', {
+			visible () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.properties.treeRun === false);
+			},
+			type: 'deploy'
+		});
 	}
 	else
 	{
@@ -539,7 +552,7 @@ export function setup(options, imports, register)
 			}
 			return null;
 		},
-
+		
 		/**
 		 * Register a new search provider
 		 * @param {String} name - the name of the search provider
@@ -617,6 +630,13 @@ export function setup(options, imports, register)
 					a: 'stop'
 				});
 			}
+		},
+
+
+		async deploy()
+		{
+			console.log('data');
+
 		},
 
 		/**
