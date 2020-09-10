@@ -212,7 +212,7 @@ export function setup (options, imports, register)
                         }
                 }
 	});
-       
+        
         let device_esp = {
 		defaultIcon() {
 			return 'plugins/devices/esp/data/img/icons/esp.png';
