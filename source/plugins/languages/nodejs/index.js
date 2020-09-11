@@ -70,8 +70,10 @@ export default function setup(options, imports, register) {
 		getMakefile(project, filename) {
 			if (filename[0] === '/') filename = filename.substring (1);
 			// TODO add filename
-			return 'run:\n\tnode main.js';
+			return 'run:\n\tnode main.js\nbuild:\n\t docker build --tag main-app'; //add build rule for docker
 		},
+		
+	
 	};
 
 	studio.projects.registerLanguage('nodejs', 'NodeJS', 'plugins/languages/nodejs/data/img/project.png', 'plugins/languages/nodejs/data/img/javascriptLittle.png',fileIcons, javaScript);

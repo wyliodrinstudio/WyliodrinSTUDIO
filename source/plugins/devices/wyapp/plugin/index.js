@@ -2,6 +2,7 @@
 import _ from 'lodash';
 import path from 'path';
 
+
 import WyApp from './WyApp';
 
 import DeviceSettings from './views/DeviceSettings.vue';
@@ -13,6 +14,7 @@ import PackageManager from './views/PackageManager.vue';
 import TaskManager from './views/TaskManager.vue';
 import { EventEmitter } from 'events';
 import Deployments from './views/Deployments.vue';
+import { fstat } from 'fs';
 
 let studio = null;
 let workspace = null;
@@ -28,6 +30,8 @@ let transportDevices = {};
  */
 let searches = {};
 let searchDevices = {};
+
+const fs = require('fs');
 
 function updateDevices ()
 {
@@ -140,6 +144,8 @@ class Connection extends EventEmitter
 export function setup(options, imports, register)
 {
 	studio = imports;
+	console.log('studio');
+	console.log(studio);
 
 	let deviceDriver = {
 		defaultIcon()
@@ -500,7 +506,8 @@ export function setup(options, imports, register)
 		/* Register the Deploy button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_DEPLOY', 70, () => {
 			// console.log ('stop');
-			device_wyapp.deploy();
+			let deploy = true;
+			device_wyapp.runProject(deploy);
 
 		}, 'plugins/devices/wyapp/plugin/data/img/icons/just_deploy.png', {
 			visible () {
@@ -632,25 +639,28 @@ export function setup(options, imports, register)
 			}
 		},
 
-
-		async deploy()
-		{
-			console.log('data');
-
-		},
-
+		
 		/**
 		 * Run the current project
 		 */
-		async runProject ()
+		
+		async runProject (deploy = false)
 		{
 			let project = await studio.projects.getCurrentProject ();
+			// console.log('yey');
+			// console.log(project);
 
 			if (project)
 			{
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
+				console.log (JSON.stringify (makefile, null, 3));
+
+				let path_to_docker = project.folder + '/Dockerfile';
+				
+			
+				
 
 				let device = studio.workspace.getDevice ();
 				if (device)
@@ -660,6 +670,7 @@ export function setup(options, imports, register)
 					if (board && board.run) board.run (project);
 					studio.console.show ();
 					studio.console.reset ();
+					
 					let structure = await studio.projects.generateStructure (project);
 
 					let tp = {
@@ -674,8 +685,11 @@ export function setup(options, imports, register)
 								children: [],
 								m: makefile
 							}
-						]
+						],
+						dockerFolder: path_to_docker
+
 					};
+
 
 					let setFiles = async (projectChildren, tpChildren, filenamePath) =>
 					{
@@ -706,14 +720,52 @@ export function setup(options, imports, register)
 
 					let xtrem = studio.console.getSize ();
 
-					sendToDevice (device, 'tp', {
-						a: 'start',
-						t: tp,
-						l: project.language,
-						onlysoft: true,
-						c: xtrem.cols,
-						r: xtrem.rows
-					});
+					if(deploy === true)
+					{
+						let Dockerfile = null;
+						let dockerfile_exists = false;
+						if(fs.existsSync(path_to_docker))
+						{
+							Dockerfile = await studio.projects.loadFile(project,'/Dockerfile');
+							console.log('There is a Dockerfile');
+							dockerfile_exists = true;
+						}
+						else
+						{
+							console.log('No Dockerfile buuut');
+						}
+						
+						//if(!Dockerfile) Dockerfile = await studio.projects.getDockerfile(project,filename);
+						console.log (JSON.stringify (Dockerfile, null, 3));
+
+						sendToDevice (device, 'tp', {
+							a: 'deploy',
+							t: tp,
+							l: project.language,
+							onlysoft: true,
+							c: xtrem.cols,
+							r: xtrem.rows,
+							dep:deploy,
+							dcfl: dockerfile_exists
+						});
+
+					}
+					else
+					{
+						sendToDevice (device, 'tp', {
+							a: 'start',
+							t: tp,
+							l: project.language,
+							onlysoft: true,
+							c: xtrem.cols,
+							r: xtrem.rows,
+							dep:deploy
+						});
+					}
+
+
+					
+					
 				}
 			}
 			else
