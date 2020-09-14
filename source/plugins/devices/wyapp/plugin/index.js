@@ -15,6 +15,8 @@ import TaskManager from './views/TaskManager.vue';
 import { EventEmitter } from 'events';
 import Deployments from './views/Deployments.vue';
 import { fstat } from 'fs';
+import Docker_pop from './views/Docker-pop.vue';
+
 
 let studio = null;
 let workspace = null;
@@ -668,6 +670,26 @@ export function setup(options, imports, register)
 					// allow the board to modify the project structure before run
 					let board = this.getBoardDriver (device.board);	
 					if (board && board.run) board.run (project);
+
+					if(deploy === true)
+					{
+						let Dockerfile = null;
+						let dockerfile_exists = false;
+						if(fs.existsSync(path_to_docker))
+						{
+							Dockerfile = await studio.projects.loadFile(project,'/Dockerfile');
+							console.log('There is a Dockerfile');
+							dockerfile_exists = true;
+						}
+						else
+						{
+							console.log('No Dockerfile buuut');
+							studio.workspace.showDialog(Docker_pop, {
+								width:800,
+							});
+
+						}
+					}
 					studio.console.show ();
 					studio.console.reset ();
 					
@@ -719,53 +741,19 @@ export function setup(options, imports, register)
 					await setFiles (structure.children, tp.children[0].children, '/');
 
 					let xtrem = studio.console.getSize ();
+					console.log (JSON.stringify (Dockerfile, null, 3));
 
-					if(deploy === true)
-					{
-						let Dockerfile = null;
-						let dockerfile_exists = false;
-						if(fs.existsSync(path_to_docker))
-						{
-							Dockerfile = await studio.projects.loadFile(project,'/Dockerfile');
-							console.log('There is a Dockerfile');
-							dockerfile_exists = true;
-						}
-						else
-						{
-							console.log('No Dockerfile buuut');
-						}
-						
-						//if(!Dockerfile) Dockerfile = await studio.projects.getDockerfile(project,filename);
-						console.log (JSON.stringify (Dockerfile, null, 3));
-
-						sendToDevice (device, 'tp', {
-							a: 'deploy',
-							t: tp,
-							l: project.language,
-							onlysoft: true,
-							c: xtrem.cols,
-							r: xtrem.rows,
-							dep:deploy,
-							dcfl: dockerfile_exists
-						});
-
-					}
-					else
-					{
-						sendToDevice (device, 'tp', {
-							a: 'start',
-							t: tp,
-							l: project.language,
-							onlysoft: true,
-							c: xtrem.cols,
-							r: xtrem.rows,
-							dep:deploy
-						});
-					}
-
-
-					
-					
+					sendToDevice (device, 'tp', {
+						a: 'deploy',
+						t: tp,
+						l: project.language,
+						onlysoft: true,
+						c: xtrem.cols,
+						r: xtrem.rows,
+						dep:deploy,
+						dcfl: dockerfile_exists
+					});
+				
 				}
 			}
 			else
