@@ -657,13 +657,15 @@ export function setup(options, imports, register)
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
+
 				console.log (JSON.stringify (makefile, null, 3));
 
 				let path_to_docker = project.folder + '/Dockerfile';
+				let Dockerfile = null;
+				let dockerfile_exists = false;
 				
-			
 				
-
+	
 				let device = studio.workspace.getDevice ();
 				if (device)
 				{
@@ -673,8 +675,7 @@ export function setup(options, imports, register)
 
 					if(deploy === true)
 					{
-						let Dockerfile = null;
-						let dockerfile_exists = false;
+						//let dockerfile_exists = false;
 						if(fs.existsSync(path_to_docker))
 						{
 							Dockerfile = await studio.projects.loadFile(project,'/Dockerfile');
@@ -683,6 +684,7 @@ export function setup(options, imports, register)
 						}
 						else
 						{
+							dockerfile_exists = false;
 							console.log('No Dockerfile buuut');
 							studio.workspace.showDialog(Docker_pop, {
 								width:800,
@@ -751,7 +753,8 @@ export function setup(options, imports, register)
 						c: xtrem.cols,
 						r: xtrem.rows,
 						dep:deploy,
-						dcfl: dockerfile_exists
+						dcfl: dockerfile_exists,
+						Dockerfile: Dockerfile
 					});
 				
 				}
