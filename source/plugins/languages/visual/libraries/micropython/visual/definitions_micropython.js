@@ -61,10 +61,22 @@ module.exports = function (blockly){
 		}
 	};
 
+	Blockly.Blocks['micropython_pin_number'] = {
+		init: function() {
+			this.appendValueInput('pin_number')
+				.setCheck('Number')
+				.appendField('Pin');
+			this.setOutput(true, null);
+			this.setColour(255);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
 	Blockly.Blocks['micropython_pwm'] = {
 		init: function() {
 			this.appendValueInput('pwm')
-				.setCheck('micropython_pin')
+				.setCheck('micropython_pin_number')
 				.appendField('PWM');
 			this.appendValueInput('freq')
 				.setCheck('Number')
@@ -242,10 +254,169 @@ module.exports = function (blockly){
 	Blockly.Blocks['micropython_adc_pin'] = {
 		init: function() {
 			this.appendValueInput('adc_pin')
-				.setCheck('micropython_pin')
+				.setCheck('micropython_pin_number')
 				.appendField('ADC');
 			this.setOutput(true, null);
 			this.setColour(150);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_i2c'] = {
+		init: function() {
+			this.appendDummyInput()
+				.appendField('I2C')
+				.appendField('id')
+				.appendField(new Blockly.FieldTextInput('-1'), 'id');
+			this.appendValueInput('scl')
+				.setCheck('micropython_pin_number')
+				.appendField('scl');
+			this.appendValueInput('sda')
+				.setCheck('micropython_pin_number')
+				.appendField('sda');
+			this.appendValueInput('freq')
+				.setCheck('Number')
+				.appendField('freq');
+			this.setInputsInline(true);
+			this.setOutput(true, null);
+			this.setColour(315);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_i2c_scan'] = {
+		init: function() {
+			this.appendDummyInput()
+				.appendField('I2C scan');
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(315);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_i2c_operation'] = {
+		init: function() {
+			this.appendDummyInput()
+				.appendField('I2C operation')
+				.appendField(new Blockly.FieldDropdown([['start','start'], ['stop','stop']]), 'operation');
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(315);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_i2c_standard_operation'] = {
+		init: function() {
+			this.appendValueInput('op')
+				.setCheck('Boolean')
+				.appendField('I2C ')
+				.appendField(new Blockly.FieldDropdown([['readfrom','readfrom'], ['readfrom_into','readfrom_into'], ['writeto','writeto']]), 'operation')
+				.appendField('addr')
+				.appendField(new Blockly.FieldTextInput('0x3a'), 'addr')
+				.appendField(new Blockly.FieldDropdown([['nbytes','nbytes'], ['buf','buf']]), 'NAME')
+				.appendField(new Blockly.FieldTextInput('0'), 'input')
+				.appendField('stop');
+			this.setInputsInline(true);
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(315);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_spi'] = {
+		init: function() {
+			this.appendValueInput('SPI')
+				.setCheck('Number')
+				.appendField('SPI');
+			this.appendValueInput('bauderate')
+				.setCheck('Number')
+				.appendField('bauderate');
+			this.appendValueInput('polarity')
+				.setCheck('Number')
+				.appendField('polarity');
+			this.appendValueInput('phase')
+				.setCheck('Number')
+				.appendField('phase');
+			this.appendValueInput('sck')
+				.setCheck('micropython_pin_number')
+				.appendField('sck');
+			this.appendValueInput('mosi')
+				.setCheck('micropython_pin_number')
+				.appendField('mosi');
+			this.appendValueInput('miso')
+				.setCheck('micropython_pin_number')
+				.appendField('miso');
+			this.setInputsInline(true);
+			this.setOutput(true, null);
+			this.setColour(175);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_spi_init'] = {
+		init: function() {
+			this.appendValueInput('spi_init')
+				.setCheck('Number')
+				.appendField('SPI init')
+				.appendField('bauderate');
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(175);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_spi_read'] = {
+		init: function() {
+			this.appendValueInput('param1')
+				.setCheck('Number')
+				.appendField('SPI')
+				.appendField(new Blockly.FieldDropdown([['read','read'], ['readinto','readinto']]), 'read');
+			this.appendDummyInput()
+				.appendField(new Blockly.FieldDropdown([['none','none'], ['0xff','0xff']]), 'NAME');
+			this.setInputsInline(true);
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(175);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_spi_write'] = {
+		init: function() {
+			this.appendValueInput('param')
+				.setCheck(['String', 'Variables'])
+				.appendField('SPI')
+				.appendField(new Blockly.FieldDropdown([['write','write'], ['write_readinto','write_readinto']]), 'write');
+			this.appendDummyInput()
+				.appendField(new Blockly.FieldDropdown([['none','none'], ['buf','buf']]), 'param2');
+			this.setInputsInline(true);
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(175);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropythob_spi_create_buffer'] = {
+		init: function() {
+			this.appendValueInput('buf')
+				.setCheck('Number')
+				.appendField('bytearray');
+			this.setOutput(true, null);
+			this.setColour(175);
 			this.setTooltip('');
 			this.setHelpUrl('');
 		}
@@ -349,6 +520,97 @@ module.exports = function (blockly){
 		}
 	};
 
+	Blockly.Blocks['micropython_network_wlan'] = {
+		init: function() {
+			this.appendDummyInput()
+				.appendField('network.WLAN')
+				.appendField(new Blockly.FieldDropdown([['STA_IF','STA_IF'], ['AP_IF','AP_IF']]), 'type');
+			this.setOutput(true, null);
+			this.setColour(165);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
 
+	Blockly.Blocks['micropython_network_set_active'] = {
+		init: function() {
+			this.appendValueInput('active')
+				.setCheck('Variables')
+				.appendField('interfaces active')
+				.appendField(new Blockly.FieldDropdown([['True','True'], ['False','False']]), 'NAME');
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(165);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_network_get_active'] = {
+		init: function() {
+			this.appendValueInput('get')
+				.setCheck('Variables')
+				.appendField('get active state from');
+			this.setOutput(true, null);
+			this.setColour(165);
+			this.setTooltip('check if the interfaces are active');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_network_check_connection'] = {
+		init: function() {
+			this.appendValueInput('conn')
+				.setCheck('Variables')
+				.appendField('connection??')
+				.appendField(new Blockly.FieldDropdown([['ifconfig','ifconfig'], ['isconnected','isconnected']]), 'conn');
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(165);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+	Blockly.Blocks['micropython_network_wifi'] = {
+		init: function() {
+			this.appendValueInput('NAME')
+				.setCheck('Variables')
+				.appendField('connect to WiFi network')
+				.appendField(new Blockly.FieldTextInput('ESSID'), 'ESSID')
+				.appendField(new Blockly.FieldTextInput('password'), 'password');
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(165);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_network_scan'] = {
+		init: function() {
+			this.appendValueInput('scan')
+				.setCheck('Variables')
+				.appendField('scan');
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(165);
+			this.setTooltip('scan for access points');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_network_config'] = {
+		init: function() {
+			this.appendValueInput('config')
+				.setCheck('Variables')
+				.appendField('config')
+				.appendField(new Blockly.FieldTextInput('mac'), 'NAME');
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(165);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
 
 };

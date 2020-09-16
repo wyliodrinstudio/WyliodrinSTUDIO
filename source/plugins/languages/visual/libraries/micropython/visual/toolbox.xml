@@ -1,5 +1,5 @@
 <toolbox>   
-  <category name="ESP8266" colour="#7FB3D5">
+  <category name="ESP8266" colour="#F1C40F">
     <category name="Pins and GPIO" colour="#6C3483">
       <block type="variables_set">
         <field name="VAR">name Pin</field>
@@ -38,6 +38,14 @@
         <value name="set_valueLED">
           <block type="variables_get">
             <field name="VAR" id="L?mQs^|T$HjCYko3jaEV">LED</field>
+          </block>
+        </value>
+      </block>
+
+      <block type="micropython_pin_number">
+        <value name="pin_number">
+          <block type="math_number">
+            <field name="NUM">0</field>
           </block>
         </value>
       </block>
@@ -83,10 +91,8 @@
         <value name="VALUE">
           <block type="micropython_adc_pin">
             <value name="adc_pin">
-              <block type="micropython_pin">
-                <field name="type1">IN</field>
-                <field name="type2">NONE</field>
-                <value name="GPIO">
+              <block type="micropython_pin_number">
+                <value name="pin_number">
                   <block type="math_number">
                     <field name="NUM">0</field>
                   </block>
@@ -111,18 +117,158 @@
       </block>
     </category>
 
+    <category name="I2C" colour="#922B21">
+      <block type="variables_set">
+        <field name="VAR">name I2C</field>
+        <value name="VALUE">
+          <block type="micropython_i2c">
+            <field name="id">-1</field>
+            <value name="scl">
+              <block type="micropython_pin_number">
+                <value name="pin_number">
+                  <block type="math_number">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="sda">
+              <block type="micropython_pin_number">
+                <value name="pin_number">
+                  <block type="math_number">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="freq">
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+ 
+      <block type="micropython_i2c_scan"/> 
+      <block type="micropython_i2c_operation"/> 
+
+      <block type="micropython_i2c_standard_operation">
+        <field name="operation">readfrom</field>
+        <field name="addr">0x3a</field>
+        <field name="NAME">nbytes</field>
+        <field name="input">0</field>
+        <value name="op">
+          <block type="logic_boolean">
+            <field name="BOOL">TRUE</field>
+          </block>
+        </value>
+      </block>  
+    </category>
+
+    <category name="SPI" colour="#76D7C4">
+      <block type="micropython_spi">
+        <value name="SPI">
+          <block type="math_number">
+            <field name="NUM">-1</field>
+          </block>
+        </value>
+        <value name="bauderate">
+          <block type="math_number">
+            <field name="NUM">100000</field>
+          </block>
+        </value>
+        <value name="polarity">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="phase">
+          <block type="math_number">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <value name="sck">
+          <block type="micropython_pin_number">
+            <value name="pin_number">
+              <block type="math_number">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="mosi">
+          <block type="micropython_pin_number">
+            <value name="pin_number">
+              <block type="math_number">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="miso">
+          <block type="micropython_pin_number">
+            <value name="pin_number">
+              <block type="math_number">
+                <field name="NUM">4</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+
+      <block type="micropython_spi_init">
+      <value name="spi_init">
+        <block type="math_number">
+          <field name="NUM">10000</field>
+        </block>
+        </value>
+      </block>
+
+      <block type="micropython_spi_read">
+        <field name="read">read</field>
+        <field name="NAME">none</field>
+        <value name="param1">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+
+      <block type="variables_set">
+        <field name="VAR">buf</field>
+        <value name="VALUE">
+          <block type="micropythob_spi_create_buffer">
+            <value name="buf">
+              <block type="math_number">
+                <field name="NUM">60</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+
+      <block type="micropython_spi_write">
+        <field name="write">write</field>
+        <field name="param2">none</field>
+        <value name="param">
+          <block type="text">
+            <field name="TEXT">b'12345'</field>
+          </block>
+        </value>
+      </block>
+    </category>
+
     <category name="PWM" colour="#AF7AC5">
       <block type="variables_set">
         <field name="VAR">name PWM</field>
         <value name="VALUE">
           <block type="micropython_pwm">
             <value name="pwm">
-              <block type="micropython_pin">
-                <field name="type1">IN</field>
-                <field name="type2">NONE</field>
-                <value name="GPIO">
+              <block type="micropython_pin_number">
+                <value name="pin_number">
                   <block type="math_number">
-                    <field name="NUM">0</field>
+                    <field name="NUM">15</field>
                   </block>
                 </value>
               </block>
@@ -290,6 +436,65 @@
       <block type="micropython_rgb_pin_set">
         <field name="rgb">red</field>
         <field name="func">on</field>
+      </block>
+    </category>
+
+    <category name="Network" colour="#85C1E9">
+      <block type="variables_set">
+        <field name="VAR">name var</field>
+        <value name="VALUE">
+          <block type="micropython_network_wlan">
+            <field name="type">STA_IF</field>
+          </block>
+        </value>
+      </block>
+      <block type="micropython_network_set_active">
+        <field name="NAME">True</field>
+        <value name="active">
+          <block type="variables_get">
+            <field name="VAR">name var</field>
+          </block>
+        </value>
+      </block>
+      <block type="micropython_network_get_active">
+        <value name="get">
+          <block type="variables_get">
+            <field name="VAR">name var</field>
+          </block>
+        </value>
+      </block>
+      <block type="micropython_network_check_connection">
+        <field name="conn">ifconfig</field>
+        <value name="conn">
+          <block type="variables_get">
+            <field name="VAR">name var</field>
+          </block>
+        </value>
+      </block>
+      <block type="micropython_network_wifi">
+        <field name="ESSID">ESSID</field>
+        <field name="password">password</field>
+        <value name="NAME">
+          <block type="variables_get">
+            <field name="VAR">name var</field>
+          </block>
+        </value>
+      </block>
+
+      <block type="micropython_network_scan">
+        <value name="scan">
+          <block type="variables_get">
+            <field name="VAR">name var</field>
+          </block>
+        </value>
+      </block>
+      <block type="micropython_network_config">
+        <field name="NAME">mac</field>
+        <value name="config">
+          <block type="variables_get">
+            <field name="VAR">name var</field>
+          </block>
+        </value>
       </block>
     </category>
 
