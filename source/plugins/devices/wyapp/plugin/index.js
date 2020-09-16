@@ -649,33 +649,32 @@ export function setup(options, imports, register)
 		async runProject (deploy = false)
 		{
 			let project = await studio.projects.getCurrentProject ();
-			// console.log('yey');
-			// console.log(project);
-
+			
 			if (project)
 			{
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
 
-				console.log (JSON.stringify (makefile, null, 3));
-
 				let path_to_docker = project.folder + '/Dockerfile';
 				let Dockerfile = null;
 				let dockerfile_exists = false;
-				
-				
 	
 				let device = studio.workspace.getDevice ();
+
 				if (device)
 				{
 					// allow the board to modify the project structure before run
 					let board = this.getBoardDriver (device.board);	
 					if (board && board.run) board.run (project);
+					studio.console.show ();
+					studio.console.reset ();
+
+					let structure = await studio.projects.generateStructure (project);
 
 					if(deploy === true)
 					{
-						//let dockerfile_exists = false;
+						
 						if(fs.existsSync(path_to_docker))
 						{
 							Dockerfile = await studio.projects.loadFile(project,'/Dockerfile');
@@ -689,13 +688,10 @@ export function setup(options, imports, register)
 							studio.workspace.showDialog(Docker_pop, {
 								width:800,
 							});
+							//Dockerfile = ("FROM node:latest\nCOPY . .\nRUN node main.js");
 
 						}
 					}
-					studio.console.show ();
-					studio.console.reset ();
-					
-					let structure = await studio.projects.generateStructure (project);
 
 					let tp = {
 						name: project.name,
@@ -743,19 +739,38 @@ export function setup(options, imports, register)
 					await setFiles (structure.children, tp.children[0].children, '/');
 
 					let xtrem = studio.console.getSize ();
-					console.log (JSON.stringify (Dockerfile, null, 3));
 
-					sendToDevice (device, 'tp', {
-						a: 'deploy',
-						t: tp,
-						l: project.language,
-						onlysoft: true,
-						c: xtrem.cols,
-						r: xtrem.rows,
-						dep:deploy,
-						dcfl: dockerfile_exists,
-						Dockerfile: Dockerfile
-					});
+					if(deploy === true)
+					{
+						sendToDevice (device, 'tp', {
+
+							a: 'deploy',
+							t: tp,
+							l: project.language,
+							onlysoft: true,
+							c: xtrem.cols,
+							r: xtrem.rows,
+							dep:deploy,
+							dcfl: dockerfile_exists,
+							Dockerfile: Dockerfile
+						});
+
+					}
+					else
+					{
+						sendToDevice (device, 'tp', {
+
+							a: 'start',
+							t: tp,
+							l: project.language,
+							onlysoft: true,
+							c: xtrem.cols,
+							r: xtrem.rows,
+							dep:deploy,
+							dcfl: dockerfile_exists,
+							Dockerfile: Dockerfile
+						});
+					}
 				
 				}
 			}
