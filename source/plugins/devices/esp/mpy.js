@@ -10,6 +10,7 @@ export const STATUS_OFFLINE = 'offline';
 const STREAM_NULL = 0;
 const STREAM_OUTPUT = 1;
 const STREAM_ERROR = 2;
+const BUFFER_SIZE = 32;
 
 const RAW_REPL_TIMEOUT = 3000;
 
@@ -276,6 +277,42 @@ export class MicroPython extends EventEmitter {
 	async reset()
 	{
 		await this.port.write(Buffer.from("\r\x04"));
+	}
+
+}
+
+export class MicroPythonFiles extends EventEmitter {
+
+	constructor(mp){
+		super();
+		this.mp = mp;
+	}
+
+	async get(filename)
+	{
+		command = "import sys\nimport ubinascii\nwith open('"+filename+"', 'rb') as infile:\nwhile True:\nresult = infile.read("+BUFFER_SIZE+")\nif result == b'':\nbreak\nlen=sys.stdout.write(ubinascii.hexlify(result))";
+		this.mp.run(command);
+		mp.on('data', (data)=> {
+            
+		});
+		
+		mp.on('error',(err) => {
+
+		});
+	}
+
+	async mkdir(directory)
+	{
+		command = "try:\nimport os\nexcept ImportError:\nimport uos as os\nos.mkdir('"+directory+"')";
+		this.mp.run(command);
+		mp.on('data', (data)=> {
+            
+		});
+		
+		mp.on('error',(err) => {
+
+		});
+
 	}
 
 }
