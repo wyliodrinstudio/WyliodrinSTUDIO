@@ -49,21 +49,13 @@ export default {
 	methods: {
 		close ()
 		{
-			this.$root.$emit ('submit');
+			this.$root.$emit ('submit',false);
 		},
 
 		send_file ()
 		{
-			let Dockerfile = null;
-
-			Dockerfile = ("FROM node:latest\nCOPY . .\nRUN node main.js");
-			console.log('yupi');
-			console.log(Dockerfile);
-
-
-			this.connection.send('tp', {a: 'start', Dockerfile:Dockerfile, dcfl:true});
-			console.log('yupi');
-
+			
+			this.$root.$emit('submit',true);
 			
 		}
 

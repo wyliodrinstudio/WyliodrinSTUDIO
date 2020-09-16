@@ -630,7 +630,7 @@ export function setup(options, imports, register)
 		 */
 		stopProject()
 		{
-			let device = studio.workspace.getDevice ();
+			let device = studio.workspace.getDevice ();dockerfile:dockerfile
 			if (device)
 			{
 				// studio.console.show ();
@@ -655,12 +655,9 @@ export function setup(options, imports, register)
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
-
-				let path_to_docker = project.folder + '/Dockerfile';
-				let Dockerfile = null;
-				let dockerfile_exists = false;
 	
 				let device = studio.workspace.getDevice ();
+				let dockerfile = null;
 
 				if (device)
 				{
@@ -672,27 +669,6 @@ export function setup(options, imports, register)
 
 					let structure = await studio.projects.generateStructure (project);
 
-					if(deploy === true)
-					{
-						
-						if(fs.existsSync(path_to_docker))
-						{
-							Dockerfile = await studio.projects.loadFile(project,'/Dockerfile');
-							console.log('There is a Dockerfile');
-							dockerfile_exists = true;
-						}
-						else
-						{
-							dockerfile_exists = false;
-							console.log('No Dockerfile buuut');
-							studio.workspace.showDialog(Docker_pop, {
-								width:800,
-							});
-							//Dockerfile = ("FROM node:latest\nCOPY . .\nRUN node main.js");
-
-						}
-					}
-
 					let tp = {
 						name: project.name,
 						isroot: true,
@@ -703,12 +679,33 @@ export function setup(options, imports, register)
 								isdir: true,
 								issoftware: true,
 								children: [],
-								m: makefile
+								m: makefile,
+								
 							}
 						],
-						dockerFolder: path_to_docker
-
 					};
+
+					if(deploy === true)
+					{
+						let question = await studio.workspace.showDialog(Docker_pop, {
+							width:800,
+						});
+
+						console.log(question);
+
+						if(question === true)							{
+							dockerfile = await studio.projects.newFile(project,'/Dockerfile', 
+							'FROM node:latest\nCOPY . .\n RUN node main.js');
+							dockerfile = await studio.projects.loadFile(project, '/Dockerfile');	
+
+						}
+						else
+						{
+							dockerfile = await studio.projects.loadFile(project, '/Dockerfile');	
+						}
+
+						console.log(dockerfile);
+					}
 
 
 					let setFiles = async (projectChildren, tpChildren, filenamePath) =>
@@ -743,7 +740,6 @@ export function setup(options, imports, register)
 					if(deploy === true)
 					{
 						sendToDevice (device, 'tp', {
-
 							a: 'deploy',
 							t: tp,
 							l: project.language,
@@ -751,10 +747,8 @@ export function setup(options, imports, register)
 							c: xtrem.cols,
 							r: xtrem.rows,
 							dep:deploy,
-							dcfl: dockerfile_exists,
-							Dockerfile: Dockerfile
+							d_file:dockerfile
 						});
-
 					}
 					else
 					{
@@ -767,8 +761,6 @@ export function setup(options, imports, register)
 							c: xtrem.cols,
 							r: xtrem.rows,
 							dep:deploy,
-							dcfl: dockerfile_exists,
-							Dockerfile: Dockerfile
 						});
 					}
 				
