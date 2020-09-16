@@ -237,7 +237,7 @@ module.exports = function (blockly) {
 	Blockly.Python['micropython_i2c_standard_operation'] = function(block) {
 		var dropdown_operation = block.getFieldValue('operation');
 		var text_addr = block.getFieldValue('addr');
-		var dropdown_name = block.getFieldValue('NAME');
+		//var dropdown_name = block.getFieldValue('NAME');
 		var text_input = block.getFieldValue('input');
 		var value_op = Blockly.Python.valueToCode(block, 'op', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
