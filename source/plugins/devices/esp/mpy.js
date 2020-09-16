@@ -13,6 +13,15 @@ const STREAM_ERROR = 2;
 const BUFFER_SIZE = 32;
 
 const RAW_REPL_TIMEOUT = 3000;
+const LIST_FILES_TIMEOUT = 3000;
+
+function escape (s) {
+	s.replace(/\\/g, '\\\\')
+		.replace(/\$/g, '\\$')
+		.replace(/'/g, '\\\'')
+		.replace(/"/g, '\\"');
+	return s;
+}
 
 export class MicroPython extends EventEmitter {
 	constructor(port){
@@ -26,9 +35,15 @@ export class MicroPython extends EventEmitter {
 		this.expectResolve = null;
 		this.expectReject = null;
 
+		this.waitingStatus = null;
+		this.waitResolve = null;
+		this.waitReject = null;
+
 		this.stream = STREAM_NULL;
 
-		this.run_source = null;
+		this.runSource = null;
+
+		this.display = true;
 
 		this.stdout = null;
 		this.stderr = null;
@@ -45,6 +60,71 @@ export class MicroPython extends EventEmitter {
 		port.on('error', (err)=>{
 			this.emit('error', err);
 		});
+	}
+
+	async listdir (folder) {
+		let cmd = `import os
+import json
+
+def listdir(directory):
+	ls = os.listdir(directory)
+	r = []
+	for f in ls:
+		s = os.stat(f)   
+		t = 'u'          
+		if s[0] == 16384: 
+			t = 'd' 
+		elif s[0] == 32768:
+			t = 'f'
+		r.append({'f': f, 't': t, 's': s[6]})
+	print(json.dumps(r))
+
+listdir ('${escape(folder)}')`;
+		let ls = null;
+		try {
+			let res = await this.execute (cmd);
+			if (!res.stderr) {
+				ls = JSON.parse (res.stdout);
+			}
+			// else
+			// {
+			// 	// TODO show notification
+			// }
+		}
+		catch (e)
+		{
+			// TODO show notification
+			ls = null;
+		}
+		return ls;
+	}
+
+	waitForStatus (status, timeout) {
+		if (!this.waitingStatus) {
+			this.waitingStatus = status;
+			return new Promise ((resolve, reject) => {
+				this.waitResolve = resolve;
+				this.waitReject = reject;
+				if (timeout > 0) this.waitTimeout = setTimeout ((() => {
+					this.waitingStatus = null;
+					reject ();
+				}).bind(this), timeout);
+			});
+		}
+		else {
+			throw new Error ('Already waiting '+this.waitingStatus);
+		}
+	}
+
+	async execute (cmd) {
+		let s = this.waitForStatus (STATUS_STOPPED, LIST_FILES_TIMEOUT);
+		await this.enterRawRepl ();
+		await this.run (cmd, false);
+		await s;
+		return {
+			stdout: this.stdout,
+			stderr: this.stderr
+		};
 	}
 
 	readBuffer (data) {
@@ -87,6 +167,7 @@ export class MicroPython extends EventEmitter {
 						this.emit ('data', emitData);
 						this.setStatus (STATUS_STOPPED);
 						this.emitData = null;
+						this.stream = STREAM_NULL;
 						// TODO switch this to previous status before STATUS_RUNNING
 						// this.setStatus (STATUS_REPL);
 					}
@@ -104,11 +185,11 @@ export class MicroPython extends EventEmitter {
 					this.stderr = this.stderr + emitData;
 				}
 			}
-			if (emitData) this.emit ('data', emitData);
+			if (emitData && (this.display || this.status !== STATUS_RUNNING)) this.emit ('data', emitData);
 		}
 	}
 
-	async expect (str, timeout) {
+	expect (str, timeout) {
 		if (!this.expecting) {
 			this.expecting = true;
 			this.expectStr = str;
@@ -122,11 +203,11 @@ export class MicroPython extends EventEmitter {
 			});
 		}
 		else {
-			throw new Error ('Already expecting');
+			throw new Error ('Already expecting '+this.expectStr);
 		}
 	}
 
-	async sleep (mseconds) {
+	sleep (mseconds) {
 		return new Promise ((resolve) => {
 			setTimeout (resolve, mseconds);
 		});
@@ -149,9 +230,9 @@ export class MicroPython extends EventEmitter {
 				await this.sleep (0.5);
 
 				this.setStatus(STATUS_REPL_REQ);
-				await this.write("\r\x01");
+				await this.write('\r\x01');
 				await this.expect ('raw REPL; CTRL-B to exit\r\n>', RAW_REPL_TIMEOUT);
-				await this.write("\x04");
+				await this.write('\x04');
 				await this.expect ('soft reboot\r\n', RAW_REPL_TIMEOUT);
 				await this.sleep (0.5);
 				await this.write ('\x03');
@@ -196,12 +277,13 @@ export class MicroPython extends EventEmitter {
 			exit_raw_repl = true;
 			console.error ('Already exited repl or in repl');
 		}
-		return raw_repl;
+		return exit_raw_repl;
 	}
 
-	async run (source) {
+	async run (source, display = true) {
 		let running = true;
 		if (this.status === STATUS_REPL) {
+			this.display = display;
 			this.stream = STREAM_NULL;
 			this.stdout = '';
 			this.stderr = '';
@@ -233,26 +315,30 @@ export class MicroPython extends EventEmitter {
 
 		let command_bytes = Buffer.from(commands);
 
-        for(let i = 0 ; i < command_bytes.length ; i=i+256)
-        {       
-            let subarray_command_bytes = command_bytes.slice(i,Math.min(i+256, command_bytes.length));
-            await this.port.write(subarray_command_bytes);
+		for(let i = 0 ; i < command_bytes.length ; i=i+256)
+		{       
+			let subarray_command_bytes = command_bytes.slice(i,Math.min(i+256, command_bytes.length));
+			await this.port.write(subarray_command_bytes);
 		}
 		
 		this.setStatus(STATUS_RUNNING);
 
-		await this.port.write(Buffer.from("\r\x04"));
-		await this.port.write(Buffer.from("\r\x02"));
+		await this.port.write(Buffer.from('\r\x04'));
+		await this.port.write(Buffer.from('\r\x02'));
 
 	}
 
 	setStatus(status)
 	{
 		this.status = status;
+		if (this.waitingStatus == status) {
+			this.waitingStatus = null;
+			if (this.waitResolve) this.waitResolve ();
+		}
 		this.emit('status', status);
-		// if (this.run_source && this.status === STATUS_REPL) {
-		// 	await this.write (this.run_source);
-		// 	this.run_source = null;
+		// if (this.runSource && this.status === STATUS_REPL) {
+		// 	await this.write (this.runSource);
+		// 	this.runSource = null;
 		// 	this.setStatus (STATUS_RUNNING);
 		// }
 	}
@@ -269,50 +355,50 @@ export class MicroPython extends EventEmitter {
 
 	async stop()
 	{
-		await this.port.write(Buffer.from("\r\x03"));
-		await this.port.write(Buffer.from("\r\x02"));
+		await this.port.write(Buffer.from('\r\x03'));
+		await this.port.write(Buffer.from('\r\x02'));
 		this.setStatus(STATUS_READY);
 	}
 
 	async reset()
 	{
-		await this.port.write(Buffer.from("\r\x04"));
+		await this.port.write(Buffer.from('\r\x04'));
 	}
 
 }
 
-export class MicroPythonFiles extends EventEmitter {
+// export class MicroPythonFiles extends EventEmitter {
 
-	constructor(mp){
-		super();
-		this.mp = mp;
-	}
+// 	constructor(mp){
+// 		super();
+// 		this.mp = mp;
+// 	}
 
-	async get(filename)
-	{
-		command = "import sys\nimport ubinascii\nwith open('"+filename+"', 'rb') as infile:\nwhile True:\nresult = infile.read("+BUFFER_SIZE+")\nif result == b'':\nbreak\nlen=sys.stdout.write(ubinascii.hexlify(result))";
-		this.mp.run(command);
-		mp.on('data', (data)=> {
+// 	async get(filename)
+// 	{
+// 		command = 'import sys\nimport ubinascii\nwith open(\''+filename+'\', \'rb\') as infile:\nwhile True:\nresult = infile.read('+BUFFER_SIZE+')\nif result == b\'\':\nbreak\nlen=sys.stdout.write(ubinascii.hexlify(result))';
+// 		this.mp.run(command);
+// 		mp.on('data', (data)=> {
             
-		});
+// 		});
 		
-		mp.on('error',(err) => {
+// 		mp.on('error',(err) => {
 
-		});
-	}
+// 		});
+// 	}
 
-	async mkdir(directory)
-	{
-		command = "try:\nimport os\nexcept ImportError:\nimport uos as os\nos.mkdir('"+directory+"')";
-		this.mp.run(command);
-		mp.on('data', (data)=> {
+// 	async mkdir(directory)
+// 	{
+// 		command = 'try:\nimport os\nexcept ImportError:\nimport uos as os\nos.mkdir(\''+directory+'\')';
+// 		this.mp.run(command);
+// 		mp.on('data', (data)=> {
             
-		});
+// 		});
 		
-		mp.on('error',(err) => {
+// 		mp.on('error',(err) => {
 
-		});
+// 		});
 
-	}
+// 	}
 
-}
+// }

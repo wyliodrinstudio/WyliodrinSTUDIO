@@ -54,5 +54,5 @@ export default {
 			this.$root.$emit ('submit');
 		}
 	}
-}
+};
 </script>

@@ -2,17 +2,17 @@ export function loadSerialPort ()
 {
 	try
 	{
-			return eval ('require(\'serialport\')');
+		return eval ('require(\'serialport\')');
 	}
 	catch (e)
 	{
 		studio.workspace.error ('device_esp: esp is not available '+e.message);
 		return {
-				list: function ()
-				{
-						return [
-						];
-				}
+			list: function ()
+			{
+				return [
+				];
+			}
 		};
 	}
 }
@@ -32,7 +32,7 @@ export default {
 	{
 		studio = s;
 		SerialPortLib = loadSerialPort();
-		console.log("setup");
+		console.log('setup');
 		console.log(SerialPortLib);
 		
 	},
@@ -47,7 +47,7 @@ export default {
 			return [];
 		}
 	}
-}
+};
 
 export class SerialPort extends EventEmitter {
 	async connect (address, baudRate)
@@ -57,24 +57,24 @@ export class SerialPort extends EventEmitter {
 			this.serial = new SerialPortLib(address,{
 				baudRate
 			},(err)=>{
-			if(err){
-				this.emit ('error', err);
-			}
-			else
-			{
-				console.log('else');
-				this.serial.on('data', (data) => {
-					this.emit ('data', data);
-				});
-				this.serial.on('error', (err) => {
+				if(err){
 					this.emit ('error', err);
-				});
-				this.serial.on('close', () => {
-					this.emit ('close');	
-				});
-				this.emit('connected');
-			}
-		});
+				}
+				else
+				{
+					console.log('else');
+					this.serial.on('data', (data) => {
+						this.emit ('data', data);
+					});
+					this.serial.on('error', (err) => {
+						this.emit ('error', err);
+					});
+					this.serial.on('close', () => {
+						this.emit ('close');	
+					});
+					this.emit('connected');
+				}
+			});
 
 		}
 		else
