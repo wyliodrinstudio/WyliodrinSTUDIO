@@ -158,16 +158,17 @@ listdir ('${escape(folder)}')`;
 					if (this.stream === STREAM_OUTPUT)
 					{
 						this.stdout = this.stdout + emitData;
-						this.emit ('data', emitData);
+						if (this.display) this.emit ('data', emitData);
 						this.emitData = null;
 						this.stream = STREAM_ERROR;
 					}
 					else if (this.stream === STREAM_ERROR) {
 						this.stderr = this.stderr + emitData;
-						this.emit ('data', emitData);
+						if (this.display) this.emit ('data', emitData);
 						this.setStatus (STATUS_STOPPED);
 						this.emitData = null;
 						this.stream = STREAM_NULL;
+						this.exitRawRepl ();
 						// TODO switch this to previous status before STATUS_RUNNING
 						// this.setStatus (STATUS_REPL);
 					}
@@ -185,7 +186,7 @@ listdir ('${escape(folder)}')`;
 					this.stderr = this.stderr + emitData;
 				}
 			}
-			if (emitData && (this.display || this.status !== STATUS_RUNNING)) this.emit ('data', emitData);
+			if (emitData && this.display === true) this.emit ('data', emitData);
 		}
 	}
 
@@ -257,8 +258,9 @@ listdir ('${escape(folder)}')`;
 
 	async exitRawRepl()
 	{
+		this.display = true;
 		let exit_raw_repl = false;
-		if (this.status === STATUS_REPL)
+		if (this.status === STATUS_REPL || this.status === STATUS_STOPPED)
 		{
 			try
 			{
@@ -355,6 +357,7 @@ listdir ('${escape(folder)}')`;
 
 	async stop()
 	{
+		this.display = true;
 		await this.port.write(Buffer.from('\r\x03'));
 		await this.port.write(Buffer.from('\r\x02'));
 		this.setStatus(STATUS_READY);
@@ -363,6 +366,7 @@ listdir ('${escape(folder)}')`;
 	async reset()
 	{
 		await this.port.write(Buffer.from('\r\x04'));
+		await this.port.write(Buffer.from('\r\x02'));
 	}
 
 }
