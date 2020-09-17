@@ -99,6 +99,194 @@ listdir ('${escape(folder)}')`;
 		return ls;
 	}
 
+	async get(file)
+	{
+		let cmd = `import sys
+import ubinascii
+with open('${escape(file)}', 'rb') as infile:
+	while True:
+		result = infile.read(${escape(BUFFER_SIZE)})
+		if result == b'':
+			break
+		len = sys.stdout.write(ubinascii.hexlify(result))`;
+		
+		let fileContent = null;
+		try{
+
+			let res = await this.execute(cmd);
+			if(!res.stderr)
+			{
+				fileContent = Buffer.from(res.stdout).toString();
+			}
+			// else
+			// {
+					//TODO show notification
+					//res.stderr === "OSError: [Errno 2] ENOENT" - "No such file {file}".
+			// }
+
+		}
+		catch (e)
+		{
+			// TODO show notification
+			fileContent = null;
+		}
+		return fileContent;
+		
+	}
+
+	async mkdir(dir)
+	{
+
+		let cmd = `try:
+	import os
+except ImportError:
+	import uos as os
+os.mkdir('${escape(dir)}')`;
+
+		try{
+
+			let res = await this.execute(cmd);
+			if(!res.stderr)
+			{
+				//TODO show notification
+			}
+			// else
+			// {
+					//TODO show notification
+					//res.stderr === "OSError: [Errno 17] EEXIST" - Directory already exist {dir}.
+			// }
+
+		}
+		catch (e)
+		{
+			// TODO show notification
+		}
+
+	}
+
+	async put(file , data)
+	{
+		let cmd = `f = open('${escape(file)}', 'wb')`;
+
+		try{
+			let res = await this.execute(cmd);
+			if(!res.stderr)
+			{
+				//TODO show notification
+
+				let len = data.length;
+
+				for(let i = 0; i < len; i=i+BUFFER_SIZE)
+				{
+					let part_len = Math.min(BUFFER_SIZE, len-i);
+					let part = data.substring(i , i+part_len);
+
+					cmd = `f.write(b'${escape(part)}')`;
+
+					try{
+						let res = await this.execute(cmd);
+						if(!res.stderr)
+						{
+							//TODO show notification
+						}
+						// else
+						// {
+						 	//TODO show notification
+						 	//ERROR: FILE NOT EXIST
+						// }
+					}
+					catch(e){
+						// TODO show notification
+					}
+					
+				}
+
+				cmd = `f.close()`;
+				await this.execute(cmd);
+
+			}
+			// else
+			// {
+			 	//TODO show notification
+			 	//ERROR: FILE ALREADY EXIST
+			// }
+		}
+		catch(e){
+			// TODO show notification
+		}
+
+	}
+
+	async rm(file)
+	{
+
+		let cmd = `try:
+	import os
+except ImportError:
+	import uos as os
+os.remove('${escape(file)}')`;
+
+		try{
+
+			let res = await this.execute(cmd);
+			if(!res.stderr)
+			{
+				//TODO show notification
+			}
+			// else
+			// {
+					//TODO show notification
+					//res.stderr === "OSError: [Errno 2] ENOENT" - No such file/directory {file}.
+					//res.stderr === "OSError: [Errno 13] EACCES" - Directory is not empty {file}.
+			// }
+
+		}
+		catch (e)
+		{
+			// TODO show notification
+		}
+
+	}
+
+	async rmdir(dir)
+	{
+		let cmd = `import os
+			except ImportError:
+				import uos as os
+			def rmdir(directory):
+				os.chdir(directory)
+				for f in os.listdir():
+					try:
+						os.remove(f)
+					except OSError:
+						pass
+				for f in os.listdir():
+					rmdir(f)
+				os.chdir('..')
+				os.rmdir(directory)
+			rmdir('${escape(dir)}')`;
+
+		try{
+
+			let res = await this.execute(cmd);
+			if(!res.stderr)
+			{
+				//TODO show notification
+			}
+			// else
+			// {
+					//TODO show notification
+					//res.stderr === "OSError: [Errno 2] ENOENT" - No such directory {dir}.
+			// }
+	
+		}
+		catch (e)
+		{
+			// TODO show notification
+		}
+		
+	}
+
 	waitForStatus (status, timeout) {
 		if (!this.waitingStatus) {
 			this.waitingStatus = status;
