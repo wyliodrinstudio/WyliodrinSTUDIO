@@ -687,21 +687,21 @@ export function setup(options, imports, register)
 
 					if(deploy === true)
 					{
-						let question = await studio.workspace.showDialog(Docker_pop, {
-							width:800,
-						});
 
-						console.log(question);
-
-						if(question === true)							{
-							dockerfile = await studio.projects.newFile(project,'/Dockerfile', 
-							'FROM node:latest\nCOPY . .\n RUN node main.js');
-							dockerfile = await studio.projects.loadFile(project, '/Dockerfile');	
-
-						}
-						else
+						dockerfile = await studio.projects.loadFile(project, '/Dockerfile');
+						
+						if(dockerfile === undefined)
 						{
-							dockerfile = await studio.projects.loadFile(project, '/Dockerfile');	
+							let question = await studio.workspace.showDialog(Docker_pop, {
+								width:800,
+							});
+
+							if(question === true)							{
+								dockerfile = await studio.projects.newFile(project,'/Dockerfile', 
+								'FROM node:latest\nCOPY . .\n RUN node main.js');
+								dockerfile = await studio.projects.loadFile(project, '/Dockerfile');	
+							}
+
 						}
 
 						console.log(dockerfile);
