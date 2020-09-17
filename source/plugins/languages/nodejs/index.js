@@ -71,7 +71,7 @@ export default function setup(options, imports, register) {
 			if (filename[0] === '/') filename = filename.substring (1);
 			console.log(filename);
 			// TODO add filename
-			return 'run:\n\tnode main.js\nbuild:\n\t docker build --tag main-app'; //add build rule for docker
+			return 'run:\n\tnode main.js\n'; 
 		},
 	};
 
