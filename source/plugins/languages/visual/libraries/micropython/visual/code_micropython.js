@@ -40,6 +40,12 @@ module.exports = function (blockly) {
 		}
 	};
 
+	Blockly.Python.micropython_import_adc = function() {
+		if (!Blockly.Python.definitions_['micropython_adc']) {
+			Blockly.Python.definitions_['micropython_adc'] = 'from machine import ADC \n';
+		}
+	};
+
 	Blockly.Python.micropython_import_network = function() {
 		if (!Blockly.Python.definitions_['micropython_network']) {
 			Blockly.Python.definitions_['micropython_network'] = 'import network \n';
@@ -57,23 +63,25 @@ module.exports = function (blockly) {
 			Blockly.Python.definitions_['micropython_SPI'] = 'from machine import Pin, SPI \n';
 		}
 	};
-	
-	Blockly.Python['micropython_pin'] = function(block) {
-		Blockly.Python.micropython_import_Pin();
-		var value_gpio = Blockly.Python.valueToCode(block, 'GPIO', Blockly.Python.ORDER_ATOMIC);
-		var dropdown_type1 = block.getFieldValue('type1');
-		var dropdown_type2 = block.getFieldValue('type2');
-		// TODO: Assemble Python into code variable.
-		var code = '';
-		if(dropdown_type2.toString() == 'NONE') {
-			code = 'Pin(' + value_gpio + ', ' + 'Pin.' + dropdown_type1 + ')'; //+ '\n';
-		} else {
-			code = 'Pin(' + value_gpio + ', ' + 'Pin.' + dropdown_type1 + ', ' + 'Pin.' + dropdown_type2 +')';// + '\n';
-		}
 
+	Blockly.Python['micropython_digital_input'] = function(block) {
+		Blockly.Python.micropython_import_Pin();
+		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
+		var dropdown_type = block.getFieldValue('type');
+		// TODO: Assemble Python into code variable.
+		var code = 'Pin(' + value_pin.toString() + ', ' + 'Pin.IN' + ', ' + 'Pin.' + dropdown_type.toString() + ')' + '\n' ;
+		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
+	Blockly.Python['micropython_led'] = function(block) {
+		Blockly.Python.micropython_import_Pin();
+		var value_led = Blockly.Python.valueToCode(block, 'LED', Blockly.Python.ORDER_ATOMIC);
+		// TODO: Assemble Python into code variable.
+		var code = 'Pin(' + value_led + ', ' + 'Pin.OUT)' + '\n';
+		// TODO: Change ORDER_NONE to the correct strength.
+		return [code, Blockly.Python.ORDER_NONE];
+	};
 
 	Blockly.Python['micropython_set_value'] = function(block) {
 		var dropdown_set_value = block.getFieldValue('set_value');
@@ -99,31 +107,21 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['micropython_pin_number'] = function(block) {
-		var value_pin_number = Blockly.Python.valueToCode(block, 'pin_number', Blockly.Python.ORDER_ATOMIC);
-		// TODO: Assemble Python into code variable.
-		var code = 'Pin(' + value_pin_number + ')';
-		// TODO: Change ORDER_NONE to the correct strength.
-		return [code, Blockly.Python.ORDER_NONE];
-	};
-
 	Blockly.Python['micropython_pwm'] = function(block) {
 		Blockly.Python.micropython_import_PWM();
-		var value_pwm = Blockly.Python.valueToCode(block, 'pwm', Blockly.Python.ORDER_ATOMIC);
+		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 		var value_freq = Blockly.Python.valueToCode(block, 'freq', Blockly.Python.ORDER_ATOMIC);
 		var value_duty = Blockly.Python.valueToCode(block, 'duty', Blockly.Python.ORDER_ATOMIC);
-		// TODO: Assemble Python into code variable.
 		var code = '';
 		if (value_freq == 0 && value_duty == 0) {
-			code = 'Pwm(' + value_pwm.toString() + ')' + '\n';
+			code = 'Pwm(' + value_pin.toString() + ', Pin.OUT'+ ')' + '\n';
 		} else if (value_duty == 0 && value_freq != 0){
-			code = 'PWM(' + value_pwm.toString() + ', ' + 'freq=' + value_freq.toString() + ')' + '\n';
+			code = 'PWM(' + '(' + value_pin.toString() + ', Pin.OUT)' + ', ' + 'freq=' + value_freq.toString() + ')' + '\n';
 		} else if (value_freq == 0 && value_duty != 0) {
-			code = 'PWM(' + value_pwm.toString() + ', ' + 'duty=' + value_duty.toString() + ')' + '\n';
+			code = 'PWM(' + '(' + value_pin.toString() + ', Pin.OUT)' + ', ' + 'duty=' + value_duty.toString() + ')' + '\n';
 		} else {
-			code = 'PWM(' + value_pwm.toString() + ', ' + 'freq=' + value_freq.toString() + ', ' +'duty=' + value_duty.toString() + ')' + '\n';	
+			code = 'PWM(' + '(' + value_pin.toString() + ', Pin.OUT)' + ', ' + 'freq=' + value_freq.toString() + ', ' +'duty=' + value_duty.toString() + ')' + '\n';	
 		}
-		
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
@@ -211,6 +209,7 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['micropython_adc'] = function(block) {
+		Blockly.Python.micropython_import_adc();
 		var value_adc_var = Blockly.Python.valueToCode(block, 'adc_var', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'ADC(' + value_adc_var + ')' + '\n';
@@ -227,9 +226,10 @@ module.exports = function (blockly) {
 	};
 
 	Blockly.Python['micropython_adc_pin'] = function(block) {
+		Blockly.Python.micropython_import_adc();
 		var value_adc_pin = Blockly.Python.valueToCode(block, 'adc_pin', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		var code = 'ADC' + value_adc_pin + '\n';
+		var code = 'ADC( Pin(' + value_adc_pin.toString() + ', Pin.IN)' + ')' + '\n';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
@@ -254,13 +254,15 @@ module.exports = function (blockly) {
 		// TODO: Assemble Python into code variable.
 		var code = '';
 		if (value_freq == 0) {
-			code = 'I2C(' + 'id=' + text_id.toString() + ', ' + 'scl=' + value_scl + ', ' + 'sda=' + value_sda + ')' + '\n';
+			code = 'I2C(' + 'id=' + text_id.toString() + ', ' + 'scl=Pin(' + value_scl + ')' + ', ' + 'sda=Pin(' + value_sda + ')' + ')' + '\n';
 		} else 
-			code = 'I2C(' + 'id=' + text_id.toString() + ', ' + 'scl=' + value_scl + ', ' + 'sda=' + value_sda + ', ' +'freq=' + value_freq.toString() + ')' + '\n';
+			code = 'I2C(' + 'id=' + text_id.toString() + ', ' + 'scl=Pin(' + value_scl + ')' + ', ' + 'sda=Pin(' + value_sda + ')'+ ', ' + 'freq=' + value_freq.toString() + ')' + '\n';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 
+	
+	
 	Blockly.Python['micropython_i2c_scan'] = function() {
 		// TODO: Assemble Python into code variable.
 		var code = 'i2c.scan()' + '\n';
@@ -284,7 +286,7 @@ module.exports = function (blockly) {
 		var value_mosi = Blockly.Python.valueToCode(block, 'mosi', Blockly.Python.ORDER_ATOMIC);
 		var value_miso = Blockly.Python.valueToCode(block, 'miso', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		var code = 'SPI(' + value_spi + ', ' + 'bauderate=' + value_bauderate + ', ' + 'polarity=' + value_polarity + ', ' + 'phase=' + value_phase + ', ' + 'sck=' + value_sck + ', ' + 'mosi=' + value_mosi + ', ' + 'miso=' + value_miso + ')' + '\n';
+		var code = 'SPI(' + value_spi + ', ' + 'bauderate=' + value_bauderate + ', ' + 'polarity=' + value_polarity + ', ' + 'phase=' + value_phase + ', ' + 'sck=Pin(' + value_sck + ')' + ', ' + 'mosi=Pin(' + value_mosi + ')' + ', ' + 'miso=Pin(' + value_miso + ')' + ')' + '\n';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
@@ -331,13 +333,6 @@ module.exports = function (blockly) {
 		}
 		return code;
 	};
-	
-	Blockly.Python['micropython_print'] = function(block) {
-		var value_print_value = Blockly.Python.valueToCode(block, 'print_value', Blockly.Python.ORDER_ATOMIC);
-		// TODO: Assemble Python into code variable.
-		var code = 'print(' + value_print_value + ')\n';
-		return code;
-	};
 
 	Blockly.Python['micropython_print_format'] = function(block) {
 		var text_quotation_mark = block.getFieldValue('text_quotation_mark');
@@ -364,11 +359,19 @@ module.exports = function (blockly) {
 		return code;
 	};
 
+	// Blockly.Python['micropython_dht'] = function(block) {
+	// 	Blockly.Python.micropython_import_dht();
+	// 	var value_dht = Blockly.Python.valueToCode(block, 'dht', Blockly.Python.ORDER_ATOMIC);
+	// 	// TODO: Assemble Python into code variable.
+	// 	var code = 'dht.DHT11(Pin())' + value_dht.toString();
+	// 	// TODO: Change ORDER_NONE to the correct strength.
+	// 	return [code, Blockly.Python.ORDER_NONE];
+	// };
+
 	Blockly.Python['micropython_dht'] = function(block) {
-		Blockly.Python.micropython_import_dht();
 		var value_dht = Blockly.Python.valueToCode(block, 'dht', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
-		var code = 'dht.DHT11' + value_dht.toString();
+		var code = 'dht.DHT11(Pin'+ value_dht.toString() + ')' +')' + '\n';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};

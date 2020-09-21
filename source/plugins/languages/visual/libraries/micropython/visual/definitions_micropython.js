@@ -3,16 +3,28 @@
 module.exports = function (blockly){
 	var Blockly = blockly.Blockly;
 
-	Blockly.Blocks['micropython_pin'] = {
+	Blockly.Blocks['micropython_digital_input'] = {
 		init: function() {
-			this.appendValueInput('GPIO')
+			this.appendValueInput('pin')
 				.setCheck('Number')
 				.appendField('Pin');
 			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([['IN','IN'], ['OUT','OUT'], ['PULL_UP','PULL_UP']]), 'type1');
-			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([['none','NONE'], ['IN','IN'], ['OUT','OUT'], ['PULL_UP','PULL_UP']]), 'type2');
+				.appendField(new Blockly.FieldDropdown([['PULL_UP','PULL_UP'], ['PULL_DOWN','PULL_DOWN']]), 'type');
 			this.setInputsInline(true);
+			this.setOutput(true, null);
+			this.setColour(315);
+			this.setTooltip('');
+			this.setHelpUrl('');
+		}
+	};
+
+	Blockly.Blocks['micropython_led'] = {
+		init: function() {
+			this.appendValueInput('LED')
+				.setCheck('Number')
+				.appendField('Pin');
+			this.appendDummyInput()
+				.appendField('Pin.OUT');
 			this.setOutput(true, null);
 			this.setColour(255);
 			this.setTooltip('');
@@ -61,23 +73,12 @@ module.exports = function (blockly){
 		}
 	};
 
-	Blockly.Blocks['micropython_pin_number'] = {
-		init: function() {
-			this.appendValueInput('pin_number')
-				.setCheck('Number')
-				.appendField('Pin');
-			this.setOutput(true, null);
-			this.setColour(255);
-			this.setTooltip('');
-			this.setHelpUrl('');
-		}
-	};
-
 	Blockly.Blocks['micropython_pwm'] = {
 		init: function() {
-			this.appendValueInput('pwm')
-				.setCheck('micropython_pin_number')
-				.appendField('PWM');
+			this.appendValueInput('pin')
+				.setCheck('Number')
+				.appendField('PWM')
+				.appendField('Pin');
 			this.appendValueInput('freq')
 				.setCheck('Number')
 				.appendField('freq');
@@ -86,7 +87,7 @@ module.exports = function (blockly){
 				.appendField('duty');
 			this.setInputsInline(true);
 			this.setOutput(true, null);
-			this.setColour(315);
+			this.setColour(335);
 			this.setTooltip('');
 			this.setHelpUrl('');
 		}
@@ -254,8 +255,9 @@ module.exports = function (blockly){
 	Blockly.Blocks['micropython_adc_pin'] = {
 		init: function() {
 			this.appendValueInput('adc_pin')
-				.setCheck('micropython_pin_number')
-				.appendField('ADC');
+				.setCheck('Number')
+				.appendField('ADC')
+				.appendField('Pin');
 			this.setOutput(true, null);
 			this.setColour(150);
 			this.setTooltip('');
@@ -270,10 +272,10 @@ module.exports = function (blockly){
 				.appendField('id')
 				.appendField(new Blockly.FieldTextInput('-1'), 'id');
 			this.appendValueInput('scl')
-				.setCheck('micropython_pin_number')
+				.setCheck('Number')
 				.appendField('scl');
 			this.appendValueInput('sda')
-				.setCheck('micropython_pin_number')
+				.setCheck('Number')
 				.appendField('sda');
 			this.appendValueInput('freq')
 				.setCheck('Number')
@@ -346,13 +348,16 @@ module.exports = function (blockly){
 				.setCheck('Number')
 				.appendField('phase');
 			this.appendValueInput('sck')
-				.setCheck('micropython_pin_number')
+				.setCheck('Number')
+				.appendField('Pin')
 				.appendField('sck');
 			this.appendValueInput('mosi')
-				.setCheck('micropython_pin_number')
+				.setCheck('Number')
+				.appendField('Pin')
 				.appendField('mosi');
 			this.appendValueInput('miso')
-				.setCheck('micropython_pin_number')
+				.setCheck('Number')
+				.appendField('Pin')
 				.appendField('miso');
 			this.setInputsInline(true);
 			this.setOutput(true, null);
@@ -422,21 +427,6 @@ module.exports = function (blockly){
 		}
 	};
 
-	Blockly.Blocks['micropython_print'] = {
-		init: function() {
-			this.appendDummyInput()
-				.appendField('print');
-			this.appendValueInput('print_value')
-				.setCheck(null);
-			this.setInputsInline(true);
-			this.setPreviousStatement(true, null);
-			this.setNextStatement(true, null);
-			this.setColour(120);
-			this.setTooltip('you can print anything');
-			this.setHelpUrl('');
-		}
-	};
-
 	Blockly.Blocks['micropython_print_format'] = {
 		init: function() {
 			this.appendDummyInput()
@@ -461,7 +451,7 @@ module.exports = function (blockly){
 	Blockly.Blocks['micropython_dht'] = {
 		init: function() {
 			this.appendValueInput('dht')
-				.setCheck('micropython_pin')
+				.setCheck('Number')
 				.appendField('DHT11');
 			this.setOutput(true, null);
 			this.setColour(180);

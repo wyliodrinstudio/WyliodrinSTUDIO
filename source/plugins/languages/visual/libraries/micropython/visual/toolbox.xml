@@ -2,19 +2,17 @@
   <category name="ESP8266" colour="#F1C40F">
     <category name="Pins and GPIO" colour="#6C3483">
       <block type="variables_set">
-        <field name="VAR">name Pin</field>
-        <value name="VALUE">
-          <block type="micropython_pin">
-            <field name="type1">IN</field>
-            <field name="type2">NONE</field>
-            <value name="GPIO">
-              <block type="math_number">
-                <field name="NUM">15</field>
-              </block>
-            </value>
-          </block>
-        </value>
-      </block>
+      <field name="VAR">LED</field>
+      <value name="VALUE">
+        <block type="micropython_led">
+          <value name="LED">
+            <block type="math_number">
+              <field name="NUM">15</field>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
 
       <block type="micropython_set_value">
         <field name="set_value">0</field>
@@ -42,10 +40,16 @@
         </value>
       </block>
 
-      <block type="micropython_pin_number">
-        <value name="pin_number">
-          <block type="math_number">
-            <field name="NUM">0</field>
+      <block type="variables_set">
+        <field name="VAR">name Digital Input</field>
+        <value name="VALUE">
+          <block type="micropython_digital_input">
+            <field name="type">PULL_UP</field>
+            <value name="pin">
+              <block type="math_number">
+                <field name="NUM">15</field>
+              </block>
+            </value>
           </block>
         </value>
       </block>
@@ -87,21 +91,17 @@
       </block>
 
       <block type="variables_set">
-        <field name="VAR">name ADC</field>
-        <value name="VALUE">
-          <block type="micropython_adc_pin">
-            <value name="adc_pin">
-              <block type="micropython_pin_number">
-                <value name="pin_number">
-                  <block type="math_number">
-                    <field name="NUM">0</field>
-                  </block>
-                </value>
-              </block>
-            </value>
-          </block>
-        </value>
-      </block>
+      <field name="VAR">name ADC</field>
+      <value name="VALUE">
+        <block type="micropython_adc_pin">
+          <value name="adc_pin">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
 
       <block type="variables_set">
         <field name="VAR">name var</field>
@@ -124,21 +124,13 @@
           <block type="micropython_i2c">
             <field name="id">-1</field>
             <value name="scl">
-              <block type="micropython_pin_number">
-                <value name="pin_number">
-                  <block type="math_number">
-                    <field name="NUM">0</field>
-                  </block>
-                </value>
+              <block type="math_number">
+                <field name="NUM">13</field>
               </block>
             </value>
             <value name="sda">
-              <block type="micropython_pin_number">
-                <value name="pin_number">
-                  <block type="math_number">
-                    <field name="NUM">0</field>
-                  </block>
-                </value>
+              <block type="math_number">
+                <field name="NUM">14</field>
               </block>
             </value>
             <value name="freq">
@@ -149,6 +141,7 @@
           </block>
         </value>
       </block>
+        
  
       <block type="micropython_i2c_scan"/> 
       <block type="micropython_i2c_operation"/> 
@@ -189,33 +182,22 @@
           </block>
         </value>
         <value name="sck">
-          <block type="micropython_pin_number">
-            <value name="pin_number">
-              <block type="math_number">
-                <field name="NUM">0</field>
-              </block>
-            </value>
+          <block type="math_number">
+            <field name="NUM">0</field>
           </block>
         </value>
         <value name="mosi">
-          <block type="micropython_pin_number">
-            <value name="pin_number">
-              <block type="math_number">
-                <field name="NUM">2</field>
-              </block>
-            </value>
+          <block type="math_number">
+            <field name="NUM">2</field>
           </block>
         </value>
         <value name="miso">
-          <block type="micropython_pin_number">
-            <value name="pin_number">
-              <block type="math_number">
-                <field name="NUM">4</field>
-              </block>
-            </value>
+          <block type="math_number">
+            <field name="NUM">4</field>
           </block>
         </value>
       </block>
+      
 
       <block type="micropython_spi_init">
       <value name="spi_init">
@@ -261,31 +243,27 @@
 
     <category name="PWM" colour="#AF7AC5">
       <block type="variables_set">
-        <field name="VAR">name PWM</field>
-        <value name="VALUE">
-          <block type="micropython_pwm">
-            <value name="pwm">
-              <block type="micropython_pin_number">
-                <value name="pin_number">
-                  <block type="math_number">
-                    <field name="NUM">15</field>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <value name="freq">
-              <block type="math_number">
-                <field name="NUM">500</field>
-              </block>
-            </value>
-            <value name="duty">
-              <block type="math_number">
-                <field name="NUM">0</field>
-              </block>
-            </value>
-          </block>
-        </value>
-      </block>
+      <field name="VAR">name PWM</field>
+      <value name="VALUE">
+        <block type="micropython_pwm">
+          <value name="pin">
+            <block type="math_number">
+              <field name="NUM">15</field>
+            </block>
+          </value>
+          <value name="freq">
+            <block type="math_number">
+              <field name="NUM">500</field>
+            </block>
+          </value>
+          <value name="duty">
+            <block type="math_number">
+              <field name="NUM">0</field>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
 
       <block type="micropython_pwm_methods">
         <field name="methods">freq</field>
@@ -332,91 +310,108 @@
       </category>
 
     <category colour="#5ba58c" name="DHT">
-
       <block type="variables_set">
-        <field name="VAR">name DHT</field>
-        <value name="VALUE">
-          <block type="micropython_dht">
-            <value name="dht">
-              <block type="micropython_pin">
-                <field name="type1">IN</field>
-                <field name="type2">NONE</field>
-                <value name="GPIO">
-                  <block type="math_number">
-                    <field name="NUM">15</field>
-                  </block>
-                </value>
-              </block>
-            </value>
-          </block>
-        </value>
-      </block>
-
-      <block type="micropython_dht_sensors">
-      <field name="sensors">measure</field>
-      <value name="sensors">
-        <block type="variables_get">
-          <field name="VAR">d</field>
-        </block>
-      </value>
-    </block>
-
-    <block type="variables_set">
-      <field name="VAR">name obj</field>
+      <field name="VAR">name DHT</field>
       <value name="VALUE">
-        <block type="micropython_get_dht_sensors">
-          <field name="sensors">temperature</field>
-          <value name="get_value_sensor">
-            <block type="variables_get">
-              <field name="VAR">name obj</field>
+        <block type="micropython_dht">
+          <value name="dht">
+            <block type="math_number">
+              <field name="NUM">13</field>
             </block>
           </value>
         </block>
       </value>
     </block>
 
-    <block type="micropython_try_catch">
-      <field name="error">OSError</field>
-      <value name="except">
-        <block type="variables_get">
-          <field name="VAR">error</field>
-        </block>
-      </value>
-    </block>>
+      <block type="micropython_dht_sensors">
+        <field name="sensors">measure</field>
+        <value name="sensors">
+          <block type="variables_get">
+            <field name="VAR">d</field>
+          </block>
+        </value>
+      </block>
+
+      <block type="variables_set">
+        <field name="VAR">name obj</field>
+        <value name="VALUE">
+          <block type="micropython_get_dht_sensors">
+            <field name="sensors">temperature</field>
+            <value name="get_value_sensor">
+              <block type="variables_get">
+                <field name="VAR">name obj</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+
+      <block type="micropython_try_catch">
+        <field name="error">OSError</field>
+        <value name="except">
+          <block type="variables_get">
+            <field name="VAR">error</field>
+          </block>
+        </value>
+      </block>
 
     </category>
 
     <category name='RGB' colour="#D35400">
         <block type="micropython_declaration_rgb_1">
         <value name="red">
-          <block type="micropython_pin">
-            <field name="type1">IN</field>
-            <field name="type2">NONE</field>
-            <value name="GPIO">
+          <block type="micropython_pwm">
+            <value name="pin">
               <block type="math_number">
-                <field name="NUM">15</field>
+                <field name="NUM">14</field>
+              </block>
+            </value>
+            <value name="freq">
+              <block type="math_number">
+                <field name="NUM">500</field>
+              </block>
+            </value>
+            <value name="duty">
+              <block type="math_number">
+                <field name="NUM">0</field>
               </block>
             </value>
           </block>
         </value>
         <value name="green">
-          <block type="micropython_pin">
-            <field name="type1">IN</field>
-            <field name="type2">NONE</field>
-            <value name="GPIO">
+          <block type="micropython_pwm">
+            <value name="pin">
               <block type="math_number">
-                <field name="NUM">15</field>
+                <field name="NUM">12</field>
+              </block>
+            </value>
+            <value name="freq">
+              <block type="math_number">
+                <field name="NUM">500</field>
+              </block>
+            </value>
+            <value name="duty">
+              <block type="math_number">
+                <field name="NUM">0</field>
               </block>
             </value>
           </block>
         </value>
         <value name="blue">
-          <block type="micropython_pin">
-            <field name="type1">IN</field>
-            <field name="type2">NONE</field>
-            <value name="GPIO">
+          <block type="micropython_pwm">
+            <value name="pin">
               <block type="math_number">
                 <field name="NUM">15</field>
+              </block>
+            </value>
+            <value name="freq">
+              <block type="math_number">
+                <field name="NUM">500</field>
+              </block>
+            </value>
+            <value name="duty">
+              <block type="math_number">
+                <field name="NUM">0</field>
               </block>
             </value>
           </block>
@@ -498,12 +493,6 @@
       </block>
     </category>
 
-    <category name="Print" colour="#2ECC71">
-      <block type="micropython_print"></block>
-      <block type="micropython_print_format">
-        <field name="text_quotation_mark">some text</field>
-      </block>
-    </category>
 
   </category>
 
