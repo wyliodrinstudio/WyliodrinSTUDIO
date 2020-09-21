@@ -46,6 +46,13 @@ export default function setup (options, imports, register)
 			// TODO add filename
 			return 'run:\n\tpython3 main.py';
 		},
+		getDockerBuildCommands(project,filename) {
+			return 'npm install';
+		},
+		getDockerRunCommands(project,filename) {
+			//cmd din dockerfile
+			return 'python main.py';
+		}
 	};
 
 	studio.projects.registerLanguage('python', 'Python', 'plugins/languages/python/data/img/project.png', 'plugins/languages/python/data/img/pythonLittle.png',fileIcons, python);

@@ -43,6 +43,13 @@ export default function setup (options, imports, register)
 			// TODO add filename
 			return 'run:\n\tcargo run';
 		},
+		getDockerBuildCommands(project,filename) {
+			return null;
+		},
+		getDockerRunCommands(project,filename) {
+			//cmd din dockerfile
+			return null;
+		}
 	};
 
 	studio.projects.registerLanguage('rust', 'Rust', null, 'plugins/languages/rust/data/img/rust.png', fileIcons, rust);

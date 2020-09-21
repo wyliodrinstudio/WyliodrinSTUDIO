@@ -16,6 +16,7 @@ import { EventEmitter } from 'events';
 import Deployments from './views/Deployments.vue';
 import { fstat } from 'fs';
 import Docker_pop from './views/Docker-pop.vue';
+import { build } from 'electron-builder';
 
 
 let studio = null;
@@ -630,7 +631,7 @@ export function setup(options, imports, register)
 		 */
 		stopProject()
 		{
-			let device = studio.workspace.getDevice ();dockerfile:dockerfile
+			let device = studio.workspace.getDevice ();
 			if (device)
 			{
 				// studio.console.show ();
@@ -655,6 +656,13 @@ export function setup(options, imports, register)
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
+				console.log("deploy : "+deploy);
+				if(deploy === true)
+				{
+					makefile += "\ndeploy:\n\t docker build --tag " +  project.name +  " .";
+				}
+				
+				console.log(project);
 	
 				let device = studio.workspace.getDevice ();
 				let dockerfile = null;
@@ -664,6 +672,8 @@ export function setup(options, imports, register)
 					// allow the board to modify the project structure before run
 					let board = this.getBoardDriver (device.board);	
 					if (board && board.run) board.run (project);
+					console.log('yey');
+					console.log(device.board);
 					studio.console.show ();
 					studio.console.reset ();
 
@@ -696,16 +706,65 @@ export function setup(options, imports, register)
 								width:800,
 							});
 
-							if(question === true)							{
-								dockerfile = await studio.projects.newFile(project,'/Dockerfile', 
-								'FROM node:latest\nCOPY . .\n RUN node main.js');
-								dockerfile = await studio.projects.loadFile(project, '/Dockerfile');	
+							if(question === true){
+								if(device.board === 'raspberrypi')
+								{
+									if(project.language === 'nodejs')
+									{
+										dockerfile = "FROM balenalib/raspberrypi3-debian-node:latest";
+									}
+									else{
+										dockerfile = "FROM balenalib/raspberrypi3-debian-"+project.language+":latest";
+										console.log('here');
+										console.log(dockerfile);
+									}
+									
+								}
+								else if(device.board === 'picopi')
+								{
+									studio.workspace.showNotification ('DEVICE_WYAPP_ERROR_BOARD_NOT_SUPPORTED');
+								}
+								else if(device.board === 'beagleboneblack')
+								{
+									if(project.language === 'nodejs') dockerfile = "FROM balenalib/beaglebone-black-debian-node:latest";
+									else{
+										dockerfile = "FROM balenalib/beaglebone-black-debian"+project.language+":latest";
+									}
+								}
+								else if(device.board === 'udooneo')
+								{
+									studio.workspace.showNotification ('DEVICE_WYAPP_ERROR_BOARD_NOT_SUPPORTED');
+								}
+								else
+								{
+									studio.workspace.showNotification ('DEVICE_WYAPP_ERROR_TYPE_OF_BOARD_UNRECOGNIZABLE');
+								}
+								// dockerfile = await studio.projects.loadFile(project, '/Dockerfile');	
+								
+								dockerfile += "\nCOPY . .\n";
+								console.log('i m here');
+								console.log(dockerfile);
+								let buildcmd = studio.projects.getDockerBuildCommands(project,'/Docker');
+								let runcmd = studio.projects.getDockerRunCommands(project,'/Docker');
+
+								if(buildcmd === null)
+								{
+									studio.workspace.showNotification('DEVICE_WYAPP_ERROR_LANGUAGE_NOT_SUPPORTED');
+								}
+								else
+								{
+									dockerfile += "RUN "+ buildcmd+"\n";
+									dockerfile += "CMD "+ runcmd+ "\n";
+								}
+								
+								let  uf = await studio.projects.newFile(project,'/Dockerfile', dockerfile);
+								console.log(uf);
+								
 							}
 
 						}
-
-						console.log(dockerfile);
 					}
+					//console.log (JSON.stringify (dockerfile, null, 3));
 
 
 					let setFiles = async (projectChildren, tpChildren, filenamePath) =>
@@ -734,36 +793,19 @@ export function setup(options, imports, register)
 					};
 
 					await setFiles (structure.children, tp.children[0].children, '/');
-
+					console.log(project.language);
 					let xtrem = studio.console.getSize ();
+					
+					sendToDevice (device, 'tp', {
 
-					if(deploy === true)
-					{
-						sendToDevice (device, 'tp', {
-							a: 'deploy',
-							t: tp,
-							l: project.language,
-							onlysoft: true,
-							c: xtrem.cols,
-							r: xtrem.rows,
-							dep:deploy,
-							d_file:dockerfile
-						});
-					}
-					else
-					{
-						sendToDevice (device, 'tp', {
-
-							a: 'start',
-							t: tp,
-							l: project.language,
-							onlysoft: true,
-							c: xtrem.cols,
-							r: xtrem.rows,
-							dep:deploy,
-						});
-					}
-				
+						a: 'start',
+						t: tp,
+						l: project.language,
+						onlysoft: true,
+						c: xtrem.cols,
+						r: xtrem.rows,	
+						deploy:deploy,
+					});			
 				}
 			}
 			else

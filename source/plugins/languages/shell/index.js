@@ -46,6 +46,13 @@ export default function setup (options, imports, register)
 			// TODO add filename
 			return 'run:\n\tbash main.sh';
 		},
+		getDockerBuildCommands(project,filename) {
+			return null;
+		},
+		getDockerRunCommands(project,filename) {
+			//cmd din dockerfile
+			return null;
+		}
 	};
 
 	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/languages/shell/data/img/project.png', 'plugins/languages/shell/data/img/shellLittle.png',fileIcons, shell);
