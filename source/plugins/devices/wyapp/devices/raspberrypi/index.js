@@ -76,6 +76,16 @@ export function setup (options, imports, register)
 		run (project)
 		{
 			project;
+		},
+
+		/**
+		 * Modidify the project before deploy
+		 * @param {Project} project - the project
+		 */
+		deploy (project)
+		{
+			// TODO add here the dockerfile
+			project;
 		}
 	};
 
