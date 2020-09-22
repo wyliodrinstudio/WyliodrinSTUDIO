@@ -636,7 +636,7 @@ export function setup(options, imports, register)
 				if (device)
 				{
 					// allow the board to modify the project structure before run
-					let board = this.getBoardDriver (device.board)	
+					let board = this.getBoardDriver (device.board);	
 					if (board && board.run) board.run (project);
 					studio.console.show ();
 					studio.console.reset ();
