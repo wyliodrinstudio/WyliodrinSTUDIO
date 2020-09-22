@@ -635,6 +635,9 @@ export function setup(options, imports, register)
 				let device = studio.workspace.getDevice ();
 				if (device)
 				{
+					// allow the board to modify the project structure before run
+					let board = this.getBoardDriver (device.board)	
+					if (board && board.run) board.run (project);
 					studio.console.show ();
 					studio.console.reset ();
 					let structure = await studio.projects.generateStructure (project);
