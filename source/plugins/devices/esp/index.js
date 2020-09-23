@@ -8,6 +8,7 @@ import { Search } from 'brace';
 import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
 import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
+import MPFileManager from './views/MPFileManager.vue';
 import {SerialPort, loadSerialPort} from './serial.js';
 import serial from './serial.js';
 import {MicroPython, STATUS_RUNNING, STATUS_READY, STATUS_OFFLINE, STATUS_REPL_REQ, STATUS_STOPPED} from './mpy.js';
@@ -105,8 +106,8 @@ function searchSerialDevices(){
 					description,
 					name,
 					connection:'serial',
-					icon:'plugins/devices/esp/data/img/icons/esp.png',
-					board:'esp8266',
+					icon:'plugins/devices/esp/data/img/icons/mp.png',
+					board:'mp',
 					status:'',
 					properties: {
 						productId: serialDevice.productId,
@@ -146,7 +147,7 @@ function updateDevices(){
 		add.push({
 			id: 'esp:newdevice',
 			address: '',
-			name: studio.workspace.vue.$t('ESP 8266'),
+			name: studio.workspace.vue.$t('MicroPython'),
 			board: 'any',
 			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			placeholder: true
@@ -215,7 +216,7 @@ export function setup (options, imports, register)
         
 	let device_esp = {
 		defaultIcon() {
-			return 'plugins/devices/esp/data/img/icons/esp.png';
+			return 'plugins/devices/esp/data/img/icons/mp.png';
 		},
 
 		registerForUpdate (device, fn)
@@ -460,6 +461,8 @@ export function setup (options, imports, register)
 				if (project.language === 'python') {
 					let mp = ports[device.id];
 					await mp.stop();
+					device.running = false;
+					updateDevice (device);
 					// device.running = false;
 					// updateDevice(device);
 				}
@@ -531,11 +534,17 @@ export function setup (options, imports, register)
 			/* Here goes the actual code that will make your device run a project */
 			console.log('Files');
 
-			let project = await studio.projects.getCurrentProject();
+			// let project = await studio.projects.getCurrentProject();
 
                         
+			// let mp = await ports[device.id];
+			// console.log (await mp.listdir ('/'));
 			let mp = ports[device.id];
-			console.log (await mp.listdir ('/'));
+
+			await studio.workspace.showDialog (MPFileManager, {
+				width: 800,
+				mp : mp
+			});
 
 
 		}, 'plugins/devices/esp/data/img/icons/fileexplorer-icon.svg',
@@ -550,7 +559,36 @@ export function setup (options, imports, register)
 			},
 		});
 
+		// FILES TEST
+                
+		workspace.registerDeviceToolButton('DEVICE_ESP_FILESTEST', 10, async () => {
+			let device = studio.workspace.getDevice();
+                
+			/* Here goes the actual code that will make your device run a project */
+			console.log('Files');
 
+			let project = await studio.projects.getCurrentProject();
+
+                        
+			let mp = ports[device.id];
+			console.log(await mp.get('test4.txt'));
+
+
+		}, 'plugins/devices/esp/data/img/icons/fileexplorer-icon.svg',
+
+                
+		/* The aditional options that make the Run Button visible and enabled only if there is a connected device
+                        and its type is "awesome" */
+		{
+			enabled () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.type === 'esp' && device.running === false);
+			},
+		});
+
+		// FILES TEST
+
+		
 
 		if (studio.system.platform () === 'electron')
 		{
@@ -566,7 +604,7 @@ export function setup (options, imports, register)
 				{
 					id: 'esp:web',
 					address: '',
-					name: 'ESP 8266',
+					name: 'MicroPython',
 					board: 'any',
 					connection: 'web-usb',
 					priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,

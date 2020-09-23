@@ -105,10 +105,10 @@ listdir ('${escape(folder)}')`;
 import ubinascii
 with open('${escape(file)}', 'rb') as infile:
 	while True:
-		result = infile.read(${escape(BUFFER_SIZE)})
+		result = infile.read(32)
 		if result == b'':
 			break
-		len = sys.stdout.write(ubinascii.hexlify(result))`;
+		len = sys.stdout.write(result)`;
 		
 		let fileContent = null;
 		try{
@@ -116,7 +116,7 @@ with open('${escape(file)}', 'rb') as infile:
 			let res = await this.execute(cmd);
 			if(!res.stderr)
 			{
-				fileContent = Buffer.from(res.stdout).toString();
+				fileContent = new Buffer.from(res.stdout).toString();
 			}
 			// else
 			// {
@@ -166,54 +166,60 @@ os.mkdir('${escape(dir)}')`;
 
 	async put(file , data)
 	{
-		let cmd = `f = open('${escape(file)}', 'wb')`;
+		let cmd = `f = open('${escape(file)}', 'wb')
+f.write(b'TEST')
+f.close()`;
+		await this.execute(cmd);
 
-		try{
-			let res = await this.execute(cmd);
-			if(!res.stderr)
-			{
-				//TODO show notification
+		// try{
+		// 	let res = await this.execute(cmd);
+		// 	if(!res.stderr)
+		// 	{
+				
+		// 		//TODO show notification
 
-				let len = data.length;
+		// 		await this.execute(cmd);
 
-				for(let i = 0; i < len; i=i+BUFFER_SIZE)
-				{
-					let part_len = Math.min(BUFFER_SIZE, len-i);
-					let part = data.substring(i , i+part_len);
+		// 		let len = data.length;
 
-					cmd = `f.write(b'${escape(part)}')`;
+		// 		// for(let i = 0; i < len; i=i+BUFFER_SIZE)
+		// 		// {
+		// 		// 	let part_len = Math.min(BUFFER_SIZE, len-i);
+		// 		// 	let part = data.substring(i , i+part_len);
 
-					try{
-						let res = await this.execute(cmd);
-						if(!res.stderr)
-						{
-							//TODO show notification
-						}
-						// else
-						// {
-						 	//TODO show notification
-						 	//ERROR: FILE NOT EXIST
-						// }
-					}
-					catch(e){
-						// TODO show notification
-					}
+		// 		// 	cmd = `f.write(b'${escape(part)}')`;
+
+		// 		// 	try{
+		// 		// 		let res = await this.execute(cmd);
+		// 		// 		if(!res.stderr)
+		// 		// 		{
+		// 		// 			//TODO show notification
+		// 		// 		}
+		// 		// 		// else
+		// 		// 		// {
+		// 		// 		 	//TODO show notification
+		// 		// 		 	//ERROR: FILE NOT EXIST
+		// 		// 		// }
+		// 		// 	}
+		// 		// 	catch(e){
+		// 		// 		// TODO show notification
+		// 		// 	}
 					
-				}
+		// 		// }
 
-				cmd = `f.close()`;
-				await this.execute(cmd);
+		// 		cmd = `f.close()`;
+		// 		await this.execute(cmd);
 
-			}
-			// else
-			// {
-			 	//TODO show notification
-			 	//ERROR: FILE ALREADY EXIST
-			// }
-		}
-		catch(e){
-			// TODO show notification
-		}
+		// 	}
+		// 	// else
+		// 	// {
+		// 	 	//TODO show notification
+		// 	 	//ERROR: FILE ALREADY EXIST
+		// 	// }
+		// }
+		// catch(e){
+		// 	// TODO show notification
+		// }
 
 	}
 
@@ -250,21 +256,22 @@ os.remove('${escape(file)}')`;
 
 	async rmdir(dir)
 	{
-		let cmd = `import os
-			except ImportError:
-				import uos as os
-			def rmdir(directory):
-				os.chdir(directory)
-				for f in os.listdir():
-					try:
-						os.remove(f)
-					except OSError:
-						pass
-				for f in os.listdir():
-					rmdir(f)
-				os.chdir('..')
-				os.rmdir(directory)
-			rmdir('${escape(dir)}')`;
+		let cmd = `try:
+	import os
+except ImportError:
+	import uos as os
+def rmdir(directory):
+	os.chdir(directory)
+	for f in os.listdir():
+		try:
+			os.remove(f)
+		except OSError:
+			pass
+	for f in os.listdir():
+		rmdir(f)
+	os.chdir('..')
+	os.rmdir(directory)
+rmdir('${escape(dir)}')`;
 
 		try{
 
