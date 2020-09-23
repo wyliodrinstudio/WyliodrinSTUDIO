@@ -15,66 +15,68 @@
 			</v-tooltip>
 
 		</v-card-title>
-		<v-card-text>
-			<div :class="projectTree" class="project-tree-on">
-			<template>
-				<v-treeview
-					v-model="tree"
-					dense
-					:items="items"
-					:load-children="fetchContent"
-					:open.sync="open"
-					open-on-click		
-					item-key="key"
-					>
-					
-					<template v-slot:label="{item, open}"	>
-						<div v-if="item.name === 'DEVICE_WYAPP_FILESYSTEM'">
-							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
-								<v-icon>mdi-folder-open</v-icon>{{$t(item.name)}}          
-							</p>
-							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
-								<v-icon>mdi-folder</v-icon>{{$t(item.name)}}
-							</p>
-							<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
-								<v-icon>mdi-file</v-icon>{{item.name}}
-							</p>
-						</div>
-						<div v-else>
-							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
-								<v-icon>mdi-folder-open</v-icon>{{item.name}}          
-							</p>
-							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
-								<v-icon>mdi-folder</v-icon>{{item.name}}
-							</p>
-							<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
-								<v-icon>mdi-file</v-icon>{{item.name}}
-							</p>
-						</div>
-					</template>
-					
+		<v-card-text style="height:100%;">
+			<div class="filemanager">
+				<div class="tree-left">
+				
+					<v-treeview style="width:fit-content;"
+						v-model="tree"
+						dense
+						:items="items"
+						:load-children="fetchContent"
+						:open.sync="open"
+						open-on-click		
+						item-key="key"
+						>
+						
+						<template v-slot:label="{item, open}"	>
+							<div v-if="item.name === 'DEVICE_WYAPP_FILESYSTEM'">
+								<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
+									<v-icon>mdi-folder-open</v-icon>{{$t(item.name)}}          
+								</p>
+								<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+									<v-icon>mdi-folder</v-icon>{{$t(item.name)}}
+								</p>
+								<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
+									<v-icon>mdi-file</v-icon>{{item.name}}
+								</p>
+							</div>
+							<div v-else>
+								<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
+									<v-icon>mdi-folder-open</v-icon>{{item.name}}          
+								</p>
+								<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+									<v-icon>mdi-folder</v-icon>{{item.name}}
+								</p>
+								<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
+									<v-icon>mdi-file</v-icon>{{item.name}}
+								</p>
+							</div>
+						</template>
+						
 					</v-treeview>
-			</template>
-			</div>
-			<div :class="editorBox" class="hs-100">
-				<v-list>
-					<v-list-item-group v-if="menuItem !== null && menuItem.children !== undefined" v-model="item" color="primary">
-						<v-list-item v-for="item in menuItem.children" :key="item.key">
-							<v-list-item-icon>
-								<p v-if="item.file !== undefined" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
-									<v-icon>mdi-file</v-icon>
-								</p>
-								<p v-else-if="item.name" @click="menuItem = item" text @contextmenu="fileItem = item,showFolder($event)">
-									<v-icon>mdi-folder</v-icon>
-								</p>
-							</v-list-item-icon>
-							<v-list-item-content>
-								<v-list-item-title v-if="item.file !== undefined" v-text="item.name" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)"></v-list-item-title>
-								<v-list-item-title v-else-if="item.name" v-text="item.name" @click="menuItem = item, fetchContent(item)" text @contextmenu="fileItem = item,showFolder($event)"></v-list-item-title>
-							</v-list-item-content>
-						</v-list-item>
-					</v-list-item-group>
-				</v-list>
+				
+				</div>
+				<div class="project-box-1">
+					<v-list>
+						<v-list-item-group v-if="menuItem !== null" v-model="item" color="primary">
+							<v-list-item v-for="item in menuItem.children" :key="item.key">
+								<v-list-item-icon>
+									<p v-if="item.file !== undefined" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
+										<v-icon>mdi-file</v-icon>
+									</p>
+									<p v-else-if="item.name" @click="menuItem = item" text @contextmenu="fileItem = item,showFolder($event)">
+										<v-icon>mdi-folder</v-icon>
+									</p>
+								</v-list-item-icon>
+								<v-list-item-content>
+									<v-list-item-title v-if="item.file !== undefined" v-text="item.name" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)"></v-list-item-title>
+									<v-list-item-title v-else-if="item.name" v-text="item.name" @click="menuItem = item, fetchContent(item)" text @contextmenu="fileItem = item,showFolder($event)"></v-list-item-title>
+								</v-list-item-content>
+							</v-list-item>
+						</v-list-item-group>
+					</v-list>
+				</div>
 			</div>
 		</v-card-text>
 		<v-card-actions>
@@ -166,14 +168,17 @@ export default {
 			device: 'link/device'//,
 			//connection: 'link/connection'
 		}),
-		projectTree ()
+		files ()
 		{
-			return 'project-tree-on';
-		},
-		editorBox ()
-		{
-			return 'project-box-1';
-		},
+			let files = [];
+			if (this.menuItem) {
+				for (let file of this.menuItem.children) {
+					files.push ({...file});
+				}
+				console.log (files);
+			}
+			return files;
+		}
 	},
 	watch: {
 		async newData(){
@@ -438,4 +443,27 @@ background: url('plugins/devices/wyapp/plugin/data/img/icons/32px.png') no-repea
 	width: 32px;
 	height: 32px;
 }
+</style>
+
+<style lang="less" scoped>
+@import '../../../../../style/var.less';
+
+	.v-dialog {box-shadow: none;
+		.v-list {background-color: @color-white !important; color: @color-black !important;
+			>div:hover {background-color: @color-white !important; color:@color-black !important;}
+		}
+	}
+
+	.filemanager {
+		display:flex; flex-flow: row wrap; overflow: hidden; height: 100%;
+
+		.tree-left {
+			height: 100%; overflow: auto; background: #eee; max-width:50%; padding: 0 20px 0 0;
+		}
+
+		.project-box-1 {
+			flex:1 1 auto; height: 100%; overflow: auto;
+		}
+
+	}
 </style>

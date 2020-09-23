@@ -10,12 +10,7 @@
 			</div>
 			<div v-else>
 				<table class="w-100">
-					<!--<tr class="w-100 task">
-						<th class="w-20">Package Name</th>
-						<th class="w-50">Version</th>
-						<th class="w-30">Actions</th>
-					</tr>-->
-					<tr v-for="container in containers" :key="container.ID" class="w-100 container">
+					<tr v-for="container in containers" :key="container.ID" class="w-100 task">
 						<td class="w-50 d-flex">
 							<v-img src="plugins/devices/wyapp/plugin/data/img/icons/docker3.svg" aria-label="Container" ></v-img>
 							<h3>{{container.name}}</h3>
