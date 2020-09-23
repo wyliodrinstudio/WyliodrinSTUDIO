@@ -34,13 +34,13 @@
 							</div>
 
 							<v-btn text class="lib-app-btn" v-else-if="container.state === 'created'"
-							@click="kill(container)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
+							@click="stop(container)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
 
 							<v-btn text class="lib-app-btn" v-else-if="container.state === 'running'"
-							@click="kill(container)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
+							@click="stop(container)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
 
 							<v-btn text class="lib-app-btn" v-else
-							@click="deletee(container)">Delete</v-btn>
+							@click="del(container)">Delete</v-btn>
 							<!-- -if="container.sentDell"  -->
 
 							
@@ -109,12 +109,12 @@ export default {
 			
 		},
 		
-		kill (container)
+		stop (container)
 		{
 			this.connection.send ('dep', {a: 'exit', ID: container.ID}); 
 			container.sentKill = true;
 		},
-		deletee(container)
+		del(container)
 		{
 			this.connection.send ('dep', {a: 'delete', ID: container.ID});
 			container.sentDell = true;

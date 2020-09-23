@@ -146,8 +146,7 @@ export default {
 				children:[],
 				path:'/',
 				size:0,
-				key:'FILESYSTEM'+0+'root'
-
+				key:'/',
 			}],
 			switch1:false,
 			fileMenu: false,
@@ -334,7 +333,7 @@ export default {
 							children:[],
 							path:this.cwd+item.name+'/',
 							size:item.size,
-							key: item.name+item.size+'folder',
+							key: this.cwd+item.name+'/',
 						});
 					} else if(item.isfile) {
 						tree.children.push({
@@ -342,7 +341,7 @@ export default {
 							file:path.extname(item.name),
 							path:this.cwd+item.name+'/',
 							size:item.size,
-							key:item.name+item.size+'file',
+							key:this.cwd+item.name+'/'+item.name,
 						});
 					} else if(item.islink) {
 						tree.children.push({
@@ -350,7 +349,7 @@ export default {
 							link:true,
 							path:this.cwd+item.name+'/',
 							size:item.size,
-							key:item.name+item.size+'link',
+							key:this.cwd+item.name+'/'+item.name,
 						});
 					}	
 				}
@@ -431,6 +430,9 @@ background: url('plugins/devices/wyapp/plugin/data/img/icons/32px.png') no-repea
 background: url('plugins/devices/wyapp/plugin/data/img/icons/32px.png') no-repeat -32px 0px !important;
 	width: 32px;
 	height: 32px;
+}
+.project-tree-on .v-treeview, .project-tree-on .v-treeview > .v-treeview-node {
+	height: auto !important;
 }
 </style>
 
