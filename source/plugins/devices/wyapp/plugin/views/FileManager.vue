@@ -168,17 +168,6 @@ export default {
 			device: 'link/device'//,
 			//connection: 'link/connection'
 		}),
-		files ()
-		{
-			let files = [];
-			if (this.menuItem) {
-				for (let file of this.menuItem.children) {
-					files.push ({...file});
-				}
-				console.log (files);
-			}
-			return files;
-		}
 	},
 	watch: {
 		async newData(){
