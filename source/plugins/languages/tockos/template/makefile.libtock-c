@@ -1,0 +1,6 @@
+run:
+	echo "$(TOCK_DIR)"
+	rm -rf "$(TOCK_DIR)/../libtock-c/examples/studio"
+	mkdir -p "$(TOCK_DIR)/../libtock-c/examples/studio"
+	cp -R * "$(TOCK_DIR)/../libtock-c/examples/studio"
+	cd "$(TOCK_DIR)/../libtock-c/examples/studio" && make -f Makefile.app

@@ -14,6 +14,7 @@
 			</v-select>
 			<v-text-field autofocus :label="$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME')" required v-model="value"></v-text-field>
 			<pre v-show="nameValid">{{json}}</pre>
+			<pre v-show="nameValid">docker run -t -i --rm --device-cgroup-rule='c 166:* rmw' -v /dev/bus:/dev/bus:ro -v /dev/serial:/dev/serial:ro -v /dev:/dev -e TOKEN={{jsonBase64}} tockos</pre>
 			<div v-show="!nameValid">{{$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_NAME_NOT_VALID')}}</div>
 			<div v-show="nameValid && setupPath">
 				<a :href="'data:text/plain;charset=utf-8, '+ encodeURIComponent(json)" download="wyliodrin.json">{{$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_DOWNLOAD')}}</a> <i>wyliodrin.json</i> {{$t('DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_DOWNLOAD_PART2')}} <i>{{setupPath}}</i>
@@ -45,6 +46,11 @@ export default {
 			let server = window.location.href;
 			if (server.startsWith('file://')) server = 'https://beta.wyliodrin.studio/';
 			return JSON.stringify ({token: this.token, id: this.value.trim (), server: server+'socket/remote'}, null, 2);
+		},
+		jsonBase64 () {
+			let server = window.location.href;
+			if (server.startsWith('file://')) server = 'https://beta.wyliodrin.studio/';
+			return Buffer.from (JSON.stringify ({token: this.token, id: this.value.trim (), server: server+'socket/remote'}, null, 2)).toString('base64');
 		},
 		nameValid ()
 		{
