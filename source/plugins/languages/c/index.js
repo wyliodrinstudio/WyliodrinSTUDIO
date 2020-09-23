@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 let studio = null;
 
 import makefile from 'raw-loader!./template/makefile';
@@ -47,7 +47,7 @@ export default function setup (options, imports, register)
 		getDefaultRunFileName() {
 			return '/main.c';
 		},
-		getMakefile(project, filename) {
+		getMakefile(/* project, filename */) {
 			return makefile;
 		},
 	};

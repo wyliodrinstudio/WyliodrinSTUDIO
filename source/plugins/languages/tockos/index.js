@@ -3,16 +3,12 @@ let studio = null;
 
 
 async function downloadBoardFile (board, filename) {
-	console.log ('https://raw.githubusercontent.com/tock/tock/master/boards/'+board+filename);
 	let response = await axios.get ('https://raw.githubusercontent.com/tock/tock/master/boards/'+board+filename);
-	console.log (response);
 	return response.data;
 }
 
 async function downloadLibtockcFile (example, filename) {
-	console.log ('https://raw.githubusercontent.com/tock/libtock-c/master/examples/'+example+filename);
 	let response = await axios.get ('https://raw.githubusercontent.com/tock/libtock-c/master/examples/'+example+filename);
-	console.log (response);
 	return response.data;
 }
 
@@ -82,7 +78,7 @@ export default function setup (options, imports, register)
 		getDefaultRunFileName() {
 			return '/src/main.rs';
 		},
-		getMakefile(project, filename) {
+		getMakefile(/* project, filename */) {
 			return makefile_board;
 		},
 	};
@@ -105,7 +101,6 @@ export default function setup (options, imports, register)
 	let libtockcTockos = {
 		async createProject(name){
 			let example = await studio.workspace.showDialog (SelectExample);
-			console.log (example);
 			if (example !== null)
 			{
 				await studio.projects.newFile(name,'/main.c', await downloadLibtockcFile (example, '/main.c'));			
@@ -118,7 +113,7 @@ export default function setup (options, imports, register)
 		getDefaultRunFileName() {
 			return '/main.c';
 		},
-		getMakefile(project, filename) {
+		getMakefile(/* project, filename */) {
 			return makefile_libtock_c;
 		},
 	};
