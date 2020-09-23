@@ -45,13 +45,6 @@ export default function setup (options, imports, register)
 			if (filename[0] === '/') filename = filename.substring (1);
 			// TODO add filename
 			return 'run:\n\tbash main.sh';
-		},
-		getDockerBuildCommands(project,filename) {
-			return null;
-		},
-		getDockerRunCommands(project,filename) {
-			//cmd din dockerfile
-			return null;
 		}
 	};
 
