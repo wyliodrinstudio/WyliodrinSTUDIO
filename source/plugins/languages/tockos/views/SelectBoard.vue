@@ -17,10 +17,8 @@
 </template>
 
 <script>
-const BOARDS = [{
-	name: 'STM32F412g Discovery Kit',
-	board: 'stm32f412gdiscovery'
-}];
+import BOARDS from './boards.json';
+
 
 export default {
 	name: 'SelectBoard',

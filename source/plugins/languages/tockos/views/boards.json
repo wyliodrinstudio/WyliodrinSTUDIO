@@ -1,0 +1,62 @@
+[
+	{
+		"name": "Hail",
+		"board": "hail"
+	},
+	{
+		"name": "Imix",
+		"board": "imix"
+	},
+	{
+		"name": "Nordic nRF52-DK",
+		"board": "nordic/nrf52dk"
+	},
+	{
+		"name": "Nordic nRF52840-DK",
+		"board": "nordic/nrf52840dk"
+	},
+	{
+		"name": "Nordic nRF52840-Dongle",
+		"board": "nordic/nrf52840_dongle"
+	},
+	{
+		"name": "ACD52832",
+		"board": "acd52832"
+	},
+	{
+		"name": "Nano 33 BLE",
+		"board": "nano33ble"
+	},
+	{
+		"name": "ST Nucleo F446RE",
+		"board": "nucleo_f446re"
+	},
+	{
+		"name": "ST Nucleo F429ZI",
+		"board": "nucleo_f429zi"
+	},
+	{
+		"name": "STM32F3Discovery kit",
+		"board": "stm32f3discovery"
+	},
+	{
+		"name": "STM32F412G Discovery kit",
+		"board": "stm32f412gdiscovery"
+	},
+	{
+		"name": "SparkFun RedBoard Artemis Nano",
+		"board": "redboard_artemis_nano"
+	},
+	{
+		"name": "SiFive HiFive1",
+		"board": "hifive1"
+	},
+	{
+		"name": "Digilent Arty A-7 100T",
+		"board": "arty_e21"
+	},
+	{
+		"name": "Nexys Video OpenTitan",
+		"board": "opentitan"
+	}
+]
