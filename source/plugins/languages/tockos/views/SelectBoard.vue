@@ -18,9 +18,9 @@
 
 <script>
 const BOARDS = [{
-				name: 'STM32F412g Discovery Kit',
-				board: 'stm32f412gdiscovery'
-			}];
+	name: 'STM32F412g Discovery Kit',
+	board: 'stm32f412gdiscovery'
+}];
 
 export default {
 	name: 'SelectBoard',

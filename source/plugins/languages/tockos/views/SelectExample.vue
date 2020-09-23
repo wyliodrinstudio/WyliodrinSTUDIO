@@ -18,14 +18,14 @@
 
 <script>
 const EXAMPLES = [{
-				name: 'Empty Application',
-				example: ''
-			},
-			{
-				name: 'Hello World',
-				example: 'c_hello'
-			},
-			];
+	name: 'Empty Application',
+	example: ''
+},
+{
+	name: 'Hello World',
+	example: 'c_hello'
+},
+];
 
 export default {
 	name: 'SelectExample',
