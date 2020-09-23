@@ -326,6 +326,7 @@ let projects = {
 	
 			} catch (e) {
 				studio.workspace.showError('PROJECT_ERROR_CREATE_PROJECT', {project: projectFolder, error: e.message});
+				this.deleteProject (project);
 			}
 		} else {
 			studio.workspace.warn('PROJECT_ERROR_CREATE_PROJECT', {project: projectFolder, error: 'NULL'});

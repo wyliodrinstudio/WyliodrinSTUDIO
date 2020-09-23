@@ -151,7 +151,7 @@ export default {
 		async addProjectDialog ()
 		{
 			this.close ();
-			await this.studio.workspace.showDialog(AddProjectDialog,{width:512});
+			await this.studio.workspace.showDialog(AddProjectDialog,{width:800});
 			this.studio.projects.showProjectsLibrary ();
 			
 		},
