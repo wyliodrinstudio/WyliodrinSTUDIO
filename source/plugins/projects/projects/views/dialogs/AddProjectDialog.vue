@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import _ from 'lodash';
-
 export default {
 	name: 'AddProjectDialog',
 	data () {
@@ -50,7 +48,6 @@ export default {
 			} else if(this.projects.find(x => x.name === this.projectName) !== undefined) {
 				await this.studio.workspace.showNotification ('PROJECT_EXISTS_PROMPT');
 			} else {
-				let type = this.studio.projects.getLanguage(this.languageID);
 				let project = await this.studio.projects.createEmptyProject(this.projectName,this.languageID);
 				if (project)
 				{

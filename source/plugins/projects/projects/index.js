@@ -301,9 +301,11 @@ let projects = {
 		let projectFolder = path.join(workspacePath, name);
 		projectFolder = this._isPathValid(workspacePath,projectFolder);
 		if(projectFolder !== null && language !== null && name !== null){
+			let projectCreate = false;
 			try {
 				if (!await studio.filesystem.pathExists(projectFolder)) {
 					await studio.filesystem.mkdirp(projectFolder);
+					projectCreate = true;
 					await studio.filesystem.mkdirp(path.join(projectFolder, '.project'));
 					let date = await studio.filesystem.lastModified(projectFolder);
 					date = new Date(date);
@@ -326,7 +328,7 @@ let projects = {
 	
 			} catch (e) {
 				studio.workspace.showError('PROJECT_ERROR_CREATE_PROJECT', {project: projectFolder, error: e.message});
-				this.deleteProject (project);
+				if (projectCreate) await studio.filesystem.remove ({folder: projectFolder});
 			}
 		} else {
 			studio.workspace.warn('PROJECT_ERROR_CREATE_PROJECT', {project: projectFolder, error: 'NULL'});
