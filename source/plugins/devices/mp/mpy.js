@@ -120,8 +120,8 @@ with open('${escape(file)}', 'rb') as infile:
 			}
 			// else
 			// {
-					//TODO show notification
-					//res.stderr === "OSError: [Errno 2] ENOENT" - "No such file {file}".
+			//TODO show notification
+			//res.stderr === "OSError: [Errno 2] ENOENT" - "No such file {file}".
 			// }
 
 		}
@@ -152,8 +152,8 @@ os.mkdir('${escape(dir)}')`;
 			}
 			// else
 			// {
-					//TODO show notification
-					//res.stderr === "OSError: [Errno 17] EEXIST" - Directory already exist {dir}.
+			//TODO show notification
+			//res.stderr === "OSError: [Errno 17] EEXIST" - Directory already exist {dir}.
 			// }
 
 		}
@@ -164,62 +164,60 @@ os.mkdir('${escape(dir)}')`;
 
 	}
 
-	async put(file , data)
+	async put(file,data)
 	{
-		let cmd = `f = open('${escape(file)}', 'wb')
-f.write(b'TEST')
-f.close()`;
+		let cmd = `f = open('${escape(file)}', 'wb')`;
 		await this.execute(cmd);
 
-		// try{
-		// 	let res = await this.execute(cmd);
-		// 	if(!res.stderr)
-		// 	{
+		try{
+			let res = await this.execute(cmd);
+			if(!res.stderr)
+			{
 				
-		// 		//TODO show notification
+				//TODO show notification
 
-		// 		await this.execute(cmd);
+				await this.execute(cmd);
 
-		// 		let len = data.length;
+				let len = data.length;
 
-		// 		// for(let i = 0; i < len; i=i+BUFFER_SIZE)
-		// 		// {
-		// 		// 	let part_len = Math.min(BUFFER_SIZE, len-i);
-		// 		// 	let part = data.substring(i , i+part_len);
+				for(let i = 0; i < len; i=i+BUFFER_SIZE)
+				{
+					let part_len = Math.min(BUFFER_SIZE, len-i);
+					let part = data.substring(i , i+part_len);
 
-		// 		// 	cmd = `f.write(b'${escape(part)}')`;
+					cmd = `f.write(b'${escape(part)}')`;
 
-		// 		// 	try{
-		// 		// 		let res = await this.execute(cmd);
-		// 		// 		if(!res.stderr)
-		// 		// 		{
-		// 		// 			//TODO show notification
-		// 		// 		}
-		// 		// 		// else
-		// 		// 		// {
-		// 		// 		 	//TODO show notification
-		// 		// 		 	//ERROR: FILE NOT EXIST
-		// 		// 		// }
-		// 		// 	}
-		// 		// 	catch(e){
-		// 		// 		// TODO show notification
-		// 		// 	}
+					try{
+						let res = await this.execute(cmd);
+						if(!res.stderr)
+						{
+							//TODO show notification
+						}
+						// else
+						// {
+						//TODO show notification
+						//ERROR: FILE NOT EXIST
+						// }
+					}
+					catch(e){
+						// TODO show notification
+					}
 					
-		// 		// }
+				}
 
-		// 		cmd = `f.close()`;
-		// 		await this.execute(cmd);
+				cmd = 'f.close()';
+				await this.execute(cmd);
 
-		// 	}
-		// 	// else
-		// 	// {
-		// 	 	//TODO show notification
-		// 	 	//ERROR: FILE ALREADY EXIST
-		// 	// }
-		// }
-		// catch(e){
-		// 	// TODO show notification
-		// }
+			}
+			// else
+			// {
+			//TODO show notification
+			//ERROR: FILE ALREADY EXIST
+			// }
+		}
+		catch(e){
+			// TODO show notification
+		}
 
 	}
 
@@ -241,9 +239,9 @@ os.remove('${escape(file)}')`;
 			}
 			// else
 			// {
-					//TODO show notification
-					//res.stderr === "OSError: [Errno 2] ENOENT" - No such file/directory {file}.
-					//res.stderr === "OSError: [Errno 13] EACCES" - Directory is not empty {file}.
+			//TODO show notification
+			//res.stderr === "OSError: [Errno 2] ENOENT" - No such file/directory {file}.
+			//res.stderr === "OSError: [Errno 13] EACCES" - Directory is not empty {file}.
 			// }
 
 		}
@@ -282,8 +280,8 @@ rmdir('${escape(dir)}')`;
 			}
 			// else
 			// {
-					//TODO show notification
-					//res.stderr === "OSError: [Errno 2] ENOENT" - No such directory {dir}.
+			//TODO show notification
+			//res.stderr === "OSError: [Errno 2] ENOENT" - No such directory {dir}.
 			// }
 	
 		}
@@ -446,7 +444,6 @@ rmdir('${escape(dir)}')`;
 		else
 		{
 			raw_repl = true;
-			console.error ('Already requested repl or in repl');
 		}
 		return raw_repl;
 	}
@@ -472,7 +469,6 @@ rmdir('${escape(dir)}')`;
 		else
 		{
 			exit_raw_repl = true;
-			console.error ('Already exited repl or in repl');
 		}
 		return exit_raw_repl;
 	}

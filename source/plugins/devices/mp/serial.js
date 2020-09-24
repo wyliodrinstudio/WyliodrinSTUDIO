@@ -32,9 +32,6 @@ export default {
 	{
 		studio = s;
 		SerialPortLib = loadSerialPort();
-		console.log('setup');
-		console.log(SerialPortLib);
-		
 	},
 	list ()
 	{
@@ -62,7 +59,6 @@ export class SerialPort extends EventEmitter {
 				}
 				else
 				{
-					console.log('else');
 					this.serial.on('data', (data) => {
 						this.emit ('data', data);
 					});
@@ -84,11 +80,11 @@ export class SerialPort extends EventEmitter {
 			this.reader = this.portConnect.readable.getReader();
 			this.writer = this.portConnect.writable.getWriter();
 			this.emit('connected');
+			
 			do {
 				try
 				{
 					let {done,value} = await this.reader.read();
-					console.log (value);
 					if(done)
 					{
 						break;
@@ -96,22 +92,21 @@ export class SerialPort extends EventEmitter {
 					else
 					{
 						this.emit ('data', value);
-						console.log(Buffer.from (value).toString());
 					}
 				}
 				catch (e)
 				{
-					console.error(e);
 					this.emit ('error', e);
 					break;
 				}
+				/* eslint-disable-next-line no-constant-condition */
 			} while(true);
 			//this.emit ('close');
 		}
 	}
 
-	async write (data) {
-		if (studio.system.platform () === 'electron')
+	write (data) {
+		if (studio.system.platform() === 'electron')
 		{
 			this.serial.write (data);
 		}

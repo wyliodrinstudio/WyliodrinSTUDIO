@@ -1,16 +1,11 @@
-import _, { update } from 'lodash';
-import { Search } from 'brace';
 import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
 import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
-import MPFileManager from './views/MPFileManager.vue';
-import {SerialPort, loadSerialPort} from './serial.js';
+//import MPFileManager from './views/MPFileManager.vue';
+import {SerialPort} from './serial.js';
 import serial from './serial.js';
-import {MicroPython, STATUS_RUNNING, STATUS_READY, STATUS_OFFLINE, STATUS_REPL_REQ, STATUS_STOPPED} from './mpy.js';
-import path from 'path';
-
-
-
+import {MicroPython, STATUS_RUNNING, STATUS_STOPPED} from './mpy.js';
+import _ from 'lodash';
 
 let studio = null;
 let workspace = null;
@@ -20,7 +15,7 @@ let serialDevices = [];
 
 
 let connections = {};
-let SerialPortlist = null;
+//let SerialPortlist = null;
 let ports = {};
 
 
@@ -160,7 +155,7 @@ export function setup (options, imports, register)
 	studio = imports;
 	serial.setup(studio);
 	searchSerialDevices();
-	SerialPortlist = loadSerialPort();
+	//SerialPortlist = loadSerialPort();
 	///let event = 'data';
 	studio.shell.register((event,id,data)=>
 	{
@@ -214,9 +209,9 @@ export function setup (options, imports, register)
 			return 'plugins/devices/mp/data/img/icons/mp.png';
 		},
 
-		registerForUpdate (device, fn)
+		registerForUpdate (/*device, fn*/)
 		{
-			deviceEvents.on ('update:'+device.id, fn);
+			//deviceEvents.on ('update:'+device.id, fn);
 			return null;//() => deviceEvents.removeListener ('update:'+device.id, fn);
 		},
 
@@ -252,13 +247,12 @@ export function setup (options, imports, register)
 						});
 					}
 
-					if(options)
+					if(options != null)
 					{
 						device.status = 'CONNECTING';
 						updateDevices();
 
 						let port = new SerialPort();
-						let sts;
 
 						let mp = new MicroPython(port);
 						ports[device.id]=mp;
@@ -278,8 +272,6 @@ export function setup (options, imports, register)
 						});
 
 						mp.on('status', (status)=>{
-							sts = status;
-							console.log('STATUS: '+sts);
 							if (status === STATUS_RUNNING) {
 								device.running = true;
 								updateDevice (device);
@@ -343,7 +335,7 @@ export function setup (options, imports, register)
                 
 
 
-		disconnect(device, options)
+		disconnect(device, /*options*/)
 		{
 			/* Here goes the actual code that you will write in order to connect the device. */
 
@@ -398,7 +390,6 @@ export function setup (options, imports, register)
 			let device = studio.workspace.getDevice();
                 
 			/* Here goes the actual code that will make your device run a project */
-			console.log('Run');
 
 			let project = await studio.projects.getCurrentProject();
 
@@ -433,7 +424,6 @@ export function setup (options, imports, register)
 		{
 			visible () {
 				let device = studio.workspace.getDevice ();
-				console.log(device);
 				return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
 			},
 			enabled () {
@@ -472,7 +462,6 @@ export function setup (options, imports, register)
 		{
 			visible () {
 				let device = studio.workspace.getDevice ();
-				console.log(device);
 				return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === true);
 			},
 			enabled () {
@@ -510,7 +499,6 @@ export function setup (options, imports, register)
 		{
 			visible () {
 				let device = studio.workspace.getDevice ();
-				console.log(device);
 				return (device.status === 'CONNECTED' && device.type === 'mp');
 			},
 			enabled () {
@@ -546,7 +534,7 @@ export function setup (options, imports, register)
 
                 
 		// /* The aditional options that make the Run Button visible and enabled only if there is a connected device
-        //                 and its type is "awesome" */
+		//                 and its type is "awesome" */
 		// {
 		// 	enabled () {
 		// 		let device = studio.workspace.getDevice ();
@@ -573,7 +561,7 @@ export function setup (options, imports, register)
 
                 
 		// /* The aditional options that make the Run Button visible and enabled only if there is a connected device
-        //                 and its type is "awesome" */
+		//                 and its type is "awesome" */
 		// {
 		// 	enabled () {
 		// 		let device = studio.workspace.getDevice ();
