@@ -2,15 +2,38 @@ import axios from 'axios';
 let studio = null;
 
 
-async function downloadBoardFile (board, filename) {
-	let response = await axios.get ('https://raw.githubusercontent.com/tock/tock/master/boards/'+board+filename);
-	return response.data;
-}
-
-async function downloadLibtockcFile (example, filename) {
-	let response = await axios.get ('https://raw.githubusercontent.com/tock/libtock-c/master/examples/'+example+filename);
-	return response.data;
-}
+let tockos = {
+	async downloadBoardFile (board, filename) {
+		let response = await axios.get ('https://raw.githubusercontent.com/tock/tock/master/boards/'+board+filename);
+		return response.data;
+	},
+	async downloadLibtockcFile (example, filename) {
+		let response = await axios.get ('https://raw.githubusercontent.com/tock/libtock-c/master/examples/'+example+filename);
+		return response.data;
+	},
+	async getDirListOfFiles (path, boardInfos) {
+		let response = await axios.get ('https://api.github.com/repos/tock/tock/contents/' + path);
+	
+		for(let item of response.data) {
+			if (item.type === 'file') {
+				if (boardInfos[path] === undefined) {
+					boardInfos[path] = [];
+				}
+				boardInfos[path].push(item.path);
+			}
+			else if (item.type === 'dir') {
+				await tockos.getDirListOfFiles(item.path, boardInfos);
+			}
+		}
+	},
+	async getBoardListOfFiles (boardRoot) {
+		let boardInfos = {};
+	
+		await tockos.getDirListOfFiles(boardRoot, boardInfos);
+	
+		return boardInfos;
+	}
+};
 
 
 //TODO create settings function to save in folder.
@@ -58,18 +81,10 @@ export default function setup (options, imports, register)
 
 	let boardTockos = {
 		async createProject(name){
-			let board = await studio.workspace.showDialog (SelectBoard);
+			let board = await studio.workspace.showDialog (SelectBoard, {name});
 			if (board !== null)
 			{
-				await studio.projects.newFolder(name,'/src');			
-				await studio.projects.newFile(name,'/src/main.rs', await downloadBoardFile (board, '/src/main.rs'));			
-				await studio.projects.newFile(name,'/src/io.rs', await downloadBoardFile (board, '/src/io.rs'));			
-				await studio.projects.newFile(name,'/Cargo.toml', (await downloadBoardFile (board, '/Cargo.toml')).toString()+'\n\n[workspace]\n');			
-				await studio.projects.newFile(name,'/layout.ld', await downloadBoardFile (board, '/layout.ld'));			
-				await studio.projects.newFile(name,'/chip_layout.ld', await downloadBoardFile (board, '/chip_layout.ld'));			
-				await studio.projects.newFile(name,'/Makefile.kernel', (await downloadBoardFile (board, '/Makefile')));
-				await studio.projects.newFile(name,'/build.rs', await downloadBoardFile (board, '/build.rs'));						
-				await studio.projects.newFile(name,'/openocd.cfg', await downloadBoardFile (board, '/openocd.cfg'));						
+				// await studio.workspace.showDialog(Download, {propBoard: board, projectName: name});
 			}
 		},
 		getDefaultFileName() {
@@ -103,8 +118,8 @@ export default function setup (options, imports, register)
 			let example = await studio.workspace.showDialog (SelectExample);
 			if (example !== null)
 			{
-				await studio.projects.newFile(name,'/main.c', await downloadLibtockcFile (example, '/main.c'));			
-				await studio.projects.newFile(name,'/Makefile.app', (await downloadLibtockcFile (example, '/Makefile')));		
+				await studio.projects.newFile(name,'/main.c', await tockos.downloadLibtockcFile (example, '/main.c'));			
+				await studio.projects.newFile(name,'/Makefile.app', (await tockos.downloadLibtockcFile (example, '/Makefile')));		
 			}
 		},
 		getDefaultFileName() {
@@ -120,5 +135,7 @@ export default function setup (options, imports, register)
 
 	studio.projects.registerLanguage('tockos-libtockc', 'TockOS C App', 'plugins/languages/tockos/data/img/project.png', 'plugins/languages/python/data/img/pythonLittle.png', libtockcFileIcons, libtockcTockos);
 
-	register (null, {});
+	register (null, {
+		tockos: tockos
+	});
 }
