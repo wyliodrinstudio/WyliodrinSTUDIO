@@ -1,0 +1,10 @@
+[
+	{
+		"name": "Empty Application",
+		"example": ""
+	},
+	{
+		"name": "Hello World",
+		"example": "c_hello"
+	}
+]

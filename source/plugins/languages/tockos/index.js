@@ -11,27 +11,34 @@ let tockos = {
 		let response = await axios.get ('https://raw.githubusercontent.com/tock/libtock-c/master/examples/'+example+filename);
 		return response.data;
 	},
-	async getDirListOfFiles (path, boardInfos) {
-		let response = await axios.get ('https://api.github.com/repos/tock/tock/contents/' + path);
+	async getDirListOfFiles (path, dirInfos, repo = 'tock') {
+		let response = await axios.get ('https://api.github.com/repos/tock/'+repo+'/contents/'+path);
 	
 		for(let item of response.data) {
 			if (item.type === 'file') {
-				if (boardInfos[path] === undefined) {
-					boardInfos[path] = [];
+				if (dirInfos[path] === undefined) {
+					dirInfos[path] = [];
 				}
-				boardInfos[path].push(item.path);
+				dirInfos[path].push(item.path);
 			}
 			else if (item.type === 'dir') {
-				await tockos.getDirListOfFiles(item.path, boardInfos);
+				await tockos.getDirListOfFiles(item.path, dirInfos, repo);
 			}
 		}
 	},
 	async getBoardListOfFiles (boardRoot) {
 		let boardInfos = {};
 	
-		await tockos.getDirListOfFiles(boardRoot, boardInfos);
+		await this.getDirListOfFiles(boardRoot, boardInfos);
 	
 		return boardInfos;
+	},
+	async getLibtockListOfFiles (exampleRoot) {
+		let exampleInfos = {};
+		
+		await this.getDirListOfFiles(exampleRoot, exampleInfos, 'libtock-c');
+
+		return exampleInfos;
 	}
 };
 
@@ -115,11 +122,11 @@ export default function setup (options, imports, register)
 
 	let libtockcTockos = {
 		async createProject(name){
-			let example = await studio.workspace.showDialog (SelectExample);
+			let example = await studio.workspace.showDialog (SelectExample, {name});
 			if (example !== null)
 			{
-				await studio.projects.newFile(name,'/main.c', await tockos.downloadLibtockcFile (example, '/main.c'));			
-				await studio.projects.newFile(name,'/Makefile.app', (await tockos.downloadLibtockcFile (example, '/Makefile')));		
+				// await studio.projects.newFile(name,'/main.c', await tockos.downloadLibtockcFile (example, '/main.c'));			
+				// await studio.projects.newFile(name,'/Makefile.app', (await tockos.downloadLibtockcFile (example, '/Makefile')));		
 			}
 		},
 		getDefaultFileName() {
