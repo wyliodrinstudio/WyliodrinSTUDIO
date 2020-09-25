@@ -90,6 +90,8 @@ export default {
 				}
 
 				this.downloadingStatus = 'Finished';
+			} else {
+				await this.studio.projects.newFile(this.name, './main.c', '');
 			}
 
 			this.$root.$emit ('submit', true);
