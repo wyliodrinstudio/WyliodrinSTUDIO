@@ -68,7 +68,7 @@ export default {
 			
 			this.downloadingStatus = 'Downloading...';
 			let downloadedFiles = 0;
-			this.progress.text = downloadedFiles + '/' + numberOfFiles;
+			this.progress.text = this.progress.value.toFixed(2)+'%';
 			for (let key in boardInfos) {
 				let folderPath = key.replace(boardRoot, '');
 				if (folderPath !== '') {
@@ -85,8 +85,8 @@ export default {
 						await this.studio.projects.newFile(this.name,filePath, await this.studio.tockos.downloadBoardFile(this.board,filePath));
 					
 					downloadedFiles++;
-					this.progress.text = downloadedFiles+'/'+numberOfFiles;
-					this.progress.value = (downloadedFiles/numberOfFiles)*100;	
+					this.progress.value = (downloadedFiles/numberOfFiles)*100;
+					this.progress.text = this.progress.value.toFixed(2)+'%';	
 				}
 			}
 			this.downloadingStatus = 'Finished';

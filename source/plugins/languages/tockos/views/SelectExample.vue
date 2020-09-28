@@ -68,7 +68,7 @@ export default {
 
 				this.downloadingStatus = 'Downloading...';
 				let downloadedFiles = 0;
-				this.progress.text = downloadedFiles + '/' + numberOfFiles;
+				this.progress.text = this.progress.value.toFixed(2)+'%';
 				for (let key in exampleInfos) {
 					let folderPath = key.replace(exampleRoot, '');
 					if (folderPath !== '') {
@@ -84,8 +84,8 @@ export default {
 							await this.studio.projects.newFile(this.name,filePath, await this.studio.tockos.downloadLibtockcFile(this.example,filePath));
 						
 						downloadedFiles++;
-						this.progress.text = downloadedFiles+'/'+numberOfFiles;
 						this.progress.value = (downloadedFiles/numberOfFiles)*100;	
+						this.progress.text = this.progress.value.toFixed(2)+'%';
 					}
 				}
 
