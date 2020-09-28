@@ -456,7 +456,6 @@ export function setup(options, imports, register)
 			}
 		});
 
-
 		/* Register the Package Manager button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_PACKAGE_MANAGER', 40, () => {
 			let device = studio.workspace.getDevice ();

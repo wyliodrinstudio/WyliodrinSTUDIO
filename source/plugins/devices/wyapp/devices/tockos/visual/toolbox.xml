@@ -1,0 +1,124 @@
+<toolbox>
+	<category name="Pi Camera" colour="135">
+		<block type="picamera_snapshot">
+			<value name="filename">
+				<block type="text">
+					<field name="TEXT">photo</field>
+				</block>
+			</value>
+		</block>
+		<block type="picamera_start_recording">
+			<value name="filename">
+				<block type="text">
+					<field name="TEXT">photo</field>
+				</block>
+			</value>
+		</block>
+		<block type="picamera_stop_recording"></block>
+	</category>
+	<category name="Arduino" colour="120">
+		<block type="firmata_serial"></block>
+		<block type="firmata_init">
+			<value name="port">
+				<block type="text">
+					<field name="TEXT">auto</field>
+				</block>
+			</value>
+		</block>
+		<block type="firmata_digitalwrite">
+			<value name="digitalPin">
+				<block type="math_number">
+					<field name="NUM">0</field>
+				</block>
+			</value>
+			<value name="value">
+				<block type="math_number">
+					<field name="NUM">1</field>
+				</block>
+			</value>
+		</block>
+		<block type="firmata_digitalread">
+			<value name="digitalPin">
+				<block type="math_number">
+					<field name="NUM">0</field>
+				</block>
+			</value>
+		</block>
+		<block type="firmata_analogwrite">
+			<value name="analogPin">
+				<block type="math_number">
+					<field name="NUM">0</field>
+				</block>
+			</value>
+			<value name="analogValue">
+				<block type="math_number">
+					<field name="NUM">255</field>
+				</block>
+			</value>
+		</block>
+		<block type="firmata_analogread">
+			<value name="analogPin">
+				<block type="math_number">
+					<field name="NUM">0</field>
+				</block>
+			</value>
+		</block>
+		<block type="firmata_set_rgb_led">
+			<value name="color">
+				<block type="colour_picker">
+					<field name="COLOUR">#ff0000</field>
+				</block>
+			</value>
+			<value name="red">
+				<block type="math_number">
+					<field name="NUM">0</field>
+				</block>
+			</value>
+			<value name="green">
+				<block type="math_number">
+					<field name="NUM">1</field>
+				</block>
+			</value>
+			<value name="blue">
+				<block type="math_number">
+					<field name="NUM">2</field>
+				</block>
+			</value>
+		</block>
+		<block type="firmata_set_fine_rgb_led">
+			<value name="color">
+				<block type="colour_picker">
+					<field name="COLOUR">#ff9966</field>
+				</block>
+			</value>
+			<value name="red">
+				<block type="math_number">
+					<field name="NUM">0</field>
+				</block>
+			</value>
+			<value name="green">
+				<block type="math_number">
+					<field name="NUM">1</field>
+				</block>
+			</value>
+			<value name="blue">
+				<block type="math_number">
+					<field name="NUM">2</field>
+				</block>
+			</value>
+		</block>
+		<block type="firmata_servo">
+			<value name="value_servo">
+				<block type="math_number">
+					<field name="NUM">0</field>
+				</block>
+			</value>
+			<value name="pin">
+				<block type="math_number">
+					<field name="NUM">0</field>
+				</block>
+			</value>
+		</block>
+	</category>
+	<sep />
+</toolbox>
