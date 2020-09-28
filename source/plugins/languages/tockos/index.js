@@ -88,11 +88,11 @@ export default function setup (options, imports, register)
 
 	let boardTockos = {
 		async createProject(name){
-			let board = await studio.workspace.showDialog (SelectBoard, {name});
-			if (board !== null)
-			{
-				// await studio.workspace.showDialog(Download, {propBoard: board, projectName: name});
-			}
+			/* studio.workspace.showDialog will return in this case:
+				--> true if the submit button was clicked
+				--> false if the cancel button was clicked
+			*/
+			await studio.workspace.showDialog (SelectBoard, {name});
 		},
 		getDefaultFileName() {
 			return '/src/main.rs';
@@ -122,12 +122,11 @@ export default function setup (options, imports, register)
 
 	let libtockcTockos = {
 		async createProject(name){
-			let example = await studio.workspace.showDialog (SelectExample, {name});
-			if (example !== null)
-			{
-				// await studio.projects.newFile(name,'/main.c', await tockos.downloadLibtockcFile (example, '/main.c'));			
-				// await studio.projects.newFile(name,'/Makefile.app', (await tockos.downloadLibtockcFile (example, '/Makefile')));		
-			}
+			/* studio.workspace.showDialog will return in this case:
+				--> true if the submit button was clicked
+				--> false if the cancel button was clicked
+			*/
+			await studio.workspace.showDialog (SelectExample, {name});
 		},
 		getDefaultFileName() {
 			return '/main.c';
