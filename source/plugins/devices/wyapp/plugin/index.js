@@ -14,10 +14,8 @@ import PackageManager from './views/PackageManager.vue';
 import TaskManager from './views/TaskManager.vue';
 import { EventEmitter } from 'events';
 import Deployments from './views/Deployments.vue';
-import { fstat } from 'fs';
-import Docker_pop from './views/Docker-pop.vue';
-import { build } from 'electron-builder';
-
+import DockerFileSettings from './views/DockerFileSettings.vue';
+import DockerSettings from './views/DockerSettings.vue';
 
 let studio = null;
 let workspace = null;
@@ -656,16 +654,17 @@ export function setup(options, imports, register)
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
-				console.log("deploy : "+deploy);
+				let name = null;
 				if(deploy === true)
 				{// functie pentru tag
-					let name = project.name.replace(/\\/g, "\\\\")
+					name = project.name.replace(/\\/g, "\\\\")
 					.replace(/\$/g, "\\$")
 					.replace(/'/g, "\\'")
 					.replace(/"/g, "\\\"");
-					makefile += "\ndeploy:\n\t docker build --tag " +  project.name.replace(/[^0-9A-Za-z_]/g,'_') +  " . && docker run --label studio=\"" +name + "\" "+ project.name.replace(/[^0-9A-Za-z_]/g,'_') +"\n" 
-					// | docker run " + project.name +"\n";
-					console.log(makefile);
+
+					let tag =  project.name.replace(/[^0-9A-Za-z_]/g,'_');
+					makefile += "\ndeploy:\n\t docker build --tag " + tag +  " . && docker run --label studio=\"" +name + "\" "+ tag;
+					
 				}
 	
 				let device = studio.workspace.getDevice ();
@@ -686,7 +685,7 @@ export function setup(options, imports, register)
 						
 						if(dockerfile === undefined)
 						{
-							let question = await studio.workspace.showDialog(Docker_pop, {
+							let question = await studio.workspace.showDialog(DockerFileSettings, {
 								width:800,
 							});
 
@@ -694,6 +693,59 @@ export function setup(options, imports, register)
 								await board.deploy(project);
 							}
 						}
+
+						if(deploy === true)
+						{
+							let options = await studio.workspace.showDialog(DockerSettings, {
+								width:800,
+							});
+							console.log(options);
+
+							let dockoptions = " ";
+
+							if(options.selectedNetwork)
+							{
+								if(options.selectedNetwork === "container")
+								{
+									dockoptions += "--network " + options.selectedNetwork + ":" + name + " ";
+								}
+								else
+								{
+									dockoptions += "--network=\"" +options.selectedNetwork + "\" ";
+								}
+							}
+
+							if(options.selectedRestart)
+							{
+								dockoptions += "--restart " + options.selectedRestart + " ";
+							}	
+
+							if(options.interactive === true)
+							{
+								dockoptions += "-it ";
+							}
+
+							if(options.daemon === true)
+							{
+								dockoptions += "-d ";
+							}
+
+							if(options.privileged === true)
+							{
+								dockoptions += "--privileged ";
+							}
+
+							if(options.remove === true)
+							{
+								dockoptions += "--rm ";
+							}
+							console.log(dockoptions);
+							makefile += " " + dockoptions;
+							console.log(makefile);
+
+						}
+						
+						
 					} 
 
 					let structure = await studio.projects.generateStructure (project);
