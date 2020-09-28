@@ -98,13 +98,13 @@
 				{{$t('PROJECT_IMPORT_FILE')}}
 			</v-btn>
 
-			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="deleteObject">
+			<v-btn v-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="deleteObject">
 				{{$t('PROJECT_DELETE_FILE')}}
 			</v-btn>
-			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="rename">
+			<v-btn v-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="rename">
 				{{$t('PROJECT_RENAME_FILE')}}
 			</v-btn>
-			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="download">
+			<v-btn v-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="download">
 				{{$t('PROJECT_EXPORT_FILE')}}
 			</v-btn>
 			

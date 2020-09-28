@@ -164,6 +164,36 @@ os.mkdir('${escape(dir)}')`;
 
 	}
 
+	async rename(name, newName)
+	{
+
+		let cmd = `try:
+	import os
+except ImportError:
+	import uos as os
+os.replace('${escape(name)}', '${escape(newName)}')`;
+
+		try{
+
+			let res = await this.execute(cmd);
+			if(!res.stderr)
+			{
+				//TODO show notification
+			}
+			// else
+			// {
+			//TODO show notification
+			//Erori probabile: Fisierul/Directorul sa nu existe
+			// }
+
+		}
+		catch (e)
+		{
+			// TODO show notification
+		}
+
+	}
+
 	async put(file,data)
 	{
 		let cmd = `f = open('${escape(file)}', 'wb')`;

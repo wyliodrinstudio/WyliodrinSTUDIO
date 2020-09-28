@@ -1,7 +1,7 @@
 import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
 import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
-//import MPFileManager from './views/MPFileManager.vue';
+import MPFileManager from './views/MPFileManager.vue';
 import {SerialPort} from './serial.js';
 import serial from './serial.js';
 import {MicroPython, STATUS_RUNNING, STATUS_STOPPED} from './mpy.js';
@@ -321,7 +321,7 @@ export function setup (options, imports, register)
 			{
 				await studio.workspace.showDialog (ChromeFlagSetup, {
 					device: device,
-					width: '500px'
+					width: '650px'
 				});
 			}
 
@@ -511,63 +511,61 @@ export function setup (options, imports, register)
 
 		// FILES
                 
-		// workspace.registerDeviceToolButton('DEVICE_MP_FILES', 10, async () => {
-		// 	let device = studio.workspace.getDevice();
+		workspace.registerDeviceToolButton('DEVICE_MP_FILES', 10, async () => {
+			let device = studio.workspace.getDevice();
                 
-		// 	/* Here goes the actual code that will make your device run a project */
-		// 	console.log('Files');
+			/* Here goes the actual code that will make your device run a project */
 
-		// 	// let project = await studio.projects.getCurrentProject();
+			// let project = await studio.projects.getCurrentProject();
 
                         
-		// 	// let mp = await ports[device.id];
-		// 	// console.log (await mp.listdir ('/'));
-		// 	let mp = ports[device.id];
+			// let mp = await ports[device.id];
+			// console.log (await mp.listdir ('/'));
+			let mp = ports[device.id];
 
-		// 	await studio.workspace.showDialog (MPFileManager, {
-		// 		width: 800,
-		// 		mp : mp
-		// 	});
+			await studio.workspace.showDialog (MPFileManager, {
+				width: 800,
+				mp : mp
+			});
 
 
-		// }, 'plugins/devices/mp/data/img/icons/fileexplorer-icon.svg',
+		}, 'plugins/devices/mp/data/img/icons/fileexplorer-icon.svg',
 
                 
-		// /* The aditional options that make the Run Button visible and enabled only if there is a connected device
-		//                 and its type is "awesome" */
-		// {
-		// 	enabled () {
-		// 		let device = studio.workspace.getDevice ();
-		// 		return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
-		// 	},
-		// });
+		/* The aditional options that make the Run Button visible and enabled only if there is a connected device
+		                and its type is "awesome" */
+		{
+			enabled () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
+			},
+		});
 
 		// FILES TEST
                 
-		// workspace.registerDeviceToolButton('DEVICE_MP_FILESTEST', 10, async () => {
-		// 	let device = studio.workspace.getDevice();
+		workspace.registerDeviceToolButton('DEVICE_MP_FILESTEST', 10, async () => {
+			let device = studio.workspace.getDevice();
                 
-		// 	/* Here goes the actual code that will make your device run a project */
-		// 	console.log('Files');
+			/* Here goes the actual code that will make your device run a project */
+			console.log('Files');
 
-		// 	let project = await studio.projects.getCurrentProject();
+			let project = await studio.projects.getCurrentProject();
+         
+			let mp = ports[device.id];
+			console.log(await mp.mkdir('/test/b'));
 
-                        
-		// 	let mp = ports[device.id];
-		// 	console.log(await mp.get('test4.txt'));
 
-
-		// }, 'plugins/devices/mp/data/img/icons/fileexplorer-icon.svg',
+		}, 'plugins/devices/mp/data/img/icons/fileexplorer-icon.svg',
 
                 
-		// /* The aditional options that make the Run Button visible and enabled only if there is a connected device
-		//                 and its type is "awesome" */
-		// {
-		// 	enabled () {
-		// 		let device = studio.workspace.getDevice ();
-		// 		return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
-		// 	},
-		// });
+		/* The aditional options that make the Run Button visible and enabled only if there is a connected device
+		                and its type is "awesome" */
+		{
+			enabled () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
+			},
+		});
 
 		// FILES TEST
 
