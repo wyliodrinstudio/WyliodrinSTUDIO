@@ -10,7 +10,7 @@
 			<v-spacer></v-spacer>
 		</v-card-title>
 
-	 <v-checkbox
+	 <!-- <v-checkbox
       v-model="interactive"
       label="Interactive conosole (-it)" 
     >
@@ -20,7 +20,31 @@
       v-model="daemon"
       label="Detached (-d)" 
     >
-	</v-checkbox>
+	</v-checkbox> -->
+
+	<v-row align="center">
+
+		<v-col
+		cols="12"
+		sm="6"
+		>
+			<v-subheader v-text="'Process options'"></v-subheader>
+		</v-col>
+
+		<v-col 
+		cols="12"
+        sm="6">
+
+			<v-select
+				:items="processOptions"
+				label="Process option"
+				v-model="selectedOption"
+				dense
+				solo
+				>
+			</v-select>
+		</v-col>
+	</v-row>
 
 	<v-checkbox
       v-model="remove"
@@ -28,23 +52,52 @@
     >
 	</v-checkbox>
 
- <v-select
-      :items="restartOptions"
-	  label="Restart option"
-	  v-model="selectedRestart"
-      dense
-	  solo
-    >
- </v-select>
+	<v-row align="center">
+		<v-col
+		cols="12"
+		sm="6"
+		>
+			<v-subheader v-text="'Restart options'"></v-subheader>
+		</v-col>
+	
+		<v-col 
+		cols="12"
+        sm="6">
 
- <v-select
-      :items="networkOptions"
-	  label="Network option"
-	  v-model="selectedNetwork"
-      dense
-	  solo
-    >
- </v-select>
+			<v-select
+				:items="restartOptions"
+				label="Restart option"
+				v-model="selectedRestart"
+				dense
+				solo
+				>
+			</v-select>
+		</v-col>
+	</v-row>
+
+	<v-row align="center">
+
+		<v-col
+		cols="12"
+		sm="6"
+		>
+			<v-subheader v-text="'Network options'"></v-subheader>
+		</v-col>
+
+		<v-col 
+		cols="12"
+        sm="6">
+
+			<v-select
+				:items="networkOptions"
+				label="Network option"
+				v-model="selectedNetwork"
+				dense
+				solo
+				>
+			</v-select>
+		</v-col>
+	</v-row>
 
  <v-checkbox
       v-model="privileged"
@@ -57,8 +110,9 @@
 		<v-card-actions>
 			<v-spacer></v-spacer>
 			
-			<v-btn text @click="close">Close</v-btn>
-			<v-btn text @click="send_options">Send</v-btn>
+			<v-btn text @click="close">{{$t('CLOSE')}}</v-btn>
+			<v-btn text @click="send_options">Deploy</v-btn>
+			<!-- de schimbat pt traduceri -->
 		</v-card-actions>
 
 
@@ -77,8 +131,11 @@ export default {
 	data () {
 
 				datas = {
-				interactive: true,
-				daemon: this.daemon,
+				processOptions:[
+					'detached',
+					'interactive console',
+				],
+				selectedOption: null,
 				remove: this.remove,
 				restartOptions :[
 					'no',
@@ -89,10 +146,8 @@ export default {
 				selectedRestart: null,
 
 				networkOptions:[
-					'none',
-					'bridge',
+					'default',
 					'host',
-					'container',
 				],
 				selectedNetwork: null,
 				privileged:this.privileged,

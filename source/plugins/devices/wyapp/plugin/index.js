@@ -655,6 +655,7 @@ export function setup(options, imports, register)
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
 				let name = null;
+				let tag = null;
 				if(deploy === true)
 				{// functie pentru tag
 					name = project.name.replace(/\\/g, "\\\\")
@@ -662,8 +663,9 @@ export function setup(options, imports, register)
 					.replace(/'/g, "\\'")
 					.replace(/"/g, "\\\"");
 
-					let tag =  project.name.replace(/[^0-9A-Za-z_]/g,'_');
-					makefile += "\ndeploy:\n\t docker build --tag " + tag +  " . && docker run --label studio=\"" +name + "\" "+ tag;
+					tag =  project.name.replace(/[^0-9A-Za-z_]/g,'_');
+					makefile += "\ndeploy:\n\t docker build --tag " + tag +  " . && docker run --label studio=\"" +name + "\" ";
+					// makefile += "\ndeploy:\n\t docker build --tag " + tag +  " . && docker run --label studio=\"" +name + "\" "+ tag;
 					
 				}
 	
@@ -697,22 +699,19 @@ export function setup(options, imports, register)
 						if(deploy === true)
 						{
 							let options = await studio.workspace.showDialog(DockerSettings, {
-								width:800,
+								width:900,
 							});
 							console.log(options);
 
 							let dockoptions = " ";
 
-							if(options.selectedNetwork)
+							if(options === false){
+								return null;
+							}
+
+							if(options.selectedNetwork === "host")
 							{
-								if(options.selectedNetwork === "container")
-								{
-									dockoptions += "--network " + options.selectedNetwork + ":" + name + " ";
-								}
-								else
-								{
-									dockoptions += "--network=\"" +options.selectedNetwork + "\" ";
-								}
+								dockoptions += "--network=\"" +options.selectedNetwork + "\" ";
 							}
 
 							if(options.selectedRestart)
@@ -720,12 +719,13 @@ export function setup(options, imports, register)
 								dockoptions += "--restart " + options.selectedRestart + " ";
 							}	
 
-							if(options.interactive === true)
+
+							if(options.selectedOption === "interactive console")
 							{
 								dockoptions += "-it ";
 							}
-
-							if(options.daemon === true)
+							
+							if(options.selectedOption === "detached")
 							{
 								dockoptions += "-d ";
 							}
@@ -740,9 +740,9 @@ export function setup(options, imports, register)
 								dockoptions += "--rm ";
 							}
 							console.log(dockoptions);
-							makefile += " " + dockoptions;
-							console.log(makefile);
+							makefile += dockoptions + " " + tag;
 
+							await studio.projects.saveSpecialFile(project,project.name,dockoptions);
 						}
 						
 						
