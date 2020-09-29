@@ -1,7 +1,5 @@
 var studio = null;
 
-import toolbox from 'raw-loader!./visual/toolbox.xml';
-
 export function setup (options, imports, register)
 {
 	studio = imports;
@@ -73,7 +71,7 @@ export function setup (options, imports, register)
 		description: 'TODO'
 	});
 
-	studio.editor_visual.registerBlocksDefinitions ('tockos', toolbox, 
+	studio.editor_visual.registerBlocksDefinitions ('tockos',
 		{
 			type: 'wyapp', 
 			board: 'tockos'
