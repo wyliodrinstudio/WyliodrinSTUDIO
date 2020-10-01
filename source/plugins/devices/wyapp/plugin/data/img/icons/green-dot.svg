@@ -1,0 +1,35 @@
+<?xml version="1.0"?><svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <title>Glossy Home Icon Button Lt Green</title>
+ <g>
+  <title>Layer 1</title>
+  <defs>
+   <pattern height="100" width="100" y="0" x="0" patternUnits="userSpaceOnUse" id="gridpattern">
+    <image height="100" width="100" y="0" x="0" id="svg_2"/>
+   </pattern>
+   <pattern height="100" width="100" y="0" x="0" patternUnits="userSpaceOnUse" id="svg_37">
+    <image height="100" width="100" y="0" x="0" id="svg_38"/>
+   </pattern>
+   <pattern height="100" width="100" y="0" x="0" patternUnits="userSpaceOnUse" id="svg_68">
+    <image height="100" width="100" y="0" x="0" id="svg_69"/>
+   </pattern>
+   <linearGradient id="svg_61">
+    <stop id="svg_64" offset="0" stop-color="#ffffff"/>
+    <stop id="svg_63" offset="1" stop-opacity="0" stop-color="#ffffff"/>
+   </linearGradient>
+   <linearGradient xlink:href="#svg_61" id="svg_60" x1="0.500015" y1="-0.000042" x2="0.500015" y2="0.892047"/>
+   <pattern height="100" width="100" y="0" x="0" patternUnits="userSpaceOnUse" id="svg_58">
+    <image height="100" width="100" y="0" x="0" id="svg_59"/>
+   </pattern>
+  </defs>
+  <g id="svg_11">
+   <rect id="svg_6" height="195.042328" width="225.400389" y="193.957686" x="223.679998" stroke-width="0" stroke="#999999" fill="#ffffff"/>
+   <path id="svg_8" d="m178.595993,215.074005c0,0 156.274002,-108.026009 156.350021,-109.797005c0.074982,-1.772003 151.03299,106.495995 151.03299,106.495995c0,0 -307.383026,3.30101 -307.383026,3.30101l0,0l0,0l0,0l0.000015,0z" stroke-width="0" stroke="#999999" fill="#ffffff"/>
+  </g>
+  <ellipse id="svg_3" ry="230.000005" rx="230.000005" cy="241.999995" cx="328.999999" stroke-width="0" stroke="#999999" fill="#6ebb1f"/>
+  <g id="svg_80">
+   <metadata id="svg_79">image/svg+xmlblue power button08 12 2006molumenblue power buttoniconbuttondesignUIinterfacepowerswitchonoffblueglossytoggle</metadata>
+   <path d="m527.640137,183.227036a196.77449,157.930588 0 1 1-393.549103,0a196.77449,157.930588 0 1 1393.549103,0z" id="svg_71" stroke-miterlimit="4" fill-rule="evenodd" fill="url(#svg_60)" opacity="0.75"/>
+  </g>
+ </g>
+</svg>

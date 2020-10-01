@@ -13,6 +13,10 @@
 					<tr v-for="container in containers" :key="container.ID" class="w-100 task">
 						<td class="w-50 d-flex">
 							<v-img src="plugins/devices/wyapp/plugin/data/img/icons/docker3.svg" aria-label="Container" ></v-img>
+							<v-img v-if="container.state === 'running'" src="plugins/devices/wyapp/plugin/data/img/icons/green-dot.svg"></v-img>
+							<v-img v-else-if="container.status.substr(0,10) === 'Exited (0)'" src="plugins/devices/wyapp/plugin/data/img/icons/grey-dot.svg"></v-img>
+							<v-img v-else-if="container.status.substr(0,14) === 'Restarting (0)'" src="plugins/devices/wyapp/plugin/data/img/icons/yellow-dot.svg"></v-img>
+							<v-img v-else src="plugins/devices/wyapp/plugin/data/img/icons/red-dot.svg"></v-img>
 							<h3>{{container.title}}</h3>
 
 						</td>
@@ -39,12 +43,12 @@
 							<v-btn text class="lib-app-btn" v-else-if="container.state === 'running'"
 							@click="stop(container)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
 
+							<v-btn text class="lib-app-btn" v-else-if="container.state === 'restarting'"
+							@click="stop(container)">{{$t('DEVICE_WYAPP_STOP')}}</v-btn>
+
 							<v-btn text class="lib-app-btn" v-else
-							@click="del(container)">Delete</v-btn>
-							<!-- -if="container.sentDell"  -->
-
-							
-
+							@click="del(container)">{{$t('DEVICE_WYAPP_DELETE')}}</v-btn>
+							<!-- TRADUCERE DAR UNDE THO -->
 						</td>
 					</tr>
 				</table>

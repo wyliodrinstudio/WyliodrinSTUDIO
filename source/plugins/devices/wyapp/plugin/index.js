@@ -684,23 +684,23 @@ export function setup(options, imports, register)
 					if(board && board.deploy)
 					{
 						dockerfile = await studio.projects.loadFile(project, '/Dockerfile');
-						
-						if(dockerfile === undefined)
-						{
-							let question = await studio.workspace.showDialog(DockerFileSettings, {
-								width:800,
-							});
-
-							if(question === true) {
-								await board.deploy(project);
-							}
-						}
 
 						if(deploy === true)
 						{
+							if(dockerfile === undefined)
+							{
+								let question = await studio.workspace.showDialog(DockerFileSettings, {
+									width:800,
+								});
+
+								if(question === true) {
+									await board.deploy(project);
+								}
+							}
 							let options = await studio.workspace.showDialog(DockerSettings, {
 								width:900,
 							});
+
 							console.log(options);
 
 							let dockoptions = " ";
@@ -739,15 +739,14 @@ export function setup(options, imports, register)
 							{
 								dockoptions += "--rm ";
 							}
-							console.log(dockoptions);
+
 							makefile += dockoptions + " " + tag;
 
-							await studio.projects.saveSpecialFile(project,project.name,dockoptions);
+							await studio.projects.saveSpecialFile(project,'docker.json',JSON.stringify(options,null,4));	
 						}
 						
 						
 					} 
-
 					let structure = await studio.projects.generateStructure (project);
 
 					let tp = {
@@ -792,7 +791,7 @@ export function setup(options, imports, register)
 					};
 
 					await setFiles (structure.children, tp.children[0].children, '/');
-					console.log(project.language);
+					
 					let xtrem = studio.console.getSize ();
 					
 					sendToDevice (device, 'tp', {

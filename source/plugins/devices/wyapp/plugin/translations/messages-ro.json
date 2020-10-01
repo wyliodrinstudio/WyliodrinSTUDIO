@@ -134,5 +134,29 @@
     "DEVICE_WYAPP_FILESYSTEM": {
         "message": "Sistem de fisiere",
         "description": "The message shown for the selected device filesystem"
+    },
+    "DEVICE_WYAPP_RUN_DEPLOY": {
+        "message": "Implementeaza",
+        "description": "The pop-up for deploying an app"
+    },
+    "DEVICE_WYAPP_DOCKERFILE": {
+        "message": "Dockerfile",
+        "description": "The pop-up that asks the user for a predefined dockefile"
+    },
+    "DEVICE_WYAPP_DEPLOY": {
+        "message": "Implementeaza",
+        "description": "The button for deploying an app"
+    },
+    "DEVICE_WYAPP_DELETE": {
+        "message": "Sterge",
+        "description": "The delete button"
+    },
+    "YES": {
+        "message": "Da",
+        "description": "The yes button "
+    },
+    "NO": {
+        "message": "Nu",
+        "description": "The no button"
     }
 }

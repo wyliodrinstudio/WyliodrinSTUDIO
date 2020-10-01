@@ -10,18 +10,6 @@
 			<v-spacer></v-spacer>
 		</v-card-title>
 
-	 <!-- <v-checkbox
-      v-model="interactive"
-      label="Interactive conosole (-it)" 
-    >
-	</v-checkbox>
-
-	<v-checkbox
-      v-model="daemon"
-      label="Detached (-d)" 
-    >
-	</v-checkbox> -->
-
 	<v-row align="center">
 
 		<v-col
@@ -37,7 +25,6 @@
 
 			<v-select
 				:items="processOptions"
-				label="Process option"
 				v-model="selectedOption"
 				dense
 				solo
@@ -66,7 +53,6 @@
 
 			<v-select
 				:items="restartOptions"
-				label="Restart option"
 				v-model="selectedRestart"
 				dense
 				solo
@@ -90,7 +76,6 @@
 
 			<v-select
 				:items="networkOptions"
-				label="Network option"
 				v-model="selectedNetwork"
 				dense
 				solo
@@ -111,7 +96,7 @@
 			<v-spacer></v-spacer>
 			
 			<v-btn text @click="close">{{$t('CLOSE')}}</v-btn>
-			<v-btn text @click="send_options">Deploy</v-btn>
+			<v-btn text @click="send_options">{{$t('DEVICE_WYAPP_DEPLOY')}}</v-btn>
 			<!-- de schimbat pt traduceri -->
 		</v-card-actions>
 
@@ -124,10 +109,10 @@
 <script>
 import { mapGetters } from 'vuex';
 let datas = null;
+let previousDatas = null;
 export default {
 	name: 'DockerSettings',
-	props: ['connection'],
-
+	props: ['connection', 'project'],
 	data () {
 
 				datas = {
@@ -135,7 +120,7 @@ export default {
 					'detached',
 					'interactive console',
 				],
-				selectedOption: null,
+				selectedOption: this.selectedOption,
 				remove: this.remove,
 				restartOptions :[
 					'no',
@@ -143,15 +128,16 @@ export default {
 					'always',
 					'unless-stopped',
 				],
-				selectedRestart: null,
+				selectedRestart: this.selectedRestart,
 
 				networkOptions:[
 					'default',
 					'host',
 				],
-				selectedNetwork: null,
+				selectedNetwork: this.selectedNetwork,
 				privileged:this.privileged,
 			};
+			previousDatas = datas;
 			return datas;
 		
 	},
@@ -160,6 +146,20 @@ export default {
 		...mapGetters ({
 			device: 'workspace/device',
 		}),
+	},
+
+	async created ()
+	{
+		try {
+			console.log('here');
+			console.log(this.project);
+			datas = await studio.projects.loadSpecialFile(this.project, 'docker.json');
+			console.log(datas);
+			console.log('file loaded');
+		} catch (error) {
+			datas = previousDatas;
+			console.log('no file');
+		}
 	},
 
 	methods: {
