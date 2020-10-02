@@ -1260,7 +1260,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * let fileContent = loadFile('MyNewProject', 'FileName');
+	 * let fileContent = loadFile(project, 'FileName');
 	 */
 	async loadFile(project, name) {
 		if(project !== null && name !== null) {

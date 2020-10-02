@@ -4,3 +4,4 @@ run:
 	mkdir -p "$(TOCK_DIR)/boards/studio"
 	cp -R * "$(TOCK_DIR)/boards/studio"
 	cd "$(TOCK_DIR)/boards/studio" && make -f Makefile.kernel flash
+	tockloader listen

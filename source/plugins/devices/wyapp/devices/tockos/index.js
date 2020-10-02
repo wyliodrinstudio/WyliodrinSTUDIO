@@ -1,5 +1,7 @@
 var studio = null;
 
+import BoardSettings from './views/BoardSettings.vue';
+
 export function setup (options, imports, register)
 {
 	studio = imports;
@@ -52,9 +54,54 @@ export function setup (options, imports, register)
 		 * Modidify the project before run
 		 * @param {Project} project - the project
 		 */
-		run (project)
+		async run (project)
 		{
-			project;
+			function extractNumber(line) {
+				let value = (/(.*=\s*)(.*)/g).exec(line);
+
+				if (value.length > 2) {
+					value = value[2];
+					if (value !== '') {
+						return Number(value);
+					}
+				}
+
+				return null;
+			}
+
+			let retVal = true;
+
+			if (project.language === 'tockos-libtockc') {
+				let boardSettings = {
+					stackSize: 2048,
+					appHeapSize: 1024,
+					kernelHeapSize: 1024
+				};
+				
+				let makefile = await studio.projects.loadFile(project, 'Makefile.app');
+				if (makefile !== null) {
+					makefile = makefile.toString('utf8').split(/\r?\n/);
+					for (let line of makefile) {
+						if (line.indexOf('STACK_SIZE') !== -1) {
+							let value = extractNumber(line);
+							if (value !== null)
+								boardSettings.stackSize = value;
+						} else if (line.indexOf('APP_HEAP_SIZE') !== -1) {
+							let value = extractNumber(line);
+							if (value !== null)
+								boardSettings.appHeapSize = value;
+						} else if (line.indexOf('KERNEL_HEAP_SIZE') !== -1) {
+							let value = extractNumber(line);
+							if (value !== null)
+								boardSettings.kernelHeapSize = value;
+						} 
+					}
+				}
+
+				retVal = await studio.workspace.showDialog(BoardSettings, {boardSettings, project});
+			}
+
+			return retVal;
 		}
 	};
 
