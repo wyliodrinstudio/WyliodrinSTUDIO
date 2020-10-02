@@ -271,12 +271,14 @@ export default {
 				if(parent !== '/')
 				{
 					await this.mp.rmdir(parent+'/'+this.fileItem.name);
+					console.log(parent+'/'+this.fileItem.name);
 				}
 				else
 				{
 					await this.mp.rmdir(this.fileItem.name);
 				}
-				
+				let d = await this.mp.listdir(parent+'/'+this.fileItem.name);
+				this.update(parent+'/'+this.fileItem.name);
 				await this.refresh();
 			}			
 		},
@@ -327,6 +329,8 @@ export default {
 				// });
 				console.log(this.fileItem.path+folderName);
 				await this.mp.mkdir(this.fileItem.path+folderName);
+				let d = await this.mp.listdir(this.fileItem.path+folderName);
+				this.update(d);
 				await this.refresh();
 
 			}			
@@ -375,6 +379,7 @@ export default {
 		},
 		async fetchContent(item){
 			this.cwd=item.path;
+			console.log(this.cwd);
 			if(!this.cwdArray.includes(this.cwd)){
 				this.cwdArray.push(this.cwd);
 				this.fileItem=item;
@@ -382,9 +387,12 @@ export default {
 				// 	a: 'ls',
 				// 	b:this.cwd
 				// });
-				//INTREBARE Ce fac aici si ce face functia?
 				let d = await this.mp.listdir(this.cwd);
 				console.log(d);
+				if(d == null)
+				{
+					d = await this.mp.listdir(this.cwd);
+				}
 				this.update(d);
 			}
 		},

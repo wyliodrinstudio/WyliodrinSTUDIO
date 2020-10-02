@@ -70,7 +70,7 @@ def listdir(directory):
 	ls = os.listdir(directory)
 	r = []
 	for f in ls:
-		s = os.stat(f)   
+		s = os.stat(directory+'/'+f)
 		t = 'u'          
 		if s[0] == 16384: 
 			t = 'd' 
@@ -80,6 +80,7 @@ def listdir(directory):
 	print(json.dumps(r))
 
 listdir ('${escape(folder)}')`;
+
 		let ls = null;
 		try {
 			let res = await this.execute (cmd);
@@ -142,6 +143,8 @@ with open('${escape(file)}', 'rb') as infile:
 except ImportError:
 	import uos as os
 os.mkdir('${escape(dir)}')`;
+
+		console.log(cmd);
 
 		try{
 
