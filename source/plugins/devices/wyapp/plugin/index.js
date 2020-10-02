@@ -145,8 +145,6 @@ class Connection extends EventEmitter
 export function setup(options, imports, register)
 {
 	studio = imports;
-	console.log('studio');
-	console.log(studio);
 
 	let deviceDriver = {
 		defaultIcon()
@@ -506,7 +504,6 @@ export function setup(options, imports, register)
 
 		/* Register the Deploy button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_DEPLOY', 70, () => {
-			// console.log ('stop');
 			let deploy = true;
 			device_wyapp.runProject(deploy);
 
@@ -654,10 +651,12 @@ export function setup(options, imports, register)
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
+
 				let name = null;
 				let tag = null;
+
 				if(deploy === true)
-				{// functie pentru tag
+				{
 					name = project.name.replace(/\\/g, "\\\\")
 					.replace(/\$/g, "\\$")
 					.replace(/'/g, "\\'")
@@ -665,8 +664,6 @@ export function setup(options, imports, register)
 
 					tag =  project.name.replace(/[^0-9A-Za-z_]/g,'_');
 					makefile += "\ndeploy:\n\t docker build --tag " + tag +  " . && docker run --label studio=\"" +name + "\" ";
-					// makefile += "\ndeploy:\n\t docker build --tag " + tag +  " . && docker run --label studio=\"" +name + "\" "+ tag;
-					
 				}
 	
 				let device = studio.workspace.getDevice ();
@@ -699,9 +696,8 @@ export function setup(options, imports, register)
 							}
 							let options = await studio.workspace.showDialog(DockerSettings, {
 								width:900,
+								project:project,
 							});
-
-							console.log(options);
 
 							let dockoptions = " ";
 

@@ -112,15 +112,14 @@ let datas = null;
 let previousDatas = null;
 export default {
 	name: 'DockerSettings',
-	props: ['connection', 'project'],
+	props: ['project'],
 	data () {
-
 				datas = {
 				processOptions:[
 					'detached',
 					'interactive console',
 				],
-				selectedOption: this.selectedOption,
+				selectedOption: null,
 				remove: this.remove,
 				restartOptions :[
 					'no',
@@ -128,16 +127,15 @@ export default {
 					'always',
 					'unless-stopped',
 				],
-				selectedRestart: this.selectedRestart,
+				selectedRestart: null,
 
 				networkOptions:[
 					'default',
 					'host',
 				],
-				selectedNetwork: this.selectedNetwork,
+				selectedNetwork: null,
 				privileged:this.privileged,
 			};
-			previousDatas = datas;
 			return datas;
 		
 	},
@@ -151,14 +149,20 @@ export default {
 	async created ()
 	{
 		try {
-			console.log('here');
-			console.log(this.project);
-			datas = await studio.projects.loadSpecialFile(this.project, 'docker.json');
-			console.log(datas);
+			let data = await this.studio.projects.loadSpecialFile(this.project, 'docker.json');
 			console.log('file loaded');
+			data = JSON.parse(data);
+			this.selectedOption = data.selectedOption;
+			this.selectedNetwork = data.selectedNetwork;
+			this.selectedRestart = data.selectedRestart;
+			this.remove = data.remove;
+			this.privileged = data.privileged;
+			
 		} catch (error) {
-			datas = previousDatas;
-			console.log('no file');
+			this.selectedOption = 'interactive console';
+			this.selectedRestart = 'no';
+			this.selectedNetwork = 'default';
+			console.log(error);
 		}
 	},
 
