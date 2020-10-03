@@ -119,30 +119,30 @@ export default {
 	props: ['project'],
 	data () {
 		datas = {
-		processOptions:[
-			this.$t('DEIVCE_WYAPP_DETACHED') ,
-			this.$t('DEVICE_WYAPP_INTERACTIVE_CONSOLE') ,
-		],
-		selectedOption: null,
-		remove: this.remove,
-		restartOptions :[
-			this.$t('DEVICE_WYAPP_NO_RESTART'),
-			this.$t('DEVICE_WYAPP_RESTART_ON_FAILURE'),
-			this.$t('DEVICE_WYAPP_RESTART_ALWAYS'),
-			this.$t('DEVICE_WYAPP_RESTART_UNLESS_STOPPED'),
-		],
-		selectedRestart: null,
+			processOptions:[
+				this.$t('DEIVCE_WYAPP_DETACHED') ,
+				this.$t('DEVICE_WYAPP_INTERACTIVE_CONSOLE') ,
+			],
+			selectedOption: null,
+			remove: this.remove,
+			restartOptions :[
+				this.$t('DEVICE_WYAPP_NO_RESTART'),
+				this.$t('DEVICE_WYAPP_RESTART_ON_FAILURE'),
+				this.$t('DEVICE_WYAPP_RESTART_ALWAYS'),
+				this.$t('DEVICE_WYAPP_RESTART_UNLESS_STOPPED'),
+			],
+			selectedRestart: null,
 
-		networkOptions:[
-			this.$t('DEVICE_WYAPP_DEFAULT_NETWORK'),
-			this.$t('DEVICE_WYAPP_HOST_NETWORK'),
-		],
-		selectedNetwork: null,
-		privileged:this.privileged,
-		textInput:'',
-	};			
-	return datas;		
-},
+			networkOptions:[
+				this.$t('DEVICE_WYAPP_DEFAULT_NETWORK'),
+				this.$t('DEVICE_WYAPP_HOST_NETWORK'),
+			],
+			selectedNetwork: null,
+			privileged:this.privileged,
+			textInput:'',
+		};			
+		return datas;		
+	},
 
 	computed: {
 		...mapGetters ({
@@ -180,5 +180,5 @@ export default {
 		}
 	}
 	
-}
+};
 </script>

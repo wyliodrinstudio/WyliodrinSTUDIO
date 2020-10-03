@@ -31,7 +31,6 @@ let transportDevices = {};
 let searches = {};
 let searchDevices = {};
 
-const fs = require('fs');
 
 function updateDevices ()
 {
@@ -656,13 +655,13 @@ export function setup(options, imports, register)
 
 				if(deploy === true)
 				{
-					name = project.name.replace(/\\/g, "\\\\")
-					.replace(/\$/g, "\\$")
-					.replace(/'/g, "\\'")
-					.replace(/"/g, "\\\"");
+					name = project.name.replace(/\\/g, '\\\\')
+						.replace(/\$/g, '\\$')
+						.replace(/'/g, '\\\'')
+						.replace(/"/g, '\\"');
 
 					tag =  project.name.replace(/[^0-9A-Za-z_]/g,'_');
-					makefile += "\ndeploy:\n\t docker build --tag " + tag +  " . && docker run --label studio=\"" +name + "\" ";
+					makefile += '\ndeploy:\n\t docker build --tag ' + tag +  ' . && docker run --label studio="' +name + '" ';
 				}
 	
 				let device = studio.workspace.getDevice ();
@@ -686,7 +685,7 @@ export function setup(options, imports, register)
 							if(dockerfile === undefined)
 							{
 								let question = await studio.workspace.showConfirmationPrompt('Dockerfile',
-								'Dockerfile non-existent. Would you like a predefined one?');
+									'Dockerfile non-existent. Would you like a predefined one?');
 
 								if(question === 'yes') {
 									await board.deploy(project);
@@ -698,63 +697,63 @@ export function setup(options, imports, register)
 								project:project,
 							});
 
-							let dockoptions = " ";
+							let dockoptions = ' ';
 
 							if(options === false){
 								return null;
 							}
 
-							if(options.selectedNetwork === "host")
+							if(options.selectedNetwork === 'host')
 							{
-								dockoptions += "--network=\"" +options.selectedNetwork + "\" ";
+								dockoptions += '--network="' +options.selectedNetwork + '" ';
 							}
 
 							if(options.selectedRestart === 'no')
 							{
-								dockoptions += "--restart no ";
+								dockoptions += '--restart no ';
 							}
 								
 							if(options.selectedRestart === 'always')
 							{
-								dockoptions += "--restart always ";
+								dockoptions += '--restart always ';
 							}
 
 							if(options.selectedRestart === 'unless-stoped')
 							{
-								dockoptions += "--restart unless-stoped ";
+								dockoptions += '--restart unless-stoped ';
 							}
 
 							if(options.selectedRestart === 'on-failure')
 							{
-								dockoptions += "--restart on-failure ";
+								dockoptions += '--restart on-failure ';
 							}		
 							
-							if(options.selectedOption === "interactive console")
+							if(options.selectedOption === 'interactive console')
 							{
-								dockoptions += "-it ";
+								dockoptions += '-it ';
 							}
 							
-							if(options.selectedOption === "detached")
+							if(options.selectedOption === 'detached')
 							{
-								dockoptions += "-d ";
+								dockoptions += '-d ';
 							}
 
 							if(options.privileged === true)
 							{
-								dockoptions += "--privileged ";
+								dockoptions += '--privileged ';
 							}
 
 							if(options.remove === true)
 							{
-								dockoptions += "--rm ";
+								dockoptions += '--rm ';
 							}
 							
 							if(options.textInput)
 							{
-								dockoptions += " "+ options.textInput; 
+								dockoptions += ' '+ options.textInput; 
 							}
 
-							makefile += dockoptions + " " + tag;
+							makefile += dockoptions + ' ' + tag;
 
 							await studio.projects.saveSpecialFile(project,'docker.json',JSON.stringify(options,null,4));	
 						}

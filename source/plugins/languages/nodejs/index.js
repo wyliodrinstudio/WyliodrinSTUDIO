@@ -73,6 +73,7 @@ export default function setup(options, imports, register) {
 			return 'run:\n\tnode main.js\n'; 
 		},
 		getEnvironmentSetup(project) {
+			project;
 			return 'RUN npm install\n';
 		},
 	};
