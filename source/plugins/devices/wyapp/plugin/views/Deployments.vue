@@ -10,7 +10,7 @@
 			</div>
 			<div v-else-if="containers.length === 0" style="text-align:center">
 				
-				<h2 class="text-center font-weight-light">There are no containers</h2>
+				<h2 class="text-center font-weight-light">{{$t('DEVICE_WYAPP_NO_CONTAINERS')}}</h2>
 			</div>
 
 			<div v-else>

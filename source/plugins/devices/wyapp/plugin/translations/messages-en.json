@@ -210,5 +210,13 @@
     "DEVICE_WYAPP_RESTART_OPTIONS": {
         "message": "Restart options",
         "description": "The restart options available for docker run"
+    },
+    "DEVICE_WYAPP_PROCESS_OPTIONS": {
+        "message": "Process options",
+        "description": "The process options available for docker run"
+    },
+    "DEVICE_WYAPP_NO_CONTAINERS": {
+        "message": "There are no containers",
+        "description": "The message shown when there are no containers"
     }
 }

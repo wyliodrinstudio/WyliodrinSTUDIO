@@ -12,7 +12,7 @@
 		cols="12"
 		sm="6"
 		>
-			<v-subheader v-text="'Process options'"></v-subheader>
+			<v-subheader v-text="$t('DEVICE_WYAPP_PROCESS_OPTIONS')"></v-subheader>
 		</v-col>
 
 		<v-col 
@@ -165,8 +165,8 @@ export default {
 			this.privileged = data.privileged;
 			
 		} catch (error) {
-			this.selectedOption = 'interactive console';
-			this.selectedRestart = 'no';
+			this.selectedOption = this.$t('DEVICE_WYAPP_INTERACTIVE_CONSOLE')
+			this.selectedRestart = this.$t('DEVICE_WYAPP_NO_RESTART');
 			this.selectedNetwork = 'default';
 			this.remove = true;
 			console.log(error);

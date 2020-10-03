@@ -686,9 +686,7 @@ export function setup(options, imports, register)
 							if(dockerfile === undefined)
 							{
 								let question = await studio.workspace.showConfirmationPrompt('Dockerfile',
-								 'Dockerfile non-existent. Would you like a predefined one?');
-
-								console.log(question);
+								'Dockerfile non-existent. Would you like a predefined one?');
 
 								if(question === 'yes') {
 									await board.deploy(project);
