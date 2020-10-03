@@ -154,7 +154,6 @@ export default {
 	{
 		try {
 			let data = await this.studio.projects.loadSpecialFile(this.project, 'docker.json');
-			console.log('file loaded');
 			data = JSON.parse(data);
 			this.selectedOption = data.selectedOption;
 			this.selectedNetwork = data.selectedNetwork;
@@ -163,11 +162,10 @@ export default {
 			this.privileged = data.privileged;
 			
 		} catch (error) {
-			this.selectedOption = this.$t('DEVICE_WYAPP_INTERACTIVE_CONSOLE')
+			this.selectedOption = this.$t('DEVICE_WYAPP_INTERACTIVE_CONSOLE');
 			this.selectedRestart = this.$t('DEVICE_WYAPP_NO_RESTART');
 			this.selectedNetwork = 'default';
 			this.remove = true;
-			console.log(error);
 		}
 	},
 
