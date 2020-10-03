@@ -1,12 +1,8 @@
 <template>
-<v-card
-	class = "mx-auto"
-	max-width="344"
-	outlined>
+<v-card>
 
 	<v-card-title>
 			<span class="headline">{{$t('DEVICE_WYAPP_RUN_DEPLOY')}}</span> 
-			<!-- de trecut in traduceri -->
 			<v-spacer></v-spacer>
 		</v-card-title>
 
@@ -35,7 +31,7 @@
 
 	<v-checkbox
       v-model="remove"
-      label="Remove Container at exit (--rm)" 
+      :label="$t('DEVICE_WYAPP_REMOVE_CONTAINER')" 
     >
 	</v-checkbox>
 
@@ -44,7 +40,7 @@
 		cols="12"
 		sm="6"
 		>
-			<v-subheader v-text="'Restart options'"></v-subheader>
+			<v-subheader v-text="$t('DEVICE_WYAPP_RESTART_OPTIONS')"></v-subheader>
 		</v-col>
 	
 		<v-col 
@@ -67,7 +63,7 @@
 		cols="12"
 		sm="6"
 		>
-			<v-subheader v-text="'Network options'"></v-subheader>
+			<v-subheader v-text="$t('DEVICE_WYAPP_NETWORK_OPTIONS')"></v-subheader>
 		</v-col>
 
 		<v-col 
@@ -86,9 +82,17 @@
 
  <v-checkbox
       v-model="privileged"
-      label="Privileged container (--privileged)" 
+      :label="$t('DEVICE_WYAPP_PRIVILEGED_CONTAINER')" 
     >
 	</v-checkbox>
+
+	 <v-text-field            
+            solo
+			v-model="textInput"
+			:label="$t('DEIVCE_WYAPP_ADDITIONAL_OPTIONS')"
+			></v-text-field>
+
+
 	
 
 	<br><br>
@@ -116,26 +120,28 @@ export default {
 	data () {
 				datas = {
 				processOptions:[
-					'detached',
-					'interactive console',
+					this.$t('DEIVCE_WYAPP_DETACHED') ,
+					this.$t('DEVICE_WYAPP_INTERACTIVE_CONSOLE') ,
 				],
 				selectedOption: null,
 				remove: this.remove,
 				restartOptions :[
-					'no',
-					'on-failure',
-					'always',
-					'unless-stopped',
+					this.$t('DEVICE_WYAPP_NO_RESTART'),
+					this.$t('DEVICE_WYAPP_RESTART_ON_FAILURE'),
+					this.$t('DEVICE_WYAPP_RESTART_ALWAYS'),
+					this.$t('DEVICE_WYAPP_RESTART_UNLESS_STOPPED'),
 				],
 				selectedRestart: null,
 
 				networkOptions:[
-					'default',
-					'host',
+					this.$t('DEVICE_WYAPP_DEFAULT_NETWORK'),
+					this.$t('DEVICE_WYAPP_HOST_NETWORK'),
 				],
 				selectedNetwork: null,
 				privileged:this.privileged,
+				textInput:'',
 			};
+			
 			return datas;
 		
 	},
@@ -162,6 +168,7 @@ export default {
 			this.selectedOption = 'interactive console';
 			this.selectedRestart = 'no';
 			this.selectedNetwork = 'default';
+			this.remove = true;
 			console.log(error);
 		}
 	},

@@ -14,7 +14,6 @@ import PackageManager from './views/PackageManager.vue';
 import TaskManager from './views/TaskManager.vue';
 import { EventEmitter } from 'events';
 import Deployments from './views/Deployments.vue';
-import DockerFileSettings from './views/DockerFileSettings.vue';
 import DockerSettings from './views/DockerSettings.vue';
 
 let studio = null;
@@ -686,16 +685,18 @@ export function setup(options, imports, register)
 						{
 							if(dockerfile === undefined)
 							{
-								let question = await studio.workspace.showDialog(DockerFileSettings, {
-									width:800,
-								});
+								let question = await studio.workspace.showConfirmationPrompt('Dockerfile',
+								 'Dockerfile non-existent. Would you like a predefined one?');
 
-								if(question === true) {
+								console.log(question);
+
+								if(question === 'yes') {
 									await board.deploy(project);
 								}
+								else return null;
 							}
 							let options = await studio.workspace.showDialog(DockerSettings, {
-								width:900,
+								width:800,
 								project:project,
 							});
 
@@ -710,12 +711,26 @@ export function setup(options, imports, register)
 								dockoptions += "--network=\"" +options.selectedNetwork + "\" ";
 							}
 
-							if(options.selectedRestart)
+							if(options.selectedRestart === 'no')
 							{
-								dockoptions += "--restart " + options.selectedRestart + " ";
-							}	
+								dockoptions += "--restart no ";
+							}
+								
+							if(options.selectedRestart === 'always')
+							{
+								dockoptions += "--restart always ";
+							}
 
+							if(options.selectedRestart === 'unless-stoped')
+							{
+								dockoptions += "--restart unless-stoped ";
+							}
 
+							if(options.selectedRestart === 'on-failure')
+							{
+								dockoptions += "--restart on-failure ";
+							}		
+							
 							if(options.selectedOption === "interactive console")
 							{
 								dockoptions += "-it ";
@@ -734,6 +749,11 @@ export function setup(options, imports, register)
 							if(options.remove === true)
 							{
 								dockoptions += "--rm ";
+							}
+							
+							if(options.textInput)
+							{
+								dockoptions += " "+ options.textInput; 
 							}
 
 							makefile += dockoptions + " " + tag;
