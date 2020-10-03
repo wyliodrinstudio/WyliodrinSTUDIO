@@ -156,6 +156,7 @@ export default {
 			newData:null,
 			cwdArray:[],
 			resolve:null,
+			blocked:false,
 			cwd:'/',
 			x: 0,
 			y: 0,
@@ -197,7 +198,9 @@ export default {
 	},
 	methods: {
 		async list(cwd){
+			this.blocked = true;
 			await this.mp.listdir(cwd);
+			this.blocked = false;
 		},
 		async saveFileDialog(data){
 			let newData1 = Buffer.from(data);
@@ -230,7 +233,9 @@ export default {
 				let fileData = await this.studio.filesystem.readImportFile (files[0]);
 				let name = files[0].name;
 				let f = this.cwd+path.basename(name);
-				await this.mp.put(f, fileData);
+				console.log(f);
+				console.log(Buffer.from(fileData).toString());
+				await this.mp.put(f, Buffer.from(fileData).toString());
 				// this.connection.send('fe',{
 				// 	a:'up',
 				// 	b:this.cwd,
@@ -244,8 +249,10 @@ export default {
 			// 	a: 'ls',
 			// 	b:this.cwd
 			// });
+			this.blocked = true;
 			let d = await this.mp.listdir(this.cwd);
 			this.update(d);
+			this.blocked = false;
 		},
 		async refresh(){
 			//TODO optimize file changes
@@ -253,10 +260,12 @@ export default {
 			this.fileItem=this.items[0];
 			this.cwd='/';
 			this.cwdArray=[];
-			this.menuItem = null;	
+			this.menuItem = null;
+			this.blocked = true;
 			let d = await this.mp.listdir('/');
 			console.log(d);
-			this.update(d);
+			await this.update(d);
+			this.blocked = false;
 		},
 		async deleteObject(){
 			//SHOW YOU SURE POPUP
@@ -268,18 +277,42 @@ export default {
 				// 	b:parent,
 				// 	c:this.fileItem.name,
 				// });
-				if(parent !== '/')
+				if(this.fileItem.children)
 				{
-					await this.mp.rmdir(parent+'/'+this.fileItem.name);
-					console.log(parent+'/'+this.fileItem.name);
+					if(parent !== '/')
+					{
+						this.blocked = true;
+						await this.mp.rmdir(parent+'/'+this.fileItem.name);
+					}
+					else
+					{
+						this.blocked = true;
+						await this.mp.rmdir(this.fileItem.name);
+					}
+					console.log(parent);
+					let d = await this.mp.listdir(parent);
+					this.update(d);
+					await this.refresh();
+					this.blocked = false;
 				}
 				else
 				{
-					await this.mp.rmdir(this.fileItem.name);
+					if(parent !== '/')
+					{
+						this.blocked = true;
+						await this.mp.rm(parent+'/'+this.fileItem.name);
+					}
+					else
+					{
+						this.blocked = true;
+						await this.mp.rm(this.fileItem.name);
+					}
+					console.log(parent);
+					let d = await this.mp.listdir(parent);
+					await this.update(d);
+					await this.refresh();
+					this.blocked = false;
 				}
-				let d = await this.mp.listdir(parent+'/'+this.fileItem.name);
-				this.update(parent+'/'+this.fileItem.name);
-				await this.refresh();
 			}			
 		},
 		async rename(){
@@ -295,8 +328,10 @@ export default {
 					// 	c:this.fileItem.name,
 					// 	d:newName
 					// });
+					this.blocked = true;
 					await this.mp.rename(parent+this.fileItem.name, parent+newName);
 					await this.refresh();
+					this.blocked = false;
 				}
 			}
 			else
@@ -311,8 +346,10 @@ export default {
 					// 	c:this.fileItem.name,
 					// 	d:newName
 					// });
-					this.mp.rename(this.fileItem.name, newName);
-					this.refresh();
+					this.blocked = true;
+					await this.mp.rename(this.fileItem.name, newName);
+					await this.refresh();
+					this.blocked = false;
 				}
 			}
 			
@@ -327,11 +364,13 @@ export default {
 				// 	b:this.fileItem.path,
 				// 	c:folderName,
 				// });
+				this.blocked = true;
 				console.log(this.fileItem.path+folderName);
 				await this.mp.mkdir(this.fileItem.path+folderName);
 				let d = await this.mp.listdir(this.fileItem.path+folderName);
 				this.update(d);
 				await this.refresh();
+				this.blocked = false;
 
 			}			
 
@@ -387,13 +426,11 @@ export default {
 				// 	a: 'ls',
 				// 	b:this.cwd
 				// });
+				this.blocked = true;
 				let d = await this.mp.listdir(this.cwd);
 				console.log(d);
-				if(d == null)
-				{
-					d = await this.mp.listdir(this.cwd);
-				}
 				this.update(d);
+				this.blocked = false;
 			}
 		},
 		showFile(e) {
