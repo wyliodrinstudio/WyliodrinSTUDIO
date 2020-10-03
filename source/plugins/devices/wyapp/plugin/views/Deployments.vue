@@ -20,7 +20,7 @@
 							<v-img v-if="container.studio === true" src="plugins/devices/wyapp/plugin/data/img/icons/wyliodrin-studio-logo.png"></v-img>
 							<v-img v-else src="plugins/devices/wyapp/plugin/data/img/icons/docker3.svg" aria-label="Container" ></v-img>
 							<v-img v-if="container.state === 'running'" src="plugins/devices/wyapp/plugin/data/img/icons/green-dot.svg"
-							 :alt="container.state" :title="container.state"> </v-img>
+							:alt="container.state" :title="container.state"> </v-img>
 							<v-img v-else-if="container.status.substr(0,10) === 'Exited (0)'" src="plugins/devices/wyapp/plugin/data/img/icons/grey-dot.svg"
 							:alt="container.state" :title="container.state"></v-img>
 							<v-img v-else-if="container.status.substr(0,14) === 'Restarting (0)'" src="plugins/devices/wyapp/plugin/data/img/icons/yellow-dot.svg"
