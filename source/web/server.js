@@ -16,6 +16,14 @@ let users = {};
 let app = express ();
 var server = http.createServer(app);
 
+if (process.env.OT_EXPERIMENTAL_TOKEN)
+{
+	app.use ((req, res, next) => {
+		res.header('Origin-Trial: '+process.env.OT_EXPERIMENTAL_TOKEN);
+	});
+	next ();
+}
+
 function sendDevices (id)
 {
 	if (users[id] && users[id].devices)
