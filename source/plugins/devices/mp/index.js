@@ -437,8 +437,6 @@ export function setup (options, imports, register)
 
 		workspace.registerDeviceToolButton('DEVICE_MP_STOP', 10, async () => {
 			let device = studio.workspace.getDevice();
-                        
-			/* Here goes the actual code that will make your device stop a project */
         
 			let project = await studio.projects.getCurrentProject();
         
@@ -478,8 +476,6 @@ export function setup (options, imports, register)
 
 		workspace.registerDeviceToolButton('DEVICE_MP_RESTART', 10, async () => {
 			let device = studio.workspace.getDevice();
-                        
-			/* Here goes the actual code that will make your device stop a project */
         
 			let project = await studio.projects.getCurrentProject();
         
@@ -513,8 +509,6 @@ export function setup (options, imports, register)
                 
 		workspace.registerDeviceToolButton('DEVICE_MP_FILES', 10, async () => {
 			let device = studio.workspace.getDevice();
-                
-			/* Here goes the actual code that will make your device run a project */
 
 			// let project = await studio.projects.getCurrentProject();
 
@@ -575,17 +569,21 @@ export function setup (options, imports, register)
 		workspace.registerDeviceToolButton('DEVICE_MP_DEPLOY', 10, async () => {
 			let device = studio.workspace.getDevice();
                 
-			/* Here goes the actual code that will make your device run a project */
-
-			let project = await studio.projects.getCurrentProject();
 			let mp = ports[device.id];
+			let project = await studio.projects.getCurrentProject();
+			let name = project.name;
+			await mp.mkdir(name);
 			if(project)
 			{
 				if (project.language === 'python') {
-					let pySource = await studio.projects.getCurrentFileCode();
-					let content = Buffer.from(pySource).toString();
-					let path = "/"+project.name+".py";
-					await mp.put(path, content);
+					let structure = await studio.projects.generateStructure(project);
+					let childrens = structure.children;
+					for(let i = 2 ; i < childrens.length ; i++)
+					{
+						let cod = await studio.projects.getFileCode(project, childrens[i].name);
+						await mp.put(name+'/'+childrens[i].name , cod);
+					}
+
 				}
 			}
 

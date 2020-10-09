@@ -85,16 +85,21 @@ listdir ('${escape(folder)}')`;
 		try {
 			let res = await this.execute (cmd);
 			if (!res.stderr) {
+				console.log("AICI");
+				console.log(res.stdout);
 				ls = JSON.parse (res.stdout);
 			}
-			// else
-			// {
-			// 	// TODO show notification
-			// }
+			else
+			{
+				console.error(folder);
+				console.error(res.stderr);
+				// TODO show notification
+			}
 		}
 		catch (e)
 		{
 			// TODO show notification
+			//console.error(e);
 			ls = null;
 		}
 		return ls;

@@ -18,7 +18,6 @@
 		<v-card-text style="height:100%;">
 			<div class="filemanager">
 				<div class="tree-left">
-				
 					<v-treeview style="width:fit-content;"
 						v-model="tree"
 						dense
@@ -29,7 +28,8 @@
 						item-key="key"
 						>
 						
-						<template v-slot:label="{item, open}"	>
+						
+						<template v-slot:label="{item, open}">
 							<div v-if="item.name === 'DEVICE_WYAPP_FILESYSTEM'">
 								<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
 									<v-icon>mdi-folder-open</v-icon>{{$t(item.name)}}          
@@ -54,8 +54,8 @@
 							</div>
 						</template>
 						
+						
 					</v-treeview>
-				
 				</div>
 				<div class="project-box-1">
 					<v-list>
@@ -279,14 +279,13 @@ export default {
 				// });
 				if(this.fileItem.children)
 				{
+					this.blocked = true;
 					if(parent !== '/')
-					{
-						this.blocked = true;
+					{	
 						await this.mp.rmdir(parent+'/'+this.fileItem.name);
 					}
 					else
 					{
-						this.blocked = true;
 						await this.mp.rmdir(this.fileItem.name);
 					}
 					console.log(parent);
@@ -297,14 +296,13 @@ export default {
 				}
 				else
 				{
+					this.blocked = true;
 					if(parent !== '/')
 					{
-						this.blocked = true;
 						await this.mp.rm(parent+'/'+this.fileItem.name);
 					}
 					else
 					{
-						this.blocked = true;
 						await this.mp.rm(this.fileItem.name);
 					}
 					console.log(parent);
