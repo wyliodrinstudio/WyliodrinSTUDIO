@@ -23,6 +23,9 @@
 				<p><strong>Teona Severin</strong> - Web File System</p>
 				<p><strong>Ana Marinescu</strong> - Pin Layout</p>
 				<p><strong>Andrei Deatcu</strong> - Resistor Color Code, Schematics</p>
+				<p><strong>Andrei-Paul Zamfir</strong> - MicroPython</p>
+				<p><strong>Roberta-Alexandra Craciun</strong> - Tutorials</p>
+				<p><strong>Alexandra-Gabriela State</strong> - Tutorials</p>
 
 				<br>
 			

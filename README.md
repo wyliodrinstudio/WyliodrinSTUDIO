@@ -114,7 +114,9 @@ Contributions
 - [Andrei Deatcu](https://www.github.com/dosarudaniel) - Resistor Color Code, Schematics
 - [Alexandru Vochescu](https://www.github.com/valexandru) - Examples
 - [Luis Miguel Capacho Valbuena](https://github.com/lmcapacho) - Translations, WyApp Serial
-- [Zamfir Andrei-Paul](https://github.com/ZamfirAndreiPaul) - MicroPython
+- [Andrei-Paul Zamfir](https://github.com/ZamfirAndreiPaul) - MicroPython
+- [Roberta-Alexandra Craciun] (https://github.com/CraciunRAlexandra) - Tutorials
+- [Alexandra-Gabriela State] (https://github.com/alexandra2607) - Tutorials
 
 Wyliodrin is a trademark of Wyliodrin SRL. All rights reserved.
 
