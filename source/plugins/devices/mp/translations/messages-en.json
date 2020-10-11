@@ -18,13 +18,21 @@
 	"DEVICE_MP_EXIT": {
         "message": "EXIT",
         "description": "The exit button."
-	},
+        },
+        "DEVICE_MP_FILES": {
+        "message": "FILE SYSTEM",
+        "description": "The file system button."
+        },
+        "DEVICE_MP_DEPLOY": {
+        "message": "DEPLOY",
+        "description": "The deploy button."
+        },
 	"DEVICE_MP_FLAG_HEADER": {
         "message": "SETUP YOUR GOOGLE FLAG",
         "description": "Header for setting chrome flag."
 	},
 	"DEVICE_MP_FLAG_STEP_ONE": {
-        "message": "1. Access the link in Google Chrome : chrome://flag",
+        "message": "1. Access the link in Google Chrome : chrome://flags",
         "description": "The step one for setting chrome flag."
 	},
 	"DEVICE_MP_FLAG_STEP_TWO": {

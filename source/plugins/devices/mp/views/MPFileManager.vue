@@ -156,7 +156,6 @@ export default {
 			newData:null,
 			cwdArray:[],
 			resolve:null,
-			blocked:false,
 			cwd:'/',
 			x: 0,
 			y: 0,
@@ -180,27 +179,18 @@ export default {
 
 	},
 	async created () {
-
-		// this.connection.on('tag:fe1',this.update);
-		// this.connection.on('tag:fe3',await this.saveFileDialog);
-		// this.connection.on('tag:fe6',this.error);
-		// this.connection.on('tag:fe7',this.error);
+		
 	},
 	mounted() {
 		this.items[0].name = this.$t(this.items[0].name);
 	},
 	async destroyed ()
 	{
-		// this.connection.removeListener('tag:fe1',this.update);
-		// this.connection.removeListener('tag:fe3',await this.saveFileDialog);
-		// this.connection.removeListener('tag:fe6',this.error);
-		// this.connection.removeListener('tag:fe7',this.error);
+		
 	},
 	methods: {
 		async list(cwd){
-			this.blocked = true;
 			await this.mp.listdir(cwd);
-			this.blocked = false;
 		},
 		async saveFileDialog(data){
 			let newData1 = Buffer.from(data);
@@ -233,8 +223,6 @@ export default {
 				let fileData = await this.studio.filesystem.readImportFile (files[0]);
 				let name = files[0].name;
 				let f = this.cwd+path.basename(name);
-				console.log(f);
-				console.log(Buffer.from(fileData).toString());
 				await this.mp.put(f, Buffer.from(fileData).toString());
 				// this.connection.send('fe',{
 				// 	a:'up',
@@ -249,10 +237,8 @@ export default {
 			// 	a: 'ls',
 			// 	b:this.cwd
 			// });
-			this.blocked = true;
 			let d = await this.mp.listdir(this.cwd);
 			this.update(d);
-			this.blocked = false;
 		},
 		async refresh(){
 			//TODO optimize file changes
@@ -263,7 +249,6 @@ export default {
 			this.menuItem = null;
 			this.blocked = true;
 			let d = await this.mp.listdir('/');
-			console.log(d);
 			await this.update(d);
 			this.blocked = false;
 		},
@@ -279,7 +264,6 @@ export default {
 				// });
 				if(this.fileItem.children)
 				{
-					this.blocked = true;
 					if(parent !== '/')
 					{	
 						await this.mp.rmdir(parent+'/'+this.fileItem.name);
@@ -288,15 +272,12 @@ export default {
 					{
 						await this.mp.rmdir(this.fileItem.name);
 					}
-					console.log(parent);
 					let d = await this.mp.listdir(parent);
 					this.update(d);
 					await this.refresh();
-					this.blocked = false;
 				}
 				else
 				{
-					this.blocked = true;
 					if(parent !== '/')
 					{
 						await this.mp.rm(parent+'/'+this.fileItem.name);
@@ -305,11 +286,9 @@ export default {
 					{
 						await this.mp.rm(this.fileItem.name);
 					}
-					console.log(parent);
 					let d = await this.mp.listdir(parent);
 					await this.update(d);
 					await this.refresh();
-					this.blocked = false;
 				}
 			}			
 		},
@@ -326,10 +305,8 @@ export default {
 					// 	c:this.fileItem.name,
 					// 	d:newName
 					// });
-					this.blocked = true;
 					await this.mp.rename(parent+this.fileItem.name, parent+newName);
 					await this.refresh();
-					this.blocked = false;
 				}
 			}
 			else
@@ -344,10 +321,8 @@ export default {
 					// 	c:this.fileItem.name,
 					// 	d:newName
 					// });
-					this.blocked = true;
-					await this.mp.rename(this.fileItem.name, newName);
+					await this.mp.rename(parent+'/'+this.fileItem.name, parent+'/'+newName);
 					await this.refresh();
-					this.blocked = false;
 				}
 			}
 			
@@ -362,13 +337,10 @@ export default {
 				// 	b:this.fileItem.path,
 				// 	c:folderName,
 				// });
-				this.blocked = true;
-				console.log(this.fileItem.path+folderName);
 				await this.mp.mkdir(this.fileItem.path+folderName);
 				let d = await this.mp.listdir(this.fileItem.path+folderName);
 				this.update(d);
 				await this.refresh();
-				this.blocked = false;
 
 			}			
 
@@ -416,7 +388,6 @@ export default {
 		},
 		async fetchContent(item){
 			this.cwd=item.path;
-			console.log(this.cwd);
 			if(!this.cwdArray.includes(this.cwd)){
 				this.cwdArray.push(this.cwd);
 				this.fileItem=item;
@@ -424,11 +395,8 @@ export default {
 				// 	a: 'ls',
 				// 	b:this.cwd
 				// });
-				this.blocked = true;
 				let d = await this.mp.listdir(this.cwd);
-				console.log(d);
 				this.update(d);
-				this.blocked = false;
 			}
 		},
 		showFile(e) {

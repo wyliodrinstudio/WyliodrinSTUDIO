@@ -535,35 +535,6 @@ export function setup (options, imports, register)
 			},
 		});
 
-		// FILES TEST
-                
-		workspace.registerDeviceToolButton('DEVICE_MP_FILESTEST', 10, async () => {
-			let device = studio.workspace.getDevice();
-                
-			/* Here goes the actual code that will make your device run a project */
-			console.log('Files');
-
-			let project = await studio.projects.getCurrentProject();
-         
-			let mp = ports[device.id];
-			console.log(await mp.rm('/test/t.py'));
-
-
-		}, 'plugins/devices/mp/data/img/icons/fileexplorer-icon.svg',
-
-                
-		/* The aditional options that make the Run Button visible and enabled only if there is a connected device
-		                and its type is "awesome" */
-		{
-			enabled () {
-				let device = studio.workspace.getDevice ();
-				return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
-			},
-		});
-
-		// FILES TEST
-
-
 		// DEPLOY
 		
 		workspace.registerDeviceToolButton('DEVICE_MP_DEPLOY', 10, async () => {
@@ -588,7 +559,7 @@ export function setup (options, imports, register)
 			}
 
 
-		}, 'plugins/devices/mp/data/img/icons/run-icon.svg',
+		}, 'plugins/devices/mp/data/img/icons/deploy.png',
 
                 
 		/* The aditional options that make the Run Button visible and enabled only if there is a connected device
@@ -598,11 +569,7 @@ export function setup (options, imports, register)
 				let device = studio.workspace.getDevice ();
 				return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
 			},
-		});
-
-		// DEPLOY
-
-		
+		});	
 
 		if (studio.system.platform () === 'electron')
 		{

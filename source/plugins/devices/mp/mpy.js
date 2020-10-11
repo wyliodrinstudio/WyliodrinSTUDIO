@@ -85,14 +85,10 @@ listdir ('${escape(folder)}')`;
 		try {
 			let res = await this.execute (cmd);
 			if (!res.stderr) {
-				console.log("AICI");
-				console.log(res.stdout);
 				ls = JSON.parse (res.stdout);
 			}
 			else
 			{
-				console.error(folder);
-				console.error(res.stderr);
 				// TODO show notification
 			}
 		}
@@ -149,8 +145,6 @@ except ImportError:
 	import uos as os
 os.mkdir('${escape(dir)}')`;
 
-		console.log(cmd);
-
 		try{
 
 			let res = await this.execute(cmd);
@@ -179,7 +173,7 @@ os.mkdir('${escape(dir)}')`;
 	import os
 except ImportError:
 	import uos as os
-os.replace('${escape(name)}', '${escape(newName)}')`;
+os.rename('${escape(name)}', '${escape(newName)}')`;
 
 		try{
 

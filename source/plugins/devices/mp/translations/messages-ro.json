@@ -19,12 +19,20 @@
         "message": "IESIRE",
         "description": "The exit button."
 	},
+        "DEVICE_MP_FILES": {
+        "message": "SISTEM DE FISIERE",
+        "description": "The file system button."
+        },
+        "DEVICE_MP_DEPLOY": {
+        "message": "INCARCA PROIECTUL",
+        "description": "The deploy button."
+        },
 	"DEVICE_MP_FLAG_HEADER": {
         "message": "SETEAZA-TI GOOGLE FLAG-UL",
         "description": "Header for setting chrome flag."
 	},
 	"DEVICE_MP_FLAG_STEP_ONE": {
-        "message": "1. Accesati in browser chrome://flag",
+        "message": "1. Accesati in browser chrome://flags",
         "description": "The step one for setting chrome flag."
 	},
 	"DEVICE_MP_FLAG_STEP_TWO": {
