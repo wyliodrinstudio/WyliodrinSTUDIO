@@ -115,6 +115,7 @@ Contributions
 - [Alexandru Vochescu](https://www.github.com/valexandru) - Examples
 - [Luis Miguel Capacho Valbuena](https://github.com/lmcapacho) - Translations, WyApp Serial
 - [Iulia Andreea Luta](https://github.com/iuliutza) - Docker
+- [Zamfir Andrei-Paul](https://github.com/ZamfirAndreiPaul) - MicroPython
 
 Wyliodrin is a trademark of Wyliodrin SRL. All rights reserved.
 
