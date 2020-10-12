@@ -74,8 +74,12 @@ export default function setup(options, imports, register) {
 		},
 		getEnvironmentSetup(project) {
 			project;
-			return 'RUN npm install\n';
+			return 'RUN npm install\nCMD node main.js\n';
 		},
+		getImage(project) {
+			project;
+			return 'FROM balenalib/raspberrypi3-debian-node:latest';
+		}
 	};
 
 	studio.projects.registerLanguage('nodejs', 'NodeJS', 'plugins/languages/nodejs/data/img/project.png', 'plugins/languages/nodejs/data/img/javascriptLittle.png',fileIcons, javaScript);

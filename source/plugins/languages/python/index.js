@@ -49,8 +49,12 @@ export default function setup (options, imports, register)
 		},
 		getEnvironmentSetup(project) {
 			project;
-			return 'RUN pip install -r requirements.txt || true\n';
+			return 'RUN pip install -r requirements.txt || true\nCMD python3 main.py\n';
 		},
+		getImage(project) {
+			project;
+			return 'FROM balenalib/raspberrypi3-debian-python:latest';
+		}
 		
 	};
 
