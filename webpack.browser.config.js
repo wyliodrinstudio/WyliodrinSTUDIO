@@ -208,7 +208,7 @@ module.exports = env => {
 			new CopyPlugin({
 				patterns: [
 					...items,
-					// { from: 'index.html', context: 'source/web' },
+					{ from: '*.html', context: 'source/web' },
 					{ from: 'server.js', context: 'source/web', to: '../' },
 					{ from: 'img/**', context: 'source' },
 					{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },

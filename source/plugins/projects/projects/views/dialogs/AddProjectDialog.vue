@@ -3,11 +3,11 @@
 		<v-card-title>
 			<span class="headline">{{$t('PROJECT_WELCOME_CREATE_NEW_APP')}}</span>
 		</v-card-title>
-		<v-card-text style="height:210px;">
-			<v-layout wrap>
+		<v-card-text>
+			<v-layout>
 				<v-text-field autofocus hide-details :label="$t('PROJECT_LIBRARY_NAME')"  required v-model="projectName"></v-text-field>
 			</v-layout>
-			<v-layout wrap>
+			<v-layout>
 				<v-radio-group row v-model="languageID" class="project-lang-box">
 					<label v-for="language of ProgLanguages" :key="language.id" class="project-lang">
 						<v-radio :label="language.title" :value="language.id"></v-radio>
@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import _ from 'lodash';
-
 export default {
 	name: 'AddProjectDialog',
 	data () {
@@ -50,14 +48,11 @@ export default {
 			} else if(this.projects.find(x => x.name === this.projectName) !== undefined) {
 				await this.studio.workspace.showNotification ('PROJECT_EXISTS_PROMPT');
 			} else {
-				let type = this.studio.projects.getLanguage(this.languageID);
 				let project = await this.studio.projects.createEmptyProject(this.projectName,this.languageID);
-				if(project && _.isFunction(type.options.createProject)){
-					if(await type.options.createProject(project))
-					{
-						this.languageID='';
-						this.projectName='';				
-					}
+				if (project)
+				{
+					this.languageID='';
+					this.projectName='';				
 				}
 				this.close();
 			}

@@ -27,9 +27,9 @@
 .lib-app-btn {background:@color-white; border:@color-grey-2 1px solid; font-size:12px; line-height: 28px; min-height: 28px; padding:0 10px; margin:auto !important; height: 30px !important;}
 .lib-app-btn:hover, .dash-btn:hover {background:@color-highlight; color:@color-white;	border:@color-highlight 1px solid;}
 
-.project-lang-box {display: block; width: 100%;
-	.project-lang {float: left;}
-	.v-image {height: 36px; width: 36px; margin:10px auto; position: absolute; top: 40px; left: 0; right: 0; cursor: pointer;	}
+.project-lang-box {display: block; width: 100%; max-height: 250px; overflow: auto;
+	.project-lang {float: left; width: 20%;}
+	.v-image {height: 48px; width: 48px; margin:10px auto; position: absolute; top: 40px; left: 0; right: 0; cursor: pointer;	}
 	label {position: relative;
 		.v-radio {padding:16px 16px 70px 16px; border-radius: 6px; min-width: 91px;
 			::v-deep .v-label {right: 0 !important; margin: auto;}
@@ -37,6 +37,7 @@
 		.v-item--active{ background: @color-grey-1;
 			::v-deep .v-label {color: @color-highlight !important;}
 		}
+		.v-label {justify-content: center;}
 	}
 	.v-radio {margin: 0px !important;}
 	::v-deep .v-input--selection-controls__input {display: none !important;}
@@ -54,3 +55,4 @@
 .fm-actions {height: 60px;
 	button:hover .v-icon{color: @color-highlight !important;}
 }
+

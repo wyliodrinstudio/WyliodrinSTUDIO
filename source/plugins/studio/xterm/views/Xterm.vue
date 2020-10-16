@@ -37,42 +37,42 @@
 
 var $ = require ('jquery');
 import { Terminal } from 'xterm';
-import { FitAddon } from 'xterm-addon-fit';
+// import { FitAddon } from 'xterm-addon-fit';
 
-// xterm.Terminal.prototype.proposeGeometry = function () {
-//     if (!this.element.parentElement) {
-//         return null;
-// 	}
-//     var parentElementStyle = window.getComputedStyle(this.element.parentElement);
-//     var parentElementHeight = parseInt(parentElementStyle.getPropertyValue('height'));
-//     var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')));
-//     var elementStyle = window.getComputedStyle(this.element);
-//     var elementPadding = {
-//         top: parseInt(elementStyle.getPropertyValue('padding-top')),
-//         bottom: parseInt(elementStyle.getPropertyValue('padding-bottom')),
-//         right: parseInt(elementStyle.getPropertyValue('padding-right')),
-//         left: parseInt(elementStyle.getPropertyValue('padding-left'))
-//     };
-//     var elementPaddingVer = elementPadding.top + elementPadding.bottom;
-//     var elementPaddingHor = elementPadding.right + elementPadding.left;
-//     var availableHeight = parentElementHeight - elementPaddingVer;
-//     var availableWidth = parentElementWidth - elementPaddingHor - this._core.viewport.scrollBarWidth;
-//     var geometry = {
-//         cols: Math.floor(availableWidth / (this._core._renderCoordinator.dimensions.actualCellWidth || 9)),
-//         rows: Math.floor(availableHeight / (this._core._renderCoordinator.dimensions.actualCellHeight || 17))
-//     };
-//     return geometry;
-// };
+Terminal.prototype.proposeGeometry = function () {
+	if (!this.element.parentElement) {
+		return null;
+	}
+	var parentElementStyle = window.getComputedStyle(this.element.parentElement);
+	var parentElementHeight = parseInt(parentElementStyle.getPropertyValue('height'));
+	var parentElementWidth = Math.max(0, parseInt(parentElementStyle.getPropertyValue('width')));
+	var elementStyle = window.getComputedStyle(this.element);
+	var elementPadding = {
+		top: parseInt(elementStyle.getPropertyValue('padding-top')),
+		bottom: parseInt(elementStyle.getPropertyValue('padding-bottom')),
+		right: parseInt(elementStyle.getPropertyValue('padding-right')),
+		left: parseInt(elementStyle.getPropertyValue('padding-left'))
+	};
+	var elementPaddingVer = elementPadding.top + elementPadding.bottom;
+	var elementPaddingHor = elementPadding.right + elementPadding.left;
+	var availableHeight = parentElementHeight - elementPaddingVer;
+	var availableWidth = parentElementWidth - elementPaddingHor - this._core.viewport.scrollBarWidth;
+	var geometry = {
+		cols: Math.floor(availableWidth / (this._core._renderService.dimensions.actualCellWidth || 9)),
+		rows: Math.floor(availableHeight / (this._core._renderService.dimensions.actualCellHeight || 17))
+	};
+	return geometry;
+};
 
-// xterm.Terminal.prototype.fit = function () {
-//     var geometry = this.proposeGeometry();
-//     if (geometry) {
-//         if (this.rows !== geometry.rows || this.cols !== geometry.cols) {
-//             this._core._renderCoordinator.clear();
-//             this.resize(geometry.cols, geometry.rows);
-//         }
-//     }
-// }
+Terminal.prototype.fit = function () {
+	var geometry = this.proposeGeometry();
+	if (geometry) {
+		if (this.rows !== geometry.rows || this.cols !== geometry.cols) {
+			this._core._renderService.clear();
+			this.resize(geometry.cols, geometry.rows);
+		}
+	}
+};
 
 export default {
 	name: 'Xterm',
@@ -81,7 +81,7 @@ export default {
 	{
 		return {
 			shell: null,
-			fitAddon: null,
+			// fitAddon: null,
 			id: null,
 			currentTerminalTitle: '',
 			buffers: {
@@ -99,10 +99,10 @@ export default {
 		start ()
 		{
 			let shell = new Terminal ({cols: 80, rows: 24});
-			let fitAddon = new FitAddon();
-			shell.loadAddon (fitAddon);
+			// let fitAddon = new FitAddon();
+			// shell.loadAddon (fitAddon);
 			this.shell = shell;
-			this.fitAddon = fitAddon;
+			// this.fitAddon = fitAddon;
 			shell.open (this.$refs.shell);
 			$(window).resize(this.resize);
 			this.update ();
@@ -185,12 +185,13 @@ export default {
 				this.shouldResize = false;
 				if (this.shell)
 				{
-					// let geometry = this.shell.proposeGeometry ();
-					// if (geometry.rows !== Infinity && geometry.rows > 0 && geometry.cols > 0)
-					// {
-					this.fitAddon.fit ();
-					this.$emit ('resize', this.id, this.shell.cols, this.shell.rows);
-					// }
+					let geometry = this.shell.proposeGeometry ();
+					if (geometry.rows !== Infinity && geometry.rows > 0 && geometry.cols > 0)
+					{
+					// this.fitAddon.fit ();
+						this.shell.fit ();
+						this.$emit ('resize', this.id, this.shell.cols, this.shell.rows);
+					}
 				}
 			}
 		},
