@@ -130,5 +130,93 @@
     "DEVICE_WYAPP_FILESYSTEM": {
         "message": "Sistem de fisiere",
         "description": "The message shown for the selected device filesystem"
+    },
+    "DEVICE_WYAPP_RUN_DEPLOY": {
+        "message": "Setari implementare",
+        "description": "The pop-up for deploying an app"
+    },
+    "DEVICE_WYAPP_DOCKERFILE": {
+        "message": "Dockerfile",
+        "description": "The pop-up that asks the user for a predefined dockefile"
+    },
+    "DEVICE_WYAPP_DEPLOY": {
+        "message": "Implementeaza",
+        "description": "The button for deploying an app"
+    },
+    "DEVICE_WYAPP_DELETE": {
+        "message": "Sterge",
+        "description": "The delete button"
+    },
+    "YES": {
+        "message": "Da",
+        "description": "The yes button "
+    },
+    "NO": {
+        "message": "Nu",
+        "description": "The no button"
+    },
+    "DEVICE_WYAPP_DEPLOYMENTS":{
+        "message": "Implementari",
+        "description": "The button for deployments"
+    },
+    "DEVICE_WYAPP_REMOVE_CONTAINER": {
+        "message": "Sterge containerul la iesire (--rm)",
+        "description": "The option for removing a container when exited"
+    },
+    "DEIVCE_WYAPP_ADDITIONAL_OPTIONS": {
+        "message": "Mai multe optiuni",
+        "description": "The text field for more running options"
+    },
+    "DEIVCE_WYAPP_DETACHED": {
+        "message": "detasat",
+        "description": "The detached option for docker run"
+    },
+    "DEVICE_WYAPP_INTERACTIVE_CONSOLE": {
+        "message": "consola interactiva ",
+        "description": "The interactive console options for docker run"
+    },
+    "DEVICE_WYAPP_PRIVILEGED_CONTAINER": {
+        "message": " Container privilegiat (--privileged)",
+        "description": "The privileged option for docker run"
+    },
+    "DEVICE_WYAPP_NO_RESTART": {
+        "message": "nu",
+        "description": "The option that never restarts a container"
+    },
+    "DEVICE_WYAPP_RESTART_ON_FAILURE": {
+        "message": "la esec",
+        "description": "Container restarts if it fails"
+    },
+    "DEVICE_WYAPP_RESTART_ALWAYS": {
+        "message": "intotdeauna",
+        "description": "Container restarts always"
+    },
+    "DEVICE_WYAPP_RESTART_UNLESS_STOPPED": {
+        "message": "doar daca e oprit",
+        "description": "container restarts as long as it is not stopped"
+    },
+    "DEVICE_WYAPP_DEFAULT_NETWORK": {
+        "message": "default",
+        "description": "Container uses the default network"
+    },
+    "DEVICE_WYAPP_HOST_NETWORK": {
+        "message": "host",
+        "description": "Container uses the host's network"
+    },
+    "DEVICE_WYAPP_NETWORK_OPTIONS": {
+        "message": "Optiuni de retea",
+        "description": "The network options available for docker run"
+    },
+    "DEVICE_WYAPP_RESTART_OPTIONS": {
+        "message": "Optiuni de restart",
+        "description": "The restart options available for docker run"
+    },
+    "DEVICE_WYAPP_PROCESS_OPTIONS": {
+        "message": "Optiuni de proces",
+        "description": "The process options available for docker run"
+    },
+    "DEVICE_WYAPP_NO_CONTAINERS": {
+        "message": "Nu sunt containere",
+        "description": "The message shown when there are no containers"
     }
 }

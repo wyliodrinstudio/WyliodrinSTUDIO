@@ -76,6 +76,22 @@ export function setup (options, imports, register)
 		run (project)
 		{
 			project;
+		},
+
+		/**
+		 * Modidify the project before deploy
+		 * @param {Project} project - the project
+		 */
+		deploy (project)
+		{
+			let dockerfile = null;
+			dockerfile = studio.projects.getImage(project);
+	
+			dockerfile += '\nCOPY . .\n';
+
+			dockerfile += studio.projects.getEnvironmentSetup(project);
+
+			return studio.projects.newFile(project,'/Dockerfile', dockerfile);
 		}
 	};
 

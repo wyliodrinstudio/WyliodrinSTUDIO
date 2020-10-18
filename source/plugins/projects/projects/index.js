@@ -1595,6 +1595,29 @@ let projects = {
 	},
 
 	/**
+	 * This function's purpose is to get the makefile for file name of a *project*.
+	 * 
+	 * @param {Project} project - project object
+	 * 
+	 * @returns {string} - name of the makefile
+	 */
+	getEnvironmentSetup(project, filename) {
+		if(project !== null) {
+			return this._runLanguageFunction('getEnvironmentSetup', project, filename);
+		} else {
+			return null;
+		}
+	},
+
+	getImage(project) {
+		if(project !== null) {
+			return this._runLanguageFunction('getImage', project);
+		} else {
+			return null;
+		}
+	},
+
+	/**
 	 * This function returns a specific option that was set to a programming language.
 	 * 
 	 * In order to obtain it, is required to have the *project* for which the option was set 

@@ -2,6 +2,7 @@
 import _ from 'lodash';
 import path from 'path';
 
+
 import WyApp from './WyApp';
 
 import DeviceSettings from './views/DeviceSettings.vue';
@@ -13,6 +14,7 @@ import PackageManager from './views/PackageManager.vue';
 import TaskManager from './views/TaskManager.vue';
 import { EventEmitter } from 'events';
 import Deployments from './views/Deployments.vue';
+import DockerSettings from './views/DockerSettings.vue';
 
 let studio = null;
 let workspace = null;
@@ -28,6 +30,7 @@ let transportDevices = {};
  */
 let searches = {};
 let searchDevices = {};
+
 
 function updateDevices ()
 {
@@ -496,6 +499,19 @@ export function setup(options, imports, register)
 				return (device.status === 'CONNECTED' && device.properties.deployments === true);
 			}
 		});
+
+		/* Register the Deploy button */
+		workspace.registerDeviceToolButton ('DEVICE_WYAPP_DEPLOY', 70, () => {
+			let deploy = true;
+			device_wyapp.runProject(deploy);
+
+		}, 'plugins/devices/wyapp/plugin/data/img/icons/just_deploy.png', {
+			visible () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.properties.treeRun === false);
+			},
+			type: 'deploy'
+		});
 	}
 	else
 	{
@@ -539,7 +555,7 @@ export function setup(options, imports, register)
 			}
 			return null;
 		},
-
+		
 		/**
 		 * Register a new search provider
 		 * @param {String} name - the name of the search provider
@@ -619,27 +635,131 @@ export function setup(options, imports, register)
 			}
 		},
 
+		
 		/**
 		 * Run the current project
 		 */
-		async runProject ()
+		
+		async runProject (deploy = false)
 		{
 			let project = await studio.projects.getCurrentProject ();
-
+			
 			if (project)
 			{
 				let filename = await studio.projects.getDefaultRunFileName(project);
 				let makefile = await studio.projects.loadFile (project, '/makefile');
 				if (!makefile) makefile = await studio.projects.getMakefile (project, filename);
 
+				let name = null;
+				let tag = null;
+
+				if(deploy === true)
+				{
+					name = project.name.replace(/\\/g, '\\\\')
+						.replace(/\$/g, '\\$')
+						.replace(/'/g, '\\\'')
+						.replace(/"/g, '\\"');
+
+					tag =  project.name.replace(/[^0-9A-Za-z_]/g,'_');
+					makefile += '\ndeploy:\n\t docker build --tag ' + tag +  ' . && docker run --label studio="' +name + '" ';
+				}
+	
 				let device = studio.workspace.getDevice ();
+				let dockerfile = null;
+
 				if (device)
 				{
 					// allow the board to modify the project structure before run
 					let board = this.getBoardDriver (device.board);	
-					if (board && board.run) board.run (project);
+					if (board && board.run) await board.run (project);
 					studio.console.show ();
 					studio.console.reset ();
+
+					// deploy
+					if(board && board.deploy)
+					{
+						dockerfile = await studio.projects.loadFile(project, '/Dockerfile');
+
+						if(deploy === true)
+						{
+							if(dockerfile === undefined)
+							{
+								let question = await studio.workspace.showConfirmationPrompt('Dockerfile',
+									'Dockerfile non-existent. Would you like a predefined one?');
+
+								if(question === 'yes') {
+									await board.deploy(project);
+								}
+								else return null;
+							}
+							let options = await studio.workspace.showDialog(DockerSettings, {
+								width:800,
+								project:project,
+							});
+
+							let dockoptions = ' ';
+
+							if(options === false){
+								return null;
+							}
+
+							if(options.selectedNetwork === 'host')
+							{
+								dockoptions += '--network="' +options.selectedNetwork + '" ';
+							}
+
+							if(options.selectedRestart === 'no')
+							{
+								dockoptions += '--restart no ';
+							}
+								
+							if(options.selectedRestart === 'always')
+							{
+								dockoptions += '--restart always ';
+							}
+
+							if(options.selectedRestart === 'unless-stoped')
+							{
+								dockoptions += '--restart unless-stoped ';
+							}
+
+							if(options.selectedRestart === 'on-failure')
+							{
+								dockoptions += '--restart on-failure ';
+							}		
+							
+							if(options.selectedOption === 'interactive console')
+							{
+								dockoptions += '-it ';
+							}
+							
+							if(options.selectedOption === 'detached')
+							{
+								dockoptions += '-d ';
+							}
+
+							if(options.privileged === true)
+							{
+								dockoptions += '--privileged ';
+							}
+
+							if(options.remove === true)
+							{
+								dockoptions += '--rm ';
+							}
+							
+							if(options.textInput)
+							{
+								dockoptions += ' '+ options.textInput; 
+							}
+
+							makefile += dockoptions + ' ' + tag;
+
+							await studio.projects.saveSpecialFile(project,'docker.json',JSON.stringify(options,null,4));	
+						}
+						
+						
+					} 
 					let structure = await studio.projects.generateStructure (project);
 
 					let tp = {
@@ -652,9 +772,10 @@ export function setup(options, imports, register)
 								isdir: true,
 								issoftware: true,
 								children: [],
-								m: makefile
+								m: makefile,
+								
 							}
-						]
+						],
 					};
 
 					let setFiles = async (projectChildren, tpChildren, filenamePath) =>
@@ -683,17 +804,19 @@ export function setup(options, imports, register)
 					};
 
 					await setFiles (structure.children, tp.children[0].children, '/');
-
+					
 					let xtrem = studio.console.getSize ();
-
+					
 					sendToDevice (device, 'tp', {
+
 						a: 'start',
 						t: tp,
 						l: project.language,
 						onlysoft: true,
 						c: xtrem.cols,
-						r: xtrem.rows
-					});
+						r: xtrem.rows,	
+						deploy:deploy,
+					});			
 				}
 			}
 			else
