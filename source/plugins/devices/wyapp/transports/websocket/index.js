@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 import ReconnectingWebSocket from 'reconnectingwebsocket';
-import { v4 } from 'uuid';
 import DeviceSetup from './views/DeviceSetup.vue';
 import _ from 'lodash';
 import validator from 'validator';
@@ -8,6 +7,8 @@ import validator from 'validator';
 let wyapp = null;
 let settings = null;
 let workspace = null;
+
+let id = null;
 
 let deviceDriver = null;
 
@@ -111,30 +112,14 @@ export function setup (options, imports, register)
 	wyapp = imports.device_wyapp;
 	settings = imports.settings;
 	workspace = imports.workspace;
+	id = imports.id;
 
 	// TODO store token
-	let newtoken = v4 ();
-	let token = settings.loadValue ('device.wyapp.websocket', 'userid', newtoken);
-	if (token === newtoken) settings.storeValue ('device.wyapp.websocket', 'userid', token);
+	let token = id.getId ();
 
-	workspace.registerMenuItem('DEVICE_WYAPP_WEBSOCKET_SET_USER_ID', 90, async () => {
-		let settoken = await workspace.showPrompt ('DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TITLE', 'DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_TEXT', token);
-		if (settoken && validator.isUUID (settoken)) settoken = settoken.toLowerCase ();
-		if (settoken && token !== settoken)
-		{
-			if (validator.isUUID (settoken))
-			{
-				// the websocket is reset after the token set
-				// eslint-disable-next-line require-atomic-updates
-				token = settoken;
-				settings.storeValue ('device.wyapp.websocket', 'userid', token);
-				startSocket ();
-			}
-			else
-			{
-				workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_NO_UUID');
-			}
-		}
+	id.on ('id:change', (t) => {
+		token = t;
+		startSocket ();
 	});
 
 	let pingPongTimeout = null;

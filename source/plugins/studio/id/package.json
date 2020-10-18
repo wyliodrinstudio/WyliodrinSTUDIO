@@ -1,0 +1,11 @@
+{
+    "name": "id",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["settings", "workspace"],
+        "provides": ["id"],
+        "target": ["electron", "browser"]
+    }
+}

@@ -4,7 +4,7 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace", "settings", "device_wyapp"],
+        "consumes": ["workspace", "settings", "device_wyapp", "id"],
         "provides": [],
         "target": ["browser", "electron"]
     }

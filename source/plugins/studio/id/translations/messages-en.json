@@ -1,0 +1,18 @@
+{
+    "ID_SET_USER_ID": {
+        "message": "Session ID",
+        "description": "The menu item where the user changes the session id"
+    },
+    "ID_SET_USER_ID_TITLE": {
+        "message": "Session ID",
+        "description": "The dialog title where the user changes the session id"
+    },
+    "ID_SET_USER_ID_TEXT": {
+        "message": "Unique ID used to connect to the devices, it's like a password.",
+        "description": "The text dispalyed in the dialog where the user changes the session id"
+    },
+    "ID_SET_USER_ID_NO_UUID": {
+        "message": "The session ID must be a valid UUID.",
+        "description": "The error the user is shown when the enetered session id is not a valid"
+    }
+}
