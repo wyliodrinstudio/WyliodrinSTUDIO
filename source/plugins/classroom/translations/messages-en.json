@@ -1,0 +1,66 @@
+{
+    "CLASSROOM": {
+        "message": "Classroom",
+        "description": "This title appears in the menu and in tha tab"
+    },
+    "CLASSROOM_CONNECT": {
+        "message": "Join a classroom",
+        "description": "This is the title of the classroom connection dialog"
+    },
+    "CLASSROOM_SERVER": {
+        "message": "Classroom Server",
+        "description": "The link for the classroom server"
+    },
+    "CLASSROOM_USER_NAME": {
+        "message": "Your Name",
+        "description": "The user's name that he will join the classroom"
+    },
+    "CLASSROOM_SECRET": {
+        "message": "Classroom Secret",
+        "description": "The secret key used to join the classroom"
+    },
+    "CLASSROOM_USERNAME": {
+        "message": "Username",
+        "description": "The user's username that he will join the classroom"
+    },
+    "CLASSROOM_PASSWORD": {
+        "message": "Password",
+        "description": "The password used to join the classroom"
+    },
+    "CLASSROOM_ALLOW_DEVICE_ACCESS": {
+        "message": "Allow intructors to access your device",
+        "description": "The checkbox that allows a use to selctet whether the instructor can access his device"
+    },
+    "CLASSROOM_JOIN": {
+        "message": "Join",
+        "description": "The button the user clicks to join a classroom"
+    },
+    "CLASSROOM_ROLE": {
+        "message": "Role",
+        "description": "The title of the role selection"
+    },
+    "CLASSROOM_ROLE_STUDENT": {
+        "message": "Student",
+        "description": "The student role"
+    },
+    "CLASSROOM_ROLE_INSTRUCTOR": {
+        "message": "Instructor",
+        "description": "The title of the instructor selection"
+    },
+    "CLASSROOM_REQUIRES_SECRET": {
+        "message": "Please fill in the classroom secret to join",
+        "description": "The message the user receives when he did not enter the classroom secret"
+    },
+    "CLASSROOM_REQUIRES_SERVER": {
+        "message": "Please fill in the classroom sever you would like to join",
+        "description": "The message the user receives when he did not enter the classroom server"
+    },
+    "CLASSROOM_REQUIRES_NAME": {
+        "message": "Please fill in your name to join",
+        "description": "The message the user receives when he did not enter his name"
+    },
+    "CLASSROOM_REQUIRES_USERNAME": {
+        "message": "Please fill in your username",
+        "description": "The message the user receives when he did not enter the classroom secret"
+    }
+}
