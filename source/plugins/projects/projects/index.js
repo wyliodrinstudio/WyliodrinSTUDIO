@@ -1609,13 +1609,6 @@ let projects = {
 		}
 	},
 
-	getImage(project) {
-		if(project !== null) {
-			return this._runLanguageFunction('getImage', project);
-		} else {
-			return null;
-		}
-	},
 
 	/**
 	 * This function returns a specific option that was set to a programming language.

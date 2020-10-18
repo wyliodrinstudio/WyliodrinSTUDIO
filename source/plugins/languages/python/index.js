@@ -50,12 +50,7 @@ export default function setup (options, imports, register)
 		getEnvironmentSetup(project) {
 			project;
 			return 'RUN pip install -r requirements.txt || true\nCMD python3 main.py\n';
-		},
-		getImage(project) {
-			project;
-			return 'FROM balenalib/raspberrypi3-debian-python:latest';
 		}
-		
 	};
 
 	studio.projects.registerLanguage('python', 'Python', 'plugins/languages/python/data/img/project.png', 'plugins/languages/python/data/img/pythonLittle.png',fileIcons, python);
