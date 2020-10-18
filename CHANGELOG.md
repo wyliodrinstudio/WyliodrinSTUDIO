@@ -1,6 +1,7 @@
 ## Wyliodrin STUDIO 2.2.0-beta
   * **added** Wyliodrin STUDIO CI tests for build, documentation and format
   * **new** plugin folder structure with plugins hierarchy
+  * **new** plugin for id, migrated from wyapp-websocket
   * **update** packages
 
 ## Wyliodrin STUDIO 2.1.4-beta
