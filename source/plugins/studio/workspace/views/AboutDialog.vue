@@ -21,10 +21,9 @@
 				<p><strong>Calin Dumitru</strong> - Simulators</p>
 				<p><strong>Diana Ghindaoanu</strong> - Notebook, Dashboard, Documentation, Emulator</p>
 				<p><strong>Teona Severin</strong> - Web File System</p>
+				<p><strong>Iulia Andreea Luta</strong> - Docker</p>
 				<p><strong>Ana Marinescu</strong> - Pin Layout</p>
 				<p><strong>Andrei Deatcu</strong> - Resistor Color Code, Schematics</p>
-				<p><strong>Iulia Andreea Luta</strong> - Docker</p>
-
 				<br>
 			
 				<h3>{{$t('ABOUT_TRANSLATE')}}</h3>

@@ -508,7 +508,7 @@ export function setup(options, imports, register)
 		}, 'plugins/devices/wyapp/plugin/data/img/icons/just_deploy.png', {
 			visible () {
 				let device = studio.workspace.getDevice ();
-				return (device.status === 'CONNECTED' && device.properties.treeRun === false);
+				return (device.status === 'CONNECTED' && device.properties.deployments === true);
 			},
 			type: 'deploy'
 		});
