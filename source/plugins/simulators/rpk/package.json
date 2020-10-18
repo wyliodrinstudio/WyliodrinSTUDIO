@@ -6,7 +6,7 @@
     "plugin": {
         "consumes": ["workspace","console","projects"],
 		"provides": ["device_simulator_rpk"],
-        "disabled": false,
+        "disabled": true,
         "target": ["electron", "browser"]
     }
 }

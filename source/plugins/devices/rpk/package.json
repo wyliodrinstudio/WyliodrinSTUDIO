@@ -7,6 +7,6 @@
         "consumes": ["workspace", "projects", "events", "device_wyapp", "console", "filesystem", "system"],
         "provides": [],
         "target": ["electron", "browser"],
-        "disabled": false
+        "disabled": true
     }
 }
