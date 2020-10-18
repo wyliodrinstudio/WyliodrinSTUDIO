@@ -1,6 +1,6 @@
-import { v4 } from "uuid";
-import validator from "validator";
-import { EventEmitter } from "events";
+import { v4 } from 'uuid';
+import validator from 'validator';
+import { EventEmitter } from 'events';
 
 let studio = null;
 let events = new EventEmitter ();
@@ -22,7 +22,7 @@ let id = {
 	on (event, ...args) {
 		events.on (event, ...args);
 	}
-}
+};
 
 export function setup (options, imports, register) {
 	studio = imports;	

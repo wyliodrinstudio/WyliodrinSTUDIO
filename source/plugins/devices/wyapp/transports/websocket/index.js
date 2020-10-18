@@ -2,10 +2,8 @@ import { EventEmitter } from 'events';
 import ReconnectingWebSocket from 'reconnectingwebsocket';
 import DeviceSetup from './views/DeviceSetup.vue';
 import _ from 'lodash';
-import validator from 'validator';
 
 let wyapp = null;
-let settings = null;
 let workspace = null;
 
 let id = null;
@@ -110,7 +108,6 @@ function updateDevices ()
 export function setup (options, imports, register)
 {
 	wyapp = imports.device_wyapp;
-	settings = imports.settings;
 	workspace = imports.workspace;
 	id = imports.id;
 

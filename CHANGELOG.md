@@ -3,6 +3,7 @@
   * **new** plugin folder structure with plugins hierarchy
   * **new** plugin for id, migrated from wyapp-websocket
   * **update** packages
+  * **disabled** Rapid IoT device and simulator 
 
 ## Wyliodrin STUDIO 2.1.4-beta
   * **fixed** delay block for libwyliodrin having the same name as in Raspberry Pi
