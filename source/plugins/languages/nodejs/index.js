@@ -75,10 +75,6 @@ export default function setup(options, imports, register) {
 		getEnvironmentSetup(project) {
 			project;
 			return 'RUN npm install\nCMD node main.js\n';
-		},
-		getImage(project) {
-			project;
-			return 'FROM balenalib/raspberrypi3-debian-node:latest';
 		}
 	};
 
