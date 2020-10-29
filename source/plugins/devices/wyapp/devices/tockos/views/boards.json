@@ -1,0 +1,51 @@
+{
+	"tockloader": [
+		{
+			"name": "HAIL",
+			"board": "hail",
+			"openocd": false
+		},
+		{
+			"name": "IMIX",
+			"board": "imix",
+			"openocd": false
+		},
+		{
+			"name": "Nordic nRF52-DK",
+			"board": "nrf52dk",
+			"openocd": true
+		},
+		{
+			"name": "Arty SiFive (A7 FPGA)",
+			"board": "arty",
+			"openocd": true
+		},
+		{
+			"name": "STM32f4-based Nucleo",
+			"board": "nucleof4",
+			"openocd": true
+		},
+		{
+			"name": "SiFive HiFive1b",
+			"board": "hifive1b",
+			"openocd": true
+		},
+		{
+			"name": "STM32F3-based Discovery Boards",
+			"board": "stm32f3discovery",
+			"openocd": true
+		}
+	],
+	"singleBinary": [
+		{
+			"name": "STM32F3 Discovery kit",
+			"board": "stm32f3discovery",
+			"architecture": "cortex-m4"
+		},
+		{
+			"name": "STM32F412G Discovery kit",
+			"board": "stm32f412gdiscovery",
+			"architecture": "cortex-m4"
+		}
+	]
+}

@@ -19,6 +19,12 @@
 				label="Kernel Heap Size"
 				v-model="boardSettings.kernelHeapSize"
 			></v-text-field>
+			<v-select v-model = "flashOption" :items="flashingOptions" label="Select Flashing Method">
+			</v-select>
+			<v-select return-object v-model = "board" :items="boards.tockloader" item-text = "name" label="Select Board" v-if="flashOption === 'Tockloader'">
+			</v-select>
+			<v-select return-object v-model = "board" :items="boards.singleBinary" item-text = "name" label="Select Board" v-else-if="flashOption === 'Single Binary'">
+			</v-select>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>
@@ -29,18 +35,31 @@
 </template>
 
 <script>
+import axios from 'axios';
 import makefileDefaultTemplate from 'raw-loader!../template/makefile_default.libtock-c';
+import BOARDS from './boards.json';
 
 export default {
 	name: 'BoardSettings',
 	props: ['boardSettings', 'project'],
 	data () {
 		return {
+			flashingOptions: ['Tockloader', 'Single Binary'],
+			flashOption: undefined,
+			boards: BOARDS,
+			board: undefined
 		};
 	},
 	methods: {
 		async select ()
 		{
+			await this.generateAppMakefile();
+
+			await this.generateUploadSH();
+
+			this.$root.$emit ('submit', true);
+		},
+		async generateAppMakefile() {
 			let makefile = await this.studio.projects.loadFile(this.project, 'Makefile.app');
 			if (makefile === null) {
 				makefile = makefileDefaultTemplate;
@@ -86,8 +105,59 @@ export default {
 
 			newMakefile = newMakefile.join('\r\n');
 			await this.studio.projects.saveFile(this.project, 'Makefile.app', Buffer.from(newMakefile));
+		},
+		async generateUploadSH() {
+			let uploadSH = '# DO NOT MODIFY this file will be generated AUTOMATICALLY\n\n';
+			
+			if (this.flashOption === 'Tockloader') {
+				const {board, openocd} = this.board;
 
-			this.$root.$emit ('submit', true);
+				if (openocd === true) {
+					uploadSH += `tockloader install ~/libtock-c/examples/studio/build/studio.tab --openocd --board ${board}\n`;
+				} else {
+					uploadSH += 'tockloader install ~/libtock-c/examples/studio/build/studio.tab\n';
+				}
+			} else if (this.flashOption === 'Single Binary') {
+				const {board} = this.board;
+
+				this.generateKernelMakefile();
+
+				uploadSH += `cp Makefile.kernel ~/tock/boards/${board}/Makefile.kernel\n`;
+				uploadSH += `cd ~/tock/boards/${board} && make -f Makefile.kernel\n`;
+				uploadSH += `cd ~/tock/boards/${board} && make -f Makefile.kernel program\n`;
+			}
+
+			await this.studio.projects.saveFile(this.project, '/upload.sh', Buffer.from(uploadSH));
+		},
+		async generateKernelMakefile() {
+			let kernelMakefile = await this.downloadBoardFile(this.board, 'Makefile');
+			kernelMakefile = kernelMakefile.split(/\r?\n/);
+
+			let writeIdx = undefined;
+			for (let line of kernelMakefile) {
+				if ((/.*:.*program/).exec(line) !== null) {
+					writeIdx = kernelMakefile.indexOf(line);
+				}
+			}
+			if (writeIdx) {
+				const {architecture} = this.board;
+
+				kernelMakefile = kernelMakefile.slice(0,writeIdx);
+				kernelMakefile.push(`APP=$(TOCK_ROOT_DIRECTORY)/../libtock-c/examples/studio/build/${architecture}/${architecture}.tbf`);
+				kernelMakefile.push('KERNEL=$(TOCK_ROOT_DIRECTORY)/target/$(TARGET)/debug/$(PLATFORM).elf');
+				kernelMakefile.push('KERNEL_WITH_APP=$(TOCK_ROOT_DIRECTORY)/target/$(TARGET)/debug/$(PLATFORM)-app.elf\r\n');
+				kernelMakefile.push('.PHONY: program');
+				kernelMakefile.push('program: $(TOCK_ROOT_DIRECTORY)target/$(TARGET)/debug/$(PLATFORM).elf');
+				kernelMakefile.push('	arm-none-eabi-objcopy --update-section .apps=$(APP) $(KERNEL) $(KERNEL_WITH_APP)');
+				kernelMakefile.push('	$(OPENOCD) $(OPENOCD_OPTIONS) -c "init; reset halt; flash write_image erase $(KERNEL_WITH_APP); verify_image $(KERNEL_WITH_APP); reset; shutdown"');
+			}
+
+			kernelMakefile = kernelMakefile.join('\r\n');
+			await this.studio.projects.saveFile(this.project, 'Makefile.kernel', Buffer.from(kernelMakefile));
+		},
+		async downloadBoardFile ({board}, filename) {
+			let response = await axios.get (`https://raw.githubusercontent.com/tock/tock/master/boards/${board}/${filename}`);
+			return response.data;
 		},
 		close ()
 		{

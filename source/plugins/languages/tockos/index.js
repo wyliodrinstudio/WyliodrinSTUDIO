@@ -126,7 +126,10 @@ export default function setup (options, imports, register)
 				--> true if the submit button was clicked
 				--> false if the cancel button was clicked
 			*/
-			await studio.workspace.showDialog (SelectExample, {name});
+			let ret = await studio.workspace.showDialog (SelectExample, {name});
+			if (ret === true) {
+				await studio.projects.newFile(name, '/upload.sh', '# DO NOT MODIFY this file will be generated AUTOMATICALLY\n\n');
+			}
 		},
 		getDefaultFileName() {
 			return '/main.c';

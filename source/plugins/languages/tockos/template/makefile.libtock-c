@@ -4,3 +4,5 @@ run:
 	mkdir -p "$(TOCK_DIR)/../libtock-c/examples/studio"
 	cp -R * "$(TOCK_DIR)/../libtock-c/examples/studio"
 	cd "$(TOCK_DIR)/../libtock-c/examples/studio" && make -f Makefile.app
+	. ./upload.sh
+	tockloader listen
