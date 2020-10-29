@@ -19,15 +19,16 @@
 						<td class="w-50 d-flex">
 							<v-img v-if="container.studio === true" src="plugins/devices/wyapp/plugin/data/img/icons/wyliodrin-studio-logo.png"></v-img>
 							<v-img v-else src="plugins/devices/wyapp/plugin/data/img/icons/docker3.svg" aria-label="Container" ></v-img>
-							<v-img v-if="container.state === 'running'" src="plugins/devices/wyapp/plugin/data/img/icons/green-dot.svg"
-							:alt="container.state" :title="container.state"> </v-img>
-							<v-img v-else-if="container.status.substr(0,10) === 'Exited (0)'" src="plugins/devices/wyapp/plugin/data/img/icons/grey-dot.svg"
-							:alt="container.state" :title="container.state"></v-img>
-							<v-img v-else-if="container.status.substr(0,14) === 'Restarting (0)'" src="plugins/devices/wyapp/plugin/data/img/icons/yellow-dot.svg"
-							:alt="container.state" :title="container.state"></v-img>
-							<v-img v-else-if="container.state === 'created'" src="plugins/devices/wyapp/plugin/data/img/icons/yellow-dot.svg"
-							:alt="container.state" :title="container.state"></v-img>
-							<v-img v-else src="plugins/devices/wyapp/plugin/data/img/icons/red-dot.svg"></v-img>
+
+							<div v-if="container.state === 'running'" v-bind:class="{green: true}" :alt="container.state" :title="container.state"> </div>
+							<div v-else-if="container.status.substr(0,10) === 'Exited (0)'" v-bind:class="{grey:true}"
+							:alt="container.state" :title="container.state"></div>
+							<div v-else-if="container.status.substr(0,14) === 'Restarting (0)'" v-bind:class="{yellow: true}"
+							:alt="container.state" :title="container.state"></div>
+							<div v-else-if="container.state === 'created'" v-bind:class="{yellow: true}"
+							:alt="container.state" :title="container.state"></div>
+							<div v-else v-bind:class ="{red: true}"></div>
+
 							<h3>{{container.title}}</h3>
 
 						</td>
@@ -71,6 +72,7 @@
 </template>
 
 <script>
+import { color } from 'highcharts';
 import { mapGetters } from 'vuex';
 export default {
 	name: 'Deployments',
@@ -143,4 +145,33 @@ export default {
 	}
 };
 </script>
+
+<style>
+.green {
+	background-color: green;
+	height: 15px;
+	width: 15px;
+	border-radius: 100px;
+}
+.red {
+	background-color: red;
+	height: 15px;
+	width: 15px;
+	border-radius: 100px;
+}
+.yellow {
+	background-color: yellow;
+	height: 15px;
+	width: 15px;
+	border-radius: 100px;
+}
+.grey {
+	background-color: grey;
+	height: 15px;
+	width: 15px;
+	border-radius: 100px;
+}
+</style>
+
+
 
