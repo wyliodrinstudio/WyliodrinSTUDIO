@@ -54,6 +54,7 @@ let dashboard = {
 	emitSignal(signalName,v,t)
 	{
 		// console.log ('emitSignal');
+		console.log (signalName);
 		signalEmitter.emit(signalName, {
 			v:v, 
 			t: t?new Date(t):new Date()

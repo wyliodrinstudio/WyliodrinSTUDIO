@@ -7,6 +7,48 @@ let studio = null;
 export function setup (options, imports, register)
 {
 	studio = imports;
+
+	let signalsBuffer = '';
+	let signalRegex = /^@([A-Za-z0-9_]+):\s*([^\/]+)(?:\/([0-9]+))?$/;
+
+	const filterSignal = (data) => {
+		let signals = [];
+		let output = '';
+		let signalParts = data.split (/\r?\n/);
+		if (signalParts.length > 1) {
+			signalParts[0] = signalsBuffer + signalParts[0];
+			let actualSignals = signalParts.slice (0, signalParts.length-1);
+			for (let signalFormat of actualSignals) {
+				let signal = signalFormat.match (signalRegex);
+				if (signal) {
+					let timestamp;
+					try
+					{
+						timestamp = new Date (signal[3]);
+					}
+					catch (e) 
+					{
+						timestamp = new Date();
+					}
+					signals.push ({
+						name: signal[1],
+						value: signal[2],
+						timestamp: timestamp
+					});
+				}
+			}
+		}
+		signalsBuffer = signalParts[signalParts.length-1];
+		if (signalsBuffer[0] !== '@') {
+			output = output +'\n'+ signalsBuffer;
+			signalsBuffer = '';
+		}
+		return {
+			signals,
+			output
+		};
+	};
+
 	let consoleObject = {
 		/**
 		 * Write to console
@@ -14,6 +56,13 @@ export function setup (options, imports, register)
 		 * @param {string} data - console data
 		 *  */
 		write(id, data) {
+			
+			let {signals, output} = filterSignal (data);
+			
+			for (let signal of signals) {
+				studio.dashboard.emitSignal (signal.name, signal.value, signal.timestamp);
+			}
+
 			let shell = getConsole ();
 			if (shell) shell.write (id, data);
 		},

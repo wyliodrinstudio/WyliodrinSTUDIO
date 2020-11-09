@@ -3,6 +3,10 @@
         "message": "Dashboard",
         "description": "The Dashboard tab, used to send signals from a board."
     },
+    "DASHBOARD_LOAD_DATA_ERROR": {
+        "message": "Failed to load the dashboard",
+        "description": "Error when loading a dashboard."
+    },
     "DASHBOARD_VIEWER_INVALID_SIGNAL": {
         "message": "Signal name invalid",
         "description": "Warning that shows up when the signal name entered by the user is not correct."

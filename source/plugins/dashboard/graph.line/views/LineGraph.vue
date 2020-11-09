@@ -1,84 +1,168 @@
 <template>
-	<section class="charts">
-        <vue-highcharts :highcharts="Highcharts" :options="options" ref="chart"></vue-highcharts>
-    </section>
+  <div>
+    <ChartJSLine 
+		ref="chart"
+    	:chart-data="series"
+    	:options="options"
+    	:styles="styles"
+    	class="line"
+    ></ChartJSLine>
+  </div>
 </template>
 <script>
-// import { Line } from 'vue-chartjs';
-import VueHighcharts from 'vue2-highcharts';
-import More from 'highcharts/highcharts-more';
-import Highcharts from 'highcharts';
+import { Line, mixins } from 'vue-chartjs';
+const { reactiveProp } = mixins;
 
-More(Highcharts);
-
+const ChartJSLine = {
+	name: 'ChartJSLine',
+	extends: Line,
+	mixins: [reactiveProp],
+	props: ['options'],
+	mounted() {
+		// this.series is created in the mixin.
+		// If you want to pass options please create a local options object
+		this.renderChart(this.chartData, this.options);
+	},
+	methods: {
+		update () {
+			this.$data._chart.update();
+		},
+	},
+};
 
 export default {
 	name: 'LineGraph',
 	components: {
-		VueHighcharts
+		ChartJSLine,
 	},
-	props: ['data'],
-	data () {
+	props: ['data', 'width', 'height'],
+	data() {
 		return {
 			unregister: () => {},
-			options:{
-				chart: {
-					type: 'line'
-				},
-				title: {
-					text: this.data.signalTitle
-				},
-				maintainAspectRatio: false,
-				yAxis: {
-					min: this.data.minAxesValue,
-					max: this.data.maxAxesValue,
-				},
-
-				series: [{
-					name: 'Value',
-					data: [0,1],
-					color: this.data.signalColor
-				}],
-				responsive: {
-					rules: [{
-						condition: {
-							maxWidth: 500
-						},
-						chartOptions: {
-							legend: {
-								layout: 'horizontal',
-								align: 'center',
-								verticalAlign: 'bottom'
-							}
-						}
-					}]
-				}
+			series: {
+				datasets: [
+					{
+						label: this.data.signalTitle,
+						backgroundColor: this.data.signalColor,
+						data: [],
+					},
+				],
 			},
-			Highcharts
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				scales: {
+					xAxes: [
+						{
+							type: 'time',
+							distribution: 'series',
+							offset: true,
+							// ticks: {
+							// 	major: {
+							// 		enabled: true,
+							// 		fontStyle: 'bold'
+							// 	},
+							// 	source: 'data',
+							// 	autoSkip: true,
+							// 	autoSkipPadding: 75,
+							// 	maxRotation: 0,
+							// 	sampleSize: 100
+							// },
+							// afterBuildTicks: function(scale, ticks) {
+							// 	var majorUnit = scale._majorUnit;
+							// 	var firstTick = ticks[0];
+							// 	var i, ilen, val, tick, currMajor, lastMajor;
+
+							// 	val = moment(ticks[0].value);
+							// 	if ((majorUnit === 'minute' && val.second() === 0)
+							// 			|| (majorUnit === 'hour' && val.minute() === 0)
+							// 			|| (majorUnit === 'day' && val.hour() === 9)
+							// 			|| (majorUnit === 'month' && val.date() <= 3 && val.isoWeekday() === 1)
+							// 			|| (majorUnit === 'year' && val.month() === 0)) {
+							// 		firstTick.major = true;
+							// 	} else {
+							// 		firstTick.major = false;
+							// 	}
+							// 	lastMajor = val.get(majorUnit);
+
+							// 	for (i = 1, ilen = ticks.length; i < ilen; i++) {
+							// 		tick = ticks[i];
+							// 		val = moment(tick.value);
+							// 		currMajor = val.get(majorUnit);
+							// 		tick.major = currMajor !== lastMajor;
+							// 		lastMajor = currMajor;
+							// 	}
+							// 	return ticks;
+							// }
+						},
+					],
+					yAxes: [
+						{
+							gridLines: {
+								drawBorder: false,
+							},
+							scaleLabel: {
+								display: true,
+								labelString: 'Value',
+							},
+						},
+					],
+				},
+			},
 		};
 	},
-	mounted () {
-		this.unregister = this.studio.dashboard.registerForSignal ('LineGraph',(data)=>{
-			const chart = this.$refs.chart.getChart();
-			var point = chart.series[0].points[0],
-				newVal = data.v;
-
-			point.update(newVal, false);
-			chart.redraw();
-		});
-
-	},
-	destroyed ()
-	{
-		this.unregister ();
-	},
-
-	watch: {
-		data ()
-		{
-			
+	computed: {
+		styles() {
+			return {
+				width: `${this.width}px`,
+				height: `${this.height}px`,
+				position: 'relative',
+			};
 		},
-		
-	}
+	},
+	watch: {
+		data: {
+			deep: true,
+			immediate: true,
+			handler() {
+				console.log('signal name changed to ' + this.data.signalTitle);
+				if (this.unregister) {
+					this.unregister();
+				}
+				this.unregister = this.studio.dashboard.registerForSignal(
+					this.data.signalTitle,
+					(data) => {
+						console.log(data);
+						const chart = this.$refs.chart;
+						let seriesData = this.series.datasets[0].data;
+						seriesData.push({
+							t: new Date().valueOf(),
+							y: data.v,
+						});
+
+						chart.update();
+					}
+				);
+				this.update ();
+			},
+		},
+	},
+	methods: {
+		update () {
+			const chart = this.$refs.chart;
+			if (chart)
+			{
+				let dataset = this.series.datasets[0];
+				dataset.label =this.data.signalTitle;
+				dataset.backgroundColor = this.data.signalColor;
+				chart.update();
+			}
+		}
+	},
+	destroyed() {
+		if (this.unregister) {
+			this.unregister();
+		}
+	},
 };
 </script>

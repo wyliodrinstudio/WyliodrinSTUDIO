@@ -98,6 +98,7 @@
 		"vue": "^2.6.12",
 		"vue-async-computed": "^3.9.0",
 		"vue-chartjs": "^3.5.1",
+		"vue-grid-layout": "^2.3.11",
 		"vue-i18n": "^8.21.0",
 		"vue-loader": "^15.9.3",
 		"vue-monaco": "^1.2.1",
@@ -168,6 +169,7 @@
 	"dependencies": {
 		"aedes": "^0.42.5",
 		"bonjour-hap": "^3.5.4",
+		"chart.js": "^2.9.4",
 		"drivelist": "^8.0.6",
 		"electron-is-dev": "^1.1.0",
 		"electron-log": "^3.0.9",

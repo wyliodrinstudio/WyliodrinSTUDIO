@@ -3,6 +3,7 @@
   * **added** deploy (docker) application feature for wyapp devices (Raspberry Pi)
   * **new** plugin folder structure with plugins hierarchy
   * **new** plugin for id, migrated from wyapp-websocket
+  * **fixed** console bounce when clicking ooutside
   * **update** packages
   * **disabled** Rapid IoT device and simulator 
 
