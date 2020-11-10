@@ -1,0 +1,10 @@
+{
+    "IMAGE_GRAPH": {
+        "message": "BILD",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDIMAGE": {
+        "message": "Bild -Signal hinzufügen",
+        "description": "Bild of the prompt used to add a new signal"
+    }
+}

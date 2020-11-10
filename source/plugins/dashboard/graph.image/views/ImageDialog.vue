@@ -1,6 +1,6 @@
 <template>
 	<v-card class="graphDialog">
-		<v-card-title>{{$t('DASHBOARD_ADDEXTRA')}}</v-card-title>
+		<v-card-title>{{$t('DASHBOARD_ADDIMAGE')}}</v-card-title>
 
 		<v-card-text class="graphDialog">
 			<div layout-padding class="signal-details row">
@@ -15,7 +15,7 @@
 					if signal = 2, image from row 3
 				</span>
 				<div class="col-md-12">
-					<v-textarea outlined required v-model="newdata.imageLink"></v-textarea>
+					<v-textarea outlined required v-model="newdata.imageLinks"></v-textarea>
 				</div>
 			</div>
 		</v-card-text>
@@ -32,7 +32,7 @@
 import _ from 'lodash';
 
 export default {
-	name:'ExtraDialog',
+	name:'ImageDialog',
 	components: {
 	},
 	props:['signal', 'signals', 'data'],
@@ -41,9 +41,8 @@ export default {
 			newdata: _.assign ({
 				signalTitle:'',
 				signalDescription:'',
-				signalColor:'',
 				figureName: '',
-				imageLink:''
+				imageLinks:''
 			}, this.data)
 		};
 	},

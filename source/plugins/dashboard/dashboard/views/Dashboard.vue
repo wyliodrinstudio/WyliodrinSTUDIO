@@ -34,9 +34,6 @@
 				</div>	
 			</li>
 		</div> -->
-		{{signals}}
-		<br>
-		{{layout}}
 		<GridLayout
             :layout="layout"
             :col-num="12"
@@ -56,7 +53,8 @@
                    :i="signal.i"
                    :key="signal.i"
 				   @resize="resizeEvent"
-				   @resized="resizeEvent">
+				   @resized="resizeEvent"
+				   @container-resized="resizeEvent">
 				   		<div>
 							<h3  class="graph-title">{{ signals[signal.i].data.signalTitle }}</h3>
 							<v-btn :v-if="signals[signal.i].setup" icon @click="setup(signal.i)" class="dash-btn">

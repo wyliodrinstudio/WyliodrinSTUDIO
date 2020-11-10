@@ -6,6 +6,7 @@
     "plugin": {
         "consumes": ["workspace","dashboard"],
         "provides": ["dashboard_graph_slider"],
-        "target": ["electron", "browser"]
+        "target": ["electron", "browser"],
+        "disabled": true
     }
 }

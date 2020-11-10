@@ -105,12 +105,16 @@
 .highcharts-container { position: relative; margin: auto; height: 30% !important;}
 
 .vue-grid-layout {
-    background: #eee;
+    // background: #eee;
 }
 .vue-grid-item:not(.vue-grid-placeholder) {
-    background: #ccc;
-    border: 1px solid black;
+    // background: #ccc;
+    border: 1px dashed rgba(0, 0, 0, 0);
+    &:hover {
+        border-color: rgba(0, 0, 0, 1);
+    }
 }
+
 .vue-grid-item .resizing {
     opacity: 0.9;
 }

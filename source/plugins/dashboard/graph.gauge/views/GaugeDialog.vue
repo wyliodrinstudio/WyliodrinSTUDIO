@@ -35,8 +35,8 @@
 						<swatches v-model="newdata.gaugeHighColor" colors="text-advanced" popover-to="left"></swatches>
 					</div>
 				</div>				
-				<v-text-field :label="$t('DASHBOARD_MIN_AXES_VALUE')" type="number" step=0.1 v-model="newdata.minAxesValue" class="col-md-6"></v-text-field>
-				<v-text-field :label="$t('DASHBOARD_MAX_AXES_VALUE')" type="number" step=0.1 v-model="newdata.maxAxesValue" class="col-md-6"></v-text-field>
+				<v-text-field :label="$t('DASHBOARD_MIN_AXES_VALUE')" type="number" step=0.1 v-model="newdata.minValue" class="col-md-6"></v-text-field>
+				<v-text-field :label="$t('DASHBOARD_MAX_AXES_VALUE')" type="number" step=0.1 v-model="newdata.maxValue" class="col-md-6"></v-text-field>
 				<div class="col-md-6">
 					<v-select class="drpdown"
 						:items="newdata.items"
@@ -74,8 +74,8 @@ export default {
 				signalColor:'#b9f5f1',
 				lowValue: 50,
 				midValue: 90,
-				minAxesValue: 0,
-				maxAxesValue: 1000,
+				minValue: 0,
+				maxValue: 1000,
 				axisName: '',
 				items: [
 					{title: 'KILOMETERS'},

@@ -1,114 +1,116 @@
 <template>
-	<section class="charts">
-        <vue-highcharts :highcharts="Highcharts" :options="options" ref="chart"></vue-highcharts>
-    </section>
+  <div>
+    <ChartJSGauge 
+		ref="chart"
+    	:chart-data="series"
+    	:options="options"
+    	:styles="styles"
+    	class="line"
+    ></ChartJSGauge>
+  </div>
 </template>
 <script>
-// import { Line } from 'vue-chartjs';
-import VueHighcharts from 'vue2-highcharts';
-import More from 'highcharts/highcharts-more';
-import Highcharts from 'highcharts';
+import { generateChart, mixins } from 'vue-chartjs';
+import gauge from 'chartjs-gauge';
+const { reactiveProp } = mixins;
 
-More(Highcharts);
-
+const ChartJSGauge = {
+	name: 'ChartJSGauge',
+	extends: generateChart('gauge-chart', 'gauge'),
+	mixins: [reactiveProp],
+	props: ['options'],
+	mounted() {
+		// this.series is created in the mixin.
+		// If you want to pass options please create a local options object
+		this.renderChart(this.chartData, this.options);
+	},
+	methods: {
+		update () {
+			this.$data._chart.update();
+		},
+	},
+};
 
 export default {
 	name: 'GaugeGraph',
 	components: {
-		VueHighcharts
+		ChartJSGauge,
 	},
-	props: ['data'],
-	data () {
+	props: ['data', 'width', 'height'],
+	data() {
 		return {
 			unregister: () => {},
-			options:{
-				chart: {
-					type: 'gauge'
-				},
-				title: {
-					text: this.data.signalTitle
-				},
-				pane: {
-					center: ['50%', '85%'],
-					size: '140%',
-					startAngle: -90,
-					endAngle: 90,
-					background: {
-						backgroundColor: this.data.signalColor,
-						innerRadius: '60%',
-						outerRadius: '100%',
-						shape: 'arc'
-					}
-				},
-				maintainAspectRatio: false,
-				yAxis: {
-					min: this.data.minAxesValue,
-					max: this.data.maxAxesValue,
-					lineWidth: 0,
-					minorTickInterval: null,
-					tickAmount: 2,
-					title: {
-						y: -70
+			series: {
+				datasets: [
+					{
+						label: this.data.signalTitle,
+						backgroundColor: [this.data.gaugeLowColor, this.data.gaugeMidColor, this.data.gaugeHighColor],
+						data: [this.data.lowValue, this.data.midValue, this.data.maxValue],
+						value: 0,
 					},
-					labels: {
-						y: 16
-					}
-				},
-				plotOptions: {
-					solidgauge: {
-						dataLabels: {
-							y: 5,
-							borderWidth: 0,
-							useHTML: true
-						}
-					}
-				},
-				series: [{
-					name: 'Gauge',
-					data: [0],
-					color: this.data.gaugeLowColor
-				}],
-				responsive: {
-					rules: [{
-						condition: {
-							maxWidth: 500
-						},
-						chartOptions: {
-							legend: {
-								layout: 'horizontal',
-								align: 'center',
-								verticalAlign: 'bottom'
-							}
-						}
-					}]
-				}
+				],
 			},
-			Highcharts
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				needle: {
+					radiusPercentage: 2,
+					widthPercentage: 3.2,
+					lengthPercentage: 80,
+					color: 'rgba(0, 0, 0, 1)'
+				},
+			},
 		};
 	},
-	mounted () {
-		this.unregister = this.studio.dashboard.registerForSignal ('GaugeGraph',(data)=>{
-			const chart = this.$refs.chart.getChart();
-			
-			var point = chart.series[0].points[0],
-				newVal = data.v;
-
-			point.update(newVal, false);
-			chart.redraw();
-		});
-
-	},
-	destroyed ()
-	{
-		this.unregister ();
-	},
-
-	watch: {
-		data ()
-		{
-			
+	computed: {
+		styles() {
+			return {
+				width: `${this.width}px`,
+				height: `${this.height}px`,
+				position: 'relative',
+			};
 		},
-		
-	}
+	},
+	watch: {
+		data: {
+			deep: true,
+			immediate: true,
+			handler() {
+				console.log('signal name changed to ' + this.data.signalTitle);
+				if (this.unregister) {
+					this.unregister();
+				}
+				this.unregister = this.studio.dashboard.registerForSignal(
+					this.data.signalTitle,
+					(data) => {
+						console.log(data);
+						const chart = this.$refs.chart;
+						let seriesData = this.series.datasets[0];
+						seriesData.value = data.v;
+
+						chart.update();
+					}
+				);
+				this.update ();
+			},
+		},
+	},
+	methods: {
+		update () {
+			const chart = this.$refs.chart;
+			if (chart)
+			{
+				let dataset = this.series.datasets[0];
+				dataset.label =this.data.signalTitle;
+				dataset.backgroundColor = [this.data.gaugeLowColor, this.data.gaugeMidColor, this.data.gaugeHighColor];
+				chart.update();
+			}
+		}
+	},
+	destroyed() {
+		if (this.unregister) {
+			this.unregister();
+		}
+	},
 };
 </script>
