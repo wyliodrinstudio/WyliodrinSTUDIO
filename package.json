@@ -34,6 +34,7 @@
 		],
 		"buildDependenciesFromSource": true,
 		"appId": "wyliodrin.studio",
+		"artifactName": "WyliodrinSTUDIO-${version}.${ext}",
 		"mac": {
 			"category": "public.app-category.developer-tools",
 			"icon": "source/img/icons/mac/wyliodrin-studio-logo.icns"
@@ -52,7 +53,7 @@
 			"icon": "source/img/icons/win/wyliodrin-studio-logo.ico"
 		},
 		"copyright": "Copyright &copy; 2020, Wyliodrin SRL",
-		"productName": "WyliodrinSTUDIO",
+		"productName": "Wyliodrin STUDIO",
 		"directories": {
 			"app": "build"
 		}
