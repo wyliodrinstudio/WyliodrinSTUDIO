@@ -3,7 +3,12 @@
 
 name: Wyliodrin Build
 
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version'
+        required: true
 
 jobs:
   build-electron:
@@ -34,11 +39,11 @@ jobs:
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
-          release_name: Wyliodrin STUDIO ${{ steps.package-version.outputs.current-version }}
+          release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
           prerelease: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.{{ matrix.extension }}
-          asset_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.{{ matrix.extension }}
-          tag: ${{ steps.package-version.outputs.current-version }}
+          file: WyliodrinSTUDIO-${{ github.event.inputs.version }}.{{ matrix.extension }}
+          asset_name: WyliodrinSTUDIO-${{ github.event.inputs.version }}.{{ matrix.extension }}
+          tag: ${{ github.event.inputs.version }}
           overwrite: true
-          body: "Wyliodrin STUDIO ${{ steps.package-version.outputs.current-version }}"
+          body: "Wyliodrin STUDIO ${{ github.event.inputs.version }}"
