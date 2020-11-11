@@ -46,7 +46,7 @@ jobs:
           overwrite: true
           body: "Wyliodrin STUDIO ${{ github.event.inputs.version }}"
       - name: Upload block maps to release
-        if: ${{ matrix.os == 'macos-latest' || matrix.os == 'ubuntu-latest' }}
+        if: ${{ matrix.os == 'macos-latest' || matrix.os == 'windows-latest' }}
         uses: svenstaro/upload-release-action@v2
         with:
           release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
