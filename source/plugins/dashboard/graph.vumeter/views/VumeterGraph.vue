@@ -37,7 +37,7 @@ export default {
 				},
 				maintainAspectRatio: false,
 				title: {
-					text: this.data.signalTitle
+					text: this.data.id
 				},
 
 				pane: {
@@ -72,7 +72,7 @@ export default {
 						{
 							from: this.data.minAxesValue,
 							to: this.data.minAxesValue + 20,
-							color: this.data.signalColor,
+							color: this.data.color,
 							innerRadius: '100%',
 							outerRadius: '105%'
 						}],

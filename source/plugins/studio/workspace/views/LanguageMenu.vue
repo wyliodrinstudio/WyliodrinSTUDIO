@@ -7,7 +7,7 @@
 						<v-img :src="languageImage" aria-label="Language" :eager="true"></v-img>
 					</v-btn>
 				</template>
-				<v-list>
+				<v-list class="menu">
 					<v-list-item v-for="(languageName, languageId) in LANGUAGES" :key="languageId" @click="setLanguage (languageId)">
 						<v-list-item-avatar item size="20">
 							<v-img :src="'plugins/studio/workspace/data/img/flags/'+languageId+'.png'"></v-img>

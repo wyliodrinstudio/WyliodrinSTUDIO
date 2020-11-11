@@ -1,6 +1,6 @@
 {
     "IMAGE_GRAPH": {
-        "message": "IMAGE",
+        "message": "Image",
         "description": "Signal name"
     },
     "DASHBOARD_ADDIMAGE": {

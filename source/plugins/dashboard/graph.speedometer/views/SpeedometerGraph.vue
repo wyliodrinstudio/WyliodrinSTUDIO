@@ -30,7 +30,7 @@ export default {
 				},
 
 				title: {
-					text: this.data.signalTitle
+					text: this.data.id
 				},
 				maintainAspectRatio: false,
 				pane: {

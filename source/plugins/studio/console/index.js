@@ -9,7 +9,7 @@ export function setup (options, imports, register)
 	studio = imports;
 
 	let signalsBuffer = '';
-	let signalRegex = /^@([A-Za-z0-9_]+):\s*([^\/]+)(?:\/([0-9]+))?$/;
+	let signalRegex = /^@([A-Za-z0-9_]+):\s*([^/]+)(?:\/([0-9]+))?$/;
 
 	const filterSignal = (data) => {
 		let signals = [];
@@ -21,14 +21,17 @@ export function setup (options, imports, register)
 			for (let signalFormat of actualSignals) {
 				let signal = signalFormat.match (signalRegex);
 				if (signal) {
-					let timestamp;
-					try
-					{
-						timestamp = new Date (signal[3]);
-					}
-					catch (e) 
-					{
-						timestamp = new Date();
+					let timestamp = new Date ();
+					if (signal[3]) {
+						let t = parseFloat (signal[3]);
+						if (!isNaN (t))
+						{
+							timestamp = new Date (t);
+						}
+						else
+						{
+							timestamp = new Date (signal[3]);
+						}
 					}
 					signals.push ({
 						name: signal[1],
@@ -36,11 +39,15 @@ export function setup (options, imports, register)
 						timestamp: timestamp
 					});
 				}
+				else
+				{
+					output = output + signalFormat + '\r\n';
+				}
 			}
 		}
 		signalsBuffer = signalParts[signalParts.length-1];
 		if (signalsBuffer[0] !== '@') {
-			output = output +'\n'+ signalsBuffer;
+			output = output + signalsBuffer;
 			signalsBuffer = '';
 		}
 		return {
@@ -64,7 +71,7 @@ export function setup (options, imports, register)
 			}
 
 			let shell = getConsole ();
-			if (shell) shell.write (id, data);
+			if (shell) shell.write (id, output);
 		},
 
 		register (fn)

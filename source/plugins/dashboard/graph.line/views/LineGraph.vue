@@ -1,13 +1,10 @@
 <template>
-  <div>
-    <ChartJSLine 
+	<ChartJSLine 
 		ref="chart"
-    	:chart-data="series"
-    	:options="options"
-    	:styles="styles"
-    	class="line"
-    ></ChartJSLine>
-  </div>
+		:chart-data="series"
+		:options="options"
+		class="line"
+	></ChartJSLine>
 </template>
 <script>
 import { Line, mixins } from 'vue-chartjs';
@@ -24,7 +21,8 @@ const ChartJSLine = {
 		this.renderChart(this.chartData, this.options);
 	},
 	methods: {
-		update () {
+		update (options) {
+			if (options) this.$data._chart.options = options;
 			this.$data._chart.update();
 		},
 	},
@@ -42,13 +40,19 @@ export default {
 			series: {
 				datasets: [
 					{
-						label: this.data.signalTitle,
-						backgroundColor: this.data.signalColor,
+						label: this.data.title || this.data.id,
+						backgroundColor: this.data.color,
 						data: [],
 					},
 				],
-			},
-			options: {
+			}
+		};
+	},
+	computed: {
+		options () {
+			let min = parseFloat (this.data.minValue);
+			let max = parseFloat (this.data.maxValue);
+			return {
 				responsive: true,
 				maintainAspectRatio: false,
 				scales: {
@@ -57,43 +61,13 @@ export default {
 							type: 'time',
 							distribution: 'series',
 							offset: true,
-							// ticks: {
-							// 	major: {
-							// 		enabled: true,
-							// 		fontStyle: 'bold'
-							// 	},
-							// 	source: 'data',
-							// 	autoSkip: true,
-							// 	autoSkipPadding: 75,
-							// 	maxRotation: 0,
-							// 	sampleSize: 100
-							// },
-							// afterBuildTicks: function(scale, ticks) {
-							// 	var majorUnit = scale._majorUnit;
-							// 	var firstTick = ticks[0];
-							// 	var i, ilen, val, tick, currMajor, lastMajor;
-
-							// 	val = moment(ticks[0].value);
-							// 	if ((majorUnit === 'minute' && val.second() === 0)
-							// 			|| (majorUnit === 'hour' && val.minute() === 0)
-							// 			|| (majorUnit === 'day' && val.hour() === 9)
-							// 			|| (majorUnit === 'month' && val.date() <= 3 && val.isoWeekday() === 1)
-							// 			|| (majorUnit === 'year' && val.month() === 0)) {
-							// 		firstTick.major = true;
-							// 	} else {
-							// 		firstTick.major = false;
-							// 	}
-							// 	lastMajor = val.get(majorUnit);
-
-							// 	for (i = 1, ilen = ticks.length; i < ilen; i++) {
-							// 		tick = ticks[i];
-							// 		val = moment(tick.value);
-							// 		currMajor = val.get(majorUnit);
-							// 		tick.major = currMajor !== lastMajor;
-							// 		lastMajor = currMajor;
-							// 	}
-							// 	return ticks;
-							// }
+							gridLines: {
+								drawBorder: false,
+							},
+							scaleLabel: {
+								display: true,
+								labelString: this.data.xAxisTitle || '',
+							},
 						},
 					],
 					yAxes: [
@@ -103,42 +77,49 @@ export default {
 							},
 							scaleLabel: {
 								display: true,
-								labelString: 'Value',
+								labelString: this.data.yAxisTitle || '',
 							},
+							ticks: {
+								min: !isNaN (min)?min:undefined,
+								max: !isNaN (max)?max:undefined
+							}
 						},
 					],
 				},
-			},
-		};
-	},
-	computed: {
-		styles() {
-			return {
-				width: `${this.width}px`,
-				height: `${this.height}px`,
-				position: 'relative',
 			};
 		},
+		maxPoints () {
+			let points = parseFloat (this.data.maxPoints);
+			if (!isNaN (points)) {
+				return Math.floor (points);
+			}
+			else
+			{
+				return false;
+			}
+		}
 	},
 	watch: {
 		data: {
 			deep: true,
 			immediate: true,
 			handler() {
-				console.log('signal name changed to ' + this.data.signalTitle);
 				if (this.unregister) {
 					this.unregister();
 				}
 				this.unregister = this.studio.dashboard.registerForSignal(
-					this.data.signalTitle,
+					this.data.id,
 					(data) => {
-						console.log(data);
 						const chart = this.$refs.chart;
 						let seriesData = this.series.datasets[0].data;
 						seriesData.push({
-							t: new Date().valueOf(),
+							t: data.t,
 							y: data.v,
 						});
+						
+						if (this.maxPoints) {
+							seriesData.splice (0, seriesData.length - this.maxPoints);
+						}
 
 						chart.update();
 					}
@@ -153,9 +134,10 @@ export default {
 			if (chart)
 			{
 				let dataset = this.series.datasets[0];
-				dataset.label =this.data.signalTitle;
-				dataset.backgroundColor = this.data.signalColor;
-				chart.update();
+				dataset.label = this.data.title || this.data.id;
+				dataset.backgroundColor = this.data.color;
+
+				chart.update(this.options);
 			}
 		}
 	},

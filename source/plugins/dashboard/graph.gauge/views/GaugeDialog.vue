@@ -4,35 +4,29 @@
 
 		<v-card-text>
 			<div layout-padding class="signal-details row">
-				<v-text-field autofocus color ="orange" :label="$t('DASHBOARD_SIGNAL_NAME')" required v-model="newdata.signalTitle" class="col-md-6">{{$t('DASHBOARD_SIGNAL_NAME')}}</v-text-field>
-				<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.signalDescription" class="col-md-6">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>
+				<v-text-field autofocus color ="orange" :label="$t('DASHBOARD_SIGNAL_NAME')" required v-model="newdata.id" class="col-md-6">{{$t('DASHBOARD_SIGNAL_NAME')}}</v-text-field>
+				<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.description" class="col-md-6">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>
 			</div>
 			<div class="sig-properties row">
 				<v-text-field  :label="$t('NAME')" v-model="newdata.figureName" class="col-md-6"></v-text-field>
-				<div class="form__field col-md-6">
-					<div class="form__label">{{$t('DASHBOARD_SIGNAL_COLOR')}}:</div>
-					<div class="form__input">
-						<swatches v-model="newdata.signalColor" colors="text-advanced" popover-to="left"></swatches>
-					</div>
-				</div>
 				<v-text-field :label="$t('DASHBOARD_LOW_VALUE')" type="number" step=0.1 v-model="newdata.lowValue" class="col-md-6"></v-text-field>
 				<div class="form__field col-md-6">
 					<div class="form__label">{{$t('DASHBOARD_LOW_COLOR')}}:</div>
 					<div class="form__input">
-						<swatches v-model="newdata.gaugeLowColor" colors="text-advanced" popover-to="left"></swatches>
+						<swatches v-model="newdata.lowColor" colors="text-advanced" popover-to="left"></swatches>
 					</div>
 				</div>
 				<v-text-field :label="$t('DASHBOARD_MID_VALUE')" type="number" step=0.1 v-model="newdata.midValue" class="col-md-6"></v-text-field>
 				<div class="form__field col-md-3">
 					<div class="form__label">{{$t('DASHBOARD_MID_COLOR')}}:</div>
 					<div class="form__input">
-						<swatches v-model="newdata.gaugeMidColor" colors="text-advanced" popover-to="left"></swatches>
+						<swatches v-model="newdata.midColor" colors="text-advanced" popover-to="left"></swatches>
 					</div>
 				</div>
 				<div class="form__field col-md-3">
 					<div class="form__label">{{$t('DASHBOARD_MID_COLOR')}}:</div>
 					<div class="form__input">
-						<swatches v-model="newdata.gaugeHighColor" colors="text-advanced" popover-to="left"></swatches>
+						<swatches v-model="newdata.highColor" colors="text-advanced" popover-to="left"></swatches>
 					</div>
 				</div>				
 				<v-text-field :label="$t('DASHBOARD_MIN_AXES_VALUE')" type="number" step=0.1 v-model="newdata.minValue" class="col-md-6"></v-text-field>
@@ -69,9 +63,8 @@ export default {
 	data() {
 		return {
 			newdata: _.assign ({
-				signalTitle:'',
-				signalDescription:'',
-				signalColor:'#b9f5f1',
+				id:'',
+				description:'',
 				lowValue: 50,
 				midValue: 90,
 				minValue: 0,
@@ -83,9 +76,9 @@ export default {
 				],
 				menuElement: 'KILOMETERS',
 				figureName: '',
-				gaugeLowColor: '#48f542',
-				gaugeMidColor: '#fafa1b',
-				gaugeHighColor: '#d11504'
+				lowColor: '#48f542',
+				midColor: '#fafa1b',
+				highColor: '#d11504'
 			}, this.data)
 
 		};
@@ -107,7 +100,7 @@ export default {
 		},
 		createChart()
 		{
-			let title = this.newdata.signalTitle.replace(/ /g,'');
+			let title = this.newdata.id.replace(/ /g,'');
 			if(title.length > 0)
 				this.$root.$emit ('submit', this.newdata);
 			else

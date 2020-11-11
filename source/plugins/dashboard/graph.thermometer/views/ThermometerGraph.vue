@@ -68,10 +68,10 @@ export default {
 				},
 				title:
 				{
-					text: this.data.signalTitle
+					text: this.data.id
 				},
 				series: [{
-					name: this.data.signalTitle,
+					name: this.data.id,
 					color: '#FFF4C6',
 					yAxis: 1,
 					data: []

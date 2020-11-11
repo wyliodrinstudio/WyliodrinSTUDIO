@@ -1,15 +1,48 @@
 <template>
 	<div class="dashboard-content">
+		<v-navigation-drawer
+			absolute
+			permanent
+			expand-on-hover
+			right
+			width="200"
+		>
+			<v-list dense>
+				<v-list-item link v-for="graph in graphs" :key="graph.name" @click.stop="addSignal (graph)">
+					<v-list-item-avatar>
+						<v-img :src="graph.iconURL"></v-img>
+					</v-list-item-avatar>
+					<v-list-item-title>{{$t(graph.name)}}</v-list-item-title>
+				</v-list-item>
+			</v-list>
+		</v-navigation-drawer>
+		<!-- <v-navigation-drawer
+			permanent
+			expand-on-hover
+			right
+		>
+			<v-list
+			nav
+			dense
+			>
+				<v-list-item link v-for="graph in graphs" :key="graph.name">
+					<v-list-item-icon>
+						<v-img :src="graph.iconURL"></v-img>
+					</v-list-item-icon>
+					<v-list-item-title>{{$t(graph.name)}}</v-list-item-title>
+				</v-list-item>
+			</v-list>
+		</v-navigation-drawer> -->
 		<!-- <div class="graph-signal">
 			<li v-for="signal in signals" :key="signal.i">
 				<div>-->
-					<!-- <div class="warning-graph" @hide="signal.signalTitle">
+					<!-- <div class="warning-graph" @hide="signal.id">
 						<v-img src="plugins/dashboard/dashboard/data/img/icons/warning-icon.png"></v-img>
 						<v-tooltip bottom>
 						{{$t('DASHBOARD_VIEWER_IVALID_SIGNAL')}}
 						</v-tooltip>
 					</div> -->
-					<!--<h3  class="graph-title">{{ signal.data.signalTitle }}</h3>
+					<!--<h3  class="graph-title">{{ signal.data.id }}</h3>
 					<v-btn @click="left(signal.i)" icon class="dash-btn">
 						<v-img src="plugins/dashboard/dashboard/data/img/icons/move-left-icon.svg" aria-label="DASHBOARD_VIEWER_MOVE_LEFT" class="s24"></v-img>
 						<v-tooltip bottom>{{ $t('DASHBOARD_VIEWER_MOVE_LEFT')}}</v-tooltip>
@@ -29,7 +62,7 @@
 						{{ $t('DASHBOARD_VIEWER_ERASE_GRAPH') }}
 						</v-tooltip>
 					</v-btn>
-					<div class="graph-description">{{ signal.data.signalDescription }}</div>
+					<div class="graph-description">{{ signal.data.description }}</div>
 					<component :is="signal.component" :data="signal.data" class="graph-box" :class="'graph-box-'+signals.width"></component>
 				</div>	
 			</li>
@@ -44,42 +77,44 @@
             :vertical-compact="true"
             :margin="[10, 10]"
             :use-css-transforms="true"
-    	>
+		>
 			<GridItem v-for="signal in layout"
-                   :x="signal.x"
-                   :y="signal.y"
-                   :w="signal.w"
-                   :h="signal.h"
-                   :i="signal.i"
-                   :key="signal.i"
-				   @resize="resizeEvent"
-				   @resized="resizeEvent"
-				   @container-resized="resizeEvent">
-				   		<div>
-							<h3  class="graph-title">{{ signals[signal.i].data.signalTitle }}</h3>
-							<v-btn :v-if="signals[signal.i].setup" icon @click="setup(signal.i)" class="dash-btn">
-								<v-img src="plugins/dashboard/dashboard/data/img/icons/settings-icon.svg" aria-label="DASHBOARD_VIEWER_GRAPH_SETTINGS" class="s24"></v-img>
-								<v-tooltip bottom>{{ $t('DASHBOARD_VIEWER_GRAPH_SETTINGS') }}</v-tooltip>
-							</v-btn>
+					:x="signal.x"
+					:y="signal.y"
+					:w="signal.w"
+					:h="signal.h"
+					:i="signal.i"
+					:key="signal.i"
+					drag-allow-from=".graph-header"
+					drag-ignore-from=".graph-box"
+					@resize="resizeEvent"
+					@resized="resizeEvent"
+					@container-resized="resizeEvent">
+						<div class="graph-header">
+							<h3  class="graph-title">{{ signals[signal.i].data.title || signals[signal.i].data.id || $t('DASHBOARD_UNKNOWN_TITLE') }}</h3>
+							<!-- <div class="graph-description">{{ signals[signal.i].data.description }}</div> -->
 							<v-btn @click="erase(signal.i)" icon class="dash-btn">
-								<v-img src="plugins/dashboard/dashboard/data/img/icons/erase-icon.svg" aria-label="DASHBOARD_VIEWER_ERASE_GRAPH" class="s18"></v-img>
+								<v-img src="plugins/dashboard/dashboard/data/img/icons/erase-icon.svg" aria-label="DASHBOARD_VIEWER_ERASE_GRAPH" class="s14"></v-img>
 								<v-tooltip bottom>
 								{{ $t('DASHBOARD_VIEWER_ERASE_GRAPH') }}
 								</v-tooltip>
 							</v-btn>
+							<v-btn :v-if="signals[signal.i].setup" icon @click="setup(signal.i)" class="dash-btn">
+								<v-img src="plugins/dashboard/dashboard/data/img/icons/settings-icon.svg" aria-label="DASHBOARD_VIEWER_GRAPH_SETTINGS" class="s18"></v-img>
+								<v-tooltip bottom>{{ $t('DASHBOARD_VIEWER_GRAPH_SETTINGS') }}</v-tooltip>
+							</v-btn>
 						</div>	
-            			<div class="graph-description">{{ signals[signal.i].data.signalDescription }}</div>
 						<component :is="signals[signal.i].component" :data="signals[signal.i].data" class="graph-box" :width="signal.width" :height="signal.height"></component>
-        	</GridItem>
+			</GridItem>
 		</GridLayout>
-		<div class="widgets-toolBox">
+
+		<!-- <div class="widgets-toolBox">
 			<v-layout v-for="graph in graphs" :key="graph.name" class="widget_item">
 				<v-btn @click.stop="addSignal (graph)" class="widget_btn">
 					<p class="widget_title">{{$t(graph.name)}}</p>
 					<img :src="graph.iconURL" :alt="$t(graph.name)">
 				</v-btn>
-			</v-layout> 
-		</div>
+			</v-layout>  -->
 	</div>
 </template>
 <script>
@@ -140,7 +175,7 @@ export default {
 
 			if(allow === 'yes')
 				this.layout = this.layout.filter ((item) => item.i !== id);
-				delete this.signals[id]
+			delete this.signals[id];
 		},
 		async addSignal (graph)
 		{
@@ -189,6 +224,7 @@ export default {
 				let data = await setup (signal.data);
 				if (data) {
 					signal.data = data;
+					this.saveDashboard ();
 				}
 				this.$forceUpdate();
 			}
@@ -205,6 +241,15 @@ export default {
 			this.studio.dashboard.emitSignal('SpeedometerGraph', this.newValue);
 			this.studio.dashboard.emitSignal('VumeterGraph', this.newValue);
 			this.studio.dashboard.emitSignal('ThermometerGraph', this.newValue);
+		},
+		async saveDashboard () {
+			if (this.currentProject)
+			{
+				await this.studio.projects.saveSpecialFile(this.currentProject,'dashboard.json', JSON.stringify ({
+					layout: this.layout,
+					signals: this.signals
+				}));
+			}
 		}
 	},
 	watch: {
@@ -219,7 +264,6 @@ export default {
 						try
 						{
 							let dashboard = JSON.parse (data);
-							console.log (dashboard);
 							this.layout = [];
 							this.signals = {};
 							for (let signal of dashboard.layout) {
@@ -250,14 +294,8 @@ export default {
 		},
 		layout: {
 			deep:true,
-			handler: async function (/* val, oldVal */){
-				if (this.currentProject)
-				{
-					await this.studio.projects.saveSpecialFile(this.currentProject,'dashboard.json', JSON.stringify ({
-						layout: this.layout,
-						signals: this.signals
-					}));
-				}
+			handler: function (/* val, oldVal */){
+				this.saveDashboard ();
 			}	
 		}
 	}
@@ -266,4 +304,10 @@ export default {
 
 <style lang="less">
 	@import '../style/dashboard.less';
+</style>
+
+<style lang="less" scoped>
+.v-list-item {
+	padding: 0 10px;
+}
 </style>

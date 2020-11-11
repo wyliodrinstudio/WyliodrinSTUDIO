@@ -1,6 +1,6 @@
 {
     "LINE_GRAPH": {
-        "message": "LIGNE",
+        "message": "Ligne",
         "description": "Signal name"
     },
     "DASHBOARD_ADDLINE": {
@@ -35,9 +35,13 @@
         "message": "Nombre maximum de points à afficher (0 signifie les afficher tous)",
         "description": "Input text area for the maximum points to show in a line graph"
     },
-    "LINE_AXIS_NAME": {
-        "message": "Nom de l'axe",
-        "description": "Name of the axis"
+    "LINE_X_AXIS_TITLE": {
+        "message": "Nom de l'axe x",
+        "description": "Title of the x axis"
+    },
+    "LINE_Y_AXIS_TITLE": {
+        "message": "Nom de l'axe y",
+        "description": "Title of the y axis"
     },
     "LINE_OVERVIEW": {
         "message": "Afficher l'aperçu",

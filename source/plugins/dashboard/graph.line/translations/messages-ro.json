@@ -1,6 +1,6 @@
 {
     "LINE_GRAPH": {
-        "message": "LINIE",
+        "message": "Linie",
         "description": "Signal name"
     },
     "DASHBOARD_ADDLINE": {
@@ -35,9 +35,13 @@
         "message": "Puncte maxime de afișat (0 înseamnă a le arăta pe toate)",
         "description": "Input text area for the maximum points to show in a line graph"
     },
-    "LINE_AXIS_NAME": {
-        "message": "Numele axei",
-        "description": "Name of the axis"
+    "LINE_X_AXIS_TITLE": {
+        "message": "Titlul axei x",
+        "description": "Title of the x axis"
+    },
+    "LINE_Y_AXIS_TITLE": {
+        "message": "Titlul axei y",
+        "description": "Title of the y axis"
     },
     "LINE_OVERVIEW": {
         "message": "Afișați prezentarea generală",

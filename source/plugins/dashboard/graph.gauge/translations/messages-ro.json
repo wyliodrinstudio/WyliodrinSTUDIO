@@ -1,6 +1,6 @@
 {
     "GAUGE_GRAPH": {
-        "message": "CADRAN",
+        "message": "Cadran",
         "description": "Signal name"
     },
     "DASHBOARD_ADDGAUGE": {

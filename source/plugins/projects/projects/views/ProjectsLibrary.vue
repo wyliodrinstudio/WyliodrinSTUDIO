@@ -40,7 +40,7 @@
 										<template v-slot:activator="{ on }">
 											<v-btn text class="lib-app-btn" v-on="on" @click.stop="">{{$t('PROJECT_LIBRARY_OPTIONS')}}</v-btn>
 										</template>
-										<v-list>
+										<v-list class="menu">
 											<v-list-item @click="renameDialog(project)">
 												<v-list-item-title >{{$t('PROJECT_LIBRARY_RENAME')}}</v-list-item-title>
 											</v-list-item>

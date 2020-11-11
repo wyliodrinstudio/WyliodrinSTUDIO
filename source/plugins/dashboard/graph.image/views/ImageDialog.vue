@@ -4,8 +4,8 @@
 
 		<v-card-text class="graphDialog">
 			<div layout-padding class="signal-details row">
-				<v-text-field autofocus color ="orange" :label="$t('DASHBOARD_SIGNAL_NAME')" required v-model="newdata.signalTitle" class="col-md-6">{{$t('DASHBOARD_SIGNAL_NAME')}}</v-text-field>
-				<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.signalDescription" class="col-md-6">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>
+				<v-text-field autofocus color ="orange" :label="$t('DASHBOARD_SIGNAL_NAME')" required v-model="newdata.id" class="col-md-6">{{$t('DASHBOARD_SIGNAL_NAME')}}</v-text-field>
+				<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.description" class="col-md-6">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>
 			</div>
 			<div class="sig-properties row">
 				<v-text-field :label="$t('NAME')" v-model="newdata.figureName" class="col-md-6"></v-text-field>
@@ -39,8 +39,8 @@ export default {
 	data() {
 		return {
 			newdata: _.assign ({
-				signalTitle:'',
-				signalDescription:'',
+				id:'',
+				description:'',
 				figureName: '',
 				imageLinks:''
 			}, this.data)
@@ -59,7 +59,7 @@ export default {
 		},
 		createChart()
 		{
-			let title = this.newdata.signalTitle.replace(/ /g,'');
+			let title = this.newdata.id.replace(/ /g,'');
 			if(title.length > 0)
 				this.$root.$emit ('submit', this.newdata);
 			else

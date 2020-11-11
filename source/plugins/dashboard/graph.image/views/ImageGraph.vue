@@ -1,5 +1,5 @@
 <template>
-	<v-img v-show="imageData" :src = "imageData"></v-img>
+	<v-img v-show="imageData" :src = "imageData" :width="width" :height="height"></v-img>
 </template>
 
 <script>
@@ -12,21 +12,19 @@ export default {
 		return {
 			value: null,
 			imageData: null
-		}
+		};
 	},
 	watch: {
 		data: {
 			deep: true,
 			immediate: true,
 			handler() {
-				console.log('signal name changed to ' + this.data.signalTitle);
 				if (this.unregister) {
 					this.unregister();
 				}
 				this.unregister = this.studio.dashboard.registerForSignal(
-					this.data.signalTitle,
+					this.data.id,
 					(data) => {
-						console.log(data);
 						this.value = data.v;
 					}
 				);
@@ -39,7 +37,7 @@ export default {
 			let link = null;
 			if (images.length === 1) {
 				link = Mustache.render (imageLinks, { 
-					[this.data.signalTitle]: this.value, 
+					[this.data.id]: this.value, 
 					params: {
 						width: this.width,
 						height: this.height,
@@ -73,3 +71,9 @@ export default {
 };
 </script>
 
+<style lang="less" scoped>
+.v-image {
+	top: 0;
+	margin: auto;
+}
+</style>

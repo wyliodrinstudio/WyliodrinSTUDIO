@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <ChartJSGauge 
+	<div>
+	<ChartJSGauge 
 		ref="chart"
-    	:chart-data="series"
-    	:options="options"
-    	:styles="styles"
-    	class="line"
-    ></ChartJSGauge>
-  </div>
+		:chart-data="series"
+		:options="options"
+		:styles="styles"
+		class="line"
+	></ChartJSGauge>
+	</div>
 </template>
 <script>
 import { generateChart, mixins } from 'vue-chartjs';
-import gauge from 'chartjs-gauge';
+import {} from 'chartjs-gauge';
 const { reactiveProp } = mixins;
 
 const ChartJSGauge = {
@@ -43,8 +43,8 @@ export default {
 			series: {
 				datasets: [
 					{
-						label: this.data.signalTitle,
-						backgroundColor: [this.data.gaugeLowColor, this.data.gaugeMidColor, this.data.gaugeHighColor],
+						label: this.data.id,
+						backgroundColor: [this.data.lowColor, this.data.midColor, this.data.highColor],
 						data: [this.data.lowValue, this.data.midValue, this.data.maxValue],
 						value: 0,
 					},
@@ -76,14 +76,12 @@ export default {
 			deep: true,
 			immediate: true,
 			handler() {
-				console.log('signal name changed to ' + this.data.signalTitle);
 				if (this.unregister) {
 					this.unregister();
 				}
 				this.unregister = this.studio.dashboard.registerForSignal(
-					this.data.signalTitle,
+					this.data.id,
 					(data) => {
-						console.log(data);
 						const chart = this.$refs.chart;
 						let seriesData = this.series.datasets[0];
 						seriesData.value = data.v;
@@ -101,8 +99,8 @@ export default {
 			if (chart)
 			{
 				let dataset = this.series.datasets[0];
-				dataset.label =this.data.signalTitle;
-				dataset.backgroundColor = [this.data.gaugeLowColor, this.data.gaugeMidColor, this.data.gaugeHighColor];
+				dataset.label =this.data.id;
+				dataset.backgroundColor = [this.data.lowColor, this.data.midColor, this.data.highColor];
 				chart.update();
 			}
 		}
