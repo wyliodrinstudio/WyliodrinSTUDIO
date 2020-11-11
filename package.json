@@ -40,7 +40,7 @@
 		},
 		"linux": {
 			"desktop": {
-				"Name": "WyliodrinSTUDIO",
+				"Name": "Wyliodrin STUDIO",
 				"Type": "Application",
 				"Terminal": false
 			},
@@ -52,7 +52,7 @@
 			"icon": "source/img/icons/win/wyliodrin-studio-logo.ico"
 		},
 		"copyright": "Copyright &copy; 2020, Wyliodrin SRL",
-		"productName": "Wyliodrin STUDIO",
+		"productName": "WyliodrinSTUDIO",
 		"directories": {
 			"app": "build"
 		}

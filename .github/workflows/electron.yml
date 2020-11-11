@@ -3,9 +3,7 @@
 
 name: Wyliodrin Build
 
-on:
-  push:
-  pull_request:
+on: workflow_dispatch
 
 jobs:
   build-electron:
@@ -13,14 +11,14 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: Wyliodrin STUDIO-2.2.0-beta.AppImage
-            asset_name: wyliodrinstudio-linux-amd64
+            artifact_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.AppImage
+            asset_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.AppImage
           - os: windows-latest
-            artifact_name: Wyliodrin STUDIO Setup 2.2.0-beta.exe
-            asset_name: wyliodrinstudio-windows-amd64
+            artifact_name: WyliodrinSTUDIO Setup ${{ steps.package-version.outputs.current-version }}.exe
+            asset_name: WyliodrinSTUDIO Setup ${{ steps.package-version.outputs.current-version }}.exe
           - os: macos-latest
-            artifact_name: Wyliodrin STUDIO-2.2.0-beta.dmg
-            asset_name: wyliodrinstudio-macos-amd64
+            artifact_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.dmg
+            asset_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.dmg
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -30,6 +28,9 @@ jobs:
         with:
           # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
           node-version: 12.x
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
       - run: npm install
       - run: npx electron-rebuild
       - run: npm run dist
@@ -39,6 +40,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/${{ matrix.artifact_name }}
           asset_name: ${{ matrix.asset_name }}
-          tag: ${{ github.ref }}
+          tag: ${{ steps.package-version.outputs.current-version }}
           overwrite: true
-          body: "Wyliodrin STUDIO 2.2.0-beta"
+          body: "Wyliodrin STUDIO ${{ steps.package-version.outputs.current-version }}"
