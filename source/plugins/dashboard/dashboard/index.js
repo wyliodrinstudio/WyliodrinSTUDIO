@@ -22,7 +22,8 @@ let dashboard = {
 				iconURL,
 				component: component.name,
 				setup: options.setup,
-				width: options.width || 1
+				width: options.width || 1,
+				height: options.height || 1
 			};
 			graphs.push(item);
 			graphs = graphs.sort((graph1, graph2)=>graph1.priority - graph2.priority);

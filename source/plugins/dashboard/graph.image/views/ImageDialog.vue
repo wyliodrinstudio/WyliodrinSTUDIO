@@ -5,10 +5,11 @@
 		<v-card-text class="graphDialog">
 			<div layout-padding class="signal-details row">
 				<v-text-field autofocus color ="orange" :label="$t('DASHBOARD_SIGNAL_NAME')" required v-model="newdata.id" class="col-md-6">{{$t('DASHBOARD_SIGNAL_NAME')}}</v-text-field>
-				<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.description" class="col-md-6">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>
+				<v-text-field :label="$t('NAME')" v-model="newdata.title" class="col-md-6"></v-text-field>
 			</div>
+			<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.description" class="col-md-12">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>
 			<div class="sig-properties row">
-				<v-text-field :label="$t('NAME')" v-model="newdata.figureName" class="col-md-6"></v-text-field>
+				
 				<span class="col-md-12">Links (one image link per row)
 					if signal = 0, image from row 1
 					if signal = 1, image from row 2
@@ -41,7 +42,7 @@ export default {
 			newdata: _.assign ({
 				id:'',
 				description:'',
-				figureName: '',
+				title: '',
 				imageLinks:''
 			}, this.data)
 		};

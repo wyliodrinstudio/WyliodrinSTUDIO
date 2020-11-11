@@ -5,41 +5,34 @@
 		<v-card-text>
 			<div layout-padding class="signal-details row">
 				<v-text-field autofocus color ="orange" :label="$t('DASHBOARD_SIGNAL_NAME')" required v-model="newdata.id" class="col-md-6">{{$t('DASHBOARD_SIGNAL_NAME')}}</v-text-field>
-				<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.description" class="col-md-6">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>
+				<v-text-field  :label="$t('NAME')" v-model="newdata.title" class="col-md-6"></v-text-field>
 			</div>
 			<div class="sig-properties row">
-				<v-text-field  :label="$t('NAME')" v-model="newdata.figureName" class="col-md-6"></v-text-field>
-				<v-text-field :label="$t('DASHBOARD_LOW_VALUE')" type="number" step=0.1 v-model="newdata.lowValue" class="col-md-6"></v-text-field>
-				<div class="form__field col-md-6">
+				<v-text-field color ="orange" :label="$t('DASHBOARD_SIGNAL_DESCRIPTION')" required v-model="newdata.description" class="col-md-12">{{$t('DASHBOARD_SIGNAL_DESCRIPTION')}}</v-text-field>
+				<v-text-field :label="$t('DASHBOARD_LOW_VALUE')" type="number" step=0.1 v-model="newdata.lowValue" class="col-md-4"></v-text-field>
+				<v-text-field :label="$t('DASHBOARD_MID_VALUE')" type="number" step=0.1 v-model="newdata.midValue" class="col-md-4"></v-text-field>
+				<v-text-field :label="$t('DASHBOARD_MAX_AXES_VALUE')" type="number" step=0.1 v-model="newdata.maxValue" class="col-md-4"></v-text-field>
+
+				<div class="form__field col-md-4">
 					<div class="form__label">{{$t('DASHBOARD_LOW_COLOR')}}:</div>
 					<div class="form__input">
 						<swatches v-model="newdata.lowColor" colors="text-advanced" popover-to="left"></swatches>
 					</div>
 				</div>
-				<v-text-field :label="$t('DASHBOARD_MID_VALUE')" type="number" step=0.1 v-model="newdata.midValue" class="col-md-6"></v-text-field>
-				<div class="form__field col-md-3">
+				
+				<div class="form__field col-md-4">
 					<div class="form__label">{{$t('DASHBOARD_MID_COLOR')}}:</div>
 					<div class="form__input">
 						<swatches v-model="newdata.midColor" colors="text-advanced" popover-to="left"></swatches>
 					</div>
 				</div>
-				<div class="form__field col-md-3">
+				<div class="form__field col-md-4">
 					<div class="form__label">{{$t('DASHBOARD_MID_COLOR')}}:</div>
 					<div class="form__input">
 						<swatches v-model="newdata.highColor" colors="text-advanced" popover-to="left"></swatches>
 					</div>
 				</div>				
 				<v-text-field :label="$t('DASHBOARD_MIN_AXES_VALUE')" type="number" step=0.1 v-model="newdata.minValue" class="col-md-6"></v-text-field>
-				<v-text-field :label="$t('DASHBOARD_MAX_AXES_VALUE')" type="number" step=0.1 v-model="newdata.maxValue" class="col-md-6"></v-text-field>
-				<div class="col-md-6">
-					<v-select class="drpdown"
-						:items="newdata.items"
-						v-model="newdata.menuElement"
-						item-text = "title"
-						item-value = "title"
-						hide-details
-					></v-select>
-				</div>
 			</div>
 		</v-card-text>
 		<v-card-actions>
@@ -70,12 +63,7 @@ export default {
 				minValue: 0,
 				maxValue: 1000,
 				axisName: '',
-				items: [
-					{title: 'KILOMETERS'},
-					{title: 'MILES'}
-				],
-				menuElement: 'KILOMETERS',
-				figureName: '',
+				title: '',
 				lowColor: '#48f542',
 				midColor: '#fafa1b',
 				highColor: '#d11504'

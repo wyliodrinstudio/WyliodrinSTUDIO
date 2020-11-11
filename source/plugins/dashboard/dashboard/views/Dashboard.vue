@@ -183,10 +183,8 @@ export default {
 			let item = {
 				x: (this.layout.length * 2) % 12,
 				y: this.layout.length + 12, // puts it at the bottom
-				w: 2,
-				h: 2,
-				width: 100,
-				height: 100,
+				w: graph.width,
+				h: graph.height,
 				i: id,
 			};
 			let signal = {

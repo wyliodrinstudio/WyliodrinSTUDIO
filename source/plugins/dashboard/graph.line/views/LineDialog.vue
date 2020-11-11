@@ -32,13 +32,13 @@
 
 				<v-text-field :label="$t('LINE_X_AXIS_TITLE')" v-model="newdata.xAxisTitle" class="col-md-6"></v-text-field>
 				<v-text-field :label="$t('LINE_Y_AXIS_TITLE')" v-model="newdata.yAxisTitle" class="col-md-6"></v-text-field>
-				<v-checkbox hide-details :label="$t('LINE_HIDE_LEGEND')" v-model="newdata.legendCheckbox" class="col-md-4"></v-checkbox>
+				<!-- <v-checkbox hide-details :label="$t('LINE_HIDE_LEGEND')" v-model="newdata.legendCheckbox" class="col-md-4"></v-checkbox>
 				<v-checkbox hide-details :label="$t('LINE_FIX_AXES_VALUES')" v-model="newdata.axesCheckbox" class="col-md-4"></v-checkbox>
 				<v-checkbox hide-details :label="$t('LINE_LOGARITHMIC_AXES')" v-model="newdata.logCheckbox" class="col-md-4"></v-checkbox>
 				<v-checkbox hide-details :label="$t('LINE_TIME_SERIES')" v-model="newdata.timeCheckbox" class="col-md-4"></v-checkbox>
 				<v-checkbox hide-details :label="$t('LINE_SHOW_POINTS')" v-model="newdata.pointsCheckbox" class="col-md-4"></v-checkbox>
 				<v-checkbox hide-details :label="$t('LINE_OVERVIEW')" v-model="newdata.overviewCheckbox" class="col-md-4"></v-checkbox>
-				<v-checkbox hide-details :label="$t('LINE_SCROLLBAR')" v-model="newdata.scrollbarCheckbox" class="col-md-12"></v-checkbox>	
+				<v-checkbox hide-details :label="$t('LINE_SCROLLBAR')" v-model="newdata.scrollbarCheckbox" class="col-md-12"></v-checkbox>	 -->
 			</div>
 		</v-card-text>
 		<v-card-actions>
@@ -71,7 +71,7 @@ export default {
 					{ title: 'STRAIGHT' },
 					{ title: 'SPLINE' }
 				],
-				chartType: 'STEP',
+				chartType: 'SPLINE',
 				legendCheckbox: false,
 				axesCheckbox: false,
 				logCheckbox: false,
