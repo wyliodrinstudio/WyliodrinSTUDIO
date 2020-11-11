@@ -51,7 +51,7 @@
 		"win": {
 			"icon": "source/img/icons/win/wyliodrin-studio-logo.ico"
 		},
-		"copyright": "Copyright &copy; 2019, Wyliodrin SRL",
+		"copyright": "Copyright &copy; 2020, Wyliodrin SRL",
 		"productName": "Wyliodrin STUDIO",
 		"directories": {
 			"app": "build"
