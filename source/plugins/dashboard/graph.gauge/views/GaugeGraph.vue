@@ -101,6 +101,7 @@ export default {
 				let dataset = this.series.datasets[0];
 				dataset.label =this.data.id;
 				dataset.backgroundColor = [this.data.lowColor, this.data.midColor, this.data.highColor];
+				dataset.data = [this.data.lowValue, this.data.midValue, this.data.maxValue];
 				chart.update();
 			}
 		}

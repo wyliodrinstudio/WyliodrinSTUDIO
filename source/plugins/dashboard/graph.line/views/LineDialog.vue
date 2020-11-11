@@ -79,7 +79,7 @@ export default {
 				minValue: 0,
 				maxValue: 1000,
 				pointsCheckbox: false,
-				maxPoints: 10,
+				maxPoints: '',
 				xAxisTitle: '',
 				yAxisTitle: '',
 				overviewCheckbox: false,

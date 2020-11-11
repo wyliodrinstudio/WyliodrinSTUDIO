@@ -58,8 +58,8 @@ export default {
 			newdata: _.assign ({
 				id:'',
 				description:'',
-				lowValue: 50,
-				midValue: 90,
+				lowValue: 500,
+				midValue: 900,
 				minValue: 0,
 				maxValue: 1000,
 				axisName: '',

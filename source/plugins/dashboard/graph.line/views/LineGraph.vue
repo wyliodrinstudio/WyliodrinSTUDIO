@@ -41,7 +41,8 @@ export default {
 				datasets: [
 					{
 						label: this.data.title || this.data.id,
-						backgroundColor: this.data.color,
+						borderColor: this.data.color,
+						backgroundColor: this.data.color+'5f',
 						data: [],
 					},
 				],
@@ -60,14 +61,13 @@ export default {
 						{
 							type: 'time',
 							distribution: 'series',
-							offset: true,
 							gridLines: {
 								drawBorder: false,
 							},
 							scaleLabel: {
 								display: true,
 								labelString: this.data.xAxisTitle || '',
-							},
+							}
 						},
 					],
 					yAxes: [
@@ -135,7 +135,8 @@ export default {
 			{
 				let dataset = this.series.datasets[0];
 				dataset.label = this.data.title || this.data.id;
-				dataset.backgroundColor = this.data.color;
+				dataset.borderColor = this.data.color;
+				dataset.backgroundColor = this.data.color + '5f';
 
 				chart.update(this.options);
 			}

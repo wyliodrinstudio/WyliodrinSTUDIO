@@ -4,7 +4,7 @@ import toolboxStr from 'raw-loader!./visual/toolbox.xml';
 let studio = null;
 
 
-let blocks_signal = require ('./visual/definitions_signal.js')
+let blocks_signal = require ('./visual/definitions_signal.js');
 
 let signal_py = require ('./visual/code_signal_python.js');
 let signal_js = require ('./visual/code_signal_javascript.js');
