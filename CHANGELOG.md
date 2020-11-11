@@ -1,8 +1,10 @@
 ## Wyliodrin STUDIO 2.2.0-beta
   * **added** Wyliodrin STUDIO CI tests for build, documentation and format
   * **added** deploy (docker) application feature for wyapp devices (Raspberry Pi)
+  * **added** console filters API (used by dashboard)
   * **new** plugin folder structure with plugins hierarchy
   * **new** plugin for id, migrated from wyapp-websocket
+  * **new** dashboard layout
   * **fixed** console bounce when clicking ooutside
   * **update** packages
   * **disabled** Rapid IoT device and simulator 
