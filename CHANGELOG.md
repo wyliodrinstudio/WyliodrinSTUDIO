@@ -6,6 +6,7 @@
   * **new** plugin for id, migrated from wyapp-websocket
   * **new** dashboard layout
   * **fixed** console bounce when clicking ooutside
+  * **fixed** monaco editor and dashboard disappearance when not active and window is resided 
   * **update** packages
   * **disabled** Rapid IoT device and simulator 
 

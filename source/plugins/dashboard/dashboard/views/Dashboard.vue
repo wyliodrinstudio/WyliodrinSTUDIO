@@ -68,6 +68,7 @@
 			</li>
 		</div> -->
 		<GridLayout
+			ref="grid"
             :layout="layout"
             :col-num="12"
             :row-height="30"
@@ -126,6 +127,7 @@ import VueGridLayout from 'vue-grid-layout';
 
 export default {
 	name: 'Dashboard',
+	props: ['active'],
 	data()
 	{
 		return {
@@ -251,6 +253,11 @@ export default {
 		}
 	},
 	watch: {
+		active (value) {
+			if (value) {
+				setTimeout (() => this.$refs.grid.onWindowResize(), 10);
+			}
+		},
 		currentProject:
 		{
 			async handler (){
@@ -293,7 +300,10 @@ export default {
 		layout: {
 			deep:true,
 			handler: function (/* val, oldVal */){
-				this.saveDashboard ();
+				if (this.active)
+				{
+					this.saveDashboard ();
+				}
 			}	
 		}
 	}
