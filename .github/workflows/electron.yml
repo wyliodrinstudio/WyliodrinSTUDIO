@@ -45,3 +45,14 @@ jobs:
           tag: ${{ github.event.inputs.version }}
           overwrite: true
           body: "Wyliodrin STUDIO ${{ github.event.inputs.version }}"
+      - name: Upload block maps to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
+          prerelease: true
+          file_glob: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/*.blockmap
+          tag: ${{ github.event.inputs.version }}
+          overwrite: true
+          body: "Wyliodrin STUDIO ${{ github.event.inputs.version }}"
