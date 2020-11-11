@@ -11,14 +11,11 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.AppImage
-            asset_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.AppImage
+            extension: AppImage
           - os: windows-latest
-            artifact_name: WyliodrinSTUDIO Setup ${{ steps.package-version.outputs.current-version }}.exe
-            asset_name: WyliodrinSTUDIO Setup ${{ steps.package-version.outputs.current-version }}.exe
+            extension: exe
           - os: macos-latest
-            artifact_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.dmg
-            asset_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.dmg
+            extension: dmg
     runs-on: ${{ matrix.os }}
     
     steps:
@@ -40,8 +37,8 @@ jobs:
           release_name: Wyliodrin STUDIO ${{ steps.package-version.outputs.current-version }}
           prerelease: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/${{ matrix.artifact_name }}
-          asset_name: ${{ matrix.asset_name }}
+          file: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.{{ matrix.extension }}
+          asset_name: WyliodrinSTUDIO-${{ steps.package-version.outputs.current-version }}.{{ matrix.extension }}
           tag: ${{ steps.package-version.outputs.current-version }}
           overwrite: true
           body: "Wyliodrin STUDIO ${{ steps.package-version.outputs.current-version }}"
