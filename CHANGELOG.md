@@ -5,7 +5,7 @@
   * **new** plugin folder structure with plugins hierarchy
   * **new** plugin for id, migrated from wyapp-websocket
   * **new** dashboard layout
-  * **fixed** console bounce when clicking ooutside
+  * **fixed** console bounce when clicking outside
   * **fixed** monaco editor and dashboard disappearance when not active and window is resided 
   * **update** packages
   * **disabled** Rapid IoT device and simulator 
