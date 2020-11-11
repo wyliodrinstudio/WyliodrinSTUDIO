@@ -30,6 +30,7 @@ jobs:
         with:
           # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
           node-version: 12.x
+      - run: echo building WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
       - run: npm install
       - run: npx electron-rebuild
       - run: npm run dist
