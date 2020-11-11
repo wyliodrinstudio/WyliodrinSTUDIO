@@ -39,8 +39,8 @@ jobs:
           release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
           prerelease: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: WyliodrinSTUDIO-${{ github.event.inputs.version }}.{{ matrix.extension }}
-          asset_name: WyliodrinSTUDIO-${{ github.event.inputs.version }}.{{ matrix.extension }}
+          file: WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
+          asset_name: WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
           tag: ${{ github.event.inputs.version }}
           overwrite: true
           body: "Wyliodrin STUDIO ${{ github.event.inputs.version }}"
