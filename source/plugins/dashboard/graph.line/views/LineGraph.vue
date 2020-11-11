@@ -114,7 +114,7 @@ export default {
 						let seriesData = this.series.datasets[0].data;
 						seriesData.push({
 							t: data.t,
-							y: data.v,
+							y: parseFloat (data.v),
 						});
 						
 						if (this.maxPoints) {

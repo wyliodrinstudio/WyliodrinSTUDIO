@@ -12,6 +12,13 @@
                 </block>
             </value>
         </block>
+        <block type="wyapp_send_signal_break">
+            <value name="value_signal">
+                <block type="text">
+                    <field name="TEXT"></field>
+                </block>
+            </value>
+        </block>
     </category>
     <sep />
 </toolbox>
