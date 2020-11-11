@@ -16,9 +16,9 @@ Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.
 
 ## Supported devices:
 
-- Raspberry Pi and Arduino
+- Raspberry Pi
+- MicroPython
 - Pico PI iMX8M
-- NXP Rapid IoT
 - UDOO Neo
 - BeagleBone Black
 
