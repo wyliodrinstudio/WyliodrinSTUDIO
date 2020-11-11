@@ -37,6 +37,8 @@ jobs:
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
+          release_name: Wyliodrin STUDIO ${{ steps.package-version.outputs.current-version }}
+          prerelease: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/${{ matrix.artifact_name }}
           asset_name: ${{ matrix.asset_name }}
