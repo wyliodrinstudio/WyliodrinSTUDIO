@@ -30,9 +30,6 @@ jobs:
         with:
           # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
           node-version: 12.x
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
       - run: npm install
       - run: npx electron-rebuild
       - run: npm run dist
