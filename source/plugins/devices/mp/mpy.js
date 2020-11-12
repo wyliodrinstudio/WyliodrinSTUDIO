@@ -23,7 +23,7 @@ function escape (s) {
 	return s;
 }
 
-const CircuitPythonRegex = /Adafruit CircuitPython ([A-Za-z0-9_\.]+) on [A-Za-z0-9\-]+; ([A-Za-z0-9_]+) with ([A-Za-z0-9_]+)/;
+const CircuitPythonRegex = /Adafruit CircuitPython ([A-Za-z0-9_\.]+) on [A-Za-z0-9\-]+; ([A-Za-z0-9_\s]+) with ([A-Za-z0-9_]+)/;
 
 export class MicroPython extends EventEmitter {
 	constructor(port){
