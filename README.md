@@ -1,7 +1,7 @@
 # Wyliodrin STUDIO
 
 ![Wyliodrin Documentation](https://github.com/wyliodrinstudio/WyliodrinSTUDIO/workflows/Wyliodrin%20Documentation/badge.svg)
-![Wyliodrin CI](https://github.com/wyliodrinstudio/WyliodrinSTUDIO/workflows/Wyliodrin%20CI/badge.svg)
+![Wyliodrin Build](https://github.com/wyliodrinstudio/WyliodrinSTUDIO/workflows/Wyliodrin%20Build/badge.svg)
 
 
 Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.
