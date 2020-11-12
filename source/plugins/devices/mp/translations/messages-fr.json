@@ -66,5 +66,13 @@
 	"DEVICE_MP_SERIAL_BAUDRATE": {
 		"message": "Définir une valeur pour la vitesse de transmission. Valeur par défaut: 115200.",
 		"description": "Baudrate set paragraph."
+	},
+	"DEVICE_MP_DROPDOWN_TITLE": {
+		"message": "Langage de programmation",
+		"description": "Brate dropdown title"
+	},
+	"DEVICE_MP_CHECKBOX": {
+			"message": "Voulez-vous redémarrer la carte lors de la connexion?",
+			"description": "Brate checkbox text"
 	}
 }

@@ -56,16 +56,23 @@
                 "description": "The step three for setting chrome flag."
         },
 	"DEVICE_MP_FLAG_CAREFUL": {
-                 "message": "CAREFUL! To work you must be on a secure connection",
+                "message": "CAREFUL! To work you must be on a secure connection",
                 "description": "Warning for setting chrome flag."
 	},
 	"DEVICE_MP_SERIAL_OPTIONS": {
                 "message": "Set the baudrate",
-                 "description": "Baudrate set header."
+                "description": "Baudrate set header."
         },
 	"DEVICE_MP_SERIAL_BAUDRATE": {
-                 "message": "Set a value for baud rate. Default value: 115200.",
-                 "description": "Baudrate set paragraph."
+                "message": "Set a value for baud rate. Default value: 115200.",
+                "description": "Baudrate set paragraph."
+        },
+        "DEVICE_MP_DROPDOWN_TITLE": {
+                "message": "Programming Language",
+                "description": "Brate dropdown title"
+        },
+        "DEVICE_MP_CHECKBOX": {
+                "message": "Do you want to restart the board when connecting?",
+                "description": "Brate checkbox text"
         }
-        
 }

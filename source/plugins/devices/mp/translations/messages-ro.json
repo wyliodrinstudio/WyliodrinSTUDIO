@@ -66,5 +66,13 @@
 	"DEVICE_MP_SERIAL_BAUDRATE": {
         "message": "Setati o valoare pentru baudrate. Valoare implicita : 115200.",
         "description": "Baudrate set paragraph."
-	}
+        },
+        "DEVICE_MP_DROPDOWN_TITLE": {
+        "message": "Limbaj de programare",
+        "description": "Brate dropdown title"
+        },
+	"DEVICE_MP_CHECKBOX": {
+	"message": "Doriti restartarea placii la conectare?",
+	"description": "Brate checkbox text"
+	} 
 }
