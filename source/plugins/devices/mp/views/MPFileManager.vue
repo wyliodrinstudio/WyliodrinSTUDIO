@@ -190,7 +190,15 @@ export default {
 	},
 	methods: {
 		async list(cwd){
-			await this.mp.listdir(cwd);
+			try{
+				await this.mp.listdir(cwd);
+			}
+			catch(e)
+			{
+				this.studio.workspace.showError('ListError',{extra:e.message});
+			}
+			
+
 		},
 		async saveFileDialog(data){
 			let newData1 = Buffer.from(data);
@@ -207,7 +215,13 @@ export default {
 			// 	z:0,
 			// 	size:this.fileItem.size
 			// });
-			let d = await this.mp.get(this.cwd+this.fileItem.name);
+			try{
+				let d = await this.mp.get(this.cwd+this.fileItem.name);
+			}
+			catch(e)
+			{
+				this.studio.workspace.showError('GetError',{extra:e.message});
+			}
 			this.saveFileDialog(d);
 
 		},
@@ -223,7 +237,13 @@ export default {
 				let fileData = await this.studio.filesystem.readImportFile (files[0]);
 				let name = files[0].name;
 				let f = this.cwd+path.basename(name);
-				await this.mp.put(f, Buffer.from(fileData).toString());
+				try{
+					await this.mp.put(f, Buffer.from(fileData).toString());
+				}
+				catch(e)
+				{
+					this.studio.workspace.showError('PutError',{extra:e.message});
+				}
 				// this.connection.send('fe',{
 				// 	a:'up',
 				// 	b:this.cwd,
@@ -237,7 +257,13 @@ export default {
 			// 	a: 'ls',
 			// 	b:this.cwd
 			// });
-			let d = await this.mp.listdir(this.cwd);
+			try{
+				let d = await this.mp.listdir(this.cwd);
+			}
+			catch(e)
+			{
+				this.studio.workspace.showError('ListError',{extra:e.message});
+			}
 			this.update(d);
 		},
 		async refresh(){
@@ -248,7 +274,13 @@ export default {
 			this.cwdArray=[];
 			this.menuItem = null;
 			this.blocked = true;
-			let d = await this.mp.listdir('/');
+			try{
+				let d = await this.mp.listdir('/');
+			}
+			catch(e)
+			{
+				this.studio.workspace.showError('ListError',{extra:e.message});
+			}
 			await this.update(d);
 			this.blocked = false;
 		},
@@ -266,13 +298,32 @@ export default {
 				{
 					if(parent !== '/')
 					{	
-						await this.mp.rmdir(parent+'/'+this.fileItem.name);
+						try{
+							await this.mp.rmdir(parent+'/'+this.fileItem.name);
+						}
+						catch(e)
+						{
+							this.studio.workspace.showError('RmDirError',{extra:e.message});
+						}
 					}
 					else
 					{
-						await this.mp.rmdir(this.fileItem.name);
+						try{
+							await this.mp.rmdir(this.fileItem.name);
+						}
+						catch(e)
+						{
+							this.studio.workspace.showError('RmDirError',{extra:e.message});
+						}
 					}
-					let d = await this.mp.listdir(parent);
+
+					try{
+						let d = await this.mp.listdir(parent);
+					}
+					catch(e)
+					{
+						this.studio.workspace.showError('ListError',{extra:e.message});
+					}
 					this.update(d);
 					await this.refresh();
 				}
@@ -280,13 +331,32 @@ export default {
 				{
 					if(parent !== '/')
 					{
-						await this.mp.rm(parent+'/'+this.fileItem.name);
+						try{
+							await this.mp.rm(parent+'/'+this.fileItem.name);
+						}
+						catch(e)
+						{
+							this.studio.workspace.showError('RmError',{extra:e.message});
+						}
 					}
 					else
 					{
-						await this.mp.rm(this.fileItem.name);
+						try{
+							await this.mp.rm(this.fileItem.name);
+						}
+						catch(e)
+						{
+							this.studio.workspace.showError('RmError',{extra:e.message});
+						}
 					}
-					let d = await this.mp.listdir(parent);
+
+					try{
+						let d = await this.mp.listdir(parent);
+					}
+					catch(e)
+					{
+						this.studio.workspace.showError('ListError',{extra:e.message});
+					}
 					await this.update(d);
 					await this.refresh();
 				}
@@ -305,7 +375,13 @@ export default {
 					// 	c:this.fileItem.name,
 					// 	d:newName
 					// });
-					await this.mp.rename(parent+this.fileItem.name, parent+newName);
+					try{
+						await this.mp.rename(parent+this.fileItem.name, parent+newName);
+					}
+					catch(e)
+					{
+						this.studio.workspace.showError('RenameError',{extra:e.message});
+					}
 					await this.refresh();
 				}
 			}
@@ -321,7 +397,13 @@ export default {
 					// 	c:this.fileItem.name,
 					// 	d:newName
 					// });
-					await this.mp.rename(parent+'/'+this.fileItem.name, parent+'/'+newName);
+					try{
+						await this.mp.rename(parent+'/'+this.fileItem.name, parent+'/'+newName);
+					}
+					catch(e)
+					{
+						this.studio.workspace.showError('RenameError',{extra:e.message});
+					}
 					await this.refresh();
 				}
 			}
@@ -337,8 +419,21 @@ export default {
 				// 	b:this.fileItem.path,
 				// 	c:folderName,
 				// });
-				await this.mp.mkdir(this.fileItem.path+folderName);
-				let d = await this.mp.listdir(this.fileItem.path+folderName);
+				try{
+					await this.mp.mkdir(this.fileItem.path+folderName);
+				}
+				catch(e)
+				{
+					this.studio.workspace.showError('MkDirError',{extra:e.message});
+				}
+
+				try{
+					let d = await this.mp.listdir(this.fileItem.path+folderName);
+				}
+				catch(e)
+				{
+					this.studio.workspace.showError('ListError',{extra:e.message});
+				}
 				this.update(d);
 				await this.refresh();
 

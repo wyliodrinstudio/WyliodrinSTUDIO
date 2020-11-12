@@ -1,5 +1,6 @@
 ## Wyliodrin STUDIO 2.2.0-beta
   * **added** Wyliodrin STUDIO CI tests for build, documentation and format
+  * **added** support for MicroPython(run, REPL and file manager)
   * **new** plugin folder structure with plugins hierarchy
   * **update** packages
 

@@ -28,19 +28,31 @@
 		"description": "The deploy button."
 	},
 	"DEVICE_MP_FLAG_HEADER": {
-		"message": "CONFIGUREZ VOTRE GOOGLE FLAG",
+		"message": "Configurez votre WebSerial",
 		"description": "Header for setting chrome flag."
 	},
 	"DEVICE_MP_FLAG_STEP_ONE": {
-		"message": "1. Accédez au lien dans Google Chrome : chrome://flags",
+		"message": "1. Pour cette fonction, vous avez besoin de Google Chrome",
 		"description": "The step one for setting chrome flag."
 	},
 	"DEVICE_MP_FLAG_STEP_TWO": {
-		"message": "2. Rechercher dans la barre de recherche: #enable-experimental-web-platform-features",
+		"message": "2. Dans la barre de recherche Chrome, nous rechercherons: chrome: // flags",
 		"description": "The step two for setting chrome flag."
 	},
 	"DEVICE_MP_FLAG_STEP_THREE": {
-		"message": "3. Définir l'indicateur ENABLE : Experimental Web Platform features",
+		"message": "3. Recherchez la barre de recherche dans les drapeaux: # enable-experimental-web-platform-features",
+		"description": "The step two for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_STEP_FOUR": {
+		"message": "4. Donnez le drapeau ENABLE: fonctionnalités de la plate-forme Web expérimentale",
+		"description": "The step three for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_STEP_FIVE": {
+		"message": "5. En bas à droite, on accède au bouton RELAUNCH",
+		"description": "The step three for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_STEP_SIX": {
+		"message": "Après avoir redémarré le navigateur, nous pourrons utiliser la version du navigateur.",
 		"description": "The step three for setting chrome flag."
 	},
 	"DEVICE_MP_FLAG_CAREFUL": {

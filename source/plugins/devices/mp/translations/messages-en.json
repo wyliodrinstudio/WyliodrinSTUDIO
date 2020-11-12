@@ -1,59 +1,71 @@
 {
         "DEVICE_MP_RUN": {
-        "message": "RUN",
-        "description": "The run button."
+                "message": "RUN",
+                "description": "The run button."
 	},
 	"DEVICE_MP_STOP": {
-        "message": "STOP",
-        "description": "The stop button."
+                "message": "STOP",
+                "description": "The stop button."
 	},
 	"DEVICE_MP_RESTART": {
-        "message": "RESTART",
-        "description": "The restart button."
+                "message": "RESTART",
+                "description": "The restart button."
 	},
 	"DEVICE_MP_CONNECT": {
-        "message": "CONNECT",
-        "description": "The connect button."
+                "message": "CONNECT",
+                "description": "The connect button."
 	},
 	"DEVICE_MP_EXIT": {
-        "message": "EXIT",
-        "description": "The exit button."
+                "message": "EXIT",
+                "description": "The exit button."
         },
         "DEVICE_MP_FILES": {
-        "message": "FILE SYSTEM",
-        "description": "The file system button."
+                "message": "FILE SYSTEM",
+                "description": "The file system button."
         },
         "DEVICE_MP_DEPLOY": {
-        "message": "DEPLOY",
-        "description": "The deploy button."
+                "message": "DEPLOY",
+                "description": "The deploy button."
         },
 	"DEVICE_MP_FLAG_HEADER": {
-        "message": "SETUP YOUR GOOGLE FLAG",
-        "description": "Header for setting chrome flag."
+                "message": "Enable WebSerial",
+                "description": "Header for setting chrome flag."
 	},
 	"DEVICE_MP_FLAG_STEP_ONE": {
-        "message": "1. Access the link in Google Chrome : chrome://flags",
-        "description": "The step one for setting chrome flag."
-	},
-	"DEVICE_MP_FLAG_STEP_TWO": {
-        "message": "2. Search in the search bar: #enable-experimental-web-platform-features",
-        "description": "The step two for setting chrome flag."
-	},
-	"DEVICE_MP_FLAG_STEP_THREE": {
-        "message": "3. Set ENABLE flag : Experimental Web Platform features",
-        "description": "The step three for setting chrome flag."
-	},
+                "message": "1. You need Google Chrome for this feature",
+                "description": "The step one for setting chrome flag."
+        },
+        "DEVICE_MP_FLAG_STEP_TWO": {
+                "message": "2. In the Chrome search bar we will look for: chrome: // flags",
+                "description": "The step two for setting chrome flag."
+        },
+        "DEVICE_MP_FLAG_STEP_THREE": {
+                "message": "3. Search the search bar in the flags: # enable-experimental-web-platform-features",
+                "description": "The step two for setting chrome flag."
+        },
+        "DEVICE_MP_FLAG_STEP_FOUR": {
+                "message": "4. Give the ENABLE flag: Experimental Web Platform features",
+                "description": "The step three for setting chrome flag."
+        },
+        "DEVICE_MP_FLAG_STEP_FIVE": {
+                "message": "5. At the bottom right we access the RELAUNCH button",
+                "description": "The step three for setting chrome flag."
+        },
+        "DEVICE_MP_FLAG_STEP_SIX": {
+                "message": "After restarting the browser we will be able to use the browser version.",
+                "description": "The step three for setting chrome flag."
+        },
 	"DEVICE_MP_FLAG_CAREFUL": {
-        "message": "CAREFUL! To work you must be on a secure connection",
-        "description": "Warning for setting chrome flag."
+                 "message": "CAREFUL! To work you must be on a secure connection",
+                "description": "Warning for setting chrome flag."
 	},
 	"DEVICE_MP_SERIAL_OPTIONS": {
-        "message": "SET THE BAUDRATE",
-        "description": "Baudrate set header."
+                "message": "Set the baudrate",
+                 "description": "Baudrate set header."
         },
 	"DEVICE_MP_SERIAL_BAUDRATE": {
-        "message": "Set a value for baud rate. Default value: 115200.",
-        "description": "Baudrate set paragraph."
+                 "message": "Set a value for baud rate. Default value: 115200.",
+                 "description": "Baudrate set paragraph."
         }
         
 }

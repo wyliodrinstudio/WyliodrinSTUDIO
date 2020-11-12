@@ -89,14 +89,12 @@ listdir ('${escape(folder)}')`;
 			}
 			else
 			{
-				// TODO show notification
+				throw new Error(res.stderr);
 			}
 		}
 		catch (e)
 		{
-			// TODO show notification
-			//console.error(e);
-			ls = null;
+			throw new Error(e);
 		}
 		return ls;
 	}
@@ -120,17 +118,15 @@ with open('${escape(file)}', 'rb') as infile:
 			{
 				fileContent = new Buffer.from(res.stdout).toString();
 			}
-			// else
-			// {
-			//TODO show notification
-			//res.stderr === "OSError: [Errno 2] ENOENT" - "No such file {file}".
-			// }
+			else
+			{
+				throw new Error(res.stderr);
+			}
 
 		}
 		catch (e)
 		{
-			// TODO show notification
-			fileContent = null;
+			throw new Error(e);
 		}
 		return fileContent;
 		
@@ -152,16 +148,16 @@ os.mkdir('${escape(dir)}')`;
 			{
 				//TODO show notification
 			}
-			// else
-			// {
-			//TODO show notification
-			//res.stderr === "OSError: [Errno 17] EEXIST" - Directory already exist {dir}.
-			// }
+			else
+			{
+				//res.stderr === "OSError: [Errno 17] EEXIST" - Directory already exist {dir}.
+				throw new Error(res.stderr);
+			}
 
 		}
 		catch (e)
 		{
-			// TODO show notification
+			throw new Error(e);
 		}
 
 	}
@@ -182,16 +178,16 @@ os.rename('${escape(name)}', '${escape(newName)}')`;
 			{
 				//TODO show notification
 			}
-			// else
-			// {
-			//TODO show notification
-			//Erori probabile: Fisierul/Directorul sa nu existe
-			// }
+			else
+			{
+				//Erori probabile: Fisierul/Directorul sa nu existe
+				throw new Error(res.stderr);
+			}
 
 		}
 		catch (e)
 		{
-			// TODO show notification
+			throw new Error(e);
 		}
 
 	}
@@ -225,14 +221,13 @@ os.rename('${escape(name)}', '${escape(newName)}')`;
 						{
 							//TODO show notification
 						}
-						// else
-						// {
-						//TODO show notification
-						//ERROR: FILE NOT EXIST
-						// }
+						else
+						{
+							throw new Error(res.stderr);
+						}
 					}
 					catch(e){
-						// TODO show notification
+						throw new Error(e);
 					}
 					
 				}
@@ -241,14 +236,13 @@ os.rename('${escape(name)}', '${escape(newName)}')`;
 				await this.execute(cmd);
 
 			}
-			// else
-			// {
-			//TODO show notification
-			//ERROR: FILE ALREADY EXIST
-			// }
+			else
+			{
+				throw new Error(res.stderr);
+			}
 		}
 		catch(e){
-			// TODO show notification
+			throw new Error(e);
 		}
 
 	}
@@ -269,17 +263,17 @@ os.remove('${escape(file)}')`;
 			{
 				//TODO show notification
 			}
-			// else
-			// {
-			//TODO show notification
-			//res.stderr === "OSError: [Errno 2] ENOENT" - No such file/directory {file}.
-			//res.stderr === "OSError: [Errno 13] EACCES" - Directory is not empty {file}.
-			// }
+			else
+			{
+				//res.stderr === "OSError: [Errno 2] ENOENT" - No such file/directory {file}.
+				//res.stderr === "OSError: [Errno 13] EACCES" - Directory is not empty {file}.
+				throw new Error(res.stderr);
+			}
 
 		}
 		catch (e)
 		{
-			// TODO show notification
+			throw new Error(e);
 		}
 
 	}
@@ -310,16 +304,16 @@ rmdir('${escape(dir)}')`;
 			{
 				//TODO show notification
 			}
-			// else
-			// {
-			//TODO show notification
-			//res.stderr === "OSError: [Errno 2] ENOENT" - No such directory {dir}.
-			// }
+			else
+			{
+				//res.stderr === "OSError: [Errno 2] ENOENT" - No such directory {dir}.
+				throw new Error(res.stderr);
+			}
 	
 		}
 		catch (e)
 		{
-			// TODO show notification
+			throw new Error(e);
 		}
 		
 	}
