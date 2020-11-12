@@ -29,8 +29,7 @@
 	"build": {
 		"publish": [
 			{
-				"provider": "github",
-				"releaseType": "release"
+				"provider": "github"
 			}
 		],
 		"buildDependenciesFromSource": true,
@@ -41,7 +40,12 @@
 			"icon": "source/img/icons/mac/wyliodrin-studio-logo.icns"
 		},
 		"snap": {
-			"plugs": ["default", "network-bind", "serial-port"]
+			"plugs": ["default", "network-bind", "serial-port"],
+			"publish": [
+				{
+					"provider": "github"
+				}
+			]
 		},
 		"linux": {
 			"desktop": {
