@@ -65,7 +65,7 @@ jobs:
           prerelease: true
           file_glob: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/latest-*.yml
+          file: dist/latest*.yml
           tag: v${{ github.event.inputs.version }}
           overwrite: true
 
