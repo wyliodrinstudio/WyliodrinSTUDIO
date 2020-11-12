@@ -28,7 +28,7 @@ jobs:
           node-version: 12.x
       - run: npm install
       - run: npx electron-rebuild
-      - run: npm run dist
+      - run: npm run dist-publish
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

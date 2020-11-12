@@ -8,6 +8,7 @@
 		"start": "electron build/",
 		"pack": "webpack --env.NODE_ENV=production && electron-builder --dir",
 		"dist": "webpack --env.NODE_ENV=production && electron-builder",
+		"dist-publish": "webpack --env.NODE_ENV=production && electron-builder --publish=always",
 		"electron": "webpack",
 		"browser": "webpack --config=webpack.browser.config.js",
 		"electron-production": "webpack --env.NODE_ENV=production",
@@ -28,7 +29,8 @@
 	"build": {
 		"publish": [
 			{
-				"provider": "github"
+				"provider": "github",
+				"releaseType": "release"
 			}
 		],
 		"buildDependenciesFromSource": true,
