@@ -29,7 +29,8 @@
 	"build": {
 		"publish": [
 			{
-				"provider": "github"
+				"provider": "github",
+				"releaseType": "draft"
 			}
 		],
 		"buildDependenciesFromSource": true,
@@ -43,7 +44,8 @@
 			"plugs": ["default", "network-bind", "serial-port"],
 			"publish": [
 				{
-					"provider": "github"
+					"provider": "github",
+					"releaseType": "draft"
 				}
 			]
 		},
