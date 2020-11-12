@@ -8,7 +8,6 @@
 		"start": "electron build/",
 		"pack": "webpack --env.NODE_ENV=production && electron-builder --dir",
 		"dist": "webpack --env.NODE_ENV=production && electron-builder",
-		"dist-publish": "webpack --env.NODE_ENV=production && electron-builder --publish=always",
 		"electron": "webpack",
 		"browser": "webpack --config=webpack.browser.config.js",
 		"electron-production": "webpack --env.NODE_ENV=production",
@@ -29,8 +28,7 @@
 	"build": {
 		"publish": [
 			{
-				"provider": "github",
-				"releaseType": "draft"
+				"provider": "github"
 			}
 		],
 		"buildDependenciesFromSource": true,
@@ -41,13 +39,7 @@
 			"icon": "source/img/icons/mac/wyliodrin-studio-logo.icns"
 		},
 		"snap": {
-			"plugs": ["default", "network-bind", "serial-port"],
-			"publish": [
-				{
-					"provider": "github",
-					"releaseType": "draft"
-				}
-			]
+			"plugs": ["default", "network-bind", "serial-port"]
 		},
 		"linux": {
 			"desktop": {

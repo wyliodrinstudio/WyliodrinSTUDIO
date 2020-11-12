@@ -5,6 +5,10 @@ name: Wyliodrin Build
 
 on: 
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version'
+        required: true
 
 jobs:
   build-electron:
@@ -26,9 +30,42 @@ jobs:
         with:
           # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
           node-version: 12.x
+      - run: echo building WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
       - run: npm install
       - run: npx electron-rebuild
-      - run: npm run dist-publish
+      - run: npm run dist
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
+          prerelease: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
+          asset_name: WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
+          tag: v${{ github.event.inputs.version }}
+          overwrite: true
+          body: "Wyliodrin STUDIO v${{ github.event.inputs.version }}"
+      - name: Upload block maps to release
+        if: ${{ matrix.os == 'macos-latest' || matrix.os == 'windows-latest' }}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
+          prerelease: true
+          file_glob: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/*.blockmap
+          tag: v${{ github.event.inputs.version }}
+          overwrite: true
+      - name: Upload update data to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
+          prerelease: true
+          file_glob: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/*-latest.yml
+          tag: v${{ github.event.inputs.version }}
+          overwrite: true
 
