@@ -16,7 +16,7 @@ const _ = require('lodash');
 
 const license = fs.readFileSync ('./LICENSE').toString();
 
-let electronPlugins = plugins.loadPlugins('electron');
+let electronPlugins = plugins.loadPlugins('electron').plugins;
 let items = [];
 
 for (let plugin of electronPlugins) {

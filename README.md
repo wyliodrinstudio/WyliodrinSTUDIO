@@ -1,5 +1,9 @@
 # Wyliodrin STUDIO
 
+![Wyliodrin Documentation](https://github.com/wyliodrinstudio/WyliodrinSTUDIO/workflows/Wyliodrin%20Documentation/badge.svg)
+![Wyliodrin CI](https://github.com/wyliodrinstudio/WyliodrinSTUDIO/workflows/Wyliodrin%20CI/badge.svg)
+
+
 Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.
 
 - Connect to devices using TCP/IP or serial port
