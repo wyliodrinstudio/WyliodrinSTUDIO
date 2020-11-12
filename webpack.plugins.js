@@ -46,15 +46,13 @@ module.exports.loadPlugins = (target) =>
 		
 						let dataFolder = path.join (folder, plugin, 'data');
 		
-						console.log ('Loading data '+dataFolder);
-		
 						try
 						{
 							if (fs.lstatSync(path.join (__dirname, 'source', 'plugins', dataFolder)).isDirectory()) listData (dataFolder);
 						}
 						catch (e)
 						{
-							console.log (e.message);
+							
 						}
 					}
 				}
