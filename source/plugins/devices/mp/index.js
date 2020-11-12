@@ -136,8 +136,8 @@ function updateDevices(){
 	if (serialDevices.length === 0 && devices.length === 0) {
 		add.push({
 			id: 'mp:newdevice',
-			address: '',
-			name: studio.workspace.vue.$t('MicroPython'),
+			address: 'WebSerial',
+			name: 'MicroPython',
 			board: 'any',
 			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			placeholder: true
@@ -257,7 +257,8 @@ export function setup (options, imports, register)
 						let mp = new MicroPython(port);
 						ports[device.id]=mp;
 
-						ports[device.id].on('connected',()=>{
+						mp.on('connected',()=>{
+							mp.reset ();
 							device.status = 'CONNECTED';
 							device.running = false;
 							updateDevice(device);
@@ -269,6 +270,18 @@ export function setup (options, imports, register)
 							studio.console.reset();
 							studio.console.show ();
                                                         
+						});
+
+						mp.on('board', (board)=>{
+							device.name = board.name;
+							device.python = board.python;
+							device.version = board.python;
+							device.address = device.address+' ('+board.python+'@'+board.version+')';
+							if (device.python === 'circuitpython')
+							{
+								device.icon = 'plugins/devices/mp/data/img/icons/circuitpython.png';
+							}
+							updateDevice (device);
 						});
 
 						mp.on('status', (status)=>{
@@ -584,9 +597,10 @@ export function setup (options, imports, register)
 			devices = [
 				{
 					id: 'mp:web',
-					address: '',
+					address: 'WebSerial',
 					name: 'MicroPython',
 					board: 'any',
+					python: 'micropython',
 					connection: 'web-usb',
 					priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 					placeholder: true,

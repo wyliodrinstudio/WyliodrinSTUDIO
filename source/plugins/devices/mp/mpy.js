@@ -23,10 +23,17 @@ function escape (s) {
 	return s;
 }
 
+const CircuitPythonRegex = /Adafruit CircuitPython ([A-Za-z0-9_\.]+) on [A-Za-z0-9\-]+; ([A-Za-z0-9_]+) with ([A-Za-z0-9_]+)/;
+
 export class MicroPython extends EventEmitter {
 	constructor(port){
 		super();
 		this.port = port;
+
+		this.console = true;
+		this.consoleBuffer = '';
+
+		this.circuitPython = false;
 
 		this.expectBuffer = '';
 		this.expecting = false;
@@ -346,67 +353,109 @@ rmdir('${escape(dir)}')`;
 		};
 	}
 
+	emitConsoleBuffer ()
+	{
+		let buffer = this.consoleBuffer;
+		this.resetConsoleBuffer ();
+		this.emit ('data', buffer);
+	}
+
+	resetConsoleBuffer ()
+	{
+		this.consoleBuffer = '';
+	}
+
 	readBuffer (data) {
-		this.expectBuffer = this.expectBuffer + Buffer.from (data).toString();
-		if (this.expecting)
+		console.log (this.console);
+		if (this.console) 
 		{
-			let index = this.expectBuffer.indexOf (this.expectStr);
-			if (index > -1) {
-				this.expectBuffer = this.expectBuffer.substring (index+this.expectStr.length);
-				clearTimeout (this.expectTimeout);
-				this.expecting = false;
-				return this.expectResolve();
+			this.emit ('data', data);
+			let buffer = Buffer.from (data).toString ();
+			if (!this.circuitPython && buffer.indexOf ('Adafruit CircuitPython') > -1) {
+				this.circuitPython = true;
+				let name = 'CircuitPython';
+				let version = null;
+				let info = buffer.match (CircuitPythonRegex)
+				if (info) {
+					version = info[1];
+					name = info[2];
+				}
+				this.emit ('board', {
+					python: this.circuitPython?'circuitpython':'micropython',
+					name,
+					version
+				});
 			}
 		}
-		else
+		else 
 		{
-			let emitData = null;
-			if(this.status === STATUS_READY)
+			if (this.stream === STREAM_NULL)
 			{
-				emitData = this.expectBuffer;
-				this.expectBuffer = '';
+				this.consoleBuffer = this.consoleBuffer + Buffer.from (data).toString();
+			}
+			this.expectBuffer = this.expectBuffer + Buffer.from (data).toString();
+			if (this.expecting)
+			{
+				let index = this.expectBuffer.indexOf (this.expectStr);
+				if (index > -1) {
+					this.expectBuffer = this.expectBuffer.substring (index+this.expectStr.length);
+					clearTimeout (this.expectTimeout);
+					this.expecting = false;
+					return this.expectResolve();
+				}
 			}
 			else
-			if (this.status === STATUS_RUNNING) {
-				let position;
-				while ((position = this.expectBuffer.indexOf ('\x04')) > -1)
+			{
+				let emitData = null;
+				if(this.status === STATUS_READY)
 				{
-					emitData = this.expectBuffer.substring (0, position);
-					this.expectBuffer = this.expectBuffer.substring (position+1);
+					emitData = this.expectBuffer;
+					this.expectBuffer = '';
+				}
+				else
+				if (this.status === STATUS_RUNNING) {
+					let position;
+					while ((position = this.expectBuffer.indexOf ('\x04')) > -1)
+					{
+						emitData = this.expectBuffer.substring (0, position);
+						this.expectBuffer = this.expectBuffer.substring (position+1);
+						
+						if (this.stream === STREAM_OUTPUT)
+						{
+							this.stdout = this.stdout + emitData;
+							if (this.display) this.emit ('data', emitData);
+							this.emitData = null;
+							this.stream = STREAM_ERROR;
+						}
+						else if (this.stream === STREAM_ERROR) {
+							this.stderr = this.stderr + emitData;
+							if (this.display) this.emit ('data', emitData);
+							this.setStatus (STATUS_STOPPED);
+							this.emitData = null;
+							this.stream = STREAM_NULL;
+							this.exitRawRepl ();
+							// TODO switch this to previous status before STATUS_RUNNING
+							// this.setStatus (STATUS_REPL);
+						}
+					}
+
+					emitData = this.expectBuffer;
+					this.expectBuffer = '';
 					
 					if (this.stream === STREAM_OUTPUT)
 					{
 						this.stdout = this.stdout + emitData;
-						if (this.display) this.emit ('data', emitData);
-						this.emitData = null;
-						this.stream = STREAM_ERROR;
+						if (this.display === true) this.emit ('data', emitData);
 					}
-					else if (this.stream === STREAM_ERROR) {
+					else if (this.stream === STREAM_ERROR)
+					{
 						this.stderr = this.stderr + emitData;
-						if (this.display) this.emit ('data', emitData);
-						this.setStatus (STATUS_STOPPED);
-						this.emitData = null;
-						this.stream = STREAM_NULL;
-						this.exitRawRepl ();
-						// TODO switch this to previous status before STATUS_RUNNING
-						// this.setStatus (STATUS_REPL);
+						if (this.display === true) this.emit ('data', emitData);
 					}
-				}
-
-				emitData = this.expectBuffer;
-				this.expectBuffer = '';
-				
-				if (this.stream === STREAM_OUTPUT)
-				{
-					this.stdout = this.stdout + emitData;
-				}
-				else if (this.stream === STREAM_ERROR)
-				{
-					this.stderr = this.stderr + emitData;
 				}
 			}
-			if (emitData && this.display === true) this.emit ('data', emitData);
 		}
+		console.log (this.consoleBuffer);
 	}
 
 	expect (str, timeout) {
@@ -435,6 +484,7 @@ rmdir('${escape(dir)}')`;
 
 	async enterRawRepl()
 	{
+		this.console = false;
 		let raw_repl = false;
 		if (this.status !== STATUS_REPL)
 		{
@@ -464,7 +514,8 @@ rmdir('${escape(dir)}')`;
 			}
 			catch (e)
 			{
-				raw_repl = false;
+				this.console = true;
+				this.emitConsoleBuffer ();
 			}
 		}
 		else
@@ -482,10 +533,12 @@ rmdir('${escape(dir)}')`;
 		{
 			try
 			{
-				// send ctrl+c 
+				// send ctrl+b
 				await this.write ('\r\x02');
 				this.setStatus(STATUS_READY);
 				exit_raw_repl = true;
+				this.console = true;
+				this.resetConsoleBuffer ();
 			}
 			catch (e)
 			{
@@ -494,6 +547,8 @@ rmdir('${escape(dir)}')`;
 		}
 		else
 		{
+			this.console = true;
+			this.resetConsoleBuffer ();
 			exit_raw_repl = true;
 		}
 		return exit_raw_repl;
@@ -511,6 +566,7 @@ rmdir('${escape(dir)}')`;
 			await this.write ('\x04');
 			// await this.expect('>', RAW_REPL_TIMEOUT);
 			await this.expect('OK', RAW_REPL_TIMEOUT);
+			this.emit ('data', '\r\nRunning \r\n\r\n');
 			this.setStatus (STATUS_RUNNING);
 			this.stream = STREAM_OUTPUT;
 			this.readBuffer ('');
@@ -574,10 +630,7 @@ rmdir('${escape(dir)}')`;
 
 	async stop()
 	{
-		this.display = true;
 		await this.port.write(Buffer.from('\r\x03'));
-		await this.port.write(Buffer.from('\r\x02'));
-		this.setStatus(STATUS_READY);
 	}
 
 	async reset()

@@ -217,12 +217,12 @@ export default {
 			// });
 			try{
 				let d = await this.mp.get(this.cwd+this.fileItem.name);
+				this.saveFileDialog(d);
 			}
 			catch(e)
 			{
 				this.studio.workspace.showError('GetError',{extra:e.message});
 			}
-			this.saveFileDialog(d);
 
 		},
 		//TODO de rezolvat put din mpy
