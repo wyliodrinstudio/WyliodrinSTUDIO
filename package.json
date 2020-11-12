@@ -28,8 +28,7 @@
 	"build": {
 		"publish": [
 			{
-				"provider": "generic",
-				"url": "https://s3.console.aws.amazon.com/s3/buckets/wyliodrin-studio/"
+				"provider": "github"
 			}
 		],
 		"buildDependenciesFromSource": true,
@@ -178,7 +177,6 @@
 		"chart.js": "^2.9.4",
 		"drivelist": "^8.0.6",
 		"electron-is-dev": "^1.1.0",
-		"electron-log": "^3.0.9",
 		"electron-updater": "^4.2.0",
 		"fs-extra": "^7.0.1",
 		"grabity": "^1.0.5",

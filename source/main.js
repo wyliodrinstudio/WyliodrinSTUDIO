@@ -5,19 +5,15 @@ const ipcMain = require ('electron').ipcMain;
 const path = require ('path');
 const isDev = require ('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
-const log = require('electron-log');
 
 app.allowRendererProcessReuse = false;
 
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
-function sendStatusToWindow(text) {
-	log.info(text);
-	win.webContents.send('message', text);
+if (isDev) {
+	process.env.APPIMAGE = path.join(__dirname, `WyliodrinSTUDIO_${app.getVersion()}.AppImage`)
 }
+  
 
 autoUpdater.on('update-downloaded', (ev, releaseNotes, releaseName) => {
-	sendStatusToWindow('Update downloaded; will install in 5 seconds');
 	const dialogOpts = {
 		type: 'info',
 		buttons: ['Restart', 'Later'],
@@ -27,7 +23,10 @@ autoUpdater.on('update-downloaded', (ev, releaseNotes, releaseName) => {
 	};
 	
 	dialog.showMessageBox(dialogOpts).then((returnValue) => {
-		if (returnValue.response === 0) autoUpdater.quitAndInstall();
+		if (returnValue.response === 0) {
+			closing = true;
+			autoUpdater.quitAndInstall();
+		}
 		win.webContents.send('updated');
 	});
 	

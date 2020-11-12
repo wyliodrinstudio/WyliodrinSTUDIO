@@ -42,9 +42,9 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
           asset_name: WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
-          tag: ${{ github.event.inputs.version }}
+          tag: v${{ github.event.inputs.version }}
           overwrite: true
-          body: "Wyliodrin STUDIO ${{ github.event.inputs.version }}"
+          body: "Wyliodrin STUDIO v${{ github.event.inputs.version }}"
       - name: Upload block maps to release
         if: ${{ matrix.os == 'macos-latest' || matrix.os == 'windows-latest' }}
         uses: svenstaro/upload-release-action@v2
@@ -54,6 +54,15 @@ jobs:
           file_glob: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/*.blockmap
-          tag: ${{ github.event.inputs.version }}
+          tag: v${{ github.event.inputs.version }}
           overwrite: true
-          body: "Wyliodrin STUDIO ${{ github.event.inputs.version }}"
+      - name: Upload update data to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
+          prerelease: true
+          file_glob: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/*-latest.yml
+          tag: v${{ github.event.inputs.version }}
+          overwrite: true
