@@ -100,3 +100,5 @@ tools/translation/*.json
 source/plugins.js
 source/web/plugins.js
 source/plugins/studio/workspace/translations.json
+
+source/web/precache.js

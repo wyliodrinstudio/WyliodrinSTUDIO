@@ -1,7 +1,7 @@
 {
 	"name": "wyliodrinstudio",
 	"version": "2.2.0-beta",
-	"description": "Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.",
+	"description": "Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems",
 	"main": "main.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",

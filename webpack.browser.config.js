@@ -10,7 +10,8 @@ const fs = require ('fs-extra');
 const webpack = require ('webpack');
 const plugins = require ('./webpack.plugins.js');
 
-let webPlugins = plugins.loadPlugins ('browser');
+let webPlugins = plugins.loadPlugins ('browser').plugins;
+let webDataItems = plugins.loadPlugins ('browser').dataItems;
 
 const package_json = require ('./package.json');
 
@@ -50,6 +51,16 @@ class StudioPluginsWeb {
 			source = source + '\treturn plugins;\n}\nmodule.exports.loadPlugins = loadPlugins;\n';
 			
 			fs.writeFileSync ('./source/web/plugins.js', source);
+
+			let precacheList = [];
+			for (let dataItem of webDataItems) {
+				precacheList.push ({
+					url: '/plugins/'+dataItem,
+					revision: package_json.version
+				});
+			}
+
+			fs.writeFileSync ('./source/web/precache.js', 'function precacheItems () { return '+JSON.stringify (precacheList)+'; }');
 
 			compiler.options.entry = {};
 			compiler.options.entry.studio = './source/web/setup.js';
@@ -210,10 +221,13 @@ module.exports = env => {
 					...items,
 					{ from: '*.html', context: 'source/web' },
 					{ from: 'server.js', context: 'source/web', to: '../' },
+					{ from: 'sw.js', context: 'source/web' },
+					{ from: 'precache.js', context: 'source/web' },
 					{ from: 'img/**', context: 'source' },
 					{ from: 'fonts/**', context: 'node_modules/material-design-icons-iconfont/dist/' },
 					{ from: 'fonts/**', context: 'node_modules/katex/dist/' },
 					{ from: 'README.md', context: 'source/web', to: '../' },
+					{ from: 'manifest.json', context: 'source/web' },
 				]}),
 			// new DtsBundleWebpack({
 			// 	name: 'plugins',

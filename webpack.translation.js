@@ -14,7 +14,7 @@ class TranslationPlugin {
 			console.log('Writing translation files');
 			// TODO apply merge here
 			
-			let allPlugins = plugins.loadPlugins (this.target);
+			let allPlugins = plugins.loadPlugins (this.target).plugins;
 			var TRANSLATION_WRITE = 'source/plugins/studio/workspace/translations.json';
 			var languages = {};
 			var translations = {};
