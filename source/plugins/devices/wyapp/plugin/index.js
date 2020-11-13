@@ -718,12 +718,12 @@ export function setup(options, imports, register)
 								dockoptions += '--restart always ';
 							}
 
-							if(options.selectedRestart === 'unless-stoped')
+							if(options.selectedRestart === "unless stopped")
 							{
-								dockoptions += '--restart unless-stoped ';
+								dockoptions += '--restart unless-stopped ';
 							}
 
-							if(options.selectedRestart === 'on-failure')
+							if(options.selectedRestart === "on failure")
 							{
 								dockoptions += '--restart on-failure ';
 							}		
