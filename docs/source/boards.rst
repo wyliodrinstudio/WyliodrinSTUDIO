@@ -102,11 +102,12 @@ The dependencies you will have to install are:
 - *build-essential*: reference package for all the packages required for compilation
 - *git*: required for the **npm install** command to download git included package
 - *python3-pip*: python 3 programming language
+- *docker*: containerization technology 
 
 .. code-block:: bash
 	
 	sudo apt-get update
-	sudo apt-get install -y supervisor redis build-essential git python3-pip
+	sudo apt-get install -y supervisor redis build-essential git python3-pip docker-ce docker-ce-cli containerd.io
 
 
 	# To enable the Notebook tab, you should also run
