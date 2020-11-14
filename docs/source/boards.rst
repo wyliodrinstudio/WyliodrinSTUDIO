@@ -283,11 +283,18 @@ In the prompt that will be opened, you will have to select the fifth option(Inte
 
 The final step before using the Wyliolab board is to reboot it.
 
+=====================
+
+Set up wireless
+^^^^^^^^^^^^^^^^^^^
+
+To set up your board wireless, please follow the steps in the link: `Set up wireless: <https://www.raspberrypi.org/documentation/configuration/wireless/headless.md>`_.
+
 =========================
 
 |
 
-Pico-Pi
+Pico-Pi.
 **********
 
 This will show how to set up a Pico-Pi device. 
