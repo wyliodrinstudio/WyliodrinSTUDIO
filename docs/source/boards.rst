@@ -211,6 +211,31 @@ The final step is to refresh the board by running the command:
 	
 	sudo supervisorctl reload
 
+**Install Docker**
+----------------------------------
+
+
+
+In order to install Docker, the following commands are required:
+.. code-block:: bash
+
+	sudo apt-get update && sudo apt-get upgrade
+	curl -fsSL https://get.docker.com -o get-docker.sh
+	sudo sh get-docker.sh
+	sudo usermod -aG docker pi
+
+Now, you'll have to restart the board using:
+.. code-block:: bash
+
+	sudo reboot
+To see if the installation worked, check the Docker version:
+.. code-block:: bash
+	docker version
+
+.. note::
+
+	Docker is **NOT** available for **Raspberry pi 0**.
+
 |
 
 =====================
