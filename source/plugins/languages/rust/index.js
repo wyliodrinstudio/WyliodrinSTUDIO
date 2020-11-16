@@ -42,7 +42,7 @@ export default function setup (options, imports, register)
 			if (filename[0] === '/') filename = filename.substring (1);
 			// TODO add filename
 			return 'run:\n\tcargo run';
-		},
+		}
 	};
 
 	studio.projects.registerLanguage('rust', 'Rust', null, 'plugins/languages/rust/data/img/rust.png', fileIcons, rust);

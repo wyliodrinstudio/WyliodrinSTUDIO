@@ -1,84 +1,151 @@
 <template>
-	<section class="charts">
-        <vue-highcharts :highcharts="Highcharts" :options="options" ref="chart"></vue-highcharts>
-    </section>
+	<ChartJSLine 
+		ref="chart"
+		:chart-data="series"
+		:options="options"
+		class="line"
+	></ChartJSLine>
 </template>
 <script>
-// import { Line } from 'vue-chartjs';
-import VueHighcharts from 'vue2-highcharts';
-import More from 'highcharts/highcharts-more';
-import Highcharts from 'highcharts';
+import { Line, mixins } from 'vue-chartjs';
+const { reactiveProp } = mixins;
 
-More(Highcharts);
-
+const ChartJSLine = {
+	name: 'ChartJSLine',
+	extends: Line,
+	mixins: [reactiveProp],
+	props: ['options'],
+	mounted() {
+		// this.series is created in the mixin.
+		// If you want to pass options please create a local options object
+		this.renderChart(this.chartData, this.options);
+	},
+	methods: {
+		update (options) {
+			if (options) this.$data._chart.options = options;
+			this.$data._chart.update();
+		},
+	},
+};
 
 export default {
 	name: 'LineGraph',
 	components: {
-		VueHighcharts
+		ChartJSLine,
 	},
-	props: ['data'],
-	data () {
+	props: ['data', 'width', 'height'],
+	data() {
 		return {
 			unregister: () => {},
-			options:{
-				chart: {
-					type: 'line'
-				},
-				title: {
-					text: this.data.signalTitle
-				},
-				maintainAspectRatio: false,
-				yAxis: {
-					min: this.data.minAxesValue,
-					max: this.data.maxAxesValue,
-				},
-
-				series: [{
-					name: 'Value',
-					data: [0,1],
-					color: this.data.signalColor
-				}],
-				responsive: {
-					rules: [{
-						condition: {
-							maxWidth: 500
-						},
-						chartOptions: {
-							legend: {
-								layout: 'horizontal',
-								align: 'center',
-								verticalAlign: 'bottom'
-							}
-						}
-					}]
-				}
-			},
-			Highcharts
+			series: {
+				datasets: [
+					{
+						label: this.data.title || this.data.id,
+						borderColor: this.data.color,
+						backgroundColor: this.data.color+'5f',
+						data: [],
+					},
+				],
+			}
 		};
 	},
-	mounted () {
-		this.unregister = this.studio.dashboard.registerForSignal ('LineGraph',(data)=>{
-			const chart = this.$refs.chart.getChart();
-			var point = chart.series[0].points[0],
-				newVal = data.v;
-
-			point.update(newVal, false);
-			chart.redraw();
-		});
-
-	},
-	destroyed ()
-	{
-		this.unregister ();
-	},
-
-	watch: {
-		data ()
-		{
-			
+	computed: {
+		options () {
+			let min = parseFloat (this.data.minValue);
+			let max = parseFloat (this.data.maxValue);
+			return {
+				responsive: true,
+				maintainAspectRatio: false,
+				scales: {
+					xAxes: [
+						{
+							type: 'time',
+							distribution: 'series',
+							gridLines: {
+								drawBorder: false,
+							},
+							scaleLabel: {
+								display: true,
+								labelString: this.data.xAxisTitle || '',
+							}
+						},
+					],
+					yAxes: [
+						{
+							gridLines: {
+								drawBorder: false,
+							},
+							scaleLabel: {
+								display: true,
+								labelString: this.data.yAxisTitle || '',
+							},
+							ticks: {
+								min: !isNaN (min)?min:undefined,
+								max: !isNaN (max)?max:undefined
+							}
+						},
+					],
+				},
+			};
 		},
-		
-	}
+		maxPoints () {
+			let points = parseFloat (this.data.maxPoints);
+			if (!isNaN (points)) {
+				return Math.floor (points);
+			}
+			else
+			{
+				return false;
+			}
+		}
+	},
+	watch: {
+		data: {
+			deep: true,
+			immediate: true,
+			handler() {
+				if (this.unregister) {
+					this.unregister();
+				}
+				this.unregister = this.studio.dashboard.registerForSignal(
+					this.data.id,
+					(data) => {
+						const chart = this.$refs.chart;
+						let seriesData = this.series.datasets[0].data;
+						seriesData.push({
+							t: data.t,
+							y: parseFloat (data.v),
+						});
+						
+						if (this.maxPoints) {
+							seriesData.splice (0, seriesData.length - this.maxPoints);
+						}
+
+						chart.update();
+					}
+				);
+				this.update ();
+			},
+		},
+	},
+	methods: {
+		update () {
+			const chart = this.$refs.chart;
+			if (chart)
+			{
+				let dataset = this.series.datasets[0];
+				dataset.label = this.data.title || this.data.id;
+				dataset.borderColor = this.data.color;
+				dataset.backgroundColor = this.data.color + '5f';
+
+				chart.update(this.options);
+			}
+		}
+	},
+	destroyed() {
+		if (this.unregister) {
+			this.unregister();
+		}
+	},
 };
 </script>

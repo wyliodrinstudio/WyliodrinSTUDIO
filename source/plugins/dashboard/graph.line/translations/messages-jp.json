@@ -35,9 +35,13 @@
         "message": "表示する最大ポイント (0　はすべてを表示することを意味します)",
         "description": "Input text area for the maximum points to show in a line graph"
     },
-    "LINE_AXIS_NAME": {
-        "message": "軸名",
-        "description": "Name of the axis"
+    "LINE_X_AXIS_TITLE": {
+        "message": "X軸のタイトル",
+        "description": "Ttile of the x axis"
+    },
+    "LINE_Y_AXIS_TITLE": {
+        "message": "Y軸タイトル",
+        "description": "Ttile of the y axis"
     },
     "LINE_OVERVIEW": {
         "message": "概要を表示",

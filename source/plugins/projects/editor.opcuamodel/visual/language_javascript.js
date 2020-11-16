@@ -14,14 +14,14 @@ module.exports = function (blockly) {
 	Blockly.JavaScript.opcuamodel_add_folder = function (name, statements) {
 		let foldervariable = Blockly.JavaScript.variableDB_.getDistinctName(name, Blockly.Generator.NAME_TYPE);
 		let folder_id = name.replace (/[^A-Za-z0-9]/g, '_');
-		Blockly.JavaScript.definitions_['opcuamodel_add_folder_'+foldervariable] = 'function opcuamodelAddFolder'+foldervariable+'(parentId, parentFolder, folderName) {\n  let folder = namespace.addFolder(parentFolder,{ browseName: folderName});\n  let folderId = parentId+\'/'+folder_id+'\';\n'+statements+'}\n';
+		Blockly.JavaScript.definitions_['opcuamodel_add_folder_'+foldervariable] = 'function opcuamodelAddFolder'+foldervariable+'(parentId, parentFolder, folderName) {\n  let folderId = parentId+\'/'+folder_id+'\';\n  let folder = namespace.addFolder(parentFolder,{ browseName: folderName, nodeId: \'ns=1;s=\'+folderId});\n'+statements+'}\n';
 		return foldervariable;
 	};
 
 	Blockly.JavaScript.opcuamodel_add_template = function (name, statements) {
 		let foldervariable = Blockly.JavaScript.variableDB_.getDistinctName(name, Blockly.Generator.NAME_TYPE);
 		// let folder_id = name.replace (/[^A-Za-z0-9]/g, '_');
-		Blockly.JavaScript.definitions_['opcuamodel_add_template_'+foldervariable] = 'function opcuamodelAddTemplate'+foldervariable+'(parentId, parentFolder)\n{\n  if (templateObjects[\''+name+'\'])\n  {\n    for (let objectName of templateObjects[\''+name+'\'])\n    {\n      let folderName = objectName;\n      let objectId = objectName.replace (/[^A-Za-z0-9]/g, \'_\');\n      let folder = namespace.addFolder(parentFolder,{ browseName: folderName});\n      let folderId = parentId+\'/\'+objectId;\n'+statements+'    }\n  }\n  else\n  {\n    console.error (\'No folder names found for template '+name+'\');\n  }\n}\n';
+		Blockly.JavaScript.definitions_['opcuamodel_add_template_'+foldervariable] = 'function opcuamodelAddTemplate'+foldervariable+'(parentId, parentFolder)\n{\n  if (templateObjects[\''+name+'\'])\n  {\n    for (let objectName of templateObjects[\''+name+'\'])\n    {\n      let folderName = objectName;\n      let objectId = objectName.replace (/[^A-Za-z0-9]/g, \'_\');\n      let folderId = parentId+\'/\'+objectId;\n      let folder = namespace.addFolder(parentFolder,{ browseName: folderName, nodeId: \'id=1;ns=\'+folderId});\n'+statements+'    }\n  }\n  else\n  {\n    console.error (\'No folder names found for template '+name+'\');\n  }\n}\n';
 		return foldervariable;
 	};
 

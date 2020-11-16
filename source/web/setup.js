@@ -4,6 +4,14 @@ let plugins = require ('./plugins.js');
 const cowsay = require ('./../cowsay');
 const jokesData = require ('./../itjokes.js');
 
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', () => {
+		navigator.serviceWorker.register('/sw.js').then(() => {
+			console.log('Service Worker Registered');
+		});
+	});
+}
+
 function getRandomInt(max) {
 	return Math.floor(Math.random() * Math.floor(max));
 }

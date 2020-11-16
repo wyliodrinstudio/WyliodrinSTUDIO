@@ -3,6 +3,7 @@ const path = require ('path');
 
 let plugins = [];
 let latestTarget = '';
+let dataItems = [];
 
 module.exports.loadPlugins = (target) =>
 {
@@ -32,6 +33,27 @@ module.exports.loadPlugins = (target) =>
 							consumes: package_json.plugin.consumes,
 							provides: package_json.plugin.provides
 						});
+
+						let listData = (folder) => {
+							let localFolder = path.join (__dirname, 'source', 'plugins', folder);
+							let items = fs.readdirSync (localFolder);
+							for (let item of items) {
+								let folderItem = folder+'/'+item;
+								if (fs.lstatSync (path.join (localFolder, item)).isDirectory()) listData (folderItem);
+								else dataItems.push (folderItem.replace (/\\/g, '/'));
+							}
+						};
+		
+						let dataFolder = path.join (folder, plugin, 'data');
+		
+						try
+						{
+							if (fs.lstatSync(path.join (__dirname, 'source', 'plugins', dataFolder)).isDirectory()) listData (dataFolder);
+						}
+						catch (e)
+						{
+							
+						}
 					}
 				}
 			}
@@ -51,5 +73,8 @@ module.exports.loadPlugins = (target) =>
 		loadPluginsFolder ('');
 	}
 
-	return plugins;
+	return {
+		plugins,
+		dataItems
+	};
 };

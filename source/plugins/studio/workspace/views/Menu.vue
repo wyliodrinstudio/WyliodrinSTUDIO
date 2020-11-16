@@ -7,7 +7,7 @@
 						<v-img src="plugins/studio/workspace/data/img/icons/menu-icon.svg" aria-label="Menu" ></v-img>
 					</v-btn>
 				</template>
-				<v-list>
+				<v-list class="menu">
 					<v-list-item v-for="menuItem in menuItems" :key="menuItem.name" v-show="menuItem.visible()" :disabled="!menuItem.enabled()" @click="runMenuItem (menuItem)">
 						<v-list-item-title>{{$t(menuItem.name)}}</v-list-item-title>
 					</v-list-item>

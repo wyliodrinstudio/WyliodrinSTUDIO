@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Wyliodrin CI
+name: Wyliodrin Build
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
-        uses: actions/setup-node@v1.4.3
+        uses: actions/setup-node@v1.4.4
         with:
           # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
           node-version: 12.x
@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
-        uses: actions/setup-node@v1.4.3
+        uses: actions/setup-node@v1.4.4
         with:
           # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
           node-version: 12.x
@@ -47,7 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js environment
-        uses: actions/setup-node@v1.4.3
+        uses: actions/setup-node@v1.4.4
         with:
           # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
           node-version: 12.x

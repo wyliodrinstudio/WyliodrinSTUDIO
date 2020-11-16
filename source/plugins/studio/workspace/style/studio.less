@@ -28,7 +28,6 @@ a:hover {text-decoration:underline;}
 		}
 	}
 	button:hover {background: @color-highlight !important;}
-	.v-menu__content {z-index: 999;}
 }
 
 .titlebar-buttons {height: 50px;
@@ -167,7 +166,7 @@ a:hover {text-decoration:underline;}
 	}
 }
 
-.v-list {background-color: @color-dark-4 !important; color: @color-white !important; padding: 0px !important;
+.v-list.menu {background-color: @color-dark-4 !important; color: @color-white !important; padding: 0px !important;
 	> div:hover {background-color: @color-highlight !important; color:@color-white !important; cursor: pointer;}
 }
 
@@ -208,8 +207,8 @@ a:hover {text-decoration:underline;}
 	.title-icon-btn:hover {padding: 0px !important; background: @color-highlight !important;	}
 }
 
-.v-menu__content {margin-top: -42px !important;
-	.v-list-item__title {color: @color-white !important;font-size: 14px !important;}
+.v-menu__content {margin-top: -42px !important; z-index: 999 !important;
+	.menu .v-list-item__title {color: @color-white !important;font-size: 14px !important;}
 }
 .v-list__tile {font-size: 14px !important;}
 

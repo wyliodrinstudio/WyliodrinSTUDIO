@@ -10,7 +10,7 @@
 				</template>
 				<span>{{$t(statusButton.name)}}</span>
 			</v-tooltip>
-			<v-bottom-sheet @keydown.esc="close(index)" :value="activeStatusButton === statusButton.name" persistent :hide-overlay="!statusButton.overlay()" eager :inset="statusButton.inset()" :retain-focus="false">
+			<v-bottom-sheet @keydown.esc="close(index)" :value="activeStatusButton === statusButton.name" persistent :hide-overlay="!statusButton.overlay()" eager :inset="statusButton.inset()" :retain-focus="false" :no-click-animation="true">
 				<v-sheet class="text-center" :height="statusButton.height()">
 					<component ref="statusButton" :is="statusButton.component" :active="activeStatusButton === statusButton.name"></component>
 				</v-sheet>

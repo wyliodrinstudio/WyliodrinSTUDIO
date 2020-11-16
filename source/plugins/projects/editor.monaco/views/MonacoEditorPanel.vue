@@ -1,5 +1,5 @@
 <template>
-	<MonacoEditor style="height: 100%" v-model="source" :options="editorOptions" :language="sourceLanguage"></MonacoEditor>
+	<MonacoEditor ref="editor" style="height: 100%" v-model="source" :options="editorOptions" :language="sourceLanguage"></MonacoEditor>
 </template>
 
 <script>
@@ -40,6 +40,11 @@ export default {
 	},
 	watch:
 	{
+		active (value) {
+			if (value) {
+				setTimeout (() => this.$refs.editor.getEditor().layout(), 10);
+			}
+		},
 		filename:
 		{
 			immediate: true,

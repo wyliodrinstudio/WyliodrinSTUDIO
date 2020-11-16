@@ -45,7 +45,7 @@ export default function setup (options, imports, register)
 			if (filename[0] === '/') filename = filename.substring (1);
 			// TODO add filename
 			return 'run:\n\tbash main.sh';
-		},
+		}
 	};
 
 	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/languages/shell/data/img/project.png', 'plugins/languages/shell/data/img/shellLittle.png',fileIcons, shell);

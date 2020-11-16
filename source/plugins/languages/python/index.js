@@ -43,9 +43,14 @@ export default function setup (options, imports, register)
 		},
 		getMakefile(project, filename) {
 			if (filename[0] === '/') filename = filename.substring (1);
+			project;
 			// TODO add filename
 			return 'run:\n\tpython3 main.py';
 		},
+		getEnvironmentSetup(project) {
+			project;
+			return 'RUN pip install -r requirements.txt || true\nCMD python3 main.py\n';
+		}
 	};
 
 	studio.projects.registerLanguage('python', 'Python', 'plugins/languages/python/data/img/project.png', 'plugins/languages/python/data/img/pythonLittle.png',fileIcons, python);

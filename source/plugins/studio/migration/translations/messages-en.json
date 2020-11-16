@@ -1,0 +1,10 @@
+{
+	"MIGRATION_BETA_TITLE": {
+		"message": "Restore your Projects and Boards",
+		"descritpion": "The title of the migration question prompt"
+	},
+	"MIGRATION_BETA_TEXT": {
+		"message": "We have migrated Wyliodrin STUDIO Web App from beta and this has changed the domain name. Please export and import your projects and your Dession ID. Would you like to go now to https://beta.wyliodrin.studio?",
+		"descritpion": "The text of the migration question prompt"
+	}
+}

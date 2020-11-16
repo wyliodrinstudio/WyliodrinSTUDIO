@@ -1,0 +1,10 @@
+{
+    "IMAGE_GRAPH": {
+        "message": "Kép",
+        "description": "Signal name"
+    },
+    "DASHBOARD_ADDIMAGE": {
+        "message": "Kép hozzáadása",
+        "description": "Title of the prompt used to add a new signal"
+    }
+}

@@ -1,6 +1,6 @@
 {
     "GAUGE_GRAPH": {
-        "message": "GAUGE",
+        "message": "Gauge",
         "description": "Signal name"
     },
     "DASHBOARD_ADDGAUGE": {

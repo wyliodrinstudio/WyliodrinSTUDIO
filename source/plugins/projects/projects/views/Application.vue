@@ -126,7 +126,7 @@
 								absolute
 								offset-y
 								>
-									<v-list>
+									<v-list class="menu">
 										<v-list-item @click="newFolder(fileItem)">
 											<v-list-item-title>{{$t('PROJECT_NEW_FOLDER')}}</v-list-item-title>
 										</v-list-item>
@@ -146,7 +146,7 @@
 								absolute
 								offset-y
 								>
-									<v-list>
+									<v-list class="menu">
 										<v-list-item @click="deleteFolder(fileItem)">
 											<v-list-item-title>{{$t('PROJECT_DELETE_FOLDER')}}</v-list-item-title>
 										</v-list-item>
@@ -172,7 +172,7 @@
 								absolute
 								offset-y
 								>
-									<v-list>
+									<v-list class="menu">
 										<v-list-item @click="deleteFile(fileItem)">
 											<v-list-item-title>{{$t('PROJECT_DELETE_FILE')}}</v-list-item-title>
 										</v-list-item>

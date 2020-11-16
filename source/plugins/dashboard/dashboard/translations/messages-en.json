@@ -3,6 +3,10 @@
         "message": "Dashboard",
         "description": "The Dashboard tab, used to send signals from a board."
     },
+    "DASHBOARD_LOAD_DATA_ERROR": {
+        "message": "Failed to load the dashboard",
+        "description": "Error when loading a dashboard."
+    },
     "DASHBOARD_VIEWER_INVALID_SIGNAL": {
         "message": "Signal name invalid",
         "description": "Warning that shows up when the signal name entered by the user is not correct."
@@ -102,5 +106,9 @@
     "DASHBOARD_NO_TITLE": {
         "message": "Please choose a name for the signal.",
         "description": "Notification text when the user didn't chose a name for the signal"
+    },
+    "DASHBOARD_UNKNOWN_TITLE": {
+        "message": "(no signal)",
+        "description": "The title displayed for a widget that has no title or signal name"
     }
 }

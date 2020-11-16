@@ -76,6 +76,27 @@ export function setup (options, imports, register)
 		run (project)
 		{
 			project;
+		},
+
+		/**
+		 * Modidify the project before deploy
+		 * @param {Project} project - the project
+		 */
+		deploy (project)
+		{
+			let dockerfile = null;
+			if(project.language === 'nodejs')
+			{
+				dockerfile = 'FROM balenalib/raspberrypi3-debian-node:latest';
+			}
+			else{
+				dockerfile = 'FROM balenalib/raspberrypi3-debian-python:latest';
+			}
+			dockerfile += '\nCOPY . .\n';
+
+			dockerfile += studio.projects.getEnvironmentSetup(project);
+
+			return studio.projects.newFile(project,'/Dockerfile', dockerfile);
 		}
 	};
 

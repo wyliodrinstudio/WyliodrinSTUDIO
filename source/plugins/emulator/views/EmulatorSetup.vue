@@ -11,7 +11,7 @@
 			</v-tabs>
 			<v-tabs-items v-model="active">
 				<v-tab-item :key="'image'">
-					<v-list>
+					<v-list class="menu">
 						<v-list-item v-for="item in images" :key="item.title">
 							<v-list-item-avatar>
 								<v-img :src="item.icon"></v-img>
@@ -56,7 +56,7 @@
 					</v-alert>
 				</v-tab-item>
 				<v-tab-item :key="'emulator'">
-					<v-list>
+					<v-list class="menu">
 						<v-list-item v-for="emulator in runningEmulatorsArray" :key="emulator.id">
 							<v-list-item-avatar>
 								<v-img :src="emulator.icon"></v-img>

@@ -70,8 +70,12 @@ export default function setup(options, imports, register) {
 		getMakefile(project, filename) {
 			if (filename[0] === '/') filename = filename.substring (1);
 			// TODO add filename
-			return 'run:\n\tnode main.js';
+			return 'run:\n\tnode main.js\n'; 
 		},
+		getEnvironmentSetup(project) {
+			project;
+			return 'RUN npm install\nCMD node main.js\n';
+		}
 	};
 
 	studio.projects.registerLanguage('nodejs', 'NodeJS', 'plugins/languages/nodejs/data/img/project.png', 'plugins/languages/nodejs/data/img/javascriptLittle.png',fileIcons, javaScript);

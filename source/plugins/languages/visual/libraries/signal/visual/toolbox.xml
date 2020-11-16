@@ -1,0 +1,24 @@
+<toolbox>
+    <category name="Signals" colour="330">
+        <block type="wyapp_send_signal">
+            <value name="value_signal">
+                <block type="text">
+                    <field name="TEXT"></field>
+                </block>
+            </value>
+            <value name="value_value">
+                <block type="math_number">
+                    <field name="NUM">0</field>
+                </block>
+            </value>
+        </block>
+        <block type="wyapp_send_signal_break">
+            <value name="value_signal">
+                <block type="text">
+                    <field name="TEXT"></field>
+                </block>
+            </value>
+        </block>
+    </category>
+    <sep />
+</toolbox>

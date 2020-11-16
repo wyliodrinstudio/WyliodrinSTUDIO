@@ -1,6 +1,6 @@
 <template>
 	<v-flex xs12>
-        <v-slider v-model="slider" thumb-label="always" :max="data.maxAxesValue" :min="data.minAxesValue" :color="data.signalColor"
+        <v-slider v-model="slider" thumb-label="always" :max="data.maxAxesValue" :min="data.minAxesValue" :color="data.color"
         ></v-slider>
       </v-flex>
 </template>
@@ -12,7 +12,7 @@ export default {
 	data() {
 		return {
 			slider: this.data.minAxesValue,
-			signalColor: this.data.signalColor
+			color: this.data.color
 		};
 	}
 };

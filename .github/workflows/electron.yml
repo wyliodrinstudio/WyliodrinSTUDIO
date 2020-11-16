@@ -1,0 +1,71 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Wyliodrin Distribute
+
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version'
+        required: true
+
+jobs:
+  build-electron:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            extension: AppImage
+          - os: windows-latest
+            extension: exe
+          - os: macos-latest
+            extension: dmg
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1.4.4
+        with:
+          # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
+          node-version: 12.x
+      - run: echo building WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
+      - run: npm install
+      - run: npx electron-rebuild
+      - run: npm run dist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
+          prerelease: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
+          asset_name: WyliodrinSTUDIO-${{ github.event.inputs.version }}.${{ matrix.extension }}
+          tag: v${{ github.event.inputs.version }}
+          overwrite: true
+          body: "Wyliodrin STUDIO v${{ github.event.inputs.version }}"
+      - name: Upload block maps to release
+        if: ${{ matrix.os == 'macos-latest' || matrix.os == 'windows-latest' }}
+        uses: svenstaro/upload-release-action@v2
+        with:
+          release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
+          prerelease: true
+          file_glob: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/*.blockmap
+          tag: v${{ github.event.inputs.version }}
+          overwrite: true
+      - name: Upload update data to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          release_name: Wyliodrin STUDIO ${{ github.event.inputs.version }}
+          prerelease: true
+          file_glob: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/latest*.yml
+          tag: v${{ github.event.inputs.version }}
+          overwrite: true
+

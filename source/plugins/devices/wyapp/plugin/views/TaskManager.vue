@@ -68,7 +68,7 @@ export default {
 		});
 		this.connection.on ('tag:tm', this.updateTasks);
 	},
-	destroyed () //!!!!!!!!!!!
+	destroyed () 
 	{
 		this.connection.send ('tm', {
 			a: 'stop'

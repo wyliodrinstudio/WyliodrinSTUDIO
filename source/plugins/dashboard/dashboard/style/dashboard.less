@@ -3,20 +3,20 @@
 .widgets-toolBox {
     z-index: 0;
     display: none;
-    width: 178px;
+    width: 50px;
     padding: 0 5px;
     position: absolute;
     top: 0px;
     bottom: 0px;
     right: 5px;
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
 	display:block;
 }
 
 .widget_item {
     background: @color-grey-5;
-    height: 160px;
+    height: 50px;
     margin: 7px 0;
     cursor: pointer;
     text-align: center;
@@ -39,33 +39,33 @@
 
 .widget_item .v-btn {
     box-shadow: none !important;
-    height: 100% !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    // height: 100% !important;
+    // width: 100% !important;
+    // margin: 0 !important;
+    // padding: 0 !important;
 }
 
 .widget_btn .v-btn__content {
-	height: 160px !important;
+	// height: 160px !important;
 }
 
-.widget_item img {
-	position: absolute;
-    left: 0;
-    right: 0;
-	margin: auto;
-	height: initial !important;
-    top: 40px;
-}
+// .widget_item img {
+// 	position: absolute;
+//     left: 0;
+//     right: 0;
+// 	margin: auto;
+// 	height: initial !important;
+//     top: 40px;
+// }
 
-.widget_item img:focus {
-	outline:none;
-}
+// .widget_item img:focus {
+// 	outline:none;
+// }
 
 .dashboard-content{
 	position:relative;
 	background:@color-white;
-	overflow: hidden;
+	overflow: auto;
 	height: calc(~"100vh - 158px") !important;
 }
 
@@ -83,15 +83,15 @@
 .signal-info img{ vertical-align:bottom; }
 
 
-.signalcolor{
+.color{
 	width:80px !important;
 }
 
- .dash-btn {height: 36px !important; width: 36px !important; background: none !important; box-shadow: none !important;
-    .v-image__image {max-height: 36px;}
-    .v-btn__content {width: 36px;}
+ .dash-btn {height: 24px !important; width: 24px !important; background: none !important; box-shadow: none !important; float: right; margin-right: 6px; margin-top: 6px;
+    .v-btn__content {width: 100%; height: 100%;}
 	.s24 .v-image__image{background-size: 24px !important;}
-	.s18 .v-image__image{background-size: 18px !important;}
+    .s18 .v-image__image{background-size: 18px !important;}
+    .s14 .v-image__image{background-size: 14px !important;}
 }
 
 .dash-btn:hover {border: 0 !important; background: @color-highlight !important;
@@ -101,5 +101,74 @@
 .dash-btn:nth-child(1){margin-left:10px;} 
 
 .graph-title {line-height: 36px; margin:0 16px; float: left;}
+.graph-box {position: absolute; top: 3em; bottom: 0; left: 0; right: 0;}
+
+.graph-header { float: left; position: relative; width: 100%;
+
+    .dash-btn {display: none;}
+
+    &:hover { background-color: #eee; cursor: pointer;
+        .dash-btn {display: block;}
+    }
+}
 
 .highcharts-container { position: relative; margin: auto; height: 30% !important;}
+
+.vue-grid-layout {
+    margin-right: 56px;
+}
+.vue-grid-item:not(.vue-grid-placeholder) {
+    background: rgba(255,255,255,.8);    
+    border: 1px dashed rgba(0, 0, 0, 0);
+    overflow: hidden;
+    &:hover {
+        border-color: rgba(0, 0, 0, .3);
+    }
+}
+
+.vue-grid-item.vue-grid-placeholder {
+    background-color: #81d4f5 !important;
+}
+
+.vue-grid-item .resizing {
+    opacity: 0.9;
+}
+.vue-grid-item .static {
+    background: #cce;
+}
+.vue-grid-item .text {
+    font-size: 24px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+}
+.vue-grid-item .no-drag {
+    height: 100%;
+    width: 100%;
+}
+.vue-grid-item .minMax {
+    font-size: 12px;
+}
+.vue-grid-item .add {
+    cursor: pointer;
+}
+.vue-draggable-handle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><circle cx='5' cy='5' r='5' fill='#999999'/></svg>") no-repeat;
+    background-position: bottom right;
+    padding: 0 8px 8px 0;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    box-sizing: border-box;
+    cursor: pointer;
+}

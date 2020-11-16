@@ -1,5 +1,9 @@
 # Wyliodrin STUDIO
 
+![Wyliodrin Documentation](https://github.com/wyliodrinstudio/WyliodrinSTUDIO/workflows/Wyliodrin%20Documentation/badge.svg)
+![Wyliodrin Build](https://github.com/wyliodrinstudio/WyliodrinSTUDIO/workflows/Wyliodrin%20Build/badge.svg)
+
+
 Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.
 
 - Connect to devices using TCP/IP or serial port
@@ -16,9 +20,9 @@ Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems.
 
 ## Supported devices:
 
-- Raspberry Pi and Arduino
+- Raspberry Pi
+- MicroPython
 - Pico PI iMX8M
-- NXP Rapid IoT
 - UDOO Neo
 - BeagleBone Black
 
@@ -107,6 +111,8 @@ Wyliodrin STUDIO is a product of [Wyliodrin](https://wyliodrin.studio) in partne
 - [Calin Dumitru](https://github.com/Dumitru98) - Simulators
 - [Diana Ghindaoanu](https://github.com/diana-ghindaoanu) - Notebook, Dashboard, Documentation
 - [Teona Severin](https://github.com/teonaseverin) - Web File Systems, Hooks, Statistics
+- [Andrei-Paul Zamfir](https://github.com/ZamfirAndreiPaul) - MicroPython
+- [Iulia Andreea Luta](https://github.com/iuliutza) - Docker
 
 Contributions
 
@@ -114,7 +120,6 @@ Contributions
 - [Andrei Deatcu](https://www.github.com/dosarudaniel) - Resistor Color Code, Schematics
 - [Alexandru Vochescu](https://www.github.com/valexandru) - Examples
 - [Luis Miguel Capacho Valbuena](https://github.com/lmcapacho) - Translations, WyApp Serial
-- [Andrei-Paul Zamfir](https://github.com/ZamfirAndreiPaul) - MicroPython
 - [Roberta-Alexandra Craciun] (https://github.com/CraciunRAlexandra) - Tutorials
 - [Alexandra-Gabriela State] (https://github.com/alexandra2607) - Tutorials
 

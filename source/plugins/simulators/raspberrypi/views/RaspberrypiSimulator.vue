@@ -10,7 +10,7 @@
 		<!-- <v-btn color="primary" @click="openDocumentation()">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_HELP')}}</v-btn> -->
 
 		<v-navigation-drawer v-if="projectsList" v-model="projectsListShow" absolute temporary width="300" dark>
-			<v-list>
+			<v-list class="menu">
 				<v-btn text @click="projectsListShow = !projectsListShow">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_CLOSE_PROJECT_LIST')}}</v-btn>
 				<v-btn text @click="uploadOwnProject(); projectsListShow = !projectsListShow">{{$t('DEVICE_SIMULATOR_RASPBERRY_PI_LOAD_PROJECT')}}</v-btn>
 

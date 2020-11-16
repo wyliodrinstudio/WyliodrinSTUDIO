@@ -7,6 +7,9 @@ let studio = null;
 export function setup (options, imports, register)
 {
 	studio = imports;
+
+	let filters = [];
+
 	let consoleObject = {
 		/**
 		 * Write to console
@@ -14,8 +17,14 @@ export function setup (options, imports, register)
 		 * @param {string} data - console data
 		 *  */
 		write(id, data) {
+			
+			let output = data;
+			for (let filter of filters) {
+				output = filter (id, output);
+			}
+
 			let shell = getConsole ();
-			if (shell) shell.write (id, data);
+			if (shell) shell.write (id, output);
 		},
 
 		register (fn)
@@ -27,6 +36,14 @@ export function setup (options, imports, register)
 			return () => {
 				events.removeListener ('data', data);
 				events.removeListener ('resize', resize);
+			};
+		},
+
+		registerFilter (fn)
+		{
+			filters.push (fn);
+			return () => {
+				filters = filters.filter ((item) => item !== fn);
 			};
 		},
 

@@ -1,0 +1,18 @@
+{
+    "ID_SET_USER_ID": {
+        "message": "ID-ul Sesiunii",
+        "description": "The menu item where the user changes the session id"
+    },
+    "ID_SET_USER_ID_TITLE": {
+        "message": "ID-ul sesiunii",
+        "description": "The dialog title where the user changes the session id"
+    },
+    "ID_SET_USER_ID_TEXT": {
+        "message": "ID unic folosit pentru conectarea la dispozitive, este similar cu o parola.",
+        "description": "The text dispalyed in the dialog where the user changes the session id"
+    },
+    "ID_SET_USER_ID_NO_UUID": {
+        "message": "ID-ul sesiunii trebuie sa fie un UUID valid.",
+        "description": "The error the user is shown when the enetered session id is not a valid"
+    }
+}
