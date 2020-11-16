@@ -1,14 +1,14 @@
 {
         "DEVICE_MP_RUN": {
-                "message": "RUN",
+                "message": "Run",
                 "description": "The run button."
 	},
 	"DEVICE_MP_STOP": {
-                "message": "STOP",
+                "message": "Stop",
                 "description": "The stop button."
 	},
 	"DEVICE_MP_RESTART": {
-                "message": "RESTART",
+                "message": "Reset",
                 "description": "The restart button."
 	},
 	"DEVICE_MP_CONNECT": {
@@ -16,15 +16,15 @@
                 "description": "The connect button."
 	},
 	"DEVICE_MP_EXIT": {
-                "message": "EXIT",
+                "message": "Exit",
                 "description": "The exit button."
         },
         "DEVICE_MP_FILES": {
-                "message": "FILE SYSTEM",
+                "message": "File System",
                 "description": "The file system button."
         },
         "DEVICE_MP_DEPLOY": {
-                "message": "DEPLOY",
+                "message": "Deploy",
                 "description": "The deploy button."
         },
 	"DEVICE_MP_FLAG_HEADER": {
@@ -60,19 +60,27 @@
                 "description": "Warning for setting chrome flag."
 	},
 	"DEVICE_MP_SERIAL_OPTIONS": {
-                "message": "Set the baudrate",
-                "description": "Baudrate set header."
+                "message": "Connect via Serial",
+                "description": "The title of the options dialog"
         },
 	"DEVICE_MP_SERIAL_BAUDRATE": {
-                "message": "Set a value for baud rate. Default value: 115200.",
+                "message": "Serial connection speed",
                 "description": "Baudrate set paragraph."
         },
-        "DEVICE_MP_DROPDOWN_TITLE": {
-                "message": "Programming Language",
-                "description": "Brate dropdown title"
+        "DEVICE_MP_VARIANT": {
+                "message": "MicroPython Variant",
+                "description": "A dropdown to select the MicroPython version"
         },
         "DEVICE_MP_CHECKBOX": {
                 "message": "Do you want to restart the board when connecting?",
                 "description": "Brate checkbox text"
+        },
+        "DEVICE_MP_AUTODETECT": {
+                "message": "Detect Automatically",
+                "description": "Autodetect option title for micropython variant"
+        },
+        "DEVICE_MP_RESET_AFTER_CONNECT": {
+                "message": "Reset after connect",
+                "description": "A switch were the use can select to reset the device after connect"
         }
 }

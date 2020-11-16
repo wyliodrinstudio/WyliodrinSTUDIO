@@ -60,7 +60,7 @@
         "description": "Warning for setting chrome flag."
 	},
 	"DEVICE_MP_SERIAL_OPTIONS": {
-        "message": "SETAREA BAUDRATE-ULUI",
+        "message": "Conectare",
         "description": "Baudrate set header."
         },
 	"DEVICE_MP_SERIAL_BAUDRATE": {

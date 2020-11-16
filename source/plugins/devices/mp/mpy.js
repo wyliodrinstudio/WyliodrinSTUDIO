@@ -23,7 +23,7 @@ function escape (s) {
 	return s;
 }
 
-const CircuitPythonRegex = /Adafruit CircuitPython ([A-Za-z0-9_\.]+) on [A-Za-z0-9\-]+; ([A-Za-z0-9_\s]+) with ([A-Za-z0-9_]+)/;
+const CircuitPythonRegex = /Adafruit CircuitPython ([A-Za-z0-9_.]+) on [A-Za-z0-9-]+; ([A-Za-z0-9_\s]+) with ([A-Za-z0-9_]+)/;
 
 export class MicroPython extends EventEmitter {
 	constructor(port){
@@ -52,6 +52,8 @@ export class MicroPython extends EventEmitter {
 
 		this.display = true;
 
+		this.options = false;
+
 		this.stdout = null;
 		this.stderr = null;
 
@@ -59,6 +61,7 @@ export class MicroPython extends EventEmitter {
 		port.on('connected', ()=>{
 			this.emit('connected');
 			this.setStatus(STATUS_READY);
+			if (this.options.reset) this.reset ();
 		});
 
 		port.on('data', (data)=>{			
@@ -67,6 +70,12 @@ export class MicroPython extends EventEmitter {
 		port.on('error', (err)=>{
 			this.emit('error', err);
 		});
+		
+	}
+
+	connect (options) {
+		this.options = options;
+		this.port.connect (options.port, options.baudrate);
 	}
 
 	async listdir (folder) {
@@ -344,13 +353,19 @@ rmdir('${escape(dir)}')`;
 
 	async execute (cmd) {
 		let s = this.waitForStatus (STATUS_STOPPED, LIST_FILES_TIMEOUT);
-		await this.enterRawRepl ();
-		await this.run (cmd, false);
-		await s;
-		return {
-			stdout: this.stdout,
-			stderr: this.stderr
-		};
+		if (await this.enterRawRepl ())
+		{
+			await this.run (cmd, false);
+			await s;
+			return {
+				stdout: this.stdout,
+				stderr: this.stderr
+			};
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	emitConsoleBuffer ()
@@ -366,7 +381,6 @@ rmdir('${escape(dir)}')`;
 	}
 
 	readBuffer (data) {
-		console.log (this.console);
 		if (this.console) 
 		{
 			this.emit ('data', data);
@@ -375,7 +389,7 @@ rmdir('${escape(dir)}')`;
 				this.circuitPython = true;
 				let name = 'CircuitPython';
 				let version = null;
-				let info = buffer.match (CircuitPythonRegex)
+				let info = buffer.match (CircuitPythonRegex);
 				if (info) {
 					version = info[1];
 					name = info[2];
@@ -406,15 +420,9 @@ rmdir('${escape(dir)}')`;
 			}
 			else
 			{
-				let emitData = null;
-				if(this.status === STATUS_READY)
-				{
-					emitData = this.expectBuffer;
-					this.expectBuffer = '';
-				}
-				else
 				if (this.status === STATUS_RUNNING) {
 					let position;
+					let emitData = '';
 					while ((position = this.expectBuffer.indexOf ('\x04')) > -1)
 					{
 						emitData = this.expectBuffer.substring (0, position);
@@ -455,7 +463,6 @@ rmdir('${escape(dir)}')`;
 				}
 			}
 		}
-		console.log (this.consoleBuffer);
 	}
 
 	expect (str, timeout) {
@@ -469,6 +476,7 @@ rmdir('${escape(dir)}')`;
 					this.expecting = false;
 					reject ();
 				}).bind(this), timeout);
+				process.nextTick (() => this.readBuffer (''));
 			});
 		}
 		else {
@@ -476,9 +484,9 @@ rmdir('${escape(dir)}')`;
 		}
 	}
 
-	sleep (mseconds) {
+	sleep (seconds) {
 		return new Promise ((resolve) => {
-			setTimeout (resolve, mseconds);
+			setTimeout (resolve, parseInt (seconds*1000));
 		});
 	}
 
@@ -635,8 +643,17 @@ rmdir('${escape(dir)}')`;
 
 	async reset()
 	{
-		await this.port.write(Buffer.from('\r\x04'));
+		this.console = false;
+		await this.port.write(Buffer.from('\x03\x04'));
+		await this.expect ('soft reboot\r\n', RAW_REPL_TIMEOUT);
+		await this.sleep (0.3);
+		this.console = true;
+		this.resetConsoleBuffer ();
 		await this.port.write(Buffer.from('\r\x02'));
+	}
+
+	close () {
+		this.port.close ();
 	}
 
 }

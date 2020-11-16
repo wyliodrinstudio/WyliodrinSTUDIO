@@ -143,96 +143,103 @@ export function setup (options, imports, register)
 
 	let startSocket = () => 
 	{
-		if (socket) socket.close ();
-		let websockethostname = (location.protocol==='http:'?'ws':'wss')+'://'+location.hostname+':'+location.port;
-		if (location.href.startsWith ('file://')) websockethostname = 'wss://beta.wyliodrin.studio';
-		socket = new ReconnectingWebSocket (websockethostname+'/socket/ui');
-
-		socket.onopen = function ()
+		if (token)
 		{
-			errorAlreadyShown = false;
-			socket.send (JSON.stringify({t:'a', token: token}));
-			// console.log ('UI Socket sent authenticate');
-		};
+			if (socket) socket.close ();
+			let websockethostname = (location.protocol==='http:'?'ws':'wss')+'://'+location.hostname+':'+location.port;
+			if (location.href.startsWith ('file://')) websockethostname = 'wss://beta.wyliodrin.studio';
+			socket = new ReconnectingWebSocket (websockethostname+'/socket/ui');
 
-		socket.onmessage = async function (evt)
-		{
-			let m = evt.data;
-			try
+			socket.onopen = function ()
 			{
-				let data = JSON.parse (m);
-				if (data.t === 'a')
-				{
-					if (data.authenticated === true) 
-					{
-						workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED', {}, 'success');
-						authenticated = true;
-						pingPongTimeout = setInterval (() => {
-							if (authenticated) socket.send (JSON.stringify ({t: 'ping'}));
-						}, 20*1000);
-						socket.send (JSON.stringify ({t: 'i'}));
-						updateDevices ();
+				errorAlreadyShown = false;
+				socket.send (JSON.stringify({t:'a', token: token}));
+				// console.log ('UI Socket sent authenticate');
+			};
 
-					}
-					if (data.e === 'unique')
+			socket.onmessage = async function (evt)
+			{
+				let m = evt.data;
+				try
+				{
+					let data = JSON.parse (m);
+					if (data.t === 'a')
 					{
-						if (displayedUnique === false)
+						if (data.authenticated === true) 
 						{
-							displayedUnique = true;
-							let reset = await workspace.showConfirmationPrompt ('DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE', 'DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET');
-							// eslint-disable-next-line require-atomic-updates
-							displayedUnique = false;
-							if (reset)
+							workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_CONNECTED', {}, 'success');
+							authenticated = true;
+							pingPongTimeout = setInterval (() => {
+								if (authenticated) socket.send (JSON.stringify ({t: 'ping'}));
+							}, 20*1000);
+							socket.send (JSON.stringify ({t: 'i'}));
+							updateDevices ();
+
+						}
+						if (data.e === 'unique')
+						{
+							if (displayedUnique === false)
 							{
-								socket.send (JSON.stringify ({t: 'a', token: token, reset: true}));
-							}
-							else
-							{
-								socket.close ();
+								displayedUnique = true;
+								let reset = await workspace.showConfirmationPrompt ('DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET_TITLE', 'DEVICE_WYAPP_WEBSOCKET_INSTANCE_RESET');
+								// eslint-disable-next-line require-atomic-updates
+								displayedUnique = false;
+								if (reset)
+								{
+									socket.send (JSON.stringify ({t: 'a', token: token, reset: true}));
+								}
+								else
+								{
+									socket.close ();
+								}
 							}
 						}
 					}
+					else
+					if (data.t === 's')
+					{
+						data.d.map ((device) => {if (!device.properties) device.properties = {};});
+						websocketDevices = data.d;
+						websocketDevices.map ((device) => {
+							if (device.id.indexOf ('wyapp:websocket:')!==0) device.id = 'wyapp:websocket:'+device.id;
+							device.priority = workspace.DEVICE_PRIORITY_NORMAL;
+						});
+						updateDevices ();
+					}
+					else
+					if (data.t === 'p')
+					{
+						socketMessages.emit ('data:'+data.id, data.d);
+					}
 				}
-				else
-				if (data.t === 's')
+				catch (e)
 				{
-					data.d.map ((device) => {if (!device.properties) device.properties = {};});
-					websocketDevices = data.d;
-					websocketDevices.map ((device) => {
-						if (device.id.indexOf ('wyapp:websocket:')!==0) device.id = 'wyapp:websocket:'+device.id;
-						device.priority = workspace.DEVICE_PRIORITY_NORMAL;
-					});
-					updateDevices ();
+					workspace.error ('UI Socket '+e.message);
 				}
-				else
-				if (data.t === 'p')
-				{
-					socketMessages.emit ('data:'+data.id, data.d);
-				}
-			}
-			catch (e)
-			{
-				workspace.error ('UI Socket '+e.message);
-			}
-		};
+			};
 
-		socket.onerror = function ()
-		{
-			if (!errorAlreadyShown)
+			socket.onerror = function ()
 			{
-				workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR');
-				errorAlreadyShown = true;
-			}
-		};
-		
-		socket.onclose = function ()
+				if (!errorAlreadyShown)
+				{
+					workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SOCKET_ERROR');
+					errorAlreadyShown = true;
+				}
+			};
+			
+			socket.onclose = function ()
+			{
+				authenticated = false;
+				websocketDevices = [];
+				updateDevices ();
+				clearInterval (pingPongTimeout);
+				workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED', {}, 'warning');
+			};
+		}
+		else
 		{
-			authenticated = false;
-			websocketDevices = [];
-			updateDevices ();
-			clearInterval (pingPongTimeout);
-			workspace.showNotification ('DEVICE_WYAPP_WEBSOCKET_SOCKET_DISCONNECTED', {}, 'warning');
-		};
+			workspace.showError ('DEVICE_WYAPP_WEBSOCKET_SET_USER_ID_NO_UUID');
+		}
 	};
 
 	startSocket ();

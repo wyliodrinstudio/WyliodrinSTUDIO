@@ -259,12 +259,12 @@ export default {
 			// });
 			try{
 				let d = await this.mp.listdir(this.cwd);
+				this.update(d);
 			}
 			catch(e)
 			{
 				this.studio.workspace.showError('ListError',{extra:e.message});
 			}
-			this.update(d);
 		},
 		async refresh(){
 			//TODO optimize file changes
@@ -276,12 +276,12 @@ export default {
 			this.blocked = true;
 			try{
 				let d = await this.mp.listdir('/');
+				await this.update(d);
 			}
 			catch(e)
 			{
 				this.studio.workspace.showError('ListError',{extra:e.message});
 			}
-			await this.update(d);
 			this.blocked = false;
 		},
 		async deleteObject(){
@@ -319,12 +319,12 @@ export default {
 
 					try{
 						let d = await this.mp.listdir(parent);
+						this.update(d);
 					}
 					catch(e)
 					{
 						this.studio.workspace.showError('ListError',{extra:e.message});
 					}
-					this.update(d);
 					await this.refresh();
 				}
 				else
@@ -352,12 +352,12 @@ export default {
 
 					try{
 						let d = await this.mp.listdir(parent);
+						await this.update(d);
 					}
 					catch(e)
 					{
 						this.studio.workspace.showError('ListError',{extra:e.message});
 					}
-					await this.update(d);
 					await this.refresh();
 				}
 			}			
@@ -429,12 +429,12 @@ export default {
 
 				try{
 					let d = await this.mp.listdir(this.fileItem.path+folderName);
+					this.update(d);
 				}
 				catch(e)
 				{
 					this.studio.workspace.showError('ListError',{extra:e.message});
 				}
-				this.update(d);
 				await this.refresh();
 
 			}			
@@ -486,10 +486,6 @@ export default {
 			if(!this.cwdArray.includes(this.cwd)){
 				this.cwdArray.push(this.cwd);
 				this.fileItem=item;
-				// this.connection.send('fe', {
-				// 	a: 'ls',
-				// 	b:this.cwd
-				// });
 				let d = await this.mp.listdir(this.cwd);
 				this.update(d);
 			}

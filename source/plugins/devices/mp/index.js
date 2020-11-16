@@ -1,5 +1,4 @@
-import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
-import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
+import MicroPythonConnectionDialog from './views/MicroPythonConnectionDialog.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
 import MPFileManager from './views/MPFileManager.vue';
 import {SerialPort} from './serial.js';
@@ -85,19 +84,19 @@ function searchSerialDevices(){
 
 		for(let serialDevice of serial_devices)
 		{
-			if(serialDevice.vendorId === /*'2a03'*/'1a86' && serialDevice.productId === /*'0043'*/'7523' )
+			if(serialDevice.vendorId || serialDevice.productId || serialDevice.manufacturer)
 			{
-				let name = 'MP'.toString();
 				let description = '';
 				let id = 'mp:serial:' + serialDevice.path;//.toString().toLowerCase();
 				devices.push({
 					id: id,
 					address: serialDevice.path,
 					description,
-					name,
+					name: serialDevice.manufacturer || serialDevice.path,
 					connection:'serial',
 					icon:'plugins/devices/mp/data/img/icons/mp.png',
-					board:'mp',
+					board:'any',
+					// python: 'autodetect', TODO estimate based on productId, vendorId and manufacturer
 					status:'',
 					properties: {
 						productId: serialDevice.productId,
@@ -128,6 +127,12 @@ function searchSerialDevices(){
                         
 
         
+}
+
+function pythonIcon (variant) {
+	let icon = 'plugins/devices/mp/data/img/icons/mp.png';
+	if (variant === 'circuitpython') icon = 'plugins/devices/mp/data/img/icons/circuitpython.png';
+	return icon;
 }
 
 
@@ -227,38 +232,32 @@ export function setup (options, imports, register)
 
 		async connect(device/*, options*/)
 		{
-			if(navigator.serial !== undefined)
+			if(studio.system.platform() === 'electron' || navigator.serial !== undefined)
 			{
 				if(_.isObject(device))
 				{
-					let options = null;
-					if(studio.system.platform() === 'electron')
-					{
-						options = await studio.workspace.showDialog (SerialConnectionDialog, {
-							device: device,
-							width: '500px'
-						});
-					}
-					else
-					{
-						options = await studio.workspace.showDialog (BrateConnectionBrowser, {
-							device: device,
-							width: '500px'
-						});
-					}
 
-					if(options != null)
+					let port = new SerialPort();
+					let options = await studio.workspace.showDialog (MicroPythonConnectionDialog, {
+						device: device,
+						width: '500px'
+					});
+					if (options) 
 					{
+						let mp = new MicroPython(port);
+
 						device.status = 'CONNECTING';
+						device.icon = pythonIcon (options.python);
 						updateDevices();
 
-						let port = new SerialPort();
+						mp.connect (options);
 
-						let mp = new MicroPython(port);
+						
+
+						
 						ports[device.id]=mp;
 
 						mp.on('connected',()=>{
-							mp.reset ();
 							device.status = 'CONNECTED';
 							device.running = false;
 							updateDevice(device);
@@ -277,10 +276,7 @@ export function setup (options, imports, register)
 							device.python = board.python;
 							device.version = board.python;
 							device.address = device.address+' ('+board.python+'@'+board.version+')';
-							if (device.python === 'circuitpython')
-							{
-								device.icon = 'plugins/devices/mp/data/img/icons/circuitpython.png';
-							}
+							device.icon = pythonIcon (device.python);
 							updateDevice (device);
 						});
 
@@ -321,10 +317,7 @@ export function setup (options, imports, register)
 							studio.console.close();
 							delete connections[device.id];
 							delete ports[device.id];
-						});
-
-						port.connect(options.port,options.baudrate);
-                                                        
+						});                                                        
 					}
                                                 
                                                 
@@ -362,7 +355,7 @@ export function setup (options, imports, register)
 				{
 					if(device)
 					{
-						ports[device.id].close();
+						mp.close();
 					}
 					device.status = 'DISCONNECTED';
 					updateDevice(device);
@@ -379,7 +372,7 @@ export function setup (options, imports, register)
 				if(device)
 				{
 					//ports[device.id].close();
-					mp.getPort().close();
+					mp.close();
 				}
 				device.status = 'DISCONNECTED';
 				updateDevice(device);
@@ -408,9 +401,11 @@ export function setup (options, imports, register)
 
 			if (project) {
 				let pySource;
-				if (project.language === 'python') {
-					pySource = await studio.projects.getCurrentFileCode();
+				if (project.language === 'python' || project.language === 'visual') {
+					let runFilename = await studio.projects.getDefaultRunFileName(project);
+					pySource = await studio.projects.loadFile(project, runFilename);
 					let mp = ports[device.id];
+					studio.console.reset ();
 					if (await mp.enterRawRepl())
 					{
 						device.running = true;
@@ -490,14 +485,10 @@ export function setup (options, imports, register)
 		workspace.registerDeviceToolButton('DEVICE_MP_RESTART', 10, async () => {
 			let device = studio.workspace.getDevice();
         
-			let project = await studio.projects.getCurrentProject();
-        
-			if (project) {
-				if (project.language === 'python') {
-					let mp = ports[device.id];
-					await mp.reset();
-				}
-        
+			if (device && ports[device.id])
+			{
+				let mp = ports[device.id];
+				await mp.reset();
 			}
         
 		}, 'plugins/devices/mp/data/img/icons/restart-icon.svg',
@@ -600,7 +591,6 @@ export function setup (options, imports, register)
 					address: 'WebSerial',
 					name: 'MicroPython',
 					board: 'any',
-					python: 'micropython',
 					connection: 'web-usb',
 					priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 					placeholder: true,

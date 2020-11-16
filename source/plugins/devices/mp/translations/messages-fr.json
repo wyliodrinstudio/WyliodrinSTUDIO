@@ -16,7 +16,7 @@
 		"description": "The connect button."
 	},
 	"DEVICE_MP_EXIT": {
-		"message": "SORTIE",
+		"message": "Sortie",
 		"description": "The exit button."
 	},
 	"DEVICE_MP_FILES": {
@@ -60,7 +60,7 @@
 		"description": "Warning for setting chrome flag."
 	},
 	"DEVICE_MP_SERIAL_OPTIONS": {
-		"message": "RÉGLER LA BAUDRATE",
+		"message": "Conecter",
 		"description": "Baudrate set header."
 	},
 	"DEVICE_MP_SERIAL_BAUDRATE": {
