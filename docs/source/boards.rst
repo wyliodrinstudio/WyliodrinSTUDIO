@@ -234,7 +234,8 @@ To see if the installation worked, check the Docker version:
 
 .. note::
 
-	For **raspberry pi 0** , in order to work, after your first try to create a container, you must change the image that the dockerfile is downloading with: FROM /balenalib/raspberry-pi-node
+	For **raspberry pi 0** , in order to work, after your first try to create a container, you have to go to the menu, select Use Advanced Mode and, in the dockerfile, change the
+	default image with: FROM /balenalib/raspberry-pi-node:14.
 
 
 |
