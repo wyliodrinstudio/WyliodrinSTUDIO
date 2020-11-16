@@ -76,7 +76,8 @@ export class SerialPort extends EventEmitter {
 		else
 		{	
 			this.portConnect = await navigator.serial.requestPort();
-			await this.portConnect.open({ baudrate: baudRate || 115200 });
+			// API changes, so we take into account both versions
+			await this.portConnect.open({ baudRate: baudRate || 115200, baudrate: baudRate || 115200 });
 			this.reader = this.portConnect.readable.getReader();
 			this.writer = this.portConnect.writable.getWriter();
 			this.emit('connected');
@@ -118,15 +119,15 @@ export class SerialPort extends EventEmitter {
 		}
 	}
 
-	close(){
+	async close(){
 		if(studio.system.platform() === 'electron')
 		{
 			this.serial.close();
 		}
 		else{
-			this.reader.cancel();
-			this.writer.close();
-			this.portConnect.close();
+			await this.reader.cancel();
+			await this.writer.abort();
+			await this.portConnect.close();
 		}
 	}
 }

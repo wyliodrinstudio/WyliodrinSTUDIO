@@ -14,6 +14,18 @@
 				{{$t('DEVICE_MP_FLAG_STEP_THREE')}}
 			</div>
 			<div>
+				{{$t('DEVICE_MP_FLAG_STEP_FOUR')}}
+			</div>
+			<div>
+				{{$t('DEVICE_MP_FLAG_STEP_FIVE')}}
+			</div>
+			<div>
+				{{$t('DEVICE_MP_FLAG_STEP_SIX')}}
+			</div>
+			<div>
+				<img src="plugins/devices/mp/data/img/gflag.gif" alt="">
+			</div>
+			<div>
 				{{$t('DEVICE_MP_FLAG_CAREFUL')}}
 			</div>
 		</v-card-text>

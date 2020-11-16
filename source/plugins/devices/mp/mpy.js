@@ -23,10 +23,17 @@ function escape (s) {
 	return s;
 }
 
+const CircuitPythonRegex = /Adafruit CircuitPython ([A-Za-z0-9_.]+) on [A-Za-z0-9-]+; ([A-Za-z0-9_\s]+) with ([A-Za-z0-9_]+)/;
+
 export class MicroPython extends EventEmitter {
 	constructor(port){
 		super();
 		this.port = port;
+
+		this.console = true;
+		this.consoleBuffer = '';
+
+		this.circuitPython = false;
 
 		this.expectBuffer = '';
 		this.expecting = false;
@@ -45,6 +52,8 @@ export class MicroPython extends EventEmitter {
 
 		this.display = true;
 
+		this.options = false;
+
 		this.stdout = null;
 		this.stderr = null;
 
@@ -52,6 +61,7 @@ export class MicroPython extends EventEmitter {
 		port.on('connected', ()=>{
 			this.emit('connected');
 			this.setStatus(STATUS_READY);
+			if (this.options.reset) this.reset ();
 		});
 
 		port.on('data', (data)=>{			
@@ -60,6 +70,12 @@ export class MicroPython extends EventEmitter {
 		port.on('error', (err)=>{
 			this.emit('error', err);
 		});
+		
+	}
+
+	connect (options) {
+		this.options = options;
+		this.port.connect (options.port, options.baudrate);
 	}
 
 	async listdir (folder) {
@@ -70,7 +86,7 @@ def listdir(directory):
 	ls = os.listdir(directory)
 	r = []
 	for f in ls:
-		s = os.stat(f)   
+		s = os.stat(directory+'/'+f)
 		t = 'u'          
 		if s[0] == 16384: 
 			t = 'd' 
@@ -80,21 +96,21 @@ def listdir(directory):
 	print(json.dumps(r))
 
 listdir ('${escape(folder)}')`;
+
 		let ls = null;
 		try {
 			let res = await this.execute (cmd);
 			if (!res.stderr) {
 				ls = JSON.parse (res.stdout);
 			}
-			// else
-			// {
-			// 	// TODO show notification
-			// }
+			else
+			{
+				throw new Error(res.stderr);
+			}
 		}
 		catch (e)
 		{
-			// TODO show notification
-			ls = null;
+			throw new Error(e);
 		}
 		return ls;
 	}
@@ -118,17 +134,15 @@ with open('${escape(file)}', 'rb') as infile:
 			{
 				fileContent = new Buffer.from(res.stdout).toString();
 			}
-			// else
-			// {
-			//TODO show notification
-			//res.stderr === "OSError: [Errno 2] ENOENT" - "No such file {file}".
-			// }
+			else
+			{
+				throw new Error(res.stderr);
+			}
 
 		}
 		catch (e)
 		{
-			// TODO show notification
-			fileContent = null;
+			throw new Error(e);
 		}
 		return fileContent;
 		
@@ -150,16 +164,46 @@ os.mkdir('${escape(dir)}')`;
 			{
 				//TODO show notification
 			}
-			// else
-			// {
-			//TODO show notification
-			//res.stderr === "OSError: [Errno 17] EEXIST" - Directory already exist {dir}.
-			// }
+			else
+			{
+				//res.stderr === "OSError: [Errno 17] EEXIST" - Directory already exist {dir}.
+				throw new Error(res.stderr);
+			}
 
 		}
 		catch (e)
 		{
-			// TODO show notification
+			throw new Error(e);
+		}
+
+	}
+
+	async rename(name, newName)
+	{
+
+		let cmd = `try:
+	import os
+except ImportError:
+	import uos as os
+os.rename('${escape(name)}', '${escape(newName)}')`;
+
+		try{
+
+			let res = await this.execute(cmd);
+			if(!res.stderr)
+			{
+				//TODO show notification
+			}
+			else
+			{
+				//Erori probabile: Fisierul/Directorul sa nu existe
+				throw new Error(res.stderr);
+			}
+
+		}
+		catch (e)
+		{
+			throw new Error(e);
 		}
 
 	}
@@ -193,14 +237,13 @@ os.mkdir('${escape(dir)}')`;
 						{
 							//TODO show notification
 						}
-						// else
-						// {
-						//TODO show notification
-						//ERROR: FILE NOT EXIST
-						// }
+						else
+						{
+							throw new Error(res.stderr);
+						}
 					}
 					catch(e){
-						// TODO show notification
+						throw new Error(e);
 					}
 					
 				}
@@ -209,14 +252,13 @@ os.mkdir('${escape(dir)}')`;
 				await this.execute(cmd);
 
 			}
-			// else
-			// {
-			//TODO show notification
-			//ERROR: FILE ALREADY EXIST
-			// }
+			else
+			{
+				throw new Error(res.stderr);
+			}
 		}
 		catch(e){
-			// TODO show notification
+			throw new Error(e);
 		}
 
 	}
@@ -237,17 +279,17 @@ os.remove('${escape(file)}')`;
 			{
 				//TODO show notification
 			}
-			// else
-			// {
-			//TODO show notification
-			//res.stderr === "OSError: [Errno 2] ENOENT" - No such file/directory {file}.
-			//res.stderr === "OSError: [Errno 13] EACCES" - Directory is not empty {file}.
-			// }
+			else
+			{
+				//res.stderr === "OSError: [Errno 2] ENOENT" - No such file/directory {file}.
+				//res.stderr === "OSError: [Errno 13] EACCES" - Directory is not empty {file}.
+				throw new Error(res.stderr);
+			}
 
 		}
 		catch (e)
 		{
-			// TODO show notification
+			throw new Error(e);
 		}
 
 	}
@@ -278,16 +320,16 @@ rmdir('${escape(dir)}')`;
 			{
 				//TODO show notification
 			}
-			// else
-			// {
-			//TODO show notification
-			//res.stderr === "OSError: [Errno 2] ENOENT" - No such directory {dir}.
-			// }
+			else
+			{
+				//res.stderr === "OSError: [Errno 2] ENOENT" - No such directory {dir}.
+				throw new Error(res.stderr);
+			}
 	
 		}
 		catch (e)
 		{
-			// TODO show notification
+			throw new Error(e);
 		}
 		
 	}
@@ -311,75 +353,115 @@ rmdir('${escape(dir)}')`;
 
 	async execute (cmd) {
 		let s = this.waitForStatus (STATUS_STOPPED, LIST_FILES_TIMEOUT);
-		await this.enterRawRepl ();
-		await this.run (cmd, false);
-		await s;
-		return {
-			stdout: this.stdout,
-			stderr: this.stderr
-		};
-	}
-
-	readBuffer (data) {
-		this.expectBuffer = this.expectBuffer + Buffer.from (data).toString();
-		if (this.expecting)
+		if (await this.enterRawRepl ())
 		{
-			let index = this.expectBuffer.indexOf (this.expectStr);
-			if (index > -1) {
-				this.expectBuffer = this.expectBuffer.substring (index+this.expectStr.length);
-				clearTimeout (this.expectTimeout);
-				this.expecting = false;
-				return this.expectResolve();
-			}
+			await this.run (cmd, false);
+			await s;
+			return {
+				stdout: this.stdout,
+				stderr: this.stderr
+			};
 		}
 		else
 		{
-			let emitData = null;
-			if(this.status === STATUS_READY)
+			return null;
+		}
+	}
+
+	emitConsoleBuffer ()
+	{
+		let buffer = this.consoleBuffer;
+		this.resetConsoleBuffer ();
+		this.emit ('data', buffer);
+	}
+
+	resetConsoleBuffer ()
+	{
+		this.consoleBuffer = '';
+	}
+
+	readBuffer (data) {
+		if (this.console) 
+		{
+			this.emit ('data', data);
+			let buffer = Buffer.from (data).toString ();
+			if (!this.circuitPython && buffer.indexOf ('Adafruit CircuitPython') > -1) {
+				this.circuitPython = true;
+				let name = 'CircuitPython';
+				let version = null;
+				let info = buffer.match (CircuitPythonRegex);
+				if (info) {
+					version = info[1];
+					name = info[2];
+				}
+				this.emit ('board', {
+					python: this.circuitPython?'circuitpython':'micropython',
+					name,
+					version
+				});
+			}
+		}
+		else 
+		{
+			if (this.stream === STREAM_NULL)
 			{
-				emitData = this.expectBuffer;
-				this.expectBuffer = '';
+				this.consoleBuffer = this.consoleBuffer + Buffer.from (data).toString();
+			}
+			this.expectBuffer = this.expectBuffer + Buffer.from (data).toString();
+			if (this.expecting)
+			{
+				let index = this.expectBuffer.indexOf (this.expectStr);
+				if (index > -1) {
+					this.expectBuffer = this.expectBuffer.substring (index+this.expectStr.length);
+					clearTimeout (this.expectTimeout);
+					this.expecting = false;
+					return this.expectResolve();
+				}
 			}
 			else
-			if (this.status === STATUS_RUNNING) {
-				let position;
-				while ((position = this.expectBuffer.indexOf ('\x04')) > -1)
-				{
-					emitData = this.expectBuffer.substring (0, position);
-					this.expectBuffer = this.expectBuffer.substring (position+1);
+			{
+				if (this.status === STATUS_RUNNING) {
+					let position;
+					let emitData = '';
+					while ((position = this.expectBuffer.indexOf ('\x04')) > -1)
+					{
+						emitData = this.expectBuffer.substring (0, position);
+						this.expectBuffer = this.expectBuffer.substring (position+1);
+						
+						if (this.stream === STREAM_OUTPUT)
+						{
+							this.stdout = this.stdout + emitData;
+							if (this.display) this.emit ('data', emitData);
+							this.emitData = null;
+							this.stream = STREAM_ERROR;
+						}
+						else if (this.stream === STREAM_ERROR) {
+							this.stderr = this.stderr + emitData;
+							if (this.display) this.emit ('data', emitData);
+							this.setStatus (STATUS_STOPPED);
+							this.emitData = null;
+							this.stream = STREAM_NULL;
+							this.exitRawRepl ();
+							// TODO switch this to previous status before STATUS_RUNNING
+							// this.setStatus (STATUS_REPL);
+						}
+					}
+
+					emitData = this.expectBuffer;
+					this.expectBuffer = '';
 					
 					if (this.stream === STREAM_OUTPUT)
 					{
 						this.stdout = this.stdout + emitData;
-						if (this.display) this.emit ('data', emitData);
-						this.emitData = null;
-						this.stream = STREAM_ERROR;
+						if (this.display === true) this.emit ('data', emitData);
 					}
-					else if (this.stream === STREAM_ERROR) {
+					else if (this.stream === STREAM_ERROR)
+					{
 						this.stderr = this.stderr + emitData;
-						if (this.display) this.emit ('data', emitData);
-						this.setStatus (STATUS_STOPPED);
-						this.emitData = null;
-						this.stream = STREAM_NULL;
-						this.exitRawRepl ();
-						// TODO switch this to previous status before STATUS_RUNNING
-						// this.setStatus (STATUS_REPL);
+						if (this.display === true) this.emit ('data', emitData);
 					}
-				}
-
-				emitData = this.expectBuffer;
-				this.expectBuffer = '';
-				
-				if (this.stream === STREAM_OUTPUT)
-				{
-					this.stdout = this.stdout + emitData;
-				}
-				else if (this.stream === STREAM_ERROR)
-				{
-					this.stderr = this.stderr + emitData;
 				}
 			}
-			if (emitData && this.display === true) this.emit ('data', emitData);
 		}
 	}
 
@@ -394,6 +476,7 @@ rmdir('${escape(dir)}')`;
 					this.expecting = false;
 					reject ();
 				}).bind(this), timeout);
+				process.nextTick (() => this.readBuffer (''));
 			});
 		}
 		else {
@@ -401,14 +484,15 @@ rmdir('${escape(dir)}')`;
 		}
 	}
 
-	sleep (mseconds) {
+	sleep (seconds) {
 		return new Promise ((resolve) => {
-			setTimeout (resolve, mseconds);
+			setTimeout (resolve, parseInt (seconds*1000));
 		});
 	}
 
 	async enterRawRepl()
 	{
+		this.console = false;
 		let raw_repl = false;
 		if (this.status !== STATUS_REPL)
 		{
@@ -438,7 +522,8 @@ rmdir('${escape(dir)}')`;
 			}
 			catch (e)
 			{
-				raw_repl = false;
+				this.console = true;
+				this.emitConsoleBuffer ();
 			}
 		}
 		else
@@ -456,10 +541,12 @@ rmdir('${escape(dir)}')`;
 		{
 			try
 			{
-				// send ctrl+c 
+				// send ctrl+b
 				await this.write ('\r\x02');
 				this.setStatus(STATUS_READY);
 				exit_raw_repl = true;
+				this.console = true;
+				this.resetConsoleBuffer ();
 			}
 			catch (e)
 			{
@@ -468,6 +555,8 @@ rmdir('${escape(dir)}')`;
 		}
 		else
 		{
+			this.console = true;
+			this.resetConsoleBuffer ();
 			exit_raw_repl = true;
 		}
 		return exit_raw_repl;
@@ -485,6 +574,7 @@ rmdir('${escape(dir)}')`;
 			await this.write ('\x04');
 			// await this.expect('>', RAW_REPL_TIMEOUT);
 			await this.expect('OK', RAW_REPL_TIMEOUT);
+			this.emit ('data', '\r\nRunning \r\n\r\n');
 			this.setStatus (STATUS_RUNNING);
 			this.stream = STREAM_OUTPUT;
 			this.readBuffer ('');
@@ -548,16 +638,22 @@ rmdir('${escape(dir)}')`;
 
 	async stop()
 	{
-		this.display = true;
 		await this.port.write(Buffer.from('\r\x03'));
-		await this.port.write(Buffer.from('\r\x02'));
-		this.setStatus(STATUS_READY);
 	}
 
 	async reset()
 	{
-		await this.port.write(Buffer.from('\r\x04'));
+		this.console = false;
+		await this.port.write(Buffer.from('\x03\x04'));
+		await this.expect ('soft reboot\r\n', RAW_REPL_TIMEOUT);
+		await this.sleep (0.3);
+		this.console = true;
+		this.resetConsoleBuffer ();
 		await this.port.write(Buffer.from('\r\x02'));
+	}
+
+	close () {
+		this.port.close ();
 	}
 
 }

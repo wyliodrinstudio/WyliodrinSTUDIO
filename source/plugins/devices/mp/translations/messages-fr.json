@@ -1,0 +1,78 @@
+{
+	"DEVICE_MP_RUN": {
+		"message": "DÉBUT",
+		"description": "The run button."
+	},
+	"DEVICE_MP_STOP": {
+		"message": "ARRÊTEZ",
+		"description": "The stop button."
+	},
+	"DEVICE_MP_RESTART": {
+		"message": "REDÉMARRER",
+		"description": "The restart button."
+	},
+	"DEVICE_MP_CONNECT": {
+		"message": "BRANCHER",
+		"description": "The connect button."
+	},
+	"DEVICE_MP_EXIT": {
+		"message": "Sortie",
+		"description": "The exit button."
+	},
+	"DEVICE_MP_FILES": {
+		"message": "SYSTÈME DE FICHIERS",
+		"description": "The file system button."
+	},
+	"DEVICE_MP_DEPLOY": {
+		"message": "DÉPLOYER",
+		"description": "The deploy button."
+	},
+	"DEVICE_MP_FLAG_HEADER": {
+		"message": "Configurez votre WebSerial",
+		"description": "Header for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_STEP_ONE": {
+		"message": "1. Pour cette fonction, vous avez besoin de Google Chrome",
+		"description": "The step one for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_STEP_TWO": {
+		"message": "2. Dans la barre de recherche Chrome, nous rechercherons: chrome: // flags",
+		"description": "The step two for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_STEP_THREE": {
+		"message": "3. Recherchez la barre de recherche dans les drapeaux: # enable-experimental-web-platform-features",
+		"description": "The step two for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_STEP_FOUR": {
+		"message": "4. Donnez le drapeau ENABLE: fonctionnalités de la plate-forme Web expérimentale",
+		"description": "The step three for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_STEP_FIVE": {
+		"message": "5. En bas à droite, on accède au bouton RELAUNCH",
+		"description": "The step three for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_STEP_SIX": {
+		"message": "Après avoir redémarré le navigateur, nous pourrons utiliser la version du navigateur.",
+		"description": "The step three for setting chrome flag."
+	},
+	"DEVICE_MP_FLAG_CAREFUL": {
+		"message": "PRUDENTE! Pour travailler, vous devez être sur une connexion sécurisée",
+		"description": "Warning for setting chrome flag."
+	},
+	"DEVICE_MP_SERIAL_OPTIONS": {
+		"message": "Conecter",
+		"description": "Baudrate set header."
+	},
+	"DEVICE_MP_SERIAL_BAUDRATE": {
+		"message": "Définir une valeur pour la vitesse de transmission. Valeur par défaut: 115200.",
+		"description": "Baudrate set paragraph."
+	},
+	"DEVICE_MP_DROPDOWN_TITLE": {
+		"message": "Langage de programmation",
+		"description": "Brate dropdown title"
+	},
+	"DEVICE_MP_CHECKBOX": {
+			"message": "Voulez-vous redémarrer la carte lors de la connexion?",
+			"description": "Brate checkbox text"
+	}
+}

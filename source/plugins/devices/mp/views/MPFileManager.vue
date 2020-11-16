@@ -15,66 +15,68 @@
 			</v-tooltip>
 
 		</v-card-title>
-		<v-card-text>
-			<div :class="projectTree" class="project-tree-on">
-			<template>
-				<v-treeview
-					v-model="tree"
-					dense
-					:items="items"
-					:load-children="fetchContent"
-					:open.sync="open"
-					open-on-click		
-					item-key="key"
-					>
-					
-					<template v-slot:label="{item, open}"	>
-						<div v-if="item.name === 'DEVICE_WYAPP_FILESYSTEM'">
-							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
-								<v-icon>mdi-folder-open</v-icon>{{$t(item.name)}}          
-							</p>
-							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
-								<v-icon>mdi-folder</v-icon>{{$t(item.name)}}
-							</p>
-							<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
-								<v-icon>mdi-file</v-icon>{{item.name}}
-							</p>
-						</div>
-						<div v-else>
-							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
-								<v-icon>mdi-folder-open</v-icon>{{item.name}}          
-							</p>
-							<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
-								<v-icon>mdi-folder</v-icon>{{item.name}}
-							</p>
-							<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
-								<v-icon>mdi-file</v-icon>{{item.name}}
-							</p>
-						</div>
-					</template>
-					
+		<v-card-text style="height:100%;">
+			<div class="filemanager">
+				<div class="tree-left">
+					<v-treeview style="width:fit-content;"
+						v-model="tree"
+						dense
+						:items="items"
+						:load-children="fetchContent"
+						:open.sync="open"
+						open-on-click		
+						item-key="key"
+						>
+						
+						
+						<template v-slot:label="{item, open}">
+							<div v-if="item.name === 'DEVICE_WYAPP_FILESYSTEM'">
+								<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
+									<v-icon>mdi-folder-open</v-icon>{{$t(item.name)}}          
+								</p>
+								<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+									<v-icon>mdi-folder</v-icon>{{$t(item.name)}}
+								</p>
+								<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
+									<v-icon>mdi-file</v-icon>{{item.name}}
+								</p>
+							</div>
+							<div v-else>
+								<p style="width:100%;" @click="menuItem = item, fileItem = item" v-if="item.file  === undefined && open" text @contextmenu="fileItem = item,showFolder($event)"> 
+									<v-icon>mdi-folder-open</v-icon>{{item.name}}          
+								</p>
+								<p style="width:100%;" @click="menuItem = item, fileItem = item" v-else-if="item.file  === undefined" text @contextmenu="fileItem = item,showFolder($event)"> 
+									<v-icon>mdi-folder</v-icon>{{item.name}}
+								</p>
+								<p v-else style="width:100%;" @click="fileItem = item" text @contextmenu="fileItem = item,showFile($event)">
+									<v-icon>mdi-file</v-icon>{{item.name}}
+								</p>
+							</div>
+						</template>
+						
+						
 					</v-treeview>
-			</template>
-			</div>
-			<div :class="editorBox" class="hs-100">
-				<v-list>
-					<v-list-item-group v-if="menuItem !== null && menuItem.children !== undefined" v-model="item" color="primary">
-						<v-list-item v-for="item in menuItem.children" :key="item.key">
-							<v-list-item-icon>
-								<p v-if="item.file !== undefined" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
-									<v-icon>mdi-file</v-icon>
-								</p>
-								<p v-else-if="item.name" @click="menuItem = item" text @contextmenu="fileItem = item,showFolder($event)">
-									<v-icon>mdi-folder</v-icon>
-								</p>
-							</v-list-item-icon>
-							<v-list-item-content>
-								<v-list-item-title v-if="item.file !== undefined" v-text="item.name" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)"></v-list-item-title>
-								<v-list-item-title v-else-if="item.name" v-text="item.name" @click="menuItem = item, fetchContent(item)" text @contextmenu="fileItem = item,showFolder($event)"></v-list-item-title>
-							</v-list-item-content>
-						</v-list-item>
-					</v-list-item-group>
-				</v-list>
+				</div>
+				<div class="project-box-1">
+					<v-list>
+						<v-list-item-group v-if="menuItem !== null" v-model="item" color="primary">
+							<v-list-item v-for="item in menuItem.children" :key="item.key">
+								<v-list-item-icon>
+									<p v-if="item.file !== undefined" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)">
+										<v-icon>mdi-file</v-icon>
+									</p>
+									<p v-else-if="item.name" @click="menuItem = item" text @contextmenu="fileItem = item,showFolder($event)">
+										<v-icon>mdi-folder</v-icon>
+									</p>
+								</v-list-item-icon>
+								<v-list-item-content>
+									<v-list-item-title v-if="item.file !== undefined" v-text="item.name" @click="fileItem = item" @contextmenu="fileItem = item,showFile($event)"></v-list-item-title>
+									<v-list-item-title v-else-if="item.name" v-text="item.name" @click="menuItem = item, fetchContent(item)" text @contextmenu="fileItem = item,showFolder($event)"></v-list-item-title>
+								</v-list-item-content>
+							</v-list-item>
+						</v-list-item-group>
+					</v-list>
+				</div>
 			</div>
 		</v-card-text>
 		<v-card-actions>
@@ -89,20 +91,20 @@
 			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="rename">
 				{{$t('PROJECT_RENAME_FOLDER')}}
 			</v-btn>
-			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="newFolder">
+			<v-btn v-if="fileItem !== null && fileItem.children !== undefined" text class="fileexplorer-actions" @click="newFolder">
 				{{$t('PROJECT_NEW_FOLDER')}}
 			</v-btn>
 			<v-btn v-if="fileItem !== null && fileItem.children !== undefined && fileItem.name !== $t('DEVICE_WYAPP_FILESYSTEM')" text class="fileexplorer-actions" @click="upload">
 				{{$t('PROJECT_IMPORT_FILE')}}
 			</v-btn>
 
-			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="deleteObject">
+			<v-btn v-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="deleteObject">
 				{{$t('PROJECT_DELETE_FILE')}}
 			</v-btn>
-			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="rename">
+			<v-btn v-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="rename">
 				{{$t('PROJECT_RENAME_FILE')}}
 			</v-btn>
-			<v-btn v-else-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="download">
+			<v-btn v-if="fileItem !== null && fileItem.file !== undefined" text class="fileexplorer-actions" @click="download">
 				{{$t('PROJECT_EXPORT_FILE')}}
 			</v-btn>
 			
@@ -134,18 +136,17 @@ const mapGetters = require ('vuex').mapGetters;
 import path from 'path';
 export default {
 	name: 'FileManager',
-	props: ['mp'],//this.mp
+	props: ['mp'],
 	data () {
 		return {
 			open: ['public'],
 			tree: [],
 			items: [{
-				name:'DEVICE_ESP_FILESYSTEM',
+				name:'DEVICE_WYAPP_FILESYSTEM',
 				children:[],
 				path:'/',
 				size:0,
-				key:'FILESYSTEM'+0+'root'
-
+				key:'/',
 			}],
 			switch1:false,
 			fileMenu: false,
@@ -166,17 +167,10 @@ export default {
 			device: 'link/device'//,
 			//connection: 'link/connection'
 		}),
-		projectTree ()
-		{
-			return 'project-tree-on';
-		},
-		editorBox ()
-		{
-			return 'project-box-1';
-		},
 	},
 	watch: {
 		async newData(){
+			// PROBLEMA this.fileItem = null
 			await this.updateFileTree(this.newData,this.fileItem);
 		},
 		// fileItem() {
@@ -185,8 +179,7 @@ export default {
 
 	},
 	async created () {
-		//Lista pe /
-		await this.mp.listdir('/');
+		
 	},
 	mounted() {
 		this.items[0].name = this.$t(this.items[0].name);
@@ -196,25 +189,43 @@ export default {
 		
 	},
 	methods: {
-		list(cwd){
-			this.mp.listdir(cwd);
+		async list(cwd){
+			try{
+				await this.mp.listdir(cwd);
+			}
+			catch(e)
+			{
+				this.studio.workspace.showError('ListError',{extra:e.message});
+			}
+			
+
 		},
 		async saveFileDialog(data){
-			let newData1 = Buffer.from(data.f);
+			let newData1 = Buffer.from(data);
 			await this.studio.projects.downloadFile(this.fileItem.name,newData1);
 		},
-		download() {
+		async download() {
 			//downlaod in fereastra glisanta
 			//max 3000 biti ~= 32kb MAXKPACKET
 			//
-			this.connection.send('fe', {
-				a:'down',
-				b:this.cwd,
-				c:this.fileItem.name,
-				z:0,
-				size:this.fileItem.size
-			});
+			// this.connection.send('fe', {
+			// 	a:'down',
+			// 	b:this.cwd,
+			// 	c:this.fileItem.name,
+			// 	z:0,
+			// 	size:this.fileItem.size
+			// });
+			try{
+				let d = await this.mp.get(this.cwd+this.fileItem.name);
+				this.saveFileDialog(d);
+			}
+			catch(e)
+			{
+				this.studio.workspace.showError('GetError',{extra:e.message});
+			}
+
 		},
+		//TODO de rezolvat put din mpy
 		async upload(){
 			let files = await this.studio.filesystem.openImportDialog({
 				title:'Import',
@@ -225,41 +236,130 @@ export default {
 				// use first file
 				let fileData = await this.studio.filesystem.readImportFile (files[0]);
 				let name = files[0].name;
-				this.connection.send('fe',{
-					a:'up',
-					b:this.cwd,
-					c:path.basename(name),
-					d:fileData,
-					t:'w',
-					end:true
-				});
+				let f = this.cwd+path.basename(name);
+				try{
+					await this.mp.put(f, Buffer.from(fileData).toString());
+				}
+				catch(e)
+				{
+					this.studio.workspace.showError('PutError',{extra:e.message});
+				}
+				// this.connection.send('fe',{
+				// 	a:'up',
+				// 	b:this.cwd,
+				// 	c:path.basename(name),
+				// 	d:fileData,
+				// 	t:'w',
+				// 	end:true
+				// });
 			}
-			this.connection.send('fe', {
-				a: 'ls',
-				b:this.cwd
-			});
-			
+			// this.connection.send('fe', {
+			// 	a: 'ls',
+			// 	b:this.cwd
+			// });
+			try{
+				let d = await this.mp.listdir(this.cwd);
+				this.update(d);
+			}
+			catch(e)
+			{
+				this.studio.workspace.showError('ListError',{extra:e.message});
+			}
 		},
-		refresh(){
+		async refresh(){
 			//TODO optimize file changes
 			this.items[0].children = [];
 			this.fileItem=this.items[0];
 			this.cwd='/';
 			this.cwdArray=[];
 			this.menuItem = null;
-			this.mp.listdir('/');
+			this.blocked = true;
+			try{
+				let d = await this.mp.listdir('/');
+				await this.update(d);
+			}
+			catch(e)
+			{
+				this.studio.workspace.showError('ListError',{extra:e.message});
+			}
+			this.blocked = false;
 		},
 		async deleteObject(){
 			//SHOW YOU SURE POPUP
 			let allow = await this.studio.workspace.showConfirmationPrompt ('PROJECT_DELETE_FILE', 'PROJECT_FILE_SURE');
 			let parent = path.dirname(this.fileItem.path);
 			if(allow){
-				this.connection.send('fe',{
-					a:'del',
-					b:parent,
-					c:this.fileItem.name,
-				});
-				this.refresh();
+				// this.connection.send('fe',{
+				// 	a:'del',
+				// 	b:parent,
+				// 	c:this.fileItem.name,
+				// });
+				if(this.fileItem.children)
+				{
+					if(parent !== '/')
+					{	
+						try{
+							await this.mp.rmdir(parent+'/'+this.fileItem.name);
+						}
+						catch(e)
+						{
+							this.studio.workspace.showError('RmDirError',{extra:e.message});
+						}
+					}
+					else
+					{
+						try{
+							await this.mp.rmdir(this.fileItem.name);
+						}
+						catch(e)
+						{
+							this.studio.workspace.showError('RmDirError',{extra:e.message});
+						}
+					}
+
+					try{
+						let d = await this.mp.listdir(parent);
+						this.update(d);
+					}
+					catch(e)
+					{
+						this.studio.workspace.showError('ListError',{extra:e.message});
+					}
+					await this.refresh();
+				}
+				else
+				{
+					if(parent !== '/')
+					{
+						try{
+							await this.mp.rm(parent+'/'+this.fileItem.name);
+						}
+						catch(e)
+						{
+							this.studio.workspace.showError('RmError',{extra:e.message});
+						}
+					}
+					else
+					{
+						try{
+							await this.mp.rm(this.fileItem.name);
+						}
+						catch(e)
+						{
+							this.studio.workspace.showError('RmError',{extra:e.message});
+						}
+					}
+
+					try{
+						let d = await this.mp.listdir(parent);
+						await this.update(d);
+					}
+					catch(e)
+					{
+						this.studio.workspace.showError('ListError',{extra:e.message});
+					}
+					await this.refresh();
+				}
 			}			
 		},
 		async rename(){
@@ -267,16 +367,22 @@ export default {
 			if (this.fileItem.children)
 			{
 				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FOLDER', 'PROJECT_NEW_FOLDER_NAME', this.fileItem.name, 'PROJECT_NEW_NAME');
-				
 				if (newName)
 				{
-					this.connection.send('fe',{
-						a:'ren',
-						b:parent,
-						c:this.fileItem.name,
-						d:newName
-					});
-					this.refresh();
+					// this.connection.send('fe',{
+					// 	a:'ren',
+					// 	b:parent,
+					// 	c:this.fileItem.name,
+					// 	d:newName
+					// });
+					try{
+						await this.mp.rename(parent+this.fileItem.name, parent+newName);
+					}
+					catch(e)
+					{
+						this.studio.workspace.showError('RenameError',{extra:e.message});
+					}
+					await this.refresh();
 				}
 			}
 			else
@@ -285,13 +391,20 @@ export default {
 				let newName = await this.studio.workspace.showPrompt ('PROJECT_RENAME_FILE', 'PROJECT_NEW_FILE_NAME', this.fileItem.name, 'PROJECT_NEW_NAME');
 				if (newName)
 				{
-					this.connection.send('fe',{
-						a:'ren',
-						b:parent,
-						c:this.fileItem.name,
-						d:newName
-					});
-					this.refresh();
+					// this.connection.send('fe',{
+					// 	a:'ren',
+					// 	b:parent,
+					// 	c:this.fileItem.name,
+					// 	d:newName
+					// });
+					try{
+						await this.mp.rename(parent+'/'+this.fileItem.name, parent+'/'+newName);
+					}
+					catch(e)
+					{
+						this.studio.workspace.showError('RenameError',{extra:e.message});
+					}
+					await this.refresh();
 				}
 			}
 			
@@ -301,12 +414,28 @@ export default {
 			let folderName = await this.studio.workspace.showPrompt ('PROJECT_NEW_FOLDER', 'PROJECT_NEW_FOLDER_NAME', '', 'PROJECT_NEW_NAME');
 			if (folderName)
 			{
-				this.connection.send('fe',{
-					a:'newf',
-					b:this.fileItem.path,
-					c:folderName,
-				});
-				this.refresh();
+				// this.connection.send('fe',{
+				// 	a:'newf',
+				// 	b:this.fileItem.path,
+				// 	c:folderName,
+				// });
+				try{
+					await this.mp.mkdir(this.fileItem.path+folderName);
+				}
+				catch(e)
+				{
+					this.studio.workspace.showError('MkDirError',{extra:e.message});
+				}
+
+				try{
+					let d = await this.mp.listdir(this.fileItem.path+folderName);
+					this.update(d);
+				}
+				catch(e)
+				{
+					this.studio.workspace.showError('ListError',{extra:e.message});
+				}
+				await this.refresh();
 
 			}			
 
@@ -322,29 +451,21 @@ export default {
 			tree.children = [];
 			if(data) {
 				for(let item of data) {
-					if(item.isdir) {
+					if(item.t === 'd') {
 						tree.children.push({
-							name: item.name,
+							name: item.f,
 							children:[],
-							path:this.cwd+item.name+'/',
-							size:item.size,
-							key: item.name+item.size+'folder',
+							path:this.cwd+item.f+'/',
+							size:item.s,
+							key: this.cwd+item.f+'/',
 						});
-					} else if(item.isfile) {
+					} else if(item.t === 'f') {
 						tree.children.push({
-							name:item.name,
-							file:path.extname(item.name),
-							path:this.cwd+item.name+'/',
-							size:item.size,
-							key:item.name+item.size+'file',
-						});
-					} else if(item.islink) {
-						tree.children.push({
-							name:item.name,
-							link:true,
-							path:this.cwd+item.name+'/',
-							size:item.size,
-							key:item.name+item.size+'link',
+							name:item.f,
+							file:path.extname(item.f),
+							path:this.cwd+item.f+'/',
+							size:item.s,
+							key:this.cwd+item.f+'/'+item.f,
 						});
 					}	
 				}
@@ -353,7 +474,6 @@ export default {
 					this.resolve();
 					this.resolve = null;
 				}
-				
 			}
 		},
 		_isChildOf(child,parent) {
@@ -361,16 +481,14 @@ export default {
 			const parentTokens = parent.split(path.sep).filter(i => i.length);
 			return parentTokens.every((t, i) => child.split(path.sep)[i] === t);
 		},
-		fetchContent(item){
+		async fetchContent(item){
 			this.cwd=item.path;
 			if(!this.cwdArray.includes(this.cwd)){
 				this.cwdArray.push(this.cwd);
 				this.fileItem=item;
-				this.mp.listdir(this.cwd);
-				let p = new Promise((resolve) => {this.resolve = resolve;});
-				return p;
+				let d = await this.mp.listdir(this.cwd);
+				this.update(d);
 			}
-
 		},
 		showFile(e) {
 			this.cwd = path.dirname(this.fileItem.path);
@@ -422,4 +540,30 @@ background: url('plugins/devices/wyapp/plugin/data/img/icons/32px.png') no-repea
 	width: 32px;
 	height: 32px;
 }
+.project-tree-on .v-treeview, .project-tree-on .v-treeview > .v-treeview-node {
+	height: auto !important;
+}
+</style>
+
+<style lang="less" scoped>
+@import '../../../../style/var.less';
+
+	.v-dialog {box-shadow: none;
+		.v-list {background-color: @color-white !important; color: @color-black !important;
+			>div:hover {background-color: @color-white !important; color:@color-black !important;}
+		}
+	}
+
+	.filemanager {
+		display:flex; flex-flow: row wrap; overflow: hidden; height: 100%;
+
+		.tree-left {
+			height: 100%; overflow: auto; background: #eee; max-width:50%; padding: 0 20px 0 0;
+		}
+
+		.project-box-1 {
+			flex:1 1 auto; height: 100%; overflow: auto;
+		}
+
+	}
 </style>

@@ -1,7 +1,6 @@
-import SerialConnectionDialog from './views/SerialConnectionDialog.vue';
-import BrateConnectionBrowser from './views/BrateConnectionBrowser.vue';
+import MicroPythonConnectionDialog from './views/MicroPythonConnectionDialog.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
-//import MPFileManager from './views/MPFileManager.vue';
+import MPFileManager from './views/MPFileManager.vue';
 import {SerialPort} from './serial.js';
 import serial from './serial.js';
 import {MicroPython, STATUS_RUNNING, STATUS_STOPPED} from './mpy.js';
@@ -85,19 +84,19 @@ function searchSerialDevices(){
 
 		for(let serialDevice of serial_devices)
 		{
-			if(serialDevice.vendorId === /*'2a03'*/'1a86' && serialDevice.productId === /*'0043'*/'7523' )
+			if(serialDevice.vendorId || serialDevice.productId || serialDevice.manufacturer)
 			{
-				let name = 'MP'.toString();
 				let description = '';
 				let id = 'mp:serial:' + serialDevice.path;//.toString().toLowerCase();
 				devices.push({
 					id: id,
 					address: serialDevice.path,
 					description,
-					name,
+					name: serialDevice.manufacturer || serialDevice.path,
 					connection:'serial',
 					icon:'plugins/devices/mp/data/img/icons/mp.png',
-					board:'mp',
+					board:'any',
+					// python: 'autodetect', TODO estimate based on productId, vendorId and manufacturer
 					status:'',
 					properties: {
 						productId: serialDevice.productId,
@@ -130,14 +129,20 @@ function searchSerialDevices(){
         
 }
 
+function pythonIcon (variant) {
+	let icon = 'plugins/devices/mp/data/img/icons/mp.png';
+	if (variant === 'circuitpython') icon = 'plugins/devices/mp/data/img/icons/circuitpython.png';
+	return icon;
+}
+
 
 function updateDevices(){
 	let add = [];
 	if (serialDevices.length === 0 && devices.length === 0) {
 		add.push({
 			id: 'mp:newdevice',
-			address: '',
-			name: studio.workspace.vue.$t('MicroPython'),
+			address: 'WebSerial',
+			name: 'MicroPython',
 			board: 'any',
 			priority: workspace.DEVICE_PRIORITY_PLACEHOLDER,
 			placeholder: true
@@ -227,37 +232,32 @@ export function setup (options, imports, register)
 
 		async connect(device/*, options*/)
 		{
-			if(navigator.serial !== undefined)
+			if(studio.system.platform() === 'electron' || navigator.serial !== undefined)
 			{
 				if(_.isObject(device))
 				{
-					let options = null;
-					if(studio.system.platform() === 'electron')
-					{
-						options = await studio.workspace.showDialog (SerialConnectionDialog, {
-							device: device,
-							width: '500px'
-						});
-					}
-					else
-					{
-						options = await studio.workspace.showDialog (BrateConnectionBrowser, {
-							device: device,
-							width: '500px'
-						});
-					}
 
-					if(options != null)
+					let port = new SerialPort();
+					let options = await studio.workspace.showDialog (MicroPythonConnectionDialog, {
+						device: device,
+						width: '500px'
+					});
+					if (options) 
 					{
+						let mp = new MicroPython(port);
+
 						device.status = 'CONNECTING';
+						device.icon = pythonIcon (options.python);
 						updateDevices();
 
-						let port = new SerialPort();
+						mp.connect (options);
 
-						let mp = new MicroPython(port);
+						
+
+						
 						ports[device.id]=mp;
 
-						ports[device.id].on('connected',()=>{
+						mp.on('connected',()=>{
 							device.status = 'CONNECTED';
 							device.running = false;
 							updateDevice(device);
@@ -269,6 +269,15 @@ export function setup (options, imports, register)
 							studio.console.reset();
 							studio.console.show ();
                                                         
+						});
+
+						mp.on('board', (board)=>{
+							device.name = board.name;
+							device.python = board.python;
+							device.version = board.python;
+							device.address = device.address+' ('+board.python+'@'+board.version+')';
+							device.icon = pythonIcon (device.python);
+							updateDevice (device);
 						});
 
 						mp.on('status', (status)=>{
@@ -308,10 +317,7 @@ export function setup (options, imports, register)
 							studio.console.close();
 							delete connections[device.id];
 							delete ports[device.id];
-						});
-
-						port.connect(options.port,options.baudrate);
-                                                        
+						});                                                        
 					}
                                                 
                                                 
@@ -321,7 +327,7 @@ export function setup (options, imports, register)
 			{
 				await studio.workspace.showDialog (ChromeFlagSetup, {
 					device: device,
-					width: '500px'
+					width: '650px'
 				});
 			}
 
@@ -349,7 +355,7 @@ export function setup (options, imports, register)
 				{
 					if(device)
 					{
-						ports[device.id].close();
+						mp.close();
 					}
 					device.status = 'DISCONNECTED';
 					updateDevice(device);
@@ -366,7 +372,7 @@ export function setup (options, imports, register)
 				if(device)
 				{
 					//ports[device.id].close();
-					mp.getPort().close();
+					mp.close();
 				}
 				device.status = 'DISCONNECTED';
 				updateDevice(device);
@@ -395,9 +401,11 @@ export function setup (options, imports, register)
 
 			if (project) {
 				let pySource;
-				if (project.language === 'python') {
-					pySource = await studio.projects.getCurrentFileCode();
+				if (project.language === 'python' || project.language === 'visual') {
+					let runFilename = await studio.projects.getDefaultRunFileName(project);
+					pySource = await studio.projects.loadFile(project, runFilename);
 					let mp = ports[device.id];
+					studio.console.reset ();
 					if (await mp.enterRawRepl())
 					{
 						device.running = true;
@@ -437,8 +445,6 @@ export function setup (options, imports, register)
 
 		workspace.registerDeviceToolButton('DEVICE_MP_STOP', 10, async () => {
 			let device = studio.workspace.getDevice();
-                        
-			/* Here goes the actual code that will make your device stop a project */
         
 			let project = await studio.projects.getCurrentProject();
         
@@ -478,17 +484,11 @@ export function setup (options, imports, register)
 
 		workspace.registerDeviceToolButton('DEVICE_MP_RESTART', 10, async () => {
 			let device = studio.workspace.getDevice();
-                        
-			/* Here goes the actual code that will make your device stop a project */
         
-			let project = await studio.projects.getCurrentProject();
-        
-			if (project) {
-				if (project.language === 'python') {
-					let mp = ports[device.id];
-					await mp.reset();
-				}
-        
+			if (device && ports[device.id])
+			{
+				let mp = ports[device.id];
+				await mp.reset();
 			}
         
 		}, 'plugins/devices/mp/data/img/icons/restart-icon.svg',
@@ -511,67 +511,69 @@ export function setup (options, imports, register)
 
 		// FILES
                 
-		// workspace.registerDeviceToolButton('DEVICE_MP_FILES', 10, async () => {
-		// 	let device = studio.workspace.getDevice();
-                
-		// 	/* Here goes the actual code that will make your device run a project */
-		// 	console.log('Files');
+		workspace.registerDeviceToolButton('DEVICE_MP_FILES', 10, async () => {
+			let device = studio.workspace.getDevice();
 
-		// 	// let project = await studio.projects.getCurrentProject();
+			// let project = await studio.projects.getCurrentProject();
 
                         
-		// 	// let mp = await ports[device.id];
-		// 	// console.log (await mp.listdir ('/'));
-		// 	let mp = ports[device.id];
+			// let mp = await ports[device.id];
+			// console.log (await mp.listdir ('/'));
+			let mp = ports[device.id];
 
-		// 	await studio.workspace.showDialog (MPFileManager, {
-		// 		width: 800,
-		// 		mp : mp
-		// 	});
-
-
-		// }, 'plugins/devices/mp/data/img/icons/fileexplorer-icon.svg',
-
-                
-		// /* The aditional options that make the Run Button visible and enabled only if there is a connected device
-		//                 and its type is "awesome" */
-		// {
-		// 	enabled () {
-		// 		let device = studio.workspace.getDevice ();
-		// 		return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
-		// 	},
-		// });
-
-		// FILES TEST
-                
-		// workspace.registerDeviceToolButton('DEVICE_MP_FILESTEST', 10, async () => {
-		// 	let device = studio.workspace.getDevice();
-                
-		// 	/* Here goes the actual code that will make your device run a project */
-		// 	console.log('Files');
-
-		// 	let project = await studio.projects.getCurrentProject();
-
-                        
-		// 	let mp = ports[device.id];
-		// 	console.log(await mp.get('test4.txt'));
+			await studio.workspace.showDialog (MPFileManager, {
+				width: 800,
+				mp : mp
+			});
 
 
-		// }, 'plugins/devices/mp/data/img/icons/fileexplorer-icon.svg',
+		}, 'plugins/devices/mp/data/img/icons/fileexplorer-icon.svg',
 
                 
-		// /* The aditional options that make the Run Button visible and enabled only if there is a connected device
-		//                 and its type is "awesome" */
-		// {
-		// 	enabled () {
-		// 		let device = studio.workspace.getDevice ();
-		// 		return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
-		// 	},
-		// });
+		/* The aditional options that make the Run Button visible and enabled only if there is a connected device
+		                and its type is "awesome" */
+		{
+			enabled () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
+			},
+		});
 
-		// FILES TEST
-
+		// DEPLOY
 		
+		workspace.registerDeviceToolButton('DEVICE_MP_DEPLOY', 10, async () => {
+			let device = studio.workspace.getDevice();
+                
+			let mp = ports[device.id];
+			let project = await studio.projects.getCurrentProject();
+			let name = project.name;
+			await mp.mkdir(name);
+			if(project)
+			{
+				if (project.language === 'python') {
+					let structure = await studio.projects.generateStructure(project);
+					let childrens = structure.children;
+					for(let i = 2 ; i < childrens.length ; i++)
+					{
+						let cod = await studio.projects.getFileCode(project, childrens[i].name);
+						await mp.put(name+'/'+childrens[i].name , cod);
+					}
+
+				}
+			}
+
+
+		}, 'plugins/devices/mp/data/img/icons/deploy.png',
+
+                
+		/* The aditional options that make the Run Button visible and enabled only if there is a connected device
+		                and its type is "awesome" */
+		{
+			enabled () {
+				let device = studio.workspace.getDevice ();
+				return (device.status === 'CONNECTED' && device.type === 'mp' && device.running === false);
+			},
+		});	
 
 		if (studio.system.platform () === 'electron')
 		{
@@ -586,7 +588,7 @@ export function setup (options, imports, register)
 			devices = [
 				{
 					id: 'mp:web',
-					address: '',
+					address: 'WebSerial',
 					name: 'MicroPython',
 					board: 'any',
 					connection: 'web-usb',

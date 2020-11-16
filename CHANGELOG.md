@@ -1,5 +1,6 @@
 ## Wyliodrin STUDIO 2.2.0-beta
   * **added** Wyliodrin STUDIO CI tests for build, documentation and format
+  * **added** support for MicroPython(run, REPL and file manager)
   * **added** deploy (docker) application feature for wyapp devices (Raspberry Pi)
   * **added** console filters API (used by dashboard)
   * **new** plugin folder structure with plugins hierarchy
