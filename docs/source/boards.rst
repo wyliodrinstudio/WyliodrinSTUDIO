@@ -220,7 +220,7 @@ In order to install Docker, the following commands are required:
 .. code-block:: bash
 
 	sudo apt-get update && sudo apt-get upgrade
-	curl -fsSL https://get.docker.com -o get-docker.sh
+	curl -fsSL https://get.docker.com -o get-docker.shgit config --global user.email "youremail@yourdoma
 	sudo sh get-docker.sh
 	sudo usermod -aG docker pi
 
@@ -234,7 +234,8 @@ To see if the installation worked, check the Docker version:
 
 .. note::
 
-	Docker is **NOT** available for **Raspberry pi 0**.
+	For **raspberry pi 0** , in order to work, after your first try to create a container, you must change the image that the dockerfile is downloading with: FROM /balenalib/raspberry-pi-node
+
 
 |
 

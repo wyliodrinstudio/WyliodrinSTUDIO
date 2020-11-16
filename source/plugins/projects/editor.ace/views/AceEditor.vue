@@ -38,6 +38,7 @@ export default {
 			require('brace/mode/python');    //language
 			require('brace/mode/javascript');    //language
 			require('brace/mode/makefile');    //language
+			require('brace/mode/dockerfile');
 			require('brace/mode/css');
 			require('brace/mode/html');    //language
 			require('brace/mode/less');
@@ -55,6 +56,7 @@ export default {
 			require('brace/snippets/python'); //snippet
 			require('brace/snippets/javascript'); //snippet
 			require('brace/snippets/makefile'); //snippet
+			require('brace/snippets/dockerfile');
 			require('brace/snippets/html'); //snippet
 			require('brace/snippets/json'); //snippet
 			require('brace/snippets/sh'); //snippet
@@ -81,6 +83,10 @@ export default {
 					if (path.basename (this.filename).toLowerCase().startsWith ('makefile'))
 					{
 						this.sourceLanguage = 'makefile';
+					}
+					else if (path.basename (this.filename).toLowerCase().startsWith ('dockerfile'))
+					{
+						this.sourceLanguage = 'dockerfile';
 					}
 					else
 						switch (path.extname (this.filename).toLowerCase())
