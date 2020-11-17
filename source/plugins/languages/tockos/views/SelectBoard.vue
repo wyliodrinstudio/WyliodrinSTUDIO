@@ -128,8 +128,8 @@ export default {
 			let response = await Axios.get (`https://raw.githubusercontent.com/tock/tock/${this.gitVesion.tag}/boards/${board}${filename}`);
 			return response.data;
 		},
-		async getDirListOfFiles (path, dirInfos, repo = 'tock') {
-			let response = await Axios.get (`https://api.github.com/repos/tock/${repo}/contents/${path}?ref=${this.gitVesion.tag}`);
+		async getDirListOfFiles (path, dirInfos) {
+			let response = await Axios.get (`https://api.github.com/repos/tock/tock/contents/${path}?ref=${this.gitVesion.tag}`);
 		
 			for(let item of response.data) {
 				if (item.type === 'file') {
@@ -139,7 +139,7 @@ export default {
 					dirInfos[path].push(item.path);
 				}
 				else if (item.type === 'dir') {
-					await this.getDirListOfFiles(item.path, dirInfos, repo);
+					await this.getDirListOfFiles(item.path, dirInfos);
 				}
 			}
 		},	

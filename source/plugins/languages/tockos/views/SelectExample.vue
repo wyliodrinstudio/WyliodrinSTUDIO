@@ -108,8 +108,8 @@ export default {
 
 			return exampleInfos;
 		},
-		async getDirListOfFiles (path, dirInfos, repo = 'tock') {
-			let response = await Axios.get('https://api.github.com/repos/tock/'+repo+'/contents/'+path);
+		async getDirListOfFiles (path, dirInfos) {
+			let response = await Axios.get('https://api.github.com/repos/tock/libtock-c/contents/'+path);
 		
 			for(let item of response.data) {
 				if (item.type === 'file') {
@@ -119,7 +119,7 @@ export default {
 					dirInfos[path].push(item.path);
 				}
 				else if (item.type === 'dir') {
-					await this.getDirListOfFiles(item.path, dirInfos, repo);
+					await this.getDirListOfFiles(item.path, dirInfos);
 				}
 			}
 		},	
