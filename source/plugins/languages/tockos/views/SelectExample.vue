@@ -63,7 +63,7 @@ export default {
 		});
 		this.gitVesions = this.gitVesions.concat(RELEASES['libtock-c']);
 		this.gitVesion = this.gitVesions[0];
-		this.example = this.example[this.gitVesion.tag][0];
+		this.example = this.examples[this.gitVesion.tag][0];
 	},
 	methods: {
 		async select ()
