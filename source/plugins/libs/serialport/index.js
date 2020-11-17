@@ -1,12 +1,15 @@
-export function loadSerialPort ()
+import EventEmitter from "events";
+
+function loadSerialPort ()
 {
 	try
 	{
+		// written like this to work with webpack when target is browser
 		return eval ('require(\'serialport\')');
 	}
 	catch (e)
 	{
-		studio.workspace.error ('device_mp: mp is not available '+e.message);
+		studio.workspace.error ('serialport: serialport is not available '+e.message);
 		return {
 			list: function ()
 			{
@@ -17,41 +20,16 @@ export function loadSerialPort ()
 	}
 }
 
-const EventEmitter = require ('events').EventEmitter;
 
-let SerialPortLib = null;
-
-
+let serial = null;
 let studio = null;
-
-
-
-
-export default {
-	setup (s)
-	{
-		studio = s;
-		SerialPortLib = loadSerialPort();
-	},
-	list ()
-	{
-		if (studio.system.platform () === 'electron')
-		{
-			return SerialPortLib.list ();
-		}
-		else
-		{
-			return [];
-		}
-	}
-};
 
 export class SerialPort extends EventEmitter {
 	async connect (address, baudRate)
 	{ 
 		if (studio.system.platform () === 'electron')
 		{
-			this.serial = new SerialPortLib(address,{
+			this.serial = new serial(address,{
 				baudRate
 			},(err)=>{
 				if(err){
@@ -130,4 +108,30 @@ export class SerialPort extends EventEmitter {
 			await this.portConnect.close();
 		}
 	}
+}
+
+let serialport = {
+	list ()
+	{
+		if (studio.system.platform () === 'electron')
+		{
+			return serial.list ();
+		}
+		else
+		{
+			return [];
+		}
+	},
+	isAvailable () {
+		return serial != null || navigator.serial != null;
+	},
+	SerialPort
+};
+
+export function setup (options, imports, register) {
+	studio = imports;
+	serial = loadSerialPort();
+	register (null, {
+		serialport: serialport
+	});
 }

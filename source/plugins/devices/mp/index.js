@@ -1,20 +1,18 @@
 import MicroPythonConnectionDialog from './views/MicroPythonConnectionDialog.vue';
 import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
 import MPFileManager from './views/MPFileManager.vue';
-import {SerialPort} from './serial.js';
-import serial from './serial.js';
 import {MicroPython, STATUS_RUNNING, STATUS_STOPPED} from './mpy.js';
 import _ from 'lodash';
 
 let studio = null;
 let workspace = null;
 let devices = [];
+let serialport = null;
 
 let serialDevices = [];
 
 
 let connections = {};
-//let SerialPortlist = null;
 let ports = {};
 
 
@@ -50,7 +48,7 @@ async function listSerialPorts()
 	let ports = [];
 	try
 	{
-		ports = await serial.list ();
+		ports = await serialport.list ();
 	}
 	catch (e)
 	{
@@ -158,7 +156,7 @@ function updateDevices(){
 export function setup (options, imports, register)
 {
 	studio = imports;
-	serial.setup(studio);
+	serialport = imports.serialport;
 	searchSerialDevices();
 	//SerialPortlist = loadSerialPort();
 	///let event = 'data';
@@ -232,12 +230,12 @@ export function setup (options, imports, register)
 
 		async connect(device/*, options*/)
 		{
-			if(studio.system.platform() === 'electron' || navigator.serial !== undefined)
+			if(serialport.isAvailable ())
 			{
 				if(_.isObject(device))
 				{
 
-					let port = new SerialPort();
+					let port = new serialport.SerialPort();
 					let options = await studio.workspace.showDialog (MicroPythonConnectionDialog, {
 						device: device,
 						width: '500px'

@@ -39,7 +39,11 @@
 			"icon": "source/img/icons/mac/wyliodrin-studio-logo.icns"
 		},
 		"snap": {
-			"plugs": ["default", "network-bind", "serial-port"]
+			"plugs": [
+				"default",
+				"network-bind",
+				"serial-port"
+			]
 		},
 		"linux": {
 			"desktop": {
