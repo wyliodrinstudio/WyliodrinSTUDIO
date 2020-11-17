@@ -41,14 +41,62 @@ import BOARDS from './boards.json';
 
 export default {
 	name: 'BoardSettings',
-	props: ['boardSettings', 'project'],
+	props: ['project'],
 	data () {
 		return {
 			flashingOptions: ['Tockloader', 'Single Binary'],
 			flashOption: undefined,
 			boards: BOARDS,
-			board: undefined
+			board: undefined,
+			boardSettings: {
+				stackSize: 2048,
+				appHeapSize: 1024,
+				kernelHeapSize: 1024
+			}
 		};
+	},
+	created: async function () {
+		function extractNumber(line) {
+			let value = (/(.*=\s*)(.*)/g).exec(line);
+
+			if (value.length > 2) {
+				value = value[2];
+				if (value !== '') {
+					return Number(value);
+				}
+			}
+
+			return null;
+		}
+
+		let AppBoardSettings = await this.studio.projects.loadSpecialFile(this.project, 'AppBoardSettings');
+
+		if (AppBoardSettings === null) {
+			let makefile = await this.studio.projects.loadFile(this.project, 'Makefile.app');
+			if (makefile !== null) {
+				makefile = makefile.toString('utf8').split(/\r?\n/);
+				for (let line of makefile) {
+					if (line.indexOf('STACK_SIZE') !== -1) {
+						let value = extractNumber(line);
+						if (value !== null)
+							this.boardSettings.stackSize = value;
+					} else if (line.indexOf('APP_HEAP_SIZE') !== -1) {
+						let value = extractNumber(line);
+						if (value !== null)
+							this.boardSettings.appHeapSize = value;
+					} else if (line.indexOf('KERNEL_HEAP_SIZE') !== -1) {
+						let value = extractNumber(line);
+						if (value !== null)
+							this.boardSettings.kernelHeapSize = value;
+					} 
+				}
+			}	
+		} else {
+			AppBoardSettings = JSON.parse(AppBoardSettings);
+			this.boardSettings = AppBoardSettings.boardSettings;
+			this.board = AppBoardSettings.board;
+			this.flashOption = AppBoardSettings.flashOption;
+		} 
 	},
 	methods: {
 		async select ()
@@ -56,6 +104,12 @@ export default {
 			await this.generateAppMakefile();
 
 			await this.generateUploadSH();
+
+			await this.studio.projects.saveSpecialFile(this.project, 'AppBoardSettings', Buffer.from(JSON.stringify({
+				boardSettings: this.boardSettings,
+				board: this.board,
+				flashOption: this.flashOption
+			})));
 
 			this.$root.$emit ('submit', true);
 		},
