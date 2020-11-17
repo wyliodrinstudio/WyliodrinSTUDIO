@@ -60,7 +60,7 @@ export default {
 	created: function () {
 		this.gitVesions.push({
 			name: 'Latest',
-			tag: 'master'
+			tag: RELEASES['tock'][0].tag
 		});
 		this.gitVesions = this.gitVesions.concat(RELEASES.tock);
 		this.gitVesion = this.gitVesions[0];
@@ -69,6 +69,10 @@ export default {
 	methods: {
 		async select ()
 		{
+			if (this.gitVesion.name === 'Latest') {
+				this.gitVesion.tag = 'master';
+			}
+			
 			await this.downloadBoardFiles();
 			await this.generateBoardSetupFile();
 			await this.generateGitPrepareFile();
