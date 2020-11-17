@@ -72,7 +72,6 @@
 </template>
 
 <script>
-import { color } from 'highcharts';
 import { mapGetters } from 'vuex';
 export default {
 	name: 'Deployments',
