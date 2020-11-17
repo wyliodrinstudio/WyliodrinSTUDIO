@@ -1328,7 +1328,7 @@ let projects = {
 	 * 
 	 * @param {Project} project - project object
 	 * @param {string} name - the path to the file
-	 * @param {string} content - the content of the file
+	 * @param {Buffer} content - the content of the file
 	 * 
 	 * @returns {boolean} - true if successful, false otherwise
 	 * 
@@ -1404,7 +1404,7 @@ let projects = {
 	 * @param {Project} project - project object
 	 * @param {string} name - the path to the file
 	 * 
-	 * @returns {Object} - the content of the special settings file
+	 * @returns {Buffer} - the content of the special settings file, null otherwise
 	 * 	 
 	 * @example
 	 * 
