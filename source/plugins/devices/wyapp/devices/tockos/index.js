@@ -1,6 +1,6 @@
 var studio = null;
 
-import BoardSettings from './views/BoardSettings.vue';
+import AppBoardSettings from './views/AppBoardSettings.vue';
 
 export function setup (options, imports, register)
 {
@@ -98,9 +98,10 @@ export function setup (options, imports, register)
 					}
 				}
 
-				retVal = await studio.workspace.showDialog(BoardSettings, {boardSettings, project});
+				retVal = await studio.workspace.showDialog(AppBoardSettings, {boardSettings, project});
+			} else if (project.language === 'tockos-board') {
+				//retVal = await studio.workspace.showDialog(BoardSettings, {});
 			}
-
 			return retVal;
 		}
 	};
