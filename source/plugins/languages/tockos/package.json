@@ -5,7 +5,7 @@
     "private": true,
     "plugin": {
         "consumes": ["workspace","projects"],
-        "provides": ["tockos"],
+        "provides": [],
         "target": ["electron", "browser"]
     }
 }
