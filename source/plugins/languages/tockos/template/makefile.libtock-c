@@ -1,4 +1,5 @@
 run:
+	. .project/gitPrepare.sh
 	echo "$(TOCK_DIR)"
 	rm -rf "$(TOCK_DIR)/../libtock-c/examples/studio"
 	mkdir -p "$(TOCK_DIR)/../libtock-c/examples/studio"

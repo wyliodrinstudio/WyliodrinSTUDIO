@@ -13,5 +13,14 @@
 			"tag": "release-1.4.1"
 		}
 	],
-	"libtock-c": []
+	"libtock-c": [
+		{
+			"name": "LibTock-C 1.5",
+			"tag": "release-1.5"
+		},
+		{
+			"name": "LibTock-C 1.4",
+			"tag": "release-1.4"
+		}
+	]
 }

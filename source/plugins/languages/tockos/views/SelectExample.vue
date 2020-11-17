@@ -6,7 +6,9 @@
 		<v-card-text>
 			<v-container fluid v-if="downloadingStatus === ''">
 				Start From an Example Application
-				<v-select v-model = "example" :items="examples" item-text = "name" item-value="example">
+				<v-select return-object v-model = "gitVesion" :items="gitVesions" item-text="name"  label="Select TockOS Repo Version">
+				</v-select>
+				<v-select v-model = "example" :items="examples[gitVesion.tag]" item-text = "name" item-value="example" label="Select Example">
 				</v-select>
 			</v-container>
 			<v-container fluid style="height: 170px;" v-else-if="downloadingStatus !== ''">
@@ -35,6 +37,7 @@
 
 <script>
 import EXAMPLES from './examples.json';
+import RELEASES from './releases.json';
 import Axios from 'axios';
 
 export default {
@@ -42,8 +45,10 @@ export default {
 	props: ['name'],
 	data () {
 		return {
+			gitVesions: [],
+			gitVesion: undefined,
 			examples: EXAMPLES,
-			example: EXAMPLES[0].example,
+			example: undefined,
 			downloadingStatus: '',
 			progress: {
 				value: 0,
@@ -51,54 +56,77 @@ export default {
 			}
 		};
 	},
-	computed: {
-		
+	created: function () {
+		this.gitVesions.push({
+			name: 'Latest',
+			tag: RELEASES['libtock-c'][0].tag
+		});
+		this.gitVesions = this.gitVesions.concat(RELEASES['libtock-c']);
+		this.gitVesion = this.gitVesions[0];
+		this.example = this.example[this.gitVesion.tag][0];
 	},
 	methods: {
 		async select ()
 		{
 			if (this.example !== '') {
-				this.downloadingStatus = 'Fetching infos...';
-				let exampleRoot = 'examples/'+this.example;
-				let exampleInfos = await this.getLibtockListOfFiles(exampleRoot);
-				
-				let numberOfFiles = 0;
-				for (let key in exampleInfos) {
-					numberOfFiles += exampleInfos[key].length;
+				if (this.gitVesion.name === 'Latest') {
+					this.gitVesion.tag = 'master';
 				}
-
-				this.downloadingStatus = 'Downloading...';
-				let downloadedFiles = 0;
-				this.progress.text = this.progress.value.toFixed(2)+'%';
-				for (let key in exampleInfos) {
-					let folderPath = key.replace(exampleRoot, '');
-					if (folderPath !== '') {
-						await this.studio.projects.newFolder(this.name,folderPath);
-					}
-
-					for (let file of exampleInfos[key]) {
-						let filePath = file.replace(exampleRoot, '');
-						
-						if (filePath.indexOf('Makefile') !== -1)
-							await this.studio.projects.newFile(this.name,filePath+'.app', await this.downloadLibtockcFile(this.example,filePath));
-						else
-							await this.studio.projects.newFile(this.name,filePath, await this.downloadLibtockcFile(this.example,filePath));
-						
-						downloadedFiles++;
-						this.progress.value = (downloadedFiles/numberOfFiles)*100;	
-						this.progress.text = this.progress.value.toFixed(2)+'%';
-					}
-				}
-
-				this.downloadingStatus = 'Finished';
+				await this.downloadExampleFiles();
 			} else {
 				await this.studio.projects.newFile(this.name, './main.c', '');
 			}
 
+
 			this.$root.$emit ('submit', true);
 		},
+		async downloadExampleFiles() {
+			this.downloadingStatus = 'Fetching infos...';
+			let exampleRoot = 'examples/'+this.example;
+			let exampleInfos = await this.getLibtockListOfFiles(exampleRoot);
+			
+			let numberOfFiles = 0;
+			for (let key in exampleInfos) {
+				numberOfFiles += exampleInfos[key].length;
+			}
+
+			this.downloadingStatus = 'Downloading...';
+			let downloadedFiles = 0;
+			this.progress.text = this.progress.value.toFixed(2)+'%';
+			for (let key in exampleInfos) {
+				let folderPath = key.replace(exampleRoot, '');
+				if (folderPath !== '') {
+					await this.studio.projects.newFolder(this.name,folderPath);
+				}
+
+				for (let file of exampleInfos[key]) {
+					let filePath = file.replace(exampleRoot, '');
+					
+					if (filePath.indexOf('Makefile') !== -1)
+						await this.studio.projects.newFile(this.name,filePath+'.app', await this.downloadLibtockcFile(this.example,filePath));
+					else
+						await this.studio.projects.newFile(this.name,filePath, await this.downloadLibtockcFile(this.example,filePath));
+					
+					downloadedFiles++;
+					this.progress.value = (downloadedFiles/numberOfFiles)*100;	
+					this.progress.text = this.progress.value.toFixed(2)+'%';
+				}
+			}
+
+			this.downloadingStatus = 'Finished';
+		},
+		async generateGitPrepareFile() {
+			let gitPrepare = 'cd $TOCK_DIR/../libtock-c && git reset --hard\n';
+			gitPrepare += 'cd $TOCK_DIR/../libtock-c && git clean -f -d\n';
+			gitPrepare += `cd $TOCK_DIR/../libtock-c && git checkout ${this.gitVesion.tag}\n`;
+			if (this.gitVesion.name === 'Latest') {
+				gitPrepare += 'cd $TOCK_DIR/../libtock-c && git pull\n';
+			}
+			
+			await this.studio.projects.newFile(this.name, '.project/gitPrepare.sh', gitPrepare);
+		},
 		async downloadLibtockcFile (example, filename) {
-			let response = await Axios.get('https://raw.githubusercontent.com/tock/libtock-c/master/examples/'+example+filename);
+			let response = await Axios.get(`https://raw.githubusercontent.com/tock/libtock-c/${this.gitVesion.tag}/examples/${example}${filename}`);
 			return response.data;
 		},
 		async getLibtockListOfFiles (exampleRoot) {
@@ -109,7 +137,7 @@ export default {
 			return exampleInfos;
 		},
 		async getDirListOfFiles (path, dirInfos) {
-			let response = await Axios.get('https://api.github.com/repos/tock/libtock-c/contents/'+path);
+			let response = await Axios.get(`https://api.github.com/repos/tock/libtock-c/contents/${path}?ref=${this.gitVesion.tag}`);
 		
 			for(let item of response.data) {
 				if (item.type === 'file') {
