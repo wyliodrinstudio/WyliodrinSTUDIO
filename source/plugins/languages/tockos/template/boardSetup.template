@@ -1,0 +1,5 @@
+echo "$TOCK_DIR"
+rm -rf "$TOCK_DIR/{{{boardRoot}}}"
+mkdir -p "$TOCK_DIR/{{{boardRoot}}}"
+cp -R * "$TOCK_DIR/{{{boardRoot}}}"
+cd "$TOCK_DIR/{{{boardRoot}}}" && make -f Makefile.kernel flash

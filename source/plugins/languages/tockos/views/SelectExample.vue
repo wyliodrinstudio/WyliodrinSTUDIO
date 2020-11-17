@@ -35,6 +35,7 @@
 
 <script>
 import EXAMPLES from './examples.json';
+import Axios from 'axios';
 
 export default {
 	name: 'SelectExample',
@@ -59,7 +60,7 @@ export default {
 			if (this.example !== '') {
 				this.downloadingStatus = 'Fetching infos...';
 				let exampleRoot = 'examples/'+this.example;
-				let exampleInfos = await this.studio.tockos.getLibtockListOfFiles(exampleRoot);
+				let exampleInfos = await this.getLibtockListOfFiles(exampleRoot);
 				
 				let numberOfFiles = 0;
 				for (let key in exampleInfos) {
@@ -79,9 +80,9 @@ export default {
 						let filePath = file.replace(exampleRoot, '');
 						
 						if (filePath.indexOf('Makefile') !== -1)
-							await this.studio.projects.newFile(this.name,filePath+'.app', await this.studio.tockos.downloadLibtockcFile(this.example,filePath));
+							await this.studio.projects.newFile(this.name,filePath+'.app', await this.downloadLibtockcFile(this.example,filePath));
 						else
-							await this.studio.projects.newFile(this.name,filePath, await this.studio.tockos.downloadLibtockcFile(this.example,filePath));
+							await this.studio.projects.newFile(this.name,filePath, await this.downloadLibtockcFile(this.example,filePath));
 						
 						downloadedFiles++;
 						this.progress.value = (downloadedFiles/numberOfFiles)*100;	
@@ -96,6 +97,32 @@ export default {
 
 			this.$root.$emit ('submit', true);
 		},
+		async downloadLibtockcFile (example, filename) {
+			let response = await Axios.get('https://raw.githubusercontent.com/tock/libtock-c/master/examples/'+example+filename);
+			return response.data;
+		},
+		async getLibtockListOfFiles (exampleRoot) {
+			let exampleInfos = {};
+			
+			await this.getDirListOfFiles(exampleRoot, exampleInfos, 'libtock-c');
+
+			return exampleInfos;
+		},
+		async getDirListOfFiles (path, dirInfos, repo = 'tock') {
+			let response = await Axios.get('https://api.github.com/repos/tock/'+repo+'/contents/'+path);
+		
+			for(let item of response.data) {
+				if (item.type === 'file') {
+					if (dirInfos[path] === undefined) {
+						dirInfos[path] = [];
+					}
+					dirInfos[path].push(item.path);
+				}
+				else if (item.type === 'dir') {
+					await this.getDirListOfFiles(item.path, dirInfos, repo);
+				}
+			}
+		},	
 		close ()
 		{
 			this.$root.$emit ('submit', false);

@@ -1,47 +1,4 @@
-import axios from 'axios';
 let studio = null;
-
-
-let tockos = {
-	async downloadBoardFile (board, filename) {
-		let response = await axios.get ('https://raw.githubusercontent.com/tock/tock/master/boards/'+board+filename);
-		return response.data;
-	},
-	async downloadLibtockcFile (example, filename) {
-		let response = await axios.get ('https://raw.githubusercontent.com/tock/libtock-c/master/examples/'+example+filename);
-		return response.data;
-	},
-	async getDirListOfFiles (path, dirInfos, repo = 'tock') {
-		let response = await axios.get ('https://api.github.com/repos/tock/'+repo+'/contents/'+path);
-	
-		for(let item of response.data) {
-			if (item.type === 'file') {
-				if (dirInfos[path] === undefined) {
-					dirInfos[path] = [];
-				}
-				dirInfos[path].push(item.path);
-			}
-			else if (item.type === 'dir') {
-				await tockos.getDirListOfFiles(item.path, dirInfos, repo);
-			}
-		}
-	},
-	async getBoardListOfFiles (boardRoot) {
-		let boardInfos = {};
-	
-		await this.getDirListOfFiles(boardRoot, boardInfos);
-	
-		return boardInfos;
-	},
-	async getLibtockListOfFiles (exampleRoot) {
-		let exampleInfos = {};
-		
-		await this.getDirListOfFiles(exampleRoot, exampleInfos, 'libtock-c');
-
-		return exampleInfos;
-	}
-};
-
 
 //TODO create settings function to save in folder.
 
@@ -92,7 +49,7 @@ export default function setup (options, imports, register)
 				--> true if the submit button was clicked
 				--> false if the cancel button was clicked
 			*/
-			await studio.workspace.showDialog (SelectBoard, {name});
+			return await studio.workspace.showDialog (SelectBoard, {name});
 		},
 		getDefaultFileName() {
 			return '/src/main.rs';
@@ -128,7 +85,7 @@ export default function setup (options, imports, register)
 			*/
 			let ret = await studio.workspace.showDialog (SelectExample, {name});
 			if (ret === true) {
-				await studio.projects.newFile(name, '/upload.sh', '# DO NOT MODIFY this file will be generated AUTOMATICALLY\n\n');
+				await studio.projects.newFile(name, '.project/upload.sh', '# DO NOT MODIFY this file will be generated AUTOMATICALLY\n\n');
 			}
 		},
 		getDefaultFileName() {
@@ -144,7 +101,5 @@ export default function setup (options, imports, register)
 
 	studio.projects.registerLanguage('tockos-libtockc', 'TockOS C App', 'plugins/languages/tockos/data/img/project.png', 'plugins/languages/python/data/img/pythonLittle.png', libtockcFileIcons, libtockcTockos);
 
-	register (null, {
-		tockos: tockos
-	});
+	register (null, {});
 }

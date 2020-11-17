@@ -1,7 +1,4 @@
 run:
-	echo "$(TOCK_DIR)"
-	rm -rf "$(TOCK_DIR)/boards/studio"
-	mkdir -p "$(TOCK_DIR)/boards/studio"
-	cp -R * "$(TOCK_DIR)/boards/studio"
-	cd "$(TOCK_DIR)/boards/studio" && make -f Makefile.kernel flash
+	. .project/gitPrepare.sh
+	. .project/boardSetup.sh
 	tockloader listen
