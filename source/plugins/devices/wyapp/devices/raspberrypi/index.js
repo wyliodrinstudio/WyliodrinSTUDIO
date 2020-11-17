@@ -87,10 +87,10 @@ export function setup (options, imports, register)
 			let dockerfile = null;
 			if(project.language === 'nodejs')
 			{
-				dockerfile = 'FROM balenalib/raspberrypi3-debian-node:latest';
+				dockerfile = 'FROM balenalib/raspberrypi3-debian-node:14';
 			}
 			else{
-				dockerfile = 'FROM balenalib/raspberrypi3-debian-python:latest';
+				dockerfile = 'FROM balenalib/raspberrypi3-debian-python:14';
 			}
 			dockerfile += '\nCOPY . .\n';
 

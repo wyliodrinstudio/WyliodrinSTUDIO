@@ -21,10 +21,10 @@ Download the pre-configured image
 The easiest way to set up a Raspberry Pi board so that it becomes available for Wyliodrin STUDIO is to download an image that is already configured.
 
 
-Download the image for `Raspberry Pi Zero and Raspberry Pi 1 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_zero_2019_11_21.zip>`_.
+Download the image for `Raspberry Pi Zero and Raspberry Pi 1 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_zero_2020_11_17.zip>`_.
 
 
-Download the image for `Raspberry Pi 2 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_11_27.zip>`_, `Raspberry Pi 3 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_11_27.zip>`_ and `Raspberry Pi 4 <https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_2019_11_27.zip>`_.
+Download the image for `Raspberry Pi 2 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_2020_11_17.zip>`_, `Raspberry Pi 3 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_2020_11_17.zip>`_ and `Raspberry Pi 4 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_2020_11_17.zip>`_.
 
 
 Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flash>` it. After that, you can simply insert the SD card into the Raspberry Pi and your board should be visible within Wyliodrin STUDIO.
@@ -102,15 +102,19 @@ The dependencies you will have to install are:
 - *build-essential*: reference package for all the packages required for compilation
 - *git*: required for the **npm install** command to download git included package
 - *python3-pip*: python 3 programming language
+- *docker*: containerization technology 
 
 .. code-block:: bash
 	
 	sudo apt-get update
-	sudo apt-get install -y supervisor redis build-essential git python3-pip
+	sudo apt-get install -y supervisor redis build-essential git python3-pip docker-ce docker-ce-cli containerd.io
 
 
 	# To enable the Notebook tab, you should also run
 	sudo pip3 install redis pygments
+
+.. note::
+	If the docker feature does not work, you can install it manually following the steps that can be found in **Install Docker manually**
 
 
 |
@@ -144,11 +148,11 @@ For **Pi 2**, **Pi 3** and **Pi 4** models, the `ARMv7  <https://nodejs.org/dist
 
 .. code-block:: bash
 
-	wget https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-armv7l.tar.xz
+	wget https://nodejs.org/dist/v14.15.1/node-v14.15.1-linux-armv7l.tar.xz
 
-	tar xvJf node-v10.16.3-linux-armv7l.tar.xz
+	tar xvJf node-v14.15.1-linux-armv7l.tar.xz
 
-	cd node-v10.16.3-linux-armv7l
+	cd node-v14.15.1-linux-armv7l
 
 	sudo cp -R * /usr
 
@@ -156,7 +160,7 @@ For **Pi 2**, **Pi 3** and **Pi 4** models, the `ARMv7  <https://nodejs.org/dist
 
 	cd ..
 
-	rm -rf node-v10.16.3-linux-armv7l
+	rm -rf node-v14.15.1-linux-armv7l
 
 |
 
@@ -209,6 +213,33 @@ The final step is to refresh the board by running the command:
 
 	
 	sudo supervisorctl reload
+
+**Install Docker manually**
+----------------------------------
+
+
+
+In order to install Docker, the following commands are required:
+.. code-block:: bash
+
+	sudo apt-get update && sudo apt-get upgrade
+	curl -fsSL https://get.docker.com -o get-docker.shgit config --global user.email "youremail@yourdoma
+	sudo sh get-docker.sh
+	sudo usermod -aG docker pi
+
+Now, you'll have to restart the board using:
+.. code-block:: bash
+
+	sudo reboot
+To see if the installation worked, check the Docker version:
+.. code-block:: bash
+	docker version
+
+.. note::
+
+	For **raspberry pi 0** , in order to work, after your first try to create a container, you have to go to the menu, select Use Advanced Mode and, in the dockerfile, change the
+	default image with: FROM /balenalib/raspberry-pi-node:14.
+
 
 |
 
@@ -282,11 +313,18 @@ In the prompt that will be opened, you will have to select the fifth option(Inte
 
 The final step before using the Wyliolab board is to reboot it.
 
+=====================
+
+Set up wireless
+^^^^^^^^^^^^^^^^^^^
+
+To set up your board wireless, please follow the steps in the link: `Set up wireless: <https://www.raspberrypi.org/documentation/configuration/wireless/headless.md>`_.
+
 =========================
 
 |
 
-Pico-Pi
+Pico-Pi.
 **********
 
 This will show how to set up a Pico-Pi device. 
