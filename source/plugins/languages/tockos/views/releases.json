@@ -1,0 +1,17 @@
+{
+	"tock": [
+		{
+			"name": "Tock 1.6",
+			"tag": "release-1.6"
+		},
+		{
+			"name": "Tock 1.5",
+			"tag": "release-1.5"
+		},
+		{
+			"name": "Tock 1.4",
+			"tag": "release-1.4.1"
+		}
+	],
+	"libtock-c": []
+}
