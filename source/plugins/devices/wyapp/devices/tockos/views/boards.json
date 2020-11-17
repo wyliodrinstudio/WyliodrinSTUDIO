@@ -3,37 +3,37 @@
 		{
 			"name": "HAIL",
 			"board": "hail",
-			"openocd": false
+			"jtagSoftware": null
 		},
 		{
 			"name": "IMIX",
 			"board": "imix",
-			"openocd": false
+			"jtagSoftware": null
 		},
 		{
 			"name": "Nordic nRF52-DK",
 			"board": "nrf52dk",
-			"openocd": true
+			"jtagSoftware": "jlink"
 		},
 		{
 			"name": "Arty SiFive (A7 FPGA)",
 			"board": "arty",
-			"openocd": true
+			"jtagSoftware": "openocd"
 		},
 		{
 			"name": "STM32f4-based Nucleo",
 			"board": "nucleof4",
-			"openocd": true
+			"jtagSoftware": "openocd"
 		},
 		{
 			"name": "SiFive HiFive1b",
 			"board": "hifive1b",
-			"openocd": true
+			"jtagSoftware": "openocd"
 		},
 		{
 			"name": "STM32F3-based Discovery Boards",
 			"board": "stm32f3discovery",
-			"openocd": true
+			"jtagSoftware": "openocd"
 		}
 	],
 	"singleBinary": [
