@@ -24,8 +24,7 @@ The easiest way to set up a Raspberry Pi board so that it becomes available for 
 Download the image for `Raspberry Pi Zero and Raspberry Pi 1 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_zero_2020_11_17.zip>`_.
 
 
-Download the image for `Raspberry Pi 2 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_2020_11_17.zip>`_, `Raspberry Pi 3 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_2020_11_17.zip>`_ 
-and `Raspberry Pi 4 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_2020_11_17.zip>`_.
+Download the image for `Raspberry Pi 2 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_2020_11_17.zip>`_, `Raspberry Pi 3 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_2020_11_17.zip>`_ and `Raspberry Pi 4 <https://wyliodrinstudio.s3.eu-central-1.amazonaws.com/images/wyliodrin_studio_raspberrypi_2020_11_17.zip>`_.
 
 
 Once the image downloaded and unziped, the only thing that you have to do is to :ref:`flash <flash>` it. After that, you can simply insert the SD card into the Raspberry Pi and your board should be visible within Wyliodrin STUDIO.
