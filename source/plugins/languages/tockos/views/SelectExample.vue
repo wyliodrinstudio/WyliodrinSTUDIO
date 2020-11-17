@@ -77,6 +77,7 @@ export default {
 				await this.studio.projects.newFile(this.name, './main.c', '');
 			}
 
+			await this.generateGitPrepareFile();
 
 			this.$root.$emit ('submit', true);
 		},
