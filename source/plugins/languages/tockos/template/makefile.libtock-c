@@ -1,9 +1,9 @@
 run:
 	. .project/gitPrepare.sh
-	echo "$(TOCK_DIR)"
-	rm -rf "$(TOCK_DIR)/../libtock-c/examples/studio"
-	mkdir -p "$(TOCK_DIR)/../libtock-c/examples/studio"
-	cp -R * "$(TOCK_DIR)/../libtock-c/examples/studio"
-	cd "$(TOCK_DIR)/../libtock-c/examples/studio" && make -f Makefile.app
+	echo "$(TOCK_LIBC_DIR)"
+	rm -rf "$(TOCK_LIBC_DIR)/examples/studio"
+	mkdir -p "$(TOCK_LIBC_DIR)/examples/studio"
+	cp -R * "$(TOCK_LIBC_DIR)/examples/studio"
+	cd "$(TOCK_LIBC_DIR)/examples/studio" && make -f Makefile.app
 	. .project/upload.sh
 	tockloader listen

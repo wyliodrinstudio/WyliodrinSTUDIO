@@ -116,11 +116,11 @@ export default {
 			this.downloadingStatus = 'Finished';
 		},
 		async generateGitPrepareFile() {
-			let gitPrepare = 'cd $TOCK_DIR/../libtock-c && git reset --hard\n';
-			gitPrepare += 'cd $TOCK_DIR/../libtock-c && git clean -f -d\n';
-			gitPrepare += `cd $TOCK_DIR/../libtock-c && git checkout ${this.gitVesion.tag}\n`;
+			let gitPrepare = 'cd $TOCK_LIBC_DIR && git reset --hard\n';
+			gitPrepare += 'cd $TOCK_LIBC_DIR && git clean -f -d\n';
+			gitPrepare += `cd $TOCK_LIBC_DIR && git checkout ${this.gitVesion.tag}\n`;
 			if (this.gitVesion.name === 'Latest') {
-				gitPrepare += 'cd $TOCK_DIR/../libtock-c && git pull\n';
+				gitPrepare += 'cd $TOCK_LIBC_DIR && git pull\n';
 			}
 			
 			await this.studio.projects.newFile(this.name, '.project/gitPrepare.sh', gitPrepare);

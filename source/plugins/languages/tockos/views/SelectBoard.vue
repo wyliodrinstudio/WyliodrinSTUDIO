@@ -119,11 +119,11 @@ export default {
 			await this.studio.projects.newFile(this.name, '.project/boardSetup.sh', Mustache.render(boardSetupTemplate, {boardRoot}));
 		},
 		async generateGitPrepareFile() {
-			let gitPrepare = 'cd $TOCK_DIR && git reset --hard\n';
-			gitPrepare += 'cd $TOCK_DIR && git clean -f -d\n';
-			gitPrepare += `cd $TOCK_DIR && git checkout ${this.gitVesion.tag}\n`;
+			let gitPrepare = 'cd $TOCK_KERNEL_DIR && git reset --hard\n';
+			gitPrepare += 'cd $TOCK_KERNEL_DIR && git clean -f -d\n';
+			gitPrepare += `cd $TOCK_KERNEL_DIR && git checkout ${this.gitVesion.tag}\n`;
 			if (this.gitVesion.name === 'Latest') {
-				gitPrepare += 'cd $TOCK_DIR && git pull\n';
+				gitPrepare += 'cd $TOCK_KERNEL_DIR && git pull\n';
 			}
 			
 			await this.studio.projects.newFile(this.name, '.project/gitPrepare.sh', gitPrepare);
