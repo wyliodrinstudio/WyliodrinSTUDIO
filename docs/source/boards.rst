@@ -113,6 +113,9 @@ The dependencies you will have to install are:
 	# To enable the Notebook tab, you should also run
 	sudo pip3 install redis pygments
 
+.. note::
+	If the docker feature does not work, you can install it manually following the steps that can be found in **Install Docker manually**
+
 
 |
 
@@ -145,11 +148,11 @@ For **Pi 2**, **Pi 3** and **Pi 4** models, the `ARMv7  <https://nodejs.org/dist
 
 .. code-block:: bash
 
-	wget https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-armv7l.tar.xz
+	wget https://nodejs.org/dist/v14.15.1/node-v14.15.1-linux-armv7l.tar.xz
 
-	tar xvJf node-v10.16.3-linux-armv7l.tar.xz
+	tar xvJf node-v14.15.1-linux-armv7l.tar.xz
 
-	cd node-v10.16.3-linux-armv7l
+	cd node-v14.15.1-linux-armv7l
 
 	sudo cp -R * /usr
 
@@ -157,7 +160,7 @@ For **Pi 2**, **Pi 3** and **Pi 4** models, the `ARMv7  <https://nodejs.org/dist
 
 	cd ..
 
-	rm -rf node-v10.16.3-linux-armv7l
+	rm -rf node-v14.15.1-linux-armv7l
 
 |
 
@@ -211,7 +214,7 @@ The final step is to refresh the board by running the command:
 	
 	sudo supervisorctl reload
 
-**Install Docker**
+**Install Docker manually**
 ----------------------------------
 
 
