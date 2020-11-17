@@ -321,8 +321,13 @@ let projects = {
 						folder: projectFolder
 					};
 					// console.log(project);
-					await this._runLanguageFunction ('createProject', project);
+					let retVal = await this._runLanguageFunction ('createProject', project);
 	
+					if (retVal === false) {
+						await this.deleteProject(project);
+						project = null;
+					}
+					
 					return project;
 				}
 	
