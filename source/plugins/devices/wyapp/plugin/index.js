@@ -693,7 +693,7 @@ export function setup(options, imports, register)
 								else return null;
 							}
 							let options = await studio.workspace.showDialog(DockerSettings, {
-								width:800,
+								width:600,
 								project:project,
 							});
 
@@ -703,32 +703,10 @@ export function setup(options, imports, register)
 								return null;
 							}
 
-							if(options.selectedNetwork === 'host')
-							{
-								dockoptions += '--network="' +options.selectedNetwork + '" ';
-							}
-
-							if(options.selectedRestart === 'no')
-							{
-								dockoptions += '--restart no ';
-							}
-								
-							if(options.selectedRestart === 'always')
-							{
-								dockoptions += '--restart always ';
-							}
-
-							if(options.selectedRestart === 'unless stopped')
-							{
-								dockoptions += '--restart unless-stopped ';
-							}
-
-							if(options.selectedRestart === 'on failure')
-							{
-								dockoptions += '--restart on-failure ';
-							}		
+							dockoptions += '--network ' +options.selectedNetwork + ' ';
+							dockoptions += '--restart ' + options.selectedRestart + ' ';
 							
-							if(options.selectedOption === 'interactive console')
+							if(options.selectedOption === 'interactive')
 							{
 								dockoptions += '-it ';
 							}

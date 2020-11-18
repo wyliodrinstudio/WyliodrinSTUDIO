@@ -1,12 +1,57 @@
 <template>
-<v-card>
-
-	<v-card-title>
+	<v-card>
+		<v-card-title>
 			<span class="headline">{{$t('DEVICE_WYAPP_RUN_DEPLOY')}}</span> 
 			<v-spacer></v-spacer>
 		</v-card-title>
+		<v-card-text>
+			<v-layout wrap>
+				<v-select
+					class="col-md-6"
+					:label="$t('DEVICE_WYAPP_PROCESS_OPTIONS')"
+					:items="processOptions"
+					item-text="title"
+					item-value="value"
+					v-model="selectedOption"
+					>
+				</v-select>
+				<v-select
+					:label="$t('DEVICE_WYAPP_RESTART_OPTIONS')"
+					:items="restartOptions"
+					item-text="title"
+					item-value="value"
+					v-model="selectedRestart"
+					class="col-md-6"
+					>
+				</v-select>
+				<v-checkbox
+					v-model="remove"
+					:label="$t('DEVICE_WYAPP_REMOVE_CONTAINER')" 
+					class="col-md-12"
+				/>
+				<v-select
+					:items="networkOptions"
+					v-model="selectedNetwork"
+					item-text="title"
+					item-value="value"
+					:label="$t('DEVICE_WYAPP_NETWORK_OPTIONS')"
+					class="col-md-6"
+					>
+				</v-select>
+				<v-checkbox
+					v-model="privileged"
+					:label="$t('DEVICE_WYAPP_PRIVILEGED_CONTAINER')" 
+					class="col-md-6"
+				/>
+				<v-text-field            
+					v-model="textInput"
+					:label="$t('DEIVCE_WYAPP_ADDITIONAL_OPTIONS')"
+					class="col-md-12"
+				></v-text-field>
+			</v-layout>
+		</v-card-text>
 
-	<v-row align="center">
+	<!-- <v-row align="center">
 
 		<v-col
 		cols="12"
@@ -27,15 +72,11 @@
 				>
 			</v-select>
 		</v-col>
-	</v-row>
+	</v-row> -->
 
-	<v-checkbox
-      v-model="remove"
-      :label="$t('DEVICE_WYAPP_REMOVE_CONTAINER')" 
-    >
-	</v-checkbox>
+	
 
-	<v-row align="center">
+	<!-- <v-row align="center">
 		<v-col
 		cols="12"
 		sm="6"
@@ -47,17 +88,11 @@
 		cols="12"
         sm="6">
 
-			<v-select
-				:items="restartOptions"
-				v-model="selectedRestart"
-				dense
-				solo
-				>
-			</v-select>
+			
 		</v-col>
-	</v-row>
+	</v-row> -->
 
-	<v-row align="center">
+	<!-- <v-row align="center">
 
 		<v-col
 		cols="12"
@@ -78,24 +113,16 @@
 				>
 			</v-select>
 		</v-col>
-	</v-row>
+	</v-row> -->
 
- <v-checkbox
-      v-model="privileged"
-      :label="$t('DEVICE_WYAPP_PRIVILEGED_CONTAINER')" 
-    >
-	</v-checkbox>
+ 
 
-	<v-text-field            
-            solo
-			v-model="textInput"
-			:label="$t('DEIVCE_WYAPP_ADDITIONAL_OPTIONS')"
-			></v-text-field>
+	
 
 
 	
 
-	<br><br>
+	<!-- <br><br> -->
 		<v-card-actions>
 			<v-spacer></v-spacer>
 			
@@ -120,25 +147,49 @@ export default {
 	data () {
 		datas = {
 			processOptions:[
-				this.$t('DEIVCE_WYAPP_DETACHED') ,
-				this.$t('DEVICE_WYAPP_INTERACTIVE_CONSOLE') ,
+				{
+					title: this.$t('DEVICE_WYAPP_DETACHED') ,
+					value: 'detached'
+				},
+				{
+					title: this.$t('DEVICE_WYAPP_INTERACTIVE_CONSOLE') ,
+					value: 'interactive'
+				}
 			],
-			selectedOption: null,
-			remove: this.remove,
+			selectedOption: 'interactive',
+			remove: true,
 			restartOptions :[
-				this.$t('DEVICE_WYAPP_NO_RESTART'),
-				this.$t('DEVICE_WYAPP_RESTART_ON_FAILURE'),
-				this.$t('DEVICE_WYAPP_RESTART_ALWAYS'),
-				this.$t('DEVICE_WYAPP_RESTART_UNLESS_STOPPED'),
+				{
+					title: this.$t('DEVICE_WYAPP_NO_RESTART'),
+					value: 'no'
+				},
+				{
+					title: this.$t('DEVICE_WYAPP_RESTART_ON_FAILURE'),
+					value: 'on-failure',
+				},
+				{
+					title: this.$t('DEVICE_WYAPP_RESTART_ALWAYS'),
+					value: 'always'
+				},
+				{
+					title: this.$t('DEVICE_WYAPP_RESTART_UNLESS_STOPPED'),
+					value: 'unless-stopped'
+				}
 			],
-			selectedRestart: null,
+			selectedRestart: 'no',
 
 			networkOptions:[
-				this.$t('DEVICE_WYAPP_DEFAULT_NETWORK'),
-				this.$t('DEVICE_WYAPP_HOST_NETWORK'),
+				{
+					title: this.$t('DEVICE_WYAPP_DEFAULT_NETWORK'),
+					value: 'default'
+				},
+				{
+					title: this.$t('DEVICE_WYAPP_HOST_NETWORK'),
+					value: 'host'
+				}
 			],
-			selectedNetwork: null,
-			privileged:this.privileged,
+			selectedNetwork: 'default',
+			privileged: false,
 			textInput:'',
 		};			
 		return datas;		
@@ -162,10 +213,7 @@ export default {
 			this.privileged = data.privileged;
 			
 		} catch (error) {
-			this.selectedOption = this.$t('DEVICE_WYAPP_INTERACTIVE_CONSOLE');
-			this.selectedRestart = this.$t('DEVICE_WYAPP_NO_RESTART');
-			this.selectedNetwork = 'default';
-			this.remove = true;
+			
 		}
 	},
 

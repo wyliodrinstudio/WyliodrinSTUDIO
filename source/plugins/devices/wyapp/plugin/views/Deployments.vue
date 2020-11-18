@@ -20,17 +20,11 @@
 							<v-img v-if="container.studio === true" src="plugins/devices/wyapp/plugin/data/img/icons/wyliodrin-studio-logo.png"></v-img>
 							<v-img v-else src="plugins/devices/wyapp/plugin/data/img/icons/docker3.svg" aria-label="Container" ></v-img>
 
-							<div v-if="container.state === 'running'" v-bind:class="{green: true}" :alt="container.state" :title="container.state"> </div>
-							<div v-else-if="container.status.substr(0,10) === 'Exited (0)'" v-bind:class="{grey:true}"
-							:alt="container.state" :title="container.state"></div>
-							<div v-else-if="container.status.substr(0,14) === 'Restarting (0)'" v-bind:class="{yellow: true}"
-							:alt="container.state" :title="container.state"></div>
-							<div v-else-if="container.state === 'created'" v-bind:class="{yellow: true}"
-							:alt="container.state" :title="container.state"></div>
-							<div v-else v-bind:class ="{red: true}"></div>
-
 							<h3>{{container.title}}</h3>
 
+						</td>
+						<td>
+							<div :class="status (container)" :alt="container.state" :title="container.state"> </div>
 						</td>
 						<td class="w-30 d-flex">
 							<v-spacer></v-spacer>
@@ -87,7 +81,7 @@ export default {
 	computed: {
 		...mapGetters ({
 			device: 'workspace/device',
-		}),
+		})
 	},
 	created () {
 		this.connection.send ('dep', {
@@ -122,6 +116,29 @@ export default {
 					else return 0;
 				}
 			});	
+		},
+
+		status (container) {
+			if (container.state === 'running') {
+				return 'green';
+			}
+			else
+			if (container.status.substr(0,10) === 'Exited (0)')
+			{
+				return 'grey';
+			}
+			if (container.status.substr(0,14) === 'Restarting (0)')
+			{
+				return 'yellow';
+			}
+			else
+			if (container.state === 'created') {
+				return 'yellow';
+			}
+			else
+			{
+				return 'red';
+			}
 		},
 		
 		stop (container)

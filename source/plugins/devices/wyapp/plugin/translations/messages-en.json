@@ -132,7 +132,7 @@
         "description": "The message shown for the selected device filesystem"
     },
     "DEVICE_WYAPP_RUN_DEPLOY": {
-        "message": "Deployment settings",
+        "message": "Deployment Settings",
         "description": "The pop-up for deploying an app"
     },
     "DEVICE_WYAPP_DOCKERFILE": {
@@ -160,47 +160,47 @@
         "description": "The button for deployments"
     },
     "DEVICE_WYAPP_REMOVE_CONTAINER": {
-        "message": "Remove container at exit (--rm)",
+        "message": "Remove container at exit",
         "description": "The option for removing a container when exited"
     },
     "DEIVCE_WYAPP_ADDITIONAL_OPTIONS": {
         "message": "Additional options",
         "description": "The text field for more running options"
     },
-    "DEIVCE_WYAPP_DETACHED": {
-        "message": "detached",
+    "DEVICE_WYAPP_DETACHED": {
+        "message": "Service",
         "description": "The detached option for docker run"
     },
     "DEVICE_WYAPP_INTERACTIVE_CONSOLE": {
-        "message": "interactive console",
+        "message": "Interactive",
         "description": "The interactive console options for docker run"
     },
     "DEVICE_WYAPP_PRIVILEGED_CONTAINER": {
-        "message": " privileged container (--privileged)",
+        "message": " Privileged container",
         "description": "The privileged option for docker run"
     },
     "DEVICE_WYAPP_NO_RESTART": {
-        "message": "no",
+        "message": "Do not restart",
         "description": "The option that never restarts a container"
     },
     "DEVICE_WYAPP_RESTART_ON_FAILURE": {
-        "message": "on failure",
+        "message": "On failure",
         "description": "Container restarts if it fails"
     },
     "DEVICE_WYAPP_RESTART_ALWAYS": {
-        "message": "always",
+        "message": "Always",
         "description": "Container restarts always"
     },
     "DEVICE_WYAPP_RESTART_UNLESS_STOPPED": {
-        "message": "unless stopped",
+        "message": "Unless stopped",
         "description": "container restarts as long as it is not stopped"
     },
     "DEVICE_WYAPP_DEFAULT_NETWORK": {
-        "message": "default",
+        "message": "Private",
         "description": "Container uses the default network"
     },
     "DEVICE_WYAPP_HOST_NETWORK": {
-        "message": "host",
+        "message": "Same as device",
         "description": "Container uses the host's network"
     },
     "DEVICE_WYAPP_NETWORK_OPTIONS": {
