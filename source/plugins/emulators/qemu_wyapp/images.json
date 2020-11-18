@@ -3,7 +3,7 @@
 		"name": "wyliodrin_studio_raspberrypi_emulator_2019_11_21.img",
 		"type": "raspberrypi",
 		"exists": "no",
-		"icon": "plugins/emulator/data/img/icons/icon-raspberrypi.png",
+		"icon": "plugins/emulators/qemu_wyapp/data/img/icons/icon-raspberrypi.png",
 		"download": "https://wyliodrin-studio.s3.us-east-2.amazonaws.com/wyliodrin_studio_raspberrypi_emulator_2019_11_21.zip",
 		"loadingEmulator": "no",
 		"progress": -1,

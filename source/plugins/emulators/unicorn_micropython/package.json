@@ -1,0 +1,11 @@
+{
+    "name": "unicorn_micropython",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+		"consumes": ["shell", "console", "workspace", "filesystem", "events"],
+        "provides": ["unicron_micropython"],
+        "target": ["electron", "browser"]
+    }
+}

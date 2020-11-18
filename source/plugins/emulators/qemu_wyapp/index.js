@@ -1,4 +1,4 @@
-import EmulatorSetup from './views/EmulatorSetup.vue';
+import QEMUEmulatorSetup from './views/QEMUEmulatorSetup.vue';
 import emulatorStore from './store';
 import { v4 } from 'uuid';
 import fs from 'fs-extra';
@@ -29,11 +29,11 @@ let qemuExitCode = {};
 
 const { spawn } = require ('child_process');
 
-let emulator = {
+let qemu_wyapp = {
 	store: null,
 	registerEmulator(name, id, type, user, password, image, port, runningFolder, icon, qemu)
 	{
-		let sameEmulator = Object.keys(runningEmulators).find((emulator) => emulator === name);
+		let sameEmulator = Object.keys(runningEmulators).find((qemu_wyapp) => qemu_wyapp === name);
 		if(!sameEmulator)
 		{
 			let item = {
@@ -49,7 +49,7 @@ let emulator = {
 				qemu
 			};
 			runningEmulators[name] = item;
-			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+			studio.workspace.dispatchToStore('qemu_wyapp', 'runningEmulators', runningEmulators);
 		}
 		else
 		{
@@ -58,7 +58,7 @@ let emulator = {
 	},
 	async registerImages()
 	{
-		emulatorFolder = path.join(studio.filesystem.getSettingsFolder(), 'emulator');
+		emulatorFolder = path.join(studio.filesystem.getSettingsFolder(), 'qemu_wyapp');
 		await studio.filesystem.mkdirp(emulatorFolder);
 		
 		imagesFolder = path.join(emulatorFolder, 'images');
@@ -93,12 +93,12 @@ let emulator = {
 				if(code !== 0)
 				{
 					qemuCheck = true;
-					studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
+					studio.workspace.dispatchToStore('qemu_wyapp', 'qemuCheck', qemuCheck);
 				}
 				else
 				{
 					qemuCheck = false;
-					studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
+					studio.workspace.dispatchToStore('qemu_wyapp', 'qemuCheck', qemuCheck);
 				}
 				qemuExitCode[image.type] = code;
 			});
@@ -110,9 +110,9 @@ let emulator = {
 
 		if (!search)
 		{
-			search = studio.device_wyapp.registerSearch ('emulator');
+			search = studio.device_wyapp.registerSearch ('qemu_wyapp');
 		}
-		studio.workspace.dispatchToStore('emulator', 'images', images);
+		studio.workspace.dispatchToStore('qemu_wyapp', 'images', images);
 	},
 	async deleteImage(image)
 	{
@@ -137,18 +137,18 @@ let emulator = {
 				studio.workspace.error(e.message);
 			}
 			
-			studio.workspace.dispatchToStore('emulator', 'images', images);
-			studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: -1});
+			studio.workspace.dispatchToStore('qemu_wyapp', 'images', images);
+			studio.workspace.dispatchToStore('qemu_wyapp', 'updateDownloadProgress', {image, progress: -1});
 		}
 	},
 	async loadAvailableEmulators() 
 	{
-		let jsonFile = path.join(studio.filesystem.getSettingsFolder(), 'emulator', 'runningEmulators', 'running.json');
+		let jsonFile = path.join(studio.filesystem.getSettingsFolder(), 'qemu_wyapp', 'runningEmulators', 'running.json');
 
 		try {
 			let availableEmulators = await fs.readFile(jsonFile);
 			runningEmulators = JSON.parse(availableEmulators);
-			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+			studio.workspace.dispatchToStore('qemu_wyapp', 'runningEmulators', runningEmulators);
 		} catch(e)
 		{
 			studio.workspace.error(e.message);
@@ -165,7 +165,7 @@ let emulator = {
 		else if(qemuExitCode[imageRunning.type] === 0)
 		{
 			qemuCheck = false;
-			studio.workspace.dispatchToStore('emulator', 'qemuCheck', qemuCheck);
+			studio.workspace.dispatchToStore('qemu_wyapp', 'qemuCheck', qemuCheck);
 			let emulatorName = await studio.workspace.showPrompt('EMULATOR_NAME', 'EMULATOR_CHOOSE_NAME');
 			if(emulatorName && !runningEmulators[emulatorName]) {
 				for(let image of images)
@@ -173,7 +173,7 @@ let emulator = {
 					if(image.type === imageRunning.type)
 					{
 						image.loadingEmulator = 'yes';
-						studio.workspace.dispatchToStore('emulator', 'images', images);
+						studio.workspace.dispatchToStore('qemu_wyapp', 'images', images);
 						
 						currentlyRunningFolder = path.join(runningEmulatorsFolder, emulatorName);
 						await studio.filesystem.mkdirp(currentlyRunningFolder);
@@ -189,7 +189,7 @@ let emulator = {
 						} catch(e) {
 							studio.workspace.showError('EMULATOR_COPY_FILE_ERROR', {extra: e.message});
 							image.loadingEmulator = 'no';
-							studio.workspace.dispatchToStore('emulator', 'images', images);
+							studio.workspace.dispatchToStore('qemu_wyapp', 'images', images);
 							await fs.remove(currentlyRunningFolder);
 							return;
 						}
@@ -199,7 +199,7 @@ let emulator = {
 						} catch(e) {
 							studio.workspace.showError('EMULATOR_COPY_FILE_ERROR', {extra: e.message});
 							image.loadingEmulator = 'no';
-							studio.workspace.dispatchToStore('emulator', 'images', images);
+							studio.workspace.dispatchToStore('qemu_wyapp', 'images', images);
 							await fs.remove(currentlyRunningFolder);
 							return;
 						}
@@ -209,13 +209,13 @@ let emulator = {
 						} catch(e) {
 							studio.workspace.showError('EMULATOR_COPY_FILE_ERROR', {extra: e.message});
 							image.loadingEmulator = 'no';
-							studio.workspace.dispatchToStore('emulator', 'images', images);
+							studio.workspace.dispatchToStore('qemu_wyapp', 'images', images);
 							await fs.remove(currentlyRunningFolder);
 							return;
 						}
 
 						image.loadingEmulator = 'no';
-						studio.workspace.dispatchToStore('emulator', 'images', images);
+						studio.workspace.dispatchToStore('qemu_wyapp', 'images', images);
 					}
 				}
 				emulatorPort = Math.floor(Math.random() * (10000 - 1024)) + 1024;
@@ -234,96 +234,96 @@ let emulator = {
 			studio.workspace.showError('EMULATOR_MISSING_QEMU_ERROR', {system: imageRunning.qemu.system});
 		}
 	},
-	startEmulator(emulator)
+	startEmulator(qemu_wyapp)
 	{	
 		let parameters = ['-net', 'nic', '-net', 'user,id=ethernet.0,hostfwd=tcp::' + emulatorPort + '-:22', '-no-reboot'];
-		if(emulator.qemu.kernel)
-			parameters.push('-kernel', path.join(imagesFolder, emulator.type, emulator.qemu.kernel));
-		if(emulator.qemu.dtb)
-			parameters.push('-dtb', path.join(imagesFolder, emulator.type, emulator.qemu.dtb));
-		if(emulator.qemu.mem)
-			parameters.push('-m', emulator.qemu.mem);
-		if(emulator.qemu.machine)
-			parameters.push('-M', emulator.qemu.machine);
-		if(emulator.qemu.cpu)
-			parameters.push('-cpu', emulator.qemu.cpu);
-		if(emulator.qemu.serial)
-			parameters.push('-serial', emulator.qemu.serial);
-		if(emulator.qemu.cmdline)
-			parameters.push('-append', emulator.qemu.cmdline);
-		if(emulator.qemu.drive)
-			parameters.push('-drive', emulator.qemu.drive + emulator.image + ',format=raw');
-		if(emulator.qemu.hda)
-			parameters.push('-hda', emulator.image);
-		if(emulator.qemu.boot)
-			parameters.push('-boot', emulator.qemu.boot);
-		qemu = spawn(QEMU + emulator.qemu.system, parameters, {
+		if(qemu_wyapp.qemu.kernel)
+			parameters.push('-kernel', path.join(imagesFolder, qemu_wyapp.type, qemu_wyapp.qemu.kernel));
+		if(qemu_wyapp.qemu.dtb)
+			parameters.push('-dtb', path.join(imagesFolder, qemu_wyapp.type, qemu_wyapp.qemu.dtb));
+		if(qemu_wyapp.qemu.mem)
+			parameters.push('-m', qemu_wyapp.qemu.mem);
+		if(qemu_wyapp.qemu.machine)
+			parameters.push('-M', qemu_wyapp.qemu.machine);
+		if(qemu_wyapp.qemu.cpu)
+			parameters.push('-cpu', qemu_wyapp.qemu.cpu);
+		if(qemu_wyapp.qemu.serial)
+			parameters.push('-serial', qemu_wyapp.qemu.serial);
+		if(qemu_wyapp.qemu.cmdline)
+			parameters.push('-append', qemu_wyapp.qemu.cmdline);
+		if(qemu_wyapp.qemu.drive)
+			parameters.push('-drive', qemu_wyapp.qemu.drive + qemu_wyapp.image + ',format=raw');
+		if(qemu_wyapp.qemu.hda)
+			parameters.push('-hda', qemu_wyapp.image);
+		if(qemu_wyapp.qemu.boot)
+			parameters.push('-boot', qemu_wyapp.qemu.boot);
+		qemu = spawn(QEMU + qemu_wyapp.qemu.system, parameters, {
 			env: process.env
 		});
 		qemu.stdout.on('data', () => {
-			runningEmulators[emulator.name].running = 1;
-			runningEmulators[emulator.name].pid = qemu.pid;
-			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+			runningEmulators[qemu_wyapp.name].running = 1;
+			runningEmulators[qemu_wyapp.name].pid = qemu.pid;
+			studio.workspace.dispatchToStore('qemu_wyapp', 'runningEmulators', runningEmulators);
 		});
 		
 		qemu.stderr.on('data', (data) => {
 			studio.workspace.error(`stderr: ${data}`);
 		});
 		qemu.on('close', async () => {
-			devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
-			runningEmulators[emulator.name].running = 0;
-			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+			devices = devices.filter(device => device.port !== runningEmulators[qemu_wyapp.name].port);
+			runningEmulators[qemu_wyapp.name].running = 0;
+			studio.workspace.dispatchToStore('qemu_wyapp', 'runningEmulators', runningEmulators);
 			await fs.writeFile(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
 			search.updateDevices(devices);
 		});
 		devices.push ({
-			id: 'wyapp:emulator:' + runningEmulators[emulator.name].port,
+			id: 'wyapp:qemu_wyapp:' + runningEmulators[qemu_wyapp.name].port,
 			transport: 'ssh',
 			address: '127.0.0.1',
-			name: emulator.name,
+			name: qemu_wyapp.name,
 			priority: studio.workspace.DEVICE_PRIORITY_HIGH,
-			port: runningEmulators[emulator.name].port,
-			board: emulator.type,
+			port: runningEmulators[qemu_wyapp.name].port,
+			board: qemu_wyapp.type,
 			properties: {
-				category: emulator.type,
+				category: qemu_wyapp.type,
 				platform: 'linux'
 			}
 		});
 		search.updateDevices(devices);
 		studio.workspace.dispatchToStore('workspace', 'devices', devices);
 	},
-	async stopEmulator(emulator)
+	async stopEmulator(qemu_wyapp)
 	{
-		if(emulator && runningEmulators[emulator.name])
+		if(qemu_wyapp && runningEmulators[qemu_wyapp.name])
 		{
-			if (runningEmulators[emulator.name].pid)
+			if (runningEmulators[qemu_wyapp.name].pid)
 			{
-				kill(runningEmulators[emulator.name].pid, 'SIGKILL');
+				kill(runningEmulators[qemu_wyapp.name].pid, 'SIGKILL');
 			}
-			devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
-			runningEmulators[emulator.name].running = 0;
-			studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+			devices = devices.filter(device => device.port !== runningEmulators[qemu_wyapp.name].port);
+			runningEmulators[qemu_wyapp.name].running = 0;
+			studio.workspace.dispatchToStore('qemu_wyapp', 'runningEmulators', runningEmulators);
 			await fs.writeFile(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
 			search.updateDevices(devices);
 		}
 	},
-	async deleteEmulator(emulator)
+	async deleteEmulator(qemu_wyapp)
 	{
-		if(emulator)
+		if(qemu_wyapp)
 		{
 			let value = await studio.workspace.showConfirmationPrompt(
 				'EMULATOR_DELETE_EMULATOR_TITLE',
 				'EMULATOR_DELETE_EMULATOR_QUESTION',
 			);
 			if (value) {
-				if (runningEmulators[emulator.name].pid)
+				if (runningEmulators[qemu_wyapp.name].pid)
 				{
-					kill(runningEmulators[emulator.name].pid, 'SIGKILL');
+					kill(runningEmulators[qemu_wyapp.name].pid, 'SIGKILL');
 				}
-				await fs.remove(runningEmulators[emulator.name].runningFolder);
-				devices = devices.filter(device => device.port !== runningEmulators[emulator.name].port);
-				delete runningEmulators[emulator.name];
-				studio.workspace.dispatchToStore('emulator', 'runningEmulators', runningEmulators);
+				await fs.remove(runningEmulators[qemu_wyapp.name].runningFolder);
+				devices = devices.filter(device => device.port !== runningEmulators[qemu_wyapp.name].port);
+				delete runningEmulators[qemu_wyapp.name];
+				studio.workspace.dispatchToStore('qemu_wyapp', 'runningEmulators', runningEmulators);
 				await fs.writeFile(path.join(runningEmulatorsFolder, 'running.json'), JSON.stringify(runningEmulators, null, 4));
 				search.updateDevices(devices);
 			}
@@ -340,7 +340,7 @@ let emulator = {
 				responseType: 'stream',
 				onDownloadProgress: (progressEvent) => {
 					var percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-					studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: percent});
+					studio.workspace.dispatchToStore('qemu_wyapp', 'updateDownloadProgress', {image, progress: percent});
 				},
 			});
 
@@ -364,7 +364,7 @@ let emulator = {
 						unzip.pipe(unzipper.Extract({path: image.dataFolder}));
 						unzip.on('end', async () => {
 							await fs.remove(path.join(image.dataFolder, 'image.zip'));
-							studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 100});
+							studio.workspace.dispatchToStore('qemu_wyapp', 'updateDownloadProgress', {image, progress: 100});
 						});
 					} catch(e) {
 						studio.workspace.error(e);
@@ -387,7 +387,7 @@ let emulator = {
 				studio.workspace.error(e.message);
 				studio.workspace.showError('EMULATOR_STOP_DOWNLOAD_ERROR' + {extra: e.message});
 			}
-			studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 0});
+			studio.workspace.dispatchToStore('qemu_wyapp', 'updateDownloadProgress', {image, progress: 0});
 		}
 	}
 };
@@ -397,15 +397,15 @@ export function setup(options, imports, register)
 	studio = imports;
 
 	studio.workspace.registerMenuItem('DEVICE_EMULATOR', 20, () => {
-		studio.workspace.showDialog(EmulatorSetup,{width:'600px'});
+		studio.workspace.showDialog(QEMUEmulatorSetup,{width:'600px'});
 
 	});
-	emulator.registerImages();
-	emulator.loadAvailableEmulators();
+	qemu_wyapp.registerImages();
+	qemu_wyapp.loadAvailableEmulators();
 
-	studio.workspace.registerStore('emulator', emulatorStore);
+	studio.workspace.registerStore('qemu_wyapp', emulatorStore);
 
 	register(null, {
-		emulator: emulator
+		qemu_wyapp: qemu_wyapp
 	});
 }

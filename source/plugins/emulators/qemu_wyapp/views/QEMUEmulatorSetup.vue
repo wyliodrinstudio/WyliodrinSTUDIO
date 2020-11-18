@@ -45,7 +45,7 @@
 									</div>
 								</div>
 								<div v-else-if="item.loadingEmulator=== 'yes'">
-									<v-img src="plugins/emulator/data/img/icons/loading-emulator.gif" style="width:50px;height:50px"></v-img>
+									<v-img src="plugins/emulators/qemu_wyapp/data/img/icons/loading-emulator.gif" style="width:50px;height:50px"></v-img>
 								</div>
 							</v-list-item-action>
 						</v-list-item>

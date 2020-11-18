@@ -1,11 +1,11 @@
 {
-    "name": "emulator",
+    "name": "qemu_wyapp",
     "version": "0.0.1",
     "main": "index.js",
     "private": true,
     "plugin": {
         "consumes": ["workspace", "filesystem", "system", "settings", "device_wyapp"],
-        "provides": ["emulator"],
+        "provides": ["qemu_wyapp"],
         "target": ["electron"]
     }
 }

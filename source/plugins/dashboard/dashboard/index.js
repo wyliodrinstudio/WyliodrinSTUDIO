@@ -69,12 +69,14 @@ export function setup (options, imports, register)
 
 	let signalsBuffer = '';
 	let signalRegex = /^@([A-Za-z0-9_]+):\s*([^/]+)(?:\/([0-9]+))?$/;
+	let newLine = true;
 
 	const filterSignal = (data) => {
 		let signals = [];
 		let output = '';
 		let signalParts = data.split (/\r?\n/);
 		if (signalParts.length > 1) {
+			newLine = true;
 			signalParts[0] = signalsBuffer + signalParts[0];
 			let actualSignals = signalParts.slice (0, signalParts.length-1);
 			for (let signalFormat of actualSignals) {
@@ -104,10 +106,11 @@ export function setup (options, imports, register)
 				}
 			}
 		}
-		signalsBuffer = signalParts[signalParts.length-1];
-		if (signalsBuffer[0] !== '@') {
+		signalsBuffer = signalsBuffer + signalParts[signalParts.length-1];
+		if (!newLine || signalsBuffer[0] !== '@') {
 			output = output + signalsBuffer;
 			signalsBuffer = '';
+			newLine = false;
 		}
 		return {
 			signals,
