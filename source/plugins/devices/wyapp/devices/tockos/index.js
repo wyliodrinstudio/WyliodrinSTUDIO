@@ -28,7 +28,7 @@ export function setup (options, imports, register)
 		*/
 		iconURL ()
 		{
-			return 'plugins/devices/wyapp/devices/tockos/data/img/icon-tockos.png';
+			return 'plugins/devices/wyapp/devices/tockos/data/img/tock-os-48.png';
 		},
 		/**
 		 * Found a device, modify stuff (like icon)
