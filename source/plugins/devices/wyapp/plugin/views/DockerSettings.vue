@@ -213,7 +213,7 @@ export default {
 			this.privileged = data.privileged;
 			
 		} catch (error) {
-			
+			this.studio.workspace.warn ('error loading docker.json '+error.message);
 		}
 	},
 
