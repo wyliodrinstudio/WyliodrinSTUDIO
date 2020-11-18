@@ -23,8 +23,12 @@
 			</v-select>
 			<v-select return-object v-model = "board" :items="boards.tockloader" item-text = "name" label="Select Board" v-if="flashOption === 'Tockloader'">
 			</v-select>
-			<v-select return-object v-model = "board" :items="boards.singleBinary" item-text = "name" label="Select Board" v-else-if="flashOption === 'Single Binary'">
-			</v-select>
+			<v-flex v-else-if="flashOption === 'Single Binary'">
+				<v-select return-object v-model = "board" :items="boards.singleBinary" item-text = "name" label="Select Board">
+				</v-select>
+				<v-select return-object v-model = "kernelVersion" :items="board.compatibleReleases" item-text = "name" label="Select Tock Release Version">
+				</v-select>
+			</v-flex>	
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer></v-spacer>
@@ -48,6 +52,7 @@ export default {
 			flashOption: undefined,
 			boards: BOARDS,
 			board: undefined,
+			kernelVersion: undefined,
 			boardSettings: {
 				stackSize: 2048,
 				appHeapSize: 1024,
@@ -96,6 +101,8 @@ export default {
 			this.boardSettings = AppBoardSettings.boardSettings;
 			this.board = AppBoardSettings.board;
 			this.flashOption = AppBoardSettings.flashOption;
+			if (this.flashOption === 'Single Binary')
+				this.kernelVersion = AppBoardSettings.kernelVersion;
 		} 
 	},
 	methods: {
@@ -105,15 +112,19 @@ export default {
 
 			await this.generateUploadSH();
 
+			if (this.flashOption === 'Single Binary')
+				await this.updateGitPrepare();
+
 			await this.studio.projects.saveSpecialFile(this.project, 'AppBoardSettings', Buffer.from(JSON.stringify({
 				boardSettings: this.boardSettings,
 				board: this.board,
-				flashOption: this.flashOption
+				flashOption: this.flashOption,
+				kernelVersion: this.kernelVersion
 			})));
 
 			this.$root.$emit ('submit', true);
 		},
-		async generateAppMakefile() {
+		async generateAppMakefile () {
 			let makefile = await this.studio.projects.loadFile(this.project, 'Makefile.app');
 			if (makefile === null) {
 				makefile = makefileDefaultTemplate;
@@ -160,7 +171,7 @@ export default {
 			newMakefile = newMakefile.join('\r\n');
 			await this.studio.projects.saveFile(this.project, 'Makefile.app', Buffer.from(newMakefile));
 		},
-		async generateUploadSH() {
+		async generateUploadSH () {
 			let uploadSH = '# DO NOT MODIFY this file will be generated AUTOMATICALLY\n\n';
 			
 			if (this.flashOption === 'Tockloader') {
@@ -183,7 +194,7 @@ export default {
 
 			await this.studio.projects.saveFile(this.project, '.project/upload.sh', Buffer.from(uploadSH));
 		},
-		async generateKernelMakefile() {
+		async generateKernelMakefile () {
 			let kernelMakefile = await this.downloadBoardFile(this.board, 'Makefile');
 			kernelMakefile = kernelMakefile.split(/\r?\n/);
 
@@ -212,6 +223,14 @@ export default {
 		async downloadBoardFile ({board}, filename) {
 			let response = await axios.get (`https://raw.githubusercontent.com/tock/tock/master/boards/${board}/${filename}`);
 			return response.data;
+		},
+		async updateGitPrepare () {
+			let gitPrepare = Buffer.from(await this.studio.projects.loadFile(this.project, '.project/gitPrepare.sh')).toString();
+			gitPrepare += 'cd $TOCK_KERNEL_DIR && git reset --hard\n';
+			gitPrepare += 'cd $TOCK_KERNEL_DIR && git clean -f -d\n';
+			gitPrepare += `cd $TOCK_KERNEL_DIR && git checkout ${this.kernelVersion.tag}\n`;
+
+			await this.studio.projects.saveFile(this.project, '.project/gitPrepare.sh', Buffer.from(gitPrepare));
 		},
 		close ()
 		{
