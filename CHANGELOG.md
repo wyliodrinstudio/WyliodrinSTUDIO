@@ -1,3 +1,7 @@
+## Wyliodrin STUDIO 2.2.1-beta
+  * **new** Raspberry Pi images (with docker)
+  * **improved** docker deployment 
+
 ## Wyliodrin STUDIO 2.2.0-beta
   * **added** Wyliodrin STUDIO CI tests for build, documentation and format
   * **added** support for MicroPython(run, REPL and file manager)
