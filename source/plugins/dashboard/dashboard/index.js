@@ -68,18 +68,24 @@ export function setup (options, imports, register)
 	studio.workspace.registerStore ('dashboard', dashboardStore);
 
 	let signalsBuffer = '';
-	let signalRegex = /^@([A-Za-z0-9_]+):\s*([^/]+)(?:\/([0-9]+))?$/;
+	let signalRegex = /^@([A-Za-z0-9_]+):\s*([^/]+)(?:\/([0-9]+))?\r?\n$/;
+
+	let possible = false;
+
+	let newLine = true;
 
 	const filterSignal = (data) => {
 		let signals = [];
 		let output = '';
-		let signalParts = data.split (/\r?\n/);
-		if (signalParts.length > 1) {
-			signalParts[0] = signalsBuffer + signalParts[0];
-			let actualSignals = signalParts.slice (0, signalParts.length-1);
-			for (let signalFormat of actualSignals) {
-				let signal = signalFormat.match (signalRegex);
-				if (signal) {
+
+		for (let s of data) 
+		{
+			if (s === '\n') {
+				newLine = true;
+				signalsBuffer = signalsBuffer + s;
+				let signal = signalsBuffer.match (signalRegex);
+				if (signal) 
+				{
 					let timestamp = new Date ();
 					if (signal[3]) {
 						let t = parseFloat (signal[3]);
@@ -100,15 +106,38 @@ export function setup (options, imports, register)
 				}
 				else
 				{
-					output = output + signalFormat + '\r\n';
+					output = output + signalsBuffer;
 				}
+				signalsBuffer = '';
+			}
+			else
+			{
+				if (newLine)
+				{
+					if (s === '@')
+					{
+						possible = true;
+						signalsBuffer = signalsBuffer + s;
+					}
+					else 
+					{
+						possible = false;
+						output = output + s;
+					}
+				}
+				else
+				if (possible)
+				{
+					signalsBuffer = signalsBuffer + s;
+				}
+				else
+				{
+					output = output + s;
+				}
+				newLine = false;
 			}
 		}
-		signalsBuffer = signalParts[signalParts.length-1];
-		if (signalsBuffer[0] !== '@') {
-			output = output + signalsBuffer;
-			signalsBuffer = '';
-		}
+		
 		return {
 			signals,
 			output

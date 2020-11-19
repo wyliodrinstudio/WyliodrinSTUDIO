@@ -68,7 +68,6 @@ export default {
 	methods: {
 		wifi ()
 		{
-			let board = this.boards.find ((board) => board.board === this.board);
 			this.studio.system.openLink (this.wifiLink);
 		},
 		more ()
