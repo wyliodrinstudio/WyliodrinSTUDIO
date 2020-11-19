@@ -26,6 +26,12 @@ export function setup (options, imports, register)
 	});
 
 	let picopi = {
+		name: 'Pico Pi',
+		setupOptions: {
+			path: '/boot/',
+			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html#id12'
+		},
+		priority: 30,
 		/** 
 		 * Device Icon 
 		*/

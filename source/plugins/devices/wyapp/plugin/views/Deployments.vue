@@ -23,7 +23,7 @@
 							<h3>{{container.title}}</h3>
 
 						</td>
-						<td>
+						<td class="status-container">
 							<div :class="status (container)" :alt="container.state" :title="container.state"> </div>
 						</td>
 						<td class="w-30 d-flex">
@@ -162,7 +162,19 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.status-container {
+	position: relative;
+}
+.status-container > div {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
 .green {
 	background-color: green;
 	height: 15px;
@@ -176,7 +188,7 @@ export default {
 	border-radius: 100px;
 }
 .yellow {
-	background-color: yellow;
+	background-color: orange;
 	height: 15px;
 	width: 15px;
 	border-radius: 100px;

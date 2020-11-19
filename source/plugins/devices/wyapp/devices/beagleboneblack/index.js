@@ -21,6 +21,12 @@ export function setup (options, imports, register)
 	});
 
 	let beagleboneblack = {
+		name: 'BeagleBone Black',
+		setupOptions: {
+			path: '/boot/',
+			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html#id25'
+		},
+		priority: 10,
 		/** 
 		 * Device Icon 
 		*/

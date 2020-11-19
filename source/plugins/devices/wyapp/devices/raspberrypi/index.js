@@ -38,6 +38,13 @@ export function setup (options, imports, register)
 	});
 
 	let raspberrypi = {
+		name: 'Raspberry Pi',
+		setupOptions: {
+			path: '/boot/',
+			wifiLink: 'https://www.raspberrypi.org/documentation/configuration/wireless/headless.md',
+			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html#connecting-via-web'
+		},
+		priority: 1,
 		/** 
 		 * Device Icon 
 		*/

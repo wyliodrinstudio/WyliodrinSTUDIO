@@ -620,6 +620,19 @@ export function setup(options, imports, register)
 		},
 
 		/**
+		 * List boards
+		 */
+		listBoards ()
+		{
+			let boardsList = [];
+			for (let board in boards) {
+				boardsList.push ({...boards[board], board});
+			}
+			boardsList.sort ((board1, board2) => board1.priority - board2.priority);
+			return boardsList;
+		},
+
+		/**
 		 * Stop the current project
 		 */
 		stopProject()

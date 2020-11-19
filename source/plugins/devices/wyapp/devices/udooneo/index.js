@@ -21,6 +21,12 @@ export function setup (options, imports, register)
 	});
 
 	let udooneo = {
+		name: 'UDOO Neo',
+		setupOptions: {
+			path: '/boot/',
+			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html#id36'
+		},
+		priority: 20,
 		/** 
 		 * Device Icon 
 		*/

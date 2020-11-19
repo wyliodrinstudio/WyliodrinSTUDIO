@@ -232,7 +232,7 @@ export function setup (options, imports, register)
 		{
 			if (device.id === 'wyapp:websocket:newdevice')
 			{
-				workspace.showDialog (DeviceSetup, {token});
+				workspace.showDialog (DeviceSetup, {token, width: 500});
 				return null;
 			}
 			else
