@@ -115,6 +115,7 @@ let web_filesystem = {
 		let obj = {
 			name: name,
 			type: type,
+			timestamp: new Date (),
 			parent: parentId
 		};
 		try {
@@ -131,9 +132,11 @@ let web_filesystem = {
 		let obj = {
 			fileId: fileId,
 			data: data,
+			timestamp: new Date (),
 			size: size
 		};
 		try {
+			// save data
 			let possibleEntry = (await db.data.where({ 'fileId': fileId }).toArray())[0];
 			if (possibleEntry)
 				await db.data.update(possibleEntry.id, obj);
@@ -192,6 +195,18 @@ let web_filesystem = {
 			if (file[0]) {
 				return file[0].type == 1;
 			}
+		}
+	},
+
+	async _stat (path) {
+		if (path.startsWith('/'))
+			path = path.substring(1);
+		let paths = path.split('/');
+		let parentId = await this.getLastParentId(paths, 0, false);
+		if (parentId != -1)
+		{
+			let file = await db.files.where(['name+parent']).equals([paths[paths.length - 1], parentId]).toArray();
+			return file[0];
 		}
 	},
 
@@ -489,10 +504,14 @@ let web_filesystem = {
 		await this.insertElementData(objIns[0].id, buffer.toString('base64'), buffer.length);
 	},
 
-	lastModified(/* path */) {
-		//TODO
+	async lastModified(path) {
+		let file = await this._stat (path);
+		if (file) {
+			return new Date (file.timestamp);
+		}
 		return false;
 	},
+
 	openExportDialog(data, options = {}) {
 		//data to take from options - type
 		let element = document.createElement('a');
@@ -592,6 +611,12 @@ export default async function setup(options, imports, register) {
 		files: '++id,*name,type,*parent,&[name+parent],&[name+type+parent],&[id+parent]',
 		data: '++id,&fileId,data,size'
 	});
+
+	db.version(2).stores({
+		files: '++id,*name,type,timestamp,*parent,&[name+parent],&[name+type+parent],&[id+parent]',
+		data: '++id,&fileId,timestamp,data,size'
+	});
+
 	db.open();
 
 	register(null, {
