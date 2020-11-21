@@ -1,3 +1,5 @@
+## Wyliodrin STUDIO 2.3.0
+  * **fixed** schematics and enabled it for browser
 ## Wyliodrin STUDIO 2.2.1-beta
   * **new** Raspberry Pi images (with docker)
   * **improved** docker deployment 

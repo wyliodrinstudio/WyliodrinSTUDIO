@@ -6,6 +6,6 @@
     "plugin": {
         "consumes": ["workspace", "projects"],
         "provides": ["schematics"],
-        "target": ["electron"]
+        "target": ["electron", "browser"]
     }
 }

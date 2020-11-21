@@ -24,7 +24,7 @@
         "description": "The message that appears when there is no picture"
     },
     "SCHEMATICS_IMPORT_ERROR": {
-        "message": "Error importing schematics: {{error}}",
+        "message": "Error importing schematics: {error}",
         "description": "The messages that appears when there is an error while importing the schematics"
     }
 }

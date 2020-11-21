@@ -1355,6 +1355,43 @@ let projects = {
 		}
 	},
 	/**
+	 * The purpose of this function is to delete a special settings file and it requires the *project* corresponding to the file, 
+	 * the *name* of the file, actually represented as the path to the file, and the *content* that will be saved in the special 
+	 * settings file.
+	 * 
+	 * @param {Project} project - project object
+	 * @param {string} name - the path to the file
+	 * 
+	 * @returns {boolean} - true if successful, false otherwise
+	 * 
+	 * @example
+	 * 
+	 * deleteSpecialFile('MyNewProject', 'SpecialFileName');
+	 */
+	async deleteSpecialFile(project, name) {
+		if(project !== null && name !== null){
+			let projectFolder = project.folder;
+			let specialFolder = path.join(projectFolder, '.project');
+			try {
+				await studio.filesystem.mkdirp(specialFolder);
+			} catch (e) {
+				// TODO show notification
+				studio.workspace.error(e);
+			}
+			let specialFile = path.join(specialFolder, (name));
+			try {
+				await studio.filesystem.remove(specialFile);
+				return specialFile;
+			} catch (e) {
+				studio.workspace.showError('PROJECT_ERROR_DELETE_SPECIAL_FILE', {file: specialFile, error: e.message});
+				return false;
+			}
+		} else {
+			studio.workspace.warn('PROJECT_ERROR_DELETE_SPECIAL_FILE', {file:name});
+			return false;
+		}
+	},
+	/**
 	 * This function loads the content of a special settings file that was previously saved. In order to 
 	 * open the file, it's needed to know the *project* that the file belongs to, and the
 	 * full *name* of the file, meaning its path.
@@ -1392,84 +1429,6 @@ let projects = {
 		} else {
 			// ERROR specialFile nu e definit aici
 			studio.workspace.showError('PROJECT_ERROR_LOAD_SPECIAL_FILE', {file: 'NULL', error: 'NULL'});
-			return null;
-		}
-	},
-
-	async saveSchematic(project,name,content) {
-		if(project !== null && name !==null) {
-			let projectFolder = project.folder;
-			let specialFolder = path.join(projectFolder, '.project');
-			try {
-				await studio.filesystem.mkdirp(specialFolder);
-			} catch (e) {
-				// TODO show notification
-				studio.workspace.error(e);
-			}
-			let specialFile = path.join(specialFolder, (name));
-			try {
-				await studio.filesystem.writeFile(specialFile, content);
-				return specialFile;
-			} catch (e) {
-				studio.workspace.showError('PROJECT_ERROR_SAVE_SCHEMATIC', {file: specialFile, data:content, error: e.message});
-				return false;
-			}
-		} else {
-			studio.workspace.warn('PROJECT_ERROR_SAVE_SCHEMATIC', {file:name, data:content});
-			return false;
-		}
-	},
-	async loadSchematic(project) {
-		if(project !== null) {
-			let projectFolder = project.folder;
-			let specialFolder = path.join(projectFolder, '.project');
-			try {
-				await studio.filesystem.mkdirp(specialFolder);
-			} catch (e) {
-				// TODO show notification
-				studio.workspace.error(e);
-			}
-			let specialFile = path.join(specialFolder, 'schematic.svg');
-			try {
-				if (await studio.filesystem.pathExists(specialFile)) {
-					let data = await studio.filesystem.readFile(specialFile);
-					return data;
-				} else
-					return null;
-			} catch (e) {
-				studio.workspace.showError('PROJECT_ERROR_LOAD_SCHEMATIC', {file: specialFile, error: e.message});
-
-			}
-		} else {
-			// ERROR specialFile nu e definit aici
-			studio.workspace.showError('PROJECT_ERROR_LOAD_SCHEMATIC', {file: 'schematic.svg', error: 'NULL'});
-			return null;
-		}
-	},
-	async deleteSchematic(project) {
-		if(project !== null) {
-			let projectFolder = project.folder;
-			let specialFolder = path.join(projectFolder, '.project');
-			try {
-				await studio.filesystem.mkdirp(specialFolder);
-			} catch (e) {
-				// TODO show notification
-				studio.workspace.error(e);
-			}
-			let specialFile = path.join(specialFolder, 'schematic.svg');
-			try {
-				if (await studio.filesystem.pathExists(specialFile)) {
-					await studio.filesystem.remove(specialFile);
-					return true;
-				} else
-					return null;
-			} catch (e) {
-				studio.workspace.showError('PROJECT_ERROR_DELETE_SCHEMATIC', {file: specialFile, error: e.message});
-
-			}
-		} else {
-			// ERROR specialFile nu e definit aici
-			studio.workspace.showError('PROJECT_ERROR_DELETE_SCHEMATIC', {file: 'schematic.svg', error: 'NULL'});
 			return null;
 		}
 	},

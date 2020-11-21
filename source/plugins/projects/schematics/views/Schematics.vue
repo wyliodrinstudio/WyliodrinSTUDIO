@@ -5,39 +5,45 @@
 		</div>
 		<v-img v-else :src="encodedImage"  contain></v-img>
 		<v-btn v-if="encodedImage===null" @click="selectFile" class="svg-btn">{{$t('ADD_SCHEMATIC')}}</v-btn>
-		<v-btn v-else  @click="deleteSchematic" class="svg-btn">{{$t('DELETE_SCHEMATIC')}}</v-btn>
+		<v-btn v-else  @click="deleteSchematics" class="svg-btn">{{$t('DELETE_SCHEMATIC')}}</v-btn>
 		
 	</div>
 </template>
 <script>
 
-import path from 'path';
 import { mapGetters } from 'vuex';
 export default {
 	name: 'Schematics',
 	data() {
 		return {
-			encodedImage: null, 
-			fileName:null,
-			pathToFile:null
+			data: null, 
 		};
 	},
 	computed: {
 		...mapGetters ({
 			currentProject: 'projects/currentProject',
 		}),
+		encodedImage () {
+			if (this.data) 
+			{
+				var encoded = this.data.toString ('base64');	
+				return 'data:image/svg+xml;base64,' + encoded;
+			}
+			else
+			{
+				return null;
+			}
+		},
 	},
 	watch:{
 		async currentProject() {
-			let image = await this.studio.projects.loadSchematic(this.currentProject);
-			if(image !== null){
-				this.encodedImage = 'data:image/svg+xml;base64,' + image.toString ('base64');
-				this.fileName = 'schematic.svg';
-				this.pathToFile = path.join(this.currentProject.folder,'.project',this.fileName);
-			} else {
-				this.encodedImage = null;
-				this.fileName = null;
-				this.pathToFile = null;
+			if (this.currentProject)
+			{
+				this.data = await this.studio.schematics.getSchematics (this.currentProject);
+			}
+			else
+			{
+				this.data = null;
 			}
 		}
 	},
@@ -50,37 +56,29 @@ export default {
 			if (files.length > 0)
 			{
 				if(files) {
-					let aux = path.basename(files[0].name);
-					let extension = aux.substring(aux.lastIndexOf('.')).substring(1);
-					this.fileName = 'schematic.svg';
-					this.pathToFile = path.join(this.currentProject.folder,'.project',this.fileName);
-
 					try 
 					{
-						let content = await this.studio.filesystem.readFile(files[0].name);
-						var encoded = content.toString ('base64');
-						await this.studio.projects.saveSchematic(this.currentProject,this.fileName,content);
-						if(extension === 'svg')
-							this.encodedImage = 'data:image/svg+xml;base64,' + encoded;
-						else
-							this.encodedImage = 'data:image/' + extension +';base64,' + encoded;
+						let content = await this.studio.filesystem.readImportFile (files[0]);
+						if (await this.studio.schematics.setSchematics (this.currentProject, content)) {
+							this.data = content;
+						}
 					}
 					catch(e)
 					{
-						this.studio.showError('SCHEMATICS_IMPORT_ERROR',  {error: e.message});
+						this.studio.workspace.showError('SCHEMATICS_IMPORT_ERROR',  {error: e.message});
 					}
 				}
 				
 			}
 			return false;
 		},
-		async deleteSchematic() {
+		async deleteSchematics() {
 			let value = await this.studio.workspace.showConfirmationPrompt('DELETE_CONFIRMATION', 'DELETE_MESSAGE');
 			if (value) {
-				await this.studio.projects.deleteSchematic(this.currentProject);
-				this.pathToFile=null;
-				this.fileName=null;
-				this.encodedImage=null;
+				if (await this.studio.schematics.deleteSchematics (this.currentProject))
+				{
+					this.data = null;
+				}
 			}
 		}
 	},
