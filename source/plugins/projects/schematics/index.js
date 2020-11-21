@@ -14,7 +14,7 @@ export default function setup (options, imports, register)
 		 * @param {Buffer} data - schematics data
 		 */
 		setSchematics (project, data) {
-			return this.studio.projects.saveSpecialFile (project, 'schematics.svg', data);
+			return studio.projects.saveSpecialFile (project, 'schematics.svg', data);
 		},
 
 		/**
@@ -23,7 +23,7 @@ export default function setup (options, imports, register)
 		 * @param {Project} project - the project
 		 */
 		deleteSchematics (project) {
-			return this.studio.projects.deleteSpecialFile (project, 'schematics.svg');
+			return studio.projects.deleteSpecialFile (project, 'schematics.svg');
 		},
 
 		/**
@@ -34,7 +34,7 @@ export default function setup (options, imports, register)
 		 * @returns {Buffer} - the project schmeatics
 		 */
 		getSchematics (project) {
-			return this.studio.projects.loadSpecialFile (project, 'schematics.svg');
+			return studio.projects.loadSpecialFile (project, 'schematics.svg');
 		}
 	};
 
