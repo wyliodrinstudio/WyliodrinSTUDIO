@@ -234,7 +234,8 @@ function Architect(config) {
 				provided[name].__name = name;
 				for (let prop of Object.keys (provided[name]))
 				{
-					if (_.isFunction (provided[name][prop]))
+					// make sure it is not a constructor function
+					if (_.isFunction (provided[name][prop]) && !provided[name][prop].prototype)
 					{
 						provided[name]['__'+prop] = provided[name][prop];
 						provided[name][prop] = hookFunction.bind (app, provided[name], prop);
