@@ -6,7 +6,7 @@ let github = {
 		if (ref) {
 			gitURL += `?ref=${ref}`;
 		}
-		let response = await Axios.get (gitURL);
+		let response = await Axios.get(gitURL);
 
 		for(let item of response.data) {
 			if (item.type === 'file') {
@@ -28,7 +28,7 @@ let github = {
 		return fileHierarchy;
 	},
 	async downloadFile (filePath, owner, repo, ref) {
-		let response = await Axios.get (`https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${filePath}`);
+		let response = await Axios.get(`https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${filePath}`);
 		return response.data;
 	}
 };
