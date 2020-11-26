@@ -1,6 +1,7 @@
 ## Wyliodrin STUDIO 2.3.0
   * **added** serialport plugin, works in electron and Chrome browser
-  * **fixed** schematics and enabled it for browser
+  * **fixed** schematics and enbled it for browser
+  * **fixed** display micropython options after port selection in browser
 ## Wyliodrin STUDIO 2.2.1-beta
   * **new** Raspberry Pi images (with docker)
   * **improved** docker deployment 
