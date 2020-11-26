@@ -6,4 +6,3 @@ run:
 	cp -R * "$(TOCK_LIBC_DIR)/examples/studio"
 	cd "$(TOCK_LIBC_DIR)/examples/studio" && make -f Makefile.app
 	. .project/upload.sh
-	tockloader listen
