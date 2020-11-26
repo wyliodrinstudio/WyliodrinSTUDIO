@@ -236,89 +236,90 @@ export function setup (options, imports, register)
 				{
 
 					let port = new serialport.SerialPort();
-					let options = await studio.workspace.showDialog (MicroPythonConnectionDialog, {
-						device: device,
-						width: '500px'
-					});
-					if (options) 
+					if (await port.start ())
 					{
-						let mp = new MicroPython(port);
-
-						device.status = 'CONNECTING';
-						device.icon = pythonIcon (options.python);
-						updateDevices();
-
-						mp.connect (options);
-
-						
-
-						
-						ports[device.id]=mp;
-
-						mp.on('connected',()=>{
-							device.status = 'CONNECTED';
-							device.running = false;
-							updateDevice(device);
-							studio.shell.select(device.id);
-							studio.notebook.setStatus (null, 'READY');
-
-							studio.console.select (device.id);
-
-							studio.console.reset();
-							studio.console.show ();
-                                                        
+						let options = await studio.workspace.showDialog (MicroPythonConnectionDialog, {
+							device: device,
+							width: '500px'
 						});
-
-						mp.on('board', (board)=>{
-							device.name = board.name;
-							device.python = board.python;
-							device.version = board.python;
-							device.address = device.address+' ('+board.python+'@'+board.version+')';
-							device.icon = pythonIcon (device.python);
-							updateDevice (device);
-						});
-
-						mp.on('status', (status)=>{
-							if (status === STATUS_RUNNING) {
-								device.running = true;
-								updateDevice (device);
-							}
-							else
-							if (status === STATUS_STOPPED) {
-								device.running = false;
-								updateDevice (device);
-							}
-						});
-
-						mp.on('data', (data)=>
+						if (options) 
 						{
-							studio.shell.write(device.id, Buffer.from(data).toString());
-							studio.console.write(device.id, Buffer.from(data).toString());
-						});
+							let mp = new MicroPython(port);
 
-						mp.on('error',(err) => {
+							device.status = 'CONNECTING';
+							device.icon = pythonIcon (options.python);
+							updateDevices();
 
-							device.status = 'DISCONNECTED';
-							updateDevice(device);
-							studio.workspace.showError ('ERROR', {extra: err.message});
-							delete connections[device.id];
-							delete ports[device.id];                
-							//studio.workspace.showError ('MP_SERIAL_CONNECTON_ERROR', {extra: err.message});
-						});
-                                                        
-                                                        
+							mp.connect (options);
 
-						ports[device.id].on('close',() => {
-                                                                                
-							device.status = 'DISCONNECTED';
-							workspace.updateDevice(device);
-							studio.console.close();
-							delete connections[device.id];
-							delete ports[device.id];
-						});                                                        
-					}
-                                                
-                                                
+							
+
+							
+							ports[device.id]=mp;
+
+							mp.on('connected',()=>{
+								device.status = 'CONNECTED';
+								device.running = false;
+								updateDevice(device);
+								studio.shell.select(device.id);
+								studio.notebook.setStatus (null, 'READY');
+
+								studio.console.select (device.id);
+
+								studio.console.reset();
+								studio.console.show ();
+															
+							});
+
+							mp.on('board', (board)=>{
+								device.name = board.name;
+								device.python = board.python;
+								device.version = board.python;
+								device.address = device.address+' ('+board.python+'@'+board.version+')';
+								device.icon = pythonIcon (device.python);
+								updateDevice (device);
+							});
+
+							mp.on('status', (status)=>{
+								if (status === STATUS_RUNNING) {
+									device.running = true;
+									updateDevice (device);
+								}
+								else
+								if (status === STATUS_STOPPED) {
+									device.running = false;
+									updateDevice (device);
+								}
+							});
+
+							mp.on('data', (data)=>
+							{
+								studio.shell.write(device.id, Buffer.from(data).toString());
+								studio.console.write(device.id, Buffer.from(data).toString());
+							});
+
+							mp.on('error',(err) => {
+
+								device.status = 'DISCONNECTED';
+								updateDevice(device);
+								studio.workspace.showError ('ERROR', {extra: err.message});
+								delete connections[device.id];
+								delete ports[device.id];                
+								//studio.workspace.showError ('MP_SERIAL_CONNECTON_ERROR', {extra: err.message});
+							});
+															
+															
+
+							ports[device.id].on('close',() => {
+																					
+								device.status = 'DISCONNECTED';
+								workspace.updateDevice(device);
+								studio.console.close();
+								delete connections[device.id];
+								delete ports[device.id];
+							});                                                        
+						}
+					}                                                  
 				}
 			}
 			else
@@ -444,19 +445,10 @@ export function setup (options, imports, register)
 		workspace.registerDeviceToolButton('DEVICE_MP_STOP', 10, async () => {
 			let device = studio.workspace.getDevice();
         
-			let project = await studio.projects.getCurrentProject();
-        
-			if (project) {
-				if (project.language === 'python') {
-					let mp = ports[device.id];
-					await mp.stop();
-					device.running = false;
-					updateDevice (device);
-					// device.running = false;
-					// updateDevice(device);
-				}
-        
-			}
+			let mp = ports[device.id];
+			await mp.stop();
+			device.running = false;
+			updateDevice (device);
         
 		}, 'plugins/devices/mp/data/img/icons/stop-icon.svg',
         

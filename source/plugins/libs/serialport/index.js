@@ -25,6 +25,22 @@ let serial = null;
 let studio = null;
 
 export class SerialPort extends EventEmitter {
+	async start ()
+	{
+		if (studio.system.platform () === 'browser')
+		{
+			try
+			{
+				this.portConnect = await navigator.serial.requestPort();
+			}
+			catch (e)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
 	async connect (address, baudRate)
 	{ 
 		if (studio.system.platform () === 'electron')
@@ -53,7 +69,7 @@ export class SerialPort extends EventEmitter {
 		}
 		else
 		{	
-			this.portConnect = await navigator.serial.requestPort();
+			
 			// API changes, so we take into account both versions
 			await this.portConnect.open({ baudRate: baudRate || 115200, baudrate: baudRate || 115200 });
 			this.reader = this.portConnect.readable.getReader();
