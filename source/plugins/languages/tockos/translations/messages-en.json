@@ -1,0 +1,26 @@
+{
+    "TOCK_OS_SELECT_BOARD": {
+        "message": "Select Board",
+        "description": ""
+	},
+	"TOCK_OS_SELECT_EXAMPLE": {
+        "message": "Select Example",
+        "description": ""
+	},
+	"TOCK_OS_SELECT_TOCK_OS_REPO_VERSION": {
+        "message": "Select TockOS Repo Version",
+        "description": ""
+	},
+	"TOCK_OS_STATUS_FETCHING": {
+        "message": "Fetching infos...",
+        "description": ""
+	},
+	"TOCK_OS_STATUS_DOWNLOADING": {
+        "message": "Downloading...",
+        "description": ""
+	},
+	"TOCK_OS_STATUS_FINISHED": {
+        "message": "Finished...",
+        "description": ""
+	}
+}

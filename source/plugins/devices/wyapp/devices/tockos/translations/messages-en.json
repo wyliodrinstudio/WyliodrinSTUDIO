@@ -1,0 +1,38 @@
+{
+    "APP_BOARD_SETTINGS": {
+        "message": "App Board Settings",
+        "description": ""
+	},
+	"STACK_SIZE": {
+        "message": "Stack Size",
+        "description": ""
+	},
+	"APP_HEAD_SIZE": {
+        "message": "APP Heap Size",
+        "description": ""
+	},
+	"KERNEL_HEAP_SIZE": {
+        "message": "Kernel Heap Size",
+        "description": ""
+	},
+	"SELECT_FLASHING_METHOD": {
+        "message": "Select Flashing Method",
+        "description": ""
+	},
+	"SELECT_BOARD": {
+        "message": "Select Board",
+        "description": ""
+	},
+	"SELECT_TOCK_RELEASE_VERSION": {
+        "message": "Select Tock Release Version",
+        "description": ""
+	},
+	"TOCK_OS_FLASHING_OPTIONS_TOCKLOADER": {
+		"message": "Tockloader",
+        "description": ""
+	},
+	"TOCK_OS_FLASHING_OPTIONS_SINGLE_BINARY": {
+		"message": "Single Binary",
+        "description": ""
+	}
+}

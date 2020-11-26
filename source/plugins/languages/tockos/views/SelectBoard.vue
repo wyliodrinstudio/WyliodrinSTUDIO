@@ -1,13 +1,13 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t('Select Board')}} </span>
+			<span class="headline">{{$t('TOCK_OS_SELECT_BOARD')}} </span>
 		</v-card-title>
 		<v-card-text >
 			<v-container fluid v-if="downloadingStatus === ''">
-				<v-select return-object v-model = "gitInfos.version" :items="gitVersions" item-text="name"  label="Select TockOS Repo Version">
+				<v-select return-object v-model = "gitInfos.version" :items="gitVersions" item-text="name"  label="$t('TOCK_OS_SELECT_TOCK_OS_REPO_VERSION')">
 				</v-select>
-				<v-select v-model = "board" :items="boards[gitInfos.version.tag]" item-text = "name" item-value="board" label="Select Board"> 
+				<v-select v-model = "board" :items="boards[gitInfos.version.tag]" item-text = "name" item-value="board" label="$t('TOCK_OS_SELECT_BOARD')"> 
 				</v-select>
 			</v-container>
 			<v-container fluid style="height: 170px;" v-else-if="downloadingStatus !== ''">
@@ -83,7 +83,7 @@ export default {
 			this.$root.$emit ('submit', true);
 		},
 		async downloadBoardFiles() {
-			this.downloadingStatus = 'Fetching infos...';
+			this.downloadingStatus = this.$t('TOCK_OS_STATUS_FETCHING');
 			let boardRoot = `boards/${this.board}`;
 			let boardInfos = await this.studio.github.getRepoFileHierarchy(boardRoot, this.gitInfos.owner, this.gitInfos.repo, this.gitInfos.version.tag);
 			
@@ -92,7 +92,7 @@ export default {
 				numberOfFiles += boardInfos[key].length;
 			}
 			
-			this.downloadingStatus = 'Downloading...';
+			this.downloadingStatus = this.$t('TOCK_OS_STATUS_DOWNLOADING');
 			let downloadedFiles = 0;
 			this.progress.text = this.progress.value.toFixed(2)+'%';
 			for (let key in boardInfos) {
@@ -114,7 +114,7 @@ export default {
 					this.progress.text = this.progress.value.toFixed(2)+'%';	
 				}
 			}
-			this.downloadingStatus = 'Finished';
+			this.downloadingStatus = this.$t('TOCK_OS_STATUS_FINISHED');
 		},
 		async generateBoardSetupFile() {
 			let boardRoot = `boards/${this.board}`;

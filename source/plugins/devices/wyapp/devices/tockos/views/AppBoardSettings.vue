@@ -1,32 +1,32 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t('App Board Settings')}} </span>
+			<span class="headline">{{$t('APP_BOARD_SETTINGS')}} </span>
 		</v-card-title>
 		<v-card-text >
 			<v-text-field
 				dense
-				label="Stack Size"
+				label="$t('STACK_SIZE')"
 				v-model="boardSettings.stackSize"
 			></v-text-field>
 			<v-text-field
 				dense
-				label="APP Heap Size"
+				label="$t('APP_HEAD_SIZE')"
 				v-model="boardSettings.appHeapSize"
 			></v-text-field>
 			<v-text-field
 				dense
-				label="Kernel Heap Size"
+				label="$t('KERNEL_HEAP_SIZE')"
 				v-model="boardSettings.kernelHeapSize"
 			></v-text-field>
-			<v-select v-model = "flashOption" :items="flashingOptions" label="Select Flashing Method">
+			<v-select v-model = "flashOption" :items="flashingOptions" label="$t('SELECT_FLASHING_METHOD')">
 			</v-select>
-			<v-select return-object v-model = "board" :items="boards.tockloader" item-text = "name" label="Select Board" v-if="flashOption === 'Tockloader'">
+			<v-select return-object v-model = "board" :items="boards.tockloader" item-text = "name" label="$t('SELECT_BOARD')" v-if="flashOption === $t('TOCK_OS_FLASHING_OPTIONS_TOCKLOADER')">
 			</v-select>
 			<v-flex v-else-if="flashOption === 'Single Binary'">
-				<v-select return-object v-model = "board" :items="boards.singleBinary" item-text = "name" label="Select Board">
+				<v-select return-object v-model = "board" :items="boards.singleBinary" item-text = "name" label="$t('SELECT_BOARD')">
 				</v-select>
-				<v-select return-object v-model = "kernelVersion" :items="board.compatibleReleases" item-text = "name" label="Select Tock Release Version">
+				<v-select return-object v-model = "kernelVersion" :items="board.compatibleReleases" item-text = "name" label="$t('SELECT_BOARD')">
 				</v-select>
 			</v-flex>	
 		</v-card-text>
@@ -48,7 +48,7 @@ export default {
 	props: ['project'],
 	data () {
 		return {
-			flashingOptions: ['Tockloader', 'Single Binary'],
+			flashingOptions: [this.$t('TOCK_OS_FLASHING_OPTIONS_TOCKLOADER'), this.$t('TOCK_OS_FLASHING_OPTIONS_SINGLE_BINARY')],
 			flashOption: undefined,
 			boards: BOARDS,
 			board: undefined,
@@ -101,7 +101,7 @@ export default {
 			this.boardSettings = AppBoardSettings.boardSettings;
 			this.board = AppBoardSettings.board;
 			this.flashOption = AppBoardSettings.flashOption;
-			if (this.flashOption === 'Single Binary')
+			if (this.flashOption === this.$t('TOCK_OS_FLASHING_OPTIONS_SINGLE_BINARY'))
 				this.kernelVersion = AppBoardSettings.kernelVersion;
 		} 
 	},
@@ -112,7 +112,7 @@ export default {
 
 			await this.generateUploadSH();
 
-			if (this.flashOption === 'Single Binary')
+			if (this.flashOption === this.$t('TOCK_OS_FLASHING_OPTIONS_SINGLE_BINARY'))
 				await this.updateGitPrepare();
 
 			await this.studio.projects.saveSpecialFile(this.project, 'app_board_settings.json', Buffer.from(JSON.stringify({
@@ -174,7 +174,7 @@ export default {
 		async generateUploadSH () {
 			let uploadSH = '# DO NOT MODIFY this file will be generated AUTOMATICALLY\n\n';
 			
-			if (this.flashOption === 'Tockloader') {
+			if (this.flashOption === this.$t('TOCK_OS_FLASHING_OPTIONS_TOCKLOADER')) {
 				const {board, jtagSoftware} = this.board;
 
 				if (jtagSoftware !== null) {
@@ -182,7 +182,7 @@ export default {
 				} else {
 					uploadSH += `tockloader install ~/libtock-c/examples/studio/build/${this.project.name}.tab\n`;
 				}
-			} else if (this.flashOption === 'Single Binary') {
+			} else if (this.flashOption === this.$t('TOCK_OS_FLASHING_OPTIONS_SINGLE_BINARY')) {
 				const {board} = this.board;
 
 				this.generateKernelMakefile();

@@ -1,14 +1,14 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t('Select Example')}}</span>
+			<span class="headline">{{$t('TOCK_OS_SELECT_EXAMPLE')}}</span>
 		</v-card-title>
 		<v-card-text>
 			<v-container fluid v-if="downloadingStatus === ''">
 				Start From an Example Application
-				<v-select return-object v-model = "gitInfos.version" :items="gitVersions" item-text="name"  label="Select TockOS Repo Version">
+				<v-select return-object v-model = "gitInfos.version" :items="gitVersions" item-text="name"  label="$t('TOCK_OS_SELECT_TOCK_OS_REPO_VERSION')">
 				</v-select>
-				<v-select v-model = "example" :items="examples[gitInfos.version.tag]" item-text = "name" item-value="example" label="Select Example">
+				<v-select v-model = "example" :items="examples[gitInfos.version.tag]" item-text = "name" item-value="example" label="$t('TOCK_OS_SELECT_EXAMPLE')">
 				</v-select>
 			</v-container>
 			<v-container fluid style="height: 170px;" v-else-if="downloadingStatus !== ''">
@@ -85,7 +85,7 @@ export default {
 			this.$root.$emit ('submit', true);
 		},
 		async downloadExampleFiles() {
-			this.downloadingStatus = 'Fetching infos...';
+			this.downloadingStatus = this.$t('TOCK_OS_STATUS_FETCHING');
 			let exampleRoot = `examples/${this.example}`;
 			let exampleInfos = await this.studio.github.getRepoFileHierarchy(exampleRoot, this.gitInfos.owner, this.gitInfos.repo, this.gitInfos.version.tag);
 			
@@ -94,7 +94,7 @@ export default {
 				numberOfFiles += exampleInfos[key].length;
 			}
 
-			this.downloadingStatus = 'Downloading...';
+			this.downloadingStatus = this.$t('TOCK_OS_STATUS_DOWNLOADING');
 			let downloadedFiles = 0;
 			this.progress.text = this.progress.value.toFixed(2)+'%';
 			for (let key in exampleInfos) {
@@ -118,7 +118,7 @@ export default {
 				}
 			}
 
-			this.downloadingStatus = 'Finished';
+			this.downloadingStatus = this.$t('TOCK_OS_STATUS_FINISHED');
 		},
 		async generateGitPrepareFile() {
 			let gitPrepare = 'cd $TOCK_LIBC_DIR && git reset --hard\n';
