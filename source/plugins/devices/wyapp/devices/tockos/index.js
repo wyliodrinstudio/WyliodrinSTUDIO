@@ -6,21 +6,22 @@ export function setup (options, imports, register)
 {
 	studio = imports;
 
-	imports.events.on ('ready', (imports) => 
-	{
-		// add optional imports
-		studio = imports;
-
-		/* Register Pin Layout */
-		if (studio.pin_layout)
+	/**	
+        imports.events.on ('ready', (imports) => 
 		{
-			//TODO
-		}
-		else
-		{
-			studio.workspace.warn ('device.wyapp.tockos: pin_layout plugin is not available');
-		}
-	});
+			// add optional imports
+			studio = imports;
+			// Register Pin Layout
+			if (studio.pin_layout)
+			{
+				//TODO
+			}
+			else
+			{
+				studio.workspace.warn ('device.wyapp.tockos: pin_layout plugin is not available');
+			}
+		});
+	*/
 
 	let tockos = {
 		/** 
