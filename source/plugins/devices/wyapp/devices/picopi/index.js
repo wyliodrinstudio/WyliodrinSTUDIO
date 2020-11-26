@@ -67,13 +67,12 @@ export function setup (options, imports, register)
 		 * Modidify the project before run
 		 * @param {Project} project - the project
 		 */
-		run (project)
+		run (/*project*/)
 		{
 			let retVal = true;
-			project;
-
+			
 			return retVal;
-		}
+		},
 	};
 
 	/* Register Icon */
