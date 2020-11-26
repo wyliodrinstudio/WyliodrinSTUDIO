@@ -8,11 +8,11 @@
                 "description": ""
         },
         "TOCK_OS_STATUS_FETCHING": {
-                "message": "Colectez informatii...",
+                "message": "Colectez informații...",
                 "description": ""
         },
         "TOCK_OS_STATUS_DOWNLOADING": {
-                "message": "Se descarca...",
+                "message": "Se descarcă...",
                 "description": ""
         },
         "TOCK_OS_STATUS_FINISHED": {

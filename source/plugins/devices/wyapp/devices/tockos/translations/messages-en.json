@@ -19,10 +19,6 @@
         "message": "Select Flashing Method",
         "description": ""
 	},
-	"TOCK_OS_SELECT_BOARD": {
-        "message": "Select Board",
-        "description": ""
-	},
 	"TOCK_OS_FLASHING_OPTIONS_TOCKLOADER": {
 		"message": "Tockloader",
         "description": ""
