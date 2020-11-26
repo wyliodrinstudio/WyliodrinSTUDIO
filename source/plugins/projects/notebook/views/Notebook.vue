@@ -482,3 +482,14 @@ export default {
 <style lang="less" scoped>
 	@import '../style/notebook.less';
 </style>
+
+<style lang="less">
+.v-window-item {
+	img {
+		height: initial !important;
+		width: auto;
+		max-width: 100%;
+		max-height: 70vh;
+	}
+}
+</style>

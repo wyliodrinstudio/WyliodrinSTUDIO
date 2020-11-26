@@ -3,7 +3,7 @@
 		<div v-if="encodedImage === null" class="schematics-msg">
 			<span>{{$t('SCHEMATICS_IMPORT')}}</span>
 		</div>
-		<v-img v-else :src="encodedImage"  contain></v-img>
+		<img v-else :src="encodedImage">
 		<v-btn v-if="encodedImage===null" @click="selectFile" class="svg-btn">{{$t('ADD_SCHEMATIC')}}</v-btn>
 		<v-btn v-else  @click="deleteSchematics" class="svg-btn">{{$t('DELETE_SCHEMATIC')}}</v-btn>
 		
