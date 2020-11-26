@@ -7,17 +7,7 @@ import main from 'raw-loader!./template/main.c';
 export default function setup (options, imports, register)
 {
 	studio = imports;
-	/**
-	{
-		id: 'javascript',
-		title: 'JavaScript',
-		icon:'./data/img/languages/project/javascript.png',
-		options:{
-			main(){
 
-			}
-		}
-	}, */
 	let fileIcons = [
 		{
 			extension: '.rs',
