@@ -1,26 +1,26 @@
 {
     "TOCK_OS_APP_BOARD_SETTINGS": {
-        "message": "App Board Settings",
+        "message": "Setari aplicatie",
         "description": ""
 	},
 	"TOCK_OS_STACK_SIZE": {
-        "message": "Stack Size",
+        "message": "Dimensiune stiva",
         "description": ""
 	},
 	"TOCK_OS_APP_HEAD_SIZE": {
-        "message": "APP Heap Size",
+        "message": "Dimensiune heap aplicatie",
         "description": ""
 	},
 	"TOCK_OS_KERNEL_HEAP_SIZE": {
-        "message": "Kernel Heap Size",
+        "message": "Dimensiune Heap Kernel",
         "description": ""
 	},
 	"TOCK_OS_SELECT_FLASHING_METHOD": {
-        "message": "Select Flashing Method",
+        "message": "Metoda de scriere",
         "description": ""
 	},
 	"TOCK_OS_SELECT_BOARD": {
-        "message": "Select Board",
+        "message": "Alege placa",
         "description": ""
 	},
 	"TOCK_OS_FLASHING_OPTIONS_TOCKLOADER": {
@@ -28,7 +28,7 @@
         "description": ""
 	},
 	"TOCK_OS_FLASHING_OPTIONS_SINGLE_BINARY": {
-		"message": "Single Binary",
+		"message": "Binar simplu",
         "description": ""
 	}
 }

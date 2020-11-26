@@ -6,7 +6,7 @@
 		<v-card-text>
 			<v-container fluid v-if="downloadingStatus === ''">
 				Start From an Example Application
-				<v-select return-object v-model = "gitInfos.version" :items="gitVersions" item-text="name"  label="$t('TOCK_OS_SELECT_TOCK_OS_REPO_VERSION')">
+				<v-select return-object v-model = "gitInfos.version" :items="gitVersions" item-text="name"  label="$t('TOCK_OS_SELECT_RELEASE_VERSION')">
 				</v-select>
 				<v-select v-model = "example" :items="examples[gitInfos.version.tag]" item-text = "name" item-value="example" label="$t('TOCK_OS_SELECT_EXAMPLE')">
 				</v-select>
