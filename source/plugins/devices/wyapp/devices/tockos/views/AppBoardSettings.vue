@@ -74,7 +74,7 @@ export default {
 			return null;
 		}
 
-		let AppBoardSettings = await this.studio.projects.loadSpecialFile(this.project, 'AppBoardSettings');
+		let AppBoardSettings = await this.studio.projects.loadSpecialFile(this.project, 'app_board_settings.json');
 
 		if (AppBoardSettings === null) {
 			let makefile = await this.studio.projects.loadFile(this.project, 'Makefile.app');
@@ -115,7 +115,7 @@ export default {
 			if (this.flashOption === 'Single Binary')
 				await this.updateGitPrepare();
 
-			await this.studio.projects.saveSpecialFile(this.project, 'AppBoardSettings', Buffer.from(JSON.stringify({
+			await this.studio.projects.saveSpecialFile(this.project, 'app_board_settings.json', Buffer.from(JSON.stringify({
 				boardSettings: this.boardSettings,
 				board: this.board,
 				flashOption: this.flashOption,
