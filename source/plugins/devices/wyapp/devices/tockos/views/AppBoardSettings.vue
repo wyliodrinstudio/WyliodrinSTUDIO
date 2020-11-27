@@ -6,27 +6,27 @@
 		<v-card-text >
 			<v-text-field
 				dense
-				label="$t('TOCK_OS_STACK_SIZE')"
+				:label="$t('TOCK_OS_STACK_SIZE')"
 				v-model="boardSettings.stackSize"
 			></v-text-field>
 			<v-text-field
 				dense
-				label="$t('TOCK_OS_APP_HEAD_SIZE')"
+				:label="$t('TOCK_OS_APP_HEAD_SIZE')"
 				v-model="boardSettings.appHeapSize"
 			></v-text-field>
 			<v-text-field
 				dense
-				label="$t('TOCK_OS_KERNEL_HEAP_SIZE')"
+				:label="$t('TOCK_OS_KERNEL_HEAP_SIZE')"
 				v-model="boardSettings.kernelHeapSize"
 			></v-text-field>
-			<v-select v-model = "flashOption" :items="flashingOptions" label="$t('TOCK_OS_SELECT_FLASHING_METHOD')">
+			<v-select v-model = "flashOption" :items="flashingOptions" :label="$t('TOCK_OS_SELECT_FLASHING_METHOD')">
 			</v-select>
-			<v-select return-object v-model = "board" :items="boards.tockloader" item-text = "name" label="$t('TOCK_OS_SELECT_BOARD')" v-if="flashOption === $t('TOCK_OS_FLASHING_OPTIONS_TOCKLOADER')">
+			<v-select return-object v-model = "board" :items="boards.tockloader" item-text = "name" :label="$t('TOCK_OS_SELECT_BOARD')" v-if="flashOption === $t('TOCK_OS_FLASHING_OPTIONS_TOCKLOADER')">
 			</v-select>
 			<v-flex v-else-if="flashOption === 'Single Binary'">
-				<v-select return-object v-model = "board" :items="boards.singleBinary" item-text = "name" label="$t('TOCK_OS_SELECT_BOARD')">
+				<v-select return-object v-model = "board" :items="boards.singleBinary" item-text = "name" :label="$t('TOCK_OS_SELECT_BOARD')">
 				</v-select>
-				<v-select return-object v-model = "kernelVersion" :items="board.compatibleReleases" item-text = "name" label="$t('SELECT_BOARD')">
+				<v-select return-object v-model = "kernelVersion" :items="board.compatibleReleases" item-text = "name" :label="$t('SELECT_BOARD')">
 				</v-select>
 			</v-flex>	
 		</v-card-text>
