@@ -1,0 +1,4 @@
+run:
+	. .project/gitPrepare.sh
+	. .project/boardSetup.sh
+	tockloader listen

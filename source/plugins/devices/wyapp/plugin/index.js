@@ -456,7 +456,6 @@ export function setup(options, imports, register)
 			}
 		});
 
-
 		/* Register the Package Manager button */
 		workspace.registerDeviceToolButton ('DEVICE_WYAPP_PACKAGE_MANAGER', 40, () => {
 			let device = studio.workspace.getDevice ();
@@ -681,133 +680,137 @@ export function setup(options, imports, register)
 				let dockerfile = null;
 
 				if (device)
-				{
+				{	
+					let retVal = false;
 					// allow the board to modify the project structure before run
 					let board = this.getBoardDriver (device.board);	
-					if (board && board.run) await board.run (project);
-					studio.console.show ();
-					studio.console.reset ();
+					if (board && board.run) retVal = await board.run (project);
+					if (retVal !== false) {
+						studio.console.show ();
+						studio.console.reset ();
 
-					// deploy
-					if(board && board.deploy)
-					{
-						dockerfile = await studio.projects.loadFile(project, '/Dockerfile');
-
-						if(deploy === true)
+						// deploy
+						if(board && board.deploy)
 						{
-							if(dockerfile === undefined)
-							{
-								let question = await studio.workspace.showConfirmationPrompt('Dockerfile',
-									'Dockerfile non-existent. Would you like a predefined one?');
+							dockerfile = await studio.projects.loadFile(project, '/Dockerfile');
 
-								if(question === 'yes') {
-									await board.deploy(project);
+							if(deploy === true)
+							{
+								if(dockerfile === undefined)
+								{
+									let question = await studio.workspace.showConfirmationPrompt('Dockerfile',
+										'Dockerfile non-existent. Would you like a predefined one?');
+
+									if(question === 'yes') {
+										await board.deploy(project);
+									}
+									else return null;
 								}
-								else return null;
-							}
-							let options = await studio.workspace.showDialog(DockerSettings, {
-								width:600,
-								project:project,
-							});
-
-							let dockoptions = ' ';
-
-							if(options === false){
-								return null;
-							}
-
-							dockoptions += '--network ' +options.selectedNetwork + ' ';
-							dockoptions += '--restart ' + options.selectedRestart + ' ';
-							
-							if(options.selectedOption === 'interactive')
-							{
-								dockoptions += '-it ';
-							}
-							
-							if(options.selectedOption === 'detached')
-							{
-								dockoptions += '-d ';
-							}
-
-							if(options.privileged === true)
-							{
-								dockoptions += '--privileged ';
-							}
-
-							if(options.remove === true)
-							{
-								dockoptions += '--rm ';
-							}
-							
-							if(options.textInput)
-							{
-								dockoptions += ' '+ options.textInput; 
-							}
-
-							makefile += dockoptions + ' ' + tag;
-
-							await studio.projects.saveSpecialFile(project,'docker.json',JSON.stringify(options,null,4));	
-						}
-						
-						
-					} 
-					let structure = await studio.projects.generateStructure (project);
-
-					let tp = {
-						name: project.name,
-						isroot: true,
-						isdir: true,
-						children: [
-							{
-								name: project.name,
-								isdir: true,
-								issoftware: true,
-								children: [],
-								m: makefile,
-								
-							}
-						],
-					};
-
-					let setFiles = async (projectChildren, tpChildren, filenamePath) =>
-					{
-						for (let file of projectChildren)
-						{
-							if (file.children)
-							{
-								let folder = {
-									name: file.name,
-									isdir: true,
-									children: []
-								};
-								tpChildren.push (folder);
-								await setFiles (file.children, folder.children, path.join (filenamePath, file.name));
-							}
-							else
-							{
-								tpChildren.push ({
-									name: file.name,
-									isdir: false,
-									content: await studio.projects.loadFile (project, path.join (filenamePath, file.name))
+								let options = await studio.workspace.showDialog(DockerSettings, {
+									width:600,
+									project:project,
 								});
+
+								let dockoptions = ' ';
+
+								if(options === false){
+									return null;
+								}
+
+								dockoptions += '--network ' +options.selectedNetwork + ' ';
+								dockoptions += '--restart ' + options.selectedRestart + ' ';
+								
+								if(options.selectedOption === 'interactive')
+								{
+									dockoptions += '-it ';
+								}
+								
+								if(options.selectedOption === 'detached')
+								{
+									dockoptions += '-d ';
+								}
+
+								if(options.privileged === true)
+								{
+									dockoptions += '--privileged ';
+								}
+
+								if(options.remove === true)
+								{
+									dockoptions += '--rm ';
+								}
+								
+								if(options.textInput)
+								{
+									dockoptions += ' '+ options.textInput; 
+								}
+
+								makefile += dockoptions + ' ' + tag;
+
+								await studio.projects.saveSpecialFile(project,'docker.json',JSON.stringify(options,null,4));	
 							}
-						}
-					};
+							
+							
+						} 
+						let structure = await studio.projects.generateStructure (project);
 
-					await setFiles (structure.children, tp.children[0].children, '/');
-					
-					let xtrem = studio.console.getSize ();
-					
-					sendToDevice (device, 'tp', {
+						let tp = {
+							name: project.name,
+							isroot: true,
+							isdir: true,
+							children: [
+								{
+									name: project.name,
+									isdir: true,
+									issoftware: true,
+									children: [],
+									m: makefile,
+									
+								}
+							],
+						};
 
-						a: 'start',
-						t: tp,
-						l: project.language,
-						onlysoft: true,
-						c: xtrem.cols,
-						r: xtrem.rows,	
-						deploy:deploy,
-					});			
+
+						let setFiles = async (projectChildren, tpChildren, filenamePath) =>
+						{
+							for (let file of projectChildren)
+							{
+								if (file.children)
+								{
+									let folder = {
+										name: file.name,
+										isdir: true,
+										children: []
+									};
+									tpChildren.push (folder);
+									await setFiles (file.children, folder.children, path.join (filenamePath, file.name));
+								}
+								else
+								{
+									tpChildren.push ({
+										name: file.name,
+										isdir: false,
+										content: await studio.projects.loadFile (project, path.join (filenamePath, file.name))
+									});
+								}
+							}
+						};
+
+						await setFiles (structure.children, tp.children[0].children, '/');
+						
+						let xtrem = studio.console.getSize ();
+						
+						sendToDevice (device, 'tp', {
+
+							a: 'start',
+							t: tp,
+							l: project.language,
+							onlysoft: true,
+							c: xtrem.cols,
+							r: xtrem.rows,	
+							deploy:deploy,
+						});			
+					}
 				}
 			}
 			else

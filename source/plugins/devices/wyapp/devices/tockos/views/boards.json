@@ -1,0 +1,67 @@
+{
+	"tockloader": [
+		{
+			"name": "HAIL",
+			"board": "hail",
+			"jtagSoftware": null
+		},
+		{
+			"name": "IMIX",
+			"board": "imix",
+			"jtagSoftware": null
+		},
+		{
+			"name": "Nordic nRF52-DK",
+			"board": "nrf52dk",
+			"jtagSoftware": "jlink"
+		},
+		{
+			"name": "Arty SiFive (A7 FPGA)",
+			"board": "arty",
+			"jtagSoftware": "openocd"
+		},
+		{
+			"name": "STM32f4-based Nucleo",
+			"board": "nucleof4",
+			"jtagSoftware": "openocd"
+		},
+		{
+			"name": "SiFive HiFive1b",
+			"board": "hifive1b",
+			"jtagSoftware": "openocd"
+		},
+		{
+			"name": "STM32F3-based Discovery Boards",
+			"board": "stm32f3discovery",
+			"jtagSoftware": "openocd"
+		}
+	],
+	"singleBinary": [
+		{
+			"name": "STM32F3 Discovery kit",
+			"board": "stm32f3discovery",
+			"architecture": "cortex-m4",
+			"compatibleReleases": [
+				{
+					"name": "Tock 1.6",
+					"tag": "release-1.6"
+				},
+				{
+					"name": "Tock 1.5",
+					"tag": "release-1.5"
+				}
+			]
+		},
+		{
+			"name": "STM32F412G Discovery kit",
+			"board": "stm32f412gdiscovery",
+			"architecture": "cortex-m4",
+			"compatibleReleases": [
+				{
+					"name": "Tock 1.6",
+					"tag": "release-1.6"
+				}
+			]
+		}
+	]
+}

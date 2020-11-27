@@ -1,5 +1,8 @@
 import EventEmitter from 'events';
 
+let serial = null;
+let studio = null;
+
 function loadSerialPort ()
 {
 	try
@@ -8,7 +11,7 @@ function loadSerialPort ()
 		return eval ('require(\'serialport\')');
 	}
 	catch (e)
-	{
+	{	
 		studio.workspace.error ('serialport: serialport is not available '+e.message);
 		return {
 			list: function ()
@@ -19,10 +22,6 @@ function loadSerialPort ()
 		};
 	}
 }
-
-
-let serial = null;
-let studio = null;
 
 export class SerialPort extends EventEmitter {
 	async start ()

@@ -321,8 +321,13 @@ let projects = {
 						folder: projectFolder
 					};
 					// console.log(project);
-					await this._runLanguageFunction ('createProject', project);
+					let retVal = await this._runLanguageFunction ('createProject', project);
 	
+					if (retVal === false) {
+						await this.deleteProject(project);
+						project = null;
+					}
+					
 					return project;
 				}
 	
@@ -1260,7 +1265,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * let fileContent = loadFile('MyNewProject', 'FileName');
+	 * let fileContent = loadFile(project, 'FileName');
 	 */
 	async loadFile(project, name) {
 		if(project !== null && name !== null) {
@@ -1323,7 +1328,7 @@ let projects = {
 	 * 
 	 * @param {Project} project - project object
 	 * @param {string} name - the path to the file
-	 * @param {string} content - the content of the file
+	 * @param {Buffer} content - the content of the file
 	 * 
 	 * @returns {boolean} - true if successful, false otherwise
 	 * 
@@ -1399,7 +1404,7 @@ let projects = {
 	 * @param {Project} project - project object
 	 * @param {string} name - the path to the file
 	 * 
-	 * @returns {Object} - the content of the special settings file
+	 * @returns {Buffer} - the content of the special settings file, null otherwise
 	 * 	 
 	 * @example
 	 * 
