@@ -456,10 +456,11 @@ let workspace = {
 	 */
 	registerToolbarButton(name, priority, action, iconURL, options = {}) {
 		// TODO verify name, priority and action to be the right value
-		options = _.merge({
+		options = {
 			visible: () => true,
-			enabled: () => true
-		}, options);
+			enabled: () => true,
+			...options
+		};
 		let sameToolbarButton = toolbarButtons.find((toolbarButton) => toolbarButton.name === name);
 		if (!sameToolbarButton) {
 			let item = {

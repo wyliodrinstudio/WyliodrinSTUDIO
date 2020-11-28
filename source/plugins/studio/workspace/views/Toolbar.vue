@@ -9,7 +9,7 @@
 			<LanguageMenu></LanguageMenu>
 			<v-tooltip v-for="toolbarButton in toolbarButtons" :key="toolbarButton.name" bottom v-show="toolbarButton.visible()" :disabled="!toolbarButton.enabled()">
 				<template v-slot:activator="{ on }">
-					<v-btn @click.stop="toolbarButton.action" v-on="on">
+					<v-btn @click.stop="toolbarButton.action" v-on="on" v-show="toolbarButton.visible()" :disabled="!toolbarButton.enabled()">
 						<img :src="toolbarButton.iconURL" :alt="$t(toolbarButton.name)" hspace="50">
 					</v-btn>
 				</template>

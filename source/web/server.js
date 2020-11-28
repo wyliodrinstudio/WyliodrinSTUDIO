@@ -5,6 +5,7 @@
 const express = require ('express');
 const path = require ('path');
 const WebSocket = require ('ws');
+const pack = require ('./package.json');
 
 const http = require ('http');
 const url = require ('url');
@@ -14,6 +15,16 @@ const os = require ('os');
 let users = {};
 
 let app = express ();
+
+let api = express.Router ();
+
+api.get ('/version', (req, res) => {
+	res.send ({
+		err: 0,
+		version: pack.version
+	});
+});
+
 var server = http.createServer(app);
 
 if (process.env.OT_EXPERIMENTAL_TOKEN)
@@ -66,6 +77,7 @@ uiSocket.on ('connection', (socket) => {
 	let id = null;
 
 	console.log ('UISocket: Client connected');
+	let lastMessage;
 	socket.on ('message', (message) => 
 	{
 		try 
@@ -247,6 +259,8 @@ server.on ('upgrade', function (req, socket, head)
 		socket.destroy();
 	}
 });
+
+app.use ('/api/v1', api);
 
 app.use (express.static (path.join (__dirname,'ui'), { cacheControl: false }));
 let serverListener = server.listen (process.env.PORT || 8080, function (err) {

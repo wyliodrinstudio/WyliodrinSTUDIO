@@ -7,6 +7,11 @@ let system = {
 
 	events: new EventEmitter (),
 	
+	send (tag, data)
+	{
+		ipcRenderer.send (tag, data);
+	},
+
 	close ()
 	{
 		ipcRenderer.send ('close');
@@ -44,6 +49,10 @@ let system = {
 	platform ()
 	{
 		return 'electron';
+	},
+	getVersion ()
+	{
+		return 
 	}
 };
 
@@ -53,8 +62,8 @@ export function setup (options, imports, register) {
 		system.events.emit ('close-ask');
 	});
 
-	ipcRenderer.on('updated', () => {
-		system.events.emit('updated');
+	ipcRenderer.on ('update-ask', () => {
+		system.events.emit ('update-ask');
 	});
 
 	register (null, { system });
