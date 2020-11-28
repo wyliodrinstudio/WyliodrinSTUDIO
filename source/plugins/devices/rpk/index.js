@@ -178,6 +178,10 @@ export function setup(options, imports, register) {
 			return 'plugins/devices/rpk/data/img/icons/rpk.png';
 		},
 
+		getBoardIcon () {
+			return this.defaultIcon ();
+		},
+
 		getConnections() {
 			let connections = [];
 			for (let deviceId in connections) {
