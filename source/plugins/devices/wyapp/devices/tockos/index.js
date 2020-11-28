@@ -24,6 +24,12 @@ export function setup (options, imports, register)
 	*/
 
 	let tockos = {
+		name: 'Tock VM',
+		setupOptions: {
+			path: '/boot/',
+			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html'
+		},
+		priority: 100,
 		/** 
 		 * Device Icon 
 		*/
