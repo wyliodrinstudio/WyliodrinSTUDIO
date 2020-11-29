@@ -8,7 +8,8 @@ This will show how to set up a ESP8266 device.
 
 |
 
-1. Install and configure Micropython on Windows
+Windows
+***********
 -----------------------------------------------
 
 1.1 Download Micropython firmware
