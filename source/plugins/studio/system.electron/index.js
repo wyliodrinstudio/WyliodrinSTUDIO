@@ -49,10 +49,6 @@ let system = {
 	platform ()
 	{
 		return 'electron';
-	},
-	getVersion ()
-	{
-		return 
 	}
 };
 
