@@ -177,7 +177,7 @@ then go install the latest version (without opening it).
 .. image:: images/esp8266/mp_firmware.png
 	:align: center
 
-3.2 Install NodeMCU PyFlasher and flashing Micropython on ESP8266
+2. Install NodeMCU PyFlasher and flashing Micropython on ESP8266
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 NodeMCU PyFlasher is a new GUI tool to flash NodeMCU based on esptool.py and wxPython.
 
