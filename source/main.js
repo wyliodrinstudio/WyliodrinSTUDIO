@@ -14,22 +14,22 @@ if (isDev) {
   
 
 autoUpdater.on('update-downloaded', (ev, releaseNotes, releaseName) => {
-	const dialogOpts = {
-		type: 'info',
-		buttons: ['Restart', 'Later'],
-		title: 'Application Update',
-		message: process.platform === 'win32' ? releaseNotes : releaseName,
-		detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-	};
+	// const dialogOpts = {
+	// 	type: 'info',
+	// 	buttons: ['Restart', 'Later'],
+	// 	title: 'Application Update',
+	// 	message: process.platform === 'win32' ? releaseNotes : releaseName,
+	// 	detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+	// };
 	
-	dialog.showMessageBox(dialogOpts).then((returnValue) => {
-		if (returnValue.response === 0) {
-			closing = true;
-			autoUpdater.quitAndInstall();
-		}
-		win.webContents.send('updated');
-	});
-	
+	// dialog.showMessageBox(dialogOpts).then((returnValue) => {
+	// 	if (returnValue.response === 0) {
+	// 		closing = true;
+	// 		autoUpdater.quitAndInstall();
+	// 	}
+	// 	win.webContents.send('updated');
+	// });
+	win.webContents.send('update-ask');
 });
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -85,6 +85,11 @@ function createWindow() {
 
 	ipcMain.on ('loaded', () => {
 		loading = false;
+	});
+
+	ipcMain.on ('update', () => {
+		closing = true;
+		autoUpdater.quitAndInstall();
 	});
 
 	ipcMain.on ('close', () => {

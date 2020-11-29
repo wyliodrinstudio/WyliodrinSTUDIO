@@ -57,3 +57,15 @@ if (workbox) {
 } else {
     console.log("Oops! Workbox didn't load ðŸ‘º");
 }
+
+self.addEventListener('message', (event) => {
+    console.log (event.data);
+    if (event.data && event.data.tag === 'update') {
+        caches.keys().then(function(names) {
+            for (let name of names)
+                console.log ('Deleting '+name);
+                caches.delete(name);
+        });        
+        console.log ('cleared cache');
+    }
+  });
