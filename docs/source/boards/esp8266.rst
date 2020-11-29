@@ -2,6 +2,11 @@
 Install and configure Micropython
 =================================
 
+This will show how to set up a ESP8266 device.
+
+.. image:: images/esp8266/esp8266_board.png
+	:align: center
+
 |
 
 1. Install and configure Micropython on Windows
@@ -15,7 +20,7 @@ then go install the latest version (without opening it).
 
 *Suggestion*: create a folder on your computer named “esp8266” or “micropython” and download it there.
 
-.. image:: images/micropython/mp_firmware.png
+.. image:: images/esp8266/mp_firmware.png
 	:align: center
 
 
@@ -25,11 +30,11 @@ then go install the latest version (without opening it).
 NodeMCU PyFlasher is a new GUI tool to flash NodeMCU based on esptool.py and wxPython. It is available for Windows and for macOS.
 First, you have to connect the ESP8266 to your computer. Take the USB cable from the kit and Put the USB-C in one of your ports and then connect the micro-USB to the microcontroller.
 
-Check this link `install NodeMCU <https://github.com/marcelstoer/nodemcu-pyflasher/releases>`_, scroll down to the executables. If f you have Windows 10 choose the first one (*NodeMCU-PyFlasher-4.0-x64.exe*), if you have Windows 7 choose the second one (*NodeMCU-PyFlasher-4.0-x86.exe*).
+Check this link `install NodeMCU <https://github.com/marcelstoer/nodemcu-pyflasher/releases>`_, scroll down to the executables. If you have Windows 10 choose the first one (*NodeMCU-PyFlasher-4.0-x64.exe*), if you have Windows 7 choose the second one (*NodeMCU-PyFlasher-4.0-x86.exe*).
 
 After the installation will be completed, click on the NodeMCU PyFlasher .exe file and you should have a similar window:
 
-.. image:: images/micropython/mp_nodeMCU_windows1.png
+.. image:: images/esp8266/nodeMCU_1.png
 	:align: center
 
 First, you have to choose your serial port, in this case it is “COM4”, (the number after “COM” is based on the port that you chose) like in the image below. 
@@ -38,14 +43,14 @@ If you want to check which port you chose go in the Open Start menu and type “
 
 Succeeding, you have to click on “Browse” and go to the folder where you installed Micropython and choose the .bin file. Next you should chose the “Baud rate” like in the image below:
 
-.. image:: images/micropython/mp_nodeMCU_windows2.png
+.. image:: images/esp8266/nodeMCU_2.png
 	:align: center
 
 If you encounter errors, you need to reduce the baud rate (for example 9600 or up down). “1115200” is the speed read by serial port
 
-As final step, you have to click on the button “Flash NodeMCU”.
+As final step, you have to click on the button *“Flash NodeMCU”*.
 
-.. image:: images/micropython/mp_nodeMCU_windows3.png
+.. image:: images/esp8266/nodeMCU_3.png
 	:align: center
 
 **Congratulations**, now you have Micropython on your ESP8266!
@@ -74,7 +79,7 @@ At the moment, you should have python3. In order to check if the installation is
 
 Then try to code in python, like in the image below:
 
-.. image:: images/micropython/mp_linux_1.png
+.. image:: images/esp8266/verify_python.png
 	:align: center
 
 *To exit python press Ctrl+Z.*
@@ -87,7 +92,7 @@ Open Terminal and type :
 
 If it is installed you should have a similar output :
 
-.. image:: images/micropython/mp_linux_2.png
+.. image:: images/esp8266/verify_pip3.png
 	:align: center
 
 But if it has not been installed, you have to use the commands:
@@ -108,7 +113,7 @@ then go install the latest version (without opening it).
 
 *Suggestion*: create a folder on your computer named “esp8266” or “micropython” and download it there.
 
-.. image:: images/micropython/mp_firmware.png
+.. image:: images/esp8266/mp_firmware.png
 	:align: center
 
 
@@ -129,7 +134,7 @@ Succeeding, go to the folder where you installed Micropython firmware. Use **$ls
 
 Type **$ dmesg** to see the port, you should have a similar output:
 
-.. image:: images/micropython/mp_linux_3_dmesg.png
+.. image:: images/esp8266/verify_dmesg.png
 	:align: center
 
 In this case the port is *ttyUSB0*.
@@ -167,7 +172,7 @@ then go install the latest version (without opening it).
 
 *Suggestion*: create a folder on your computer named “esp8266” or “micropython” and download it there.
 
-.. image:: images/micropython/mp_firmware.png
+.. image:: images/esp8266/mp_firmware.png
 	:align: center
 
 3.2 Install NodeMCU PyFlasher and flashing Micropython on ESP8266
@@ -180,16 +185,16 @@ Check this link `install NodeMCU <https://github.com/marcelstoer/nodemcu-pyflash
 
 After the installation will be completed, click on the NodeMCU PyFlasher .exe file and you should have a similar window: 
 
-.. image:: images/micropython/mp_nodeMCU_mac.png
+.. image:: images/esp8266/nodeMCU_mac.png
 	:align: center
 
 First, you have to choose your serial port, in this case the port is: “/dev/cu.SLAB_USBtoUART”
 
 Succeeding, you have to click on “Browse” and go to the folder where you installed Micropython and choose the .bin file. Next you should choose the *Baud rate* like in the image above
 
-If you encounter errors, you need to reduce the baud rate (for example 1115200 or up down). “921600” is the speed read by serial port
+If you encounter errors, you need to reduce the baud rate (for example 1115200 or up down). “921600” is the speed read by serial port.
 
-As final step, you have to click on the button “Flash NodeMCU”.
+As final step, you have to click on the button *“Flash NodeMCU”*.
 
 **Congratulations**, now you have Micropython on your ESP8266!
 

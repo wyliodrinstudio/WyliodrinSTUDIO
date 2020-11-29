@@ -11,4 +11,5 @@ Boards Setup
    beagleboneblack
    udooneo
    picopi
+   esp8266
    
