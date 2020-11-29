@@ -1371,7 +1371,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * loadSpecialFile(project, 'SpecialFileName');
+	 * deleteSpecialFile(project, 'SpecialFileName');
 	 */
 	async deleteSpecialFile(project, name) {
 		if(project !== null && name !== null){
