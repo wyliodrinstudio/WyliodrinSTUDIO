@@ -4,8 +4,7 @@ Getting Started
 *****************
 
 
-
-In order for you to can start prototyping IoT applications or move to the next level by using our professional solution to develop and deploy Internet of Things systems, we offer you 3 different techniques to **install the Wyliodrin Studio IDE**.
+Wyliodrin STUDIO is avalable in two versions: an offline or downloadable one and a web version.
 
 |
 
