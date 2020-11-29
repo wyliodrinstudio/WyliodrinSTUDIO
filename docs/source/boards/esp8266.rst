@@ -1,5 +1,5 @@
 =================================
-Install and configure Micropython
+ESP 8266 (MicroPython)
 =================================
 
 This will show how to set up a ESP8266 device.
