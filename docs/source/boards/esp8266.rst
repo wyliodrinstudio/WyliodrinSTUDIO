@@ -57,7 +57,8 @@ As final step, you have to click on the button *“Flash NodeMCU”*.
 
 |
 
-2.Install and configure Micropython on Linux
+Linux
+*******
 ---------------------------------------------
 
 2.1 Install Python
