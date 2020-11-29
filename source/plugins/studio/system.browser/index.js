@@ -9,10 +9,13 @@ export function setup (options, imports, register) {
 	
 		send (tag, data)
 		{
-			serviceWorker.postMessage({
-				tag,
-				data
-			});
+			if (serviceWorker)
+			{
+				serviceWorker.postMessage({
+					tag,
+					data
+				});
+			}
 		},
 	
 		close ()
@@ -49,9 +52,12 @@ export function setup (options, imports, register) {
 		}
 	};
 
-	navigator.serviceWorker.ready.then( registration => {
-		serviceWorker = registration.active;
-	});
+	if (navigator.serviceWorker)
+	{
+		navigator.serviceWorker.ready.then( registration => {
+			serviceWorker = registration.active;
+		});
+	}
 	
 
 	register (null, { system });
