@@ -1,6 +1,5 @@
 {
     "editor.tabSize": 4,
     "editor.insertSpaces": false,
-    "files.eol": "\n",
-    "restructuredtext.confPath": "${workspaceFolder}\\docs\\source"
+    "files.eol": "\n"
 }

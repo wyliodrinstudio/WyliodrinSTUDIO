@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = u'Wyliodrin Studio'
-copyright = u'2019, Diana Ghindaoanu'
-author = u'Diana Ghindaoanu'
+copyright = u'2020, Wyliodrin SRL'
+author = u'Diana Ghindaoanu, Alexandra State, Alexandru Radovici'
 
 # The short X.Y version
-version = u'2.0.9'
+version = u'2.2.3'
 # The full version, including alpha/beta/rc tags
-release = u'2.0.9-beta'
+release = u'2.2.3-beta'
 
 
 # -- General configuration ---------------------------------------------------
