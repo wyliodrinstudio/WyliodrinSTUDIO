@@ -162,7 +162,8 @@ Next, connect to the serial console with command:
 
 |
 
-3. Install and configure Micropython on MacOS
+macOS
+*********
 ---------------------------------------------
 
 3.1 Download Micropython firmware
