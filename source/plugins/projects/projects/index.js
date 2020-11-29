@@ -1587,7 +1587,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * let sourceLanguage = languageSpecificOption (project, 'sourceLanguage');
+	 * let sourceLanguage = languageSpecificOption (project, {...});
 	 */
 	languageSpecificOption (project, option) {
 		return this._runLanguageFunction(option, project);
