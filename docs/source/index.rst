@@ -60,7 +60,7 @@ Also, the recognized programming languages at the time are:
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    
    start
    boards/index.rst
