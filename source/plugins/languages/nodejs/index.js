@@ -5,28 +5,6 @@ let studio = null;
 
 export default function setup(options, imports, register) {
 	studio = imports;
-	/**
-	{
-		id: 'javascript',
-		title: 'JavaScript',
-		icon:'./data/img/languages/project/javascript.png',
-		options:{
-			main(){
-
-			}
-		}
-	}, */
-	//languageAddon(language,board,type, options)
-	/**
-	 * 		addon
-	 * 		{
-				type:'rpk/wyapp',
-				board:'oriceBoard',
-				createProject(name),
-				getDefaultFileName(project),
-				getCurrentProject,
-			}
-	 */
 	let fileIcons = [
 		{
 			extension: '.js',
@@ -78,7 +56,7 @@ export default function setup(options, imports, register) {
 		}
 	};
 
-	studio.projects.registerLanguage('nodejs', 'NodeJS', 'plugins/languages/nodejs/data/img/project.png', 'plugins/languages/nodejs/data/img/javascriptLittle.png',fileIcons, javaScript);
+	studio.projects.registerLanguage('nodejs', 'NodeJS', 'plugins/languages/nodejs/data/img/project.png', 'plugins/languages/nodejs/data/img/javascript.png', 'plugins/languages/nodejs/data/img/javascriptLittle.png',fileIcons, javaScript);
 
 	studio.projects.registerLanguagePackage ('nodejs', null, [
 		{
@@ -142,5 +120,8 @@ export default function setup(options, imports, register) {
 			description: 'Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.'
 		},
 	]);
-	register(null, {});
+	register(null, {
+		// provides this for the application icons
+		language_nodejs: {}
+	});
 }

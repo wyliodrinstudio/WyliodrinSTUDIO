@@ -115,6 +115,7 @@ let projects = {
 	 * @param {string} id - language id
 	 * @param {string} title - language title
 	 * @param {string} projectIcon - icon that appears in the projects library
+	 * @param {string} logoIcon - icon that appears in the new application popup
 	 * @param {string} fileTreeIcon - icon that appears at the top of the file tree
 	 * @param {string} fileIcons - icons for files
 	 * @param {Object} options - language options
@@ -124,7 +125,7 @@ let projects = {
 	 * 
 	 * registerLanguage('python', 'Python', 'plugins/languages/python/data/img/project_python.png', 'plugins/languages/python/data/img/python.png', python);
 	 */
-	registerLanguage(id, title, projectIcon, fileTreeIcon, fileIcons, options) {
+	registerLanguage(id, title, projectIcon, logoIcon, fileTreeIcon, fileIcons, options) {
 		if(!fileIcons) fileIcons = [];
 		if (!options) options = {};
 		if(id !== null && title !== null && fileTreeIcon !== null)
@@ -133,6 +134,7 @@ let projects = {
 				id,
 				title,
 				projectIcon,
+				logo: logoIcon,
 				icon: fileTreeIcon,
 				addons: {},
 				options: options,

@@ -22,14 +22,6 @@ export default function setup(options, imports, register) {
 			icon:'mdi-puzzle'
 		},
 		{
-			extension: '.py',
-			icon:'mdi-language-python'
-		},
-		{
-			extension: '.json',
-			icon:'mdi-json'
-		},
-		{
 			extension: '.md',
 			icon:'mdi-markdown'
 		},
@@ -57,7 +49,10 @@ export default function setup(options, imports, register) {
 		}
 	};
 
-	studio.projects.registerLanguage('visual', 'Visual', 'plugins/languages/visual/language/data/img/project.png', 'plugins/languages/visual/language/data/img/visualLittle.png', fileIcons, visual);
+	studio.projects.registerLanguage('visual', 'Visual', 'plugins/languages/visual/language/data/img/project.png', 'plugins/languages/visual/language/data/img/visual.png', 'plugins/languages/visual/language/data/img/visualLittle.png', fileIcons, visual);
 
-	register(null, {});
+	register(null, {
+		// provides this for the application icons
+		language_visual: {}
+	});
 }

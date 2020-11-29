@@ -53,7 +53,7 @@ export default function setup (options, imports, register)
 		}
 	};
 
-	studio.projects.registerLanguage('python', 'Python', 'plugins/languages/python/data/img/project.png', 'plugins/languages/python/data/img/pythonLittle.png',fileIcons, python);
+	studio.projects.registerLanguage('python', 'Python', 'plugins/languages/python/data/img/project.png', 'plugins/languages/python/data/img/python.png', 'plugins/languages/python/data/img/pythonLittle.png',fileIcons, python);
 
 	studio.projects.registerLanguagePackage ('python', null, [
 		{
@@ -90,5 +90,8 @@ export default function setup (options, imports, register)
 		},
 	]);
 
-	register (null, {});
+	register (null, {
+		// provides this for the application icons
+		language_python: {}
+	});
 }

@@ -42,7 +42,10 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('c', 'C', 'plugins/languages/c/data/img/c.png', 'plugins/languages/c/data/img/c.png',fileIcons, c);
+	studio.projects.registerLanguage('c', 'C', 'plugins/languages/c/data/img/project.png', 'plugins/languages/c/data/img/c.png', 'plugins/languages/c/data/img/cLittle.png',fileIcons, c);
 
-	register (null, {});
+	register (null, {
+		// provided for application icons
+		language_c: {}
+	});
 }

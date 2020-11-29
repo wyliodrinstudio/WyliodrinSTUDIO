@@ -4,8 +4,8 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace","projects"],
-        "provides": [],
+        "consumes": ["workspace","projects", "language_python", "language_nodejs"],
+        "provides": ["language_visual"],
         "target": ["electron", "browser"]
     }
 }
