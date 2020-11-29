@@ -1222,7 +1222,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		saveFile(project, 'FileName', [1, 2, 3]);
+	 * 		saveFile(project, '/folder/file', Buffer.from ('...'));
 	 */
 	async saveFile(project, name, buffer) {
 		// TODO optimize file writes
