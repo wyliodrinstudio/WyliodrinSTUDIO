@@ -13,13 +13,7 @@ function loadSerialPort ()
 	catch (e)
 	{	
 		studio.workspace.error ('serialport: serialport is not available '+e.message);
-		return {
-			list: function ()
-			{
-				return [
-				];
-			}
-		};
+		return null;
 	}
 }
 
@@ -128,7 +122,7 @@ export class SerialPort extends EventEmitter {
 let serialport = {
 	list ()
 	{
-		if (studio.system.platform () === 'electron')
+		if (studio.system.platform () === 'electron' && serial)
 		{
 			return serial.list ();
 		}
