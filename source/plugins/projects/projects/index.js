@@ -782,7 +782,7 @@ let projects = {
 	 *
 	 * @example
 	 * 
-	 * newFolder(project, 'C:\Users\User\Desktop');
+	 * newFolder(project, '.folder/file');
 	 */
 	async newFolder(project, name) {
 		if(project !== null && name !== null){
@@ -978,7 +978,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * deleteFile(project, 'C:\Users\User\Desktop\file');
+	 * deleteFile(project, '.folder/file');
 	 */
 	async deleteFile(project, pathTo) {
 		if(project !== null && pathTo !== null) {
