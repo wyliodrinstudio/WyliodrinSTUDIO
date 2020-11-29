@@ -5,6 +5,7 @@
   * **fixed** display micropython options after port selection in browser
   * **fixed** schematics image layout
   * **fixed** notebook images display
+  * **updated** documentation structure, each board has a floder
 ## Wyliodrin STUDIO 2.2.1-beta
   * **new** Raspberry Pi images (with docker)
   * **improved** docker deployment 

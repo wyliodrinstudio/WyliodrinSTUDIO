@@ -34,6 +34,7 @@ The purpose of Wyliodrion STUDIO is to help its users deploy industrial IoT appl
 For the moment, the devices supported by the platform are:
 
 * Raspberry Pi
+* MicroPython
 * UDOO Neo
 * BeagleBone Black
 
@@ -44,6 +45,8 @@ Also, the recognized programming languages at the time are:
 
 * Javascript
 * Python
+* C/C++
+* Rust
 * Shell Script (bash)
 * Visual Programming (translates to Python)
 
@@ -60,15 +63,15 @@ Also, the recognized programming languages at the time are:
    :maxdepth: 3
    
    start
-   boards
-   architecture
+   boards/index.rst
+   architecture.rst
    extension
    api
    plugin
    translations
    dialogs_notifications
-   emulator
-   simulators
+   emulators/index.rst
+   simulators/index.rst
 
 .. Indices and tables
 .. ==================
