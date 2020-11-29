@@ -1005,6 +1005,19 @@ let workspace = {
 		}
 		return null;
 	},
+	
+	/**
+	 * Returns the icon for a board
+	 * 
+	 * @param {String} type - driver's type
+	 * @param {String} board - board's anme
+	 */
+	getBoardIcon (type, board) {
+		let icon = null;
+		let deviceDriver = deviceDrivers[type];
+		if (deviceDriver) icon = deviceDriver.getBoardIcon (board);
+		return icon;
+	},
 
 	/**
 	 * This function updates the list of devices for a device type. It's required to know

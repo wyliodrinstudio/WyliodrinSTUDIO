@@ -447,7 +447,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * cloneProject('MyNewProject', 'MyClonedProject'); 
+	 * cloneProject(project, 'MyClonedProject'); 
 	 * 
 	 */
 	async cloneProject(project, newName) {
@@ -492,13 +492,14 @@ let projects = {
 	 * (in this case the files will be extracted), or *‘.wylioapp”* (we are creating recursively the project folder).
 	 * 
 	 * @param {Project} project - project object
+	 * @param {Project} data - data from project
 	 * @param {string} extension - archive extension (.zip/.tar/.wylioapp)
 	 *
 	 * @returns {boolean} true if succsesful, false otherwise
-	 * 
+	 *
 	 * @example
 	 * 
-	 * importProject('MyNewProject', '.zip');
+	 * importProject(project, projectData, '.zip');
 	 *  
 	 */
 	async importProject(fileName, data, type) 
@@ -619,7 +620,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * exportProject('MyNewProject');
+	 * exportProject(project);
 	 * 
 	 */
 	async exportProject(project) {
@@ -784,7 +785,7 @@ let projects = {
 	 *
 	 * @example
 	 * 
-	 * newFolder('MyNewProject', 'C:\Users\User\Desktop');
+	 * newFolder(project, '/folder/folder2');
 	 */
 	async newFolder(project, name) {
 		if(project !== null && name !== null){
@@ -834,7 +835,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * newFile('MyNewProject', '/main.js', 'console.log(\'Hello from JavaScript\');');
+	 * newFile(project, '/main.js', 'console.log(\'Hello from JavaScript\');');
 	 */
 	async newFile(project, name, data = '') {
 		if(project !== null && name !== null && data !== null) {
@@ -929,7 +930,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * renameObject('MyNewProject', 'ObjectNewName', 'C:\Users\User\Desktop');
+	 * renameObject(project, 'ObjectNewName', '/folder/file');
 	 */
 	async renameObject(project, newName, pathTo) {
 		
@@ -980,7 +981,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * deleteFile('MyNewProject', 'C:\Users\User\Desktop\file');
+	 * deleteFile(project, '/folder/file');
 	 */
 	async deleteFile(project, pathTo) {
 		if(project !== null && pathTo !== null) {
@@ -1030,7 +1031,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * deleteFolder('MyNewProject', 'C:\Users\User\Desktop\folder');
+	 * deleteFolder(project, '/folder/folder2');
 	 */
 	async deleteFolder(project, pathTo) {
 		if(project !== null && pathTo !== null) {
@@ -1224,7 +1225,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * 		saveFile('MyNewProject', 'FileName', [1, 2, 3]);
+	 * 		saveFile(project, '/folder/file', Buffer.from ('...'));
 	 */
 	async saveFile(project, name, buffer) {
 		// TODO optimize file writes
@@ -1336,7 +1337,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * saveSpecialFile('MyNewProject', 'SpecialFileName', [1, 2, 3]);
+	 * saveSpecialFile(project, 'SpecialFileName', Buffer.from ('...'));
 	 */
 	async saveSpecialFile(project, name, content) {
 		if(project !== null && name !== null && content !== null){
@@ -1373,7 +1374,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * deleteSpecialFile('MyNewProject', 'SpecialFileName');
+	 * deleteSpecialFile(project, 'SpecialFileName');
 	 */
 	async deleteSpecialFile(project, name) {
 		if(project !== null && name !== null){
@@ -1589,7 +1590,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * let sourceLanguage = languageSpecificOption ('MyNewProject', 'sourceLanguage');
+	 * let sourceLanguage = languageSpecificOption (project, {...});
 	 */
 	languageSpecificOption (project, option) {
 		return this._runLanguageFunction(option, project);

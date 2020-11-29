@@ -12,3 +12,5 @@ Boards Setup
    udooneo
    picopi
    adafruit_clue
+   esp8266
+

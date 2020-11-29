@@ -150,6 +150,12 @@ export function setup(options, imports, register)
 			return 'plugins/devices/wyapp/plugin/data/img/icons/network.png';
 		},
 
+		getBoardIcon (name) {
+			let board = boards[name];
+			if (board) return board.iconURL ();
+			else return null;
+		},
+
 		async connect (device, options)
 		{
 			if (_.isObject (device))

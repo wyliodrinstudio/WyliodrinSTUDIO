@@ -1,5 +1,9 @@
 {
     "editor.tabSize": 4,
     "editor.insertSpaces": false,
-    "files.eol": "\n"
+    "files.eol": "\n",
+    "restructuredtext.confPath": "${workspaceFolder}\\docs\\source",
+    "files.watcherExclude": {
+        "**/target": true
+    }
 }

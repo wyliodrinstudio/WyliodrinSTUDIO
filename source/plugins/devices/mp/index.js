@@ -212,6 +212,10 @@ export function setup (options, imports, register)
 			return 'plugins/devices/mp/data/img/icons/mp.png';
 		},
 
+		getBoardIcon () {
+			return this.defaultIcon ();
+		},
+
 		registerForUpdate (/*device, fn*/)
 		{
 			//deviceEvents.on ('update:'+device.id, fn);
