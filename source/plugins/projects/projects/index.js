@@ -978,7 +978,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * deleteFile(project, '.folder/file');
+	 * deleteFile(project, '/folder/file');
 	 */
 	async deleteFile(project, pathTo) {
 		if(project !== null && pathTo !== null) {
