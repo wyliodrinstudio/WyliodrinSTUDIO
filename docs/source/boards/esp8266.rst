@@ -118,7 +118,7 @@ then go install the latest version (without opening it).
 	:align: center
 
 
-2.3 Flashing Micropython on ESP8266
+3. Flashing Micropython on ESP8266
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open Terminal and use the command:
