@@ -78,7 +78,7 @@ export default {
 		}
 		
 		for (let dir of dirs) {
-			let tutorialData = await axios.get (`https://raw.githubusercontent.com/${this.repository}/master/${dir}/.project/tutorial.json`);
+			let tutorialData = await axios.get (`https://raw.githubusercontent.com/${this.repository}/main/${dir}/.project/tutorial.json`);
 			let tutorial = tutorialData.data;
 			tutorials.push(tutorial);
 			tutorial['path'] = dir;
@@ -170,7 +170,7 @@ export default {
 			}	
 		},
 		async downloadFile (path) {
-			let file = await axios.get (`https://raw.githubusercontent.com/${this.repository}/master/${path}`, {responseType: 'arraybuffer',});
+			let file = await axios.get (`https://raw.githubusercontent.com/${this.repository}/main/${path}`, {responseType: 'arraybuffer',});
 			return file.data;
 		}
 	}

@@ -113,6 +113,7 @@ Wyliodrin STUDIO is a product of [Wyliodrin](https://wyliodrin.studio) in partne
 - [Teona Severin](https://github.com/teonaseverin) - Web File Systems, Hooks, Statistics
 - [Andrei-Paul Zamfir](https://github.com/ZamfirAndreiPaul) - MicroPython
 - [Iulia Andreea Luta](https://github.com/iuliutza) - Docker
+- [Alexandra-Gabriela State](https://github.com/alexandra2607) - Tutorials
 
 Contributions
 
@@ -120,8 +121,7 @@ Contributions
 - [Andrei Deatcu](https://www.github.com/dosarudaniel) - Resistor Color Code, Schematics
 - [Alexandru Vochescu](https://www.github.com/valexandru) - Examples
 - [Luis Miguel Capacho Valbuena](https://github.com/lmcapacho) - Translations, WyApp Serial
-- [Roberta-Alexandra Craciun] (https://github.com/CraciunRAlexandra) - Tutorials
-- [Alexandra-Gabriela State] (https://github.com/alexandra2607) - Tutorials
+- [Roberta-Alexandra Craciun](https://github.com/CraciunRAlexandra) - Tutorials
 
 Wyliodrin is a trademark of Wyliodrin SRL. All rights reserved.
 
