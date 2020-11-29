@@ -12,7 +12,7 @@ Windows
 ***********
 -----------------------------------------------
 
-1.1 Download Micropython firmware
+1. Download Micropython firmware
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open a browser and type this link: https://micropython.org/download/esp8266/,
