@@ -782,7 +782,7 @@ let projects = {
 	 *
 	 * @example
 	 * 
-	 * newFolder(project, '.folder/file');
+	 * newFolder(project, '/folder/folder2');
 	 */
 	async newFolder(project, name) {
 		if(project !== null && name !== null){
