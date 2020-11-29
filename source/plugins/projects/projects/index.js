@@ -490,13 +490,14 @@ let projects = {
 	 * (in this case the files will be extracted), or *‘.wylioapp”* (we are creating recursively the project folder).
 	 * 
 	 * @param {Project} project - project object
+	 * @param {Project} data - data from project
 	 * @param {string} extension - archive extension (.zip/.tar/.wylioapp)
 	 *
 	 * @returns {boolean} true if succsesful, false otherwise
-	 * 
+	 *
 	 * @example
 	 * 
-	 * importProject(project, '.zip');
+	 * importProject(project, projectData, '.zip');
 	 *  
 	 */
 	async importProject(fileName, data, type) 
@@ -927,7 +928,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * renameObject(project, 'ObjectNewName', 'C:\Users\User\Desktop');
+	 * renameObject(project, 'ObjectNewName', '/folder/file');
 	 */
 	async renameObject(project, newName, pathTo) {
 		
@@ -1028,7 +1029,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * deleteFolder(project, 'C:\Users\User\Desktop\folder');
+	 * deleteFolder(project, '/folder/folder2');
 	 */
 	async deleteFolder(project, pathTo) {
 		if(project !== null && pathTo !== null) {
