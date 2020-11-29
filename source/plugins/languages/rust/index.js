@@ -6,17 +6,6 @@ let studio = null;
 export default function setup (options, imports, register)
 {
 	studio = imports;
-	/**
-	{
-		id: 'javascript',
-		title: 'JavaScript',
-		icon:'./data/img/languages/project/javascript.png',
-		options:{
-			main(){
-
-			}
-		}
-	}, */
 	let fileIcons = [
 		{
 			extension: '.rs',
@@ -29,7 +18,7 @@ export default function setup (options, imports, register)
 	];
 	let rust = {
 		async createProject(project){
-			await studio.projects.newFile(project,'/package.toml','[package]\nname = "'+project.name+'"\nversion = "0.1.0"\nauthors = ["Your Name <name@email.net>"]\nedition = "2018"\n');			
+			await studio.projects.newFile(project,'/Cargo.toml','[package]\nname = "'+project.name+'"\nversion = "0.1.0"\nauthors = ["Your Name <name@email.net>"]\nedition = "2018"\n');			
 			await studio.projects.newFile(project,'/src/main.rs','use std;\n\nfn main (){\n\tprintln! ("Hello from Rust");\n}\n');			
 		},
 		getDefaultFileName() {
@@ -45,42 +34,10 @@ export default function setup (options, imports, register)
 		}
 	};
 
-	studio.projects.registerLanguage('rust', 'Rust', null, 'plugins/languages/rust/data/img/rust.png', fileIcons, rust);
+	studio.projects.registerLanguage('rust', 'Rust', 'plugins/languages/rust/data/img/project.png', 'plugins/languages/rust/data/img/rust.png', 'plugins/languages/rust/data/img/rustLittle.png', fileIcons, rust);
 
-	// studio.projects.registerLanguagePackage ('python', null, [
-	// 	{
-	// 		name: 'requests',
-	// 		description: 'Requests is the only Non-GMO HTTP library for Python, safe for human consumption.'
-	// 	},
-	// 	{
-	// 		name: 'scrapy',
-	// 		description: 'Scrapy, a fast high-level web crawling & scraping framework for Python.'
-	// 	},
-	// 	{
-	// 		name: 'tensorflow',
-	// 		description: 'An end-to-end open source machine learning platform'
-	// 	},
-	// 	{
-	// 		name: 'scrapy',
-	// 		description: 'Scrapy, a fast high-level web crawling & scraping framework for Python.'
-	// 	},
-	// 	{
-	// 		name: 'numpy',
-	// 		description: 'NumPy is the fundamental package for scientific computing with Python.'
-	// 	},
-	// 	{
-	// 		name: 'Flask',
-	// 		description: 'The Python micro framework for building web applications.'
-	// 	},
-	// 	{
-	// 		name: 'opcua',
-	// 		description: 'LGPL Pure Python OPC-UA Client and Server'
-	// 	},
-	// 	{
-	// 		name: 'asyncua',
-	// 		description: 'OPC UA library for python > 3.6 asyncio'
-	// 	},
-	// ]);
-
-	register (null, {});
+	register (null, {
+		// provides this for the application icons
+		language_rust: {}
+	});
 }

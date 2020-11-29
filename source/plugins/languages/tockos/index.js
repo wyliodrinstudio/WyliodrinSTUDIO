@@ -15,14 +15,6 @@ export default function setup (options, imports, register)
 
 	let boardFileIcons = [
 		{
-			extension: '.rs',
-			icon:'plugins/languages/rust/data/img/rustLittle.png'
-		},
-		{
-			extension: '.toml',
-			icon:'mdi-settings'
-		},
-		{
 			extension: '.ld',
 			icon:'mdi-settings'
 		},
@@ -51,19 +43,12 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('tockos-board', 'TockOS Kernel', 'plugins/languages/tockos/data/img/tockos-board-small.png', 'plugins/languages/tockos/data/img/tock-os-28.png', boardFileIcons, boardTockos);
+	studio.projects.registerLanguage('tockos-kernel', 'TockOS Kernel', 'plugins/languages/tockos/data/img/tockos-kernel-project.png', 'plugins/languages/tockos/data/img/tockos.png', 'plugins/languages/tockos/data/img/tock-os-28.png', boardFileIcons, boardTockos);
 
 	/* libtock-c */
 
 	let libtockcFileIcons = [
-		{
-			extension: '.h',
-			icon:'mdi-file'
-		},
-		{
-			extension: '.c',
-			icon:'mdi-language-c'
-		},
+		
 	];
 
 	let libtockcTockos = {
@@ -88,7 +73,7 @@ export default function setup (options, imports, register)
 		},
 	};
 
-	studio.projects.registerLanguage('tockos-libtockc', 'TockOS C App', 'plugins/languages/tockos/data/img/tockos-c-small.png', 'plugins/languages/tockos/data/img/lib-tock-c-28.png', libtockcFileIcons, libtockcTockos);
+	studio.projects.registerLanguage('tockos-libtockc', 'TockOS C App', 'plugins/languages/c/data/img/tockos-c-project.png', 'plugins/languages/c/data/img/c.png', 'plugins/languages/c/data/img/cLittle.png', libtockcFileIcons, libtockcTockos);
 
 	register (null, {});
 }

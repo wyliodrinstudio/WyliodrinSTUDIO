@@ -11,5 +11,6 @@ Boards Setup
    beagleboneblack
    udooneo
    picopi
+   adafruit_clue
    esp8266
-   
+

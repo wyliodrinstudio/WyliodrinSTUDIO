@@ -11,7 +11,7 @@
 				<v-radio-group row v-model="languageID" class="project-lang-box">
 					<label v-for="language of ProgLanguages" :key="language.id" class="project-lang">
 						<v-radio :label="language.title" :value="language.id"></v-radio>
-						<v-img :src="language.icon"></v-img>
+						<v-img :src="language.logo"></v-img>
 					</label>
 				</v-radio-group>
 			</v-layout>

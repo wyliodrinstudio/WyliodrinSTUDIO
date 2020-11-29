@@ -8,6 +8,23 @@ This will show how to set up a Raspberry Pi device.
 
 |
 
+Video
+^^^^^
+
+A quick video explaining how to connect the Raspberry Pi. A detailed tutorial is available below.
+
+.. raw:: html	
+
+	<center>
+		<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/WOSv0WYB0aU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</center>
+
+|
+
+=========================
+
+|
+
 Download the pre-configured image
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

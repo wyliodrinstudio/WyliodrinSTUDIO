@@ -1,4 +1,4 @@
-Pico-Pi.
+Pico-Pi
 **********
 
 This will show how to set up a Pico-Pi device. 

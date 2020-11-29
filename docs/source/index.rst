@@ -2,6 +2,13 @@ Wyliodrin Studio documentation
 ==============================
 
 |
+
+.. raw:: html
+
+   <center>
+		<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/F_4GXU8kKfk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</center>
+
 |
 
 Wyliodrin STUDIO is an educational platform for software and hardware development for IoT and Embedded Linux systems. 
@@ -60,7 +67,7 @@ Also, the recognized programming languages at the time are:
 
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    
    start
    boards/index.rst

@@ -5,7 +5,7 @@
     "private": true,
     "plugin": {
         "consumes": ["workspace","projects"],
-        "provides": [],
+        "provides": ["language_rust"],
         "target": ["electron", "browser"]
     }
 }

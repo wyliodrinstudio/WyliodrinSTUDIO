@@ -76,22 +76,15 @@ export function setup (options, imports, register)
 	/* Register Icon */
 	studio.device_wyapp.registerBoard ('tockos', tockos);
 
-	studio.projects.registerLanguagePackage ('tockos-board', 'tockos', {
-		name: 'TockOS Board',
-		description: 'TODO'
+	studio.projects.registerLanguagePackage ('tockos-kernel', 'tockos', {
+		name: 'TockOS Kernel',
+		description: ''
 	});
 
 	studio.projects.registerLanguagePackage ('tockos-libtockc', 'tockos', {
 		name: 'TockOS LibTockC',
-		description: 'TODO'
+		description: ''
 	});
-
-	studio.editor_visual.registerBlocksDefinitions ('tockos',
-		{
-			type: 'wyapp', 
-			board: 'tockos'
-		}
-	);
 
 	register (null, {});
 }

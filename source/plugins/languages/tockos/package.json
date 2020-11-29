@@ -4,7 +4,7 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace", "projects", "github"],
+        "consumes": ["workspace", "projects", "github", "language_rust", "language_c"],
         "provides": [],
         "target": ["electron", "browser"]
     }

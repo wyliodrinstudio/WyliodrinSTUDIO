@@ -1,11 +1,13 @@
 ## Wyliodrin STUDIO 2.3.0
   * **added** serialport plugin, works in electron and Chrome browser
   * **added** update plugin, handles updates in electron and browser
+  * **added** to docs Adafruit CLUE board setup
   * **fixed** schematics and enbled it for browser
   * **fixed** display micropython options after port selection in browser
   * **fixed** schematics image layout
   * **fixed** notebook images display
-  * **updated** documentation structure, each board has a floder
+  * **fixed** language logo images
+  * **updated** documentation structure, each board has a folder
 ## Wyliodrin STUDIO 2.2.1-beta
   * **new** Raspberry Pi images (with docker)
   * **improved** docker deployment 

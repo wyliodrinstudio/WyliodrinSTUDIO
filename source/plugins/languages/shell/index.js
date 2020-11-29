@@ -48,7 +48,10 @@ export default function setup (options, imports, register)
 		}
 	};
 
-	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/languages/shell/data/img/project.png', 'plugins/languages/shell/data/img/shellLittle.png',fileIcons, shell);
+	studio.projects.registerLanguage('shell', 'Bash Shell', 'plugins/languages/shell/data/img/project.png', 'plugins/languages/shell/data/img/shell.png', 'plugins/languages/shell/data/img/shellLittle.png',fileIcons, shell);
 
-	register (null, {});
+	register (null, {
+		// provides this for the application icons
+		language_shell: {}
+	});
 }
