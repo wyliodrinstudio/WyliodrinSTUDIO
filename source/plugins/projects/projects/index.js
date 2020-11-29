@@ -1334,7 +1334,7 @@ let projects = {
 	 * 
 	 * @example
 	 * 
-	 * saveSpecialFile(project, 'SpecialFileName', [1, 2, 3]);
+	 * saveSpecialFile(project, 'SpecialFileName', Buffer.from ('...'));
 	 */
 	async saveSpecialFile(project, name, content) {
 		if(project !== null && name !== null && content !== null){
