@@ -8,6 +8,7 @@
   * **fixed** schematics image layout
   * **fixed** notebook images display
   * **fixed** language logo images
+  * **fixed** notebook fail to save when moving elements around
   * **updated** documentation structure, each board has a folder
 ## Wyliodrin STUDIO 2.2.1-beta
   * **new** Raspberry Pi images (with docker)

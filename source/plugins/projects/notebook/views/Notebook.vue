@@ -272,11 +272,8 @@ export default {
 		},
 		elements: { 
 			deep:true,
-			handler: async function (/* val, oldVal */){
-				if (this.currentProject)
-				{
-					await this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
-				}
+			handler: function (/* val, oldVal */){
+				this.save ();
 			}		
 		}
 	},
@@ -285,6 +282,12 @@ export default {
 		notebook = this;
 	},
 	methods: {
+		async save () {
+			if (this.currentProject)
+			{
+				await this.studio.projects.saveSpecialFile(this.currentProject,'notebook.json', JSON.stringify (this.elements));
+			}
+		},
 		async resetNotebook () {
 			let value = await this.studio.workspace.showCustomConfirmationPrompt(
 				'NOTEBOOK_RESET_NOTEBOOK_TITLE',
@@ -327,6 +330,7 @@ export default {
 					this.elements[index] = this.elements[index-1];
 					this.elements[index-1] = aux;
 					this.$forceUpdate();
+					this.save ();
 				}
 			}
 			catch(e)
@@ -346,6 +350,7 @@ export default {
 					this.elements[index] = this.elements[index+1];
 					this.elements[index+1] = aux;
 					this.$forceUpdate();
+					this.save ();
 				}
 			}
 			catch(e)
