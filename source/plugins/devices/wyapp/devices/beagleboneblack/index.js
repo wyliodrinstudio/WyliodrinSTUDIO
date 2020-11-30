@@ -24,7 +24,7 @@ export function setup (options, imports, register)
 		name: 'BeagleBone Black',
 		setupOptions: {
 			path: '/boot/',
-			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html#id25'
+			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards/beagleboneblack.html#connecting-via-web'
 		},
 		priority: 10,
 		/** 

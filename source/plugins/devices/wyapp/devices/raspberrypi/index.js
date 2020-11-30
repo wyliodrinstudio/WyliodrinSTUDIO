@@ -41,8 +41,8 @@ export function setup (options, imports, register)
 		name: 'Raspberry Pi',
 		setupOptions: {
 			path: '/boot/',
-			wifiLink: 'https://www.raspberrypi.org/documentation/configuration/wireless/headless.md',
-			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html#connecting-via-web'
+			wifiLink: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards/raspberrypi.html#set-up-wireless',
+			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards/raspberrypi.html#connecting-via-web'
 		},
 		priority: 1,
 		/** 

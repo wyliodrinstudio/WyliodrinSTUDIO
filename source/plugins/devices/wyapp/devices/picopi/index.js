@@ -29,7 +29,7 @@ export function setup (options, imports, register)
 		name: 'Pico Pi',
 		setupOptions: {
 			path: '/boot/',
-			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html#id12'
+			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards/picopi.html#connecting-via-web'
 		},
 		priority: 30,
 		/** 

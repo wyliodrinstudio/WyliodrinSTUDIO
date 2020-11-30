@@ -24,7 +24,7 @@ export function setup (options, imports, register)
 		name: 'UDOO Neo',
 		setupOptions: {
 			path: '/boot/',
-			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html#id36'
+			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards/udooneo.html#connecting-via-web'
 		},
 		priority: 20,
 		/** 
