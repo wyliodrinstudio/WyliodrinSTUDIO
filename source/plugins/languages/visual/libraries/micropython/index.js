@@ -21,7 +21,6 @@ export function setup (options, imports, register)
 			// let device = studio.workspace.getDevice ();
 			// if (device.properties.wyliolab) return true;
 			// else return false;
-			return true;
 		}
 	});
 
