@@ -54,7 +54,8 @@ module.exports = function (blockly) {
 
 	Blockly.Python.micropython_import_I2C = function() {
 		if (!Blockly.Python.definitions_['micropython_I2C']) {
-			Blockly.Python.definitions_['micropython_I2C'] = 'from machine import Pin, I2C \n';
+                        Blockly.Python.micropython_import_Pin ();
+			Blockly.Python.definitions_['micropython_I2C'] = 'from machine import I2C \n';
 		}
 	};
 
