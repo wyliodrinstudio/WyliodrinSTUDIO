@@ -60,7 +60,8 @@ module.exports = function (blockly) {
 
 	Blockly.Python.micropython_import_SPI = function() {
 		if (!Blockly.Python.definitions_['micropython_SPI']) {
-			Blockly.Python.definitions_['micropython_SPI'] = 'from machine import Pin, SPI \n';
+                        Blockly.Python.micropython_import_Pin ();
+			Blockly.Python.definitions_['micropython_SPI'] = 'from machine import SPI \n';
 		}
 	};
 
