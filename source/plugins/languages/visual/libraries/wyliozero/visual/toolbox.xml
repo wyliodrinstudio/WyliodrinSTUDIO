@@ -152,7 +152,6 @@
                     <field name="VAR">ledName</field>
                 </block>
             </value>
-            
         </block>
         <block type="wyliozero_led_turn_off">
             <value name="NAME">
