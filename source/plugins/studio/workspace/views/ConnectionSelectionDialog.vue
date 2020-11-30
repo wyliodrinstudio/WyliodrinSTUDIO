@@ -80,7 +80,7 @@ export default {
 		},
 		setup ()
 		{
-			this.studio.system.openLink ('https://wyliodrinstudio.readthedocs.io/en/latest/boards.html');
+			this.studio.system.openLink ('https://wyliodrinstudio.readthedocs.io/en/latest/boards');
 		}
 	}
 };
