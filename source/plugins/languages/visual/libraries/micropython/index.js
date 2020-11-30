@@ -18,9 +18,9 @@ export function setup (options, imports, register)
 		board: null, 
 		visible ()
 		{
-			// let device = studio.workspace.getDevice ();
-			// if (device.properties.wyliolab) return true;
-			// else return false;
+			let device = studio.workspace.getDevice ();
+			if (device && device.type === 'mp' ) return true;
+			else return false;
 		}
 	});
 
