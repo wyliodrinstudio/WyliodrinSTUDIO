@@ -95,7 +95,7 @@
 		</div>
 
 		<div class="loading" id="loading">
-			Loading ...
+			Loading ... <div id="not_loading"></div>
 		</div>
 
 		<pre id="jokes" class="loading">
@@ -105,5 +105,14 @@
 		<div class="loading-progress" id="loading-progress">
 			<div class="loading-progress-bar" id="loading-progress-bar" style="width:0%"></div>
 		  </div> 
+
+		<script>
+			setTimeout (() => {
+				if (document.querySelector ('#not_loading')) {
+					console.log ('Something went wrong, Wyliodrin STUDIO is not loading, please reload the page while holding the shift button.');
+					document.querySelector('#loading').innerHTML = 'Something went wrong ... please reload the page while holding the SHIFT button.';
+				}
+			}, 3000);
+		</script>
 	</body>
 </html>

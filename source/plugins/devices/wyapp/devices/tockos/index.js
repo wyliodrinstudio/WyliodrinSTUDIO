@@ -26,7 +26,7 @@ export function setup (options, imports, register)
 	let tockos = {
 		name: 'Tock VM',
 		setupOptions: {
-			path: '/boot/',
+			path: 'http://localhost:2080/',
 			link: 'https://wyliodrinstudio.readthedocs.io/en/latest/boards.html'
 		},
 		priority: 100,
