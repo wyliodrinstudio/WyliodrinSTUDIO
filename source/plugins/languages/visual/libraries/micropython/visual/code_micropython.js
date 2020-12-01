@@ -55,14 +55,14 @@ module.exports = function (blockly) {
 
 	Blockly.Python.micropython_import_I2C = function() {
 		if (!Blockly.Python.definitions_['micropython_I2C']) {
-                        Blockly.Python.micropython_import_Pin ();
+			Blockly.Python.micropython_import_Pin ();
 			Blockly.Python.definitions_['micropython_I2C'] = 'from machine import I2C \n';
 		}
 	};
 
 	Blockly.Python.micropython_import_SPI = function() {
 		if (!Blockly.Python.definitions_['micropython_SPI']) {
-                        Blockly.Python.micropython_import_Pin ();
+			Blockly.Python.micropython_import_Pin ();
 			Blockly.Python.definitions_['micropython_SPI'] = 'from machine import SPI \n';
 		}
 	};
@@ -468,5 +468,4 @@ module.exports = function (blockly) {
 		var code = value_config.toString() + '.config("' + text_name.toString() + '")' + '\n';
 		return code;
 	};
-
 };
