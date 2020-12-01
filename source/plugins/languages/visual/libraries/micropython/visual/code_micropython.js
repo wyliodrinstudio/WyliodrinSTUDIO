@@ -12,7 +12,7 @@ module.exports = function (blockly) {
 
 	Blockly.Python.micropython_import_PWM = function() {
 		if (!Blockly.Python.definitions_['micropython_pwm']) {
-                        Blockly.Python.micropython_import_Pin ();
+			Blockly.Python.micropython_import_Pin ();
 			Blockly.Python.definitions_['micropython_pwm'] = 'from machine import PWM \n';
 		}
 	};
