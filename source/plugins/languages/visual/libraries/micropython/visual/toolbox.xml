@@ -141,7 +141,6 @@
           </block>
         </value>
       </block>
-        
  
       <block type="micropython_i2c_scan"/> 
       <block type="micropython_i2c_operation"/> 
@@ -498,5 +497,3 @@
 
   <sep />
 </toolbox>
-
-  
