@@ -145,8 +145,7 @@ export default {
 			this.$root.$emit ('submit');
 		},
 		formatDate(date){
-			// return moment(date).format('dddd, MMMM Do YYYY, h:mm:ss a');
-			return moment(date).tz(moment.tz.guess()).add(3, 'hours').format('LLLL');
+			return moment.utc(date).tz(moment.tz.guess()).format('Do MMMM YYYY, h:mm A');
 		},
 		async addProjectDialog ()
 		{
