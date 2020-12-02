@@ -20,7 +20,7 @@ let github = {
 			}
 		}
 	},
-	async getRepoFileHierarchy (root, owner, repo, ref = undefined) {
+	async getRepoFileHierarchy (root, owner, repo, ref) {
 		let fileHierarchy = {};
 	
 		await this.getDirListOfFiles(root, fileHierarchy, owner, repo, ref);
