@@ -56,6 +56,7 @@ export default function setup(options, imports, register) {
 		}
 	};
 
+
 	studio.projects.registerLanguage('nodejs', 'NodeJS', 'plugins/languages/nodejs/data/img/project.png', 'plugins/languages/nodejs/data/img/javascript.png', 'plugins/languages/nodejs/data/img/javascriptLittle.png',fileIcons, javaScript);
 
 	studio.projects.registerLanguagePackage ('nodejs', null, [

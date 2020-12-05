@@ -712,6 +712,9 @@ export function setup(options, imports, register)
 									}
 									else return null;
 								}
+								console.log(project);
+								console.log(board);
+								
 								let options = await studio.workspace.showDialog(DockerSettings, {
 									width:600,
 									project:project,
@@ -722,6 +725,8 @@ export function setup(options, imports, register)
 								if(options === false){
 									return null;
 								}
+
+								console.log(options);
 
 								dockoptions += '--network ' +options.selectedNetwork + ' ';
 								dockoptions += '--restart ' + options.selectedRestart + ' ';
