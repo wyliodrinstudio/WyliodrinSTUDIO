@@ -143,7 +143,6 @@ export default {
 		
 		stop (container)
 		{
-			console.log(container);
 			this.connection.send ('dep', {a: 'exit', ID: container.ID}); 
 			container.sentKill = true;
 		},
