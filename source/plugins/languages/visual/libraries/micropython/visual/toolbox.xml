@@ -78,7 +78,7 @@
 
     <category name="ADC" colour="#AED6F1">
       <block type="variables_set">
-        <field name="VAR">name ADC</field>
+        <field name="VAR">adc</field>
         <value name="VALUE">
           <block type="micropython_adc">
             <value name="adc_var">
