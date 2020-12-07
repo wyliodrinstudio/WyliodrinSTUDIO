@@ -5,6 +5,7 @@ let studio = null;
 
 export default function setup(options, imports, register) {
 	studio = imports;
+	console.log(imports);
 	let fileIcons = [
 		{
 			extension: '.js',
