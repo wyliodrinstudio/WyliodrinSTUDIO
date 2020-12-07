@@ -1,11 +1,13 @@
 Deploy Application
 ======================
 
-Having in mind the diversity of languages, frameworks, architectures, and interfaces, **deploying an application** allows users to easily
-develop and run their programs and projects. **Deploying** basically means to put an application into production, after its prototype is finished and tested.
-The application then will be able to start automatically and run in the background.
+Broadly speaking, software deployment consists of all the porcesses required for preparing the a software application to run and operate in a specific environment.
+It involves installation, configuration, testing and making changes to optimize the performance of the software. In Wyliodrin Studio, **deploying an application ** 
+basically means to put it into production, after its prototype is finished and tested. 
 
-For the moment Wyliodrin Studio provides support just for **Docker**.
+
+For the moment Wyliodrin Studio provides support just for **Docker**. The application will be deployed in a container, which is a standard unit of software that 
+packages up code and all its dependencies so the application runs quickly and reliably. In this way the app will be able to start automatically and run in the background.
  
 
 Steps to use Docker in Wyliodrin Studio
