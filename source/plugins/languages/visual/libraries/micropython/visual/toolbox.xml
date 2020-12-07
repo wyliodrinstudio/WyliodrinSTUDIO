@@ -279,7 +279,7 @@
       </block>     
     </category>
   
-      <category name="Time and Utime" colour="#EC7063">
+      <category name="Timing" colour="#EC7063">
         <block type="micropython_time">
           <field name="time">sleep</field>
             <value name="micropython_time">
