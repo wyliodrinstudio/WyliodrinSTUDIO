@@ -104,7 +104,7 @@
     </block>
 
       <block type="variables_set">
-        <field name="VAR">name var</field>
+        <field name="VAR">value</field>
         <value name="VALUE">
           <block type="micropython_adc_method">
             <value name="NAME">
