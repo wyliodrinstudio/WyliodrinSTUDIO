@@ -109,7 +109,7 @@
           <block type="micropython_adc_method">
             <value name="NAME">
               <block type="variables_get">
-                <field name="VAR">name ADC</field>
+                <field name="VAR">adc</field>
               </block>
             </value>
           </block>
