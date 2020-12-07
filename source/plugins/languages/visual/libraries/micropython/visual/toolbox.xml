@@ -91,7 +91,7 @@
       </block>
 
       <block type="variables_set">
-      <field name="VAR">name ADC</field>
+      <field name="VAR">adc</field>
       <value name="VALUE">
         <block type="micropython_adc_pin">
           <value name="adc_pin">
