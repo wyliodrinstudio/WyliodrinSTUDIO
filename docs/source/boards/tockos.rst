@@ -42,7 +42,7 @@ Kernel
 	12. Click on you project from 'Projects Library'
 	13. (OPTIONAL) If you want to see all kernel files click on 'Menu' and select 'Use Advanced Mode'
 	
-	*Flash Kernel on the board
+	* Flash Kernel on the board
 		1. Connect to StudioSupervisor
 			- Locally (works only with WyliodrinStudio app)
 				1. Make sure that the `TockOS VM <TODO>` is running
