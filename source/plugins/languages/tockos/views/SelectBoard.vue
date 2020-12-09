@@ -62,7 +62,7 @@ export default {
 	},
 	created: function () {
 		this.gitVersions.push({
-			name: 'Latest',
+			name: RELEASES['tock'][0].name,
 			tag: RELEASES['tock'][0].tag
 		});
 		this.gitVersions = this.gitVersions.concat(RELEASES.tock);
@@ -72,10 +72,6 @@ export default {
 	methods: {
 		async select ()
 		{
-			if (this.gitInfos.version.name === 'Latest') {
-				this.gitInfos.version.tag = 'master';
-			}
-			
 			await this.downloadBoardFiles();
 			await this.generateBoardSetupFile();
 			await this.generateGitPrepareFile();

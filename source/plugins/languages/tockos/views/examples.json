@@ -1,4 +1,94 @@
 {
+	"master": [
+		{
+			"name": "Empty Application",
+			"example": ""
+		},
+		{
+			"name": "Hello World",
+			"example": "c_hello"
+		},
+		{
+			"name": "Accelerometer -> LEDs",
+			"example": "accel-leds"
+		},
+		{
+			"name": "UART over BLE",
+			"example": "ble-uart"
+		},
+		{
+			"name": "Bluetooth Low Energy Advertisement App",
+			"example": "ble_advertising"
+		},
+		{
+			"name": "Bluetooth Low Energy Passive Scanning",
+			"example": "ble_passive_scanning"
+		},
+		{
+			"name": "Blink",
+			"example": "blink"
+		},
+		{
+			"name": "Buttons -> LEDs",
+			"example": "buttons"
+		},
+		{
+			"name": "cxx_hello",
+			"example": "cxx_hello"
+		},
+		{
+			"name": "Find North",
+			"example": "find_north"
+		},
+		{
+			"name": "LCD 16x2 HD44780 App",
+			"example": "hd44780"
+		},
+		{
+			"name": "IPv6 Sensor App",
+			"example": "ip_sense"
+		},
+		{
+			"name": "l3gd20",
+			"example": "l3gd20"
+		},
+		{
+			"name": "lsm303dlhc",
+			"example": "lsm303dlhc"
+		},
+		{
+			"name": "lua-hello",
+			"example": "lua-hello"
+		},
+		{
+			"name": "lvgl",
+			"example": "lvgl"
+		},
+		{
+			"name": "rot13_client",
+			"example": "rot13_client"
+		},
+		{
+			"name": "rot13_service",
+			"example": "rot13_service"
+		},
+		{
+			"name": "screen",
+			"example": "screen"
+		},
+		{
+			"name": "security_app",
+			"example": "security_app"
+		},
+		{
+			"name": "sensors",
+			"example": "sensors"
+		},
+		{
+			"name": "Wit Energy BLE App",
+			"example": "witenergy"
+		}
+	],
 	"release-1.5": [
 		{
 			"name": "Empty Application",

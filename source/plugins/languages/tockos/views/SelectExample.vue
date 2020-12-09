@@ -61,7 +61,7 @@ export default {
 	},
 	created: function () {
 		this.gitVersions.push({
-			name: 'Latest',
+			name: RELEASES['libtock-c'][0].name,
 			tag: RELEASES['libtock-c'][0].tag
 		});
 		this.gitVersions = this.gitVersions.concat(RELEASES['libtock-c']);
@@ -72,9 +72,6 @@ export default {
 		async select ()
 		{
 			if (this.example !== '') {
-				if (this.gitInfos.version.name === 'Latest') {
-					this.gitInfos.version.tag = 'master';
-				}
 				await this.downloadExampleFiles();
 			} else {
 				await this.studio.projects.newFile(this.name, './main.c', '');

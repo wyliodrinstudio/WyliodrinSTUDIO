@@ -1,6 +1,10 @@
 {
 	"tock": [
 		{
+			"name": "Latest",
+			"tag": "master"
+		},
+		{
 			"name": "Tock 1.6",
 			"tag": "release-1.6"
 		},
@@ -14,6 +18,10 @@
 		}
 	],
 	"libtock-c": [
+		{
+			"name": "Latest",
+			"tag": "master"
+		},
 		{
 			"name": "LibTock-C 1.5",
 			"tag": "release-1.5"
