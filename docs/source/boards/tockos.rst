@@ -43,41 +43,40 @@ Kernel
 	13. (OPTIONAL) If you want to see all kernel files click on 'Menu' and select 'Use Advanced Mode'
 	
 	* Flash Kernel on the board
-		1. Connect to StudioSupervisor
-			- Locally (works only with WyliodrinStudio app)
-				1. Make sure that the `TockOS VM <TODO>` is running
-				2. Go to WyliodrinStudio app
-				3. Click on 'CONNECT'
-				4. Click on 'IP Address'
-				5. You will need to complete the 'Network Connection' informations as following:
-					- IP: localhost
-					- Port: 2000
-					- Username: tock
-					- Password: tock
-				6. Click on 'CONNECT'
-				7. Connect your device to the computer
-				8. Go to VirtualBOX
-				9. Right click on the USB Icon (bottom right corner of VirtualBOX)
-				10. Select your device from the list
-				11. Go to WyliodrinStudio app
-				12. Click on 'RUN'
-			- Over the internet (works with both WyliodrinStudio versions browser/app)
-				1. Make sure that the `TockOS VM <TODO>` is running
-				2. Go to WyliodrinStudio app
-				3. Click on 'CONNECT'
-				4. Click on 'Add Web Device'
-				5. Select from 'Device' list 'Tock VM'
-				6. Give your device a name, for example 'TockOS'
-				7. Copy the JSON
-				8. Open you browser and go to http://localhost:2080/
-				9. Paste the JSON in the text area and click 'Send JSON'
-				10. If the JSON was uploaded successfully you will see a sugestive message
-				11. Go to WyliodrinStudio Browser/App
-				12. Click on 'CONNECT'
-				13. Click on your device
-				14. Go to VirtualBOX
-				15. Right click on the USB Icon (bottom right corner of VirtualBOX)
-				16. Select your device from the list
-				17. Go to WyliodrinStudio app
-				18. Click on 'RUN'
-				
+		- Locally (works only with WyliodrinStudio app)
+			1. Make sure that the `TockOS VM <TODO>` is running
+			2. Go to WyliodrinStudio app
+			3. Click on 'CONNECT'
+			4. Click on 'IP Address'
+			5. You will need to complete the 'Network Connection' informations as following:
+				- IP: localhost
+				- Port: 2000
+				- Username: tock
+				- Password: tock
+			6. Click on 'CONNECT'
+			7. Connect your device to the computer
+			8. Go to VirtualBOX
+			9. Right click on the USB Icon (bottom right corner of VirtualBOX)
+			10. Select your device from the list
+			11. Go to WyliodrinStudio app
+			12. Click on 'RUN'
+		- Over the internet (works with both WyliodrinStudio versions browser/app)
+			1. Make sure that the `TockOS VM <TODO>` is running
+			2. Go to WyliodrinStudio app
+			3. Click on 'CONNECT'
+			4. Click on 'Add Web Device'
+			5. Select from 'Device' list 'Tock VM'
+			6. Give your device a name, for example 'TockOS'
+			7. Copy the JSON
+			8. Open you browser and go to http://localhost:2080/
+			9. Paste the JSON in the text area and click 'Send JSON'
+			10. If the JSON was uploaded successfully you will see a sugestive message
+			11. Go to WyliodrinStudio Browser/App
+			12. Click on 'CONNECT'
+			13. Click on your device
+			14. Go to VirtualBOX
+			15. Right click on the USB Icon (bottom right corner of VirtualBOX)
+			16. Select your device from the list
+			17. Go to WyliodrinStudio app
+			18. Click on 'RUN'
+
