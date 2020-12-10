@@ -13,4 +13,5 @@ Boards Setup
    picopi
    adafruit_clue
    esp8266
+   tockos
 

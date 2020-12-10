@@ -1,33 +1,57 @@
 TockOS
-***************
+=======
 
 This will show how to set up the TockOS development enviroment. 
 
 |
 
-Development Environment
+Overview
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You will have to install:
-	* `VirtualBox <https://www.virtualbox.org/>` - virtualization tool for x86 and x86-64 hardware
-		- `Extension Pack <https://download.virtualbox.org/virtualbox/6.1.12/Oracle_VM_VirtualBox_Extension_Pack-6.1.12.vbox-extpack>` - you will be able to see you USB devices in guest virtual machine
-	* `Visual Studio Code <https://code.visualstudio.com/>` - a powerfull source code editor
-	* `TockOS VM <TODO>` - a Linux environment with the WyliodrinSupervisor for local development
+Tock Setup
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Tock development environment requires Linux or macOS. Wyliodrin STUDIO has prepared a Linux Virtual Machine that 
+provides all the packages required to get started.
+
+To set up this Virtual Machine, you will need:
+	* `VirtualBox <https://www.virtualbox.org/>`_ - virtualization tool for x86 and x86-64 hardware
+		- `Extension Pack <https://download.virtualbox.org/virtualbox/6.1.12/Oracle_VM_VirtualBox_Extension_Pack-6.1.12.vbox-extpack>`_ - you will be able to see you USB devices in guest virtual machine
+	* `Visual Studio Code <https://code.visualstudio.com/>`_ - a powerfull source code editor
+	* `TockOS VM <TODO>`_ - a Linux environment with the WyliodrinSupervisor for local development
 		- Windows: Make sure you select Allow when you get a question from the Firewall
+
+Local connection
+*****************
+
+
+Remote connection
+******************
+
+
+You will have to install:
+	
 
 `VirtualBox <https://www.virtualbox.org/>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	1. Install the `VirtualBox <https://www.virtualbox.org/>` on your computer
-	2. Install the `Extension Pack <https://download.virtualbox.org/virtualbox/6.1.12/Oracle_VM_VirtualBox_Extension_Pack-6.1.12.vbox-extpack>` for VirtualBox
-	3. Import Appliance `TockOS VM <TODO>`
+	1. Install the `VirtualBox <https://www.virtualbox.org/>`_ on your computer
+	2. Install the `Extension Pack <https://download.virtualbox.org/virtualbox/6.1.12/Oracle_VM_VirtualBox_Extension_Pack-6.1.12.vbox-extpack>`_ for VirtualBox
+	3. Import Appliance `TockOS VM <TODO>`_
 
 `Visual Studio Code <https://code.visualstudio.com/>`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	1. Install `Visual Studio Code <https://code.visualstudio.com/>` on your computer
 	
-Kernel
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	* Create a Kernel project
+Application Types
+^^^^^^^^^^^^^^^^^
+
+The TockOS environment allows you to build two types of projects: Tock kernels and Tock userspace applications (in C).
+
+Tock Kernel
+***********
+
+To build a Tock custom kernel, you can start from one of the existing boards. 
+
 	1. Start the `TockOS VM <TODO>` in the VirtualBOX
 	2. Open WyliodrinStudio App
 	3. Click on 'Projects Library'
