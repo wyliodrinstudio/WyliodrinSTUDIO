@@ -10,7 +10,6 @@ This will show how to set up a ESP8266 device.
 
 Windows
 ***********
------------------------------------------------
 
 1. Download Micropython firmware
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -59,7 +58,6 @@ As final step, you have to click on the button *“Flash NodeMCU”*.
 
 Linux
 *******
----------------------------------------------
 
 2.1 Install Python
 ^^^^^^^^^^^^^^^^^^
@@ -164,7 +162,6 @@ Next, connect to the serial console with command:
 
 macOS
 *********
----------------------------------------------
 
 1. Download Micropython firmware
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
