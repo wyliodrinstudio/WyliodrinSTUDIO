@@ -3,6 +3,7 @@
   * **added** update plugin, handles updates in electron and browser
   * **added** to docs Adafruit CLUE board setup
   * **added** tutorials plugin
+  * **added** application deployment documentation
   * **fixed** schematics and enbled it for browser
   * **fixed** display micropython options after port selection in browser
   * **fixed** schematics image layout
