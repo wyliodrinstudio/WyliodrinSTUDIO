@@ -73,6 +73,7 @@ Also, the recognized programming languages at the time are:
    boards/index.rst
    architecture.rst
    extension
+   docker/index.rst
    api
    plugin
    translations

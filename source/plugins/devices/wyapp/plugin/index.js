@@ -681,6 +681,7 @@ export function setup(options, imports, register)
 					tag =  project.name.replace(/[^0-9A-Za-z_]/g,'_');
 					makefile += '\ndeploy:\n\t docker build --tag ' + tag +  ' . && docker run --label studio="' +name + '" ';
 				}
+
 	
 				let device = studio.workspace.getDevice ();
 				let dockerfile = null;
@@ -712,6 +713,7 @@ export function setup(options, imports, register)
 									}
 									else return null;
 								}
+								
 								let options = await studio.workspace.showDialog(DockerSettings, {
 									width:600,
 									project:project,

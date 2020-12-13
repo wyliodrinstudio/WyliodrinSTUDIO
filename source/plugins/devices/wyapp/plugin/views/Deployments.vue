@@ -52,7 +52,7 @@
 
 							<v-btn text class="lib-app-btn" v-else
 							@click="del(container)">{{$t('DEVICE_WYAPP_DELETE')}}</v-btn>
-							<!-- TRADUCERE DAR UNDE THO -->
+							
 						</td>
 					</tr>
 				</table>

@@ -1,6 +1,4 @@
 let studio = null;
-
-
 //TODO create settings function to save in folder.
 
 export default function setup(options, imports, register) {
@@ -53,8 +51,10 @@ export default function setup(options, imports, register) {
 		getEnvironmentSetup(project) {
 			project;
 			return 'RUN npm install\nCMD node main.js\n';
-		}
+		},
+	
 	};
+
 
 	studio.projects.registerLanguage('nodejs', 'NodeJS', 'plugins/languages/nodejs/data/img/project.png', 'plugins/languages/nodejs/data/img/javascript.png', 'plugins/languages/nodejs/data/img/javascriptLittle.png',fileIcons, javaScript);
 
