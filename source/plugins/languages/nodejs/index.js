@@ -1,11 +1,8 @@
 let studio = null;
-
-
 //TODO create settings function to save in folder.
 
 export default function setup(options, imports, register) {
 	studio = imports;
-	console.log(imports);
 	let fileIcons = [
 		{
 			extension: '.js',
@@ -54,7 +51,8 @@ export default function setup(options, imports, register) {
 		getEnvironmentSetup(project) {
 			project;
 			return 'RUN npm install\nCMD node main.js\n';
-		}
+		},
+	
 	};
 
 
