@@ -2,7 +2,7 @@ Deploy Application
 ======================
 
 Broadly speaking, software deployment consists of all the porcesses required for preparing the a software application to run and operate in a specific environment.
-It involves installation, configuration, testing and making changes to optimize the performance of the software. In Wyliodrin Studio, **deploying an application ** 
+It involves installation, configuration, testing and making changes to optimize the performance of the software. In Wyliodrin Studio, **deploying an application** 
 basically means to put it into production, after its prototype is finished and tested. 
 
 
@@ -10,9 +10,16 @@ For the moment Wyliodrin Studio provides support just for **Docker**. The applic
 packages up code and all its dependencies so the application runs quickly and reliably. In this way the app will be able to start automatically and run in the background.
  
 
-Steps to use Docker in Wyliodrin Studio
-***************************************
-This feature contains two main parts. Firstly, you can deploy projects using the **Deploy** button. 
+
+This feature contains two main parts. 
+
+Deploy an Application
+*********************
+
+Start a deployment
+^^^^^^^^^^^^^^^^^^
+
+To deploy a project you have to use the **Deploy** button. 
 
 
 .. image:: images/deployButton.png
@@ -24,7 +31,13 @@ After pressing it, the **Dockerfile** pop-up will appear.
 	:align: center
 
 This means that you do not have any dockerfile in the folder of your project. You now have the posibility to create a dockerfile through **Wyliodrin Studio**,
-or to make one of your own. If you choose the first path, you will be able to customize your dockerfile in the **Deployment Settings** pop-up.
+or to make one of your own. 
+
+
+Setup the deployment
+^^^^^^^^^^^^^^^^^^^^
+
+You will be able to customize your dockerfile in the **Deployment Settings** pop-up.
 
 .. image:: images/dockerSettingsPopup.png
 	:align: center
@@ -78,7 +91,14 @@ As you can see, there are already some default options set. However, you can alw
 
 
 By doing these actions, you succesfully deployed your project in a container. This container has the same name as your project and can be found in the **Deployments**
-pop-up. This represents the second part of the **Docker** feature. By pressing the **Deployments** button you can manage both your containers created
+pop-up. 
+
+
+Manage Deployments
+******************
+
+
+Wyliodrin STUDIO allows you to manage your deployed apps. By pressing the **Deployments** button you can manage both your containers created
 in **Wyliodrin Studio**, and the ones created locally on your machine. 
 
 .. image:: images/deploymentsButton.png
