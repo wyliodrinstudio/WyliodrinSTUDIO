@@ -50,5 +50,21 @@
     "DEVICE_WYAPP_WEBSOCKET_MORE_INFO": {
         "message": "Más información",
         "description": "The button the user clicks to get more information about how to connect a device through the web"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_SETUP_WIFI": {
+        "message": "Ajustar WiFi",
+        "description": "The button the user clicks to get more information about how to setup the wifi"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_TYPE": {
+        "message": "Dispositivo",
+        "description": "The type of the device with instructions on how to add a new device"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_DOWNLOAD": {
+        "message": "Descargar",
+        "description": "The download link for the settings json"
+    },
+    "DEVICE_WYAPP_WEBSOCKET_NEW_DEVICE_DOWNLOAD_PART2": {
+        "message": "a la tarjeta en",
+        "description": "the text for the download"
     }
 }

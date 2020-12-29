@@ -1,0 +1,8 @@
+{
+    "MIGRATION_BETA_TITLE": {
+        "message": "Restaurar tus proyectos y tarjetas"
+    },
+    "MIGRATION_BETA_TEXT": {
+        "message": "Hemos migrado Wyliodrin STUDIO Web App a beta y esto ha cambiado el nombre del dominio. Por favor exporta e importa tus proyectos y tu ID de sesión. ¿Te gustaría ir ahora a https://beta.wyliodrin.studio?"
+    }
+}

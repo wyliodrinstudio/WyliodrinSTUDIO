@@ -1,4 +1,12 @@
 {
+    "YES": {
+        "message": "Yes",
+        "description": "The yes button "
+    },
+    "NO": {
+        "message": "No",
+        "description": "The no button"
+    },
     "LANGUAGE": {
         "message": "English",
         "description": "Button that indicates the current language of the program, represented by a flag"
@@ -74,14 +82,6 @@
     "WORKSPACE_TOOLBAR_EXIT_QUESTION": {
         "message": "Are you sure you want to exit?",
         "description": "Select if you are sure you want to exit"
-    },
-    "YES": {
-        "message": "Yes",
-        "description": "The 'yes' button"
-    },
-    "NO": {
-        "message": "No",
-        "description": "The 'no' button"
     },
     "EXIT": {
         "message": "Exit",

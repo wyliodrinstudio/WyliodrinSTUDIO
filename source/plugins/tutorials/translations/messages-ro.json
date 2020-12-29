@@ -1,18 +1,18 @@
 {
-	"TUTORIALS_NAME": {
-		"message": "Tutoriale",
-		"description": "Textul pentru tutorialele din toolbar și titlul pentru dialog"
-	},
-	"TUTORIALS_IMPORT": {
-		"message": "Import {title}",
-		"description": "Titlul pentru import-ul tutorial dialog"
-	},
-	"TUTORIALS_IMPORT_PROJECT_NAME": {
-		"message": "Scrieţi numele noului proiect",
-		"description": "Numele noului proiect"
-	},
-	"TUTORIALS_PROJECT_EXISTS": {
-		"message": "Un proiect cu numele {name} există deja, vă rog alegeţi un alt nume.",
-		"description": "Apare un mesaj dacă există deja un proiect cu același nume"
-	}
+    "TUTORIALS_NAME": {
+        "message": "Tutoriale",
+        "description": "Textul pentru tutorialele din toolbar și titlul pentru dialog"
+    },
+    "TUTORIALS_IMPORT": {
+        "message": "Import {title}",
+        "description": "Titlul pentru import-ul tutorial dialog"
+    },
+    "TUTORIALS_IMPORT_PROJECT_NAME": {
+        "message": "Scrieţi numele noului proiect",
+        "description": "Numele noului proiect"
+    },
+    "TUTORIALS_PROJECT_EXISTS": {
+        "message": "Un proiect cu numele {name} există deja, vă rog alegeţi un alt nume.",
+        "description": "Apare un mesaj dacă există deja un proiect cu același nume"
+    }
 }

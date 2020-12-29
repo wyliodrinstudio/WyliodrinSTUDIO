@@ -155,7 +155,7 @@
         "message": "Nu",
         "description": "The no button"
     },
-    "DEVICE_WYAPP_DEPLOYMENTS":{
+    "DEVICE_WYAPP_DEPLOYMENTS": {
         "message": "Implementari",
         "description": "The button for deployments"
     },

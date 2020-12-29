@@ -1,18 +1,18 @@
 {
     "TUTORIALS_NAME": {
-        "message": "Tutorials",
+        "message": "Tutoriales",
         "description": "The text for the tutorials toolbar button and the title for the tutorials dialog"
     },
     "TUTORIALS_IMPORT": {
-        "message": "Import {title}",
+        "message": "Importar {title}",
         "description": "The title of the import tutorial dialog"
     },
     "TUTORIALS_IMPORT_PROJECT_NAME": {
-        "message": "Input the name for the new project",
+        "message": "Ingrese el nombre para el nuevo proyecto",
         "description": "Name of the new project"
     },
     "TUTORIALS_PROJECT_EXISTS": {
-        "message": "A project with the name {name} already exists, please choose another name for it",
+        "message": "Un proyecto con el nombre {name} ya existe, por favor escoja otro nombre",
         "description": "A message shown if there is already a project with that name"
     }
 }

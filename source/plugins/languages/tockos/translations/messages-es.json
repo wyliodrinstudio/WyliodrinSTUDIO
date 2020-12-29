@@ -1,26 +1,26 @@
 {
     "TOCK_OS_SELECT_BOARD": {
-        "message": "Select Board",
+        "message": "Seleccionar tarjeta",
         "description": ""
     },
     "TOCK_OS_SELECT_EXAMPLE": {
-        "message": "Select Example",
+        "message": "Seleccionar ejemplo",
         "description": ""
     },
     "TOCK_OS_STATUS_FETCHING": {
-        "message": "Fetching infos...",
+        "message": "Obteniendo información...",
         "description": ""
     },
     "TOCK_OS_STATUS_DOWNLOADING": {
-        "message": "Downloading...",
+        "message": "Descargando...",
         "description": ""
     },
     "TOCK_OS_STATUS_FINISHED": {
-        "message": "Finished...",
+        "message": "Finalizando...",
         "description": ""
     },
     "TOCK_OS_SELECT_RELEASE_VERSION": {
-        "message": "Select Tock Release Version",
+        "message": "Seleccionar versión Tock Release",
         "description": ""
     }
 }

@@ -1,22 +1,22 @@
 {
     "TOCK_OS_APP_BOARD_SETTINGS": {
-        "message": "App Board Settings",
+        "message": "Ajustes aplicación tarjeta",
         "description": ""
     },
     "TOCK_OS_STACK_SIZE": {
-        "message": "Stack Size",
+        "message": "Tamaño pila",
         "description": ""
     },
     "TOCK_OS_APP_HEAD_SIZE": {
-        "message": "APP Heap Size",
+        "message": "Tamaño montículo aplicación",
         "description": ""
     },
     "TOCK_OS_KERNEL_HEAP_SIZE": {
-        "message": "Kernel Heap Size",
+        "message": "Tamaño montículo kernel",
         "description": ""
     },
     "TOCK_OS_SELECT_FLASHING_METHOD": {
-        "message": "Select Flashing Method",
+        "message": "Seleccionar método de programación",
         "description": ""
     },
     "TOCK_OS_FLASHING_OPTIONS_TOCKLOADER": {
@@ -24,7 +24,7 @@
         "description": ""
     },
     "TOCK_OS_FLASHING_OPTIONS_SINGLE_BINARY": {
-        "message": "Single Binary",
+        "message": "Binario solo",
         "description": ""
     }
 }

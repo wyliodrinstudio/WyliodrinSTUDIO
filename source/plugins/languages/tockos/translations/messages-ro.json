@@ -1,26 +1,26 @@
 {
-        "TOCK_OS_SELECT_BOARD": {
-                "message": "Alege placa",
-                "description": ""
-        },
-        "TOCK_OS_SELECT_EXAMPLE": {
-                "message": "Alege exemplul",
-                "description": ""
-        },
-        "TOCK_OS_STATUS_FETCHING": {
-                "message": "Colectez informații...",
-                "description": ""
-        },
-        "TOCK_OS_STATUS_DOWNLOADING": {
-                "message": "Se descarcă...",
-                "description": ""
-        },
-        "TOCK_OS_STATUS_FINISHED": {
-                "message": "Gata",
-                "description": ""
-        },
-	"TOCK_OS_SELECT_RELEASE_VERSION": {
-                "message": "Alege versiunea release-ului de Tock",
-                "description": ""
-        }
+    "TOCK_OS_SELECT_BOARD": {
+        "message": "Alege placa",
+        "description": ""
+    },
+    "TOCK_OS_SELECT_EXAMPLE": {
+        "message": "Alege exemplul",
+        "description": ""
+    },
+    "TOCK_OS_STATUS_FETCHING": {
+        "message": "Colectez informații...",
+        "description": ""
+    },
+    "TOCK_OS_STATUS_DOWNLOADING": {
+        "message": "Se descarcă...",
+        "description": ""
+    },
+    "TOCK_OS_STATUS_FINISHED": {
+        "message": "Gata",
+        "description": ""
+    },
+    "TOCK_OS_SELECT_RELEASE_VERSION": {
+        "message": "Alege versiunea release-ului de Tock",
+        "description": ""
+    }
 }
