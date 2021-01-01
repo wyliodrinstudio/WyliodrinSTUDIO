@@ -54,5 +54,9 @@
     "DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_DIALOG_ADD_XML": {
         "message": "Agregar lista de redes XML",
         "description": "Add the XML file of your project"
+    },
+    "DEVICE_SIMULATOR_RASPBERRY_PI_RUN_ERROR": {
+        "message": "Error ejecutando proyecto ({{error}})",
+        "description": "The Raspberry Pi simulator button to run"
     }
 }

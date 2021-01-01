@@ -1,78 +1,78 @@
 {
-        "DEVICE_MP_RUN": {
+    "DEVICE_MP_RUN": {
         "message": "RULEAZA",
         "description": "The run button."
-	},
-	"DEVICE_MP_STOP": {
+    },
+    "DEVICE_MP_STOP": {
         "message": "OPRESTE",
         "description": "The stop button."
-	},
-	"DEVICE_MP_RESTART": {
+    },
+    "DEVICE_MP_RESTART": {
         "message": "RESETEAZA",
         "description": "The restart button."
-	},
-	"DEVICE_MP_CONNECT": {
+    },
+    "DEVICE_MP_CONNECT": {
         "message": "CONECTEAZA",
         "description": "The connect button."
-	},
-	"DEVICE_MP_EXIT": {
+    },
+    "DEVICE_MP_EXIT": {
         "message": "IESIRE",
         "description": "The exit button."
-	},
-        "DEVICE_MP_FILES": {
+    },
+    "DEVICE_MP_FILES": {
         "message": "SISTEM DE FISIERE",
         "description": "The file system button."
-        },
-        "DEVICE_MP_DEPLOY": {
+    },
+    "DEVICE_MP_DEPLOY": {
         "message": "INCARCA PROIECTUL",
         "description": "The deploy button."
-        },
-	"DEVICE_MP_FLAG_HEADER": {
+    },
+    "DEVICE_MP_FLAG_HEADER": {
         "message": "Activeaza WebSerial",
         "description": "Header for setting chrome flag."
-	},
-	"DEVICE_MP_FLAG_STEP_ONE": {
+    },
+    "DEVICE_MP_FLAG_STEP_ONE": {
         "message": "1. Pentru aceasta functie aveti nevoie de Google Chrome",
         "description": "The step one for setting chrome flag."
-        },
-        "DEVICE_MP_FLAG_STEP_TWO": {
+    },
+    "DEVICE_MP_FLAG_STEP_TWO": {
         "message": "2. In bara de search din Chrome vom cauta : chrome://flags",
         "description": "The step two for setting chrome flag."
-        },
-        "DEVICE_MP_FLAG_STEP_THREE": {
+    },
+    "DEVICE_MP_FLAG_STEP_THREE": {
         "message": "3. Cautati in bara de search din flags: #enable-experimental-web-platform-features",
         "description": "The step two for setting chrome flag."
-        },
-        "DEVICE_MP_FLAG_STEP_FOUR": {
+    },
+    "DEVICE_MP_FLAG_STEP_FOUR": {
         "message": "4. Dati ENABLE flag-ului : Experimental Web Platform features",
         "description": "The step three for setting chrome flag."
-        },
-        "DEVICE_MP_FLAG_STEP_FIVE": {
+    },
+    "DEVICE_MP_FLAG_STEP_FIVE": {
         "message": "5. In partea de jos dreapta accesam butonul RELAUNCH",
         "description": "The step three for setting chrome flag."
-        },
-        "DEVICE_MP_FLAG_STEP_SIX": {
+    },
+    "DEVICE_MP_FLAG_STEP_SIX": {
         "message": "Dupa repornirea browser-ului vom putea folosii varianta browser.",
         "description": "The step three for setting chrome flag."
-        },
-	"DEVICE_MP_FLAG_WARNING": {
+    },
+    "DEVICE_MP_FLAG_WARNING": {
         "message": "ATENTIE! Pentru a functiona trebuie sa fiti pe o conexiune securizata.",
         "description": "Warning for setting chrome flag."
-	},
-	"DEVICE_MP_SERIAL_OPTIONS": {
+    },
+    "DEVICE_MP_SERIAL_OPTIONS": {
         "message": "Conectare",
         "description": "Baudrate set header."
-        },
-	"DEVICE_MP_SERIAL_BAUDRATE": {
+    },
+    "DEVICE_MP_SERIAL_BAUDRATE": {
         "message": "Setati o valoare pentru baudrate. Valoare implicita : 115200.",
         "description": "Baudrate set paragraph."
-        },
-        "DEVICE_MP_DROPDOWN_TITLE": {
+    },
+    "DEVICE_MP_DROPDOWN_TITLE": {
         "message": "Limbaj de programare",
         "description": "Brate dropdown title"
-        },
-	"DEVICE_MP_CHECKBOX": {
-	"message": "Doriti restartarea placii la conectare?",
-	"description": "Brate checkbox text"
-	} 
+    },
+    "DEVICE_MP_CHECKBOX": {
+        "message": "Doriti restartarea placii la conectare?",
+        "description": "Brate checkbox text"
+    }
 }

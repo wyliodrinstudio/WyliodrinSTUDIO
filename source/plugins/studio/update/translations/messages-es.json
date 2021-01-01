@@ -1,14 +1,14 @@
 {
     "UPDATE": {
-        "message": "Update",
+        "message": "Actualizar",
         "description": "The title of the update toolbar button"
     },
     "UPDATE_TITLE": {
-        "message": "Update Available",
+        "message": "Actualización disponible",
         "description": "The title of the update question prompt"
     },
     "UPDATE_MESSAGE": {
-        "message": "There is a new version of Wyliodrin STUDIO available. Would you like to update?",
+        "message": "Hay una nueva versión de Wyliodrin STUDIO disponible. ¿Te gustaría actualizar?",
         "description": "The message of the update question prompt"
     }
 }

@@ -1,18 +1,18 @@
 {
-	"TUTORIALS_NAME": {
-		"message": "Les tutoriels",
-		"description": "Le texte pour les tutoriels des boutons de la barre d’outils et le titre pour les tutoriels du dialogue"
-	},
-	"TUTORIALS_IMPORT": {
-		"message": "Import {title}",
-		"description": "Le titre pour l'import tutoriel dialog"
-	},
-	"TUTORIALS_IMPORT_PROJECT_NAME": {
-		"message": "Mettez le nom du nouveau projet.",
-		"description": "Le nom du nouveau projet."
-	},
-	"TUTORIALS_PROJECT_EXISTS": {
-		"message": "Un projet avec le nom {name} existe déjà, s'il vous plaît choisissez un autre nom",
-		"description": "Un message apparaît si il existe déjà un projet avec le même nom"
-	}
+    "TUTORIALS_NAME": {
+        "message": "Les tutoriels",
+        "description": "Le texte pour les tutoriels des boutons de la barre d’outils et le titre pour les tutoriels du dialogue"
+    },
+    "TUTORIALS_IMPORT": {
+        "message": "Import {title}",
+        "description": "Le titre pour l'import tutoriel dialog"
+    },
+    "TUTORIALS_IMPORT_PROJECT_NAME": {
+        "message": "Mettez le nom du nouveau projet.",
+        "description": "Le nom du nouveau projet."
+    },
+    "TUTORIALS_PROJECT_EXISTS": {
+        "message": "Un projet avec le nom {name} existe déjà, s'il vous plaît choisissez un autre nom",
+        "description": "Un message apparaît si il existe déjà un projet avec le même nom"
+    }
 }
