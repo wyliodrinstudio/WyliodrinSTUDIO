@@ -1,4 +1,4 @@
-import PatreonDialog from "./views/PatreonDialog.vue";
+import PatreonDialog from './views/PatreonDialog.vue';
 
 export default function setup (options, imports, register) {
 	let studio = imports;
