@@ -76,7 +76,7 @@ let filesystem_real = {
 			return false;
 		}
 	},
-	openExportDialog(data, opts = {}) {
+	async openExportDialog(data, opts = {}) {
 		const options = {
 			title:opts.title || 'Export',
 			defaultPath: path.join(this.getDefaultFolder(),opts.filename),
@@ -84,7 +84,9 @@ let filesystem_real = {
 				{name:'export', extensions: opts.filetypes || []}
 			]
 		};
-		return dialog.showSaveDialog(remote.getCurrentWindow (), options);
+		let file = await dialog.showSaveDialog(remote.getCurrentWindow (), options);
+		if (file.filePath) return file.filePath;
+		else return null;
 		// TODO save the actual data to the file
 	},
 	readImportFile (file)
