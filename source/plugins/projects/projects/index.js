@@ -642,7 +642,6 @@ let projects = {
 				filetypes:['zip','tar'],
 				type:'application/zip'
 			});
-			console.log (savePath);
 			if(savePath !== null){
 				await studio.filesystem.writeFile(savePath, zipContent);
 			}
@@ -667,7 +666,6 @@ let projects = {
 						if(path.sep == '\\'){
 							x = x.replace(/\\/g, '/');
 						}
-						console.log (x);
 						zip.folder(x);
 						await this._buildZipFromDirectory(file, zip, root);
 					} else {
@@ -677,7 +675,6 @@ let projects = {
 							if(path.sep == '\\'){
 								x = x.replace(/\\/g, '/');
 							}
-							console.log (x);
 							zip.file(x, filedata);
 						}
 						
