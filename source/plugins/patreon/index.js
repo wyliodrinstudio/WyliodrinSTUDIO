@@ -15,7 +15,7 @@ export default function setup (options, imports, register) {
 		let sponsored = await studio.settings.loadValue('patreon', 'sponsored', false);
 		studio.settings.storeValue('patreon', 'run_times', run_times + 1);
 
-		if (!sponsored && run_times % 10 == 1) {
+		if (!sponsored && run_times % 10 == 0) {
 			showDialog ();
 		}
 	});
