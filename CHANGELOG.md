@@ -4,12 +4,14 @@
   * **added** to docs Adafruit CLUE board setup
   * **added** tutorials plugin
   * **added** application deployment documentation
+  * **added** patreon link
   * **fixed** schematics and enbled it for browser
   * **fixed** display micropython options after port selection in browser
   * **fixed** schematics image layout
   * **fixed** notebook images display
   * **fixed** language logo images
-  * **fixed** notebook fail to save when moving elements around
+  * **fixed** notebook fail to sav when moving elements around
+  * **fixed** project download for electron version
   * **updated** documentation structure, each board has a folder
 ## Wyliodrin STUDIO 2.2.1-beta
   * **new** Raspberry Pi images (with docker)

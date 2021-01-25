@@ -1,0 +1,22 @@
+{
+    "PATREON_SPONSOR": {
+        "message": "Patrocinador",
+        "description": "Menu item that appears in the main menu"
+    },
+    "PATREON_SPONSOR_TITLE": {
+        "message": "Patrocine el proyecto Wyliodrin STUDIO",
+        "description": "Title text to ask users to sponsor Wyliodrin STUDIO"
+    },
+    "PATREON_SPONSOR_TEXT": {
+        "message": "Wyliodrin STUDIO es un proyecto gratuito y de código abierto. Tu patrocinio nos permite mantener el proyecto y ofrecerlo gratis. Gracias.",
+        "description": "Text to ask users to sponsor Wyliodrin STUDIO"
+    },
+    "PATREON_SPONSOR_NOW": {
+        "message": "Patrocinador",
+        "description": "Button to click and go to the sponsor link"
+    },
+    "PATREON_SPONSOR_LATER": {
+        "message": "Más tarde",
+        "description": "Button to click and sponsor later"
+    }
+}

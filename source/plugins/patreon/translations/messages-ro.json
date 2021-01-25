@@ -1,0 +1,22 @@
+{
+    "PATREON_SPONSOR": {
+        "message": "Susțineți",
+        "description": "Menu item that appears in the main menu"
+    },
+    "PATREON_SPONSOR_TITLE": {
+        "message": "Susțineți proiectul Wyliodrin STUDIO",
+        "description": "Title text to ask users to sponsor Wyliodrin STUDIO"
+    },
+    "PATREON_SPONSOR_TEXT": {
+        "message": "Wyliodrin STUDIO este un proiect open source și gratuit. Sponsorizarea dvs. ne permite să îmbunătățim proiectul și să îl oferim gratuit. Mulțumim.",
+        "description": "Text to ask users to sponsor Wyliodrin STUDIO"
+    },
+    "PATREON_SPONSOR_NOW": {
+        "message": "Susține",
+        "description": "Button to click and go to the sponsor link"
+    },
+    "PATREON_SPONSOR_LATER": {
+        "message": "Mai târziu",
+        "description": "Button to click and sponsor later"
+    }
+}
