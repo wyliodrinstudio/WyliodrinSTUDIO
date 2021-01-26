@@ -7,6 +7,8 @@ import axios from 'axios';
 import unzipper from 'unzipper';
 import path from 'path'; 
 
+axios.defaults.adapter = require('axios/lib/adapters/http');
+
 const QEMU = 'qemu-system-';
 let qemu = null;
 let studio = null;
@@ -172,8 +174,7 @@ let emulator = {
 				{
 					if(image.type === imageRunning.type)
 					{
-						image.loadingEmulator = 'yes';
-						studio.workspace.dispatchToStore('emulator', 'images', images);
+						studio.workspace.dispatchToStore('emulator', 'updateLoading', {image, loading: 'yes'});
 						
 						currentlyRunningFolder = path.join(runningEmulatorsFolder, emulatorName);
 						await studio.filesystem.mkdirp(currentlyRunningFolder);
@@ -188,8 +189,7 @@ let emulator = {
 							await fs.copyFile(copyImage, runningEmulatorImage);
 						} catch(e) {
 							studio.workspace.showError('EMULATOR_COPY_FILE_ERROR', {extra: e.message});
-							image.loadingEmulator = 'no';
-							studio.workspace.dispatchToStore('emulator', 'images', images);
+							studio.workspace.dispatchToStore('emulator', 'updateLoading', {image, loading: 'no'});
 							await fs.remove(currentlyRunningFolder);
 							return;
 						}
@@ -198,8 +198,7 @@ let emulator = {
 							await fs.copyFile(copyKernel, runningEmulatorKernel);
 						} catch(e) {
 							studio.workspace.showError('EMULATOR_COPY_FILE_ERROR', {extra: e.message});
-							image.loadingEmulator = 'no';
-							studio.workspace.dispatchToStore('emulator', 'images', images);
+							studio.workspace.dispatchToStore('emulator', 'updateLoading', {image, loading: 'no'});
 							await fs.remove(currentlyRunningFolder);
 							return;
 						}
@@ -208,14 +207,12 @@ let emulator = {
 							await fs.copyFile(copyDatabase, runningEmulatorDatabase);
 						} catch(e) {
 							studio.workspace.showError('EMULATOR_COPY_FILE_ERROR', {extra: e.message});
-							image.loadingEmulator = 'no';
-							studio.workspace.dispatchToStore('emulator', 'images', images);
+							studio.workspace.dispatchToStore('emulator', 'updateLoading', {image, loading: 'no'});
 							await fs.remove(currentlyRunningFolder);
 							return;
 						}
 
-						image.loadingEmulator = 'no';
-						studio.workspace.dispatchToStore('emulator', 'images', images);
+						studio.workspace.dispatchToStore('emulator', 'updateLoading', {image, loading: 'no'});
 					}
 				}
 				emulatorPort = Math.floor(Math.random() * (10000 - 1024)) + 1024;
@@ -334,7 +331,7 @@ let emulator = {
 		if(image) {
 			await studio.filesystem.mkdirp(path.join(imagesFolder, image.type));
 			
-			let download = await axios.request ({
+			let download = await axios ({
 				url: image.download,
 				method: 'GET',
 				responseType: 'stream',
@@ -344,50 +341,66 @@ let emulator = {
 				},
 			});
 
+			let contentLength = download.headers['content-length'];
+
 			downloadingImages[image.type] = download;
 			
 			try {
-				download.pipe(fs.createWriteStream(path.join(image.dataFolder, 'image.zip')));
+				download.data.pipe(fs.createWriteStream(path.join(image.dataFolder, 'image.zip')));
 			} catch(e) {
 				this.studio.workspace.showError('EMULATOR_DOWNLOAD_ERROR' + {extra: e.message});
 			}
-			
-			download.data.on ('abort', () => {
-				download.__aborted = true;
+
+			let loaded = 0;
+
+			download.data.on ('data', (data) => {
+				loaded = loaded + data.length;
+				let percent = Math.round((loaded * 100) / contentLength);
+				if (percent < 100)
+				{
+					studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: percent});
+				}
 			});
+			
 			download.data.on('end', async () => {
-				if (!download.__aborted)
+				if (!download.request.aborted)
 				{			
 					try{
+						studio.workspace.dispatchToStore('emulator', 'updateLoading', {image, loading: 'yes'});
 						let pathing = path.join(image.dataFolder, 'image.zip');
 						let unzip =  fs.createReadStream(pathing);
 						unzip.pipe(unzipper.Extract({path: image.dataFolder}));
 						unzip.on('end', async () => {
 							await fs.remove(path.join(image.dataFolder, 'image.zip'));
 							studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 100});
+							studio.workspace.dispatchToStore('emulator', 'updateLoading', {image, loading: 'no'});
 						});
 					} catch(e) {
 						studio.workspace.error(e);
 						this.studio.workspace.showError('EMULATOR_UNZIP_ERROR' + {extra: e.message});
 						await fs.remove(image.dataFolder);
+						studio.workspace.dispatchToStore('emulator', 'updateLoading', {image, loading: 'no'});
 					}
+				}
+				else
+				{
+					try { 
+						await fs.remove(image.dataFolder);
+					} catch(e) {
+						studio.workspace.error(e.message);
+						studio.workspace.showError('EMULATOR_STOP_DOWNLOAD_ERROR' + {extra: e.message});
+					}
+					studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 0});
 				}
 			});
 		}
 	},
-	async stopDownload(image)
+	stopDownload(image)
 	{
 		if(image)
 		{
 			let download = downloadingImages[image.type];
-			download.abort();
-			try { 
-				await fs.remove(image.dataFolder);
-			} catch(e) {
-				studio.workspace.error(e.message);
-				studio.workspace.showError('EMULATOR_STOP_DOWNLOAD_ERROR' + {extra: e.message});
-			}
-			studio.workspace.dispatchToStore('emulator', 'updateDownloadProgress', {image, progress: 0});
+			download.request.abort();
 		}
 	}
 };

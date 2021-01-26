@@ -1,3 +1,7 @@
+## Wyliodrin STUDIO 2.3.1
+  * **fixed** emulator download
+  * **fixed** Windows installer
+
 ## Wyliodrin STUDIO 2.3.0
   * **added** serialport plugin, works in electron and Chrome browser
   * **added** update plugin, handles updates in electron and browser

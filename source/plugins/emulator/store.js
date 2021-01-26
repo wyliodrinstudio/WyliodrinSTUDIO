@@ -20,6 +20,7 @@ export default {
 		images: ({commit}, images) => commit('images', [...images]),
 		qemuCheck: ({commit}, qemuCheck) => commit('qemuCheck', qemuCheck),
 		updateDownloadProgress: ({commit}, data) => { commit ('updateDownloadProgress', data);},
+		updateLoading: ({commit}, data) => { commit ('updateLoading', data);},
 		activeTab: ({commit}, activeTab) => commit('activeTab', activeTab),
 
 	},
@@ -32,6 +33,13 @@ export default {
 			if (index >= 0)
 			{
 				state.images[index].progress = progress;
+			}
+		},
+		updateLoading: (state, {image, loading}) => {
+			let index = state.images.findIndex(img => img.id === image.id);
+			if (index >= 0)
+			{
+				state.images[index].loadingEmulator = loading;
 			}
 		},
 		qemuCheck: (state, value) => state.qemuCheck = value,
