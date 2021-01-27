@@ -180,6 +180,7 @@
 	},
 	"dependencies": {
 		"aedes": "^0.42.5",
+		"axios": "^0.21.1",
 		"bonjour-hap": "^3.5.4",
 		"chart.js": "^2.9.4",
 		"drivelist": "^8.0.6",
