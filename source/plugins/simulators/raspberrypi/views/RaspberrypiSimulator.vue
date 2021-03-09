@@ -147,7 +147,7 @@ export default {
 		 * Open the documentation
 		 */
 		openDocumentation() {
-			this.studio.system.openLink('https://wyliodrinstudio.readthedocs.io/en/latest/simulator_raspberrypi.html');
+			this.studio.system.openLink('https://wyliodrinstudio.readthedocs.io/en/latest/simulators/raspberrypi.html');
 		},
 
 		/**
