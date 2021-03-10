@@ -150,6 +150,12 @@ export default function setup(options, imports, register) {
 			let device = studio.workspace.getDevice ();
 			return (device.status === 'CONNECTED' && !device.properties.isRunning);
 		},
+		enabled() {
+
+			// The enabled options of the RaspberryPi simulator run button
+			let project = studio.projects.getCurrentProject();
+			return (project);
+		},
 		type: 'run'
 	});
 
