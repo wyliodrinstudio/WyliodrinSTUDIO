@@ -98,7 +98,7 @@
 		"moment-timezone": "^0.5.31",
 		"monaco-editor": "^0.20.0",
 		"monaco-editor-webpack-plugin": "^1.9.0",
-		"msgpack5": "^4.2.1",
+		"msgpack5": "^4.5.1",
 		"mustache": "^4.0.1",
 		"node-blockly": "https://github.com/wyliodrinstudio/node-blockly.git",
 		"raw-loader": "^3.1.0",
