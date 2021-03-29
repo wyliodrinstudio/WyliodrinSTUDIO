@@ -60,7 +60,7 @@
         "description": "The Raspberry Pi simulator button to run"
     },
     "DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE": {
-        "message": "The simulator does not support projects' language",
+        "message": "The simulator does not support your projects' programming language",
         "description": "A warning that pops up if the project in the Raspberry Pi Simulator is not nodejs"
     }
 }
