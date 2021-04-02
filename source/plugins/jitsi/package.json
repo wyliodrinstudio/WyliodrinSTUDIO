@@ -1,0 +1,11 @@
+{
+    "name": "jitsi",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace", "filesystem", "system", "settings", "events"],
+        "provides": ["jitsi"],
+        "target": ["electron", "browser"]
+    }
+}

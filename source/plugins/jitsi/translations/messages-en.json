@@ -1,0 +1,18 @@
+{
+    "PROJECT_JITSI": {
+        "message": "Jitsi Conference",
+        "description": "Jitsi Conference tab"
+    },
+    "JITSI_CONFERENCE_SETUP": {
+        "message": "Setup New Conference",
+        "description": ""
+    },
+    "JITSI_CLOSE": {
+        "message": "Close",
+        "description": ""
+    },
+    "JITSI_CREATE_NEW_CONFERENCE": {
+        "message": "Create new conference", 
+        "description": ""
+    }
+}

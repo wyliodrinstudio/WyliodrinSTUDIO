@@ -1,0 +1,18 @@
+{
+    "PROJECT_JITSI": {
+        "message": "Conferință Jitsi",
+        "description": "Jitsi Conference tab"
+    },
+    "JITSI_CONFERENCE_SETUP": {
+        "message": "Configurare conferință noua",
+        "description": ""
+    },
+    "JITSI_CLOSE": {
+        "message": "Închide",
+        "description": ""
+    },
+    "JITSI_CREATE_NEW_CONFERENCE": {
+        "message": "Creați o conferință nouă", 
+        "description": ""
+    }
+}
