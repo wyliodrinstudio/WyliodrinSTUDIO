@@ -67,8 +67,8 @@ let lcd_library = {
 		if (correctPins) {
 			let createLcd = true;
 
-			for (let pin of Object.keys(dataNumber.properties)) {
-				if (generic_raspberrypi.dataLoaded.assignedPins.includes(dataNumber.properties[pin])) {
+			for (let pin of Object.keys(dataNumber)) {
+				if (generic_raspberrypi.dataLoaded.assignedPins.includes(dataNumber[pin])) {
 					createLcd = false;
 				}
 			}
@@ -82,8 +82,8 @@ let lcd_library = {
 			}
 
 			if (createLcd) {
-				for (let pin of Object.keys(dataNumber.properties)) {
-					generic_raspberrypi.dataLoaded.assignedPins.push(dataNumber.properties[pin]);
+				for (let pin of Object.keys(dataNumber)) {
+					generic_raspberrypi.dataLoaded.assignedPins.push(dataNumber[pin]);
 				}
 
 				generic_raspberrypi.dataLoaded.assignedPins.push(rsNumber);
