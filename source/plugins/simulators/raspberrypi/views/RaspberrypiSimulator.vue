@@ -171,6 +171,9 @@ export default {
 				document.getElementById('lcd_display').removeChild(document.getElementById('lcd_display').firstChild);
 			}
 
+			// Create an array for LCD segments simulation
+			this.lcdComponents = [];
+
 			// Create the list needed for the table of components
 			for (let component of Object.keys(this.projectData.components)) {
 				let newComponent = {
@@ -209,8 +212,7 @@ export default {
 				// Add the component to the table
 				this.componentsTable.push(newComponent);
 
-				// Create the LCD segments simulation and add them to the HTML
-				this.lcdComponents = [];
+				// Push the LCD segments simulation to add them to the HTML
 				if (this.projectData.components[component].name === 'lcd') {
 					this.lcdComponents.push(component);
 				}
