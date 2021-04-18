@@ -1211,8 +1211,9 @@ let projects = {
 				} 
 			} else {
 				studio.workspace.showDialog(ProjectsLibrary, {width: 1000});
-			}
-			
+			}			
+		} else if(!studio.settings.loadValue('firstrun', 'firstRun', true)) {
+			studio.workspace.showDialog(ProjectsLibrary, {width: 1000});
 		}
 		
 	},
