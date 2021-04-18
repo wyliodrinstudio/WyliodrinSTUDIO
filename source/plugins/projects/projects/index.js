@@ -1202,11 +1202,15 @@ let projects = {
 		let project = studio.settings.loadValue('projects', 'currentProject', null);
 		let file = studio.settings.loadValue('projects', 'currentFile', null);
 
-		if (project !== {} && project !== null) { 
-			if(await this.selectCurrentProject(project, false)) {
-				if (file !== {} && file !== null) {
-					await this.changeFile(project,file);
-				}
+		if (project !== {} && project !== null) {
+			if(await studio.filesystem.pathExists(project.folder)) {
+				if(await this.selectCurrentProject(project, false)) {
+					if (file !== {} && file !== null) {
+						await this.changeFile(project,file);
+					}
+				} 
+			} else {
+				studio.workspace.showDialog(ProjectsLibrary, {width: 1000});
 			}
 			
 		}
