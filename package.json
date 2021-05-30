@@ -1,6 +1,6 @@
 {
 	"name": "wyliodrinstudio",
-	"version": "2.3.1",
+	"version": "2.3.2",
 	"description": "Wyliodrin STUDIO is an educational platform for IoT and Embedded Linux systems",
 	"main": "main.js",
 	"scripts": {
@@ -75,14 +75,12 @@
 		"css-loader": "^3.0.0",
 		"dexie": "^3.0.2",
 		"electron": "^9.4.0",
-		"electron-builder": "^22.9.1",
+		"electron-builder": "^22.11.5",
 		"electron-rebuild": "^2.0.0",
 		"eslint": "^7.7.0",
 		"eslint-loader": "^4.0.2",
 		"eslint-plugin-vue": "^6.2.2",
 		"file-loader": "^6.0.0",
-		"highcharts": "^7.2.2",
-		"highcharts-vue": "^1.3.5",
 		"highlight.js": "^10.4.1",
 		"html-webpack-plugin": "^4.3.0",
 		"jquery": "^3.5.1",
