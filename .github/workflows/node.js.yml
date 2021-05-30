@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v1.4.4
         with:
           # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
-          node-version: 12.x
+          node-version: 14.x
       - run: npm install
       - run: rm -rf build && FIX=false npm run electron-format
       - run: rm -rf build && FIX=false npm run browser-format
