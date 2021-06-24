@@ -4,7 +4,7 @@ let studio = null;
 
 let githubdownloader = {
 	downloading: false,
-	progress: {},
+	progress: {started: false},
 	/**
 	 * Show a list for tutorials from a github repository
 	 * 
@@ -54,7 +54,8 @@ let githubdownloader = {
 	async createProject(repository, tutorial, project) {
 		this.downloading = true;
 		let nameProject = await studio.workspace.showPrompt('TUTORIALS_IMPORT', 'TUTORIALS_IMPORT_PROJECT_NAME', tutorial.title, 'TUTORIALS_IMPORT', {title: tutorial.title});
-		if (nameProject !== null) {					
+		if (nameProject !== null) {		
+			this.progress.started = true;			
 			let createProject = await studio.projects.createEmptyProject(nameProject, tutorial.language);
 			if (createProject) {
 				let dirInfos = {};
@@ -89,7 +90,7 @@ let githubdownloader = {
 			{
 				studio.workspace.showNotification ('TUTORIALS_PROJECT_EXISTS', {name: nameProject});
 			}
-			this.downloading = false;
+			this.progress.started = false;
 		}
 
 		this.downloading = false;

@@ -10,7 +10,7 @@
 				<v-progress-circular indeterminate></v-progress-circular>
 			</div>
 			<div v-else>
-				<div v-if="downloading">
+				<div v-if="progress.started">
 					<v-row align="center" justify="center">
 							Downloading ...
 
@@ -62,7 +62,7 @@ export default {
 	{
 		return  {
 			downloading: false,
-			progress: {}
+			progress: {started: false}
 		};
 	},
 	methods: {	
@@ -100,6 +100,8 @@ export default {
 				this.progress = this.studio.githubdownloader.progress;
 				this.downloading = this.studio.githubdownloader.downloading;
 
+				console.log(this.progress.started);
+
 				if(this.downloading == false) {
 					clearInterval(downloadingClock);
 					if(project.project != null) {
@@ -107,7 +109,7 @@ export default {
 						this.studio.projects.selectCurrentProject(project.project, true);
 					}
 				}
-			}, 100);
+			}, 10);
 		}
 	}
 };
