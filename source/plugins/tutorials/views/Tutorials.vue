@@ -54,7 +54,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
 	name: 'Tutorials',
 	props: ['repository', 'tutorials'],
@@ -89,7 +88,7 @@ export default {
 		available (languageId) {
 			return this.studio.projects.getLanguage (languageId) != null;
 		},
-		async createProject(tutorial) {
+		createProject(tutorial) {
 			let project = {project: null};
 
 			this.studio.githubdownloader.createProject(this.repository, tutorial, project);
