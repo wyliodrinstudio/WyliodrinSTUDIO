@@ -57,34 +57,13 @@
 import axios from 'axios';
 export default {
 	name: 'Tutorials',
-	props: ['repository'],
+	props: ['repository', 'tutorials'],
 	data ()
 	{
 		return  {
-			tutorials: null,	
 			downloading: false,
 			progress: {}
 		};
-	},
-	async created () {
-		let response = await axios.get(`https://api.github.com/repos/${this.repository}/contents`);
-		
-		let dirs =[];
-		let tutorials = [];
-		for (let list of response.data) {
-			if (list.type === 'dir') {
-				dirs.push(list.path);
-			}
-		}
-		
-		for (let dir of dirs) {
-			let tutorialData = await axios.get (`https://raw.githubusercontent.com/${this.repository}/main/${dir}/.project/tutorial.json`);
-			let tutorial = tutorialData.data;
-			tutorials.push(tutorial);
-			tutorial['path'] = dir;
-		}	
-		
-		this.tutorials = tutorials;
 	},
 	methods: {	
 		close ()
@@ -111,67 +90,24 @@ export default {
 			return this.studio.projects.getLanguage (languageId) != null;
 		},
 		async createProject(tutorial) {
-			let nameProject = await this.studio.workspace.showPrompt('TUTORIALS_IMPORT', 'TUTORIALS_IMPORT_PROJECT_NAME', tutorial.title, 'TUTORIALS_IMPORT', {title: tutorial.title});
-			if (nameProject !== null) 
-			{				
-				this.downloading = true;	
-				let createProject = await this.studio.projects.createEmptyProject(nameProject, tutorial.language);
-				if (createProject) {
-					let dirInfos = {};
-					await this.getDirListOfFiles(tutorial.path, dirInfos);
-					let numberOfFiles = 0;
-					for (let key in dirInfos) {
-						numberOfFiles += dirInfos[key].length;
+			let project = {project: null};
+
+			this.studio.githubdownloader.createProject(this.repository, tutorial, project);
+			this.downloading = true;
+
+
+			let downloadingClock = setInterval(() => {
+				this.progress = this.studio.githubdownloader.progress;
+				this.downloading = this.studio.githubdownloader.downloading;
+
+				if(this.downloading == false) {
+					clearInterval(downloadingClock);
+					if(project.project != null) {
+						this.close();
+						this.studio.projects.selectCurrentProject(project.project, true);
 					}
-					let downloadedFiles = 0;
-									
-					for (let key in dirInfos) {
-						let folderPath = key.replace(tutorial.path, '');
-						if (folderPath !== '') {
-							
-							await this.studio.projects.newFolder(createProject, folderPath);
-						}
-						for (let file of dirInfos[key]) {
-						
-							let filePath = file.replace(tutorial.path, '');
-							let fileData = await this.downloadFile(file);
-							
-							await this.studio.projects.newFile(createProject, filePath, Buffer.from (fileData));
-							downloadedFiles++;
-							this.progress.value = (downloadedFiles/numberOfFiles)*100;
-							this.progress.text = this.progress.value.toFixed(2)+'%';
-						}
-						
-					}	 
-					this.close ();
-					this.studio.projects.selectCurrentProject (createProject, true);
 				}
-				else
-				{
-					this.studio.workspace.showNotification ('TUTORIALS_PROJECT_EXISTS', {name: nameProject});
-				}
-				this.downloading = false;
-			}	
-		},
-		async getDirListOfFiles (path, dirInfos) {
-			
-			let response = await axios.get (`https://api.github.com/repos/${this.repository}/contents/${path}`);
-			
-			for(let item of response.data) {
-				if (item.type === 'file') {
-					if (dirInfos[path] === undefined) {
-						dirInfos[path] = [];
-					}
-					dirInfos[path].push(item.path);
-				}
-				else if (item.type === 'dir') {
-					await this.getDirListOfFiles(item.path, dirInfos);
-				}
-			}	
-		},
-		async downloadFile (path) {
-			let file = await axios.get (`https://raw.githubusercontent.com/${this.repository}/main/${path}`, {responseType: 'arraybuffer',});
-			return file.data;
+			}, 100);
 		}
 	}
 };

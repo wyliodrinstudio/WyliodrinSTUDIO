@@ -12,9 +12,11 @@ export function setup(options, imports, register)
 		 * 
 		 * @param {String} githubRepository - username/repository
 		 */
-		showTutorials (githubRepository) {
+		async showTutorials (githubRepository) {
+			let tutorialsList = await studio.githubdownloader.getTutorials(githubRepository);
 			studio.workspace.showDialog (Tutorials, {
 				repository: githubRepository,
+				tutorials: tutorialsList,
 				width: 600
 			});
 		}
