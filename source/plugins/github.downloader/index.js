@@ -47,7 +47,6 @@ let githubdownloader = {
 		}	
 	},
 	async downloadFile (repository, path) {
-		console.log(repository + " " + path);
 		let file = await axios.get (`https://raw.githubusercontent.com/${repository}/main/${path}`, {responseType: 'arraybuffer',});
 		return file.data;
 	},

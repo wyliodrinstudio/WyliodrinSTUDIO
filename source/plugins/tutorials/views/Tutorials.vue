@@ -100,8 +100,6 @@ export default {
 				this.progress = this.studio.githubdownloader.progress;
 				this.downloading = this.studio.githubdownloader.downloading;
 
-				console.log(this.progress.started);
-
 				if(this.downloading == false) {
 					clearInterval(downloadingClock);
 					if(project.project != null) {
