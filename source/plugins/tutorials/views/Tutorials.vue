@@ -91,13 +91,13 @@ export default {
 		createProject(tutorial) {
 			let project = {project: null};
 
-			this.studio.githubdownloader.createProject(this.repository, tutorial, project);
+			this.studio.downloader.createProject(this.repository, tutorial, project);
 			this.downloading = true;
 
 
 			let downloadingClock = setInterval(() => {
-				this.progress = this.studio.githubdownloader.progress;
-				this.downloading = this.studio.githubdownloader.downloading;
+				this.progress = this.studio.downloader.progress;
+				this.downloading = this.studio.downloader.downloading;
 
 				if(this.downloading == false) {
 					clearInterval(downloadingClock);

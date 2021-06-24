@@ -1,11 +1,11 @@
 {
-    "name": "github.downloader",
+    "name": "downloader",
     "version": "0.0.1",
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace", "projects"],
-        "provides": ["githubdownloader"],
+        "consumes": ["workspace", "projects", "settings"],
+        "provides": ["downloader"],
         "target": ["electron", "browser"]
     }
 }
