@@ -1,3 +1,9 @@
+## Wyliodrin STUDIO 2.3.2
+  * **fixed** default project not found
+  * **fixed** project error messages
+  * **fixed** Raspberry Pi Simulator LCD example
+  * **deleted** deprecated dashboard widgets
+
 ## Wyliodrin STUDIO 2.3.1
   * **fixed** emulator download
   * **fixed** Windows installer
