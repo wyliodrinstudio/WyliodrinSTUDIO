@@ -55,7 +55,7 @@ let gitlab = {
 		return fileHierarchy;
 	},
 	async downloadFile (filePath, owner, repo, ref, responseType = 'json') {
-		filePath = filePath.replace(/\//g, "%2F");
+		filePath = filePath.replace(/\//g, '%2F');
 
 		let gitURL = `https://gitlab.com/api/v4/projects/${owner}%2F${repo}/repository/files/${filePath}?ref=${ref}`;
 		if(this.token) {
