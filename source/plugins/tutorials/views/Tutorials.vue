@@ -127,8 +127,6 @@ export default {
 						
 							let filePath = file.replace(tutorial.path, '');
 							let fileData = await this.downloadFile(file);
-							
-							console.log(fileData);
 
 							await this.studio.projects.newFile(createProject, filePath, Buffer.from (fileData));
 							downloadedFiles++;
