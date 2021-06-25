@@ -5,6 +5,7 @@ let studio = null;
 export function setup(options, imports, register) 
 {
 	studio = imports;
+	let platformData = 'github';
 
 	let tutorials = {
 		/**
@@ -18,6 +19,7 @@ export function setup(options, imports, register)
 			studio.workspace.showDialog (Tutorials, {
 				owner: owner,
 				repository: repository,
+				platformData: platformData,
 				width: 600
 			});
 		}
