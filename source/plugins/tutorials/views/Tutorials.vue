@@ -56,7 +56,7 @@
 <script>
 export default {
 	name: 'Tutorials',
-	props: ['repository', 'owner', 'platformData'],
+	props: ['repository', 'owner', 'platformData', 'token'],
 	data ()
 	{
 		return  {
@@ -69,6 +69,9 @@ export default {
 	async created () {
 		if(this.platformData == 'github') this.platform = this.studio.github;
 		else this.platform = this.studio.gitlab;
+
+		if(this.token)
+			this.platform.authenticate(this.token);
 
 		let response = await this.platform.getContentOfDir('', this.owner, this.repository, 'main');
 		

@@ -6,6 +6,7 @@ export function setup(options, imports, register)
 {
 	studio = imports;
 	let platformData = 'github';
+	let token = null;
 
 	let tutorials = {
 		/**
@@ -20,6 +21,7 @@ export function setup(options, imports, register)
 				owner: owner,
 				repository: repository,
 				platformData: platformData,
+				token: token,
 				width: 600
 			});
 		}
