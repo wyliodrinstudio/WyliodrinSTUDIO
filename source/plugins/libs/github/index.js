@@ -20,6 +20,24 @@ let github = {
 			}
 		}
 	},
+	async getContentOfDir(path, owner, repo, ref) {
+		let gitURL = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+		if (ref) {
+			gitURL += `?ref=${ref}`;
+		}
+		let response = await Axios.get(gitURL);
+
+		let contents = {dirs: [], files: []};
+
+		for(let item of response.data) {
+			if(item.type === 'dir')
+				contents.dirs.push(item.path);
+			else if(item.type === 'file')
+				contents.files.push(item.path);
+		}
+
+		return contents;
+	},
 	async getRepoFileHierarchy (root, owner, repo, ref = undefined) {
 		let fileHierarchy = {};
 	
@@ -27,8 +45,8 @@ let github = {
 	
 		return fileHierarchy;
 	},
-	async downloadFile (filePath, owner, repo, ref) {
-		let response = await Axios.get(`https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${filePath}`);
+	async downloadFile (filePath, owner, repo, ref, responseType = 'json') {
+		let response = await Axios.get(`https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${filePath}`,  {responseType: responseType,});
 		return response.data;
 	}
 };

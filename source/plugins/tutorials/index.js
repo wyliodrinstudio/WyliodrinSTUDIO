@@ -8,15 +8,16 @@ export function setup(options, imports, register)
 
 	let tutorials = {
 		/**
-		 * Show a list for tutorials from a github repository
+		 * Show a list for tutorials from a repository
 		 * 
-		 * @param {String} githubRepository - username/repository
+		 * @param {String} repository - username/repository
 		 */
-		async showTutorials (repository) {
-			let tutorialsList = await studio.downloader.getTutorials(repository);
+		showTutorials (repository) {
+			let owner = repository.split('/')[0];
+			repository = repository.split('/')[1];
 			studio.workspace.showDialog (Tutorials, {
+				owner: owner,
 				repository: repository,
-				tutorials: tutorialsList,
 				width: 600
 			});
 		}

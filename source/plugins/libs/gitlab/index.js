@@ -20,6 +20,24 @@ let gitlab = {
 			}
 		}
 	},
+	async getContentOfDir(path, owner, repo, ref) {
+		let gitURL = `https://gitlab.com/api/v4/projects/${owner}%2F${repo}/repository/tree?path=${path}`;
+		if (ref) {
+			gitURL += `&ref=${ref}`;
+		}
+		let response = await Axios.get(gitURL);
+
+		let contents = {dirs: [], files: []};
+
+		for(let item of response.data) {
+			if(item.type === 'tree')
+				contents.dirs.push(item.path);
+			else if(item.type === 'blob')
+				contents.files.push(item.path);
+		}
+
+		return contents;
+	},
 	async getRepoFileHierarchy (root, owner, repo, ref = undefined) {
 		let fileHierarchy = {};
 	
@@ -27,8 +45,8 @@ let gitlab = {
 	
 		return fileHierarchy;
 	},
-	async downloadFile (filePath, owner, repo, ref) {
-		let response = await Axios.get(`https://gitlab.com/${owner}/${repo}/-/raw/${ref}/${filePath}`);
+	async downloadFile (filePath, owner, repo, ref, responseType = 'json') {
+		let response = await Axios.get(`https://gitlab.com/${owner}/${repo}/-/raw/${ref}/${filePath}`,  {responseType: responseType,});
 		return response.data;
 	}
 };

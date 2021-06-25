@@ -10,7 +10,7 @@
 				<v-progress-circular indeterminate></v-progress-circular>
 			</div>
 			<div v-else>
-				<div v-if="progress.started">
+				<div v-if="downloading">
 					<v-row align="center" justify="center">
 							Downloading ...
 
@@ -56,13 +56,27 @@
 <script>
 export default {
 	name: 'Tutorials',
-	props: ['repository', 'tutorials'],
+	props: ['repository', 'owner'],
 	data ()
 	{
 		return  {
+			tutorials: null,	
 			downloading: false,
-			progress: {started: false}
+			progress: {}
 		};
+	},
+	async created () {
+		let response = await this.studio.downloader.getContentOfDir('', this.owner, this.repository, 'main');
+		
+		let tutorials = [];
+		for (let dir of response.dirs) {
+			let tutorial = await this.studio.downloader.downloadFile(`${dir}/.project/tutorial.json`, this.owner, this.repository, 'main');
+
+			tutorials.push(tutorial);
+			tutorial['path'] = dir;
+		}	
+		
+		this.tutorials = tutorials;
 	},
 	methods: {	
 		close ()
@@ -88,25 +102,56 @@ export default {
 		available (languageId) {
 			return this.studio.projects.getLanguage (languageId) != null;
 		},
-		createProject(tutorial) {
-			let project = {project: null};
-
-			this.studio.downloader.createProject(this.repository, tutorial, project);
-			this.downloading = true;
-
-
-			let downloadingClock = setInterval(() => {
-				this.progress = this.studio.downloader.progress;
-				this.downloading = this.studio.downloader.downloading;
-
-				if(this.downloading == false) {
-					clearInterval(downloadingClock);
-					if(project.project != null) {
-						this.close();
-						this.studio.projects.selectCurrentProject(project.project, true);
+		async createProject(tutorial) {
+			let nameProject = await this.studio.workspace.showPrompt('TUTORIALS_IMPORT', 'TUTORIALS_IMPORT_PROJECT_NAME', tutorial.title, 'TUTORIALS_IMPORT', {title: tutorial.title});
+			if (nameProject !== null) 
+			{				
+				this.downloading = true;	
+				let createProject = await this.studio.projects.createEmptyProject(nameProject, tutorial.language);
+				if (createProject) {
+					let dirInfos = {};
+					await this.getDirListOfFiles(tutorial.path, dirInfos);
+					let numberOfFiles = 0;
+					for (let key in dirInfos) {
+						numberOfFiles += dirInfos[key].length;
 					}
+					let downloadedFiles = 0;
+									
+					for (let key in dirInfos) {
+						let folderPath = key.replace(tutorial.path, '');
+						if (folderPath !== '') {
+							
+							await this.studio.projects.newFolder(createProject, folderPath);
+						}
+						for (let file of dirInfos[key]) {
+						
+							let filePath = file.replace(tutorial.path, '');
+							let fileData = await this.downloadFile(file);
+							
+							console.log(fileData);
+
+							await this.studio.projects.newFile(createProject, filePath, Buffer.from (fileData));
+							downloadedFiles++;
+							this.progress.value = (downloadedFiles/numberOfFiles)*100;
+							this.progress.text = this.progress.value.toFixed(2)+'%';
+						}
+						
+					}	 
+					this.close ();
+					this.studio.projects.selectCurrentProject (createProject, true);
 				}
-			}, 10);
+				else
+				{
+					this.studio.workspace.showNotification ('TUTORIALS_PROJECT_EXISTS', {name: nameProject});
+				}
+				this.downloading = false;
+			}	
+		},
+		async getDirListOfFiles (path, dirInfos) {	
+			await this.studio.downloader.getDirListOfFiles(path, dirInfos, this.owner, this.repository, 'main');
+		},
+		async downloadFile (path) {
+			return await this.studio.downloader.downloadFile(path, this.owner, this.repository, 'main', 'arraybuffer');
 		}
 	}
 };
