@@ -5,16 +5,21 @@ let studio = null;
 export function setup(options, imports, register) 
 {
 	studio = imports;
+	let platformData = 'github';
 
 	let tutorials = {
 		/**
-		 * Show a list for tutorials from a github repository
+		 * Show a list for tutorials from a repository
 		 * 
-		 * @param {String} githubRepository - username/repository
+		 * @param {String} repository - username/repository
 		 */
-		showTutorials (githubRepository) {
+		showTutorials (repository) {
+			let owner = repository.split('/')[0];
+			repository = repository.split('/')[1];
 			studio.workspace.showDialog (Tutorials, {
-				repository: githubRepository,
+				owner: owner,
+				repository: repository,
+				platformData: platformData,
 				width: 600
 			});
 		}

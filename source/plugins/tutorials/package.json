@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"private": false,
 	"plugin": {
-		"consumes": ["workspace", "projects"],
+		"consumes": ["workspace", "projects", "github", "gitlab"],
 		"provides": ["tutorials"],
 		"target": ["browser", "electron"]
 	}

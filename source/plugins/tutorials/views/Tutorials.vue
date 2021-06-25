@@ -54,32 +54,28 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
 	name: 'Tutorials',
-	props: ['repository'],
+	props: ['repository', 'owner', 'platformData'],
 	data ()
 	{
 		return  {
 			tutorials: null,	
 			downloading: false,
+			platform: null,
 			progress: {}
 		};
 	},
 	async created () {
-		let response = await axios.get(`https://api.github.com/repos/${this.repository}/contents`);
+		if(this.platformData == 'github') this.platform = this.studio.github;
+		else this.platform = this.studio.gitlab;
+
+		let response = await this.platform.getContentOfDir('', this.owner, this.repository, 'main');
 		
-		let dirs =[];
 		let tutorials = [];
-		for (let list of response.data) {
-			if (list.type === 'dir') {
-				dirs.push(list.path);
-			}
-		}
-		
-		for (let dir of dirs) {
-			let tutorialData = await axios.get (`https://raw.githubusercontent.com/${this.repository}/main/${dir}/.project/tutorial.json`);
-			let tutorial = tutorialData.data;
+		for (let dir of response.dirs) {
+			let tutorial = await this.platform.downloadFile(`${dir}/.project/tutorial.json`, this.owner, this.repository, 'main');
+
 			tutorials.push(tutorial);
 			tutorial['path'] = dir;
 		}	
@@ -118,7 +114,7 @@ export default {
 				let createProject = await this.studio.projects.createEmptyProject(nameProject, tutorial.language);
 				if (createProject) {
 					let dirInfos = {};
-					await this.getDirListOfFiles(tutorial.path, dirInfos);
+					await this.platform.getDirListOfFiles(tutorial.path, dirInfos, this.owner, this.repository, 'main');
 					let numberOfFiles = 0;
 					for (let key in dirInfos) {
 						numberOfFiles += dirInfos[key].length;
@@ -134,8 +130,8 @@ export default {
 						for (let file of dirInfos[key]) {
 						
 							let filePath = file.replace(tutorial.path, '');
-							let fileData = await this.downloadFile(file);
-							
+							let fileData = await this.platform.downloadFile(file, this.owner, this.repository, 'main', 'arraybuffer');
+
 							await this.studio.projects.newFile(createProject, filePath, Buffer.from (fileData));
 							downloadedFiles++;
 							this.progress.value = (downloadedFiles/numberOfFiles)*100;
@@ -152,26 +148,6 @@ export default {
 				}
 				this.downloading = false;
 			}	
-		},
-		async getDirListOfFiles (path, dirInfos) {
-			
-			let response = await axios.get (`https://api.github.com/repos/${this.repository}/contents/${path}`);
-			
-			for(let item of response.data) {
-				if (item.type === 'file') {
-					if (dirInfos[path] === undefined) {
-						dirInfos[path] = [];
-					}
-					dirInfos[path].push(item.path);
-				}
-				else if (item.type === 'dir') {
-					await this.getDirListOfFiles(item.path, dirInfos);
-				}
-			}	
-		},
-		async downloadFile (path) {
-			let file = await axios.get (`https://raw.githubusercontent.com/${this.repository}/main/${path}`, {responseType: 'arraybuffer',});
-			return file.data;
 		}
 	}
 };
