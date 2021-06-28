@@ -50,10 +50,10 @@ let github = {
 		return response.data;
 	},
 	authenticate(token) {
-		return null;
+		return token;
 	},
 	changeURL(newURL) {
-		return null;
+		return newURL;
 	}
 };
 
