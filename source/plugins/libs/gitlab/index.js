@@ -2,8 +2,9 @@ import Axios from 'axios';
 
 let gitlab = {
 	token: null,
+	urlAPI: 'https://gitlab.com',
 	async getDirListOfFiles (path, fileHierarchy, owner, repo, ref) {
-		let gitURL = `https://gitlab.com/api/v4/projects/${owner}%2F${repo}/repository/tree?path=${path}`;
+		let gitURL = `${this.urlAPI}/api/v4/projects/${owner}%2F${repo}/repository/tree?path=${path}`;
 		if (ref) {
 			gitURL += `&ref=${ref}`;
 		}
@@ -26,7 +27,7 @@ let gitlab = {
 		}
 	},
 	async getContentOfDir(path, owner, repo, ref) {
-		let gitURL = `https://gitlab.com/api/v4/projects/${owner}%2F${repo}/repository/tree?path=${path}`;
+		let gitURL = `${this.urlAPI}/api/v4/projects/${owner}%2F${repo}/repository/tree?path=${path}`;
 		if (ref) {
 			gitURL += `&ref=${ref}`;
 		}
@@ -57,12 +58,12 @@ let gitlab = {
 	async downloadFile (filePath, owner, repo, ref, responseType = 'json') {
 		filePath = filePath.replace(/\//g, '%2F');
 
-		let gitURL = `https://gitlab.com/api/v4/projects/${owner}%2F${repo}/repository/files/${filePath}?ref=${ref}`;
+		let gitURL = `${this.urlAPI}/api/v4/projects/${owner}%2F${repo}/repository/files/${filePath}?ref=${ref}`;
 		if(this.token) {
 			gitURL += `&private_token=${this.token}`;
 		}
 		let response = await Axios.get(gitURL);	
-		
+
 		response = Buffer.from(response.data.content, response.data.encoding);
 
 		if(responseType == 'json')
@@ -71,6 +72,12 @@ let gitlab = {
 	},
 	authenticate(token) {
 		this.token = token;
+	},
+	changeURL(newURL) {
+		if(newURL.endsWith('/'))
+			newURL = newURL.slice(0, -1);
+
+		this.urlAPI = newURL;
 	}
 };
 

@@ -5,8 +5,12 @@ let studio = null;
 export function setup(options, imports, register) 
 {
 	studio = imports;
-	let platformData = 'github';
-	let token = null;
+	let platformData = {
+		platform: 'github',
+		branch: 'main',
+		token: null,
+		gitlabURL: null
+	};
 
 	let tutorials = {
 		/**
@@ -14,14 +18,13 @@ export function setup(options, imports, register)
 		 * 
 		 * @param {String} repository - username/repository
 		 */
-		showTutorials (repository) {
+		showTutorials (repository) {		
 			let owner = repository.split('/')[0];
 			repository = repository.split('/')[1];
 			studio.workspace.showDialog (Tutorials, {
 				owner: owner,
 				repository: repository,
 				platformData: platformData,
-				token: token,
 				width: 600
 			});
 		}
