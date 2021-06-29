@@ -122,6 +122,7 @@ Contributions
 - [Alexandru Vochescu](https://www.github.com/valexandru) - Examples
 - [Luis Miguel Capacho Valbuena](https://github.com/lmcapacho) - Translations, WyApp Serial
 - [Roberta-Alexandra Craciun](https://github.com/CraciunRAlexandra) - Tutorials
+- [Serban Andrei](https://github.com/hateofhades) - GitLab Download
 
 Wyliodrin is a trademark of Wyliodrin SRL. All rights reserved.
 
