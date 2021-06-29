@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 
 let gitlab = {
 	token: null,
@@ -12,7 +12,7 @@ let gitlab = {
 			gitURL += `&private_token=${this.token}`;
 		}
 
-		let response = await Axios.get(gitURL);
+		let response = await axios.get(gitURL);
 
 		for(let item of response.data) {
 			if (item.type === 'blob') {
@@ -35,7 +35,7 @@ let gitlab = {
 			gitURL += `&private_token=${this.token}`;
 		}
 		
-		let response = await Axios.get(gitURL);
+		let response = await axios.get(gitURL);
 
 		let contents = {dirs: [], files: []};
 
@@ -62,7 +62,7 @@ let gitlab = {
 		if(this.token) {
 			gitURL += `&private_token=${this.token}`;
 		}
-		let response = await Axios.get(gitURL);	
+		let response = await axios.get(gitURL);	
 
 		response = Buffer.from(response.data.content, response.data.encoding);
 
