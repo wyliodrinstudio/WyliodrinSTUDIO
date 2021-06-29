@@ -48,6 +48,12 @@ let github = {
 	async downloadFile (filePath, owner, repo, ref, responseType = 'json') {
 		let response = await Axios.get(`https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${filePath}`,  {responseType: responseType,});
 		return response.data;
+	},
+	authenticate(token) {
+		return token;
+	},
+	changeURL(newURL) {
+		return newURL;
 	}
 };
 
