@@ -1,12 +1,18 @@
-import Axios from 'axios';
+import axios from 'axios';
 
 let gitlab = {
+	token: null,
+	urlAPI: 'https://gitlab.com',
 	async getDirListOfFiles (path, fileHierarchy, owner, repo, ref) {
-		let gitURL = `https://gitlab.com/api/v4/projects/${owner}%2F${repo}/repository/tree?path=${path}`;
+		let gitURL = `${this.urlAPI}/api/v4/projects/${owner}%2F${repo}/repository/tree?path=${path}`;
 		if (ref) {
 			gitURL += `&ref=${ref}`;
 		}
-		let response = await Axios.get(gitURL);
+		if(this.token) {
+			gitURL += `&private_token=${this.token}`;
+		}
+
+		let response = await axios.get(gitURL);
 
 		for(let item of response.data) {
 			if (item.type === 'blob') {
@@ -21,11 +27,15 @@ let gitlab = {
 		}
 	},
 	async getContentOfDir(path, owner, repo, ref) {
-		let gitURL = `https://gitlab.com/api/v4/projects/${owner}%2F${repo}/repository/tree?path=${path}`;
+		let gitURL = `${this.urlAPI}/api/v4/projects/${owner}%2F${repo}/repository/tree?path=${path}`;
 		if (ref) {
 			gitURL += `&ref=${ref}`;
 		}
-		let response = await Axios.get(gitURL);
+		if(this.token) {
+			gitURL += `&private_token=${this.token}`;
+		}
+		
+		let response = await axios.get(gitURL);
 
 		let contents = {dirs: [], files: []};
 
@@ -46,8 +56,28 @@ let gitlab = {
 		return fileHierarchy;
 	},
 	async downloadFile (filePath, owner, repo, ref, responseType = 'json') {
-		let response = await Axios.get(`https://gitlab.com/${owner}/${repo}/-/raw/${ref}/${filePath}`,  {responseType: responseType,});
-		return response.data;
+		filePath = filePath.replace(/\//g, '%2F');
+
+		let gitURL = `${this.urlAPI}/api/v4/projects/${owner}%2F${repo}/repository/files/${filePath}?ref=${ref}`;
+		if(this.token) {
+			gitURL += `&private_token=${this.token}`;
+		}
+		let response = await axios.get(gitURL);	
+
+		response = Buffer.from(response.data.content, response.data.encoding);
+
+		if(responseType == 'json')
+			return JSON.parse(response.toString());
+		else return response.toString();
+	},
+	authenticate(token) {
+		this.token = token;
+	},
+	changeURL(newURL) {
+		if(newURL.endsWith('/'))
+			newURL = newURL.slice(0, -1);
+
+		this.urlAPI = newURL;
 	}
 };
 
