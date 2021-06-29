@@ -27,6 +27,7 @@
 				<p><strong>Andrei Deatcu</strong> - Resistor Color Code, Schematics</p>
 				<p><strong>Roberta-Alexandra Craciun</strong> - Tutorials</p>
 				<p><strong>Alexandra-Gabriela State</strong> - Tutorials</p>
+				<p><strong>Serban Andrei</strong> - GitLab Download</p>
 
 				<br>
 			
