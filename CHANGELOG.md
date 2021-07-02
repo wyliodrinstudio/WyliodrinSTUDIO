@@ -1,3 +1,7 @@
+## Wyliodrin STUDIO 2.3.3
+ * **added** new dialogs for connecting to MicroPython
+ * **added** GitLab downloader
+
 ## Wyliodrin STUDIO 2.3.2
   * **fixed** default project not found
   * **fixed** project error messages

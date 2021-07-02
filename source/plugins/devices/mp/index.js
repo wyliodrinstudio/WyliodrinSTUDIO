@@ -1,8 +1,10 @@
 import MicroPythonConnectionDialog from './views/MicroPythonConnectionDialog.vue';
-import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
+import EdgeOrChrome from './views/EdgeOrChrome.vue';
+import UpgradeToHttps from './views/UpgradeToHttps.vue';
 import MPFileManager from './views/MPFileManager.vue';
 import {MicroPython, STATUS_RUNNING, STATUS_STOPPED} from './mpy.js';
 import _ from 'lodash';
+import axios from 'axios';
 
 let studio = null;
 let workspace = null;
@@ -328,10 +330,20 @@ export function setup (options, imports, register)
 			}
 			else
 			{
-				await studio.workspace.showDialog (ChromeFlagSetup, {
-					device: device,
-					width: '650px'
-				});
+				let response = await axios.get('/api/v1/userAgent');
+				if(response.data.chrome == false) {
+					await studio.workspace.showDialog (EdgeOrChrome, {
+						width: '500px'
+					});
+				} else if(response.data.https == false) {
+					await studio.workspace.showDialog (UpgradeToHttps, {
+						width: '500px'
+					});
+				} else {
+					await studio.workspace.showDialog (EdgeOrChrome, {
+						width: '500px'
+					});
+				}
 			}
 
 			setTimeout(() => {
