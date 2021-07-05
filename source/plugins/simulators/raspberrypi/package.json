@@ -4,8 +4,8 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace","console","projects"],
-		"provides": ["device_simulator_raspberrypi"],
+        "consumes": ["workspace","console","projects","shell","filesystem","events"],
+		"provides": ["device_simulator_raspberrypi", "unicorn_micropython"],
         "disabled": false,
         "target": ["electron", "browser"]
     }

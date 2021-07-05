@@ -1,3 +1,6 @@
+import { emulator } from './unicorn/mp_unicorn.js';
+import unicorn from './unicorn/unicorn-arm.min.js';
+
 let studio = null;
 let simulator = {
 	connected: false,
@@ -15,18 +18,45 @@ import generic_raspberrypi from './libraries/utils/generic_raspberrypi.js';
 import onoff from './libraries/onoff.js';
 import lcd from './libraries/lcd.js';
 
+async function readFirmware() {
+	try {
+		let data = await studio.filesystem.loadDataFile('../simulators/raspberrypi', 'firmware/firmware_pyboard.bin');
+		return data;
+	} catch (err) {
+		studio.workspace.error(err);
+	}
+}
+
+let unicorn_micropython = {
+
+};
+
 let device_simulator_raspberrypi = {
 	/**
 	 * Simulate the connection to a real RaspberryPi
 	 * @param  {Object} device The 'device' object in the platform
 	 */
-	connect(device) {
+	async connect(device) {
 		if (simulator.connected === false) {
 			if (_.isObject(device)) {
 				process.nextTick(() => {
 					device.status = 'CONNECTED';
 					workspace.updateDevice(device);
 				});
+				let firmware = await readFirmware();
+				let mp = emulator(unicorn, firmware);
+				studio.console.show ();
+				studio.console.select ('unicorn_micropython');
+				studio.console.reset ();
+				studio.console.register ((event, id, data) => {
+					if (id ===  'unicorn_micropython' && event === 'data') {
+						mp.inject (data);
+					}
+				});
+				mp.events.on ('data', (data) => {
+					studio.console.write ('unicorn_micropython', data);
+				});
+
 				simulator.connected = true;
 
 				return device;
@@ -57,7 +87,7 @@ let device_simulator_raspberrypi = {
  * @param  {Object} imports The imported objects (plugins)
  * @param  {Object} register The exported object (plugin)
  */
-export default function setup(options, imports, register) {
+export default async function setup(options, imports, register) {
 	studio = imports;
 	workspace = studio.workspace.registerDeviceDriver('raspberrypi_simulator', device_simulator_raspberrypi);
 
@@ -192,6 +222,7 @@ export default function setup(options, imports, register) {
 	
 	// The object returned by this plugin
 	register(null, {
-		device_simulator_raspberrypi
+		device_simulator_raspberrypi,
+		unicorn_micropython: unicorn_micropython
 	});
 }
