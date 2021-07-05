@@ -4,7 +4,6 @@ import UpgradeToHttps from './views/UpgradeToHttps.vue';
 import MPFileManager from './views/MPFileManager.vue';
 import {MicroPython, STATUS_RUNNING, STATUS_STOPPED} from './mpy.js';
 import _ from 'lodash';
-import axios from 'axios';
 
 let studio = null;
 let workspace = null;
@@ -236,7 +235,20 @@ export function setup (options, imports, register)
 
 		async connect(device/*, options*/)
 		{
-			if(serialport.isAvailable ())
+			let chrome = !!window.chrome;
+			let https = (location.protocol === 'https:');
+
+			if(chrome == false) 
+			{
+				await studio.workspace.showDialog (EdgeOrChrome, {
+					width: '500px'
+				});
+			} else if(https == false) 
+			{
+				await studio.workspace.showDialog (UpgradeToHttps, {
+					width: '500px'
+				});
+			} else if(serialport.isAvailable ())
 			{
 				if(_.isObject(device))
 				{
@@ -329,21 +341,10 @@ export function setup (options, imports, register)
 				}
 			}
 			else
-			{
-				let response = await axios.get('/api/v1/userAgent');
-				if(response.data.chrome == false) {
-					await studio.workspace.showDialog (EdgeOrChrome, {
-						width: '500px'
-					});
-				} else if(response.data.https == false) {
-					await studio.workspace.showDialog (UpgradeToHttps, {
-						width: '500px'
-					});
-				} else {
-					await studio.workspace.showDialog (EdgeOrChrome, {
-						width: '500px'
-					});
-				}
+			{				
+				await studio.workspace.showDialog (EdgeOrChrome, {
+					width: '500px'
+				});
 			}
 
 			setTimeout(() => {

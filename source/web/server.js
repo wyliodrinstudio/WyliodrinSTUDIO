@@ -25,14 +25,6 @@ api.get ('/version', (req, res) => {
 	});
 });
 
-api.get('/userAgent', (req, res) => {
-	res.send ({
-		chrome: req.headers['user-agent'].includes('Chrome/'),
-		edge: req.headers['user-agent'].includes('Edg/'),
-		https: req.protocol == 'https'
-	})
-});
-
 var server = http.createServer(app);
 
 if (process.env.OT_EXPERIMENTAL_TOKEN)
