@@ -3,8 +3,12 @@
 		<v-card-title>
 			<span class="headline">{{$t('FLASH_SELECT_BOARD')}}</span>
 		</v-card-title>
-		<v-card-text justify="center">
-			<v-btn text @click="espDialog">ESP BOARDS</v-btn>
+		<v-card-text>
+			<div>
+				<v-row align="center" justify="center">
+					<v-btn text @click="espDialog">ESP8266</v-btn>
+				</v-row>
+			</div>
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer/>
