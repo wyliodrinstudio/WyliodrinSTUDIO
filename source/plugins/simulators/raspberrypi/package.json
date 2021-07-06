@@ -5,7 +5,7 @@
     "private": true,
     "plugin": {
         "consumes": ["workspace","console","projects","shell","filesystem","events"],
-		"provides": ["device_simulator_raspberrypi", "unicorn_micropython"],
+		"provides": ["device_simulator_raspberrypi"],
         "disabled": false,
         "target": ["electron", "browser"]
     }

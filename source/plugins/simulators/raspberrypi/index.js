@@ -20,14 +20,34 @@ import lcd from './libraries/lcd.js';
 
 async function readFirmware() {
 	try {
-		let data = await studio.filesystem.loadDataFile('../simulators/raspberrypi', 'firmware/firmware_pyboard.bin');
+		let data = await studio.filesystem.loadDataFile('simulators/raspberrypi', 'firmware/firmware_pyboard.bin');
 		return data;
 	} catch (err) {
 		studio.workspace.error(err);
 	}
 }
 
-let unicorn_micropython = {
+function loadMicroPythonConsole() {
+	studio.console.show ();
+	studio.console.select ('unicorn_micropython');
+	studio.console.reset ();
+}
+
+function runEditorCode(code) {
+	if (code.toString() === '') return;
+
+	loadMicroPythonConsole();
+
+	mp.inject(String.fromCharCode(3)); // CTRL-C
+	mp.inject(String.fromCharCode(1)); // CTRL-A - MicroPython raw REPL
+	mp.inject(String.fromCharCode(4)); // CTRL-D
+	// loadMicroPythonConsole();
+	mp.inject(code);
+	mp.inject(String.fromCharCode(4));
+	mp.inject(String.fromCharCode(2)); // CTRL-B - stop raw REPL
+}
+
+let mp = {
 
 };
 
@@ -38,24 +58,25 @@ let device_simulator_raspberrypi = {
 	 */
 	async connect(device) {
 		if (simulator.connected === false) {
+
+			// Initialize MicroPython console
+			let firmware = await readFirmware();
+			mp = emulator(unicorn, firmware);
+			loadMicroPythonConsole();
+			studio.console.register ((event, id, data) => {
+				if (id ===  'unicorn_micropython' && event === 'data') {
+					mp.inject (data);
+				}
+			});
+			mp.events.on ('data', (data) => {
+				studio.console.write ('unicorn_micropython', data);
+			});
+
 			if (_.isObject(device)) {
 				process.nextTick(() => {
 					device.status = 'CONNECTED';
 					workspace.updateDevice(device);
-				});
-				let firmware = await readFirmware();
-				let mp = emulator(unicorn, firmware);
-				studio.console.show ();
-				studio.console.select ('unicorn_micropython');
-				studio.console.reset ();
-				studio.console.register ((event, id, data) => {
-					if (id ===  'unicorn_micropython' && event === 'data') {
-						mp.inject (data);
-					}
-				});
-				mp.events.on ('data', (data) => {
-					studio.console.write ('unicorn_micropython', data);
-				});
+				});				
 
 				simulator.connected = true;
 
@@ -87,7 +108,7 @@ let device_simulator_raspberrypi = {
  * @param  {Object} imports The imported objects (plugins)
  * @param  {Object} register The exported object (plugin)
  */
-export default async function setup(options, imports, register) {
+export default function setup(options, imports, register) {
 	studio = imports;
 	workspace = studio.workspace.registerDeviceDriver('raspberrypi_simulator', device_simulator_raspberrypi);
 
@@ -113,9 +134,7 @@ export default async function setup(options, imports, register) {
 			let project = studio.projects.getCurrentProject();
 			if (!project) {
 				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_NOT_OPEN'));
-			} else if (project.language !== 'nodejs') {
-				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE'));
-			} else {	
+			} else if (project.language === 'nodejs') {	
 				let filePath = studio.projects.getDefaultRunFileName(project);
 				let code = await studio.projects.loadFile(project, filePath);
 
@@ -160,7 +179,7 @@ export default async function setup(options, imports, register) {
 								simulator.opperationsCounter = 0;
 							} else {
 								setTimeout(runToCompletion, 1);
-							}
+							}	
 						} else {
 							simulator.isRunning = false;
 							device.properties.isRunning = false;
@@ -169,6 +188,13 @@ export default async function setup(options, imports, register) {
 					};
 					process.nextTick(runToCompletion);
 				}
+			} else if (project.language === 'python') {
+				let filePath = studio.projects.getDefaultRunFileName(project);
+				let code = await studio.projects.loadFile(project, filePath);
+				code = code.toString();
+				runEditorCode(code);
+			} else {
+				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE'));
 			}
 		} catch(e) {
 			studio.showError ('DEVICE_SIMULATOR_RASPBERRY_PI_RUN_ERROR', {error: e.message});
@@ -222,7 +248,6 @@ export default async function setup(options, imports, register) {
 	
 	// The object returned by this plugin
 	register(null, {
-		device_simulator_raspberrypi,
-		unicorn_micropython: unicorn_micropython
+		device_simulator_raspberrypi
 	});
 }
