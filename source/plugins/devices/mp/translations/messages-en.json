@@ -82,5 +82,21 @@
     "DEVICE_MP_RESET_AFTER_CONNECT": {
         "message": "Reset after connect",
         "description": "A switch were the use can select to reset the device after connect"
+    },
+    "DEVICE_MP_BROWSER_HEADER": {
+        "message": "Browser not supported",
+        "description": "Header for switching to Chrome or Edge"
+    },
+    "DEVICE_MP_HTTPS_HEADER": {
+        "message": "Use a secure connection",
+        "description": "Header for switching to a https connection"
+    },
+    "DEVICE_MP_HTTPS_MESSAGE": {
+        "message": "Please upgrade to a secure connection to use MicroPython.",
+        "description": "Message to switch to https"
+    },
+    "DEVICE_MP_HTTPS_SWITCH_CONNECTION": {
+        "message": "Switch to secure connection",
+        "description": "Button to switch to https"
     }
 }
