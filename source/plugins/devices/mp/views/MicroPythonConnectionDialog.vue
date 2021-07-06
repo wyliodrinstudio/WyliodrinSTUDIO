@@ -22,6 +22,7 @@
 		</v-card-text>
 
 		<v-card-actions>
+			<v-btn text @click="flash">{{$t('DEVICE_MP_FLASH')}}</v-btn>
 			<v-spacer></v-spacer>
 			<v-btn text @click="connect">{{$t('DEVICE_MP_CONNECT')}}</v-btn>
 			<v-btn text @click="close">{{$t('DEVICE_MP_EXIT')}}</v-btn>
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import FlashMicropython from './FlashMicropython.vue';
 
 let defaults = {};
 
@@ -83,6 +85,13 @@ export default {
 					reset: this.reset
 				};
 			}
+		},
+		flash() {
+			this.close();
+			this.studio.workspace.showDialog (FlashMicropython, {
+					device: this.device,
+					width: '600px'
+			});
 		},
 		close ()
 		{
