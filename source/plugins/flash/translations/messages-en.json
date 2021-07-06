@@ -1,0 +1,22 @@
+{
+    "TOOLBAR_FLASH": {
+        "message": "Flash MicroPython",
+        "description": "Option in the Help Menu which opens a dialog that helps you flash micropython to specific boards"
+    },
+    "FLASH_SELECT_BOARD": {
+        "message": "Select board to flash",
+        "description": "Dialog asking the user to select the board he wishes to flash"
+    },
+    "FLASH_ESP": {
+        "message": "Flash MicroPython ESP Boards",
+        "description": "Dialog where the user can flash an ESP Board"
+    },
+    "START": {
+        "message": "START",
+        "description": "A button that starts a process"
+    },
+    "BACK": {
+        "message": "BACK",
+        "description": "A button that returns to another dialog"
+    }
+}

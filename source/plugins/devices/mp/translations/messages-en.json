@@ -98,9 +98,5 @@
     "DEVICE_MP_HTTPS_SWITCH_CONNECTION": {
         "message": "Switch to secure connection",
         "description": "Button to switch to https"
-    },
-    "DEVICE_MP_FLASH": {
-        "message": "FLASH MICROPYTHON",
-        "description": "The flash MicroPython button."
     }
 }
