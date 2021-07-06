@@ -89,8 +89,7 @@ export default {
 		flash() {
 			this.close();
 			this.studio.workspace.showDialog (FlashMicropython, {
-					device: this.device,
-					width: '600px'
+				width: '600px'
 			});
 		},
 		close ()
