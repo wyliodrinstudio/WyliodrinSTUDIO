@@ -6,7 +6,7 @@
 		<v-card-text>
 			<div>
 				<v-row align="center" justify="center">
-					<v-btn text @click="espDialog">ESP8266</v-btn>
+					<v-btn text @click="espDialog">ESP8266/ESP32</v-btn>
 				</v-row>
 			</div>
 		</v-card-text>

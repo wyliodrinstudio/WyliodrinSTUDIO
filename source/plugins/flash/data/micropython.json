@@ -4,6 +4,10 @@
     {
       "chipFamily": "ESP8266",
       "parts": [{ "path": "micropython/esp8266-v1.16.bin", "offset": 0 }]
+    },
+    {
+      "chipFamily": "ESP32",
+      "parts": [{ "path": "micropython/esp32-v1.16.bin", "offset": 4096}]
     }
   ]
 }
