@@ -67,7 +67,7 @@ export default {
 					filters: [{vendorId: 0xD28}]
 				});
 
-				await flash(device);
+				await this.flash(device);
 			} 
 			catch (error) {
 				this.progress.text = error;
