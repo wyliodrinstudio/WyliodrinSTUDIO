@@ -121,7 +121,7 @@ let filesystem_real = {
 	 */
 	loadDataFile (pluginName, filename)
 	{
-		return fs.readFile (path.join (__dirname, '..', pluginName, 'data', filename));
+		return fs.readFile (path.join (__dirname, '../..', pluginName, 'data', filename));
 	},
 	
 	/**
