@@ -6,7 +6,8 @@
 		<v-card-text>
 			<div>
 				<v-row align="center" justify="center">
-					<v-btn text @click="espDialog">ESP8266/ESP32</v-btn>
+					<v-btn text @click="showDialog('esp')">ESP8266/ESP32</v-btn>
+					<v-btn text @click="showDialog('micro')">Micro:bit</v-btn>
 				</v-row>
 			</div>
 		</v-card-text>
@@ -19,6 +20,7 @@
 
 <script>
 import FlashMicropythonESP from './FlashMicropythonESP.vue';
+import FlashMicropythonMicrobit from './FlashMicropythonMicrobit.vue';
 
 export default {
 	name: 'FlashSelectDevice',
@@ -27,12 +29,17 @@ export default {
 		{
 			this.$root.$emit ('submit');
 		},
-		espDialog ()
+		showDialog (dialog)
 		{
 			this.close();
-			this.studio.workspace.showDialog (FlashMicropythonESP, {
-				width: 500
-			});
+			if(dialog == 'esp')
+				this.studio.workspace.showDialog (FlashMicropythonESP, {
+					width: 500
+				});
+			else if(dialog == 'micro')
+				this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
+					width: 500
+				});
 		}
 	}
 };

@@ -11,6 +11,10 @@
         "message": "Flash MicroPython ESP Boards",
         "description": "Dialog where the user can flash an ESP Board"
     },
+    "FLASH_MICROBIT": {
+        "message": "Flash MicroPython Micro:bit",
+        "description": "Dialog where the user can flash a Micro:bit Board"
+    },
     "START": {
         "message": "START",
         "description": "A button that starts a process"
