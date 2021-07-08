@@ -10,6 +10,11 @@ let simulator = {
 
 let workspace = null;
 
+const supportedLibraries = [
+	'import RPi.GPIO as GPIO',
+];
+
+
 import _ from 'lodash';
 import RaspberrypiSimulator from './views/RaspberrypiSimulator.vue';
 import JSInterpreter from './JSInterpreter/interpreter.js';
@@ -27,10 +32,49 @@ async function readFirmware() {
 	}
 }
 
+// Reads custom libraries from data/python-libraries and prepends them to the code
+async function readLibraries() {
+	try {
+		// Names of python files
+		const libraries = await studio.filesystem.loadDirFiles('raspberrypi', 'python-libraries');
+
+		let code = '';
+		for (let library of libraries) {
+			// Read text from file and add them to the code
+			const libraryCode = await studio.filesystem.loadDataFile('simulators/raspberrypi', 'python-libraries/' + library);
+			code = code + libraryCode + '\n';
+		}
+		return code;
+	} catch(err) {
+		studio.workspace.error(err);
+	}
+}
+
+function cleanLoadedLibraries(code) {
+	for (let library of supportedLibraries) {
+		const regex = new RegExp(library);
+		code = code.replace(regex, '');
+	}
+
+	return code;
+}
+
+// // Returns an array with the loaded libraries
+// function getLoadedLibraries(code) {
+// 	const importedLibraries = [];
+// 	for (let library of supportedLibraries) {
+// 		if (code.search(library))
+// 			importedLibraries.push(library);
+// 	}
+
+// 	return importedLibraries;
+// }
+
+// Opens studio console with MicroPython
 function loadMicroPythonConsole() {
 	studio.console.show ();
 	studio.console.select ('unicorn_micropython');
-	studio.console.reset ();
+	studio.console.reset ();	
 }
 
 function runEditorCode(code) {
@@ -41,7 +85,6 @@ function runEditorCode(code) {
 	mp.inject(String.fromCharCode(3)); // CTRL-C
 	mp.inject(String.fromCharCode(1)); // CTRL-A - MicroPython raw REPL
 	mp.inject(String.fromCharCode(4)); // CTRL-D
-	// loadMicroPythonConsole();
 	mp.inject(code);
 	mp.inject(String.fromCharCode(4));
 	mp.inject(String.fromCharCode(2)); // CTRL-B - stop raw REPL
@@ -51,6 +94,8 @@ let mp = {
 
 };
 
+let librariesCode = '';
+
 let device_simulator_raspberrypi = {
 	/**
 	 * Simulate the connection to a real RaspberryPi
@@ -58,7 +103,7 @@ let device_simulator_raspberrypi = {
 	 */
 	async connect(device) {
 		if (simulator.connected === false) {
-
+			librariesCode = await readLibraries();
 			// Initialize MicroPython console
 			let firmware = await readFirmware();
 			mp = emulator(unicorn, firmware);
@@ -189,9 +234,10 @@ export default function setup(options, imports, register) {
 					process.nextTick(runToCompletion);
 				}
 			} else if (project.language === 'python') {
-				let filePath = studio.projects.getDefaultRunFileName(project);
-				let code = await studio.projects.loadFile(project, filePath);
+				const filePath = studio.projects.getDefaultRunFileName(project);
+				let code = librariesCode + '\n\n' + await studio.projects.loadFile(project, filePath);
 				code = code.toString();
+				code = cleanLoadedLibraries(code);
 				runEditorCode(code);
 			} else {
 				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE'));
