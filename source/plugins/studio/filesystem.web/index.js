@@ -586,6 +586,25 @@ let web_filesystem = {
 	},
 
 	/**
+	 * Returns an array with file names from a given directory
+	 * @param {string} pluginName 
+	 * @param {string} dirName 
+	 * @returns {Array} File names
+	 */
+	async loadDirFiles (pluginName, dirName)
+	{
+		const dirFiles = [];
+
+		await axios.get(`/api/v1/dirfiles/${pluginName}/${dirName}`)
+			.then((response) => {
+				dirFiles.push(response);
+			}).catch((err) => {
+				console.error(err);
+			});
+		return dirFiles;
+	},
+
+	/**
 	 * Is the filesystem persistent?
 	 */
 	isPersistent ()
