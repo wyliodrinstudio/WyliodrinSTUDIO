@@ -1,5 +1,6 @@
 import MicroPythonConnectionDialog from './views/MicroPythonConnectionDialog.vue';
-import ChromeFlagSetup from './views/ChromeFlagSetup.vue';
+import EdgeOrChrome from './views/EdgeOrChrome.vue';
+import UpgradeToHttps from './views/UpgradeToHttps.vue';
 import MPFileManager from './views/MPFileManager.vue';
 import {MicroPython, STATUS_RUNNING, STATUS_STOPPED} from './mpy.js';
 import _ from 'lodash';
@@ -234,7 +235,20 @@ export function setup (options, imports, register)
 
 		async connect(device/*, options*/)
 		{
-			if(serialport.isAvailable ())
+			let chrome = !!window.chrome;
+			let https = (location.protocol === 'https:');
+
+			if(chrome == false) 
+			{
+				await studio.workspace.showDialog (EdgeOrChrome, {
+					width: '500px'
+				});
+			} else if(https == false) 
+			{
+				await studio.workspace.showDialog (UpgradeToHttps, {
+					width: '500px'
+				});
+			} else if(serialport.isAvailable ())
 			{
 				if(_.isObject(device))
 				{
@@ -327,10 +341,9 @@ export function setup (options, imports, register)
 				}
 			}
 			else
-			{
-				await studio.workspace.showDialog (ChromeFlagSetup, {
-					device: device,
-					width: '650px'
+			{				
+				await studio.workspace.showDialog (EdgeOrChrome, {
+					width: '500px'
 				});
 			}
 
