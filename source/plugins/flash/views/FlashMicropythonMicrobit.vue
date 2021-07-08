@@ -38,7 +38,7 @@ export default {
 		return  {
 			progress: {
 				value: 0,
-				text: 'Press START to begin.',
+				text: 'Please select device.',
 				color: 'teal',
 				started: false
 			},

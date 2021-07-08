@@ -19,7 +19,7 @@
 		</v-card-text>
 		<v-card-actions>
 			<esp-web-install-button manifest="plugins/flash/data/micropython.json" hide-progress erase-first>
-				<v-btn :disabled="progress.started" slot="activate" text>{{$t('START')}}</v-btn>
+				<v-btn id="install-btn" :disabled="progress.started" slot="activate" text>{{$t('START')}}</v-btn>
 			</esp-web-install-button>
 			<v-spacer/>
 			<v-btn :disabled="progress.started" text @click="close">{{$t('BACK')}}</v-btn>
@@ -38,7 +38,7 @@ export default {
 			webToolsScript: null,
 			progress: {
 				value: 0,
-				text: 'Press START to begin.',
+				text: 'Please select device.',
 				color: 'teal',
 				started: false
 			}
@@ -68,6 +68,11 @@ export default {
 				}
 			}
 		);
+
+		setTimeout( () => {
+			if(!this.progress.started)
+				document.getElementById('install-btn').click();
+		}, 200);
 	},
 	methods: {
 		close ()

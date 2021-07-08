@@ -27,6 +27,10 @@
         "message": "CANCEL",
         "description": "A button that cancels the current action"
     },
+    "SELECT": {
+        "message": "SELECT",
+        "description": "A button that submits the action"
+    },
     "FLASH_CANCEL_DIALOG": {
         "message": "Cancel Flashing",
         "description": "Dialog asking the user if he's sure he wants to cancel."
