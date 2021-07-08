@@ -22,5 +22,21 @@
     "BACK": {
         "message": "BACK",
         "description": "A button that returns to another dialog"
+    },
+    "CANCEL": {
+        "message": "CANCEL",
+        "description": "A button that cancels the current action"
+    },
+    "FLASH_CANCEL_DIALOG": {
+        "message": "Cancel Flashing",
+        "description": "Dialog asking the user if he's sure he wants to cancel."
+    },
+    "FLASH_CANCEL_TEXT_QUESTION": {
+        "message": "Are you sure you want to cancel?",
+        "description": "The question of the cancel dialog."
+    },
+    "FLASH_CANCEL_TEXT": {
+        "message": "The board will be unusable until you flash it.",
+        "description": "A warning for the user that his board will be unusable."
     }
 }

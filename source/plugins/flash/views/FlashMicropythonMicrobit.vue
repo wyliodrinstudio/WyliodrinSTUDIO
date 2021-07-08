@@ -18,6 +18,7 @@
 			</div>
 		</v-card-text>
 		<v-card-actions>
+			<v-btn :disabled='!progress.started' text @click="cancel">{{$t('CANCEL')}}</v-btn>
 			<v-spacer/>
 			<v-btn :disabled='progress.started' text @click="close">{{$t('BACK')}}</v-btn>
 		</v-card-actions>
@@ -26,6 +27,7 @@
 
 <script>
 import FlashSelectDevice from './FlashSelectDevice.vue';
+import FlashCancel from './FlashCancel.vue';
 const DAPjs = require('dapjs');
 
 export default {
@@ -41,7 +43,8 @@ export default {
 				started: false
 			},
 			buffer: null,
-			closed: 0
+			closed: 0,
+			target: null
 		};
 	},
 	mounted () {
@@ -58,6 +61,14 @@ export default {
 
 				this.closed = 1;
 			}
+		},
+		async cancel ()
+		{
+			let action = await this.studio.workspace.showDialog  (FlashCancel, {
+				width: 400
+			});
+
+			if(action) this.target.disconnect();
 		},
 		async readHex ()
 		{
@@ -91,19 +102,19 @@ export default {
 			await this.readHex();
 
 			const transport = new DAPjs.WebUSB(device);
-			const target = new DAPjs.DAPLink(transport);
+			this.target = new DAPjs.DAPLink(transport);
 
-			target.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
+			this.target.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
 				this.progress.text = `Writing progress: ${Math.floor(progress * 100)}%`;
 				this.progress.value = progress * 100;
 			});
 
 			try {
-				await target.connect();
-				await target.flash(this.buffer);
+				await this.target.connect();
+				await this.target.flash(this.buffer);
 
 				this.progress.text = 'Disconnecting...';
-				await target.disconnect();
+				await this.target.disconnect();
 
 				this.progress.text = 'All done.';
 				this.progress.color = 'red';
