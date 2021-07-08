@@ -40,7 +40,8 @@ export default {
 				color: 'teal',
 				started: false
 			},
-			buffer: null
+			buffer: null,
+			closed: 0
 		};
 	},
 	mounted () {
@@ -49,10 +50,14 @@ export default {
 	methods: {
 		close ()
 		{
-			this.$root.$emit ('submit');
-			this.studio.workspace.showDialog (FlashSelectDevice, {
-				width: 500
-			});
+			if(!this.closed) {
+				this.$root.$emit ('submit');
+				this.studio.workspace.showDialog (FlashSelectDevice, {
+					width: 500
+				});
+
+				this.closed = 1;
+			}
 		},
 		async readHex ()
 		{
