@@ -7,7 +7,8 @@
 			<div>
 				<v-row align="center" justify="center">
 					<v-btn text @click="showDialog('esp')">ESP8266/ESP32</v-btn>
-					<v-btn text @click="showDialog('micro')">Micro:bit</v-btn>
+					<v-btn text @click="showDialog('micro1')">Micro:bit V1</v-btn>
+					<v-btn text @click="showDialog('micro2')">Micro:bit V2</v-btn>
 				</v-row>
 			</div>
 		</v-card-text>
@@ -36,8 +37,14 @@ export default {
 				this.studio.workspace.showDialog (FlashMicropythonESP, {
 					width: 500
 				});
-			else if(dialog == 'micro')
+			else if(dialog == 'micro1')
 				this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
+					version: 1,
+					width: 500
+				});
+			else if(dialog == 'micro2')
+				this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
+					version: 2,
 					width: 500
 				});
 		}

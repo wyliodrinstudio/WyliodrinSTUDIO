@@ -60,7 +60,7 @@ export default {
 				} else if(ev.detail.state == 'writing') {
 					this.progress.value = ev.detail.details.percentage;
 				} else if(ev.detail.state == 'finished') {
-					this.progress.color = 'green';
+					this.progress.color = 'red';
 					this.progress.started = false;
 				} else if(ev.detail.state == 'error') {
 					this.progress.started = false;

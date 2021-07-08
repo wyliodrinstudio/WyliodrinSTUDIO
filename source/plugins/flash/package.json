@@ -4,7 +4,7 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace", "serialport"],
+        "consumes": ["workspace", "serialport", "filesystem"],
         "provides": [],
         "target": ["browser"]
     }
