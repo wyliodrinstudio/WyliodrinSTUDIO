@@ -10,6 +10,7 @@ let simulator = {
 
 let workspace = null;
 
+// Array of mocked supported libraries imports
 const supportedLibraries = [
 	'import RPi.GPIO as GPIO',
 ];
@@ -51,6 +52,7 @@ async function readLibraries() {
 	}
 }
 
+// Checks for imports of mocked libraries and deletes them
 function cleanLoadedLibraries(code) {
 	for (let library of supportedLibraries) {
 		const regex = new RegExp(library);
@@ -60,17 +62,6 @@ function cleanLoadedLibraries(code) {
 	return code;
 }
 
-// // Returns an array with the loaded libraries
-// function getLoadedLibraries(code) {
-// 	const importedLibraries = [];
-// 	for (let library of supportedLibraries) {
-// 		if (code.search(library))
-// 			importedLibraries.push(library);
-// 	}
-
-// 	return importedLibraries;
-// }
-
 // Opens studio console with MicroPython
 function loadMicroPythonConsole() {
 	studio.console.show ();
@@ -78,6 +69,7 @@ function loadMicroPythonConsole() {
 	studio.console.reset ();	
 }
 
+// Loads the code from editor into MicroPython
 function runEditorCode(code) {
 	if (code.toString() === '') return;
 
@@ -95,7 +87,7 @@ function runEditorCode(code) {
 function updateComponentsFromMP(pins, generic_raspberrypi) {
 	try {
 		for (let gpioPin = 2; gpioPin <= 26; gpioPin++) {
-			const value = pins & (1 << gpioPin) ? 1 : 0;
+			const value = pins & (1 << gpioPin) ? 1 : 0; // Checks if pin is HIGH or LOW
 			const pin = generic_raspberrypi.parseGpioToPin(gpioPin);
 			if (pin && generic_raspberrypi.dataLoaded.pins[pin]) {
 				generic_raspberrypi.dataLoaded.pins[pin].value = value;
@@ -135,11 +127,13 @@ let device_simulator_raspberrypi = {
 					mp.inject (data);
 				}
 			});
-			// Chars written on processor
+
+			// Listens to chars written on processor
 			mp.events.on ('data', (data) => {
 				studio.console.write ('unicorn_micropython', data);
 			});
 
+			// Listens to GPIO writes
 			mp.events.on('pins', (writtenPins) => {
 				pins = writtenPins;
 				updateComponentsFromMP(pins, generic_raspberrypi);
