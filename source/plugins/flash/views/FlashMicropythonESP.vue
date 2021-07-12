@@ -46,7 +46,7 @@ export default {
 	},
 	mounted() {
 		this.webToolsScript = document.createElement('script');
-		this.webToolsScript.setAttribute('src', 'https://unpkg.com/esp-web-tools@3.4.2/dist/web/install-button.js?module');
+		this.webToolsScript.setAttribute('src', 'plugins/flash/data/espFlasher/install-button-342.js');
 		this.webToolsScript.setAttribute('type', 'module');
 		document.head.appendChild(this.webToolsScript);
 
@@ -60,7 +60,6 @@ export default {
 				} else if(ev.detail.state == 'writing') {
 					this.progress.value = ev.detail.details.percentage;
 				} else if(ev.detail.state == 'finished') {
-					this.progress.color = 'red';
 					this.progress.started = false;
 				} else if(ev.detail.state == 'error') {
 					this.progress.started = false;

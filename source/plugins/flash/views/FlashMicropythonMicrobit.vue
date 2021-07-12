@@ -117,7 +117,6 @@ export default {
 				await this.target.disconnect();
 
 				this.progress.text = 'All done.';
-				this.progress.color = 'red';
 			}
 			catch (error) {
 				this.progress.text = error;
