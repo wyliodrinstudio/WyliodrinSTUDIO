@@ -335,7 +335,8 @@ export function emulator (uc, firmware) {
 		} else if (addr_lo == GPIO_Y_ODR) {
 			// write_to_i2c_devices(value_lo);
 			pins_y = value_lo;
-			emu.mem_write(GPIO_X_IDR, int_to_bytes(pins_y));
+			events.emit ('pins', pins_y.toString(2));
+			emu.mem_write(GPIO_Y_IDR, int_to_bytes(pins_y));
 		} else if (addr_lo == SERVO_1_ANGLE) {
 			servo_target = value_lo;
 			rotate_servo();
@@ -372,7 +373,6 @@ export function emulator (uc, firmware) {
 			return 1;
 		}
 		addr = emu.reg_read_i32(uc.ARM_REG_PC);
-		console.log ('execute '+addr);
 		if (!waiting) {
 			cycles++;
 			insns += CYCLE_LIMIT * TICK_INSN_RATIO;

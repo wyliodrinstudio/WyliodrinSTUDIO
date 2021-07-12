@@ -601,7 +601,7 @@ let web_filesystem = {
 			}).catch((err) => {
 				console.error(err);
 			});
-		return dirFiles;
+		return dirFiles[0].data;
 	},
 
 	/**

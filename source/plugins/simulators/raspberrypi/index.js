@@ -22,6 +22,7 @@ import JSInterpreterLibrary from './JSInterpreter/interpreter_library.js';
 import generic_raspberrypi from './libraries/utils/generic_raspberrypi.js';
 import onoff from './libraries/onoff.js';
 import lcd from './libraries/lcd.js';
+import update_components from './libraries/utils/update_components.js';
 
 async function readFirmware() {
 	try {
@@ -90,6 +91,27 @@ function runEditorCode(code) {
 	mp.inject(String.fromCharCode(2)); // CTRL-B - stop raw REPL
 }
 
+// Get state of each pin, set the value and update the components
+function updateComponentsFromMP(pins, generic_raspberrypi) {
+	try {
+		for (let gpioPin = 2; gpioPin <= 26; gpioPin++) {
+			const value = pins & (1 << gpioPin) ? 1 : 0;
+			const pin = generic_raspberrypi.parseGpioToPin(gpioPin);
+			if (pin && generic_raspberrypi.dataLoaded.pins[pin]) {
+				generic_raspberrypi.dataLoaded.pins[pin].value = value;
+				generic_raspberrypi.dataLoaded.pins[pin].state = 'out';
+
+			}
+		}
+	} catch (e) {
+		studio.showError ('DEVICE_SIMULATOR_RASPBERRY_PI_RUN_ERROR', {error: e.message});
+	}
+
+	update_components();
+}
+
+let pins = 0;
+
 let mp = {
 
 };
@@ -113,8 +135,14 @@ let device_simulator_raspberrypi = {
 					mp.inject (data);
 				}
 			});
+			// Chars written on processor
 			mp.events.on ('data', (data) => {
 				studio.console.write ('unicorn_micropython', data);
+			});
+
+			mp.events.on('pins', (writtenPins) => {
+				pins = writtenPins;
+				updateComponentsFromMP(pins, generic_raspberrypi);
 			});
 
 			if (_.isObject(device)) {
@@ -189,7 +217,7 @@ export default function setup(options, imports, register) {
 					studio.console.show();
 					studio.console.select(device.id);
 
-					// Create the object constructors for each library and
+					// Create the object constr`uc`tors for each library and
 					// append them to the users code
 					let librariesToLoad = 
 						'var libraries = {};\n\n' +
@@ -234,10 +262,18 @@ export default function setup(options, imports, register) {
 					process.nextTick(runToCompletion);
 				}
 			} else if (project.language === 'python') {
+				// Get the code from files and clean supported libraries
 				const filePath = studio.projects.getDefaultRunFileName(project);
 				let code = librariesCode + '\n\n' + await studio.projects.loadFile(project, filePath);
 				code = code.toString();
 				code = cleanLoadedLibraries(code);
+
+				// Configure workspace
+				let device = studio.workspace.getDevice();
+				workspace.updateDevice(device);
+
+				// Set raspberry to default values and run the code
+				generic_raspberrypi.setDefault();
 				runEditorCode(code);
 			} else {
 				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE'));
