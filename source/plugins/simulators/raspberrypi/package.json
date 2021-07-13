@@ -4,7 +4,7 @@
     "main": "index.js",
     "private": true,
     "plugin": {
-        "consumes": ["workspace","console","projects"],
+        "consumes": ["workspace","console","projects","shell","filesystem","events"],
 		"provides": ["device_simulator_raspberrypi"],
         "disabled": false,
         "target": ["electron", "browser"]

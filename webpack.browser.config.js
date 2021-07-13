@@ -209,7 +209,8 @@ module.exports = env => {
 		},
 		mode: mode,
 		node: {
-			__dirname: false
+			__dirname: false,
+			fs: 'empty'
 		},
 		plugins: [
 			// make sure to include the plugin!
