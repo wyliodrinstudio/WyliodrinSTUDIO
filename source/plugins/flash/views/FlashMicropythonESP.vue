@@ -28,7 +28,7 @@
 <script>
 import FlashSelectDevice from './FlashSelectDevice.vue';
 import FlashCancel from './FlashCancel.vue';
-import * as espFlash from '../data/espFlasher/index.js';
+import * as espFlash from '../data/esp-web-flasher/index.js';
 
 export default {
 	name: 'FlashMicropythonESP',
