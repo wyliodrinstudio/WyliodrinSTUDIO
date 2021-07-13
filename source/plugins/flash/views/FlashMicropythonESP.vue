@@ -18,9 +18,7 @@
 			</div>
 		</v-card-text>
 		<v-card-actions>
-			<esp-web-install-button manifest="plugins/flash/data/micropython.json" hide-progress erase-first>
-				<v-btn id="install-btn" :disabled="progress.started" slot="activate" text>{{$t('START')}}</v-btn>
-			</esp-web-install-button>
+			<v-btn :disabled='!progress.started || canceled' text @click="cancel">{{$t('CANCEL')}}</v-btn>
 			<v-spacer/>
 			<v-btn :disabled="progress.started" text @click="close">{{$t('BACK')}}</v-btn>
 		</v-card-actions>
@@ -29,13 +27,18 @@
 
 <script>
 import FlashSelectDevice from './FlashSelectDevice.vue';
+import FlashCancel from './FlashCancel.vue';
+import * as espFlash from '../data/espFlasher/index.js';
 
 export default {
 	name: 'FlashMicropythonESP',
 	data ()
 	{
 		return  {
-			webToolsScript: null,
+			espLoader: null,
+			closed: 0,
+			canceled: false,
+			port: null,
 			progress: {
 				value: 0,
 				text: 'Please select device.',
@@ -45,42 +48,141 @@ export default {
 		};
 	},
 	mounted() {
-		this.webToolsScript = document.createElement('script');
-		this.webToolsScript.setAttribute('src', 'plugins/flash/data/espFlasher/install-button-342.js');
-		this.webToolsScript.setAttribute('type', 'module');
-		document.head.appendChild(this.webToolsScript);
-
-		document.getElementsByTagName('esp-web-install-button')[0].addEventListener(
-			'state-changed', (ev) => { 
-				this.progress.text = ev.detail.message;
-
-				if(ev.detail.state == 'initializing') {
-					this.progress.started = true;
-					this.progress.color = 'teal';
-				} else if(ev.detail.state == 'writing') {
-					this.progress.value = ev.detail.details.percentage;
-				} else if(ev.detail.state == 'finished') {
-					this.progress.started = false;
-				} else if(ev.detail.state == 'error') {
-					this.progress.started = false;
-					this.progress.color = 'red';
-				}
-			}
-		);
-
-		setTimeout( () => {
-			if(!this.progress.started)
-				document.getElementById('install-btn').click();
-		}, 200);
+		this.connect();
 	},
 	methods: {
+		async connect ()
+		{
+			this.progress.text = 'Please select device.';
+			this.progress.color = 'teal';
+			this.progress.value = 0;
+
+			try {
+				this.port = await navigator.serial.requestPort({
+					filters: [{usbVendorId: 0x1a86}]
+				});
+
+				await this.flash(this.port);
+			} 
+			catch (error) {
+				this.close();
+			}
+
+			this.progress.started = false;
+		},
+		//Fake Logger to send to the espFlash, with log, error and debug functions.
+		log(message) {
+			return message;
+		},
+		error(message) {
+			return message;
+		},
+		debug(message) {
+			return message;
+		},
+		async flash(port) {
+			this.progress.started = true;
+
+			try {
+				this.progress.text = 'Connecting...';
+				this.espLoader = await espFlash.connect(port, this);
+				this.progress.text = 'Initializing...';
+			} catch (error) {
+				this.progress.text = error;
+			}
+
+			try {
+				await this.espLoader.initialize();
+			} catch (error) {
+				this.progress.text = error;
+
+				this.espLoader.disconnect();
+				return;
+			}
+
+			let chipFamily = this.getChipFamily();
+			
+			if(chipFamily == 'Unknown Chip') {
+				this.espLoader.disconnect();
+				this.progress.text = 'Unknown ESP Board...';
+				this.progress.color = 'red';
+
+				return;
+			}
+
+			let data = {};
+
+			if(chipFamily == 'ESP8266') {
+				data.file = await this.studio.filesystem.loadDataFile('flash', 'micropython/esp8266-v1.16.bin');
+				data.offset = 0;
+			} else {
+				data.file = await this.studio.filesystem.loadDataFile('flash', 'micropython/esp32-v1.16.bin');
+				data.offset = 4096;
+			}
+
+			const espStub = await this.espLoader.runStub();
+
+			this.progress.text = 'Erasing device...';
+			await espStub.eraseFlash();
+			this.progress.text = 'Device erased.';
+
+			this.progress.value = 0;
+			this.progress.text = `Writing progress: ${this.progress.value}%`;
+
+			try {
+				await espStub.flashData(data.file.buffer, bytesWritten => {
+					if(this.canceled) {
+						this.close();
+						throw 'Canceled flashing data';
+					}
+
+					this.progress.value = (bytesWritten / data.file.byteLength) * 100;
+					this.progress.text = `Writing progress: ${Math.floor(this.progress.value)}%`;
+				}, data.offset, true);
+			} catch (error) {
+				this.progress.text = error;
+				this.progress.color = 'red';
+
+				this.espLoader.disconnect();
+				return;
+			}
+
+			this.progress.text = 'Writing complete.';
+
+			await this.espLoader.hardReset();
+			await this.espLoader.disconnect();
+
+			this.progress.text = 'All done!';
+		},
+		getChipFamily () {
+			switch (this.espLoader.chipFamily) {
+				case espFlash.CHIP_FAMILY_ESP32:
+					return 'ESP32';
+				case espFlash.CHIP_FAMILY_ESP8266:
+					return 'ESP8266';
+				default:
+					return 'Unknown Chip';
+			}
+		},
 		close ()
 		{
-			this.$root.$emit ('submit');
-			document.head.removeChild(this.webToolsScript);
-			this.studio.workspace.showDialog (FlashSelectDevice, {
-				width: 500
+			if(!this.closed) {
+				this.$root.$emit ('submit');
+				this.studio.workspace.showDialog (FlashSelectDevice, {
+					width: 500
+				});
+			
+				this.closed = 1;
+			}
+		},
+		async cancel ()
+		{
+			let action = await this.studio.workspace.showDialog  (FlashCancel, {
+				width: 400
 			});
+
+			if(action)
+				this.canceled = true;
 		}
 	}
 };
