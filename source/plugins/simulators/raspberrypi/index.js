@@ -72,9 +72,7 @@ function loadMicroPythonConsole() {
 // Loads the code from editor into MicroPython
 function runEditorCode(code) {
 	if (code.toString() === '') return;
-
-	loadMicroPythonConsole();
-
+	
 	mp.inject(String.fromCharCode(3)); // CTRL-C
 	mp.inject(String.fromCharCode(1)); // CTRL-A - MicroPython raw REPL
 	mp.inject(String.fromCharCode(4)); // CTRL-D
@@ -92,7 +90,6 @@ function updateComponentsFromMP(pins, generic_raspberrypi) {
 			if (pin && generic_raspberrypi.dataLoaded.pins[pin]) {
 				generic_raspberrypi.dataLoaded.pins[pin].value = value;
 				generic_raspberrypi.dataLoaded.pins[pin].state = 'out';
-
 			}
 		}
 	} catch (e) {
@@ -138,6 +135,16 @@ let device_simulator_raspberrypi = {
 				pins = writtenPins;
 				updateComponentsFromMP(pins, generic_raspberrypi);
 			});
+
+			// Update run button when proccess is killed
+			mp.events.on('killed', () => {
+				let device = studio.workspace.getDevice();
+				if (device && device.properties.isRunning) {
+					simulator.isRunning = false;
+					device.properties.isRunning = false;
+					workspace.updateDevice(device);
+				}
+			})
 
 			if (_.isObject(device)) {
 				process.nextTick(() => {
@@ -262,13 +269,16 @@ export default function setup(options, imports, register) {
 				code = code.toString();
 				code = cleanLoadedLibraries(code);
 
-				// Configure workspace
-				let device = studio.workspace.getDevice();
-				workspace.updateDevice(device);
-
 				// Set raspberry to default values and run the code
 				generic_raspberrypi.setDefault();
+				
 				runEditorCode(code);
+
+				// Configure workspace
+				let device = studio.workspace.getDevice();
+				simulator.isRunning = true;
+				device.properties.isRunning = true;
+				workspace.updateDevice(device);
 			} else {
 				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE'));
 			}
@@ -301,6 +311,13 @@ export default function setup(options, imports, register) {
 			device.properties.isRunning = false;
 			simulator.isRunning = false;
 			workspace.updateDevice(device);
+		}
+
+		let project = studio.projects.getCurrentProject();
+		
+		// Terminate MicroPython process
+		if (project && project.language === 'python') {
+			mp.inject(String.fromCharCode(3));
 		}
 	}, 'plugins/simulators/raspberrypi/data/img/icons/stop-icon.svg', {
 		visible() {

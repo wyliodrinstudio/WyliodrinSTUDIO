@@ -249,6 +249,7 @@ export function emulator (uc, firmware) {
 				try {
 					emu.emu_stop();
 					waiting = true;
+					events.emit('killed');
 				}
 				catch (e){
 					console.log(e, '\n');
