@@ -144,7 +144,7 @@ let device_simulator_raspberrypi = {
 					device.properties.isRunning = false;
 					workspace.updateDevice(device);
 				}
-			})
+			});
 
 			if (_.isObject(device)) {
 				process.nextTick(() => {
