@@ -42,5 +42,37 @@
     "FLASH_CANCEL_TEXT": {
         "message": "The board will be unusable until you flash it.",
         "description": "A warning for the user that his board will be unusable."
+    },
+    "FLASH_SELECT_DEVICE": {
+        "message": "Select the device to flash",
+        "description": "Message saying the user to select a device to flash"
+    },
+    "FLASH_WRITING_PROGRESS": {
+        "message": "Writing progress:",
+        "description": "A message indicating the writing progress"
+    },
+    "FLASH_CONNECTING_TEXT": {
+        "message": "Connecting to device...",
+        "description": "A message indicating the device is connecting"
+    },
+    "FLASH_INITIALIZING_TEXT": {
+        "message": "Initializing device...",
+        "description": "A message indicating the device is initializing"
+    },
+    "FLASH_UNKNOWN_BOARD_TEXT": {
+        "message": "Unknown board",
+        "description": "A message indicating the device is an unknown board"
+    },
+    "FLASH_ERASING_DEVICE_TEXT": {
+        "message": "Erasing device...",
+        "description": "A message indicating the device is erasing"
+    },
+    "FLASH_COMPLETE_TEXT": {
+        "message": "All done!",
+        "description": "A message indicating the device has been flashed"
+    },
+    "FLASH_DISCONNECTING_TEXT": {
+        "message": "Disconnecting from device...",
+        "description": "A message indicating the device is disconnecting"
     }
 }

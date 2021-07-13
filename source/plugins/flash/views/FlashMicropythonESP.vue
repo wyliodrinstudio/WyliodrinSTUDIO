@@ -41,7 +41,7 @@ export default {
 			port: null,
 			progress: {
 				value: 0,
-				text: 'Please select device.',
+				text: '',
 				color: 'teal',
 				started: false
 			}
@@ -53,7 +53,7 @@ export default {
 	methods: {
 		async connect ()
 		{
-			this.progress.text = 'Please select device.';
+			this.progress.text = this.$t('FLASH_SELECT_DEVICE');
 			this.progress.color = 'teal';
 			this.progress.value = 0;
 
@@ -84,9 +84,9 @@ export default {
 			this.progress.started = true;
 
 			try {
-				this.progress.text = 'Connecting...';
+				this.progress.text = this.$t('FLASH_CONNECTING_TEXT');
 				this.espLoader = await espFlash.connect(port, this);
-				this.progress.text = 'Initializing...';
+				this.progress.text = this.$t('FLASH_INITIALIZING_TEXT');
 			} catch (error) {
 				this.progress.text = error;
 			}
@@ -104,7 +104,7 @@ export default {
 			
 			if(chipFamily == 'Unknown Chip') {
 				this.espLoader.disconnect();
-				this.progress.text = 'Unknown ESP Board...';
+				this.progress.text = this.$t('FLASH_UNKNOWN_BOARD_TEXT');
 				this.progress.color = 'red';
 
 				return;
@@ -122,12 +122,11 @@ export default {
 
 			const espStub = await this.espLoader.runStub();
 
-			this.progress.text = 'Erasing device...';
+			this.progress.text = this.$t('FLASH_ERASING_DEVICE_TEXT');
 			await espStub.eraseFlash();
-			this.progress.text = 'Device erased.';
 
 			this.progress.value = 0;
-			this.progress.text = `Writing progress: ${this.progress.value}%`;
+			this.progress.text = `${this.$t('FLASH_WRITING_PROGRESS')} ${this.progress.value}%`;
 
 			try {
 				await espStub.flashData(data.file.buffer, bytesWritten => {
@@ -137,7 +136,7 @@ export default {
 					}
 
 					this.progress.value = (bytesWritten / data.file.byteLength) * 100;
-					this.progress.text = `Writing progress: ${Math.floor(this.progress.value)}%`;
+					this.progress.text = `${this.$t('FLASH_WRITING_PROGRESS')} ${Math.floor(this.progress.value)}%`;
 				}, data.offset, true);
 			} catch (error) {
 				this.progress.text = error;
@@ -147,12 +146,11 @@ export default {
 				return;
 			}
 
-			this.progress.text = 'Writing complete.';
-
+			this.progress.text = this.$t('FLASH_DISCONNECTING_TEXT');
 			await this.espLoader.hardReset();
 			await this.espLoader.disconnect();
 
-			this.progress.text = 'All done!';
+			this.progress.text = this.$t('FLASH_COMPLETE_TEXT');
 		},
 		getChipFamily () {
 			switch (this.espLoader.chipFamily) {

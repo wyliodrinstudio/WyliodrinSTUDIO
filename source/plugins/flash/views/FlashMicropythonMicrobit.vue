@@ -38,7 +38,7 @@ export default {
 		return  {
 			progress: {
 				value: 0,
-				text: 'Please select device.',
+				text: '',
 				color: 'teal',
 				started: false
 			},
@@ -79,7 +79,7 @@ export default {
 		},
 		async connect ()
 		{
-			this.progress.text = 'Please select device.';
+			this.progress.text = this.$t('FLASH_SELECT_DEVICE');
 			this.progress.color = 'teal';
 			this.progress.value = 0;
 
@@ -105,7 +105,7 @@ export default {
 			this.target = new DAPjs.DAPLink(transport);
 
 			this.target.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
-				this.progress.text = `Writing progress: ${Math.floor(progress * 100)}%`;
+				this.progress.text = `${this.$t('FLASH_WRITING_PROGRESS')} ${Math.floor(progress * 100)}%`;
 				this.progress.value = progress * 100;
 			});
 
@@ -113,10 +113,10 @@ export default {
 				await this.target.connect();
 				await this.target.flash(this.buffer);
 
-				this.progress.text = 'Disconnecting...';
+				this.progress.text = this.$t('FLASH_DISCONNECTING_TEXT');
 				await this.target.disconnect();
 
-				this.progress.text = 'All done.';
+				this.progress.text = this.$t('FLASH_COMPLETE_TEXT');
 			}
 			catch (error) {
 				this.progress.text = error;
