@@ -47,6 +47,7 @@ export class SerialPort extends EventEmitter {
 				else
 				{
 					this.serial.on('data', (data) => {
+						this.data = data;
 						this.emit ('data', data);
 					});
 					this.serial.on('error', (err) => {
@@ -117,6 +118,47 @@ export class SerialPort extends EventEmitter {
 			await this.portConnect.close();
 		}
 	}
+
+	//Adding fake functions so it can emulate webserial on electron
+	setSignals(options) {
+		return options;
+	}
+
+	open (options) {
+		this.writable = this;
+		this.readable = this;
+
+		return options;
+	}
+
+	getReader() {
+		return this;
+	}
+
+	getWriter() {
+		return this;
+	}
+
+	cancel() {
+		return true;
+	}
+
+	releaseLock() {
+		return true;
+	}
+
+	read() {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				if(this.data == null) {
+					resolve({done: true, value: null});
+				} else {
+					resolve({done: false, value: this.data});
+				}
+			}, 200);
+		});
+	}
+
 }
 
 let serialport = {

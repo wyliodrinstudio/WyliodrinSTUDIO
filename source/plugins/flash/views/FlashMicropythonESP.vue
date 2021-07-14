@@ -32,6 +32,7 @@ import * as espFlash from '../data/esp-web-flasher/index.js';
 
 export default {
 	name: 'FlashMicropythonESP',
+	props: ['device'],
 	data ()
 	{
 		return  {
@@ -53,19 +54,33 @@ export default {
 	methods: {
 		async connect ()
 		{
-			this.progress.text = this.$t('FLASH_SELECT_DEVICE');
-			this.progress.color = 'teal';
-			this.progress.value = 0;
+			this.progress.started = true;
 
-			try {
-				this.port = await navigator.serial.requestPort({
-					filters: [{usbVendorId: 0x1a86}]
-				});
+			if(!this.device) {
+				this.progress.text = this.$t('FLASH_SELECT_DEVICE');
+				this.progress.color = 'teal';
+				this.progress.value = 0;
 
-				await this.flash(this.port);
-			} 
-			catch (error) {
-				this.close();
+				try {
+					this.port = await navigator.serial.requestPort({
+						filters: [{usbVendorId: 0x1a86}]
+					});
+
+					await this.flash(this.port);
+				} 
+				catch (error) {
+					this.close();
+				}
+			} else {
+				this.port = new this.studio.serialport.SerialPort();
+				await this.port.connect(this.device.address, 115200);
+
+				try {
+					await this.flash(this.port);
+				} 
+				catch (error) {
+					//this.close();
+				}
 			}
 
 			this.progress.started = false;
@@ -100,7 +115,11 @@ export default {
 				return;
 			}
 
+			//console.log('Initialized');
+
 			let chipFamily = this.getChipFamily();
+
+			//console.log(chipFamily);
 			
 			if(chipFamily == 'Unknown Chip') {
 				this.espLoader.disconnect();
@@ -119,6 +138,8 @@ export default {
 				data.file = await this.studio.filesystem.loadDataFile('flash', 'micropython/esp32-v1.16.bin');
 				data.offset = 4096;
 			}
+
+			//console.log(data);
 
 			const espStub = await this.espLoader.runStub();
 

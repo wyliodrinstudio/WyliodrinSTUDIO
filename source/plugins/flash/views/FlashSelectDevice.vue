@@ -27,6 +27,7 @@ import FlashMicropythonMicrobit from './FlashMicropythonMicrobit.vue';
 
 export default {
 	name: 'FlashSelectDevice',
+	props: ['device'],
 	data () {
 		return {
 			boards: [],
@@ -60,15 +61,18 @@ export default {
 			this.close();
 			if(dialog == 'esp')
 				this.studio.workspace.showDialog (FlashMicropythonESP, {
+					device: this.device,
 					width: 500
 				});
 			else if(dialog == 'micro1')
 				this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
+					device: this.device,
 					version: 1,
 					width: 500
 				});
 			else if(dialog == 'micro2')
 				this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
+					device: this.device,
 					version: 2,
 					width: 500
 				});

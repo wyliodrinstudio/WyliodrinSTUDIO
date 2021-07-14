@@ -32,7 +32,7 @@ const DAPjs = require('dapjs');
 
 export default {
 	name: 'FlashMicropythonMicrobit',
-	props: ['version'],
+	props: ['device', 'version'],
 	data ()
 	{
 		return  {
