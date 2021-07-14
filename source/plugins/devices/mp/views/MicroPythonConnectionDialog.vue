@@ -22,6 +22,9 @@
 		</v-card-text>
 
 		<v-card-actions>
+			<div v-if="electron">
+				<v-btn text @click="flash">{{$t('DEVICE_MP_FLASH')}}</v-btn>
+			</div>
 			<v-spacer></v-spacer>
 			<v-btn text @click="connect">{{$t('DEVICE_MP_CONNECT')}}</v-btn>
 			<v-btn text @click="close">{{$t('DEVICE_MP_EXIT')}}</v-btn>
@@ -30,11 +33,12 @@
 </template>
 
 <script>
+import FlashSelectDevice from '../../../flash/views/FlashSelectDevice.vue';
 let defaults = {};
 
 export default {
 	name: 'MicroPythonConnectionDialog',
-	props: ['device'],
+	props: ['device', 'electron'],
 	data ()
 	{
 		let defvalue = defaults[this.device.address];
@@ -86,6 +90,15 @@ export default {
 		close ()
 		{
 			this.$root.$emit('submit');
+		},
+		flash()
+		{
+			this.close();
+			
+			this.studio.workspace.showDialog (FlashSelectDevice, {
+				device: this.device,
+				width: 500
+			});
 		}
 	}
 };
