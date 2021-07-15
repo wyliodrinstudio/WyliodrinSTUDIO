@@ -30,7 +30,6 @@
 </template>
 
 <script>
-
 let defaults = {};
 
 export default {
