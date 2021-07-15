@@ -74,6 +74,8 @@ export default {
 			} else {
 				this.port = new this.studio.serialport.SerialPort();
 				await this.port.connect(this.device.address, 115200);
+				await this.port.open();
+				await this.sleep(1000);
 
 				try {
 					await this.flash(this.port);
@@ -95,6 +97,9 @@ export default {
 		debug(message) {
 			return message;
 		},
+		async sleep(time) {
+			await new Promise(resolve => setTimeout(resolve, time));
+		},
 		async flash(port) {
 			this.progress.started = true;
 
@@ -115,11 +120,7 @@ export default {
 				return;
 			}
 
-			//console.log('Initialized');
-
 			let chipFamily = this.getChipFamily();
-
-			//console.log(chipFamily);
 			
 			if(chipFamily == 'Unknown Chip') {
 				this.espLoader.disconnect();
@@ -139,9 +140,10 @@ export default {
 				data.offset = 4096;
 			}
 
-			//console.log(data);
-
 			const espStub = await this.espLoader.runStub();
+
+			if(this.device)
+				data.file = new Uint8Array(data.file);
 
 			this.progress.text = this.$t('FLASH_ERASING_DEVICE_TEXT');
 			await espStub.eraseFlash();

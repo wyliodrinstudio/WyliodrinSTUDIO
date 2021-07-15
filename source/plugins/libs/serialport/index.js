@@ -17,6 +17,28 @@ function loadSerialPort ()
 	}
 }
 
+class writerElectron {
+	constructor(serial) {
+		this.serial = serial;
+	}
+
+	abort () {
+		return true;
+	}
+
+	close () {
+		return true;
+	}
+
+	releaseLock () {
+		return true;
+	}
+
+	write (data) {
+		this.serial.write(data);
+	}
+}
+
 export class SerialPort extends EventEmitter {
 	async start ()
 	{
@@ -37,7 +59,9 @@ export class SerialPort extends EventEmitter {
 	async connect (address, baudRate)
 	{ 
 		if (studio.system.platform () === 'electron')
-		{
+		{	
+			this.writerElectron = new writerElectron(this);
+
 			this.serial = new serial(address,{
 				baudRate
 			},(err)=>{
@@ -97,6 +121,11 @@ export class SerialPort extends EventEmitter {
 	write (data) {
 		if (studio.system.platform() === 'electron')
 		{
+			
+			if(typeof data === 'object')
+				if(data.constructor === Uint8Array)
+					data = Buffer.from(data.buffer);
+
 			this.serial.write (data);
 		}
 		else
@@ -119,12 +148,19 @@ export class SerialPort extends EventEmitter {
 		}
 	}
 
-	//Adding fake functions so it can emulate webserial on electron
+	//Emulating some functions and adding some fake functions
 	setSignals(options) {
-		return options;
+		return new Promise((resolve) => {
+			this.serial.set({dtr: options.dataTerminalReady, rts: options.requestToSend}, () => {
+				resolve(null);
+			});
+		});
 	}
 
-	open (options) {
+	async open (options) {
+		if(!this.serial.isOpen)
+			await this.serial.open();
+
 		this.writable = this;
 		this.readable = this;
 
@@ -136,7 +172,7 @@ export class SerialPort extends EventEmitter {
 	}
 
 	getWriter() {
-		return this;
+		return this.writerElectron;
 	}
 
 	cancel() {
@@ -149,16 +185,25 @@ export class SerialPort extends EventEmitter {
 
 	read() {
 		return new Promise((resolve) => {
-			setTimeout(() => {
-				if(this.data == null) {
-					resolve({done: true, value: null});
-				} else {
-					resolve({done: false, value: this.data});
-				}
-			}, 200);
+			if(this.serial.isOpen) {
+				this.serial.on('data', (data) => {
+					let newData = new Uint8Array(data.length);
+					for (let i = 0; i < data.length; i++) {
+						newData[i] = data[i];
+					}
+
+					resolve({value: newData, done: false});			
+				});
+
+				setTimeout(() => {
+					resolve({value: undefined, done: true});
+				}, 20000);
+			} else {
+				resolve({value: undefined, done: true});
+			}
 		});
 	}
-
+		
 }
 
 let serialport = {
