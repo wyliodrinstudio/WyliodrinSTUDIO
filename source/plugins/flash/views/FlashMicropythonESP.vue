@@ -72,6 +72,9 @@ export default {
 					this.close();
 				}
 			} else {
+				this.progress.started = true;
+				this.progress.text = this.$t('FLASH_CONNECTING_TEXT');
+				
 				this.port = new this.studio.serialport.SerialPort();
 				await this.port.connect(this.device.address, 115200);
 				await this.port.open();
@@ -189,9 +192,11 @@ export default {
 		{
 			if(!this.closed) {
 				this.$root.$emit ('submit');
-				this.studio.workspace.showDialog (FlashSelectDevice, {
-					width: 500
-				});
+
+				if(!this.device)
+					this.studio.workspace.showDialog (FlashSelectDevice, {
+						width: 500
+					});
 			
 				this.closed = 1;
 			}
