@@ -111,7 +111,7 @@ export default {
 
 			try {
 				await this.target.connect();
-				await this.target.flash(this.buffer);
+				await this.target.flash(this.buffer.buffer);
 
 				this.progress.text = this.$t('FLASH_DISCONNECTING_TEXT');
 				await this.target.disconnect();
