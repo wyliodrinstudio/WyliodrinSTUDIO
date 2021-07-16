@@ -74,5 +74,9 @@
     "FLASH_DISCONNECTING_TEXT": {
         "message": "Disconnecting from device...",
         "description": "A message indicating the device is disconnecting"
+    },
+    "FLASH_ERROR_DEVICE_NOT_FOUND": {
+        "message": "Error: Device not found, please try again.",
+        "description": "A message indicating the device was not found"
     }
 }

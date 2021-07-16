@@ -29,6 +29,7 @@
 import FlashSelectDevice from './FlashSelectDevice.vue';
 import FlashCancel from './FlashCancel.vue';
 const DAPjs = require('dapjs');
+let usb = null;
 
 export default {
 	name: 'FlashMicropythonMicrobit',
@@ -48,6 +49,7 @@ export default {
 		};
 	},
 	mounted () {
+		usb = this.loadUSB();
 		this.connect();
 	},
 	methods: {
@@ -79,19 +81,38 @@ export default {
 		},
 		async connect ()
 		{
-			this.progress.text = this.$t('FLASH_SELECT_DEVICE');
-			this.progress.color = 'teal';
-			this.progress.value = 0;
+			if(!this.device) {
+				this.progress.text = this.$t('FLASH_SELECT_DEVICE');
+				this.progress.color = 'teal';
+				this.progress.value = 0;
 
-			try {
-				const device = await navigator.usb.requestDevice({
-					filters: [{vendorId: 0xD28}]
-				});
+				try {
+					const device = await navigator.usb.requestDevice({
+						filters: [{vendorId: 0xD28}]
+					});
 
-				await this.flash(device);
-			} 
-			catch (error) {
-				this.close();
+					await this.flash(device);
+				} 
+				catch (error) {
+					this.close();
+				}
+
+				this.progress.started = false;
+			} else {
+				let devices = usb.getDeviceList();
+				devices = devices.filter(device => device.deviceDescriptor.idProduct === parseInt(this.device.properties.productId, 16) && device.deviceDescriptor.idVendor === parseInt(this.device.properties.vendorId, 16));
+
+				if(devices.length != 1) {
+					this.progress.text = this.$t('FLASH_DEVICE_NOT_FOUND');
+					this.progress.color = 'red';
+				} else {
+					try {
+						await this.flash(devices[0]);
+
+					} catch (error) {
+						//this.close();
+					}
+				}
 			}
 
 			this.progress.started = false;
@@ -100,8 +121,14 @@ export default {
 		{
 			this.progress.started = true;
 			await this.readHex();
+			
+			let transport = null;
 
-			const transport = new DAPjs.WebUSB(device);
+			if(!this.device)
+				transport = new DAPjs.WebUSB(device);
+			else
+				transport = new DAPjs.USB(device);
+
 			this.target = new DAPjs.DAPLink(transport);
 
 			this.target.on(DAPjs.DAPLink.EVENT_PROGRESS, progress => {
@@ -121,6 +148,19 @@ export default {
 			catch (error) {
 				this.progress.text = error;
 				this.progress.color = 'red';
+			}
+		},
+		loadUSB ()
+		{
+			try
+			{
+				// written like this to work with webpack when target is browser
+				return eval ('require(\'usb\')');
+			}
+			catch (e)
+			{	
+				this.studio.workspace.error ('usb: usb is not available '+e.message);
+				return null;
 			}
 		}
 	}

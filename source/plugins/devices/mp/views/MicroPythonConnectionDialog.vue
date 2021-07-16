@@ -35,6 +35,7 @@
 <script>
 import FlashSelectDevice from '../../../flash/views/FlashSelectDevice.vue';
 import FlashMicropythonESP from '../../../flash/views/FlashMicropythonESP.vue';
+import FlashMicropythonMicrobit from '../../../flash/views/FlashMicropythonMicrobit.vue';
 
 let defaults = {};
 
@@ -98,6 +99,11 @@ export default {
 			//If our device is an ESP Board directly flash it
 			if(this.device.properties.vendorId.toLowerCase() == '1a86')
 				this.studio.workspace.showDialog (FlashMicropythonESP, {
+					device: this.device,
+					width: 500
+				});
+			else if(this.device.properties.vendorId.toLowerCase() == 'd28')
+				this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
 					device: this.device,
 					width: 500
 				});
