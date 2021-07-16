@@ -194,10 +194,6 @@ export class SerialPort extends EventEmitter {
 
 					resolve({value: newData, done: false});			
 				});
-
-				setTimeout(() => {
-					resolve({value: undefined, done: true});
-				}, 20000);
 			} else {
 				resolve({value: undefined, done: true});
 			}
