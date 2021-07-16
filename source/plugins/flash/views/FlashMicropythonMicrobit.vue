@@ -57,9 +57,11 @@ export default {
 		{
 			if(!this.closed) {
 				this.$root.$emit ('submit');
-				this.studio.workspace.showDialog (FlashSelectDevice, {
-					width: 500
-				});
+
+				if(!this.device)
+					this.studio.workspace.showDialog (FlashSelectDevice, {
+						width: 500
+					});
 
 				this.closed = 1;
 			}
