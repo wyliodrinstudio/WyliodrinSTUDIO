@@ -102,13 +102,14 @@ export default {
 					device: this.device,
 					width: 500
 				});
-			else if(this.device.properties.vendorId.toLowerCase() == 'd28')
+			else if(this.device.properties.vendorId.toLowerCase() == 'd28' || this.device.properties.vendorId.toLowerCase() == '0d28')
 				this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
 					device: this.device,
 					width: 500
 				});
 			else
 				this.studio.workspace.showDialog (FlashSelectDevice, {
+					fromBurger: false,
 					device: this.device,
 					width: 500
 				});

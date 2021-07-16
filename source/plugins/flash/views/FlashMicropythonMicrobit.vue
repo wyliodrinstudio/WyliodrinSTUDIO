@@ -33,7 +33,7 @@ let usb = null;
 
 export default {
 	name: 'FlashMicropythonMicrobit',
-	props: ['device', 'version'],
+	props: ['device', 'version', 'fromBurger'],
 	data ()
 	{
 		return  {
@@ -102,7 +102,10 @@ export default {
 				this.progress.started = false;
 			} else {
 				let devices = usb.getDeviceList();
-				devices = devices.filter(device => device.deviceDescriptor.idProduct === parseInt(this.device.properties.productId, 16) && device.deviceDescriptor.idVendor === parseInt(this.device.properties.vendorId, 16));
+				if(!this.fromBurger)
+					devices = devices.filter(device => device.deviceDescriptor.idProduct === parseInt(this.device.properties.productId, 16) && device.deviceDescriptor.idVendor === parseInt(this.device.properties.vendorId, 16));
+				else
+					devices = devices.filter(device => device.deviceDescriptor.idProduct === parseInt(this.device.productId, 16) && device.deviceDescriptor.idVendor === parseInt(this.device.vendorId, 16));
 
 				if(devices.length != 1) {
 					this.progress.text = this.$t('FLASH_DEVICE_NOT_FOUND');

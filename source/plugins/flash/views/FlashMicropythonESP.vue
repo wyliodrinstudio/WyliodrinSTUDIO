@@ -32,7 +32,7 @@ import * as espFlash from '../data/esp-web-flasher/index.js';
 
 export default {
 	name: 'FlashMicropythonESP',
-	props: ['device'],
+	props: ['device', 'fromBurger'],
 	data ()
 	{
 		return  {
@@ -76,7 +76,12 @@ export default {
 				this.progress.text = this.$t('FLASH_CONNECTING_TEXT');
 				
 				this.port = new this.studio.serialport.SerialPort();
-				await this.port.connect(this.device.address, 115200);
+
+				if(!this.fromBurger)
+					await this.port.connect(this.device.address, 115200);
+				else
+					await this.port.connect(this.device.path, 115200);
+
 				await this.port.open();
 				await this.sleep(1000);
 
