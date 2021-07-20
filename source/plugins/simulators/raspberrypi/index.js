@@ -266,19 +266,21 @@ export default function setup(options, imports, register) {
 				// Get the code from files and clean supported libraries
 				const filePath = studio.projects.getDefaultRunFileName(project);
 				let code = librariesCode + '\n\n' + await studio.projects.loadFile(project, filePath);
-				code = code.toString();
-				code = cleanLoadedLibraries(code);
+				code = cleanLoadedLibraries(code.toString());
 
 				// Set raspberry to default values and run the code
 				generic_raspberrypi.setDefault();
 				
-				runEditorCode(code);
-
-				// Configure workspace
 				let device = studio.workspace.getDevice();
-				simulator.isRunning = true;
-				device.properties.isRunning = true;
-				workspace.updateDevice(device);
+
+				if (device && device.properties.isRunning === false) {
+					runEditorCode(code);
+
+					// Configure workspace
+					simulator.isRunning = true;
+					device.properties.isRunning = true;
+					workspace.updateDevice(device);
+				}
 			} else {
 				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE'));
 			}

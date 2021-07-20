@@ -11,5 +11,4 @@ ToDo-List:
 DE DECOMENTAT LINIA 47 DIN device.rpk/index.js
 
 Bogdan TO-DO:
-	- simulator running pana cand se termina programul sau pana la CTRL-C in MicroPython
-	(butonul nu e sincronizat)
+	- Buttons
