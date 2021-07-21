@@ -33,9 +33,6 @@
 </template>
 
 <script>
-import FlashSelectDevice from '../../../flash/views/FlashSelectDevice.vue';
-import FlashMicropythonESP from '../../../flash/views/FlashMicropythonESP.vue';
-import FlashMicropythonMicrobit from '../../../flash/views/FlashMicropythonMicrobit.vue';
 
 let defaults = {};
 

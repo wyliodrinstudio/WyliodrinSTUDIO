@@ -22,43 +22,27 @@
 </template>
 
 <script>
-import FlashMicropythonESP from './FlashMicropythonESP.vue';
-import FlashMicropythonMicrobit from './FlashMicropythonMicrobit.vue';
-
 export default {
 	name: 'FlashSelectDevice',
 	props: ['device', 'fromBurger'],
 	data () {
 		return {
 			devices: [],
+			flashers: [],
 			boards: [],
 			boardID: null
 		};
 	},
-	async mounted () {
+	mounted () {
+		this.flashers = this.studio.flash.flashers;
+
 		if(this.studio.system.platform () === 'browser' || !this.fromBurger) {
-			this.newBoard('esp', 'ESP8266/32', 'plugins/flash/data/img/ESP.png');
-			this.newBoard('micro1', 'Micro:bit V1', 'plugins/flash/data/img/microbit1.png');
-			this.newBoard('micro2', 'Micro:bit V2', 'plugins/flash/data/img/microbit2.png');
-
-			this.boardID = 'esp';
+			for(let flasher of this.flashers)
+				this.newBoard(flasher.id, flasher.name, flasher.boardLogo);
+			
+			this.boardID = this.flashers[0].id;
 		} else {
-			this.devices = await this.studio.serialport.list();
-
-			this.boardID = 0;
-			for(let i = 0; i < this.devices.length; i++) {
-				let board = this.devices[i];
-
-				if(board.vendorId.toLowerCase() == '1a86')
-					this.newBoard(i,'ESP8266/32', 'plugins/flash/data/img/ESP.png');
-				else if(board.vendorId.toLowerCase() == '0d28' || board.vendorId.toLowerCase() == 'd28') {
-					//Get version of micro:bit (v1.3 = 9900, v1.5 = 9901, v2 = 9903 || 9904)
-					let serialNumber = board.serialNumber.substring(0, 4);
-
-					if(serialNumber == '9900' || serialNumber == '9901') this.newBoard(i, 'Micro:bit V1', 'plugins/flash/data/img/microbit1.png');
-					else if(serialNumber == '9903' || serialNumber == '9904') this.newBoard(i, 'Micro:bit V2', 'plugins/flash/data/img/microbit2.png');
-				}
-			}
+			
 		}
 	},
 	methods: {
@@ -69,14 +53,27 @@ export default {
 				title: title,
 				logo: logo
 			};
-
 			this.boards.push(board);
 		},
 		close ()
 		{
 			this.$root.$emit ('submit');
 		},
-		showDialog (dialog)
+		showDialog ()
+		{
+			if(this.studio.system.platform () === 'browser' || !this.fromBurger) {
+				this.close();
+				
+				this.studio.workspace.showDialog (this.studio.flash.getFlasher(this.boardID).dialogVue, {
+					device: this.device,
+					version: this.boardID,
+					width: 500
+				});
+			} else {
+
+			}
+		}
+		/*showDialog (dialog)
 		{
 			if(this.studio.system.platform () === 'browser' || !this.fromBurger) {
 				this.close();
@@ -121,7 +118,7 @@ export default {
 						width: 500
 					});
 			}
-		}
+		}*/
 	}
 };
 </script>

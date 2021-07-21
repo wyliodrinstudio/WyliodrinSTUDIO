@@ -26,12 +26,12 @@
 </template>
 
 <script>
-import FlashSelectDevice from './FlashSelectDevice.vue';
-import FlashCancel from './FlashCancel.vue';
+import FlashSelectDevice from '../../flash/views/FlashSelectDevice.vue';
+import FlashCancel from '../../flash/views/FlashCancel.vue';
 import * as espFlash from '../data/esp-web-flasher/index.js';
 
 export default {
-	name: 'FlashMicropythonESP',
+	name: 'FlashDialog',
 	props: ['device', 'fromBurger'],
 	data ()
 	{
@@ -141,10 +141,10 @@ export default {
 			let data = {};
 
 			if(chipFamily == 'ESP8266') {
-				data.file = await this.studio.filesystem.loadDataFile('flash', 'micropython/esp8266-v1.16.bin');
+				data.file = await this.studio.filesystem.loadDataFile('flash/flash.esp', 'micropython/esp8266-v1.16.bin');
 				data.offset = 0;
 			} else {
-				data.file = await this.studio.filesystem.loadDataFile('flash', 'micropython/esp32-v1.16.bin');
+				data.file = await this.studio.filesystem.loadDataFile('flash/flash.esp', 'micropython/esp32-v1.16.bin');
 				data.offset = 4096;
 			}
 

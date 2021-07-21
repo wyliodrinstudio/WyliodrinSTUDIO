@@ -26,13 +26,13 @@
 </template>
 
 <script>
-import FlashSelectDevice from './FlashSelectDevice.vue';
-import FlashCancel from './FlashCancel.vue';
+import FlashSelectDevice from '../../flash/views/FlashSelectDevice.vue';
+import FlashCancel from '../../flash/views/FlashCancel.vue';
 const DAPjs = require('dapjs');
 let usb = null;
 
 export default {
-	name: 'FlashMicropythonMicrobit',
+	name: 'FlashDialog',
 	props: ['device', 'version', 'fromBurger'],
 	data ()
 	{
@@ -77,9 +77,9 @@ export default {
 		async readHex ()
 		{
 			if(this.version == 1)
-				this.buffer = await this.studio.filesystem.loadDataFile('flash', 'micropython/microbit-v1.0.1.hex');
+				this.buffer = await this.studio.filesystem.loadDataFile('flash/flash.microbit', 'micropython/microbit-v1.0.1.hex');
 			else if(this.version == 2)
-				this.buffer = await this.studio.filesystem.loadDataFile('flash', 'micropython/microbit-v2.0.0.hex');
+				this.buffer = await this.studio.filesystem.loadDataFile('flash/flash.microbit', 'micropython/microbit-v2.0.0.hex');
 		},
 		async connect ()
 		{
