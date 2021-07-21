@@ -76,9 +76,9 @@ export default {
 		},
 		async readHex ()
 		{
-			if(this.version == 1)
+			if(this.version == 'micro1')
 				this.buffer = await this.studio.filesystem.loadDataFile('flash/flash.microbit', 'micropython/microbit-v1.0.1.hex');
-			else if(this.version == 2)
+			else if(this.version == 'micro2')
 				this.buffer = await this.studio.filesystem.loadDataFile('flash/flash.microbit', 'micropython/microbit-v2.0.0.hex');
 		},
 		async connect ()
