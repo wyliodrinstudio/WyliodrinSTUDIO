@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import FlashSelectDevice from '../../../flash/flash/views/FlashSelectDevice.vue'
 
 let defaults = {};
 
@@ -93,20 +94,15 @@ export default {
 		},
 		flash()
 		{
-			//If our device is an ESP Board directly flash it
-			if(this.device.properties.vendorId.toLowerCase() == '1a86')
-				this.studio.workspace.showDialog (FlashMicropythonESP, {
-					device: this.device,
-					width: 500
-				});
-			else if(this.device.properties.vendorId.toLowerCase() == 'd28' || this.device.properties.vendorId.toLowerCase() == '0d28')
-				this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
+			let neededFlasher = this.studio.flash.getFlasherByVP(this.device.properties.vendorId.toLowerCase(), this.device.properties.productId.toLowerCase());
+
+			if(neededFlasher == null)
+				this.studio.workspace.showDialog (FlashSelectDevice, {
 					device: this.device,
 					width: 500
 				});
 			else
-				this.studio.workspace.showDialog (FlashSelectDevice, {
-					fromBurger: false,
+				this.studio.workspace.showDialog(neededFlasher.dialogVue, {
 					device: this.device,
 					width: 500
 				});

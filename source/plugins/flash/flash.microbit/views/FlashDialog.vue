@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t('FLASH_MICROBIT')}} V{{this.version}}</span>
+			<span class="headline">{{$t('FLASH_MICROBIT')}} V{{this.version.substr(this.version.length - 1)}}</span>
 		</v-card-title>
 		<v-card-text>
 			<div>

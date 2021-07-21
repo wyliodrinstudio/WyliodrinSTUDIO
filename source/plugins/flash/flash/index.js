@@ -57,6 +57,30 @@ let flash = {
 			studio.workspace.warn('FLASH_NULL');
 			return null;
 		}
+	},
+
+	/**
+	 * This function returns a flasher object by its vendor ID and product ID.
+	 * 
+	 * @param {string} vendorId - vendor ID
+	 * @param {string} productId - product ID
+	*/
+	getFlasherByVP(vendorId, productId) {
+		if(vendorId !== null) {
+			let found = [];
+			for(let flasher of this.flashers)
+				if(flasher.vendorId == vendorId) found.push(flasher);
+			
+			if(found.length == 1 && found[0].productId == null) return found[0];
+			else if(found.length > 0) {
+				for(let flasher of found)
+					if(flasher.productId == productId) return flasher;
+			}
+			return null;
+		} else {
+			studio.workspace.warn('FLASH_NULL');
+			return null;
+		}
 	}
 };
 
