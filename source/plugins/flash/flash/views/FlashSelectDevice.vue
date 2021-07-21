@@ -33,7 +33,7 @@ export default {
 			boardID: null
 		};
 	},
-	mounted () {
+	async mounted () {
 		this.flashers = this.studio.flash.flashers;
 
 		if(this.studio.system.platform () === 'browser' || !this.fromBurger) {
@@ -42,7 +42,16 @@ export default {
 			
 			this.boardID = this.flashers[0].id;
 		} else {
-			
+			this.devices = await this.studio.serialport.list();
+
+			for(let i = 0; i < this.devices.length; i++) {
+				let board = this.devices[i];
+				let flasher = this.studio.flash.getFlasherByVP(board.vendorId.toLowerCase(), board.productId.toLowerCase());
+
+				this.newBoard(i, flasher.name, flasher.boardLogo);
+			}
+
+			this.boardID = 0;
 		}
 	},
 	methods: {
@@ -66,59 +75,17 @@ export default {
 				
 				this.studio.workspace.showDialog (this.studio.flash.getFlasher(this.boardID).dialogVue, {
 					device: this.device,
-					version: this.boardID,
+					version: this.boards[this.boardID].title,
 					width: 500
 				});
-			} else {
-
-			}
+			} else 
+				this.studio.workspace.showDialog (this.studio.flash.getFlasherByName(this.boards[this.boardID].title).dialogVue, {
+					device: this.devices[this.boardID],
+					version: this.boards[this.boardID].title,
+					fromBurger: true,
+					width: 500
+				});
 		}
-		/*showDialog (dialog)
-		{
-			if(this.studio.system.platform () === 'browser' || !this.fromBurger) {
-				this.close();
-				if(dialog == 'esp')
-					this.studio.workspace.showDialog (FlashMicropythonESP, {
-						device: this.device,
-						width: 500
-					});
-				else if(dialog == 'micro1')
-					this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
-						device: this.device,
-						version: 1,
-						width: 500
-					});
-				else if(dialog == 'micro2')
-					this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
-						device: this.device,
-						version: 2,
-						width: 500
-					});
-			} else {
-				let board = this.boards[this.boardID].title;
-
-				if(board == 'ESP8266/32')
-					this.studio.workspace.showDialog (FlashMicropythonESP, {
-						device: this.devices[this.boardID],
-						fromBurger: true,
-						width: 500
-					});
-				else if(board == 'Micro:bit V1')
-					this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
-						device: this.device,
-						version: 1,
-						fromBurger: true,
-						width: 500
-					});
-				else if(board == 'Micro:bit V2')
-					this.studio.workspace.showDialog (FlashMicropythonMicrobit, {
-						device: this.device,
-						version: 2,
-						fromBurger: true,
-						width: 500
-					});
-			}
-		}*/
 	}
 };
 </script>

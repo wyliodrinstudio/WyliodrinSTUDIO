@@ -81,6 +81,22 @@ let flash = {
 			studio.workspace.warn('FLASH_NULL');
 			return null;
 		}
+	},
+
+	/**
+	 * This function returns a flasher object by its name.
+	 * 	
+	 * @param {string} name - flasher name
+	 */
+	getFlasherByName(name) {
+		if(name !== null) {
+			for(let flasher of this.flashers)
+				if(flasher.name == name) return flasher;
+			return null;
+		} else {
+			studio.workspace.warn('FLASH_NULL');
+			return null;
+		}
 	}
 };
 

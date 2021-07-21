@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import FlashSelectDevice from '../../../flash/flash/views/FlashSelectDevice.vue'
+import FlashSelectDevice from '../../../flash/flash/views/FlashSelectDevice.vue';
 
 let defaults = {};
 

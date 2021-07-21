@@ -1,7 +1,7 @@
 <template>
 	<v-card>
 		<v-card-title>
-			<span class="headline">{{$t('FLASH_MICROBIT')}} V{{this.version.substr(this.version.length - 1)}}</span>
+			<span class="headline">{{$t('FLASH_MICROBIT')}} {{this.version.substr(this.version.length - 2)}}</span>
 		</v-card-title>
 		<v-card-text>
 			<div>
@@ -76,9 +76,9 @@ export default {
 		},
 		async readHex ()
 		{
-			if(this.version == 'micro1')
+			if(this.version == 'Micro:bit V1')
 				this.buffer = await this.studio.filesystem.loadDataFile('flash/flash.microbit', 'micropython/microbit-v1.0.1.hex');
-			else if(this.version == 'micro2')
+			else if(this.version == 'Micro:bit V2')
 				this.buffer = await this.studio.filesystem.loadDataFile('flash/flash.microbit', 'micropython/microbit-v2.0.0.hex');
 		},
 		async connect ()
