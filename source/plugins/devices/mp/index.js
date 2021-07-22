@@ -245,6 +245,7 @@ export function setup (options, imports, register)
 					{
 						let options = await studio.workspace.showDialog (MicroPythonConnectionDialog, {
 							device: device,
+							webSerial: port,
 							electron: studio.system.platform () === 'electron',
 							width: '500px'
 						});

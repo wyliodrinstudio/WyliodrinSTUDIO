@@ -71,11 +71,12 @@ export default {
 		showDialog ()
 		{
 			if(this.studio.system.platform () === 'browser' || !this.fromBurger) {
-				this.close();
-				
-				this.studio.workspace.showDialog (this.studio.flash.getFlasher(this.boardID).dialogVue, {
+				this.close();			
+				let neededFlasher = this.studio.flash.getFlasher(this.boardID);
+
+				this.studio.workspace.showDialog (neededFlasher.dialogVue, {
 					device: this.device,
-					version: this.boards[this.boardID].title,
+					version: neededFlasher.name,
 					width: 500
 				});
 			} else 

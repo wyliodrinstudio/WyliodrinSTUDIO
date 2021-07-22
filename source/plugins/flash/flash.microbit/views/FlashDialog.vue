@@ -102,10 +102,17 @@ export default {
 				this.progress.started = false;
 			} else {
 				let devices = usb.getDeviceList();
-				if(!this.fromBurger)
-					devices = devices.filter(device => device.deviceDescriptor.idProduct === parseInt(this.device.properties.productId, 16) && device.deviceDescriptor.idVendor === parseInt(this.device.properties.vendorId, 16));
-				else
-					devices = devices.filter(device => device.deviceDescriptor.idProduct === parseInt(this.device.productId, 16) && device.deviceDescriptor.idVendor === parseInt(this.device.vendorId, 16));
+
+				if(this.studio.system.platform() == 'electron') {
+					if(!this.fromBurger)
+						devices = devices.filter(device => device.deviceDescriptor.idProduct === parseInt(this.device.properties.productId, 16) && device.deviceDescriptor.idVendor === parseInt(this.device.properties.vendorId, 16));
+					else
+						devices = devices.filter(device => device.deviceDescriptor.idProduct === parseInt(this.device.productId, 16) && device.deviceDescriptor.idVendor === parseInt(this.device.vendorId, 16));
+				} else {
+					let info = await this.device.getInfo();
+
+					devices = devices.filter(device => device.deviceDescriptor.idProduct === info.usbProductId && device.deviceDescriptor.idVendor === info.usbVendorId);
+				}
 
 				if(devices.length != 1) {
 					this.progress.text = this.$t('FLASH_DEVICE_NOT_FOUND');

@@ -199,7 +199,10 @@ export class SerialPort extends EventEmitter {
 			}
 		});
 	}
-		
+
+	getPort() {
+		return this.portConnect;
+	}		
 }
 
 let serialport = {

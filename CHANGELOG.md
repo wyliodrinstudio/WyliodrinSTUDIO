@@ -1,6 +1,8 @@
 ## Wyliodrin STUDIO 2.3.3
  * **added** new dialogs for connecting to MicroPython
  * **added** GitLab downloader
+ * **added** MicroPython flasher with support for ESP8266/32 and Micro:bit V1/2
+ * **added** support for some functions of WebSerial API to the SerialPort plugin
 
 ## Wyliodrin STUDIO 2.3.2
   * **fixed** default project not found

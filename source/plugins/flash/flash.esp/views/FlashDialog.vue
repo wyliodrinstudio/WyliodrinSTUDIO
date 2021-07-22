@@ -56,15 +56,17 @@ export default {
 		{
 			this.progress.started = true;
 
-			if(!this.device) {
+			if(!this.device || this.studio.system.platform() == 'browser') {
 				this.progress.text = this.$t('FLASH_SELECT_DEVICE');
 				this.progress.color = 'teal';
 				this.progress.value = 0;
 
 				try {
-					this.port = await navigator.serial.requestPort({
-						filters: [{usbVendorId: 0x1a86}]
-					});
+					if(!this.device)
+						this.port = await navigator.serial.requestPort({
+							filters: [{usbVendorId: 0x1a86}]
+						});
+					else this.port = this.device;
 
 					await this.flash(this.port);
 				} 
