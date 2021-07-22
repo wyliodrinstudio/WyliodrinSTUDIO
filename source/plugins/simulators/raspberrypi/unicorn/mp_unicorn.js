@@ -338,6 +338,7 @@ export function emulator (uc, firmware) {
 			pins_y = value_lo;
 			events.emit ('pins', pins_y.toString(2));
 			emu.mem_write(GPIO_Y_IDR, int_to_bytes(pins_y));
+			emu.mem_write(GPIO_Y_ODR, int_to_bytes(pins_y));
 		} else if (addr_lo == SERVO_1_ANGLE) {
 			servo_target = value_lo;
 			rotate_servo();
@@ -435,6 +436,7 @@ export function emulator (uc, firmware) {
 
 	return {
 		events,
-		inject: inject
+		inject: inject,
+		hook_write: hook_write
 	};
 }

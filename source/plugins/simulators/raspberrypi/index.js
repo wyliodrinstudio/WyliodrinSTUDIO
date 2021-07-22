@@ -99,9 +99,17 @@ function updateComponentsFromMP(pins, generic_raspberrypi) {
 	update_components();
 }
 
-let pins = 0;
+function cleanZeros(strArray) {
+	while (strArray.length > 1 && strArray[0] == '0') {
+		strArray = strArray.substring(1);
+	}
 
-let mp = {
+	return strArray;
+}
+
+let pins = '';
+
+export let mp = {
 
 };
 
@@ -144,6 +152,26 @@ let device_simulator_raspberrypi = {
 					device.properties.isRunning = false;
 					workspace.updateDevice(device);
 				}
+			});
+
+			// When button is pressed, change pin state
+			generic_raspberrypi.events.on('button', (pinToWrite) => {
+				let index = pinToWrite;
+
+				// Check state of pin array and modify button pin state
+				if (pins.length < index) {
+					pins = '1' + '0'.repeat(index - pins.length) + pins;
+				} else {
+					let isActive = pins[pins.length - index - 1] == '1' ? 1 : 0;
+					if (isActive) {
+						pins = pins.substring(0, pins.length - index - 1) + '0' + pins.substring(pins.length - index);
+					} else {
+						pins = pins.substring(0, pins.length - index - 1) + '1' + pins.substring(pins.length - index);
+					}
+				}
+				pins = cleanZeros(pins);
+
+				mp.hook_write(null, null, 0x40000210, null, null,  parseInt(pins, 2), null, null);
 			});
 
 			if (_.isObject(device)) {

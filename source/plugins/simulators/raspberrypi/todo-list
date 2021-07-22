@@ -11,4 +11,5 @@ ToDo-List:
 DE DECOMENTAT LINIA 47 DIN device.rpk/index.js
 
 Bogdan TO-DO:
-	- Buttons
+	- Buttons (done for now)
+	- Reload micropython on project change

@@ -41,6 +41,8 @@ class GPIO:
 	LOW = 0
 	BOARD = 100
 	BCM = 0
+	IN = -5
+	OUT = 5
 
 	def setmode(mode):
 		if mode == GPIO.BOARD:
@@ -48,11 +50,19 @@ class GPIO:
 		elif mode == GPIO.BCM:
 			GPIO.BOARD = -100
 
+	# To do: create logic
+	def setup(givenPin, mode, pull_up_down='pull_up_down=GPIO.PUD_DOWN'):
+		return True
 
 	def output(givenPin, mode):
 		givenPin = convertToBCM(givenPin, GPIO.BOARD)
 		pin = machine.Pin(str(givenPin))
-		if mode == GPIO.HIGH:
+		if mode == GPIO.HIGH or mode == True or mode == 1:
 			pin(1)
-		elif mode == GPIO.LOW:
+		elif mode == GPIO.LOW or mode == False or mode == 0:
 			pin(0)
+
+	def input(givenPin):
+		givenPin = convertToBCM(givenPin, GPIO.BOARD)
+		pin = machine.Pin(str(givenPin))
+		return pin()
