@@ -190,6 +190,7 @@
 		"serialport": "^9.0.1",
 		"ssh2": "^0.8.9",
 		"tree-kill": "^1.2.1",
-		"unzipper": "^0.10.5"
+		"unzipper": "^0.10.5",
+		"worker-loader": "^3.0.8"
 	}
 }

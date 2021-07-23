@@ -146,7 +146,11 @@ module.exports = env => {
 				{
 					test: /\.ttf$/,
 					use: ['file-loader']
-				}
+				},
+				{
+					test: /\.worker\.js$/,
+					use: { loader: "worker-loader" },
+				},
 				// {
 				// 	test: /\.ts$/,
 				// 	loader: 'ts-loader',

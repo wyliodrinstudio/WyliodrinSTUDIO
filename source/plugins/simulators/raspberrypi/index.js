@@ -1,5 +1,4 @@
-import { emulator } from './unicorn/mp_unicorn.js';
-import unicorn from './unicorn/unicorn-arm.min.js';
+import Worker from 'worker-loader!./workers/unicorn.worker.js';
 
 let studio = null;
 let simulator = {
@@ -15,6 +14,7 @@ const supportedLibraries = [
 	'import RPi.GPIO as GPIO',
 ];
 
+let worker = new Worker();
 
 import _ from 'lodash';
 import RaspberrypiSimulator from './views/RaspberrypiSimulator.vue';
@@ -69,18 +69,6 @@ function loadMicroPythonConsole() {
 	studio.console.reset ();	
 }
 
-// Loads the code from editor into MicroPython
-function runEditorCode(code) {
-	if (code.toString() === '') return;
-	
-	mp.inject(String.fromCharCode(3)); // CTRL-C
-	mp.inject(String.fromCharCode(1)); // CTRL-A - MicroPython raw REPL
-	mp.inject(String.fromCharCode(4)); // CTRL-D
-	mp.inject(code);
-	mp.inject(String.fromCharCode(4));
-	mp.inject(String.fromCharCode(2)); // CTRL-B - stop raw REPL
-}
-
 // Get state of each pin, set the value and update the components
 function updateComponentsFromMP(pins, generic_raspberrypi) {
 	try {
@@ -109,10 +97,6 @@ function cleanZeros(strArray) {
 
 let pins = '';
 
-export let mp = {
-
-};
-
 let librariesCode = '';
 
 let device_simulator_raspberrypi = {
@@ -121,38 +105,44 @@ let device_simulator_raspberrypi = {
 	 * @param  {Object} device The 'device' object in the platform
 	 */
 	async connect(device) {
-		if (simulator.connected === false) {
+		if (simulator.connected === false) {			
 			librariesCode = await readLibraries();
 			// Initialize MicroPython console
 			let firmware = await readFirmware();
-			mp = emulator(unicorn, firmware);
+			worker.postMessage({firmware: firmware, messageType: 'load-mp'});
 			loadMicroPythonConsole();
+
+			// Write text from studio console to micropython
 			studio.console.register ((event, id, data) => {
 				if (id ===  'unicorn_micropython' && event === 'data') {
-					mp.inject (data);
+					worker.postMessage({data: data, messageType: 'console-data'});
 				}
 			});
 
-			// Listens to chars written on processor
-			mp.events.on ('data', (data) => {
-				studio.console.write ('unicorn_micropython', data);
-			});
-
-			// Listens to GPIO writes
-			mp.events.on('pins', (writtenPins) => {
-				pins = writtenPins;
-				updateComponentsFromMP(pins, generic_raspberrypi);
-			});
-
-			// Update run button when proccess is killed
-			mp.events.on('killed', () => {
-				let device = studio.workspace.getDevice();
-				if (device && device.properties.isRunning) {
-					simulator.isRunning = false;
-					device.properties.isRunning = false;
-					workspace.updateDevice(device);
+			// Write text from micropython to studio console
+			worker.onmessage = (event) => {
+				switch (event.data.messageType){
+					case 'console-data': {
+						let data = event.data.data;
+						studio.console.write ('unicorn_micropython', data);
+						break;
+					}
+					case 'pins': {
+						pins = event.data.pins;
+						updateComponentsFromMP(pins, generic_raspberrypi);
+						break;
+					}
+					case 'killed': {
+						let device = studio.workspace.getDevice();
+						if (device && device.properties.isRunning) {
+							simulator.isRunning = false;
+							device.properties.isRunning = false;
+							workspace.updateDevice(device);
+						}
+						break;
+					}
 				}
-			});
+			};
 
 			// When button is pressed, change pin state
 			generic_raspberrypi.events.on('button', (pinToWrite) => {
@@ -171,7 +161,7 @@ let device_simulator_raspberrypi = {
 				}
 				pins = cleanZeros(pins);
 
-				mp.hook_write(null, null, 0x40000210, null, null,  parseInt(pins, 2), null, null);
+				worker.postMessage({pins: pins, messageType: 'pins'});
 			});
 
 			if (_.isObject(device)) {
@@ -197,7 +187,6 @@ let device_simulator_raspberrypi = {
 				device.status = 'DISCONNECTED';
 				workspace.updateDevice(device);
 				simulator.connected = false;
-
 				return true;
 			}
 		}
@@ -302,7 +291,7 @@ export default function setup(options, imports, register) {
 				let device = studio.workspace.getDevice();
 
 				if (device && device.properties.isRunning === false) {
-					runEditorCode(code);
+					worker.postMessage({code: code, messageType: 'run-code'});
 
 					// Configure workspace
 					simulator.isRunning = true;
@@ -347,7 +336,7 @@ export default function setup(options, imports, register) {
 		
 		// Terminate MicroPython process
 		if (project && project.language === 'python') {
-			mp.inject(String.fromCharCode(3));
+			worker.postMessage({data: String.fromCharCode(3), messageType: 'console-data'});
 		}
 	}, 'plugins/simulators/raspberrypi/data/img/icons/stop-icon.svg', {
 		visible() {

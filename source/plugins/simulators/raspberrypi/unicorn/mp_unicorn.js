@@ -286,9 +286,9 @@ export function emulator (uc, firmware) {
 				/* TODO */
 			}
 		} else if (addr_lo == RTC_TICKS_MS) {
-			emu.mem_write(RTC_TICKS_MS, int_to_bytes(parseInt(window.performance.now() - epoch, 10)));
+			// emu.mem_write(RTC_TICKS_MS, int_to_bytes(parseInt(window.performance.now() - epoch, 10)));
 		} else if (addr_lo == RTC_TICKS_US) {
-			emu.mem_write(RTC_TICKS_US, int_to_bytes(parseInt((window.performance.now() - epoch) * 1000, 10)));
+			// emu.mem_write(RTC_TICKS_US, int_to_bytes(parseInt((window.performance.now() - epoch) * 1000, 10)));
 		} else if (addr_lo == I2C_DATA) {
 			// for (let key of i2c_devices.keys()) {
 			// 	pins_x = i2c_devices.get(key).read('X', pins_x);
@@ -430,7 +430,7 @@ export function emulator (uc, firmware) {
 	emu.hook_add(uc.HOOK_MEM_READ, hook_read, null, PERIPHERAL_ADDRESS, PERIPHERAL_ADDRESS + PERIPHERAL_SIZE);
 	emu.hook_add(uc.HOOK_MEM_WRITE, hook_write, null, PERIPHERAL_ADDRESS, PERIPHERAL_ADDRESS + PERIPHERAL_SIZE);
 
-	epoch = window.performance.now();
+	// epoch = window.performance.now();
 
 	execute();
 
