@@ -1,4 +1,4 @@
-import Worker from 'worker-loader!./workers/unicorn.worker.js';
+import Worker from 'worker-loader!./workers/unicorn.wpworker.js';
 
 let studio = null;
 let simulator = {

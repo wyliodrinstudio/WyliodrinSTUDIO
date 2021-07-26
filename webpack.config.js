@@ -148,7 +148,7 @@ module.exports = env => {
 					use: ['file-loader']
 				},
 				{
-					test: /\.worker\.js$/,
+					test: /\.wpworker\.js$/,
 					use: { loader: "worker-loader" },
 				},
 				// {
