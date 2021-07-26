@@ -22,6 +22,7 @@
 		</v-card-text>
 
 		<v-card-actions>
+			<v-btn text @click="flash">{{$t('DEVICE_MP_FLASH')}}</v-btn>
 			<v-spacer></v-spacer>
 			<v-btn text @click="connect">{{$t('DEVICE_MP_CONNECT')}}</v-btn>
 			<v-btn text @click="close">{{$t('DEVICE_MP_EXIT')}}</v-btn>
@@ -30,12 +31,13 @@
 </template>
 
 <script>
+import FlashSelectDevice from '../../../flash/flash/views/FlashSelectDevice.vue';
 
 let defaults = {};
 
 export default {
 	name: 'MicroPythonConnectionDialog',
-	props: ['device'],
+	props: ['device', 'electron', 'webSerial'],
 	data ()
 	{
 		let defvalue = defaults[this.device.address];
@@ -87,6 +89,38 @@ export default {
 		close ()
 		{
 			this.$root.$emit('submit');
+		},
+		async flash()
+		{
+			if(this.electron) {
+				let neededFlasher = this.studio.flash.getFlasherByVP(this.device.properties.vendorId.toLowerCase(), this.device.properties.productId.toLowerCase());
+
+				if(neededFlasher == null)
+					this.studio.workspace.showDialog (FlashSelectDevice, {
+						device: this.device,
+						width: 500
+					});
+				else
+					this.studio.workspace.showDialog(neededFlasher.dialogVue, {
+						device: this.device,
+						width: 500
+					});
+			} else {
+				let portConnect = this.webSerial.getPort();
+				let info = await portConnect.getInfo();
+				let neededFlasher = this.studio.flash.getFlasherByVP(info.usbVendorId.toString(16).toLowerCase(), info.usbProductId.toString(16).toLowerCase());
+
+				if(neededFlasher == null)
+					this.studio.workspace.showDialog (FlashSelectDevice, {
+						device: portConnect,
+						width: 500
+					});
+				else
+					this.studio.workspace.showDialog(neededFlasher.dialogVue, {
+						device: portConnect,
+						width: 500
+					});
+			}
 		}
 	}
 };

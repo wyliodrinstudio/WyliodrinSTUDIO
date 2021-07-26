@@ -181,6 +181,7 @@
 		"axios": "^0.21.1",
 		"bonjour-hap": "^3.5.4",
 		"chart.js": "^2.9.4",
+		"dapjs": "^2.3.0",
 		"drivelist": "^8.0.6",
 		"electron-is-dev": "^1.1.0",
 		"electron-updater": "^4.2.0",
@@ -190,6 +191,7 @@
 		"serialport": "^9.0.1",
 		"ssh2": "^0.8.9",
 		"tree-kill": "^1.2.1",
-		"unzipper": "^0.10.5"
+		"unzipper": "^0.10.5",
+		"usb": "^1.6.4"
 	}
 }
