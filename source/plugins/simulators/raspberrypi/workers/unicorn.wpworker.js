@@ -13,7 +13,7 @@ const runEditorCode = (code) => {
 	mp.inject(String.fromCharCode(2)); // CTRL-B - stop raw REPL
 };
 
-let mp = { };
+let mp = null;
 
 onmessage = (event) => {
 	let messageType = event.data.messageType;
@@ -55,6 +55,12 @@ onmessage = (event) => {
 			let code = event.data.code;
 			runEditorCode(code);
 			break;
+		}
+
+		case 'remove-listeners': {
+			mp.events.removeAllListeners('data');
+			mp.events.removeAllListeners('pins');
+			mp.events.removeAllListeners('killed');
 		}
 	}
 };

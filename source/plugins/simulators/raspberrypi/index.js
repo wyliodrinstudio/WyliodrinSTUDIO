@@ -12,7 +12,7 @@ const supportedLibraries = [
 	'import RPi.GPIO as GPIO',
 ];
 
-const worker = new Worker('./workers/unicorn.wpworker.js', {type: 'module'});
+let worker = null;
 
 import _ from 'lodash';
 import RaspberrypiSimulator from './views/RaspberrypiSimulator.vue';
@@ -103,64 +103,60 @@ let device_simulator_raspberrypi = {
 	 * @param  {Object} device The 'device' object in the platform
 	 */
 	async connect(device) {
-		if (simulator.connected === false) {			
-			librariesCode = await readLibraries();
-			// Initialize MicroPython console
-			let firmware = await readFirmware();
-			worker.postMessage({firmware: firmware, messageType: 'load-mp'});
-			loadMicroPythonConsole();
+		if (simulator.connected === false) {
+			if (!worker) {			
+				worker = new Worker('./workers/unicorn.wpworker.js', {type: 'module'});
+				librariesCode = await readLibraries();
+				// Initialize MicroPython console
+				let firmware = await readFirmware();
+				worker.postMessage({firmware: firmware, messageType: 'load-mp'});
+				loadMicroPythonConsole();
 
-			// Write text from studio console to micropython
-			studio.console.register ((event, id, data) => {
-				if (id ===  'unicorn_micropython' && event === 'data') {
-					worker.postMessage({data: data, messageType: 'console-data'});
-				}
-			});
-
-			worker.onmessage = (event) => {
-				switch (event.data.messageType){
-					// Write text from micropython to studio console
-					case 'console-data': {
-						let data = event.data.data;
-						studio.console.write ('unicorn_micropython', data);
-						break;
-					}
-					case 'pins': {
-						pins = event.data.pins;
-						updateComponentsFromMP(pins, generic_raspberrypi);
-						break;
-					}
-					case 'killed': {
-						let device = studio.workspace.getDevice();
-						if (device && device.properties.isRunning) {
-							simulator.isRunning = false;
-							device.properties.isRunning = false;
-							workspace.updateDevice(device);
+				worker.onmessage = (event) => {
+					switch (event.data.messageType){
+						// Write text from micropython to studio console
+						case 'console-data': {
+							let data = event.data.data;
+							studio.console.write ('unicorn_micropython', data);
+							break;
 						}
-						break;
+						case 'pins': {
+							pins = event.data.pins;
+							updateComponentsFromMP(pins, generic_raspberrypi);
+							break;
+						}
+						case 'killed': {
+							let device = studio.workspace.getDevice();
+							if (device && device.properties.isRunning) {
+								simulator.isRunning = false;
+								device.properties.isRunning = false;
+								workspace.updateDevice(device);
+							}
+							break;
+						}
 					}
-				}
-			};
+				};
 
-			// When button is pressed, change pin state
-			generic_raspberrypi.events.on('button', (pinToWrite) => {
-				let index = pinToWrite;
+				// When button is pressed, change pin state
+				generic_raspberrypi.events.on('button', (pinToWrite) => {
+					let index = pinToWrite;
 
-				// Check state of pin array and modify button pin state
-				if (pins.length < index) {
-					pins = '1' + '0'.repeat(index - pins.length) + pins;
-				} else {
-					let isActive = pins[pins.length - index - 1] == '1' ? 1 : 0;
-					if (isActive) {
-						pins = pins.substring(0, pins.length - index - 1) + '0' + pins.substring(pins.length - index);
+					// Check state of pin array and modify button pin state
+					if (pins.length < index) {
+						pins = '1' + '0'.repeat(index - pins.length) + pins;
 					} else {
-						pins = pins.substring(0, pins.length - index - 1) + '1' + pins.substring(pins.length - index);
+						let isActive = pins[pins.length - index - 1] == '1' ? 1 : 0;
+						if (isActive) {
+							pins = pins.substring(0, pins.length - index - 1) + '0' + pins.substring(pins.length - index);
+						} else {
+							pins = pins.substring(0, pins.length - index - 1) + '1' + pins.substring(pins.length - index);
+						}
 					}
-				}
-				pins = cleanZeros(pins);
+					pins = cleanZeros(pins);
 
-				worker.postMessage({pins: pins, messageType: 'pins'});
-			});
+					worker.postMessage({pins: pins, messageType: 'pins'});
+				});
+			}
 
 			if (_.isObject(device)) {
 				process.nextTick(() => {
@@ -185,6 +181,10 @@ let device_simulator_raspberrypi = {
 				device.status = 'DISCONNECTED';
 				workspace.updateDevice(device);
 				simulator.connected = false;
+				worker.postMessage({messageType: 'remove-listeners'});
+				worker.terminate();
+				studio.console.reset();
+				worker = null;
 				return true;
 			}
 		}
@@ -200,6 +200,13 @@ let device_simulator_raspberrypi = {
 export default function setup(options, imports, register) {
 	studio = imports;
 	workspace = studio.workspace.registerDeviceDriver('raspberrypi_simulator', device_simulator_raspberrypi);
+
+	// Write text from studio console to micropython
+	studio.console.register ((event, id, data) => {
+		if (id ===  'unicorn_micropython' && event === 'data') {
+			worker.postMessage({data: data, messageType: 'console-data'});
+		}
+	});
 
 	// Register a new device: 'RaspberryPi simulator'
 	workspace.updateDevices([{
