@@ -13,6 +13,8 @@ DE DECOMENTAT LINIA 47 DIN device.rpk/index.js
 Bogdan TO-DO:
 	- Buttons (done for now)
 	- Multithreading:
+		- Electron compatibility (done)
+		- Kill thread on disconnect
 		- Make stop button work properly
-		- Electron compatibility
+		- Import python libraries instead of prepend
 	- Reload micropython on project change

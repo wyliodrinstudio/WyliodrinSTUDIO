@@ -1,5 +1,3 @@
-import Worker from 'worker-loader!./workers/unicorn.wpworker.js';
-
 let studio = null;
 let simulator = {
 	connected: false,
@@ -14,7 +12,7 @@ const supportedLibraries = [
 	'import RPi.GPIO as GPIO',
 ];
 
-let worker = new Worker();
+const worker = new Worker('./workers/unicorn.wpworker.js', {type: 'module'});
 
 import _ from 'lodash';
 import RaspberrypiSimulator from './views/RaspberrypiSimulator.vue';
@@ -119,9 +117,9 @@ let device_simulator_raspberrypi = {
 				}
 			});
 
-			// Write text from micropython to studio console
 			worker.onmessage = (event) => {
 				switch (event.data.messageType){
+					// Write text from micropython to studio console
 					case 'console-data': {
 						let data = event.data.data;
 						studio.console.write ('unicorn_micropython', data);

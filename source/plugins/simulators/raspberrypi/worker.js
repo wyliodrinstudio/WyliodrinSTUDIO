@@ -1,5 +1,5 @@
-import { emulator } from '../unicorn/mp_unicorn.js';
-import unicorn from '../unicorn/unicorn-arm.min.js';
+import { emulator } from './unicorn/mp_unicorn.js';
+import unicorn from './unicorn/unicorn-arm.min.js';
 
 // Loads the code from editor into MicroPython
 const runEditorCode = (code) => {
