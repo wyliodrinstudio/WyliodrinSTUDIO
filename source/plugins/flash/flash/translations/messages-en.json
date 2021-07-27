@@ -1,0 +1,82 @@
+{
+    "TOOLBAR_FLASH": {
+        "message": "Flash MicroPython",
+        "description": "Option in the Help Menu which opens a dialog that helps you flash micropython to specific boards"
+    },
+    "FLASH_SELECT_BOARD": {
+        "message": "Select board to flash",
+        "description": "Dialog asking the user to select the board he wishes to flash"
+    },
+    "FLASH_ESP": {
+        "message": "Flash MicroPython ESP Boards",
+        "description": "Dialog where the user can flash an ESP Board"
+    },
+    "FLASH_MICROBIT": {
+        "message": "Flash MicroPython Micro:bit",
+        "description": "Dialog where the user can flash a Micro:bit Board"
+    },
+    "START": {
+        "message": "START",
+        "description": "A button that starts a process"
+    },
+    "BACK": {
+        "message": "BACK",
+        "description": "A button that returns to another dialog"
+    },
+    "CANCEL": {
+        "message": "CANCEL",
+        "description": "A button that cancels the current action"
+    },
+    "SELECT": {
+        "message": "SELECT",
+        "description": "A button that submits the action"
+    },
+    "FLASH_CANCEL_DIALOG": {
+        "message": "Cancel Flashing",
+        "description": "Dialog asking the user if he's sure he wants to cancel."
+    },
+    "FLASH_CANCEL_TEXT_QUESTION": {
+        "message": "Are you sure you want to cancel?",
+        "description": "The question of the cancel dialog."
+    },
+    "FLASH_CANCEL_TEXT": {
+        "message": "The board will be unusable until you flash it.",
+        "description": "A warning for the user that his board will be unusable."
+    },
+    "FLASH_SELECT_DEVICE": {
+        "message": "Select the device to flash",
+        "description": "Message saying the user to select a device to flash"
+    },
+    "FLASH_WRITING_PROGRESS": {
+        "message": "Writing progress:",
+        "description": "A message indicating the writing progress"
+    },
+    "FLASH_CONNECTING_TEXT": {
+        "message": "Connecting to device...",
+        "description": "A message indicating the device is connecting"
+    },
+    "FLASH_INITIALIZING_TEXT": {
+        "message": "Initializing device...",
+        "description": "A message indicating the device is initializing"
+    },
+    "FLASH_UNKNOWN_BOARD_TEXT": {
+        "message": "Unknown board",
+        "description": "A message indicating the device is an unknown board"
+    },
+    "FLASH_ERASING_DEVICE_TEXT": {
+        "message": "Erasing device...",
+        "description": "A message indicating the device is erasing"
+    },
+    "FLASH_COMPLETE_TEXT": {
+        "message": "All done!",
+        "description": "A message indicating the device has been flashed"
+    },
+    "FLASH_DISCONNECTING_TEXT": {
+        "message": "Disconnecting from device...",
+        "description": "A message indicating the device is disconnecting"
+    },
+    "FLASH_ERROR_DEVICE_NOT_FOUND": {
+        "message": "Error: Device not found, please try again.",
+        "description": "A message indicating the device was not found"
+    }
+}
