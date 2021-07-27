@@ -1,0 +1,11 @@
+{
+    "name": "flash.microbit",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace", "serialport", "filesystem", "system", "flash"],
+        "provides": [],
+        "target": ["electron", "browser"]
+    }
+}

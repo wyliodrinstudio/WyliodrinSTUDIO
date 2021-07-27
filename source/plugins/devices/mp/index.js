@@ -235,20 +235,7 @@ export function setup (options, imports, register)
 
 		async connect(device/*, options*/)
 		{
-			let chrome = !!window.chrome;
-			let https = (location.protocol === 'https:');
-
-			if(chrome == false) 
-			{
-				await studio.workspace.showDialog (EdgeOrChrome, {
-					width: '500px'
-				});
-			} else if(https == false) 
-			{
-				await studio.workspace.showDialog (UpgradeToHttps, {
-					width: '500px'
-				});
-			} else if(serialport.isAvailable ())
+			if(serialport.isAvailable ())
 			{
 				if(_.isObject(device))
 				{
@@ -258,6 +245,8 @@ export function setup (options, imports, register)
 					{
 						let options = await studio.workspace.showDialog (MicroPythonConnectionDialog, {
 							device: device,
+							webSerial: port,
+							electron: studio.system.platform () === 'electron',
 							width: '500px'
 						});
 						if (options) 
@@ -341,10 +330,26 @@ export function setup (options, imports, register)
 				}
 			}
 			else
-			{				
-				await studio.workspace.showDialog (EdgeOrChrome, {
-					width: '500px'
-				});
+			{	
+				let chrome = !!window.chrome;
+				let https = (location.protocol === 'https:');
+
+				if(chrome == false) 
+				{
+					await studio.workspace.showDialog (EdgeOrChrome, {
+						width: '500px'
+					});
+				} else if(https == false) 
+				{
+					await studio.workspace.showDialog (UpgradeToHttps, {
+						width: '500px'
+					});
+				} else 
+				{			
+					await studio.workspace.showDialog (EdgeOrChrome, {
+						width: '500px'
+					});
+				}
 			}
 
 			setTimeout(() => {
