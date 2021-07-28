@@ -249,7 +249,6 @@ export function emulator (uc, firmware) {
 				try {
 					emu.emu_stop();
 					waiting = true;
-					events.emit('killed');
 				}
 				catch (e){
 					console.log(e, '\n');
@@ -301,6 +300,8 @@ export function emulator (uc, firmware) {
 
 	function hook_write(handle, type, addr_lo, addr_hi, size,  value_lo, value_hi, user_data) {
 		if (addr_lo == UART0_TXR) {
+			if (value_lo == 4)
+				events.emit('killed');
 			if (value_lo == 4 && in_script) {
 				if (in_error == true) {
 					block_output = 1;

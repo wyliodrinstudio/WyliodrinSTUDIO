@@ -45,7 +45,7 @@ async function readLibraries() {
 			code = code + libraryCode + '\n';
 		}
 		return code;
-	} catch(err) {
+	} catch (err) {
 		studio.workspace.error(err);
 	}
 }
@@ -62,9 +62,9 @@ function cleanLoadedLibraries(code) {
 
 // Opens studio console with MicroPython
 function loadMicroPythonConsole() {
-	studio.console.show ();
-	studio.console.select ('unicorn_micropython');
-	studio.console.reset ();	
+	studio.console.show();
+	studio.console.select('unicorn_micropython');
+	studio.console.reset();
 }
 
 // Get state of each pin, set the value and update the components
@@ -79,7 +79,7 @@ function updateComponentsFromMP(pins, generic_raspberrypi) {
 			}
 		}
 	} catch (e) {
-		studio.showError ('DEVICE_SIMULATOR_RASPBERRY_PI_RUN_ERROR', {error: e.message});
+		studio.showError('DEVICE_SIMULATOR_RASPBERRY_PI_RUN_ERROR', { error: e.message });
 	}
 
 	update_components();
@@ -93,6 +93,37 @@ function cleanZeros(strArray) {
 	return strArray;
 }
 
+async function initMPWorker() {
+	let firmware = await readFirmware();
+	worker = new Worker('./workers/unicorn.wpworker.js', { type: 'module' });
+	worker.postMessage({ firmware: firmware, messageType: 'load-mp' });
+
+	worker.onmessage = (event) => {
+		switch (event.data.messageType) {
+			// Write text from micropython to studio console
+			case 'console-data': {
+				let data = event.data.data;
+				studio.console.write('unicorn_micropython', data);
+				break;
+			}
+			case 'pins': {
+				pins = event.data.pins;
+				updateComponentsFromMP(pins, generic_raspberrypi);
+				break;
+			}
+			case 'killed': {
+				let device = studio.workspace.getDevice();
+				if (device && device.properties.isRunning) {
+					simulator.isRunning = false;
+					device.properties.isRunning = false;
+					workspace.updateDevice(device);
+				}
+				break;
+			}
+		}
+	};
+}
+
 let pins = '';
 
 let librariesCode = '';
@@ -104,39 +135,13 @@ let device_simulator_raspberrypi = {
 	 */
 	async connect(device) {
 		if (simulator.connected === false) {
-			if (!worker) {			
-				worker = new Worker('./workers/unicorn.wpworker.js', {type: 'module'});
+			if (!worker) {
 				librariesCode = await readLibraries();
 				// Initialize MicroPython console
-				let firmware = await readFirmware();
-				worker.postMessage({firmware: firmware, messageType: 'load-mp'});
+				await initMPWorker();
 				loadMicroPythonConsole();
 
-				worker.onmessage = (event) => {
-					switch (event.data.messageType){
-						// Write text from micropython to studio console
-						case 'console-data': {
-							let data = event.data.data;
-							studio.console.write ('unicorn_micropython', data);
-							break;
-						}
-						case 'pins': {
-							pins = event.data.pins;
-							updateComponentsFromMP(pins, generic_raspberrypi);
-							break;
-						}
-						case 'killed': {
-							let device = studio.workspace.getDevice();
-							if (device && device.properties.isRunning) {
-								simulator.isRunning = false;
-								device.properties.isRunning = false;
-								workspace.updateDevice(device);
-							}
-							break;
-						}
-					}
-				};
-
+				
 				// When button is pressed, change pin state
 				generic_raspberrypi.events.on('button', (pinToWrite) => {
 					let index = pinToWrite;
@@ -154,7 +159,14 @@ let device_simulator_raspberrypi = {
 					}
 					pins = cleanZeros(pins);
 
-					worker.postMessage({pins: pins, messageType: 'pins'});
+					worker.postMessage({ pins: pins, messageType: 'pins' });
+				});
+
+				generic_raspberrypi.events.on('project-load', async () => {
+					worker.postMessage({ messageType: 'remove-listeners' });
+					worker.terminate();
+					await initMPWorker();
+					loadMicroPythonConsole();
 				});
 			}
 
@@ -162,7 +174,7 @@ let device_simulator_raspberrypi = {
 				process.nextTick(() => {
 					device.status = 'CONNECTED';
 					workspace.updateDevice(device);
-				});				
+				});
 
 				simulator.connected = true;
 
@@ -181,10 +193,12 @@ let device_simulator_raspberrypi = {
 				device.status = 'DISCONNECTED';
 				workspace.updateDevice(device);
 				simulator.connected = false;
-				worker.postMessage({messageType: 'remove-listeners'});
+				worker.postMessage({ messageType: 'remove-listeners' });
 				worker.terminate();
 				studio.console.reset();
 				worker = null;
+				generic_raspberrypi.events.removeAllListeners('button');
+				generic_raspberrypi.events.removeAllListeners('project-load');
 				return true;
 			}
 		}
@@ -202,9 +216,9 @@ export default function setup(options, imports, register) {
 	workspace = studio.workspace.registerDeviceDriver('raspberrypi_simulator', device_simulator_raspberrypi);
 
 	// Write text from studio console to micropython
-	studio.console.register ((event, id, data) => {
-		if (id ===  'unicorn_micropython' && event === 'data') {
-			worker.postMessage({data: data, messageType: 'console-data'});
+	studio.console.register((event, id, data) => {
+		if (id === 'unicorn_micropython' && event === 'data') {
+			worker.postMessage({ data: data, messageType: 'console-data' });
 		}
 	});
 
@@ -224,13 +238,13 @@ export default function setup(options, imports, register) {
 	]);
 
 	// The code that should be executed in case of run button pressing
-	workspace.registerDeviceToolButton ('DEVICE_SIMULATOR_RASPBERRY_PI_RUN', 40, async () => {
+	workspace.registerDeviceToolButton('DEVICE_SIMULATOR_RASPBERRY_PI_RUN', 40, async () => {
 		try {
 			// Load the project code
 			let project = studio.projects.getCurrentProject();
 			if (!project) {
 				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_PROJECT_NOT_OPEN'));
-			} else if (project.language === 'nodejs') {	
+			} else if (project.language === 'nodejs') {
 				let filePath = studio.projects.getDefaultRunFileName(project);
 				let code = await studio.projects.loadFile(project, filePath);
 
@@ -242,7 +256,7 @@ export default function setup(options, imports, register) {
 
 					// Create the object constr`uc`tors for each library and
 					// append them to the users code
-					let librariesToLoad = 
+					let librariesToLoad =
 						'var libraries = {};\n\n' +
 						onoff +
 						lcd +
@@ -267,15 +281,15 @@ export default function setup(options, imports, register) {
 					 * 100 steps it is slowed down in order for the application not to
 					 * crash in case of an infinite loop
 					 */
-					let runToCompletion = function() {
+					let runToCompletion = function () {
 						if (simulator.isRunning && interpreter.step()) {
-							simulator.opperationsCounter ++;
+							simulator.opperationsCounter++;
 							if (simulator.opperationsCounter === 100) {
 								setTimeout(runToCompletion, 10);
 								simulator.opperationsCounter = 0;
 							} else {
 								setTimeout(runToCompletion, 1);
-							}	
+							}
 						} else {
 							simulator.isRunning = false;
 							device.properties.isRunning = false;
@@ -292,11 +306,11 @@ export default function setup(options, imports, register) {
 
 				// Set raspberry to default values and run the code
 				generic_raspberrypi.setDefault();
-				
+
 				let device = studio.workspace.getDevice();
 
 				if (device && device.properties.isRunning === false) {
-					worker.postMessage({code: code, messageType: 'run-code'});
+					worker.postMessage({ code: code, messageType: 'run-code' });
 
 					// Configure workspace
 					simulator.isRunning = true;
@@ -306,14 +320,14 @@ export default function setup(options, imports, register) {
 			} else {
 				studio.workspace.showNotification(studio.workspace.vue.$t('DEVICE_SIMULATOR_RASPBERRY_PI_LANGUAGE_INCOMPATIBLE'));
 			}
-		} catch(e) {
-			studio.showError ('DEVICE_SIMULATOR_RASPBERRY_PI_RUN_ERROR', {error: e.message});
+		} catch (e) {
+			studio.showError('DEVICE_SIMULATOR_RASPBERRY_PI_RUN_ERROR', { error: e.message });
 		}
 	}, 'plugins/simulators/raspberrypi/data/img/icons/run-icon.svg', {
 		visible() {
 
 			// The visible options of the RaspberryPi simulator run button
-			let device = studio.workspace.getDevice ();
+			let device = studio.workspace.getDevice();
 			return (device.status === 'CONNECTED' && !device.properties.isRunning);
 		},
 		enabled() {
@@ -330,7 +344,7 @@ export default function setup(options, imports, register) {
 
 		// Set the running variables of the device to false in order to make
 		// the JS interpreter to stop
-		let device = studio.workspace.getDevice ();
+		let device = studio.workspace.getDevice();
 		if (device && device.properties.isRunning) {
 			device.properties.isRunning = false;
 			simulator.isRunning = false;
@@ -338,16 +352,16 @@ export default function setup(options, imports, register) {
 		}
 
 		let project = studio.projects.getCurrentProject();
-		
+
 		// Terminate MicroPython process
 		if (project && project.language === 'python') {
-			worker.postMessage({data: String.fromCharCode(3), messageType: 'console-data'});
+			worker.postMessage({ data: String.fromCharCode(3), messageType: 'console-data' });
 		}
 	}, 'plugins/simulators/raspberrypi/data/img/icons/stop-icon.svg', {
 		visible() {
 
 			// The visible options of the RaspberryPi simulator stop button
-			let device = studio.workspace.getDevice ();
+			let device = studio.workspace.getDevice();
 			return (device.status === 'CONNECTED' && device.properties.isRunning);
 		},
 		type: 'stop'
@@ -358,11 +372,11 @@ export default function setup(options, imports, register) {
 		visible() {
 
 			// The visible options of the RaspberryPi simulator tab
-			let device = studio.workspace.getDevice ();
+			let device = studio.workspace.getDevice();
 			return (device.status === 'CONNECTED' && device.id === 'raspberrypi_simulator');
 		},
 	});
-	
+
 	// The object returned by this plugin
 	register(null, {
 		device_simulator_raspberrypi

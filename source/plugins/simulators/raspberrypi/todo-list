@@ -14,7 +14,7 @@ Bogdan TO-DO:
 	- Buttons (done for now)
 	- Multithreading:
 		- Electron compatibility (done)
-		- Kill thread on disconnect
-		- Make stop button work properly
+		- Kill thread on disconnect (done)
+		- Make stop button work properly (done)
 		- Import python libraries instead of prepend
-	- Reload micropython on project change
+	- Reload micropython on project change (done)
