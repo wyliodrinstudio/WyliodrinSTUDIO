@@ -1,4 +1,4 @@
-## Wyliodrin STUDIO 2.3.3
+## Wyliodrin STUDIO 2.4.0
  * **added** new dialogs for connecting to MicroPython
  * **added** GitLab downloader
  * **added** MicroPython flasher with support for ESP8266/32 and Micro:bit V1/2
