@@ -101,7 +101,12 @@ export default {
 
 				this.progress.started = false;
 			} else {
-				let devices = usb.getDeviceList();
+				let devices = null;
+				
+				if(this.studio.system.platform() == 'electron')
+					devices = usb.getDeviceList();
+				else
+					devices = await navigator.usb.getDevices();
 
 				if(this.studio.system.platform() == 'electron') {
 					if(!this.fromBurger)
@@ -111,7 +116,7 @@ export default {
 				} else {
 					let info = await this.device.getInfo();
 
-					devices = devices.filter(device => device.deviceDescriptor.idProduct === info.usbProductId && device.deviceDescriptor.idVendor === info.usbVendorId);
+					devices = devices.filter(device => device.productId === info.usbProductId && device.vendorId === info.usbVendorId);
 				}
 
 				if(devices.length != 1) {
@@ -136,7 +141,7 @@ export default {
 			
 			let transport = null;
 
-			if(!this.device)
+			if(!this.device || this.studio.system.platform() == 'browser')
 				transport = new DAPjs.WebUSB(device);
 			else
 				transport = new DAPjs.USB(device);
