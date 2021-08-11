@@ -61,8 +61,8 @@ let I2C_DATA = 0x40000400;
 let I2C_COMMAND = 0x40000404;
 
 let CYCLE_LIMIT = 50000;
-// let LCD_WIDTH = 64;
-// let LCD_HEIGHT = 32;
+let LCD_WIDTH = 64;
+let LCD_HEIGHT = 32;
 let EPSILON = 0.5;
 let TICK_INSN_RATIO = 2.5; // The approximate number of clock ticks per instruction found through experimentation
 let HARD_I2C_SCL_X = 9;
@@ -70,6 +70,9 @@ let HARD_I2C_SDA_X = 10;
 
 let pins_x = 0;
 let pins_y = 0;
+
+let wroteLCD = false;
+let lcdEmitted = false;
 
 class I2C {
 	constructor(address, scl, sda) {
@@ -149,36 +152,22 @@ class I2C {
 	}
 }
 
-// class LCD extends I2C {
-// 	process() {
-// 		let ctx = lcd_unicorn.getContext('2d');
-// 		ctx.fillStyle = 'rgb(255, 255, 255)';
-// 		for (let j = 0; j < LCD_HEIGHT; j++) {
-// 			for (let i = 0; i < LCD_WIDTH / 8; i++) {
-// 				if (this.buffer.length == 0) {
-// 					return;
-// 				}
-// 				let bite = this.buffer.shift();
-// 				for (let k = 7; k >= 0; k--) {
-// 					if (bite >> k & 1) {
-// 						ctx.fillRect(i * 4 * 8 + ((7 - k) * 4), j * 4, 4, 4);
-// 					} else {
-// 						ctx.clearRect(i * 4 * 8 + ((7 - k) * 4), j * 4, 4, 4);
-// 					}
-// 				}
-// 			}
-// 		}
-// 	}
-// }
+class LCD extends I2C {
+	process() {
+		if (this.buffer.length > 0) {
+			wroteLCD = true;
+		}
+	}
+}
 
-// let i2c_devices = new Map([[8, new LCD(8, [X, HARD_I2C_SCL_X], [X, HARD_I2C_SDA_X])]]);
+let i2c_devices = new Map([[8, new LCD(8, [X, HARD_I2C_SCL_X], [X, HARD_I2C_SDA_X])]]);
 
-// function write_to_i2c_devices(pins) {
-// 	// No X Y split?
-// 	for (let key of i2c_devices.keys()) {
-// 		i2c_devices.get(key).write(pins);
-// 	}
-// }
+function write_to_i2c_devices(pins) {
+	// No X Y split?
+	for (let key of i2c_devices.keys()) {
+		i2c_devices.get(key).write(pins);
+	}
+}
 
 function set_pin(pins, pin_no, val) {
 	if (val) {
@@ -192,7 +181,7 @@ function hard_i2c_write(scl, sda) {
 	let pins = pins_x;
 	pins = set_pin(pins, HARD_I2C_SCL_X, scl);
 	pins = set_pin(pins, HARD_I2C_SDA_X, sda);
-	// write_to_i2c_devices(pins);
+	write_to_i2c_devices(pins);
 	pins_x = pins;
 }
 
@@ -266,15 +255,15 @@ export function emulator (uc, firmware) {
 		} else if (addr_lo == GPIO_IDR) {
 			emu.mem_write(GPIO_IDR, int_to_bytes(user_button_state));
 		} else if (addr_lo == GPIO_X_IDR) {
-			// for (let key of i2c_devices.keys()) {
-			// 	pins_x = i2c_devices.get(key).read('X', pins_x);
-			// }
+			for (let key of i2c_devices.keys()) {
+				pins_x = i2c_devices.get(key).read('X', pins_x);
+			}
 			emu.mem_write(GPIO_X_IDR, int_to_bytes(pins_x));
 			emu.mem_write(GPIO_X_ODR, int_to_bytes(pins_x));
 		} else if (addr_lo == GPIO_Y_IDR) {
-			// for (let key of i2c_devices.keys()) {
-			// 	pins_y = i2c_devices.get(key).read('Y', pins_y);
-			// }
+			for (let key of i2c_devices.keys()) {
+				pins_y = i2c_devices.get(key).read('Y', pins_y);
+			}
 			emu.mem_write(GPIO_Y_IDR, int_to_bytes(pins_y));
 			emu.mem_write(GPIO_Y_ODR, int_to_bytes(pins_y));
 		} else if (addr_lo == SERVO_1_ANGLE) {
@@ -289,9 +278,9 @@ export function emulator (uc, firmware) {
 		} else if (addr_lo == RTC_TICKS_US) {
 			// emu.mem_write(RTC_TICKS_US, int_to_bytes(parseInt((window.performance.now() - epoch) * 1000, 10)));
 		} else if (addr_lo == I2C_DATA) {
-			// for (let key of i2c_devices.keys()) {
-			// 	pins_x = i2c_devices.get(key).read('X', pins_x);
-			// }
+			for (let key of i2c_devices.keys()) {
+				pins_x = i2c_devices.get(key).read('X', pins_x);
+			}
 			emu.mem_write(I2C_DATA, int_to_bytes(X(HARD_I2C_SDA_X)));
 			hard_i2c_write(0, X(HARD_I2C_SDA_X));
 		}
@@ -300,8 +289,11 @@ export function emulator (uc, firmware) {
 
 	function hook_write(handle, type, addr_lo, addr_hi, size,  value_lo, value_hi, user_data) {
 		if (addr_lo == UART0_TXR) {
-			if (value_lo == 4)
+			if (value_lo == 4) {
 				events.emit('killed');
+				wroteLCD = false;
+				lcdEmitted = false;
+			}
 			if (value_lo == 4 && in_script) {
 				if (in_error == true) {
 					block_output = 1;
@@ -331,11 +323,18 @@ export function emulator (uc, firmware) {
 		} else if (addr_lo == GPIO_ODR) {
 			/* TODO */
 		} else if (addr_lo == GPIO_X_ODR) {
-			// write_to_i2c_devices(value_lo);
+			write_to_i2c_devices(value_lo);
 			pins_x = value_lo;
 			emu.mem_write(GPIO_X_IDR, int_to_bytes(pins_x));
+			for (let key of i2c_devices.keys()) {
+				let lcd = i2c_devices.get(key);
+				if (!lcdEmitted && wroteLCD) {
+					events.emit('lcd-write', lcd);
+					lcdEmitted = true;
+				}
+			}
 		} else if (addr_lo == GPIO_Y_ODR) {
-			// write_to_i2c_devices(value_lo);
+			write_to_i2c_devices(value_lo);
 			pins_y = value_lo;
 			events.emit ('pins', pins_y.toString(2));
 			emu.mem_write(GPIO_Y_IDR, int_to_bytes(pins_y));

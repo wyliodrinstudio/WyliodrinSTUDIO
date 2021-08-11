@@ -10,6 +10,8 @@ let workspace = null;
 // Array of mocked supported libraries imports
 const supportedLibraries = [
 	'import RPi.GPIO as GPIO',
+	'import RPLCD',
+	'from RPLCD import CharLCD'
 ];
 
 let worker = null;
@@ -22,6 +24,7 @@ import generic_raspberrypi from './libraries/utils/generic_raspberrypi.js';
 import onoff from './libraries/onoff.js';
 import lcd from './libraries/lcd.js';
 import update_components from './libraries/utils/update_components.js';
+import lcd_library from './JSInterpreter/lcd_library.js';
 
 async function readFirmware() {
 	try {
@@ -119,6 +122,27 @@ async function initMPWorker() {
 					workspace.updateDevice(device);
 				}
 				break;
+			}
+			case 'lcd-write': {
+				let lcdPins = [];
+				let device = studio.workspace.getDevice();
+
+				for (let index in generic_raspberrypi.dataLoaded.components) {
+					if (generic_raspberrypi.dataLoaded.components[index].name === 'lcd') {
+						for (let pinIndex in generic_raspberrypi.dataLoaded.pins) {
+							if (pinIndex.toString() != '5v' && pinIndex.toString() != 'gnd' && generic_raspberrypi.dataLoaded.pins[pinIndex].components[0] == index.toString()) {
+								lcdPins.push(generic_raspberrypi.parsePinToGpio(pinIndex));
+							}
+						}
+					}
+				}
+
+				let data = {};
+				data.properties = lcdPins.slice(1, 5);
+				lcd_library.assign(studio, device, simulator);
+				lcd_library.create(lcdPins[0], 2, data);
+				lcd_library.print(data.properties[0], String.fromCharCode.apply(null, event.data.buffer));
+				
 			}
 		}
 	};

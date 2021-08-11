@@ -36,6 +36,10 @@ onmessage = (event) => {
 				postMessage({messageType: 'killed'});
 			});
 
+			mp.events.on('lcd-write', (lcd) => {
+				postMessage({buffer: lcd.buffer, messageType: 'lcd-write'});
+			});
+
 			break;
 		}
 		// Inject text data into MicroPython
@@ -61,6 +65,7 @@ onmessage = (event) => {
 			mp.events.removeAllListeners('data');
 			mp.events.removeAllListeners('pins');
 			mp.events.removeAllListeners('killed');
+			mp.events.removeAllListeners('lcd-write');
 		}
 	}
 };
