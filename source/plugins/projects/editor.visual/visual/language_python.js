@@ -11,6 +11,18 @@ module.exports = function (blockly) {
 		}
 	};
 
+	Blockly.Python.import_requests = function() {
+		if (!Blockly.Python.definitions_['import_requests']) {
+			Blockly.Python.definitions_['import_requests'] = 'import requests\n';
+		}
+		var val_city= Blockly.Python.variableDB_.getDistinctName('val_city', Blockly.Generator.NAME_TYPE);
+		Blockly.Python.val_city = val_city;
+		var val_country_code= Blockly.Python.variableDB_.getDistinctName('val_country_code', Blockly.Generator.NAME_TYPE);
+		Blockly.Python.val_country_code = val_country_code;
+		var val_api_key= Blockly.Python.variableDB_.getDistinctName('val_api_key', Blockly.Generator.NAME_TYPE);
+		Blockly.Python.val_api_key = val_api_key;
+	}
+
 	Blockly.Python['print'] = function (block) {
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -32,6 +44,7 @@ module.exports = function (blockly) {
 		else if (type == 2) {
 			code = 'float(raw_input (""))';
 		}
+		
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
@@ -247,5 +260,44 @@ module.exports = function (blockly) {
 		var code = 'json.dumps (' + value_value+')';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
+	};
+	Blockly.Python['test'] = function (block) {
+		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
+		var s = 'some';
+		// TODO: Assemble Python into code variable.
+		var code = 'print(' + s +')\nprint (' + value_value + ')\n';
+		// TODO: Change ORDER_NONE to the correct strength.
+		return code;
+	};
+	Blockly.Python['test'] = function (block) {
+		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
+		//var s = 'some';
+		// TODO: Assemble Python into code variable.
+		var code = 'print(' + Blockly.Python.val_api_key +')\nprint (' + value_value + ')\n';
+		// TODO: Change ORDER_NONE to the correct strength.
+		return code;
+	};
+	Blockly.Python['setup'] = function (block) {
+		Blockly.Python.import_requests();
+		// TODO: Assemble Python into code variable.
+		var code = 'print(' + 'This is a setup block'+ ')\n';// TODO: Change ORDER_NONE to the correct strength.
+		return code;
+	};
+	Blockly.Python['initialize_open_weather'] = function (block) {
+		// TODO: Assemble Python into code variable.
+		Blockly.Python.val_city = block.getFieldValue('city_value').toString();
+		Blockly.Python.val_country_code = block.getFieldValue('country_code_value').toString();
+		Blockly.Python.val_api_key = block.getFieldValue('api_key_value').toString();
+		// TODO: Change ORDER_NONE to the correct strength.
+		var code = 'print(\'' + Blockly.Python.val_city+ '\')\n' + 'print(\'' + Blockly.Python.val_country_code+ '\')\n' + 'print(\'' + Blockly.Python.val_api_key + '\')\n';
+       
+		return code;
+	};
+	Blockly.Python['label_show'] = function (block) {
+
+		// TODO: Assemble Python into code variable.
+		var code = 'print(' + 'This is a label show block'+ ')\n';
+		// TODO: Change ORDER_NONE to the correct strength.
+		return code;
 	};
 };

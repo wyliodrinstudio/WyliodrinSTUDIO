@@ -445,5 +445,61 @@ module.exports = function (blockly) {
 			this.setTooltip('');
 		}
 	};
-	
+	Blockly.Blocks['test'] = {
+		init: function () {
+			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
+			this.setColour(250);
+			this.appendDummyInput()
+				.appendField('Print ');
+			this.appendValueInput('value');
+			this.setInputsInline(true);
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setTooltip('test');
+		}
+	};
+	Blockly.Blocks['setup'] = {
+		init: function () {
+			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
+			this.setColour(250);
+			this.appendDummyInput()
+				.appendField('Setup ');
+			this.setNextStatement(true);
+			this.setTooltip('test');
+		}
+	};
+	Blockly.Blocks['initialize_open_weather'] = {
+		init: function () {
+			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
+			this.setColour(250);
+			this.appendDummyInput()
+				.appendField('Initialize Open Weather App');
+			this.appendDummyInput()
+				.appendField('City')
+				.appendField(new Blockly.FieldTextInput('city'), 'city_value');
+			this.appendDummyInput()
+				.appendField('Country code')
+				.appendField(new Blockly.FieldTextInput('country_code'), 'country_code_value');
+			this.appendDummyInput()
+				.appendField('API key')
+				.appendField(new Blockly.FieldTextInput('api_key'), 'api_key_value');
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setTooltip('test');
+		}
+	};
+	Blockly.Blocks['label_show'] = {
+		init: function () {
+			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
+			this.setColour(250);
+			this.appendDummyInput()
+				.appendField('Label ')
+				.appendField(new Blockly.FieldDropdown());
+			this.appendValueInput('value');
+			this.setInputsInline(true);
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setTooltip('test');
+		}
+	};
 };

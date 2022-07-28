@@ -358,6 +358,38 @@
         </value>
       </block>
     </category>
+    <category name="Weather Data" colour="200">
+		<!--<block type="setup">
+			<value name="value">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+		</block>-->
+    <block type="initialize_open_weather" colour='220'>
+			<value name="value">
+				<block type="text">
+					<field name="city_value">text</field>
+          <field name="country_code_value">text</field>
+          <field name="api_key_value">text</field>
+				</block>
+			</value>
+		</block>
+    <!--<block type="test">
+			<value name="value">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+		</block>
+    <block type="label_show" colour='230'>
+			<value name="value">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+		</block>-->
+	</category>
     <category name="Objects" colour="20">
             <block type="dicts_create_with">
             </block>
@@ -422,6 +454,13 @@
 				</block>
 			</value>
 		</block>
+    <block type="test">
+			<value name="value">
+				<block type="text">
+					<field name="TEXT"></field>
+				</block>
+			</value>
+		</block>
 		<block type="read"></block>
 		<block type="readwrite">
 			<value name="value">
@@ -435,7 +474,11 @@
 			<field name="TEXT">text</field>
 		</block>
 
+<sep />
 	</category>
+  
+  
+<sep />
 
 	<sep />
 	
