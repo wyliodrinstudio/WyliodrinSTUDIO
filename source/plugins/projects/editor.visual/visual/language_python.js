@@ -23,6 +23,9 @@ module.exports = function (blockly) {
 		Blockly.Python.val_api_key = val_api_key;
 	}
 
+	/*var coordinates = Blockly.Python.variableDB_.getDistinctName('coordinates', Blockly.Generator.NAME_TYPE);
+	Blockly.Python.coordinates = coordinates;*/
+
 	Blockly.Python['print'] = function (block) {
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -279,8 +282,9 @@ module.exports = function (blockly) {
 	};
 	Blockly.Python['setup'] = function (block) {
 		Blockly.Python.import_requests();
+		Blockly.Python.import_json();
 		// TODO: Assemble Python into code variable.
-		var code = 'print(' + 'This is a setup block'+ ')\n';// TODO: Change ORDER_NONE to the correct strength.
+		var code = 'print(' + '"This is a setup block"'+ ')\n';// TODO: Change ORDER_NONE to the correct strength.
 		return code;
 	};
 	Blockly.Python['initialize_open_weather'] = function (block) {
@@ -289,15 +293,24 @@ module.exports = function (blockly) {
 		Blockly.Python.val_country_code = block.getFieldValue('country_code_value').toString();
 		Blockly.Python.val_api_key = block.getFieldValue('api_key_value').toString();
 		// TODO: Change ORDER_NONE to the correct strength.
-		var code = 'print(\'' + Blockly.Python.val_city+ '\')\n' + 'print(\'' + Blockly.Python.val_country_code+ '\')\n' + 'print(\'' + Blockly.Python.val_api_key + '\')\n';
-       
+		var code = 'URL = "https://api.openweathermap.org/data/2.5/weather?q=' + Blockly.Python.val_city + '&appid=' + Blockly.Python.val_api_key + '"\n';
+		code += 'r = requests.get(URL)\n';
+		code += 'if r.status_code == 200:\n\t';
+		code += 'data = r.json()\n\t';
 		return code;
 	};
 	Blockly.Python['label_show'] = function (block) {
 
 		// TODO: Assemble Python into code variable.
-		var code = 'print(' + 'This is a label show block'+ ')\n';
+		var code = block.getFieldValue('type') + '=' + Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_NONE) + '\n\t';
+		code += 'print(data[' + block.getFieldValue('type') + '])\n';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return code;
+	};
+	Blockly.Python['get_coord'] = function (block) {
+		// TODO: Assemble Python into code variable.
+		var code = '\'coord\'';
+		// TODO: Change ORDER_NONE to the correct strength.
+		return [code, Blockly.Python.ORDER_NONE];
 	};
 };

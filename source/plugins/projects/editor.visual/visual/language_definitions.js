@@ -493,13 +493,26 @@ module.exports = function (blockly) {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
 			this.setColour(250);
 			this.appendDummyInput()
-				.appendField('Label ')
-				.appendField(new Blockly.FieldDropdown());
+				.appendField('Label');
+			this.appendDummyInput()
+				.appendField(new Blockly.FieldDropdown([['temp', 'temp'], ['temp_feels', 'temp_feels'], ['weather_state', 'weather_state']]), 'type');
+			this.appendDummyInput()
+				.appendField('show');
 			this.appendValueInput('value');
+			this.appendDummyInput();
 			this.setInputsInline(true);
 			this.setPreviousStatement(true);
 			this.setNextStatement(true);
 			this.setTooltip('test');
+		}
+	};
+	Blockly.Blocks['get_coord'] = {
+		// Set element at index.
+		init: function () {
+			this.setColour(20);
+			this.appendDummyInput()
+				.appendField('Get coordinates from OpenWeatherMap');
+			this.setOutput(true);
 		}
 	};
 };
