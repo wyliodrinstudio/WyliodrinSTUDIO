@@ -84,7 +84,7 @@
 		"highlight.js": "^10.4.1",
 		"html-webpack-plugin": "^4.3.0",
 		"jquery": "^3.5.1",
-		"jszip": "^3.3.0",
+		"jszip": "^3.7.0",
 		"katex": "^0.12.0",
 		"less": "^3.12.1",
 		"less-loader": "^6.2.0",
