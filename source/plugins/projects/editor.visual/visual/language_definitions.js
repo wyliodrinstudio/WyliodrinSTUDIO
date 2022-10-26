@@ -445,30 +445,18 @@ module.exports = function (blockly) {
 			this.setTooltip('');
 		}
 	};
-	Blockly.Blocks['test'] = {
-		init: function () {
-			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
-			this.setColour(250);
-			this.appendDummyInput()
-				.appendField('Print ');
-			this.appendValueInput('value');
-			this.setInputsInline(true);
-			this.setPreviousStatement(true);
-			this.setNextStatement(true);
-			this.setTooltip('test');
-		}
-	};
-	Blockly.Blocks['setup'] = {
+
+	Blockly.Blocks['open_weather_setup'] = {
 		init: function () {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
 			this.setColour(250);
 			this.appendDummyInput()
 				.appendField('Setup ');
 			this.setNextStatement(true);
-			this.setTooltip('test');
+			this.setTooltip('Makes the required setup for OpenWeatherMap');
 		}
 	};
-	Blockly.Blocks['initialize_open_weather'] = {
+	Blockly.Blocks['open_weather_initialize'] = {
 		init: function () {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
 			this.setColour(250);
@@ -485,10 +473,10 @@ module.exports = function (blockly) {
 				.appendField(new Blockly.FieldTextInput('api_key'), 'api_key_value');
 			this.setPreviousStatement(true);
 			this.setNextStatement(true);
-			this.setTooltip('test');
+			this.setTooltip('Initializes connection to OpenWeatherMap');
 		}
 	};
-	Blockly.Blocks['label_show'] = {
+	Blockly.Blocks['open_weather_show_label'] = {
 		init: function () {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
 			this.setColour(250);
@@ -503,11 +491,10 @@ module.exports = function (blockly) {
 			this.setInputsInline(true);
 			this.setPreviousStatement(true);
 			this.setNextStatement(true);
-			this.setTooltip('test');
+			this.setTooltip('Sets the label for retrieved information');
 		}
 	};
-	Blockly.Blocks['get_coord'] = {
-		// Set element at index.
+	Blockly.Blocks['open_weather_get_coord'] = {
 		init: function () {
 			this.setColour(20);
 			this.appendDummyInput()

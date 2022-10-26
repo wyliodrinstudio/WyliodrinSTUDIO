@@ -357,14 +357,7 @@
       </block>
     </category>
     <category name="Weather Data" colour="200">
-      <!--<block type="setup">
-        <value name="value">
-          <block type="text">
-            <field name="TEXT"></field>
-          </block>
-        </value>
-      </block>-->
-      <block type="initialize_open_weather" colour='220'>
+      <block type="open_weather_initialize" colour='220'>
         <value name="value">
           <block type="text">
             <field name="city_value">text</field>
@@ -373,18 +366,18 @@
           </block>
         </value>
       </block>
-      <block type="label_show">
+      <block type="open_weather_show_label">
 			<value name="value">
 			</value>
 		</block>
-    <block type="setup">
+    <block type="open_weather_setup">
 			<value name="value">
 				<block type="text">
 					<field name="TEXT" />
 				</block>
 			</value>
 		</block>
-    <block type="get_coord">
+    <block type="open_weather_get_coord">
 		</block>
 	  </category>
     <category name="Objects" colour="20">
@@ -445,13 +438,6 @@
 			</value>
 		</block>
 		<block type="println">
-			<value name="value">
-				<block type="text">
-					<field name="TEXT" />
-				</block>
-			</value>
-		</block>
-    <block type="test">
 			<value name="value">
 				<block type="text">
 					<field name="TEXT" />
