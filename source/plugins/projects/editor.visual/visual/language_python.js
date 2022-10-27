@@ -11,6 +11,19 @@ module.exports = function (blockly) {
 		}
 	};
 
+	Blockly.Python.import_requests = function() {
+		if (!Blockly.Python.definitions_['import_requests']) {
+			Blockly.Python.definitions_['import_requests'] = 'import requests\n';
+		}
+		var val_city= Blockly.Python.variableDB_.getDistinctName('val_city', Blockly.Generator.NAME_TYPE);
+		Blockly.Python.val_city = val_city;
+		var val_country_code= Blockly.Python.variableDB_.getDistinctName('val_country_code', Blockly.Generator.NAME_TYPE);
+		Blockly.Python.val_country_code = val_country_code;
+		var val_api_key= Blockly.Python.variableDB_.getDistinctName('val_api_key', Blockly.Generator.NAME_TYPE);
+		Blockly.Python.val_api_key = val_api_key;
+	};
+
+
 	Blockly.Python['print'] = function (block) {
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -32,6 +45,7 @@ module.exports = function (blockly) {
 		else if (type == 2) {
 			code = 'float(raw_input (""))';
 		}
+		
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
@@ -245,6 +259,39 @@ module.exports = function (blockly) {
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
 		var code = 'json.dumps (' + value_value+')';
+		// TODO: Change ORDER_NONE to the correct strength.
+		return [code, Blockly.Python.ORDER_NONE];
+	};
+	Blockly.Python['open_weather_setup'] = function () {
+		Blockly.Python.import_requests();
+		Blockly.Python.import_json();
+		// TODO: Assemble Python into code variable.
+		var code = '';// TODO: Change ORDER_NONE to the correct strength.
+		return code;
+	};
+	Blockly.Python['open_weather_initialize'] = function (block) {
+		// TODO: Assemble Python into code variable.
+		Blockly.Python.val_city = block.getFieldValue('city_value').toString();
+		Blockly.Python.val_country_code = block.getFieldValue('country_code_value').toString();
+		Blockly.Python.val_api_key = block.getFieldValue('api_key_value').toString();
+		// TODO: Change ORDER_NONE to the correct strength.
+		var code = 'URL = "https://api.openweathermap.org/data/2.5/weather?q=' + Blockly.Python.val_city + '&appid=' + Blockly.Python.val_api_key + '"\n';
+		code += 'r = requests.get(URL)\n';
+		code += 'if r.status_code == 200:\n\t';
+		code += 'data = r.json()\n\t';
+		return code;
+	};
+	Blockly.Python['open_weather_show_label'] = function (block) {
+
+		// TODO: Assemble Python into code variable.
+		var code = block.getFieldValue('type') + ' = ' + ' data[' + Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_NONE) + ']' + '\n\t';
+		code += 'print(' + block.getFieldValue('type') + ')\n';
+		// TODO: Change ORDER_NONE to the correct strength.
+		return code;
+	};
+	Blockly.Python['open_weather_get_coord'] = function () {
+		// TODO: Assemble Python into code variable.
+		var code = '\'coord\'';
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};

@@ -445,5 +445,61 @@ module.exports = function (blockly) {
 			this.setTooltip('');
 		}
 	};
-	
+
+	Blockly.Blocks['open_weather_setup'] = {
+		init: function () {
+			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
+			this.setColour(250);
+			this.appendDummyInput()
+				.appendField('Setup ');
+			this.setNextStatement(true);
+			this.setTooltip('Makes the required setup for OpenWeatherMap');
+		}
+	};
+	Blockly.Blocks['open_weather_initialize'] = {
+		init: function () {
+			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
+			this.setColour(250);
+			this.appendDummyInput()
+				.appendField('Initialize Open Weather App');
+			this.appendDummyInput()
+				.appendField('City')
+				.appendField(new Blockly.FieldTextInput('city'), 'city_value');
+			this.appendDummyInput()
+				.appendField('Country code')
+				.appendField(new Blockly.FieldTextInput('country_code'), 'country_code_value');
+			this.appendDummyInput()
+				.appendField('API key')
+				.appendField(new Blockly.FieldTextInput('api_key'), 'api_key_value');
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setTooltip('Initializes connection to OpenWeatherMap');
+		}
+	};
+	Blockly.Blocks['open_weather_show_label'] = {
+		init: function () {
+			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
+			this.setColour(250);
+			this.appendDummyInput()
+				.appendField('Label');
+			this.appendDummyInput()
+				.appendField(new Blockly.FieldDropdown([['temp', 'temp'], ['temp_feels', 'temp_feels'], ['weather_state', 'weather_state']]), 'type');
+			this.appendDummyInput()
+				.appendField('show');
+			this.appendValueInput('value');
+			this.appendDummyInput();
+			this.setInputsInline(true);
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setTooltip('Sets the label for retrieved information');
+		}
+	};
+	Blockly.Blocks['open_weather_get_coord'] = {
+		init: function () {
+			this.setColour(20);
+			this.appendDummyInput()
+				.appendField('Get coordinates from OpenWeatherMap');
+			this.setOutput(true);
+		}
+	};
 };
