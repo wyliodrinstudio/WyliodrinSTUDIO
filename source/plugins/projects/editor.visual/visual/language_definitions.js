@@ -445,5 +445,26 @@ module.exports = function (blockly) {
 			this.setTooltip('');
 		}
 	};
+
+	//Peripheral
+
+	//Set HIGH/LOW pin X
+	Blockly.Blocks['led_on_off'] = {
+		init: function () {
+			this.setHelpUrl('http://www.example.com/');
+			this.setColour(250);
+			this.appendDummyInput()
+				.appendField('Set ');
+			this.appendDummyInput()
+				.appendField(new Blockly.FieldDropdown([['LOW', '0'], ['HIGH', '1']]), 'mode');
+			this.appendDummyInput()
+				.appendField('pin');
+			this.appendValueInput('pin')
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setInputsInline(true);
+			this.setTooltip('');
+		}
+	};
 	
 };
