@@ -446,7 +446,7 @@ module.exports = function (blockly) {
 		}
 	};
 
-<<<<<<< HEAD
+
 	Blockly.Blocks['open_weather_setup'] = {
 		init: function () {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
@@ -457,6 +457,7 @@ module.exports = function (blockly) {
 			this.setTooltip('Makes the required setup for OpenWeatherMap');
 		}
 	};
+
 	Blockly.Blocks['open_weather_initialize'] = {
 		init: function () {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
@@ -477,6 +478,7 @@ module.exports = function (blockly) {
 			this.setTooltip('Initializes connection to OpenWeatherMap');
 		}
 	};
+	
 	Blockly.Blocks['open_weather_show_label'] = {
 		init: function () {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
@@ -503,7 +505,7 @@ module.exports = function (blockly) {
 			this.setOutput(true);
 		}
 	};
-=======
+
 	//Peripheral
 
 	//Set HIGH/LOW pin X
@@ -525,5 +527,4 @@ module.exports = function (blockly) {
 		}
 	};
 	
->>>>>>> 724d450 (Added digital write on pin)
 };
