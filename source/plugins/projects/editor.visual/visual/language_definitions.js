@@ -446,6 +446,7 @@ module.exports = function (blockly) {
 		}
 	};
 
+<<<<<<< HEAD
 	Blockly.Blocks['open_weather_setup'] = {
 		init: function () {
 			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
@@ -502,4 +503,27 @@ module.exports = function (blockly) {
 			this.setOutput(true);
 		}
 	};
+=======
+	//Peripheral
+
+	//Set HIGH/LOW pin X
+	Blockly.Blocks['led_on_off'] = {
+		init: function () {
+			this.setHelpUrl('http://www.example.com/');
+			this.setColour(250);
+			this.appendDummyInput()
+				.appendField('Set ');
+			this.appendDummyInput()
+				.appendField(new Blockly.FieldDropdown([['LOW', '0'], ['HIGH', '1']]), 'mode');
+			this.appendDummyInput()
+				.appendField('pin');
+			this.appendValueInput('pin')
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setInputsInline(true);
+			this.setTooltip('');
+		}
+	};
+	
+>>>>>>> 724d450 (Added digital write on pin)
 };

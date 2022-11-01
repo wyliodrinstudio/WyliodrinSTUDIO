@@ -11,6 +11,7 @@ module.exports = function (blockly) {
 		}
 	};
 
+<<<<<<< HEAD
 	Blockly.Python.import_requests = function() {
 		if (!Blockly.Python.definitions_['import_requests']) {
 			Blockly.Python.definitions_['import_requests'] = 'import requests\n';
@@ -24,6 +25,9 @@ module.exports = function (blockly) {
 	};
 
 
+=======
+	
+>>>>>>> 724d450 (Added digital write on pin)
 	Blockly.Python['print'] = function (block) {
 		var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
 		// TODO: Assemble Python into code variable.
@@ -262,6 +266,7 @@ module.exports = function (blockly) {
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
+<<<<<<< HEAD
 	Blockly.Python['open_weather_setup'] = function () {
 		Blockly.Python.import_requests();
 		Blockly.Python.import_json();
@@ -295,4 +300,25 @@ module.exports = function (blockly) {
 		// TODO: Change ORDER_NONE to the correct strength.
 		return [code, Blockly.Python.ORDER_NONE];
 	};
+=======
+
+	//Peripherals
+
+	Blockly.Python.import_machine = function () {
+		if (!Blockly.Python.definitions_['import_machine']) {
+			Blockly.Python.definitions_['import_machine'] = 'import machine\n';
+		}
+	};
+
+	Blockly.Python['led_on_off'] = function (block) {
+		Blockly.Python.import_machine();
+		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
+		var value_mode = parseInt(block.getFieldValue('mode'));
+		// TODO: Assemble Python into code variable.
+		var code = 'machine.Pin('+ value_pin + ', machine.Pin.OUT, value=' + value_mode + ')';
+		// TODO: Change ORDER_NONE to the correct strength.
+		return code;
+	};
+	
+>>>>>>> 724d450 (Added digital write on pin)
 };
