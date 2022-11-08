@@ -1,0 +1,115 @@
+<xml id="toolbox" style="display: none">
+    <category name="Peripherals" colour="123">
+      <block type="digital_write" colour="123">
+        <value name="pin">
+          <shadow type="math_number">
+            <field name="NUM">25</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="led_on" colour="123">
+      </block>
+      <block type="led_off" colour="123">
+      </block>
+      <block type="digital_read_initialize" colour="123">
+      </block>
+      <block type="digital_read_get_value" colour="123">
+      </block>
+      <block type="analog_read_initialize" colour="123">
+      </block>
+      <block type="analog_read_get_value" colour="123">
+      </block>
+    </category>
+    <category name="Time" colour="240">
+        <block type="wait" colour="240">
+        </block>
+    </category>
+    <category name="Wifi" colour="180">
+        <block type="connect_to_wifi" colour="180">
+            <value name="ssid">
+                <shadow type="text">
+                    <field name="ssid_text">text</field>
+                </shadow>
+            </value>
+            <value name="password">
+                <shadow type="text">
+                    <field name="password_text">text</field>
+                </shadow>
+            </value>
+        </block>
+    </category>
+    <category name="Web communication" colour="180">
+        <block type="send_response" colour="180">
+            <value name="message"></value>
+        </block>
+        <block type="get_request_content" colour="180">
+        </block>
+        <block type="close_connection" colour="180">
+        </block>
+        <block type="initialize_communication" colour="180">
+            <value>
+                <shadow type="text">
+                    <field name="ip">ip</field>
+                </shadow>
+            </value>
+            <value>
+                <shadow type="text">
+                    <field name="port">port</field>
+                </shadow>
+            </value>
+        </block>
+        <block type="listen_for_connections" colour="180">
+            <value name="value">
+				<block type="text">
+					<field name="TEXT" />
+				</block>
+			</value>
+        </block>
+        <block type="request_topic" colour="180">
+            <value name="value">
+				<shadow type="text">
+					<field name="TEXT" />
+				</shadow>
+			</value>
+        </block>
+    </category>
+    <category name="Thermistor" colour="140">
+        <block type="read_temperature_initialize" colour="140">
+        </block>
+        <block type="get_temperature" colour="140">
+        </block>
+    </category>
+    <category name="Servo" colour="100">
+        <block type="initialize_servo" colour="100">
+        </block>
+        <block type="initialize_servo_multiple" colour="100">
+        </block>
+        <block type="set_angle" colour="100">
+        </block>
+        <block type="set_angle_multiple" colour="100">
+        </block>
+    </category>
+    <category name="Distance measurement" colour="45">
+        <block type="distance_initialize" colour="45">
+        </block>
+        <block type="measure_distance" colour="45">
+        </block>
+        <block type="get_distance" colour="45">
+        </block>
+    </category>
+    <category name="Weather Data" colour="200">
+        <block type="open_weather_initialize" colour="200">
+            <value name="value">
+                <block type="text">
+                    <field name="city_value">text</field>
+                    <field name="api_key_value">text</field>
+                </block>
+            </value>
+        </block>
+        <block type="open_weather_show_label" colour="200">
+	        <value name="value"></value>
+	    </block>
+        <block type="open_weather_get_data" colour="200">
+	    </block>
+  </category>
+</xml>

@@ -203,6 +203,11 @@
           </shadow>
         </value>
       </block>
+      <block type="to_float" colour="%{BKY_MATH_HUE}">
+        <value name="value"/>
+      </block>
+      <block type="reduce_to_decimals" colour="%{BKY_MATH_HUE}">
+      </block>
     </category>
     <category name="Text" colour="%{BKY_TEXTS_HUE}">
       <block type="text" />
@@ -356,51 +361,6 @@
         </value>
       </block>
     </category>
-    <category name="Peripherals" colour="%{BKY_COLOUR_HUE}">
-      <block type="led_on_off">
-        <value name="pin">
-          <shadow type="math_number">
-            <field name="NUM">25</field>
-          </shadow>
-        </value>
-      </block>
-    <!-- <block type="led-on-off">
-      <value name="pin">
-        <shadow type="math_number">
-          <field name="NUM">25</field>
-        </shadow>
-      </value>
-      <value name="mode">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block> -->
-  </category>
-    <category name="Weather Data" colour="200">
-      <block type="open_weather_initialize" colour='220'>
-        <value name="value">
-          <block type="text">
-            <field name="city_value">text</field>
-            <field name="country_code_value">text</field>
-            <field name="api_key_value">text</field>
-          </block>
-        </value>
-      </block>
-      <block type="open_weather_show_label">
-			<value name="value">
-			</value>
-		</block>
-    <block type="open_weather_setup">
-			<value name="value">
-				<block type="text">
-					<field name="TEXT" />
-				</block>
-			</value>
-		</block>
-    <block type="open_weather_get_coord">
-		</block>
-	  </category>
     <category name="Objects" colour="20">
             <block type="dicts_create_with">
             </block>

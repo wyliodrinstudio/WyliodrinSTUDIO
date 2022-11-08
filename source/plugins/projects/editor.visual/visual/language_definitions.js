@@ -446,85 +446,37 @@ module.exports = function (blockly) {
 		}
 	};
 
-
-	Blockly.Blocks['open_weather_setup'] = {
-		init: function () {
-			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
-			this.setColour(250);
-			this.appendDummyInput()
-				.appendField('Setup ');
-			this.setNextStatement(true);
-			this.setTooltip('Makes the required setup for OpenWeatherMap');
-		}
-	};
-
-	Blockly.Blocks['open_weather_initialize'] = {
-		init: function () {
-			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
-			this.setColour(250);
-			this.appendDummyInput()
-				.appendField('Initialize Open Weather App');
-			this.appendDummyInput()
-				.appendField('City')
-				.appendField(new Blockly.FieldTextInput('city'), 'city_value');
-			this.appendDummyInput()
-				.appendField('Country code')
-				.appendField(new Blockly.FieldTextInput('country_code'), 'country_code_value');
-			this.appendDummyInput()
-				.appendField('API key')
-				.appendField(new Blockly.FieldTextInput('api_key'), 'api_key_value');
-			this.setPreviousStatement(true);
-			this.setNextStatement(true);
-			this.setTooltip('Initializes connection to OpenWeatherMap');
-		}
-	};
 	
-	Blockly.Blocks['open_weather_show_label'] = {
-		init: function () {
-			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
-			this.setColour(250);
-			this.appendDummyInput()
-				.appendField('Label');
-			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([['temp', 'temp'], ['temp_feels', 'temp_feels'], ['weather_state', 'weather_state']]), 'type');
-			this.appendDummyInput()
-				.appendField('show');
-			this.appendValueInput('value');
-			this.appendDummyInput();
-			this.setInputsInline(true);
-			this.setPreviousStatement(true);
-			this.setNextStatement(true);
-			this.setTooltip('Sets the label for retrieved information');
-		}
-	};
-	Blockly.Blocks['open_weather_get_coord'] = {
-		init: function () {
-			this.setColour(20);
-			this.appendDummyInput()
-				.appendField('Get coordinates from OpenWeatherMap');
-			this.setOutput(true);
-		}
-	};
+	//Math 
 
-	//Peripheral
-
-	//Set HIGH/LOW pin X
-	Blockly.Blocks['led_on_off'] = {
-		init: function () {
+	Blockly.Blocks['to_float'] = {
+		init: function() {
 			this.setHelpUrl('http://www.example.com/');
-			this.setColour(250);
-			this.appendDummyInput()
-				.appendField('Set ');
-			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([['LOW', '0'], ['HIGH', '1']]), 'mode');
-			this.appendDummyInput()
-				.appendField('pin');
-			this.appendValueInput('pin')
-			this.setPreviousStatement(true);
-			this.setNextStatement(true);
-			this.setInputsInline(true);
-			this.setTooltip('');
+			this.setColour(230);
+			// this.appendDummyInput()
+			// 	.appendField('Convert to float');
+			// this.appendValueInput('value');
+			this.appendValueInput('value')
+				.appendField('Convert to float');
+			// this.setInputsInline(true);
+			this.setOutput(true, 'Number');
+			this.setTooltip('Converts the given number to float');
 		}
 	};
-	
+
+	Blockly.Blocks['reduce_to_decimals'] = {
+		init: function() {
+			this.setHelpUrl('http://www.example.com/');
+			this.setColour(230);
+			this.appendValueInput('number')
+				.appendField('Round');
+			this.appendDummyInput()
+				.appendField('to');
+			this.appendValueInput('decimals_number');
+			this.appendDummyInput()
+				.appendField('decimal places');
+			this.setOutput(true, 'Number');
+			this.setTooltip('Rounds the float to the given number of decimals');
+		}
+	};
 };

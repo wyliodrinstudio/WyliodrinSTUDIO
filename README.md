@@ -114,6 +114,7 @@ Wyliodrin STUDIO is a product of [Wyliodrin](https://wyliodrin.studio) in partne
 - [Andrei-Paul Zamfir](https://github.com/ZamfirAndreiPaul) - MicroPython
 - [Iulia Andreea Luta](https://github.com/iuliutza) - Docker
 - [Alexandra-Gabriela State](https://github.com/alexandra2607) - Tutorials
+- [Amalia Camelia Simion](https://github.com/CAmi307) - MicroPython blocks
 
 Contributions
 
