@@ -74,7 +74,7 @@
 		"countly-sdk-web": "^20.4.0",
 		"css-loader": "^3.0.0",
 		"dexie": "^3.0.2",
-		"electron": "^9.4.0",
+		"electron": "^18.3.7",
 		"electron-builder": "^22.11.5",
 		"electron-rebuild": "^2.0.0",
 		"eslint": "^7.7.0",
