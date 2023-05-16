@@ -457,7 +457,7 @@ module.exports = function (blockly) {
 			// 	.appendField('Convert to float');
 			// this.appendValueInput('value');
 			this.appendValueInput('value')
-				.appendField('Convert to float');
+				.appendField('Convert to number');
 			// this.setInputsInline(true);
 			this.setOutput(true, 'Number');
 			this.setTooltip('Converts the given number to float');

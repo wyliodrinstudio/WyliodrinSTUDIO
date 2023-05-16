@@ -246,26 +246,27 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['measure_distance'] = function() {
-		Blockly.Python.compute_distance();
-		Blockly.Python.distance = Blockly.Python.variableDB_.getDistinctName('distance', Blockly.Generator.NAME_TYPE);
+	// Blockly.Python['measure_distance'] = function() {
+	// 	Blockly.Python.compute_distance();
+	// 	Blockly.Python.distance = Blockly.Python.variableDB_.getDistinctName('distance', Blockly.Generator.NAME_TYPE);
 
-		var code = Blockly.Python.distance + ' = getDistance()\n'; 
+	// 	var code = Blockly.Python.distance + ' = getDistance()\n'; 
 
-		return code; 
-	};
+	// 	return code; 
+	// };
 
 	Blockly.Python['get_distance'] = function(block) {
+		Blockly.Python.compute_distance();
 		var unit = block.getFieldValue('unit');
 
 		var code = '';
 
 		switch(unit){
 			case 'mm':
-				code = Blockly.Python.distance + '*10';
+				code = 'getDistance()*10';
 				break;
 			case 'cm':
-				code = Blockly.Python.distance;
+				code = 'getDistance()';
 				break;
 		}
 
@@ -288,38 +289,37 @@ module.exports = function (blockly) {
 		code += 'data = r.json()\n\t';
 		return code;
 	};
-	Blockly.Python['open_weather_show_label'] = function (block) {
-		// TODO: Assemble Python into code variable.
-		var code = block.getFieldValue('type') + ' = ' + ' data' + Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_NONE) + '\n\t';
-		code += 'print(' + block.getFieldValue('type') + ')\n';
-		// TODO: Change ORDER_NONE to the correct strength.
-		return code;
-	};
+
+	// Blockly.Python['open_weather_show_label'] = function (block) {
+	// 	// TODO: Assemble Python into code variable.
+	// 	var code = block.getFieldValue('type') + ' = ' + ' data' + Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_NONE) + '\n\t';
+	// 	code += 'print(' + block.getFieldValue('type') + ')\n';
+	// 	// TODO: Change ORDER_NONE to the correct strength.
+	// 	return code;
+	// };
 
 	Blockly.Python['open_weather_get_data'] = function (block) {
 		var type_value = block.getFieldValue('type');
-		var code = '';
+		var code = 'data';
 
 		switch(type_value){
 			case 'temp':
-				code = '[\'main\'][\'temp\']';
+				code += '[\'main\'][\'temp\']';
 				break;
 			case 'temp_feels':
-				code = '[\'main\'][\'feels_like\']';
+				code += '[\'main\'][\'feels_like\']';
 				break;
 			case 'weather_desc': 
-				code = '[\'weather\'][0][\'description\']';
+				code += '[\'weather\'][0][\'description\']';
 				break;
 			case 'weather_icon':
-				code = '[\'weather\'][0][\'icon\']';
+				code += '[\'weather\'][0][\'icon\']';
 				break;
 			case 'coord': 
-				code = '[\'coord\']';
+				code += '[\'coord\']';
 				break;
 		}
-		// TODO: Assemble Python into code variable.
-		// var code = '\'coord\'';
-		// TODO: Change ORDER_NONE to the correct strength.
+
 		return [code, Blockly.Python.ORDER_NONE];
 	};
 	
@@ -388,6 +388,19 @@ module.exports = function (blockly) {
 		return code;
 	};
 
+	Blockly.Python['initialize_communication_simple'] = function(block) {
+		Blockly.Python.import_socket();
+
+		// TODO: Assemble Python into code variable.
+		var code = 'addr = socket.getaddrinfo(\'0.0.0.0\', 80)[0][-1]\n';
+		code += 's = socket.socket()\n';
+		code += 's.bind(addr)\n';
+		code += 's.listen(1)\n'; 
+		code += 'print(\'listening on\', addr)\n';
+		code += '\n';
+		return code;
+	};
+
 	Blockly.Python['listen_for_connections'] = function(block) {
 		Blockly.Python.import_socket();
 
@@ -440,6 +453,54 @@ module.exports = function (blockly) {
 		} else if(status_code_value == 403) {
 			status_message = 'Forbidden';
 		}
+
+		var code = 'c1.send(\'HTTP/1.0 ' + status_code_value + ' ' + status_message + '\\r\\nContent-type: ' + content_type_value + '\\r\\n\\r\\n\')\n';
+		code += 'c1.send(' + message_value + ')\n';
+		code += 'c1.close()\n';
+		
+		return code;
+	};
+
+	Blockly.Python['send_response_ok'] = function(block) {
+		Blockly.Python.import_socket();
+
+		var content_type_value = parseInt(block.getFieldValue('content_type_value'));
+		var message_value = Blockly.Python.valueToCode(block, 'message_value', Blockly.Python.ORDER_ATOMIC);
+		var status_message = 'OK';
+		var status_code_value = 200;
+
+		if(content_type_value == 0) {
+			content_type_value = 'text/plain';
+		}else if (content_type_value == 1) {
+			content_type_value = 'text/html';
+		} else if (content_type_value == 2) {
+			content_type_value = 'text/json';
+		}
+
+		var code = 'c1.send(\'HTTP/1.0 ' + status_code_value + ' ' + status_message + '\\r\\nContent-type: ' + content_type_value + '\\r\\n\\r\\n\')\n';
+		code += 'c1.send(' + message_value + ')\n';
+		code += 'c1.close()\n';
+		
+		return code;
+	};
+
+	Blockly.Python['send_response_error'] = function(block) {
+		Blockly.Python.import_socket();
+
+		var content_type_value = parseInt(block.getFieldValue('content_type_value'));
+		var message_value = Blockly.Python.valueToCode(block, 'message_value', Blockly.Python.ORDER_ATOMIC);
+		var status_message = '';
+
+		if(content_type_value == 0) {
+			content_type_value = 'text/plain';
+		}else if (content_type_value == 1) {
+			content_type_value = 'text/html';
+		} else if (content_type_value == 2) {
+			content_type_value = 'text/json';
+		}
+
+		var status_code_value = 404;
+		var status_message = 'Not found';
 
 		var code = 'c1.send(\'HTTP/1.0 ' + status_code_value + ' ' + status_message + '\\r\\nContent-type: ' + content_type_value + '\\r\\n\\r\\n\')\n';
 		code += 'c1.send(' + message_value + ')\n';
