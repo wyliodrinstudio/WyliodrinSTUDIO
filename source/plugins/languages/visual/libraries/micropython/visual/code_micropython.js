@@ -246,15 +246,6 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	// Blockly.Python['measure_distance'] = function() {
-	// 	Blockly.Python.compute_distance();
-	// 	Blockly.Python.distance = Blockly.Python.variableDB_.getDistinctName('distance', Blockly.Generator.NAME_TYPE);
-
-	// 	var code = Blockly.Python.distance + ' = getDistance()\n'; 
-
-	// 	return code; 
-	// };
-
 	Blockly.Python['get_distance'] = function(block) {
 		Blockly.Python.compute_distance();
 		var unit = block.getFieldValue('unit');
@@ -280,7 +271,6 @@ module.exports = function (blockly) {
 		Blockly.Python.import_json();
 		// TODO: Assemble Python into code variable.
 		Blockly.Python.val_city = block.getFieldValue('city_value').toString();
-		// Blockly.Python.val_country_code = block.getFieldValue('country_code_value').toString();
 		Blockly.Python.val_api_key = block.getFieldValue('api_key_value').toString();
 		// TODO: Change ORDER_NONE to the correct strength.
 		var code = 'URL = "https://api.openweathermap.org/data/2.5/weather?q=' + Blockly.Python.val_city + '&appid=' + Blockly.Python.val_api_key + '"\n';
@@ -289,14 +279,6 @@ module.exports = function (blockly) {
 		code += 'data = r.json()\n\t';
 		return code;
 	};
-
-	// Blockly.Python['open_weather_show_label'] = function (block) {
-	// 	// TODO: Assemble Python into code variable.
-	// 	var code = block.getFieldValue('type') + ' = ' + ' data' + Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_NONE) + '\n\t';
-	// 	code += 'print(' + block.getFieldValue('type') + ')\n';
-	// 	// TODO: Change ORDER_NONE to the correct strength.
-	// 	return code;
-	// };
 
 	Blockly.Python['open_weather_get_data'] = function (block) {
 		var type_value = block.getFieldValue('type');
@@ -388,7 +370,7 @@ module.exports = function (blockly) {
 		return code;
 	};
 
-	Blockly.Python['initialize_communication_simple'] = function(block) {
+	Blockly.Python['initialize_communication_simple'] = function() {
 		Blockly.Python.import_socket();
 
 		// TODO: Assemble Python into code variable.
@@ -489,7 +471,6 @@ module.exports = function (blockly) {
 
 		var content_type_value = parseInt(block.getFieldValue('content_type_value'));
 		var message_value = Blockly.Python.valueToCode(block, 'message_value', Blockly.Python.ORDER_ATOMIC);
-		var status_message = '';
 
 		if(content_type_value == 0) {
 			content_type_value = 'text/plain';

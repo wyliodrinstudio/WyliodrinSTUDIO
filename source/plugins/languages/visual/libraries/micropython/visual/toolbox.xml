@@ -98,8 +98,6 @@
     <category name="Distance measurement" colour="45">
         <block type="distance_initialize" colour="45">
         </block>
-        <!-- <block type="measure_distance" colour="45">
-        </block> -->
         <block type="get_distance" colour="45">
         </block>
     </category>
@@ -112,9 +110,6 @@
                 </block>
             </value>
         </block>
-        <!-- <block type="open_weather_show_label" colour="200">
-	        <value name="value"></value>
-	    </block> -->
         <block type="open_weather_get_data" colour="200">
 	    </block>
   </category>

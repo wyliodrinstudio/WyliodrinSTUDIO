@@ -95,7 +95,7 @@ module.exports = function (blockly) {
 			this.appendDummyInput()
 				.appendField('Set position of')
 				.appendField(new Blockly.FieldTextInput('servoName1'), 'servo_name')
-				.appendField('to:')
+				.appendField('to')
 				.appendField(new Blockly.FieldTextInput('degrees'), 'angle')
 				.appendField('degrees');
 			this.setPreviousStatement(true);
@@ -123,18 +123,6 @@ module.exports = function (blockly) {
 			this.setTooltip('Initialize the distance sensor by adding the imports and setting up the pins.');	
 		}
 	};
-
-	// Blockly.Blocks['measure_distance'] = {
-	// 	init: function() {
-	// 		this.setHelpUrl('http://www.example.com/');
-	// 		this.setColour(45);
-	// 		this.appendDummyInput()
-	// 			.appendField('Measure current distance');
-	// 		this.setPreviousStatement(true);
-	// 		this.setNextStatement(true);
-	// 		this.setTooltip('Get\'s the current distance to the closest object and saves it in a variable.');	
-	// 	}
-	// };
 
 	Blockly.Blocks['get_distance'] = {
 		init: function() {
@@ -171,25 +159,6 @@ module.exports = function (blockly) {
 		}
 	};
 	
-	// Blockly.Blocks['open_weather_show_label'] = {
-	// 	init: function () {
-	// 		this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
-	// 		this.setColour(200);
-	// 		this.appendDummyInput()
-	// 			.appendField('Label');
-	// 		this.appendDummyInput()
-	// 			.appendField(new Blockly.FieldDropdown([['coordinates','coord'],['temp', 'temp'], ['temp_feels', 'temp_feels'], ['weather_state', 'weather_state'],  ['weather icon name', 'weather_icon']]), 'type');
-	// 		this.appendDummyInput()
-	// 			.appendField('show');
-	// 		this.appendValueInput('value');
-	// 		this.appendDummyInput();
-	// 		this.setInputsInline(true);
-	// 		this.setPreviousStatement(true);
-	// 		this.setNextStatement(true);
-	// 		this.setTooltip('Sets the label for retrieved information');
-	// 	}
-	// };
-
 	Blockly.Blocks['open_weather_get_data'] = {
 		init: function () {
 			this.setColour(200);
