@@ -1,0 +1,11 @@
+{
+    "name": "notebook",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace", "projects", "filesystem"],
+        "provides": ["notebook"],
+        "target": ["electron", "browser"]
+    }
+}

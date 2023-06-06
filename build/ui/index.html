@@ -1,0 +1,118 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+		<meta name="robots" content="noindex">
+		<meta http-equiv="origin-trial" content="Aop/0rAyjLKEyFDJGnulJZ4/V5pYww4uCGNFFurntdfUrka20tyNJ+aR0MECw6ytui9ufPNYLjvnnkEfofPjpAkAAABUeyJvcmlnaW4iOiJodHRwczovL3dlYi53eWxpb2RyaW4uc3R1ZGlvOjQ0MyIsImZlYXR1cmUiOiJTZXJpYWwiLCJleHBpcnkiOjE2MTAzMDQ2ODd9">
+		<title>Wyliodrin STUDIO</title>
+		<link rel="icon" href="img/wyliodrin-studio-logo.png" type="image/x-icon"/>
+		<link rel="manifest" href="/manifest.json"/>
+		<style>
+			.wyliodrin-loading{
+				background: url('img/wyliodrin-logo.png') no-repeat transparent;
+				background-color: #ffffff;
+				background-position-x: center;
+				background-position-y: 40%;
+				overflow: hidden;
+				height: 100%;
+			}
+			.startuperror {
+				font-size:18px; 
+				font-family: Arial, Helvetica, sans-serif; 
+				color:#ffffff; 
+				text-align:center; 
+				padding: 10px 15px; 
+				position: absolute; 
+				margin: auto; 
+				width:100%; 
+				background: #d9534f;
+				display: none;
+			}
+			pre.loading {
+				font-size:18px; 
+				font-family: 'Courier New', Courier, monospace; 
+				color:#000; 
+				text-align:left; 
+				padding: 10px 15px; 
+				position: absolute; 
+				margin: auto; 
+				/* width: 100%; */
+				top: 60%;
+				background: #ffffff;
+				display: flex;
+  				justify-content: center;
+			}
+			.loading {
+				font-size:18px; 
+				font-family: Arial, Helvetica, sans-serif; 
+				color:#000; 
+				text-align:center; 
+				padding: 10px 15px; 
+				position: absolute; 
+				margin: auto; 
+				width: 100%;
+				top: 54%;
+				background: #ffffff;
+			}
+			.loading-progress {
+				font-size:18px; 
+				font-family: Arial, Helvetica, sans-serif; 
+				text-align:center; 
+				padding: 0px;
+				position: absolute; 
+				margin: auto; 
+				top: 50%;
+				display: none;
+				left: 0;
+				right: 0;
+				width: 450px;
+				border-style: solid;
+				border-width: 0px;
+				border-color: #555;
+				background: #ffffff;
+			}
+			.loading-progress-bar {
+				font-size:18px; 
+				font-family: Arial, Helvetica, sans-serif; 
+				text-align:center; 
+				padding: 0px;
+				position: absolute; 
+				margin: auto; 
+				top: 50%;
+				height: 12px;
+				background: #d3431f;
+			}
+		</style>
+		<script src="http://localhost:8098"></script>
+	</head>
+	<body class="wyliodrin-loading">
+
+		<div id="app">
+
+		</div>
+		<div class="startuperror" id="startuperror">
+			
+		</div>
+
+		<div class="loading" id="loading">
+			Loading ... <div id="not_loading"></div>
+		</div>
+
+		<pre id="jokes" class="loading">
+			
+			</pre>
+
+		<div class="loading-progress" id="loading-progress">
+			<div class="loading-progress-bar" id="loading-progress-bar" style="width:0%"></div>
+		  </div> 
+
+		<script>
+			setTimeout (() => {
+				if (document.querySelector ('#not_loading')) {
+					console.log ('Something went wrong, Wyliodrin STUDIO is not loading, please reload the page while holding the shift button.');
+					document.querySelector('#loading').innerHTML = 'Something went wrong ... please reload the page while holding the SHIFT button.';
+				}
+			}, 3000);
+		</script>
+	<script src="imports/../vendor_7aa7f567dc9af9f61eb7.js"></script><script src="imports/studio_7aa7f567dc9af9f61eb7.js"></script></body>
+</html>

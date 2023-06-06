@@ -1,0 +1,12 @@
+{
+    "name": "statistics",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace", "hooks", "events", "projects", "settings", "firstrun"],
+        "provides": [],
+        "disabled": false,
+        "target": ["electron", "browser"]
+    }
+}

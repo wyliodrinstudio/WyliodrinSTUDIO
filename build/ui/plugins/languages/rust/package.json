@@ -1,0 +1,11 @@
+{
+    "name": "rust",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace","projects"],
+        "provides": ["language_rust"],
+        "target": ["electron", "browser"]
+    }
+}

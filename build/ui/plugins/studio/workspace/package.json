@@ -1,0 +1,13 @@
+{
+    "name": "workspace",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["system", "settings", "hooks"],
+        "provides": [
+            "workspace"
+        ],
+        "target": ["electron", "browser"]
+    }
+}

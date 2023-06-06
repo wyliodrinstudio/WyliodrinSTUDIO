@@ -1,0 +1,11 @@
+{
+    "name": "c",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace","projects"],
+        "provides": ["language_c"],
+        "target": ["electron", "browser"]
+    }
+}

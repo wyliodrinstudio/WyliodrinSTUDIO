@@ -1,0 +1,11 @@
+{
+    "name": "editor.opcuamodel",
+    "version": "0.0.1",
+    "main": "index.js",
+    "private": true,
+    "plugin": {
+        "consumes": ["workspace","projects", "editor_visual"],
+        "provides": ["editor_opcuamodel"],
+        "target": ["electron", "browser"]
+    }
+}

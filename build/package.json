@@ -1,0 +1,75 @@
+{
+    "name": "wstudio-web",
+    "version": "2.4.0",
+    "description": "Wyliodrin STUDIO web browser version",
+    "main": "main.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wyliodrinstudio/WyliodrinSTUDIO.git"
+    },
+    "author": "Wyliodrin SRL",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/wyliodrinstudio/WyliodrinSTUDIO/issues"
+    },
+    "homepage": "https://wyliodrin.studio",
+    "eslintConfig": {
+        "env": {
+            "es6": true,
+            "node": true,
+            "browser": true,
+            "mocha": false
+        },
+        "globals": {
+            "node": true
+        },
+        "parserOptions": {
+            "ecmaVersion": 2018,
+            "sourceType": "module"
+        },
+        "plugins": [
+            "vue"
+        ],
+        "extends": [
+            "eslint:recommended",
+            "plugin:vue/essential"
+        ],
+        "rules": {
+            "indent": [
+                "error",
+                "tab",
+                {
+                    "SwitchCase": 1
+                }
+            ],
+            "linebreak-style": [
+                "error",
+                "unix"
+            ],
+            "no-console": [
+                "error"
+            ],
+            "quotes": [
+                "error",
+                "single"
+            ],
+            "semi": [
+                "error",
+                "always"
+            ],
+            "require-await": [
+                "error"
+            ]
+        }
+    },
+    "dependencies": {
+        "express": "*",
+        "ws": "*"
+    },
+    "scripts": {
+        "start": "node server.js"
+    },
+    "bin": {
+        "wstudio-web": "server.js"
+    }
+}

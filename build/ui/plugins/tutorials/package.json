@@ -1,0 +1,11 @@
+{
+	"name": "tutorials",
+	"version": "0.0.1",
+	"main": "index.js",
+	"private": false,
+	"plugin": {
+		"consumes": ["workspace", "projects", "github", "gitlab"],
+		"provides": ["tutorials"],
+		"target": ["browser", "electron"]
+	}
+}

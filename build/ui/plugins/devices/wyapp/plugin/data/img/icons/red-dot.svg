@@ -1,0 +1,16 @@
+<?xml version="1.0"?><svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="linearGradient1697">
+   <stop stop-color="#db0e87" offset="0" id="stop1698"/>
+   <stop stop-color="#76074b" offset="1" id="stop1699"/>
+  </linearGradient>
+  <linearGradient y2="0.077481" y1="0.077481" xlink:href="#linearGradient1697" x2="0.491802" x1="0.491802" id="linearGradient1077"/>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <g id="layer1">
+   <path fill="#ff0000" fill-rule="nonzero" stroke="url(#linearGradient1077)" stroke-width="1.364453" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke-dashoffset="0" id="path1070" d="m392.368164,203.390503a190.403656,190.403656 0 1 1-380.807341,0a190.403656,190.403656 0 1 1380.807341,0z"/>
+   <path opacity="0.9" fill="#ff0000" fill-rule="evenodd" stroke-width="0.25000000pt" id="path1713" d="m340.278168,153.23671c44.367218,-0.966782 -12.400116,-123.152863 -135.680984,-123.802773c-134.561523,-0.687119 -162.095947,110.961357 -140.719452,112.997215c0,0 36.864166,5.062607 71.939575,14.856079c56.472656,15.930817 125.549149,-13.069244 152.768723,-17.2836c30.342529,-4.697876 47.373444,15.392426 51.692139,13.233078z"/>
+  </g>
+ </g>
+</svg>
