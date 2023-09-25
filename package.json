@@ -98,7 +98,7 @@
 		"monaco-editor-webpack-plugin": "^1.9.0",
 		"msgpack5": "^4.5.1",
 		"mustache": "^4.0.1",
-		"node-blockly": "https://github.com/wyliodrinstudio/node-blockly.git",
+		"node-blockly": "^1.2.8",
 		"raw-loader": "^3.1.0",
 		"reconnectingwebsocket": "^1.0.0",
 		"semver": "^7.3.2",

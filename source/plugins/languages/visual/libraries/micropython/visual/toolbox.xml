@@ -42,6 +42,10 @@
         <block type="send_response" colour="180">
             <value name="message"></value>
         </block>
+        <block type="send_response_ok" colour="180">
+        </block>
+        <block type="send_response_error" colour="180">
+        </block>
         <block type="get_request_content" colour="180">
         </block>
         <block type="close_connection" colour="180">
@@ -57,6 +61,8 @@
                     <field name="port">port</field>
                 </shadow>
             </value>
+        </block>
+        <block type="initialize_communication_simple" colour="180">
         </block>
         <block type="listen_for_connections" colour="180">
             <value name="value">
@@ -92,8 +98,6 @@
     <category name="Distance measurement" colour="45">
         <block type="distance_initialize" colour="45">
         </block>
-        <block type="measure_distance" colour="45">
-        </block>
         <block type="get_distance" colour="45">
         </block>
     </category>
@@ -106,9 +110,6 @@
                 </block>
             </value>
         </block>
-        <block type="open_weather_show_label" colour="200">
-	        <value name="value"></value>
-	    </block>
         <block type="open_weather_get_data" colour="200">
 	    </block>
   </category>

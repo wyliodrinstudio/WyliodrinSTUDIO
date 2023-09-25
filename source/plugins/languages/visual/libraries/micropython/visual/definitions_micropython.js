@@ -78,11 +78,13 @@ module.exports = function (blockly) {
 			this.setHelpUrl('http://www.example.com/');
 			this.setColour(100);
 			this.appendDummyInput()
-				.appendField('Set angle to:');
+				.appendField('Set position to ');
 			this.appendValueInput('angle');
+			this.appendDummyInput()
+				.appendField('degrees');
 			this.setPreviousStatement(true);
 			this.setNextStatement(true);
-			this.setTooltip('Sets the angle of the servo motor');
+			this.setTooltip('Sets the position of the servo motor');
 		}
 	};
 
@@ -91,10 +93,11 @@ module.exports = function (blockly) {
 			this.setHelpUrl('http://www.example.com/');
 			this.setColour(100);
 			this.appendDummyInput()
-				.appendField('Set angle of')
+				.appendField('Set position of')
 				.appendField(new Blockly.FieldTextInput('servoName1'), 'servo_name')
-				.appendField('to:')
-				.appendField(new Blockly.FieldTextInput('angles'), 'angle');
+				.appendField('to')
+				.appendField(new Blockly.FieldTextInput('degrees'), 'angle')
+				.appendField('degrees');
 			this.setPreviousStatement(true);
 			this.setNextStatement(true);
 			this.setTooltip('Sets the angle of the given servo motor, identified by it\'s name. This should be used when using multiple servo motors.');
@@ -118,18 +121,6 @@ module.exports = function (blockly) {
 			this.setPreviousStatement(true);
 			this.setNextStatement(true);
 			this.setTooltip('Initialize the distance sensor by adding the imports and setting up the pins.');	
-		}
-	};
-
-	Blockly.Blocks['measure_distance'] = {
-		init: function() {
-			this.setHelpUrl('http://www.example.com/');
-			this.setColour(45);
-			this.appendDummyInput()
-				.appendField('Measure current distance');
-			this.setPreviousStatement(true);
-			this.setNextStatement(true);
-			this.setTooltip('Get\'s the current distance to the closest object and saves it in a variable.');	
 		}
 	};
 
@@ -168,25 +159,6 @@ module.exports = function (blockly) {
 		}
 	};
 	
-	Blockly.Blocks['open_weather_show_label'] = {
-		init: function () {
-			this.setHelpUrl('https://projects.wyliodrin.com/wiki/languages/visual#write');
-			this.setColour(200);
-			this.appendDummyInput()
-				.appendField('Label');
-			this.appendDummyInput()
-				.appendField(new Blockly.FieldDropdown([['coordinates','coord'],['temp', 'temp'], ['temp_feels', 'temp_feels'], ['weather_state', 'weather_state'],  ['weather icon name', 'weather_icon']]), 'type');
-			this.appendDummyInput()
-				.appendField('show');
-			this.appendValueInput('value');
-			this.appendDummyInput();
-			this.setInputsInline(true);
-			this.setPreviousStatement(true);
-			this.setNextStatement(true);
-			this.setTooltip('Sets the label for retrieved information');
-		}
-	};
-
 	Blockly.Blocks['open_weather_get_data'] = {
 		init: function () {
 			this.setColour(200);
@@ -376,6 +348,18 @@ module.exports = function (blockly) {
 		}
 	};
 
+	Blockly.Blocks['initialize_communication_simple'] = {
+		init: function() {
+			this.setHelpUrl('http://www.example.com/');
+			this.setColour(180);
+			this.appendDummyInput()
+				.appendField('Initialize Web Communication');
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setTooltip('Initializes the web communicatio');
+		}
+	};
+
 	Blockly.Blocks['listen_for_connections'] = {
 		init: function() {
 			this.setHelpUrl('http://www.example.com/');
@@ -411,6 +395,43 @@ module.exports = function (blockly) {
 			this.setTooltip('Sends a response back to the client');
 		}
 	};
+
+	
+	Blockly.Blocks['send_response_error'] = {
+		init: function() {
+			this.setHelpUrl('http://www.example.com/');
+			this.setColour(180);
+			this.appendDummyInput()
+				.appendField('Send error response');
+			this.appendDummyInput()
+				.appendField('Content type')
+				.appendField(new Blockly.FieldDropdown([['text', '0'], ['html', '1'], ['json', '2']]), 'content_type_value');
+			this.appendValueInput('message_value')
+				.appendField('Message');
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setTooltip('Sends an error response back to the client');
+		}
+	};
+
+	
+	Blockly.Blocks['send_response_ok'] = {
+		init: function() {
+			this.setHelpUrl('http://www.example.com/');
+			this.setColour(180);
+			this.appendDummyInput()
+				.appendField('Send success response');
+			this.appendDummyInput()
+				.appendField('Content type')
+				.appendField(new Blockly.FieldDropdown([['text', '0'], ['html', '1'], ['json', '2']]), 'content_type_value');
+			this.appendValueInput('message_value')
+				.appendField('Message');
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setTooltip('Sends a success response back to the client');
+		}
+	};
+
 
 	Blockly.Blocks['get_request_content'] = {
 		init: function() {
