@@ -9,3 +9,12 @@ ToDo-List:
 		- De vazut cum se poate scrie PWM pe led
 
 DE DECOMENTAT LINIA 47 DIN device.rpk/index.js
+
+Bogdan TO-DO:
+	- Buttons (done for now)
+	- Multithreading:
+		- Electron compatibility (done)
+		- Kill thread on disconnect (done)
+		- Make stop button work properly (done)
+		- Import python libraries instead of prepend
+	- Reload micropython on project change (done)

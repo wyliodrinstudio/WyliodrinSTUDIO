@@ -124,6 +124,7 @@
 		"webpack": "^4.44.1",
 		"webpack-cli": "^3.3.12",
 		"webpack-node-externals": "^1.7.2",
+		"worker-plugin": "^5.0.1",
 		"xml-js": "^1.6.11",
 		"xterm": "^4.8.1"
 	},

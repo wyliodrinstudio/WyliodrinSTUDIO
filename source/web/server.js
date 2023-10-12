@@ -11,12 +11,32 @@ const http = require ('http');
 const url = require ('url');
 
 const os = require ('os');
+const fs = require ('fs');
 
 let users = {};
 
 let app = express ();
 
 let api = express.Router ();
+
+api.get('/dirfiles/:plugin/:dir', (req, res) => {
+	let plugin = req.params.plugin;
+	if (plugin === 'raspberrypi') {
+		plugin = 'simulators/' + plugin;
+	}
+
+	const librariesFolder = `${__dirname}/plugins/${plugin}/data/${req.params.dir}`;
+
+	try {
+		const fileArr = [];
+		fs.readdirSync(librariesFolder).forEach((file) => {
+			fileArr.push(file);
+		})
+		res.send(fileArr);
+	} catch (err) {
+		res.status(404).send(err);
+	}
+})
 
 api.get ('/version', (req, res) => {
 	res.send ({

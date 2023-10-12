@@ -7,6 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const TranslationPlugin = require('./webpack.translation.js');
 const webpack = require('webpack');
 const MonacoEditorPlugin = require('monaco-editor-webpack-plugin');
+const WorkerPlugin = require('worker-plugin');
 const plugins = require('./webpack.plugins.js');
 
 const package_json = require('./package.json');
@@ -146,7 +147,7 @@ module.exports = env => {
 				{
 					test: /\.ttf$/,
 					use: ['file-loader']
-				}
+				},
 				// {
 				// 	test: /\.ts$/,
 				// 	loader: 'ts-loader',
@@ -220,6 +221,9 @@ module.exports = env => {
 				// Languages are loaded on demand at runtime
 				// languages: ['css', 'html', 'python', 'cpp', 'sh', 'javascript', 'typescript']
 				output: 'plugins/projects/editor.monaco'
+			}),
+			new WorkerPlugin({
+				globalObject: false
 			})
 		],
 		target: 'electron-renderer'
