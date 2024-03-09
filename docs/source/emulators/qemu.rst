@@ -57,7 +57,7 @@ Here, for each available emulator, you will have 3 options:
 Connect to the emulator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once the emulator completely loaded, you will be asked to input the default username and password, which are: *pi* / *raspberry*. After that, you will have to start the ssh session by typing: *sudo systemctl ssh start*
+Once the emulator completely loaded, you will be asked to input the default username and password, which are: *pi* / *raspberry*. After that, you will have to start the ssh session by typing: *sudo systemctl start ssh *
 
 .. image:: images/qemu/rpi_connect.png
 	:align: center
