@@ -204,6 +204,54 @@ module.exports = function (blockly) {
 		}
 	};
 
+	Blockly.Blocks['pwm_initialize'] = {
+		init: function () {
+			this.setHelpUrl('http://www.example.com/');
+			this.setColour(123);
+			this.appendValueInput('pin')
+				.appendField('Initialize PWM pin');
+			this.appendDummyInput()
+				.appendField('with pin name')
+				.appendField(new Blockly.FieldTextInput('pinName1'), 'pin_name');
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setInputsInline(false);
+			this.setTooltip('Initialize pin for PWM write');
+		}
+	};
+
+	Blockly.Blocks['pwm_set_frequency'] = {
+		init: function () {
+			this.setHelpUrl('http://www.example.com/');
+			this.setColour(123);
+			this.appendValueInput('frequency')
+				.appendField('Set frequency');
+			this.appendDummyInput()
+				.appendField('Hz for pin');
+			this.appendValueInput('pin');
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setInputsInline(false);
+			this.setTooltip('Set frequency for PWM pin');
+		}
+	};
+
+	Blockly.Blocks['pwm_set_duty_cycle'] = {
+		init: function () {
+			this.setHelpUrl('http://www.example.com/');
+			this.setColour(123);
+			this.appendValueInput('duty_cycle')
+				.appendField('Set duty cycle');
+			this.appendDummyInput()
+				.appendField('% for pin');
+			this.appendValueInput('pin');
+			this.setPreviousStatement(true);
+			this.setNextStatement(true);
+			this.setInputsInline(false);
+			this.setTooltip('Set duty cycle for PWM pin');
+		}
+	};
+
 	Blockly.Blocks['digital_write'] = {
 		init: function () {
 			this.setHelpUrl('http://www.example.com/');

@@ -19,6 +19,8 @@
       </block>
       <block type="analog_read_get_value" colour="123">
       </block>
+      <block type="pwm_initialize" colour="123">
+      </block>
     </category>
     <category name="Time" colour="240">
         <block type="wait" colour="240">
