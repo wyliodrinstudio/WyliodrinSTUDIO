@@ -43,7 +43,7 @@ module.exports = function (blockly) {
 	Blockly.Python['pwm_initialize'] = function(block) {
 		Blockly.Python.import_machine();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-		//var frequency = block.getFieldValue('frequency').toString();
+		var pin_name = block.getFieldValue('pin_name').toString();
 
 		var code = pin_name + ' = machine.PWM(machine.Pin(' + value_pin + '))\n';
 		return code;
