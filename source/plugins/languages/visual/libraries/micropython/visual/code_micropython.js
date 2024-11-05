@@ -43,7 +43,7 @@ module.exports = function (blockly) {
 	Blockly.Python['pwm_initialize'] = function(block) {
 		Blockly.Python.import_machine();
 		var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-		var frequency = block.getFieldValue('frequency').toString();
+		//var frequency = block.getFieldValue('frequency').toString();
 
 		var code = pin_name + ' = machine.PWM(machine.Pin(' + value_pin + '))\n';
 		return code;
@@ -52,7 +52,7 @@ module.exports = function (blockly) {
 	Blockly.Python['pwm_set_frequency'] = function(block) {
 		Blockly.Python.import_machine();
 		var frequency = Blockly.Python.valueToCode(block, 'frequency', Blockly.Python.ORDER_ATOMIC);
-		var pin_name = block.getFieldValue('pin').toString();
+		var pin_name = block.getFieldValue('pin_name').toString();
 
 		var code = pin_name + '.frequency(' + frequency + ')\n';
 		return code;
@@ -61,7 +61,7 @@ module.exports = function (blockly) {
 	Blockly.Python['pwm_set_duty_cycle'] = function(block) {
 		Blockly.Python.import_machine();
 		var duty_cycle = Blockly.Python.valueToCode(block, 'duty_cycle', Blockly.Python.ORDER_ATOMIC);
-		var pin_name = block.getFieldValue('pin').toString();
+		var pin_name = block.getFieldValue('pin_name').toString();
 
 		duty_cycle = parseInt(Math.floor(Math.min(100, Math.max (duty_cycle, 0)) * 65535 / 100));
 
