@@ -21,6 +21,10 @@
       </block>
       <block type="pwm_initialize" colour="123">
       </block>
+       <block type="pwm_set_frequency" colour="123">
+      </block>
+       <block type="pwm_set_duty_cycle" colour="123">
+      </block>
     </category>
     <category name="Time" colour="240">
         <block type="wait" colour="240">
