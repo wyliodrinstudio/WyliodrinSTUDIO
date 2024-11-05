@@ -54,7 +54,7 @@ module.exports = function (blockly) {
 		var frequency = Blockly.Python.valueToCode(block, 'frequency', Blockly.Python.ORDER_ATOMIC);
 		var pin_name = block.getFieldValue('pin_name').toString();
 
-		var code = pin_name + '.frequency(' + frequency + ')\n';
+		var code = pin_name + '.freq(' + frequency + ')\n';
 		return code;
 	};
 
