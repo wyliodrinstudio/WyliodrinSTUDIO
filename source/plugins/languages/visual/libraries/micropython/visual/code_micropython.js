@@ -62,16 +62,6 @@ module.exports = function (blockly) {
 		Blockly.Python.import_machine();
 		var duty_cycle = Blockly.Python.valueToCode(block, 'duty_cycle', Blockly.Python.ORDER_ATOMIC);
 		var pin_name = block.getFieldValue('pin_name').toString();
-
-		console.log (duty_cycle);
-		console.log ( Math.max (duty_cycle, 0));
-		console.log (Math.min(100, Math.max (duty_cycle, 0)));
-		console.log (Math.min(100, Math.max (duty_cycle, 0)) * 65535 / 100);
-		console.log (Math.floor(Math.min(100, Math.max (duty_cycle, 0)) * 65535 / 100));
-		console.log (parseInt(Math.floor(Math.min(100, Math.max (duty_cycle, 0)) * 65535 / 100)));
-
-		duty_cycle = parseInt(Math.floor(Math.min(100, Math.max (duty_cycle, 0)) * 65535 / 100));
-
 		var code = pin_name + '.duty_u16(' + duty_cycle + ')\n';
 		return code;
 	};

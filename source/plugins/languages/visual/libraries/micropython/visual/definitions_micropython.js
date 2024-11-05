@@ -243,7 +243,7 @@ module.exports = function (blockly) {
 			this.appendValueInput('duty_cycle')
 				.appendField('Set duty cycle');
 			this.appendDummyInput()
-				.appendField('% for pin')
+				.appendField('for pin')
 				.appendField(new Blockly.FieldTextInput('pinName1'), 'pin_name');
 			this.setPreviousStatement(true);
 			this.setNextStatement(true);
