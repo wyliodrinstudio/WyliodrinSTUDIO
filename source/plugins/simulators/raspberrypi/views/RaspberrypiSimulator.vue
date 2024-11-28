@@ -163,6 +163,7 @@ export default {
 				this.projectNameToBeShown = this.projectNameToBeShown.replace(/([0-9A-Z])/g, ' $1').trim();
 			}
 
+			generic_raspberrypi.events.emit('project-load');
 			generic_raspberrypi.loadProject(name);
 			this.projectData = generic_raspberrypi.dataLoaded;
 

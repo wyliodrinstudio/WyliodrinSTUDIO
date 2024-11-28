@@ -6,6 +6,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const TranslationPlugin = require ('./webpack.translation.js'); 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MonacoEditorPlugin = require('monaco-editor-webpack-plugin');
+const WorkerPlugin = require('worker-plugin');
 const fs = require ('fs-extra');
 const webpack = require ('webpack');
 const plugins = require ('./webpack.plugins.js');
@@ -209,7 +210,8 @@ module.exports = env => {
 		},
 		mode: mode,
 		node: {
-			__dirname: false
+			__dirname: false,
+			fs: 'empty'
 		},
 		plugins: [
 			// make sure to include the plugin!
@@ -264,6 +266,9 @@ module.exports = env => {
 				// Languages are loaded on demand at runtime
 				// languages: ['css', 'html', 'python', 'cpp', 'sh', 'javascript', 'typescript']
 				output: 'plugins/projects.editor.monaco'
+			}),
+			new WorkerPlugin({
+				globalObject: false
 			})
 		],
 		target: 'web'

@@ -3,6 +3,8 @@ import $ from 'jquery';
 import generate_project_json from './generate_project_json.js';
 import update_components from './update_components.js';
 
+import { EventEmitter } from 'events';
+
 let generic_raspberrypi = {
 	name: 'Raspberry Pi 3 Model B v1.2',
 
@@ -124,8 +126,6 @@ let generic_raspberrypi = {
 			name: 'GND',
 			states: ['0']
 		},
-
-
 		20: {
 			name: 'GIPO9',
 			states: ['IN', 'OUT', 'SPI_MOSI']
@@ -210,6 +210,8 @@ let generic_raspberrypi = {
 		}
 	},
 
+	events: new EventEmitter(),
+
 	/**
 	 * Return the GPIO number of the pin
 	 * @param  {Integer} pinNumber The pin number on the RaspberryPi
@@ -254,6 +256,16 @@ let generic_raspberrypi = {
 
 		// Function for pressing the button
 		$(document.querySelector('#raspberrypi_svg').firstElementChild).find('g[partID="' + component + '"]').on('mousedown', () => {
+			if (this.dataLoaded.pins) {
+				// Emit event with pins that are connected to buttons
+				for (let pin of Object.keys(this.dataLoaded.pins)) {
+					if (this.dataLoaded.pins[pin].components[0] == component) {
+						if (this.pins[this.dataLoaded.pins[pin].id] !== undefined)
+							this.events.emit('button', this.pins[this.dataLoaded.pins[pin].id].name.substr(4));
+					}
+				}
+			}
+
 			this.dataLoaded.components[component].active = true;
 			update_components();
 		});

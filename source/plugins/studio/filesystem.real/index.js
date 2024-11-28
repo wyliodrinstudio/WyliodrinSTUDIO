@@ -123,6 +123,30 @@ let filesystem_real = {
 	{
 		return fs.readFile (path.join (__dirname, '../..', pluginName, 'data', filename));
 	},
+
+	/**
+	 * Returns an array with file names from a given directory
+	 * @param {string} pluginName 
+	 * @param {string} dirName 
+	 * @returns {Array} File names
+	 */
+	loadDirFiles (pluginName, dirName)
+	{
+		const dirFiles = [];
+
+		if (pluginName === 'raspberrypi') {
+			pluginName = 'simulators/' + pluginName;
+		}
+
+		// const librariesFolder = `${__dirname}/../../plugins/${pluginName}/data/${dirName}`;
+		const librariesFolder = path.join(__dirname, '../..', pluginName, 'data', dirName);
+
+		fs.readdirSync(librariesFolder).forEach((file) => {
+			dirFiles.push(file);
+		});
+
+		return dirFiles;
+	},
 	
 	/**
 	 * Is the filesystem persistent?
