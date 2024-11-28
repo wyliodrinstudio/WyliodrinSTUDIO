@@ -118,7 +118,7 @@
 		"vue2-ace-editor": "0.0.15",
 		"vue2-highcharts": "^1.2.5",
 		"vuedl": "0.3.4",
-		"vuetify": "2.3.9",
+		"vuetify": "2.6.10",
 		"vuetify-dialog": "^0.3.6",
 		"vuex": "^3.5.1",
 		"webpack": "^4.44.1",
