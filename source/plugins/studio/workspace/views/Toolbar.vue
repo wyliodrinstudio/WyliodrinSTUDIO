@@ -6,6 +6,7 @@
 		</v-toolbar-title>
 		<v-spacer></v-spacer>
 		<v-toolbar-items class="hidden-sm-and-down titlebar-buttons">
+			<v-img src="plugins/studio/workspace/data/img/logo/eu_funded.png" style="padding: 25px"></v-img>
 			<LanguageMenu></LanguageMenu>
 			<v-tooltip v-for="toolbarButton in toolbarButtons" :key="toolbarButton.name" bottom v-show="toolbarButton.visible()" :disabled="!toolbarButton.enabled()">
 				<template v-slot:activator="{ on }">
